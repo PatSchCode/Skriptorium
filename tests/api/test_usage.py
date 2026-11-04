@@ -71,7 +71,46 @@ def test_records_are_summed_per_month(tmp_path: Path) -> None:
         "token_ein": None,
         "token_aus": None,
         "kosten_usd": None,
+        "cache_gelesen": None,
+        "cache_geschrieben": None,
     }
+
+
+def test_prompt_cache_counts_are_stored_but_not_summed(tmp_path: Path) -> None:
+    clock = FakeClock()
+    log, store = _log(tmp_path, clock)
+    # An item written before step 9.10 has no cache fields (ADR-099).
+    store.write(
+        "system/verbrauch/2026-09.md",
+        {
+            "anfragen": [
+                {
+                    "zeit": "2026-09-25T08:00:00+00:00",
+                    "art": "schreiben",
+                    "modell": "x-ai/grok-4.6",
+                    "ergebnis": "ok",
+                    "token_ein": 1000,
+                    "token_aus": 50,
+                    "kosten_usd": 0.002,
+                }
+            ]
+        },
+        "",
+    )
+
+    log.record("schreiben", "x-ai/grok-4.6", Usage(1200, 40, 0.001, 900, 300), "ok")
+    log.record("kurzfassung", "x-ai/grok-4.6", Usage(800, 20, 0.0005, None, 0), "ok")
+
+    stored = store.read("system/verbrauch/2026-09.md").header["anfragen"]
+    assert isinstance(stored, list)
+    items = [item for item in stored if isinstance(item, dict)]
+    assert [(item.get("cache_gelesen"), item.get("cache_geschrieben")) for item in items] == [
+        (None, None),
+        (900, 300),
+        (None, 0),
+    ]
+    september = log.month("2026-09")
+    assert (september.requests, september.input_tokens, september.output_tokens) == (3, 3000, 110)
 
 
 def test_empty_month_and_bad_month(tmp_path: Path) -> None:
