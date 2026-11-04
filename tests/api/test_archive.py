@@ -192,3 +192,25 @@ def test_delete_a_middle_chapter(logged_in: TestClient) -> None:
     assert [n["text"] for n in notes] == ["Verlauf Ankunft"]
     assert logged_in.get(f"{story}/chapters/3").status_code == 404
     assert logged_in.delete(f"{story}/chapters/3").status_code == 404
+
+
+def test_preview_and_delete_with_several_stories_and_a_vanished_guest(
+    logged_in: TestClient,
+) -> None:
+    _set_up(logged_in)
+    second = f"{SALZ}/stories/ohne-gast"
+    _ok(logged_in.post(f"{second}/guests", json={"world": "glaskueste", "entry": "mira"}), 201)
+    _ok(logged_in.post(f"{second}/facts", json={"entry": "mira", "fact": "Mira wartet."}), 201)
+    # An entry deleted on its own leaves its guest link behind; the preview names its identifier.
+    _ok(logged_in.delete(f"{GLAS}/entries/vale"), 204)
+
+    preview = _ok(logged_in.get(f"{GLAS}/deletion-preview"))
+    assert [(u["story"], u["guests"], u["facts"]) for u in preview["guest_uses"]] == [
+        ("die-ueberfahrt", ["Mira", "Kael", "vale"], 1),
+        ("ohne-gast", ["Mira"], 1),
+    ]
+    _ok(logged_in.post(f"{GLAS}/archive"))
+    _ok(logged_in.request("DELETE", GLAS, json={"name": "Glasküste"}), 204)
+    for story in (f"{SALZ}/stories/die-ueberfahrt", second):
+        assert _ok(logged_in.get(story))["guest_links"] == []
+    assert _ok(logged_in.get(second))["facts"] == []
