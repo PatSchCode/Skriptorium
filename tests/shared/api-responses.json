@@ -6,7 +6,8 @@
       "id": "die-salzmark",
       "name": "Die Salzmark",
       "description": "Salz und Nebel.",
-      "maps": []
+      "maps": [],
+      "archived": false
     }
   },
   "createEntry": {
@@ -44,7 +45,8 @@
       "id": "die-salzmark",
       "name": "Die Salzmark",
       "description": "Salz, Nebel, Wind.",
-      "maps": []
+      "maps": [],
+      "archived": false
     }
   },
   "updateEntry": {
@@ -116,7 +118,8 @@
           "file": "karte-000000000003.png",
           "markers": []
         }
-      ]
+      ],
+      "archived": false
     }
   },
   "renameMap": {
@@ -137,7 +140,8 @@
           "file": "karte-000000000004.jpg",
           "markers": []
         }
-      ]
+      ],
+      "archived": false
     }
   },
   "setMarkers": {
@@ -164,7 +168,8 @@
           "file": "karte-000000000004.jpg",
           "markers": []
         }
-      ]
+      ],
+      "archived": false
     }
   },
   "removeMap": {
@@ -186,7 +191,8 @@
             }
           ]
         }
-      ]
+      ],
+      "archived": false
     }
   },
   "worlds": {
@@ -209,13 +215,15 @@
               }
             ]
           }
-        ]
+        ],
+        "archived": false
       },
       {
         "id": "nebelreich",
         "name": "Nebelreich",
         "description": "Nebel.",
-        "maps": []
+        "maps": [],
+        "archived": false
       }
     ]
   },
@@ -322,7 +330,8 @@
         "explicitness": null,
         "free": ""
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "createStoryWithoutPerspective": {
@@ -348,7 +357,8 @@
         "explicitness": null,
         "free": ""
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "updateStory": {
@@ -374,7 +384,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "addGuest": {
@@ -405,7 +416,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "removeGuest": {
@@ -436,7 +448,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "addFact": {
@@ -472,7 +485,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "removeFact": {
@@ -508,7 +522,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "setStorySummary": {
@@ -544,7 +559,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "setCover": {
@@ -580,7 +596,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": "titelbild-000000000005.jpg"
+      "cover": "titelbild-000000000005.jpg",
+      "archived": false
     }
   },
   "removeCover": {
@@ -616,7 +633,8 @@
         "explicitness": "angedeutet",
         "free": "Kurze Absätze."
       },
-      "cover": null
+      "cover": null,
+      "archived": false
     }
   },
   "saveChapter": {
@@ -789,7 +807,8 @@
           "explicitness": null,
           "free": ""
         },
-        "cover": null
+        "cover": null,
+        "archived": false
       },
       {
         "world": "die-salzmark",
@@ -821,7 +840,8 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png"
+        "cover": "titelbild-000000000006.png",
+        "archived": false
       }
     ]
   },
@@ -877,7 +897,8 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png"
+        "cover": "titelbild-000000000006.png",
+        "archived": false
       },
       "failure": null
     }
@@ -934,7 +955,8 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png"
+        "cover": "titelbild-000000000006.png",
+        "archived": false
       },
       "failure": {
         "stage": "kapitel",
@@ -994,7 +1016,8 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png"
+        "cover": "titelbild-000000000006.png",
+        "archived": false
       },
       "failure": {
         "stage": "kapitel",
@@ -1597,6 +1620,130 @@
         "last_seen": "2026-09-26T12:05:00Z",
         "client": "testclient",
         "current": true
+      }
+    ]
+  },
+  "archiveWorld": {
+    "route": "POST /api/worlds/nebelreich/archive",
+    "type": "World",
+    "body": {
+      "id": "nebelreich",
+      "name": "Nebelreich",
+      "description": "Nebel.",
+      "maps": [],
+      "archived": true
+    }
+  },
+  "worldDeletion": {
+    "route": "GET /api/worlds/nebelreich/deletion-preview",
+    "type": "WorldDeletion",
+    "body": {
+      "name": "Nebelreich",
+      "entries": 2,
+      "images": 0,
+      "maps": 0,
+      "stories": 0,
+      "guest_uses": [
+        {
+          "world": "die-salzmark",
+          "world_name": "Die Salzmark",
+          "story": "die-ueberfahrt",
+          "story_title": "Die Überfahrt",
+          "guests": ["Nebelkönig"],
+          "facts": 0
+        }
+      ]
+    }
+  },
+  "restoreWorld": {
+    "route": "POST /api/worlds/nebelreich/restore",
+    "type": "World",
+    "body": {
+      "id": "nebelreich",
+      "name": "Nebelreich",
+      "description": "Nebel.",
+      "maps": [],
+      "archived": false
+    }
+  },
+  "archiveStory": {
+    "route": "POST /api/worlds/die-salzmark/stories/am-ufer/archive",
+    "type": "Story",
+    "body": {
+      "world": "die-salzmark",
+      "id": "am-ufer",
+      "title": "Am Ufer",
+      "form": "kurzgeschichte",
+      "perspective": null,
+      "controlled_characters": [],
+      "guest_links": [],
+      "facts": [],
+      "summary": "",
+      "model": null,
+      "genres": [],
+      "writing_style": {
+        "tone": [],
+        "atmosphere": [],
+        "style": [],
+        "tempo": null,
+        "explicitness": null,
+        "free": ""
+      },
+      "cover": null,
+      "archived": true
+    }
+  },
+  "storyDeletion": {
+    "route": "GET /api/worlds/die-salzmark/stories/die-ueberfahrt/deletion-preview",
+    "type": "StoryDeletion",
+    "body": {
+      "title": "Die Überfahrt",
+      "chapters": 2,
+      "facts": 1,
+      "cover": true
+    }
+  },
+  "restoreStory": {
+    "route": "POST /api/worlds/die-salzmark/stories/am-ufer/restore",
+    "type": "Story",
+    "body": {
+      "world": "die-salzmark",
+      "id": "am-ufer",
+      "title": "Am Ufer",
+      "form": "kurzgeschichte",
+      "perspective": null,
+      "controlled_characters": [],
+      "guest_links": [],
+      "facts": [],
+      "summary": "",
+      "model": null,
+      "genres": [],
+      "writing_style": {
+        "tone": [],
+        "atmosphere": [],
+        "style": [],
+        "tempo": null,
+        "explicitness": null,
+        "free": ""
+      },
+      "cover": null,
+      "archived": false
+    }
+  },
+  "deleteChapter": {
+    "route": "DELETE /api/worlds/die-salzmark/stories/die-ueberfahrt/chapters/1",
+    "type": "Chapter[]",
+    "body": [
+      {
+        "world": "die-salzmark",
+        "story": "die-ueberfahrt",
+        "number": 1,
+        "title": "Überfahrt",
+        "status": "in-arbeit",
+        "summary": "Kael fährt ab.",
+        "summary_status": "geprüft",
+        "text": "Es regnete.",
+        "writing_style": null
       }
     ]
   }

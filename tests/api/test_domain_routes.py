@@ -42,6 +42,7 @@ def test_worlds(logged_in: TestClient) -> None:
         "name": "Die Salzmark",
         "description": "Neu",
         "maps": [],
+        "archived": False,
     }
     assert logged_in.get(f"/api/worlds/{world}").json()["description"] == "Neu"
     assert logged_in.post("/api/worlds", json={"name": "Die Salzmark"}).status_code == 409

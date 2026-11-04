@@ -113,6 +113,21 @@ class InstructionIn(BaseModel):
     model: str | None = None
 
 
+class StoryDeletionConfirm(BaseModel):
+    """The title of the story, typed by the author to confirm deleting it for good."""
+
+    title: str
+
+
+class StoryDeletion(BaseModel):
+    """What deleting a story for good takes with it (step 9.9, ADR-098)."""
+
+    title: str
+    chapters: int
+    facts: int
+    cover: bool
+
+
 class GuestLinkIn(BaseModel):
     """A canon entry of another world, bound into this story only."""
 
@@ -173,6 +188,39 @@ async def update_story(
     if "writing_style" in given:
         given["writing_style"] = _style(body.writing_style) or WritingStyle()
     return found.manuscript.update_story(world_id, story_id, **given)
+
+
+@router.post("/{story_id}/archive")
+def archive_story(world_id: str, story_id: str, found: ServicesDep) -> Story:
+    """Put a story into the archive (step 9.9, ADR-098)."""
+    found.canon.get_world(world_id)
+    return found.manuscript.archive_story(world_id, story_id)
+
+
+@router.post("/{story_id}/restore")
+def restore_story(world_id: str, story_id: str, found: ServicesDep) -> Story:
+    """Take a story back from the archive."""
+    found.canon.get_world(world_id)
+    return found.manuscript.restore_story(world_id, story_id)
+
+
+@router.get("/{story_id}/deletion-preview")
+def preview_story_deletion(world_id: str, story_id: str, found: ServicesDep) -> StoryDeletion:
+    """What deleting the story for good takes with it."""
+    story = _story(found, world_id, story_id)
+    contents = found.manuscript.story_contents(world_id, story_id)
+    return StoryDeletion(
+        title=story.title, chapters=contents.chapters, facts=contents.facts, cover=contents.cover
+    )
+
+
+@router.delete("/{story_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_story(
+    world_id: str, story_id: str, body: StoryDeletionConfirm, found: ServicesDep
+) -> None:
+    """Delete an archived story for good; ``title`` must be exactly its title (ADR-098)."""
+    found.canon.get_world(world_id)
+    found.manuscript.delete_story(world_id, story_id, body.title)
 
 
 @router.put("/{story_id}/summary")
@@ -241,6 +289,13 @@ def save_chapter(
     if "writing_style" in given:
         given["writing_style"] = _style(body.writing_style)
     return found.manuscript.save_chapter(world_id, story_id, number, **given)
+
+
+@router.delete("/{story_id}/chapters/{number}")
+def delete_chapter(world_id: str, story_id: str, number: int, found: ServicesDep) -> list[Chapter]:
+    """Delete a chapter; the following chapters move up by one (step 9.9, ADR-098)."""
+    found.canon.get_world(world_id)
+    return found.manuscript.delete_chapter(world_id, story_id, number)
 
 
 @router.post("/{story_id}/chapters/{number}/complete")

@@ -170,3 +170,14 @@ def test_guest_whose_entry_is_gone_is_skipped_or_reported(services: Services) ->
     assert blocks(context, "gast") == []
     with pytest.raises(NotFound):
         build(services, "nebelkoenig")
+
+
+def test_guest_from_an_archived_world_still_comes_along(services: Services) -> None:
+    """Step 9.9, ADR-098: archiving a world hides it, existing guest links keep working."""
+    canon, _ = services
+    canon.archive_world(HOME)
+
+    context = build(services, "nebelkoenig")
+
+    assert blocks(context, "gast") == ["Nebelkönig"]
+    assert GUEST_BODY in context.messages[0].content

@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, Field
 
 from skriptorium.api.context import ServicesDep, current_session
+from skriptorium.api.flows import WorldDeletion, delete_world, world_deletion
 from skriptorium.api.image_routes import ImageOriginIn, ImageOriginOut, origin_from, origin_out
 from skriptorium.canon import (
     MAX_MARKERS_PER_MAP,
@@ -38,6 +39,12 @@ class WorldChange(BaseModel):
 
     name: str | None = None
     description: str | None = None
+
+
+class WorldDeletionConfirm(BaseModel):
+    """The name of the world, typed by the author to confirm deleting it for good."""
+
+    name: str
 
 
 class EntryCreate(BaseModel):
@@ -142,6 +149,30 @@ def get_world(world_id: str, found: ServicesDep) -> World:
 def update_world(world_id: str, body: WorldChange, found: ServicesDep) -> World:
     """Change name or description of a world."""
     return found.canon.update_world(world_id, **_given(body))
+
+
+@router.post("/{world_id}/archive")
+def archive_world(world_id: str, found: ServicesDep) -> World:
+    """Put a world into the archive (step 9.9, ADR-098)."""
+    return found.canon.archive_world(world_id)
+
+
+@router.post("/{world_id}/restore")
+def restore_world(world_id: str, found: ServicesDep) -> World:
+    """Take a world back from the archive."""
+    return found.canon.restore_world(world_id)
+
+
+@router.get("/{world_id}/deletion-preview")
+def preview_world_deletion(world_id: str, found: ServicesDep) -> WorldDeletion:
+    """What deleting the world for good takes with it, also in stories of other worlds."""
+    return world_deletion(found.canon, found.manuscript, world_id)
+
+
+@router.delete("/{world_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_world_for_good(world_id: str, body: WorldDeletionConfirm, found: ServicesDep) -> None:
+    """Delete an archived world for good; ``name`` must be exactly its name (ADR-098)."""
+    delete_world(found.canon, found.manuscript, world_id, body.name)
 
 
 @router.post("/{world_id}/maps", status_code=status.HTTP_201_CREATED)
