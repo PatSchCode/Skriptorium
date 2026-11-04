@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 22:30 – [BEOBACHTUNG] 9.10 erledigt
+
+- Eigentümer bestätigte die Messung („Ja, 9.10 erledigt“). Fahrplan (Schritt und Übersicht ✅), README und CHANGELOG (Eintrag 9.10 nachgetragen) angepasst. Eingangskriterium von 9.11 („9.10 erledigt“) ist damit auch formal erfüllt.
+
 ### 2026-11-04 22:20 – [BEOBACHTUNG] Messung 9.10 (4): Zwischenspeicher greift bei Schreiben, Weltenbauer und Kurzfassung
 
 - Testanfragen des Eigentümers 22:07–22:14 UTC in einer seiner Welten, je Ablauf zwei (Weltenbauer drei) gleiche Anfragen kurz hintereinander. Gelesen in einer SSH-Prüfung: Protokollzeilen `ki_anfrage` der letzten zwei Stunden und die November-Verbrauchsdatei (jetzt 90 Einträge, 9 neue, alle mit `welt`, Schreiben und Kurzfassungen auch mit `geschichte`). Modell `qwen/qwen3.8-max-0902`, ausführender Anbieter jedes Mal Alibaba.
