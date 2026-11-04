@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 22:50 – [BEOBACHTUNG] 9.9 erledigt
+
+- Eigentümer prüfte Archivieren, Zurückholen, endgültiges Löschen und Kapitel löschen mit einer Wegwerf-Welt und bestätigte („9.9 passt“). Fahrplan (Schritt und Übersicht ✅), FR-036 `ERLEDIGT`, README; CHANGELOG-Eintrag 9.9 nachgetragen (fehlte). Damit ist der Block Verwaltung 9.9–9.11 abgeschlossen; nächster Schritt 9.12 (Erkundung). Keine Phasengrenze – 9.12 bis 9.15 offen.
+
 ### 2026-11-04 22:40 – [BEOBACHTUNG] 9.11 erledigt
 
 - Eigentümer prüfte die Seite „Verbrauch“ mit den Testanfragen von 9.10 und bestätigte („9.11 passt“). Fahrplan (Schritt und Übersicht ✅, aktiver Schritt jetzt 9.9), FR-037 `ERLEDIGT`, README angepasst; CHANGELOG-Eintrag bestand schon. Priorität „Kann“ von FR-037 bleibt mein Vorschlag, vom Eigentümer nicht eigens bestätigt.
