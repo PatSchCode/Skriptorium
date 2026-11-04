@@ -2497,3 +2497,164 @@ button.story-cover-add {
 .delete-dialog input {
   width: 100%;
 }
+
+/* Verbrauch (step 9.11, ADR-100): a table by world; on small screens each line becomes a card
+   with name and cost on top and the counts below. */
+.usage {
+  overflow-x: auto;
+}
+
+.usage-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.usage-head h2,
+.usage-head h3 {
+  margin: 0;
+}
+
+.usage-table td:not(.name),
+.usage-table th:not(:first-child),
+.usage-models td:not(:first-child),
+.usage-models th:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.usage-table .unit {
+  display: none;
+}
+
+.usage-table tr.sub td {
+  background: var(--page);
+}
+
+.usage-table tr.sub td.name {
+  padding-left: 1.4rem;
+}
+
+.usage-table tr.old td {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.usage-table tr.sum td {
+  font-weight: 700;
+  border-top: 2px solid var(--text);
+}
+
+.usage-detail h3 {
+  margin: 1rem 0 0.4rem;
+  font-size: 1rem;
+}
+
+.usage-kinds {
+  display: grid;
+  grid-template-columns: auto minmax(2rem, 1fr) auto;
+  gap: 0.2rem 0.6rem;
+  align-items: center;
+}
+
+.usage-kind {
+  display: contents;
+}
+
+.usage-kind .bar {
+  height: 0.55rem;
+  background: var(--accent);
+  opacity: 0.55;
+  border-radius: 2px;
+}
+
+.segmented {
+  display: inline-flex;
+}
+
+.segmented button {
+  border-radius: 0;
+  padding: 0.15rem 0.6rem;
+}
+
+.segmented button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.segmented button:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--page);
+}
+
+@media (max-width: 40rem) {
+  .usage-table thead,
+  .usage-table .wide {
+    display: none;
+  }
+
+  .usage-table,
+  .usage-table tbody {
+    display: block;
+  }
+
+  .usage-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.6rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .usage-table td {
+    border: none;
+    padding: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .usage-table td.name {
+    flex: 1 0 70%;
+    order: -2;
+    color: var(--text);
+  }
+
+  .usage-table td.cost {
+    order: -1;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .usage-table .unit {
+    display: inline;
+  }
+
+  .usage-table td.total::before,
+  .usage-table td.share::before {
+    content: "· ";
+  }
+
+  .usage-table tr.sub {
+    padding-left: 0.9rem;
+    background: var(--page);
+  }
+
+  .usage-table tr.sub td,
+  .usage-table tr.sub td.name {
+    background: none;
+    padding-left: 0;
+  }
+
+  .usage-table tr.sum {
+    border-top: 2px solid var(--text);
+  }
+
+  .usage-table tr.sum td {
+    border: none;
+  }
+}

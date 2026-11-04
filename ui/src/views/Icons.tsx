@@ -20,6 +20,7 @@ const PATHS = {
     </>
   ),
   import: <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />,
+  usage: <path d="M4 20h16M7 20v-6M12 20V6M17 20v-10" />,
   theme: (
     <>
       <circle cx="12" cy="12" r="9" />

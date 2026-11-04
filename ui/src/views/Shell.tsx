@@ -21,6 +21,7 @@ import { useLoad } from "../useLoad";
 import { appTitle } from "../title";
 import { Account } from "./Account";
 import { Settings } from "./Settings";
+import { Usage } from "./Usage";
 import { ErrorText } from "./Common";
 import { MenuButton, MenuContext } from "./Menu";
 import { StoryList } from "./StoryList";
@@ -137,6 +138,13 @@ export function Shell({ onLogout }: { onLogout: () => void }) {
               <span className="spacer" />
               <ThemeChoice />
               <RailButton
+                symbol={<Icon name="usage" />}
+                label="Verbrauch"
+                onClick={() => {
+                  go("/verbrauch");
+                }}
+              />
+              <RailButton
                 symbol={<Icon name="settings" />}
                 label="Einstellungen"
                 onClick={() => {
@@ -184,6 +192,7 @@ export function Shell({ onLogout }: { onLogout: () => void }) {
                 <Route path="/" element={<WorldsRoute />} />
                 <Route path="/konto" element={<Account />} />
                 <Route path="/einstellungen" element={<Settings />} />
+                <Route path="/verbrauch" element={<Usage />} />
                 <Route
                   path="/welt/:world/geschichte/:story/kapitel/:chapter"
                   element={<StoryRoute />}

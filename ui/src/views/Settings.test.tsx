@@ -395,6 +395,7 @@ describe("tasks start with their saved model (step 9.7)", () => {
     });
     const { unmount } = render(
       <ImageGenerate
+        target={{ world: "die-salzmark" }}
         title="Bild erzeugen"
         initialPrompt="Kael"
         initialFormat="1:1"
@@ -416,6 +417,7 @@ describe("tasks start with their saved model (step 9.7)", () => {
 
     render(
       <ImageGenerate
+        target={{ world: "die-salzmark" }}
         title="Bild erzeugen"
         initialPrompt="Kael"
         initialFormat="1:1"

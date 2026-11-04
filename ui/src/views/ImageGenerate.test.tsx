@@ -52,6 +52,7 @@ describe("generating an image (step 7.12)", () => {
     const user = userEvent.setup();
     render(
       <ImageGenerate
+        target={{ world: "die-salzmark" }}
         title="Bild erzeugen – Gunda"
         initialPrompt="Gunda: kräftig"
         initialFormat="2:3"
@@ -79,6 +80,7 @@ describe("generating an image (step 7.12)", () => {
       model: "black-forest-labs/flux.2-pro",
       prompt: "Gunda: kräftig, Schürze",
       aspect_ratio: "1:1",
+      world: "die-salzmark",
     });
     expect(screen.getByText("FLUX.2 Pro · Kosten 0,031 $")).toBeDefined();
     await user.click(screen.getByRole("button", { name: "Übernehmen" }));
@@ -102,6 +104,7 @@ describe("generating an image (step 7.12)", () => {
     const user = userEvent.setup();
     render(
       <ImageGenerate
+        target={{ world: "die-salzmark" }}
         title="Bild"
         initialPrompt="x"
         initialFormat="1:1"
@@ -182,6 +185,7 @@ function renderGenerate(
 ) {
   return render(
     <ImageGenerate
+      target={{ world: "die-salzmark" }}
       title="Bild"
       initialPrompt="Gunda: kräftig"
       initialFormat="2:3"

@@ -7,6 +7,7 @@ import {
   type GeneratedImage,
   type ImageOrigin,
   type ImagePrice,
+  type ImageTarget,
 } from "../api";
 import { ErrorText } from "./Common";
 import type { Basis } from "./ImageOriginPanel";
@@ -23,7 +24,8 @@ const FORMATS: readonly { id: AspectRatio; label: string }[] = [
  * until "Übernehmen", which hands the image and its origin (model, description, format, cost;
  * step 9.6, ADR-095) to the caller's usual upload. With a `basis` (step 9.8, ADR-097) a stored
  * image goes along to the model: the description says what should change, only models that take
- * a basis are offered, and the format follows the basis until the author picks one.
+ * a basis are offered, and the format follows the basis until the author picks one. The `target`
+ * (world, and story for a cover) only files the request in the usage statistics (step 9.11).
  */
 export function ImageGenerate({
   title,
@@ -34,6 +36,7 @@ export function ImageGenerate({
   hint = null,
   extra = null,
   basis = null,
+  target,
   onTakeOver,
   onClose,
 }: {
@@ -52,6 +55,8 @@ export function ImageGenerate({
   extra?: ReactNode;
   /** A stored image the new one is made from (step 9.8). */
   basis?: Basis | null;
+  /** Where the image goes, for the usage statistics (step 9.11, ADR-100). */
+  target: ImageTarget;
   onTakeOver: (image: Blob, origin: ImageOrigin) => Promise<void>;
   onClose: () => void;
 }) {
@@ -159,6 +164,7 @@ export function ImageGenerate({
           model,
           prompt: prompt.trim(),
           aspect_ratio: format,
+          ...target,
           ...(basis === null ? {} : { reference: basis.reference }),
         }),
       );
