@@ -29,6 +29,26 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 20:40 – [ADR-ANGELEGT] ADR-100 Verbrauch je Welt und Geschichte (9.11)
+
+- Bestandsaufnahme: alle Abläufe kennen ihre Welt; Geschichte kennen Schreiben, Kurzfassung, Gesamtzusammenfassung; Bild erzeugen kennt kein Ziel (die Oberfläche schon). Messung auf dem Mac (Skript im Scratchpad, 1.100 Zeilen im neuen Format): Schreiben der Monatsdatei 370 ms, Lesen 240 ms; libyaml 30 + 34 ms statt 140 + 226 ms für Ausgabe und Einlesen; JSON-Zeilen ca. 3 ms. Bei 2.000 Zeilen 674 / 432 ms.
+- Mockup `mockup-9.11.html` (lokal, vorher/nachher, Desktop und Smartphone, Testwelten Salzmark und Glimmergrund, Beispielzahlen). Eigentümer per Auswahlfragen: Ort A, Speicher 1, Zuordnung nach Vorschlag – jeweils die Empfehlung → ADR-100, FR-037 (Priorität „Kann“ von der KI gesetzt nach dem Wortlaut von V.37 – Wunsch, keine Pflicht; Bestätigung offen). Reaktiv-Quote 0 / 10 (ADR-091–100).
+- 9.10 Messung: Testanfragen des Eigentümers noch nicht gemacht („nein noch nicht“). 9.11 beginnt trotzdem – der Code von 9.10 liegt vor, nur die Messung fehlt; damit drei Schritte `[IN ARBEIT]` (9.9 wartet auf Prüfung, 9.10 auf Messung) – Abweichung von `CLAUDE.md` Abschnitt 7 mit Zustimmung des Eigentümers („dann 9.11“).
+
+### 2026-11-04 20:12 – [BEOBACHTUNG] 9.9 und 9.10 eingespielt (`e52d69a`); Anfragen je Monat gezählt
+
+- Eingespielt nach Runbook Abschnitt 7: `git archive` von `origin/main` (`e52d69a`, CI grün), `REVISION` geschrieben, altes Image als `skriptorium:vorher`, `app.vorher` liegt bereit; Build und Start ohne Fehler. `/api/health` 200 nach ca. 65 s (Warten nur per HTTPS), Anmeldeseite 200; eine SSH-Prüfung: Container `healthy`, `REVISION` `e52d69a`.
+- Zählung für 9.11 (nur Anzahl, lesend, `data/system/verbrauch/`): 2026-10 1.094 Anfragen (176 kB), 2026-11 bis heute 81 (13 kB). Je Art über beide Monate: schreiben 915, weltenbau 138, bilderzeugung 62, kurzfassung 26, gesamtzusammenfassung 25, aussehen 9.
+- Offen: Prüfung 9.9 und Messung 9.10 (4) mit echten Anfragen des Eigentümers – je Ablauf zwei gleiche Anfragen hintereinander.
+
+### 2026-11-04 20:10 – [SESSIONSTART] Einspielen, 9.10 messen, dann 9.11
+
+- **Modell:** Opus 5.5 (`claude-opus-5-5`, laut `get_session` und Systemkontext), Entscheidungs-Klasse – passend zu 9.11 (Empfehlung Entscheidung); Einspielen und Messung wären Routine (keine Abgabe, D.22 offen).
+- **Umgebung:** Mac-Session (SSH zum VPS, ADR-025). `git fetch`: `main` auf `e52d69a` (9.9 PR #195, 9.10 PR #197), Doku-PR #198 offen. Arbeitszweig `feat/9.11-verbrauchsstatistik` auf dem Stand von #198 (`origin/scp/youthful-hawking-eb5ybn`), damit dessen Doku-Stand nicht verloren geht.
+- **Beobachtung:** Der lokale Zweig `feat/9.9-loeschen-archivieren` (9 Commits, nie gepusht) ist eine ältere, parallele Umsetzung von 9.9; die gültige kam aus der Cloud-Session (PR #195). Nicht gelöscht – Entscheidung beim Eigentümer.
+- **Wiedereinstieg:** Mindest-Lektüre vollständig (Projektkontext; Logbuch ab dem letzten `[SESSIONENDE]`; Fahrplan „Aktueller Stand“ und Phase 9; Architektur 1, 2, 9; Entscheidungen Teil A und C; aktive Blocker: keine). Keine offenen STOPP-Situationen.
+- **Kontextgröße:** `get_session` meldet keine Kontextgröße – Regel zur Sessiongröße entfällt für diese Session.
+
 ### 2026-11-04 – [BEOBACHTUNG] 9.11 auf die Mac-Session verlegt
 
 - Eigentümer: „weiter mit 9.11“. Rückfrage, weil das Eingangskriterium (9.10 erledigt) fehlt, die Vorlage die Zahl der Anfragen je Monat vom Server braucht (nur per SSH, ADR-025) und die Session über der Größengrenze liegt. Eigentümer per Auswahlfrage: „Neue Mac-Session“ (Empfehlung) – dort zuerst 9.9 und 9.10 einspielen, 9.10 messen, dann 9.11 mit Bestandsaufnahme, Serverzählung, Mockup und Vorlage (Entscheidungs-Klasse). Doku-PR #198 angelegt.

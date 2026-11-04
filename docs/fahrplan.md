@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; zusammengeführt (PR #195), Einspielen und Prüfung offen. Parallel 9.10 Cache-Treffer – seit 2026-11-04; entschieden (C, ADR-099), umgesetzt und zusammengeführt (PR #197)
-- **Nächster Schritt:** 9.9 und 9.10 einspielen (`main` auf `e52d69a`; nur aus der Mac-Session, ADR-025), dann Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4) an echten Anfragen; danach in derselben Mac-Session 9.11 (Bestandsaufnahme, Zahl der Anfragen je Monat auf dem Server, Mockup, Vorlage – Eigentümer 2026-11-04). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 9.11 Verbrauchsstatistik – seit 2026-11-04; entschieden (ADR-100), Umsetzung läuft. Daneben 9.9 Löschen oder Archivieren (eingespielt `e52d69a` 2026-11-04, Prüfung des Eigentümers offen) und 9.10 Cache-Treffer (eingespielt `e52d69a`, Messung (4) mit Testanfragen des Eigentümers offen)
+- **Nächster Schritt:** 9.11 umsetzen (storage, api, ui nach ADR-100), CI, Merge, Einspielen; Messung 9.10 (4), sobald der Eigentümer je Ablauf zwei gleiche Anfragen gemacht hat; Prüfung 9.9 durch den Eigentümer. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -36,9 +36,9 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.6 | Herkunft von Bildern (B1) | erledigt 2026-10-25 (ADR-095) | – |
 | ✅ | 9.7 | Einstellungsseite – Modell je Aufgabe (G3, B6) | erledigt 2026-10-26 (ADR-096) | – |
 | ✅ | 9.8 | Bild zu Bild (B7) | erledigt 2026-10-26 (ADR-097) | – |
-| 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 (ADR-098), zusammengeführt (PR #195) | KI: Einspielen, dann du: Prüfung |
-| 🟠 | 9.10 | Cache-Treffer festhalten (V.36) | in Arbeit seit 2026-11-04 (C, ADR-099), zusammengeführt (PR #197) | KI: Einspielen, dann Messung |
-| ⚪ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | offen | KI: nach 9.10 Vorlage |
+| 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 (ADR-098), eingespielt `e52d69a` | du: Prüfung |
+| 🟠 | 9.10 | Cache-Treffer festhalten (V.36) | in Arbeit seit 2026-11-04 (C, ADR-099), eingespielt `e52d69a` | du: Testanfragen, dann KI: Messung |
+| 🟠 | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | in Arbeit seit 2026-11-04 (ADR-100) | KI: Umsetzung |
 | ⚪ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | offen | KI |
 | ⚪ | 9.13 | Gast-Figuren ausbauen (V.34) | offen – Probe des Eigentümers erfolgt 2026-10-21 | KI: Vorlage |
 | ⚪ | 9.14 | Kontexttreue erneut prüfen | offen | KI: nach 9.4 |
@@ -329,7 +329,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.9: Geschichten, Welten und Kapitel löschen oder archivieren (V.35 B5)
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-04 – Bestandsaufnahme und Vorlage)
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-04 – Bestandsaufnahme und Vorlage) – zusammengeführt (PR #195), eingespielt `e52d69a` (2026-11-04); Prüfung des Eigentümers offen
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage und Mockup zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Löschen ist destruktiv (`CLAUDE.md` Abschnitt 8, Kriterium 6), Datenmodell und API (Kategorien 4 und 5)
@@ -363,16 +363,16 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.11: Verbrauchsstatistik je Welt und je Geschichte (V.37)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-04) – Bestandsaufnahme, Zählung auf dem Server und Mockup vorher/nachher vorgelegt; Eigentümer per Auswahlfragen: Ort A (eigene Seite „Verbrauch“), Speicher 1 (Format bleibt, libyaml), Zuordnung nach Vorschlag → ADR-100, FR-037. Begonnen, während 9.10 noch auf die Messung (4) wartet: Der Code von 9.10 liegt vor (Cache-Felder), das Eingangskriterium ist inhaltlich erfüllt – Abweichung mit Zustimmung des Eigentümers („dann 9.11“)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage und Mockup zu Beginn)
 - **Abhängigkeiten:** 9.10
 - **Freigabepflichtig:** ja – wie V.37: Datenmodell (Option C aus ADR-023, Kategorie 4), neuer Endpunkt (Kategorie 5, additiv)
 - **Empfohlene Klasse:** Entscheidung – Datenmodelländerung gegen eine bestehende Entscheidung (Eskalations-Auslöser 1).
 - **Eingangskriterien:** 9.10 erledigt
-- **Anforderungen (ab Klasse M):** neue Anforderung, in der Vorlage anzulegen
-- **Zu tun:** wie V.37; dazu das Speicherlayout der Verbrauchsdateien entscheiden – Befund 2 der Bewertung (je Anfrage wird die ganze Monatsdatei neu geschrieben: 83 ms bei 400, 431 ms bei 2.000 Einträgen) mit der echten Zahl der Anfragen je Monat auf dem Server (nur Anzahl, lesend).
-- **Akzeptanzkriterien:** wie V.37.
-- **Betroffene Module:** api, ui; ggf. canon und manuscript
+- **Anforderungen (ab Klasse M):** FR-037 (angelegt 2026-11-04)
+- **Zu tun:** ~~wie V.37; dazu das Speicherlayout der Verbrauchsdateien entscheiden – Befund 2 der Bewertung (je Anfrage wird die ganze Monatsdatei neu geschrieben: 83 ms bei 400, 431 ms bei 2.000 Einträgen) mit der echten Zahl der Anfragen je Monat auf dem Server (nur Anzahl, lesend).~~ – entschieden 2026-11-04, ADR-100 (Mockup `mockup-9.11.html`, lokal; Zählung: 2026-10 1.094, 2026-11 bis zum 04. 81 Anfragen). Umsetzung nach ADR-100: (1) `storage`: Dateikopf über libyaml lesen und schreiben, Rückfall ohne libyaml, gleiche strenge Regeln; (2) `api`: Verbrauchszeile mit `welt` und `geschichte` aus allen Abläufen, `POST /api/images/generate` mit optionalem Ziel, `GET /api/usage/stats`; (3) `ui`: Seite „Verbrauch“ (Tabelle bzw. Karten, Zeitraum, Aufklappen, Art, Modelle sortierbar), Ziel beim Bild erzeugen, Verweis im Konto.
+- **Akzeptanzkriterien:** wie V.37 (Vorlage mit Mockup und ADR erledigt 2026-11-04); Tests für Zuordnung je Ablauf, Summen, Sortierung, alte Zeilen ohne Welt, gelöschte Welt; Summen je Welt plus „ohne Zuordnung“ ergeben die Monatssumme; gleiche Ergebnisse beider YAML-Leser an den gemeinsamen Testfällen; Bildschirmfotos Desktop und Smartphone; Eigentümer bestätigt.
+- **Betroffene Module:** storage, api, ui
 - **Reifegrad-Wirkung:** keine (Datenmodell bleibt `[BELASTBAR]` nach ADR)
 - **Artefakte:** Code, Tests, ADR, Mockup
 - **Notizen:** Aus V.37 (ADR-090).
