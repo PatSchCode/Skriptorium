@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [ADR-ANGELEGT] ADR-102 Weltbezug je Gast und Einpassen (9.13)
+
+- Eigentümer per Auswahlfragen zum Mockup: Bedienung so, Weltbezug je Geschichte, Heimatwelt-Abschnitt weglassen, wenn ein Weltbezug da ist. Kategorien 4, 1, 5, additiv, nicht reaktiv.
+
+### 2026-11-05 – [BEOBACHTUNG] 9.13 begonnen: Bestandsaufnahme und Mockup
+
+- Probe des Eigentümers (2026-10-21): „Gastfiguren funktionieren auch“ – kein benannter Mangel. Server (eine SSH-Prüfung, nur Anzahlen): 5 Welten, 11 Geschichten, 0 Gast-Verbindungen, 0 Fakten „nur diese Geschichte“.
+- Rückfrage mit Empfehlung „auf später (nach 9.15)“, weil kein Mangel und keine Nutzung belegt sind; Eigentümer: „A wie geplant“.
+- Bestand im Code: `GuestLink(world, entry)` im Kopf der Geschichte (`gast_verbindungen`), Fakten je Geschichte in `facts.md`; die Anfrage zeigt einen Gast mit „Gast aus der Welt …“ in der Überschrift und den ganzen Eintrag (`context/parts.py::render`). Bedienung: `ui/src/views/Guests.tsx` in der Seitenleiste der Geschichte.
+- Mockup `mockup-9.13.html` (lokal, ausgeschlossen): Feld „In ‹Welt›“ je Gast, „✨ Einpassen vorschlagen“, Anfrage vorher/nachher, Smartphone.
+
 ### 2026-11-05 – [BEOBACHTUNG] 9.12 erledigt; V.44–V.46 und FR-038 angelegt
 
 - Akzeptanzkriterien erfüllt: Erkenntnisdokument mit Optionen und Kosten, Vorlage an den Eigentümer, Umsetzung als eigene Schritte V.44 (Recherche), V.45 (Namen), V.46 (Fragenliste) mit Landeplatz 9.15. FR-038 Namenshilfe (Kann, von mir vorgeschlagen) angelegt.
