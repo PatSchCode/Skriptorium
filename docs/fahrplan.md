@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; zusammengeführt (PR #195), Einspielen und Prüfung offen. Parallel 9.10 Cache-Treffer – seit 2026-11-04; entschieden (C, ADR-099), Umsetzung läuft
-- **Nächster Schritt:** 9.9 und 9.10 einspielen (nur aus der Mac-Session, ADR-025), dann Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4) an echten Anfragen. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; zusammengeführt (PR #195), Einspielen und Prüfung offen. Parallel 9.10 Cache-Treffer – seit 2026-11-04; entschieden (C, ADR-099), umgesetzt und zusammengeführt (PR #197)
+- **Nächster Schritt:** 9.9 und 9.10 einspielen (`main` auf `e52d69a`; nur aus der Mac-Session, ADR-025), dann Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4) an echten Anfragen. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -36,8 +36,8 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.6 | Herkunft von Bildern (B1) | erledigt 2026-10-25 (ADR-095) | – |
 | ✅ | 9.7 | Einstellungsseite – Modell je Aufgabe (G3, B6) | erledigt 2026-10-26 (ADR-096) | – |
 | ✅ | 9.8 | Bild zu Bild (B7) | erledigt 2026-10-26 (ADR-097) | – |
-| 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 | KI: Vorlage mit Mockup |
-| 🟠 | 9.10 | Cache-Treffer festhalten (V.36) | in Arbeit seit 2026-11-04 (C, ADR-099) | KI: Umsetzung, dann Messung nach dem Einspielen |
+| 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 (ADR-098), zusammengeführt (PR #195) | KI: Einspielen, dann du: Prüfung |
+| 🟠 | 9.10 | Cache-Treffer festhalten (V.36) | in Arbeit seit 2026-11-04 (C, ADR-099), zusammengeführt (PR #197) | KI: Einspielen, dann Messung |
 | ⚪ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | offen | KI: nach 9.10 Vorlage |
 | ⚪ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | offen | KI |
 | ⚪ | 9.13 | Gast-Figuren ausbauen (V.34) | offen – Probe des Eigentümers erfolgt 2026-10-21 | KI: Vorlage |

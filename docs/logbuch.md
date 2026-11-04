@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] PR #197 zusammengeführt (9.10), Einspielen offen
+
+- Entwurf #196 auf Anweisung des Eigentümers mit Verweis auf #197 geschlossen. CI zu #197 auf `1fb6b68` grün (4 von 4); Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung, größtes Bündel 409 kB (unverändert). Kein Review, keine Konflikte. Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`e52d69a`). Beobachtung beendet, ausstehender Check-in gelöscht.
+- 9.9 und 9.10 bleiben `[IN ARBEIT]` bis Einspielen (nur aus der Mac-Session, ADR-025); danach Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4). Dieser Doku-Stand liegt auf dem neu auf `main` aufgesetzten Session-Branch und braucht einen eigenen kleinen PR.
+
 ### 2026-11-04 – [SESSIONENDE] 9.10 entschieden (ADR-099) und umgesetzt
 
 - **Bearbeitet:** Entwurfs-PR #196 aufgegriffen; 9.10 erklärt, Wahl C → ADR-099, Umsetzung (1)–(3).
