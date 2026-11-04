@@ -49,6 +49,16 @@ Beobachtungen:
 - Nutzungsbedingungen: Die meisten Texte sind urheberrechtlich geschützt; Ideen und Fragen dürfen aufgegriffen, die Texte nicht übernommen werden.
 - Einbindung ohne Dienst: eine **eigene kurze Fragenliste je Art** (Figur, Ort, Gegenstand, Kultur – passend zu den festen Abschnitten aus 9.3) in eigenen Worten im Programm. Der Weltenbauer kann damit sagen, was einem Eintrag noch fehlt („Wer profitiert von dieser Regel?“, „Was kostet diese Magie?“). Kein Abruf zur Laufzeit, keine Kosten außer wenigen hundert Token.
 
+## 5a. Nachtrag: Datenbanken und RPG-Hintergrundseiten (Rückfrage des Eigentümers)
+
+| Quelle | Inhalt | Zugang und Bedingungen | Bewertung |
+|---|---|---|---|
+| Open5e (offenes D&D-Regelwerk SRD 5.1 und weitere offene Werke) | Monster, Zauber, magische Gegenstände, Völker, Ausrüstung; Suche `/v2/search/?query=` | ohne Konto; SRD 5.1 unter CC BY 4.0 (Quelle nennen); Open5e mischt weitere Werke mit eigenen Lizenzen (OGL) – je Dokument prüfen; Drosselung erwähnt, nicht beziffert | einbindbar wie Wikipedia, Fantasy im D&D-Stil |
+| Fandom-Wikis | Hintergrund fremder Welten (Forgotten Realms, Star Wars …) | Texte CC BY-SA, aber laut Bericht (Hugging Face, Bedingungen vom 2025-12-19) untersagen die Nutzungsbedingungen automatische Abrufe und KI-Nutzung; Bedingungen selbst nicht abrufbar (HTTP 402) | nicht einbinden |
+| World Anvil | Welten von Nutzern | Schnittstelle nur auf Antrag, keine kommerzielle Nutzung ohne Erlaubnis | nicht einbindbar |
+| TV Tropes | Erzählmuster | keine Schnittstelle, CC BY-NC-SA (nicht kommerziell) | nicht einbindbar |
+| Wikidata | strukturierte Fakten (Orte, Personen, Dinge) | ohne Konto, CC0 | als Faktenquelle möglich; für Namen in N2 vorgesehen |
+
 ## 6. Empfehlung (zur Vorlage)
 
 - **V1: B, dazu A als Sofortmaßnahme.** A ist eine Einstellung ohne neue Abhängigkeit und senkt die Kosten der freien Websuche sofort; B macht die häufigste Recherche unabhängig von OpenRouter und kostenlos, ohne Konto und Secret. C nicht, solange die Websuche nur wenige Dollar im Monat kostet.
@@ -56,6 +66,12 @@ Beobachtungen:
 - **H1 Anleitungen:** eigene Fragenliste je Art.
 - Umsetzung jeweils als eigener Schritt mit Landeplatz 9.15 (Akzeptanzkriterium von 9.12), mit ADR für die neuen Dienste (Kategorie 3).
 - **Konfidenz:** hoch für die Kostenaussage (gemessen 6.7 und Verbrauch Oktober); mittel für die Größe des Exa-Suchtexts bei A (Herstellerangabe, nicht gemessen); mittel für den Nutzen von N2 (Klang der gebildeten Namen ist erst am Beispiel zu beurteilen). **Umkehrbarkeit:** billig – alle Optionen sind abschaltbar und ändern keine gespeicherten Daten.
+
+## 6a. Entscheidung (2026-11-05, ADR-101)
+
+- Recherche: Wikipedia und offenes D&D-Regelwerk (Open5e, SRD 5.1) als eigene Quellen, dazu die Websuche mit Exa und 3 Treffern (B mit D&D-Regelwerk plus A) → V.44.
+- Namen: offene Namenslisten (N2) → V.45, FR-038.
+- Anleitungen: Fragenliste je Art → V.46.
 
 ## 7. Quellen
 
@@ -66,4 +82,7 @@ Beobachtungen:
 - Wikimedia: User-Agent-Richtlinie <https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy>, API-Etikette <https://www.mediawiki.org/wiki/API:Etiquette>
 - GeoNames, Export und Lizenz: <https://www.geonames.org/export/>
 - Behind the Name, API: <https://www.behindthename.com/api/>
+- Open5e, API: <https://open5e.com/api-docs>
+- Fandom-Bedingungen laut Bericht: <https://huggingface.co/datasets/SlayerLab/polish-dynaword/discussions/57>
+- World Anvil, API: <https://www.worldanvil.com/api/external/boromir/documentation>
 - Fantasy Name Generators: Lizenzhinweis zitiert in <https://git.neptards.moe/neptards/offline-fantasy-name-generators/file/README.md.html>; die Seite selbst lehnt automatische Abrufe ab

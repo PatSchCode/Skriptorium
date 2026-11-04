@@ -29,6 +29,16 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 9.12 erledigt; V.44–V.46 und FR-038 angelegt
+
+- Akzeptanzkriterien erfüllt: Erkenntnisdokument mit Optionen und Kosten, Vorlage an den Eigentümer, Umsetzung als eigene Schritte V.44 (Recherche), V.45 (Namen), V.46 (Fragenliste) mit Landeplatz 9.15. FR-038 Namenshilfe (Kann, von mir vorgeschlagen) angelegt.
+- Drift behoben: Kennzahl „Muss / Soll / Kann“ in `docs/requirements.md` stand seit 2026-11-04 auf 19 / 10 / 6, tatsächlich 19 / 11 / 6 (FR-036 ist Soll) – jetzt mit FR-038 19 / 11 / 7.
+- Reaktiv-Quote 0 / 10 über ADR-092 bis ADR-101; Phase 9 weiter 15 von 15 Schritten (V-Schritte zählen nicht zur Phase).
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-101 Recherche, Namen, Fragenliste (9.12)
+
+- Eigentümer per Auswahlfragen; zwei Rückfragen („Baustein Wikipedia?“, „Gibts keine Datenbanken oder spezielle RPG-Hintergrundseiten?“) – daraufhin Open5e, Fandom, World Anvil, TV Tropes und Wikidata nachgeprüft (Nachtrag 5a im Erkenntnisdokument). Entscheidung: Wikipedia und offenes D&D-Regelwerk (SRD 5.1 über Open5e) als eigene Quellen plus Websuche mit Exa und 3 Treffern; offene Namenslisten (GeoNames, Wikidata); Fragenliste je Art. Kategorien 3 und 8, nicht reaktiv.
+
 ### 2026-11-05 – [BEOBACHTUNG] Erkenntnisdokument 9.12 geschrieben, Vorlage folgt
 
 - `docs/research/quellen-und-recherche.md`: V1 (Optionen A Plugin einstellen, B eigener Wikipedia-Baustein, C eigene Such-API, D nichts), H1 Namen (N1–N4) und Anleitungen; Preise aus OpenRouter-, Exa-, Wikimedia-, GeoNames- und Behind-the-Name-Seiten vom 2026-11-05.
