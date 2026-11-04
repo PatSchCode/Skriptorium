@@ -240,7 +240,7 @@ async def write(
         found.canon, found.manuscript, found.context, order, models=found.catalog
     )
     return StreamingResponse(
-        stream_events(found.provider, prepared, found.usage.record),
+        stream_events(found.provider, prepared, found.usage.recorder(world_id, story_id)),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )
@@ -264,7 +264,7 @@ async def worldbuilder(
     )
     prepared = prepare_worldbuilder(found.context, order, found.catalog)
     return StreamingResponse(
-        stream_worldbuilder(found.provider, prepared, found.usage.record),
+        stream_worldbuilder(found.provider, prepared, found.usage.recorder(world_id)),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )
@@ -304,7 +304,7 @@ async def appearance(
         found.context, world_id, entry_id, body.model or _preset(found, "aussehen"), found.catalog
     )
     return StreamingResponse(
-        stream_answer(found.provider, prepared, "aussehen", found.usage.record),
+        stream_answer(found.provider, prepared, "aussehen", found.usage.recorder(world_id)),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )
@@ -324,7 +324,9 @@ async def _describe(order: DescribeOrder, found: Services) -> StreamingResponse:
     await found.catalog.refresh()
     prepared = prepare_description(found.canon, found.context, found.catalog, order)
     return StreamingResponse(
-        stream_answer(found.provider, prepared, "bildbeschreibung", found.usage.record),
+        stream_answer(
+            found.provider, prepared, "bildbeschreibung", found.usage.recorder(order.world)
+        ),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )
@@ -350,7 +352,7 @@ async def summarize(world_id: str, story_id: str, number: int, found: ServicesDe
         model=_preset(found, "kurzfassung"),
         overall_model=_preset(found, "gesamtzusammenfassung"),
         models=found.catalog,
-        record=found.usage.record,
+        record=found.usage.recorder(world_id, story_id),
     )
     return SummaryResult(chapter=outcome.chapter, story=outcome.story, failure=outcome.failure)
 

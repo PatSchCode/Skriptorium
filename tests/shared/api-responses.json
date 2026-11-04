@@ -1459,6 +1459,354 @@
       "without_cost": 6
     }
   },
+  "usageStats": {
+    "route": "GET /api/usage/stats",
+    "type": "UsageStats",
+    "body": {
+      "month": null,
+      "months": ["2026-09"],
+      "total": {
+        "totals": {
+          "requests": 16,
+          "input_tokens": 11700,
+          "output_tokens": 390,
+          "cost_usd": 0.0229,
+          "without_cost": 6,
+          "cache_read_tokens": 0,
+          "cache_share": null
+        },
+        "kinds": [
+          {
+            "requests": 6,
+            "input_tokens": 2400,
+            "output_tokens": 80,
+            "cost_usd": 0.0042,
+            "without_cost": 4,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "schreiben"
+          },
+          {
+            "requests": 3,
+            "input_tokens": 2400,
+            "output_tokens": 80,
+            "cost_usd": 0.0042,
+            "without_cost": 1,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "kurzfassung"
+          },
+          {
+            "requests": 3,
+            "input_tokens": 2100,
+            "output_tokens": 70,
+            "cost_usd": 0.0061,
+            "without_cost": 1,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "weltenbau"
+          },
+          {
+            "requests": 2,
+            "input_tokens": 2400,
+            "output_tokens": 80,
+            "cost_usd": 0.0042,
+            "without_cost": 0,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "bildbeschreibung"
+          },
+          {
+            "requests": 1,
+            "input_tokens": 1200,
+            "output_tokens": 40,
+            "cost_usd": 0.0021,
+            "without_cost": 0,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "aussehen"
+          },
+          {
+            "requests": 1,
+            "input_tokens": 1200,
+            "output_tokens": 40,
+            "cost_usd": 0.0021,
+            "without_cost": 0,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "gesamtzusammenfassung"
+          }
+        ],
+        "models": [
+          {
+            "requests": 10,
+            "input_tokens": 9300,
+            "output_tokens": 310,
+            "cost_usd": 0.0187,
+            "without_cost": 2,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "model": "x-ai/grok-4.6"
+          },
+          {
+            "requests": 6,
+            "input_tokens": 2400,
+            "output_tokens": 80,
+            "cost_usd": 0.0042,
+            "without_cost": 4,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "model": "x-ai/grok-4.7"
+          }
+        ]
+      },
+      "worlds": [
+        {
+          "id": "die-salzmark",
+          "name": "Die Salzmark",
+          "archived": false,
+          "deleted": false,
+          "usage": {
+            "totals": {
+              "requests": 16,
+              "input_tokens": 11700,
+              "output_tokens": 390,
+              "cost_usd": 0.0229,
+              "without_cost": 6,
+              "cache_read_tokens": 0,
+              "cache_share": null
+            },
+            "kinds": [
+              {
+                "requests": 6,
+                "input_tokens": 2400,
+                "output_tokens": 80,
+                "cost_usd": 0.0042,
+                "without_cost": 4,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "schreiben"
+              },
+              {
+                "requests": 3,
+                "input_tokens": 2400,
+                "output_tokens": 80,
+                "cost_usd": 0.0042,
+                "without_cost": 1,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "kurzfassung"
+              },
+              {
+                "requests": 3,
+                "input_tokens": 2100,
+                "output_tokens": 70,
+                "cost_usd": 0.0061,
+                "without_cost": 1,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "weltenbau"
+              },
+              {
+                "requests": 2,
+                "input_tokens": 2400,
+                "output_tokens": 80,
+                "cost_usd": 0.0042,
+                "without_cost": 0,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "bildbeschreibung"
+              },
+              {
+                "requests": 1,
+                "input_tokens": 1200,
+                "output_tokens": 40,
+                "cost_usd": 0.0021,
+                "without_cost": 0,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "aussehen"
+              },
+              {
+                "requests": 1,
+                "input_tokens": 1200,
+                "output_tokens": 40,
+                "cost_usd": 0.0021,
+                "without_cost": 0,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "gesamtzusammenfassung"
+              }
+            ],
+            "models": [
+              {
+                "requests": 10,
+                "input_tokens": 9300,
+                "output_tokens": 310,
+                "cost_usd": 0.0187,
+                "without_cost": 2,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "model": "x-ai/grok-4.6"
+              },
+              {
+                "requests": 6,
+                "input_tokens": 2400,
+                "output_tokens": 80,
+                "cost_usd": 0.0042,
+                "without_cost": 4,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "model": "x-ai/grok-4.7"
+              }
+            ]
+          },
+          "own": {
+            "totals": {
+              "requests": 6,
+              "input_tokens": 5700,
+              "output_tokens": 190,
+              "cost_usd": 0.0124,
+              "without_cost": 1,
+              "cache_read_tokens": 0,
+              "cache_share": null
+            },
+            "kinds": [
+              {
+                "requests": 3,
+                "input_tokens": 2100,
+                "output_tokens": 70,
+                "cost_usd": 0.0061,
+                "without_cost": 1,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "weltenbau"
+              },
+              {
+                "requests": 2,
+                "input_tokens": 2400,
+                "output_tokens": 80,
+                "cost_usd": 0.0042,
+                "without_cost": 0,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "bildbeschreibung"
+              },
+              {
+                "requests": 1,
+                "input_tokens": 1200,
+                "output_tokens": 40,
+                "cost_usd": 0.0021,
+                "without_cost": 0,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "aussehen"
+              }
+            ],
+            "models": [
+              {
+                "requests": 6,
+                "input_tokens": 5700,
+                "output_tokens": 190,
+                "cost_usd": 0.0124,
+                "without_cost": 1,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "model": "x-ai/grok-4.6"
+              }
+            ]
+          },
+          "stories": [
+            {
+              "id": "die-ueberfahrt",
+              "title": "Die Überfahrt",
+              "form": "roman",
+              "archived": false,
+              "deleted": false,
+              "usage": {
+                "totals": {
+                  "requests": 10,
+                  "input_tokens": 6000,
+                  "output_tokens": 200,
+                  "cost_usd": 0.0105,
+                  "without_cost": 5,
+                  "cache_read_tokens": 0,
+                  "cache_share": null
+                },
+                "kinds": [
+                  {
+                    "requests": 6,
+                    "input_tokens": 2400,
+                    "output_tokens": 80,
+                    "cost_usd": 0.0042,
+                    "without_cost": 4,
+                    "cache_read_tokens": 0,
+                    "cache_share": null,
+                    "kind": "schreiben"
+                  },
+                  {
+                    "requests": 3,
+                    "input_tokens": 2400,
+                    "output_tokens": 80,
+                    "cost_usd": 0.0042,
+                    "without_cost": 1,
+                    "cache_read_tokens": 0,
+                    "cache_share": null,
+                    "kind": "kurzfassung"
+                  },
+                  {
+                    "requests": 1,
+                    "input_tokens": 1200,
+                    "output_tokens": 40,
+                    "cost_usd": 0.0021,
+                    "without_cost": 0,
+                    "cache_read_tokens": 0,
+                    "cache_share": null,
+                    "kind": "gesamtzusammenfassung"
+                  }
+                ],
+                "models": [
+                  {
+                    "requests": 6,
+                    "input_tokens": 2400,
+                    "output_tokens": 80,
+                    "cost_usd": 0.0042,
+                    "without_cost": 4,
+                    "cache_read_tokens": 0,
+                    "cache_share": null,
+                    "model": "x-ai/grok-4.7"
+                  },
+                  {
+                    "requests": 4,
+                    "input_tokens": 3600,
+                    "output_tokens": 120,
+                    "cost_usd": 0.0063,
+                    "without_cost": 1,
+                    "cache_read_tokens": 0,
+                    "cache_share": null,
+                    "model": "x-ai/grok-4.6"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "unassigned": {
+        "totals": {
+          "requests": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "cost_usd": 0.0,
+          "without_cost": 0,
+          "cache_read_tokens": 0,
+          "cache_share": null
+        },
+        "kinds": [],
+        "models": []
+      }
+    }
+  },
   "imageModels": {
     "route": "GET /api/images/models",
     "type": "ImageModelList",

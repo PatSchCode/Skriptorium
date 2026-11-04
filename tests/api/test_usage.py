@@ -73,6 +73,8 @@ def test_records_are_summed_per_month(tmp_path: Path) -> None:
         "kosten_usd": None,
         "cache_gelesen": None,
         "cache_geschrieben": None,
+        "welt": None,
+        "geschichte": None,
     }
 
 
