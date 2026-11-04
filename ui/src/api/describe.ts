@@ -33,6 +33,27 @@ export function streamDescription(
   );
 }
 
+/**
+ * Ask the world builder how a guest fits the world of the story (step 9.13, ADR-102); events as
+ * for a description. `wish` may be empty. Nothing is saved.
+ */
+export function streamGuestFit(
+  path: string,
+  model: string,
+  wish: string,
+  onEvent: (event: DescribeEvent) => void,
+  signal?: AbortSignal,
+): Promise<void> {
+  return streamEvents(
+    path,
+    { model, wish },
+    WRITE_EVENTS,
+    { type: "error", kind: "verbindung" },
+    onEvent,
+    signal,
+  );
+}
+
 export const describeApi = {
   describeImagePath: (world: string, entry: string, image: string) =>
     `${worldPath(world)}/entries/${enc(entry)}/images/${enc(image)}/describe`,

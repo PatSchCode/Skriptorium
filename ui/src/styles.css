@@ -2658,3 +2658,29 @@ button.story-cover-add {
     border: none;
   }
 }
+
+/* Guests with a relation to the world of the story (step 9.13, ADR-102). */
+ul[aria-label="Gäste"] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.guest {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.guest-relation label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.guest-relation textarea {
+  width: 100%;
+  box-sizing: border-box;
+}

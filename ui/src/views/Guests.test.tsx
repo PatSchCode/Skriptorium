@@ -194,6 +194,161 @@ describe("guests from other worlds on the story page (step 3.7)", () => {
   });
 });
 
+describe("relation of a guest to the world of the story (step 9.13)", () => {
+  const guestList = () => within(screen.getByRole("list", { name: "Gäste" }));
+
+  async function openGuests(user: ReturnType<typeof userEvent.setup>) {
+    await openStorySettings(user);
+    await user.click(await screen.findByText("Gäste aus anderen Welten (1)"));
+    return screen.findByLabelText(/In dieser Welt \(„Die Salzmark“\)/);
+  }
+
+  it("saves the relation trimmed, and only when it changed", async () => {
+    const { calls } = fakeApi({
+      ...storyRoutes(),
+      [`PUT ${BASE}/guests/nebelreich/nebelkoenig`]: (body) => ({
+        status: 200,
+        body: {
+          ...WITH_GUEST,
+          guest_links: [
+            { ...LINK, relation: (body as { relation: string }).relation },
+          ],
+        },
+      }),
+    });
+    const user = userEvent.setup();
+    render(
+      <StoryPage
+        story={{
+          ...WITH_GUEST,
+          guest_links: [{ ...LINK, relation: "Kam übers Eis." }],
+        }}
+      />,
+    );
+    const field = await openGuests(user);
+    const save = guestList().getByRole("button", { name: "Speichern" });
+
+    expect((field as HTMLTextAreaElement).value).toBe("Kam übers Eis.");
+    expect((save as HTMLButtonElement).disabled).toBe(true);
+    await user.clear(field);
+    await user.type(field, "  Strandete nach der Flut. ");
+    await user.click(save);
+
+    await waitFor(() => {
+      expect(calls.find((c) => c.method === "PUT")?.body).toEqual({
+        relation: "Strandete nach der Flut.",
+      });
+    });
+    expect(
+      screen.getByText(/Abschnitte über Nebelreich \(„In …“\)/),
+    ).toBeDefined();
+  });
+
+  it("takes over the world builder's proposal into the field", async () => {
+    const feed = sseFeed();
+    const { calls } = fakeApi({
+      ...storyRoutes(),
+      [`POST ${BASE}/guests/nebelreich/nebelkoenig/fit`]: () => ({
+        status: 200,
+        stream: feed.stream,
+      }),
+      [`PUT ${BASE}/guests/nebelreich/nebelkoenig`]: ok(WITH_GUEST),
+    });
+    const user = userEvent.setup();
+    render(<StoryPage story={WITH_GUEST} />);
+    const field = await openGuests(user);
+
+    await user.click(
+      screen.getByRole("button", { name: "✨ Einpassen vorschlagen" }),
+    );
+    expect(
+      screen.getByRole("heading", {
+        name: "Vorschlag des Weltenbauers für Nebelkönig",
+      }),
+    ).toBeDefined();
+    await user.type(screen.getByLabelText(/Wunsch/), "soll fremd bleiben");
+    await user.click(
+      await screen.findByRole("button", { name: "Vorschlagen" }),
+    );
+    expect(calls.find((c) => c.path.endsWith("/fit"))?.body).toEqual({
+      model: "x-ai/grok-4.7",
+      wish: "soll fremd bleiben",
+    });
+    feed.send("text", { text: "Strandete nach der Flut " });
+    feed.send("text", { text: "auf den Inseln." });
+    feed.send("done", {
+      input_tokens: 900,
+      output_tokens: 40,
+      cost_usd: 0.002,
+      finish_reason: "stop",
+    });
+    feed.close();
+    await user.click(
+      await screen.findByRole("button", { name: "In das Feld übernehmen" }),
+    );
+
+    expect((field as HTMLTextAreaElement).value).toBe(
+      "Strandete nach der Flut auf den Inseln.",
+    );
+    expect(screen.queryByLabelText("Vorschlag")).toBeNull();
+    await user.click(guestList().getByRole("button", { name: "Speichern" }));
+    await waitFor(() => {
+      expect(calls.find((c) => c.method === "PUT")?.body).toEqual({
+        relation: "Strandete nach der Flut auf den Inseln.",
+      });
+    });
+  });
+
+  it("discards a proposal, shows refusals and offers no field without entry", async () => {
+    const feed = sseFeed();
+    fakeApi({
+      ...storyRoutes(),
+      [`POST ${BASE}/guests/nebelreich/nebelkoenig/fit`]: () => ({
+        status: 200,
+        stream: feed.stream,
+      }),
+      [`PUT ${BASE}/guests/nebelreich/nebelkoenig`]: fail(
+        422,
+        "Weltbezug darf höchstens 4000 Zeichen lang sein",
+      ),
+    });
+    const user = userEvent.setup();
+    const { unmount } = render(<StoryPage story={WITH_GUEST} />);
+    const field = await openGuests(user);
+
+    await user.click(
+      screen.getByRole("button", { name: "✨ Einpassen vorschlagen" }),
+    );
+    await user.click(
+      await screen.findByRole("button", { name: "Vorschlagen" }),
+    );
+    feed.send("text", { text: "Etwas." });
+    feed.send("error", { kind: "abgelehnt", message: "nein" });
+    feed.close();
+    expect(await screen.findByText(/abgelehnt|lehnt/i)).toBeDefined();
+    await user.click(screen.getByRole("button", { name: "Verwerfen" }));
+    expect((field as HTMLTextAreaElement).value).toBe("");
+    await user.type(field, "Zu lang.");
+    await user.click(guestList().getByRole("button", { name: "Speichern" }));
+    expect(
+      await screen.findByText(
+        "Weltbezug darf höchstens 4000 Zeichen lang sein",
+      ),
+    ).toBeDefined();
+    unmount();
+
+    fakeApi({
+      ...storyRoutes(),
+      "GET /api/worlds/nebelreich/entries/nebelkoenig": fail(404, "fehlt"),
+    });
+    render(<StoryPage story={WITH_GUEST} />);
+    await openStorySettings(user);
+    await user.click(await screen.findByText("Gäste aus anderen Welten (1)"));
+    await screen.findByText(/Eintrag fehlt in seiner Welt/);
+    expect(screen.queryByLabelText(/In dieser Welt/)).toBeNull();
+  });
+});
+
 describe("guests in the writing panel (step 3.7)", () => {
   it("sends a guest named with @ and offers guests for a new scene", async () => {
     const feed = sseFeed();

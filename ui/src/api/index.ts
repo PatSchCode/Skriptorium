@@ -70,7 +70,7 @@ export type {
   TranslatedMaterial,
 } from "./transfer";
 export type { Source } from "./stream";
-export { streamDescription } from "./describe";
+export { streamDescription, streamGuestFit } from "./describe";
 export type {
   AspectRatio,
   GeneratedImage,

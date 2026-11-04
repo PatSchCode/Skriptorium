@@ -20,6 +20,11 @@ export const FORMS: readonly { id: Form; label: string }[] = [
 export interface GuestLink {
   world: string;
   entry: string;
+  /**
+   * How the guest fits the world of the story (step 9.13, ADR-102); `""` means none. The server
+   * always sends it; links the interface builds as keys leave it out.
+   */
+  relation?: string;
 }
 
 /** A fact about a canon entry that holds only in one story (FR-024). */
@@ -191,6 +196,21 @@ export const manuscriptApi = {
       "DELETE",
       `${storyPath(world, story)}/guests/${enc(guest.world)}/${enc(guest.entry)}`,
     ) as Promise<Story>,
+  /** Blank text removes the relation (step 9.13, ADR-102). */
+  setGuestRelation: (
+    world: string,
+    story: string,
+    guest: GuestLink,
+    relation: string,
+  ) =>
+    request(
+      "PUT",
+      `${storyPath(world, story)}/guests/${enc(guest.world)}/${enc(guest.entry)}`,
+      { relation },
+    ) as Promise<Story>,
+  /** Stream of "Einpassen vorschlagen" (step 9.13); takes `{model, wish}`. */
+  fitGuestPath: (world: string, story: string, guest: GuestLink) =>
+    `${storyPath(world, story)}/guests/${enc(guest.world)}/${enc(guest.entry)}/fit`,
   addFact: (world: string, story: string, fact: StoryFact) =>
     request("POST", `${storyPath(world, story)}/facts`, fact) as Promise<Story>,
   removeFact: (world: string, story: string, fact: StoryFact) =>
