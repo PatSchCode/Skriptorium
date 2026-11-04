@@ -182,12 +182,27 @@ def test_delete_a_middle_chapter(logged_in: TestClient) -> None:
             201,
         )
 
+    for number in (1, 3):
+        _ok(
+            logged_in.put(
+                f"{story}/chapters/{number}/summary",
+                json={"summary": f"Kurz {number}.", "status": "geprüft"},
+            )
+        )
+
     remaining = _ok(logged_in.delete(f"{story}/chapters/2"))
 
-    assert [(c["number"], c["title"]) for c in remaining] == [
-        (1, "Aufbruch"),
-        (2, "Ankunft"),
+    assert [(c["number"], c["title"], c["summary_status"]) for c in remaining] == [
+        (1, "Aufbruch", "geprüft"),
+        (2, "Ankunft", "veraltet"),
     ]
+    # Confirming the outdated summary marks it as checked again.
+    checked = _ok(
+        logged_in.put(
+            f"{story}/chapters/2/summary", json={"summary": "Kurz 3.", "status": "geprüft"}
+        )
+    )
+    assert checked["summary_status"] == "geprüft"
     notes = _ok(logged_in.get(f"{story}/chapters/2/instructions"))
     assert [n["text"] for n in notes] == ["Verlauf Ankunft"]
     assert logged_in.get(f"{story}/chapters/3").status_code == 404
