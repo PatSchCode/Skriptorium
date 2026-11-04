@@ -350,19 +350,26 @@ def _sources(chunk: Mapping[str, object]) -> list[Source]:
 
 
 def _usage(reported: Mapping[str, object]) -> Usage:
-    """Usage data as reported; missing or malformed values stay ``None``."""
+    """Usage data as reported; missing or malformed values stay ``None``.
 
-    def number(key: str) -> int | None:
-        value = reported.get(key)
+    The prompt cache counts sit in ``prompt_tokens_details`` (step 9.10, ADR-099).
+    """
+
+    def number(source: Mapping[str, object], key: str) -> int | None:
+        value = source.get(key)
         return value if isinstance(value, int) and not isinstance(value, bool) else None
 
+    details = reported.get("prompt_tokens_details")
+    cache: Mapping[str, object] = details if isinstance(details, dict) else {}
     cost = reported.get("cost")
     return Usage(
-        input_tokens=number("prompt_tokens"),
-        output_tokens=number("completion_tokens"),
+        input_tokens=number(reported, "prompt_tokens"),
+        output_tokens=number(reported, "completion_tokens"),
         cost_usd=float(cost)
         if isinstance(cost, int | float) and not isinstance(cost, bool)
         else None,
+        cache_read_tokens=number(cache, "cached_tokens"),
+        cache_write_tokens=number(cache, "cache_write_tokens"),
     )
 
 
@@ -424,13 +431,16 @@ def _log_request(model: str, outcome: _Outcome, start: float) -> None:
     usage = outcome.usage or Usage(input_tokens=None, output_tokens=None, cost_usd=None)
     _log.info(
         "ki_anfrage anbieter=openrouter modell=%s ausfuehrend=%s ergebnis=%s token_ein=%s "
-        "token_aus=%s kosten_usd=%s dauer_ms=%d erstes_textstueck_ms=%s",
+        "token_aus=%s kosten_usd=%s cache_gelesen=%s cache_geschrieben=%s dauer_ms=%d "
+        "erstes_textstueck_ms=%s",
         _LOG_NAME.sub("_", model),
         _LOG_NAME.sub("_", outcome.upstream or "-"),
         outcome.result,
         _or_dash(usage.input_tokens),
         _or_dash(usage.output_tokens),
         _or_dash(usage.cost_usd),
+        _or_dash(usage.cache_read_tokens),
+        _or_dash(usage.cache_write_tokens),
         _elapsed_ms(start),
         _or_dash(outcome.first_chunk_ms),
     )
