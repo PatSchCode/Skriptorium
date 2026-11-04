@@ -9,6 +9,8 @@ from skriptorium.storage import checked_identifier
 
 WORLDS: Final = "worlds"
 WORLD_FILE: Final = "world.md"
+# Header field of an archived world (step 9.9, ADR-098); absent means active.
+ARCHIVED: Final = "archiviert"
 CANON: Final = "canon"
 IMAGES: Final = "bilder"
 MAPS: Final = "karten"
@@ -22,8 +24,12 @@ MAP_FILE: Final = re.compile(r"karte-[0-9a-f]{12}\.(?:png|jpg|webp)")
 IMAGE_NAME: Final = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\.(?:png|jpg|webp)")
 
 
+def world_dir(world_id: str) -> str:
+    return f"{WORLDS}/{checked_identifier(world_id)}"
+
+
 def world_path(world_id: str) -> str:
-    return f"{WORLDS}/{checked_identifier(world_id)}/{WORLD_FILE}"
+    return f"{world_dir(world_id)}/{WORLD_FILE}"
 
 
 def entry_path(world_id: str, category: Category, entry_id: str) -> str:

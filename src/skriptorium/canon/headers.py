@@ -4,7 +4,15 @@ from pathlib import PurePosixPath
 from typing import cast
 
 from skriptorium.canon.categories import Category
-from skriptorium.canon.layout import IMAGE_NAME, IMAGES, MAP_FILE, MAPS, MARKERS, image_prefix
+from skriptorium.canon.layout import (
+    ARCHIVED,
+    IMAGE_NAME,
+    IMAGES,
+    MAP_FILE,
+    MAPS,
+    MARKERS,
+    image_prefix,
+)
 from skriptorium.canon.models import CanonEntry, MapMarker, World, WorldMap
 from skriptorium.canon.validation import check_marker, checked_category, is_number
 from skriptorium.storage import Document, HeaderValue, InvalidInput
@@ -59,8 +67,22 @@ def world_from(document: Document) -> World:
     parts = PurePosixPath(document.path).parts
     name = header_text(document, "name", required=True)
     return World(
-        id=parts[1], name=name or parts[1], description=document.body, maps=maps_of(document)
+        id=parts[1],
+        name=name or parts[1],
+        description=document.body,
+        maps=maps_of(document),
+        archived=archived_of(document),
     )
+
+
+def archived_of(document: Document) -> bool:
+    """The header field ``archiviert`` (step 9.9, ADR-098); absent means active."""
+    value = document.header.get(ARCHIVED)
+    if value is None:
+        return False
+    if not isinstance(value, bool):
+        raise InvalidInput(f"{document.path}: Feld {ARCHIVED!r} muss true oder false sein")
+    return value
 
 
 def entry_header(

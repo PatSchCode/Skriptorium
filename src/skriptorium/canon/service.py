@@ -3,7 +3,8 @@
 Layout below the data directory (docs/architecture.md section 7)::
 
     worlds/<world>/world.md                          name, optional karten (name, datei,
-                                                     optional marken: eintrag, x, y); body:
+                                                     optional marken: eintrag, x, y),
+                                                     optional archiviert (ADR-098); body:
                                                      description and ground rules
     worlds/<world>/karten/karte-<random>.<ending>    maps of the world (step 7.10, ADR-073)
     worlds/<world>/canon/<category>/<entry>.md       name, aliasse, kategorie, optional status,
@@ -43,6 +44,7 @@ from skriptorium.canon.models import (
     Keep,
     MapMarker,
     World,
+    WorldContents,
     WorldMap,
 )
 from skriptorium.canon.worlds import WorldStore
@@ -61,6 +63,7 @@ __all__ = [
     "Keep",
     "MapMarker",
     "World",
+    "WorldContents",
     "WorldMap",
 ]
 
@@ -113,6 +116,61 @@ class CanonService:
             InvalidInput: ``name`` is empty.
         """
         return self._worlds.update_world(world_id, name=name, description=description)
+
+    # --- archive and deleting for good (step 9.9, ADR-098) ---------------------------------
+
+    def archive_world(self, world_id: str) -> World:
+        """Put a world into the archive (header ``archiviert: true``).
+
+        Raises:
+            NotFound: The world does not exist.
+        """
+        return self._worlds.set_archived(world_id, True)
+
+    def restore_world(self, world_id: str) -> World:
+        """Take a world back from the archive; the header field goes away.
+
+        Raises:
+            NotFound: The world does not exist.
+        """
+        return self._worlds.set_archived(world_id, False)
+
+    def world_contents(self, world_id: str) -> WorldContents:
+        """How many entries, entry images and maps go with the world.
+
+        Raises:
+            NotFound: The world does not exist.
+        """
+        world = self._worlds.get_world(world_id)
+        entries = self._entries.list_entries(world_id)
+        return WorldContents(
+            entries=len(entries),
+            images=sum(len(entry.images) for entry in entries),
+            maps=len(world.maps),
+        )
+
+    def check_world_deletion(self, world_id: str, name: str) -> World:
+        """The world, if :meth:`delete_world` would accept ``name``; changes nothing.
+
+        Raises:
+            NotFound: The world does not exist.
+            InvalidInput: The world is not archived, or ``name`` is not exactly its name.
+        """
+        return self._worlds.check_deletion(world_id, name)
+
+    def delete_world(self, world_id: str, name: str) -> None:
+        """Delete an archived world for good: its folder with canon, images, maps, origin
+        files and all its stories, and their rows of the search index.
+
+        Links into the world from stories of other worlds are not this module's business;
+        the flow in ``api`` removes them first.
+
+        Raises:
+            NotFound: The world does not exist.
+            InvalidInput: The world is not archived, or ``name`` is not exactly its name.
+            StorageError: The folder could not be moved aside; nothing is changed.
+        """
+        self._worlds.delete_world(world_id, name)
 
     # --- maps of a world (step 7.10, ADR-073) -----------------------------------------------
 

@@ -3,10 +3,10 @@
 from pathlib import PurePosixPath
 
 from skriptorium.canon.headers import world_from
-from skriptorium.canon.layout import WORLD_FILE, WORLDS, world_path
+from skriptorium.canon.layout import ARCHIVED, WORLD_FILE, WORLDS, world_dir, world_path
 from skriptorium.canon.models import KEEP, Keep, World
 from skriptorium.canon.validation import required_text
-from skriptorium.storage import DocumentStore, slugify
+from skriptorium.storage import DocumentStore, InvalidInput, slugify
 
 
 class WorldStore:
@@ -54,3 +54,28 @@ class WorldStore:
             header["name"] = required_text(name, "Name der Welt")
         body = document.body if isinstance(description, Keep) else description
         return world_from(self._store.write(path, header, body))
+
+    def set_archived(self, world_id: str, archived: bool) -> World:
+        """Put a world into the archive or take it back; nothing else in the file changes."""
+        path = world_path(world_id)
+        document = self._store.read(path)
+        header = dict(document.header)
+        if archived:
+            header[ARCHIVED] = True
+        else:
+            header.pop(ARCHIVED, None)
+        return world_from(self._store.write(path, header, document.body))
+
+    def check_deletion(self, world_id: str, name: str) -> World:
+        """The world, if it may be deleted for good with the typed ``name``."""
+        world = self.get_world(world_id)
+        if not world.archived:
+            raise InvalidInput("Endgültig löschen geht nur für eine archivierte Welt")
+        if name != world.name:
+            raise InvalidInput("Der eingetippte Name passt nicht zur Welt")
+        return world
+
+    def delete_world(self, world_id: str, name: str) -> None:
+        """Delete an archived world with everything in its folder."""
+        self.check_deletion(world_id, name)
+        self._store.delete_tree(world_dir(world_id))

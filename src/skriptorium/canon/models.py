@@ -47,6 +47,17 @@ class World:
     description: str
     maps: tuple[WorldMap, ...] = ()
     """The world's maps in the order they were added."""
+    archived: bool = False
+    """In the archive (step 9.9, ADR-098): shown only there; guests from it still work."""
+
+
+@dataclass(frozen=True)
+class WorldContents:
+    """What goes with a world when it is deleted for good (step 9.9, ADR-098)."""
+
+    entries: int
+    images: int
+    maps: int
 
 
 @dataclass(frozen=True)
