@@ -342,6 +342,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
 - **Notizen:** Aus V.35 (ADR-090).
+- **Umgesetzt (lokal, 2026-11-04, noch nicht abgenommen):** (1)–(4) nach ADR-098 auf dem Arbeitszweig; neun neue Routen (Routenzahl 71 → 80, alle mit Sitzung). Neue Tests: Python 36 (storage 9, canon 7, manuscript 11, api 8, context 1; Vertragsdatei neu geschrieben; Gesamtlauf 1028 bestanden, rot nur die 7 bekannten Pwned-Passwords-Fälle der Cloud-Umgebung; Abdeckung 99,67 %, canon 100 %, context 99,64 %), Oberfläche 12 (`Archive.test.tsx`; 544 bestanden; Abdeckung 98,84 / 95,69 / 98,23 / 99,01 % Anweisungen/Zweige/Funktionen/Zeilen), E2E 15 bestanden (unverändert, kein neuer Fall). Offen: Kurzfassungen der nachrückenden Kapitel als veraltet markieren – Statuswerte heute nur `fehlt`, `erzeugt`, `geprüft`, keiner bedeutet „veraltet“; Wert ist zu entscheiden (`TODO(fahrplan-ref: 9.9)` in `manuscript/chapters.py`).
 
 #### 9.10: Cache-Treffer der KI-Anbieter festhalten (V.36)
 
