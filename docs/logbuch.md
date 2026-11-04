@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [GELÖST] Roter Audit-Job im PR #194 durch neuen Sicherheitsfund (D.24)
+
+- Check-in zu PR #194 (Doku 9.9): Pre-Commit, TypeScript und End-to-End grün, „Python“ rot im Dependency-Audit – `pip-audit` meldet CVE-2026-114613 in msgpack 1.2.2 (Korrektur 1.2.3). Nicht vom PR verursacht (nur Doku), blockiert jeden PR; lokal reproduziert. msgpack nur über pip-audit → cachecontrol (Entwicklungsgruppe).
+- Behoben als D.24 im selben PR: `uv lock --upgrade-package msgpack` → 1.2.4 (neueste der Linie, Regel-001); `pip-audit` ohne Befund. pytest lokal: 992 grün, 7 rot (4 failed, 3 errors) – alle im Testaufbau „ohne Anbieter“, der ein Passwort über Pwned Passwords anlegt; die Prüfung ist aus der Cloud-Session nicht erreichbar („Passwortprüfung nicht erreichbar“, Folgefehler 401). Gleiches Ergebnis ohne die Änderung (gegengeprüft per `git stash`); die CI erreicht den Dienst.
+- Reibung: Die Claude-GitHub-App ist auf dem Repository nicht installiert – PR-Ereignisse kommen nicht von selbst, Prüfung per geplantem Check-in. GitHub nennt das Repository in Antworten `PatSchCode/Skriptorium` (Umleitung von `Paddel87/Skriptorium`, Ursache nicht geprüft).
+- Pre-Commit-Hook markdownlint wieder lauffähig: Ursache war, dass nodeenv ohne Vorgabe die neueste Node-Version aus dem Index nimmt und an einer Vorabversion („…0-alpha“) scheitert. Behoben ohne Repo-Änderung mit `~/.nodeenvrc` (`node = 24.21.0`, die Projektversion) in der Cloud-Session; danach liefen alle Hooks ohne Überspringen. Für künftige Cloud-Sessions wäre das ein Fall für `scripts/session-start.sh` (Kategorie 7, freigabepflichtig) – dem Eigentümer vorgelegt.
+
 ### 2026-11-04 – [SESSIONENDE] 9.9 entschieden, Umsetzung in neuer Session
 
 - **Bearbeitet:** Auskunft offene Schritte/TypingMind (siehe Einträge unten); 9.9 Bestandsaufnahme, Mockup, Vorlage → ADR-098, FR-036, V.43 (Landeplatz 9.15).
