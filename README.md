@@ -111,7 +111,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **9.9:** Löschen oder Archivieren – eingespielt 2026-11-04 (ADR-098: Archiv, endgültig löschen nur aus dem Archiv, Kapitel einzeln mit Umnummerierung); erledigt 2026-11-04.
 - ✅ **9.10:** Cache-Treffer – erledigt 2026-11-04 (ADR-099): bei der zweiten gleichen Anfrage kommen 98–99,7 % der Eingabe aus dem Zwischenspeicher.
 - ✅ **9.11:** Verbrauch je Welt und Geschichte – neue Seite „Verbrauch“ mit Monat oder allen Monaten, je Welt aufklappbar zu Geschichten, nach Art und Modell, mit Anteil aus dem Zwischenspeicher (ADR-100); erledigt 2026-11-04.
-- ⚪ **9.12–9.14:** Erkundung zu Quellen und Recherche; Gast-Figuren ausbauen (nach deiner Probe); Kontexttreue erneut prüfen (ADR-090).
+- ✅ **9.12:** Quellen und Recherche erkundet – erledigt 2026-11-05 (ADR-101): Recherche über Wikipedia und das offene D&D-Regelwerk, sparsamere Websuche, Namenslisten und Fragenliste je Art; gebaut wird in der nächsten Ausbaustufe (V.44–V.46).
+- ⚪ **9.13–9.14:** Gast-Figuren ausbauen (Vorlage); Kontexttreue erneut prüfen (ADR-090).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
 Ergebnisse der Erkundung: [Modell-Eignungstest](docs/research/modell-eignungstest.md) – damals Startmodell grok-4.7, Zweitmodell grok-4.6; seit 5.7 ist grok-4.6 voreingestellt (ADR-044).

@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner. Erledigt am 2026-11-04: 9.9 Löschen oder Archivieren, 9.10 Cache-Treffer, 9.11 Verbrauchsstatistik
-- **Nächster Schritt:** 9.12 Quellen und Recherche – Erkundung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner. Erledigt: 9.12 Quellen und Recherche (2026-11-05, ADR-101); 9.9, 9.10, 9.11 (2026-11-04)
+- **Nächster Schritt:** 9.13 Gast-Figuren ausbauen – Vorlage (Probe des Eigentümers erfolgt 2026-10-21), danach 9.14 Kontexttreue. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -39,7 +39,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.9 | Löschen oder Archivieren (B5) | erledigt 2026-11-04 (ADR-098), eingespielt `e52d69a` | – |
 | ✅ | 9.10 | Cache-Treffer festhalten (V.36) | erledigt 2026-11-04 (ADR-099; 98–99,7 % Treffer bei der zweiten gleichen Anfrage) | – |
 | ✅ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | erledigt 2026-11-04 (ADR-100), eingespielt `7319b26` | – |
-| ⚪ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | offen | KI |
+| ✅ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | erledigt 2026-11-05 (ADR-101; Umsetzung V.44–V.46 → 9.15) | – |
 | ⚪ | 9.13 | Gast-Figuren ausbauen (V.34) | offen – Probe des Eigentümers erfolgt 2026-10-21 | KI: Vorlage |
 | ⚪ | 9.14 | Kontexttreue erneut prüfen | offen | KI: nach 9.4 |
 | ⚪ | 9.15 | Planung der nächsten Ausbaustufe | offen | KI |
@@ -67,7 +67,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | erledigt 2026-11-04 | – |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25), V.43 (verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags, aus 9.9, 2026-11-04). In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25), V.43 (verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags, aus 9.9, 2026-11-04), V.44 (Recherche über Wikipedia und D&D-Regelwerk, sparsamere Websuche), V.45 (Namenslisten), V.46 (Fragenliste je Art) – alle drei aus 9.12, 2026-11-05, ADR-101. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
 
 ---
 
@@ -381,7 +381,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.12: Quellen für Worldbuilding und Namen; eigener Recherche-Baustein – Erkundung (V.35 H1, V1)
 
-- **Status:** ⚪ OFFEN
+- **Status:** ✅ ERLEDIGT (2026-11-05) – Erkenntnisdokument `docs/research/quellen-und-recherche.md`, Vorlage per Auswahlfragen, Entscheidung ADR-101; Umsetzung als V.44, V.45, V.46 mit Landeplatz 9.15
 - **Phasentyp-Kontext:** ERKUNDUNG innerhalb der UMSETZUNG-Phase (wie 8.12)
 - **Schritt-Art (nur ERKUNDUNG):** Vergleichsstudie
 - **Zeitbox (nur ERKUNDUNG):** eine Session, dann Zwischenstand
@@ -440,7 +440,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 9
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.20, V.21, V.23, V.24, V.33, V.38, V.39, V.40, V.41, V.42 (und neue V-Schritte, auch aus 9.12) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.20, V.21, V.23, V.24, V.33, V.38, V.39, V.40, V.41, V.42, V.43, V.44, V.45, V.46 (und weitere neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1509,6 +1509,57 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Angelegt 2026-10-25 in 9.6.
+
+#### V.44: Recherche im Weltenbauer über Wikipedia und das offene D&D-Regelwerk; sparsamere Websuche
+
+- **Status:** ⏸️ VERSCHOBEN → 9.15 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 9.15 (Ergebnis der Erkundung 9.12, Entscheidung des Eigentümers 2026-11-05, ADR-101)
+- **Phasentyp-Kontext:** UMSETZUNG
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** ja – neue externe Dienste sind entschieden (ADR-101); offen sind Ort im Modulschnitt (Kategorie 1/2) und Bedienung (Mockup)
+- **Empfohlene Klasse:** Entscheidung – neue Verantwortung mit Datenfluss nach außen (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-029
+- **Zu tun:** (1) Vorlage: wo der Abruf externer Quellen lebt, Bedienung im Weltenbauer (Mockup vorher/nachher); (2) Wikipedia (de, en) über die MediaWiki-API und Open5e (nur SRD 5.1, CC BY 4.0) mit eigenem User-Agent, Anfragen nacheinander, Rückzug bei Drosselung, Auszüge auf einen Richtwert von 3.000 Token gekürzt, Fundstellen unter der Antwort; (3) Plugin `web` mit Suchmaschine Exa und 3 Treffern; (4) optional Feld `websuche` in der Verbrauchszeile (Kategorie 4, additiv); (5) Prüfung durch eine getrennte Instanz (fremde Inhalte in der Anfrage).
+- **Akzeptanzkriterien:** Vorlage, ADR; Tests ohne Netz (Antworten der Quellen nachgestellt); Probe mit echten Abrufen; Messung: Eingabe-Token und Kosten einer Antwort mit Recherche gegen die alte Websuche; Eigentümer bestätigt.
+- **Betroffene Module:** ai_gateway, context, api, ui (Ort laut Vorlage)
+- **Reifegrad-Wirkung:** offen (je nach Modulschnitt)
+- **Artefakte:** Code, Tests, ADR, Mockup
+- **Notizen:** Angelegt 2026-11-05 in 9.12; Befunde und Preise in `docs/research/quellen-und-recherche.md`.
+
+#### V.45: Namenshilfe aus offenen Namenslisten
+
+- **Status:** ⏸️ VERSCHOBEN → 9.15 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 9.15 (Ergebnis der Erkundung 9.12, Entscheidung des Eigentümers 2026-11-05, ADR-101)
+- **Phasentyp-Kontext:** UMSETZUNG
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** ja – Auswahl der Länder durch den Eigentümer, Bedienung (Mockup), Quellenangaben (Kategorie 8)
+- **Empfohlene Klasse:** Entscheidung – neue Funktion mit Lizenzpflichten (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-038
+- **Zu tun:** Orte je Land aus GeoNames (CC BY) und Vor- und Nachnamen aus Wikidata (CC0) einmal aufbereiten (Skript mit Header nach `CLAUDE.md` Abschnitt 15, verdichtete Listen im Repo); Verfahren für ähnlich klingende neue Namen (Silben oder Markov) oder echte Namen als Vorbild für das Modell; Bedienung im Weltenbauer; Quellenangaben im Programm und in der README.
+- **Akzeptanzkriterien:** Vorlage mit Beispielen je Land, ADR; Tests (deterministisch mit festem Startwert); Eigentümer beurteilt den Klang an Beispielen und bestätigt.
+- **Betroffene Module:** context, api, ui (Ort laut Vorlage)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Daten, Skript, Tests, ADR, Mockup
+- **Notizen:** Angelegt 2026-11-05 in 9.12.
+
+#### V.46: Fragenliste je Art im Weltenbauer
+
+- **Status:** ⏸️ VERSCHOBEN → 9.15 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 9.15 (Ergebnis der Erkundung 9.12, Entscheidung des Eigentümers 2026-11-05, ADR-101)
+- **Phasentyp-Kontext:** UMSETZUNG
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** nein für die Liste selbst; ja, falls die Anfrage an die KI anders zusammengestellt wird (Kategorie 1)
+- **Empfohlene Klasse:** Routine – Liste und Rahmen-Text; Entscheidung, falls die Kontext-Zusammenstellung berührt wird.
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-029
+- **Zu tun:** Kurze Fragen je Art (Figur, Ort, Gegenstand, Kultur – passend zu den festen Abschnitten aus 9.3, ADR-092) in eigenen Worten; der Weltenbauer nennt damit, was einem Eintrag noch fehlt. Keine Ratgebertexte übernehmen.
+- **Akzeptanzkriterien:** Liste vom Eigentümer durchgesehen; Tests der Anfrage; Probe an einem echten Eintrag; Eigentümer bestätigt.
+- **Betroffene Module:** context, ggf. ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests
+- **Notizen:** Angelegt 2026-11-05 in 9.12.
 
 #### V.43: Verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags
 
