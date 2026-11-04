@@ -64,7 +64,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | D.21 | Sicherheitsfunde virtualenv (Audit 2026-10-22) | erledigt 2026-10-22 | – |
 | ⚪ | D.22 | Probelauf Routine-Klasse mit Sonnet 5.5 | offen | KI – vor der nächsten Abgabe an Unteragenten |
 | ✅ | D.23 | Sicherheitsfunde filelock, undici, zod (Audit 2026-10-25) | erledigt 2026-10-25 | – |
-| 🟠 | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | in Arbeit – behoben in PR #194, CI ausstehend | KI |
+| ✅ | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | erledigt 2026-11-04 | – |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
 Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25), V.43 (verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags, aus 9.9, 2026-11-04). In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
@@ -799,7 +799,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 
 #### D.24: Sicherheitsfund msgpack (Audit 2026-11-04)
 
-- **Status:** 🟠 IN ARBEIT (2026-11-04) – behoben auf dem Branch von PR #194: msgpack 1.2.2 → 1.2.4 (`uv.lock`); `pip-audit` lokal ohne Befund; pytest lokal 992 grün, 7 rot nur durch die in der Cloud-Session nicht erreichbare Passwortprüfung (Pwned Passwords) – ebenso ohne die Änderung; CI ausstehend. 9.9 ruht derweil mit vorliegender Entscheidung (ADR-098) bis zur nächsten Session.
+- **Status:** ✅ ERLEDIGT (2026-11-04) – PR #194: CI grün (4 von 4, Audit ohne Befund, keine Bündelgrößen-Warnung im TypeScript-Protokoll), auf Anweisung des Eigentümers zusammengeführt (`7643a53`); kein Einspielen nötig. Verlauf: msgpack 1.2.2 → 1.2.4 (`uv.lock`); `pip-audit` lokal ohne Befund; pytest lokal 992 grün, 7 rot nur durch die in der Cloud-Session nicht erreichbare Passwortprüfung (Pwned Passwords) – ebenso ohne die Änderung.
 - **Phasentyp-Kontext:** STABILISIERUNG
 - **Abhängigkeiten:** keine
 - **Frist:** sofort – roter Audit-Job (Python) blockiert jeden PR (#194)

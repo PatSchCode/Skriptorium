@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] PR #194 zusammengeführt; D.24 erledigt
+
+- Zweiter Lauf nach D.24 (`1c29c8b`) grün, 4 von 4 Pflicht-Checks; Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung (die übrigen Protokolle nicht gelesen – `gh` liest Job-Protokolle durch den Proxy nicht). Ein Sicherheits-Check-in um 15:44 UTC ohne Neues. Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`7643a53`) → D.24 `[ERLEDIGT]`. Beobachtung beendet, ausstehender Check-in gelöscht. Kein Einspielen: nur Doku und ein Entwicklungswerkzeug.
+- 9.9 bleibt `[IN ARBEIT]` (Entscheidung ADR-098 auf `main`, Umsetzung in neuer Session). Dieser Doku-Stand liegt auf dem neu auf `main` aufgesetzten Session-Branch und braucht einen eigenen kleinen PR.
+
 ### 2026-11-04 – [GELÖST] Roter Audit-Job im PR #194 durch neuen Sicherheitsfund (D.24)
 
 - Check-in zu PR #194 (Doku 9.9): Pre-Commit, TypeScript und End-to-End grün, „Python“ rot im Dependency-Audit – `pip-audit` meldet CVE-2026-114613 in msgpack 1.2.2 (Korrektur 1.2.3). Nicht vom PR verursacht (nur Doku), blockiert jeden PR; lokal reproduziert. msgpack nur über pip-audit → cachecontrol (Entwicklungsgruppe).
