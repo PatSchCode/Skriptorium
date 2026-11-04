@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 21:20 – [BEOBACHTUNG] 9.11 umgesetzt (lokal), Bildschirmfotos zur Freigabe
+
+- Commits `50c57d8` (api), `31e0742` (storage), `a3d27d4` (ui); Prüfzahlen im Fahrplan 9.11. pytest 1094, Abdeckung 99,86 %; vitest 551; Playwright 15/15; Linter, Formatter, Typprüfer grün. Quick-Start nicht berührt (keine neue Abhängigkeit: libyaml steckt im PyYAML-Rad); Kategorie 6 nicht berührt (nur Kennungen in den Verbrauchsdateien, ADR-021).
+- Reibungen: (1) Pre-Commit prüft mit mypy den ganzen Baum samt noch nicht hinzugefügter Dateien – der erste Commit nur mit `storage` scheiterte an den neuen, ungestagten `api`-Dateien; Reihenfolge gedreht (erst `api`, dann `storage`). (2) `ruff format` im Hook formatierte `usage_routes.py` nach einer `sed`-Änderung neu – erneut gestaged. (3) Der erste Playwright-Lauf lief gegen die alte gebaute Oberfläche (`dist/` vor der Änderung); nach `npx vite build` erneut 15/15. (4) Drei Konto-Tests in `ModelChoice.test.tsx` brauchten einen Router, weil das Konto jetzt einen Verweis enthält. (5) Smartphone-Bildschirmfoto zeigte fleckigen Hintergrund der Unterzeilen und fehlende Trenner – CSS nachgebessert, neu fotografiert.
+- Größtes Bündel 416,6 kB (vorher 409 kB), keine Bündelgrößen-Warnung.
+- Nach Regel „PR erst nach Freigabe“: lokal committet, nicht gepusht – Bildschirmfotos der echten Seite an den Eigentümer.
+
 ### 2026-11-04 20:40 – [ADR-ANGELEGT] ADR-100 Verbrauch je Welt und Geschichte (9.11)
 
 - Bestandsaufnahme: alle Abläufe kennen ihre Welt; Geschichte kennen Schreiben, Kurzfassung, Gesamtzusammenfassung; Bild erzeugen kennt kein Ziel (die Oberfläche schon). Messung auf dem Mac (Skript im Scratchpad, 1.100 Zeilen im neuen Format): Schreiben der Monatsdatei 370 ms, Lesen 240 ms; libyaml 30 + 34 ms statt 140 + 226 ms für Ausgabe und Einlesen; JSON-Zeilen ca. 3 ms. Bei 2.000 Zeilen 674 / 432 ms.
