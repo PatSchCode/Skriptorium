@@ -359,6 +359,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, Logbuch-Eintrag, ggf. ADR
 - **Notizen:** Aus V.36 (ADR-090).
+- **Umgesetzt (2026-11-04, Cloud-Session, noch nicht abgenommen):** (1) `Usage` um `cache_read_tokens`/`cache_write_tokens` (Vorgabe `None`), der OpenRouter-Adapter liest sie aus `usage.prompt_tokens_details` (`cached_tokens`, `cache_write_tokens`; Ort laut Dokumentation „Prompt Caching“ geprüft); fehlende, fehlerhafte oder auf oberster Ebene gemeldete Werte bleiben `None`. (2) Protokollzeile `ki_anfrage … kosten_usd=… cache_gelesen=… cache_geschrieben=…`. (3) nach ADR-099 (C): Verbrauchszeile mit `cache_gelesen`, `cache_geschrieben`; Monatssumme und `/api/usage` unverändert, Vertragstest unverändert. Tests: ai_gateway 8 neue Fälle (davon 5 mit fehlenden oder fehlerhaften Werten) und 1 erweiterter, api 1 neuer und 1 erweiterter; pytest 1046 grün, Abdeckung 99,86 %, `openrouter.py`, `provider.py`, `api/usage.py` 100 % Zeilen; ruff, ruff format, `mypy --strict`, bandit grün. Oberfläche nicht berührt. Offen: (4) Messung an echten Anfragen nach dem Einspielen, Bestätigung des Eigentümers.
 
 #### 9.11: Verbrauchsstatistik je Welt und je Geschichte (V.37)
 

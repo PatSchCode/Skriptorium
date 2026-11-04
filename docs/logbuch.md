@@ -29,6 +29,24 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [SESSIONENDE] 9.10 entschieden (ADR-099) und umgesetzt
+
+- **Bearbeitet:** Entwurfs-PR #196 aufgegriffen; 9.10 erklärt, Wahl C → ADR-099, Umsetzung (1)–(3).
+- **Stand:** Phase 9, 8 von 15; 9.9 und 9.10 `[IN ARBEIT]` (beide warten auf Einspielen; 9.9 auf die Prüfung des Eigentümers, 9.10 auf die Messung (4)). Keine aktiven Blocker, keine offenen STOPP-Situationen.
+- **Nächster Schritt:** Branch `scp/youthful-hawking-eb5ybn` als Pull Request (ersetzt den Entwurf #196, dessen Branch diese Session nicht beschreiben darf), CI, Merge auf Anweisung; dann 9.9 und 9.10 aus der Mac-Session einspielen (ADR-025) und je Ablauf (Schreiben, Weltenbauer, Kurzfassung) zwei gleiche Anfragen hintereinander: `cache_gelesen` in der Protokollzeile bzw. Verbrauchsdatei festhalten.
+- **Offen:** D.11 (Frist 2026-10-31 überschritten, Eigentümer); D.1 ab 2026-11-05; mypy-2-Nachprüfung 2026-11-06 (D.5); D.22 Probelauf Sonnet 5.5.
+- **Modell-Bilanz:** Start Sonnet 5.5 (Routine) für Wiedereinstieg und Erklärung; nach Wechsel durch den Eigentümer Opus 5.5 (Entscheidung) für ADR und Datenmodell – passend zur Empfehlung von 9.10 bei Erweiterung der Verbrauchsdateien, 0 Schritte oberhalb der Empfehlung; keine Abgabe an Unteragenten (D.22 offen).
+- **Kontextgröße:** `get_session` meldet unverändert 211.975 Token seit dem Modellwechsel – Wert wird offenbar nicht laufend aktualisiert (wie am 2026-10-25 und heute Vormittag). Über der Grenze → kein weiterer Schritt in dieser Session.
+- **Sessionende-Prüfungen:** README nachgezogen (9.9 zusammengeführt, 9.10 umgesetzt). Drift: ADR-099 → 9.10 vorhanden, 9.10 nennt ADR-099; Reaktiv-Quote 0 / 10 (ADR-090–099) stimmt mit Teil B; Modul-Liste unverändert (ai_gateway, api); keine `[BLOCKIERT]`-Schritte; Phase 9 weiter 15 Schritte. Ablaufdaten-Register: D.1 erreicht morgen sein Datum, Schritt vorhanden. Archiv: Logbuch unter 800 Zeilen. Projektkontext unter Budget. Quick-Start nicht berührt; Kategorie 6 nicht berührt.
+
+### 2026-11-04 – [BEOBACHTUNG] 9.10 umgesetzt (C, ADR-099), Messung offen
+
+- Commits `8c31f17` (ai_gateway) und `b2faeca` (api): Cache-Token aus `usage.prompt_tokens_details` in `Usage`, Protokollzeile und Verbrauchszeile; Monatssumme und `/api/usage` unverändert. Prüfzahlen im Fahrplan 9.10.
+- pytest 1046 grün, diesmal auch die 7 Fälle mit Pwned Passwords – der Dienst ist aus dieser Cloud-Session erreichbar (am Vormittag nicht). Abdeckung 99,86 %.
+- Reibungen: Pre-Commit-Hook markdownlint scheiterte wieder an `nodeenv` (Vorabversion „0-alpha“) – neue Cloud-Umgebung, `~/.nodeenvrc` mit `node = 24.21.0` erneut angelegt, danach alle Hooks grün, nichts übersprungen. Ruff RUF002 (Gedankenstrich im Docstring) und ein mypy-Fund im neuen Test (Listenelemente als beliebige Kopfwerte) behoben.
+- README-Drift behoben: 9.9 stand noch als „Umsetzung offen“.
+- Kategorie 6 nicht berührt (nur Token-Zahlen, ADR-021); Quick-Start nicht berührt. Messung (4) braucht echte Anfragen – nach dem Einspielen aus der Mac-Session.
+
 ### 2026-11-04 – [ADR-ANGELEGT] ADR-099 Cache-Token in der Verbrauchsdatei (9.10)
 
 - Eigentümer per Auswahlfrage nach Erklärung des Schritts: „C, dann Opus für den ADR“ → ADR-099 (Datenmodell, Kategorie 4, additiv; `/api/usage` unverändert), Reaktiv-Quote 0 / 10 (ADR-090–099). 9.10 von `[WARTET-AUF-FREIGABE]` auf `[IN ARBEIT]`.
