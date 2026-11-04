@@ -164,6 +164,7 @@ export function StoryCover({
       )}
       {generating && (
         <ImageGenerate
+          target={{ world: story.world, story: story.id }}
           title={
             seed?.basis === undefined
               ? "Titelbild erzeugen"

@@ -1,6 +1,7 @@
-/** Models, favorites and usage (`/api/models`, `/api/usage`). */
+/** Models, favorites and usage (`/api/models`, `/api/usage`, `/api/usage/stats`). */
 
 import { request } from "./core";
+import type { Form } from "./manuscript";
 
 /** Requests, tokens and cost of one month (step 3.9, ADR-023). */
 export interface MonthUsage {
@@ -11,6 +12,70 @@ export interface MonthUsage {
   cost_usd: number;
   /** Requests without a cost reported by the provider (aborted, failed). */
   without_cost: number;
+}
+
+/** Sums over a set of requests (step 9.11, ADR-100). */
+export interface UsageTotals {
+  requests: number;
+  input_tokens: number;
+  output_tokens: number;
+  cost_usd: number;
+  without_cost: number;
+  /** Input tokens read from the provider's cache (step 9.10, ADR-099). */
+  cache_read_tokens: number;
+  /** Part of the input from the cache, 0–1; `null` if no provider reported a cache. */
+  cache_share: number | null;
+}
+
+/** Sums of one kind of request, e.g. `schreiben` or `weltenbau`. */
+export interface KindUsage extends UsageTotals {
+  kind: string;
+}
+
+/** Sums of one model. */
+export interface ModelUsage extends UsageTotals {
+  model: string;
+}
+
+/** Sums of a set of requests, by kind and by model (both by number of requests). */
+export interface UsageGroup {
+  totals: UsageTotals;
+  kinds: KindUsage[];
+  models: ModelUsage[];
+}
+
+/** The requests of one story; `title` and `form` are `null` if it was deleted. */
+export interface StoryUsage {
+  id: string;
+  title: string | null;
+  form: Form | null;
+  archived: boolean;
+  deleted: boolean;
+  usage: UsageGroup;
+}
+
+/** The requests of one world: all, on the world itself (`own`) and per story. */
+export interface WorldUsage {
+  id: string;
+  name: string | null;
+  archived: boolean;
+  deleted: boolean;
+  usage: UsageGroup;
+  own: UsageGroup;
+  stories: StoryUsage[];
+}
+
+/**
+ * Usage of a month or, with `month` `null`, of all months (step 9.11, ADR-100). `worlds` (by
+ * cost) and `unassigned` (requests from before step 9.11) together make up `total`.
+ */
+export interface UsageStats {
+  month: string | null;
+  /** Every month with requests, newest first. */
+  months: string[];
+  total: UsageGroup;
+  worlds: WorldUsage[];
+  unassigned: UsageGroup;
 }
 
 /** A cost in US dollars as shown to the author, e.g. "0,0021 $". */
@@ -73,4 +138,12 @@ export const modelsApi = {
   setTaskModels: (tasks: TaskModels) =>
     request("PUT", "/api/models/aufgaben", { tasks }) as Promise<ModelList>,
   usage: () => request("GET", "/api/usage") as Promise<MonthUsage>,
+  /** `month` `null`: all months. */
+  usageStats: (month: string | null) =>
+    request(
+      "GET",
+      month === null
+        ? "/api/usage/stats"
+        : `/api/usage/stats?month=${encodeURIComponent(month)}`,
+    ) as Promise<UsageStats>,
 };

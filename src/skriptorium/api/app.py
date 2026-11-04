@@ -31,6 +31,7 @@ from skriptorium.api import (
     canon_routes,
     image_routes,
     manuscript_routes,
+    usage_routes,
     writing_routes,
 )
 from skriptorium.api.access import (
@@ -163,6 +164,7 @@ def create_app(
     app.include_router(manuscript_routes.router)
     app.include_router(writing_routes.router)
     app.include_router(image_routes.router)
+    app.include_router(usage_routes.router)
     _add_error_handlers(app)
     app.middleware("http")(_origin_check)
     app.middleware("http")(_security_headers)

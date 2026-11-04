@@ -1,5 +1,6 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   catalogModel,
@@ -172,7 +173,11 @@ describe("costs of this month (ADR-023)", () => {
         without_cost: 1,
       }),
     });
-    render(<Account />);
+    render(
+      <MemoryRouter>
+        <Account />
+      </MemoryRouter>,
+    );
     expect(
       await screen.findByText(
         "0,0021 $ für 2 Anfragen (1.200 Token ein, 40 aus)",
@@ -195,7 +200,11 @@ describe("costs of this month (ADR-023)", () => {
         without_cost: 0,
       }),
     });
-    render(<Account />);
+    render(
+      <MemoryRouter>
+        <Account />
+      </MemoryRouter>,
+    );
     expect(
       await screen.findByText("0 $ für 1 Anfrage (5 Token ein, 1 aus)"),
     ).toBeDefined();
@@ -214,7 +223,11 @@ describe("costs of this month (ADR-023)", () => {
         without_cost: 3,
       }),
     });
-    render(<Account />);
+    render(
+      <MemoryRouter>
+        <Account />
+      </MemoryRouter>,
+    );
     expect(
       await screen.findByText(/3 abgebrochene oder gescheiterte Anfragen ohne/),
     ).toBeDefined();

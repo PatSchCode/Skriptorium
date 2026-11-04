@@ -1,4 +1,5 @@
 import { useCallback, useState, type SyntheticEvent } from "react";
+import { Link } from "react-router";
 import { api, describeError, formatCost } from "../api";
 import { useLoad } from "../useLoad";
 import { ErrorText, Field } from "./Common";
@@ -178,6 +179,11 @@ function MonthCosts() {
               Kosten – die Abrechnung bei OpenRouter kann etwas höher liegen.
             </p>
           )}
+          <p>
+            <Link to="/verbrauch">
+              Aufteilung nach Welt, Geschichte und Modell
+            </Link>
+          </p>
         </>
       )}
     </section>

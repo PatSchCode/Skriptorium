@@ -177,6 +177,7 @@ export function EntryImages({
       <ErrorText message={error} />
       {generating && (
         <ImageGenerate
+          target={{ world: entry.world }}
           title={
             seed?.basis === undefined
               ? `Bild erzeugen – ${entry.name}`

@@ -51,10 +51,17 @@ export type {
 export { formatCost } from "./models";
 export type {
   CatalogModel,
+  KindUsage,
   ModelList,
   ModelTask,
+  ModelUsage,
   MonthUsage,
+  StoryUsage,
   TaskModels,
+  UsageGroup,
+  UsageStats,
+  UsageTotals,
+  WorldUsage,
 } from "./models";
 export type {
   ImportItem,
@@ -71,6 +78,7 @@ export type {
   ImageOrigin,
   ImagePrice,
   ImageReference,
+  ImageTarget,
   StoredImageOrigin,
 } from "./images";
 export type { DescribeEvent } from "./describe";

@@ -1,9 +1,48 @@
-"""Tests for reading and writing the YAML header (ADR-016)."""
+"""Tests for reading and writing the YAML header (ADR-016).
+
+Every case runs with the pure Python classes and with libyaml (ADR-100).
+"""
+
+from collections.abc import Iterator
 
 import pytest
 
-from skriptorium.storage import HeaderValue, InvalidInput
+from skriptorium.storage import HeaderValue, InvalidInput, frontmatter
 from skriptorium.storage.frontmatter import parse, render
+
+_BOTH = [pytest.param(frontmatter.PURE, id="python")]
+if frontmatter.FAST is not None:
+    _BOTH.append(pytest.param(frontmatter.FAST, id="libyaml"))
+
+
+@pytest.fixture(autouse=True, params=_BOTH)
+def classes(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> Iterator[None]:
+    """Run the test with one pair of loader and dumper."""
+    monkeypatch.setattr(frontmatter, "_classes", request.param)
+    yield
+
+
+def test_libyaml_is_used_when_present() -> None:
+    assert frontmatter.FAST is not None, "PyYAML ohne libyaml: Lesen wäre langsam (ADR-100)"
+    assert frontmatter.FAST[1].__name__ == "CSafeDumper"
+
+
+def test_both_write_the_same_text(monkeypatch: pytest.MonkeyPatch) -> None:
+    header: dict[str, HeaderValue] = {
+        "name": "Anselm Drach",
+        "lang": "Ein sehr langer Wert, " * 12,
+        "zeichen": "„Zitat“ \u2013 äöüß: #1 ' \" ` @Kael",
+        "leer": "",
+        "nichts": None,
+        "zahlen": [0, -3, 1.5, 0.0123, True, False],
+        "anfragen": [{"zeit": "2026-11-04T19:00:00+00:00", "welt": "die-salzmark"}],
+    }
+    texts = set()
+    for pair in (frontmatter.PURE, frontmatter.FAST or frontmatter.PURE):
+        monkeypatch.setattr(frontmatter, "_classes", pair)
+        texts.add(render(header, "Text\n"))
+        assert parse(render(header, "Text\n")) == (header, "Text\n")
+    assert len(texts) == 1
 
 
 def test_round_trip_keeps_header_and_body() -> None:

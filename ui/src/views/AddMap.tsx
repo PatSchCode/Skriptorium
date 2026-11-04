@@ -95,6 +95,7 @@ export function AddMap({
       </div>
       {generating && (
         <ImageGenerate
+          target={{ world: world.id }}
           title={
             seed?.basis === undefined
               ? "Karte erzeugen"

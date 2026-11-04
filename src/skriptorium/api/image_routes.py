@@ -89,6 +89,10 @@ class GenerateIn(BaseModel):
     aspect_ratio: AspectRatio = "1:1"
     # One stored image to build on (ADR-097).
     reference: ReferenceIn | None = None
+    # Where the image is meant to go, for the usage statistics (ADR-100): a world for an entry
+    # image or a map, a world and a story for a cover.
+    world: _Id | None = None
+    story: _Id | None = None
 
     @field_validator("prompt")
     @classmethod
@@ -197,13 +201,14 @@ async def generate_image(body: GenerateIn, found: ServicesDep) -> GeneratedOut:
         if found.image_catalog.references(body.model) < 1:
             raise InvalidInput("Dieses Bildmodell nimmt kein Ausgangsbild an")
         reference = ImageReference(*_basis(body.reference, found))
+    record = found.usage.recorder(body.world, body.story)
     order = ImageOrder(body.model, body.prompt, body.aspect_ratio, reference)
     try:
         image = await found.images.generate(order)
     except GatewayError as error:
-        found.usage.record("bilderzeugung", body.model, None, _outcome(error))
+        record("bilderzeugung", body.model, None, _outcome(error))
         raise _http_error(error) from None
-    found.usage.record("bilderzeugung", body.model, Usage(None, None, image.cost_usd), "ok")
+    record("bilderzeugung", body.model, Usage(None, None, image.cost_usd), "ok")
     try:
         info = inspect_image(
             image.data, max_bytes=_MAX_DELIVERED_BYTES, max_side=_MAX_DELIVERED_SIDE

@@ -56,6 +56,7 @@ afterEach(() => {
 function generate(onTakeOver = vi.fn(() => Promise.resolve())) {
   render(
     <ImageGenerate
+      target={{ world: "die-salzmark" }}
       title="Neues Bild aus Bild 1 von Kael"
       initialPrompt=""
       initialFormat="3:2"
@@ -130,6 +131,7 @@ describe("an image as the basis of a new one (step 9.8, ADR-097)", () => {
       model: "black-forest-labs/flux.2-pro",
       prompt: "Im Winter",
       aspect_ratio: "3:2",
+      world: "die-salzmark",
       reference: BASIS.reference,
     });
     await waitFor(() => {

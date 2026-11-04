@@ -63,6 +63,12 @@ export interface GeneratedImage {
   model: string;
 }
 
+/** Where a generated image goes: a world, and a story for a cover (step 9.11, ADR-100). */
+export interface ImageTarget {
+  world: string;
+  story?: string;
+}
+
 export const imagesApi = {
   imageModels: () =>
     request("GET", "/api/images/models") as Promise<ImageModelList>,
@@ -71,11 +77,13 @@ export const imagesApi = {
       "GET",
       `/api/images/price?model=${encodeURIComponent(model)}`,
     ) as Promise<ImagePrice>,
-  generateImage: (order: {
-    model: string;
-    prompt: string;
-    aspect_ratio: AspectRatio;
-    reference?: ImageReference;
-  }) =>
+  generateImage: (
+    order: {
+      model: string;
+      prompt: string;
+      aspect_ratio: AspectRatio;
+      reference?: ImageReference;
+    } & ImageTarget,
+  ) =>
     request("POST", "/api/images/generate", order) as Promise<GeneratedImage>,
 };
