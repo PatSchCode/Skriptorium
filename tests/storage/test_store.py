@@ -238,3 +238,77 @@ def test_rebuild_rejects_unreadable_header(store: DocumentStore, root: Path) -> 
     (root / KAEL).write_text("---\nname: Kael\naliasse: [No]\n---\n", encoding="utf-8")
     with pytest.raises(InvalidInput):
         store.rebuild_index()
+
+
+# --- Deleting a whole directory (step 9.9, ADR-098) --------------------------------------
+
+STORY_DIR = "worlds/salzmark/stories/flucht"
+
+
+def test_delete_tree_removes_files_and_index_rows(store: DocumentStore, root: Path) -> None:
+    _fill(store)
+    store.write(f"{STORY_DIR}/chapters/01-anfang.md", {"titel": "Anfang"}, "Salzhafen bei Nacht")
+    (root / STORY_DIR / "titelbild-000000000000.png").write_bytes(b"bild")
+    store.delete_tree(STORY_DIR)
+    assert not (root / STORY_DIR).exists()
+    assert store.list_paths("worlds/salzmark") == [KAEL, HAFEN]
+    assert store.search("salzmark", "die fl") == []
+    assert store.search("salzmark", "nacht", "fulltext") == []
+    # Neighbours with the same start are untouched.
+    assert SearchHit(HAFEN, "Salzhafen") in store.search("salzmark", "salzhafen", "fulltext")
+    assert [p.name for p in root.iterdir() if p.name.startswith(".")] == []
+
+
+def test_delete_tree_leaves_neighbouring_names_alone(store: DocumentStore) -> None:
+    store.write("worlds/salz/world.md", {"name": "Salz"}, "")
+    store.write("worlds/salz-2/world.md", {"name": "Salz zwei"}, "")
+    store.write("worlds/salz0/world.md", {"name": "Salz null"}, "")
+    store.delete_tree("worlds/salz")
+    assert store.list_paths("worlds") == ["worlds/salz-2/world.md", "worlds/salz0/world.md"]
+    assert store.search("salz-2", "salz") == [SearchHit("worlds/salz-2/world.md", "Salz zwei")]
+    assert store.search("salz0", "salz") == [SearchHit("worlds/salz0/world.md", "Salz null")]
+
+
+@pytest.mark.parametrize("prefix", ["", "../x", "worlds/../x", "/worlds"])
+def test_delete_tree_rejects_bad_prefixes(store: DocumentStore, prefix: str) -> None:
+    with pytest.raises(InvalidInput):
+        store.delete_tree(prefix)
+
+
+def test_delete_tree_needs_a_directory(store: DocumentStore, root: Path) -> None:
+    _fill(store)
+    with pytest.raises(NotFound):
+        store.delete_tree("worlds/gibt-es-nicht")
+    with pytest.raises(NotFound):
+        store.delete_tree(KAEL)
+    (root / "worlds" / "verweis").symlink_to(root / "worlds" / "salzmark")
+    with pytest.raises(NotFound):
+        store.delete_tree("worlds/verweis")
+    assert KAEL in store.list_paths()
+
+
+def test_failed_move_leaves_the_directory_unchanged(
+    store: DocumentStore, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _fill(store)
+
+    def crash(source: object, target: object) -> None:
+        raise OSError("gesperrt")
+
+    monkeypatch.setattr(os, "replace", crash)
+    with pytest.raises(StorageError):
+        store.delete_tree(STORY_DIR)
+    monkeypatch.undo()
+    assert store.read(f"{STORY_DIR}/story.md").header["titel"] == "Die Flucht"
+    assert store.search("salzmark", "die fl") == [SearchHit(f"{STORY_DIR}/story.md", "Die Flucht")]
+
+
+def test_leftover_of_a_failed_removal_goes_with_the_next_deletion(
+    store: DocumentStore, root: Path
+) -> None:
+    _fill(store)
+    leftover = root / ".geloescht-000000000000"
+    (leftover / "chapters").mkdir(parents=True)
+    (leftover / "chapters" / "01-x.md").write_text("---\ntitel: X\n---\n", encoding="utf-8")
+    store.delete_tree(STORY_DIR)
+    assert [p.name for p in root.iterdir() if p.name.startswith(".")] == []
