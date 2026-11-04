@@ -172,6 +172,41 @@ def test_deleting_a_middle_chapter_moves_the_following_ones_up(
     assert ms.save_chapter(W, story, 4, title="Teil 5").number == 4
 
 
+def test_deleting_a_chapter_marks_the_summaries_after_it_outdated(
+    ms: ManuscriptService, root: Path
+) -> None:
+    """A chapter that moves up keeps its summary but as ``veraltet``; a missing one stays
+    missing, the chapters before keep theirs (step 9.9, ADR-098)."""
+    story = _novel(ms, 5)
+    ms.set_chapter_summary(W, story, 3, "Kurz 3.", "erzeugt")
+    ms.set_chapter_summary(W, story, 4, "", "fehlt")
+
+    remaining = ms.delete_chapter(W, story, 2)
+
+    assert [(c.number, c.summary, c.summary_status) for c in remaining] == [
+        (1, "Kurz 1.", "geprüft"),
+        (2, "Kurz 3.", "veraltet"),
+        (3, "", "fehlt"),
+        (4, "Kurz 5.", "veraltet"),
+    ]
+    # The value is written into the file and read back by a new service.
+    again = ManuscriptService(DocumentStore(root))
+    assert again.get_chapter(W, story, 2).summary_status == "veraltet"
+    assert "kurzfassung_status: veraltet" in next(
+        (root / "worlds" / W / "stories" / story / "chapters").glob("02-*.md")
+    ).read_text(encoding="utf-8")
+    # Moving up again leaves an outdated summary outdated.
+    assert [c.summary_status for c in ms.delete_chapter(W, story, 1)] == [
+        "veraltet",
+        "fehlt",
+        "veraltet",
+    ]
+    # Creating it again and checking it work as before.
+    assert ms.set_chapter_summary(W, story, 1, "Neu 3.", "erzeugt").summary_status == "erzeugt"
+    assert ms.set_chapter_summary(W, story, 1, "Neu 3.", "geprüft").summary_status == "geprüft"
+    assert ms.set_chapter_summary(W, story, 3, "Kurz 5.", "veraltet").summary_status == "veraltet"
+
+
 def test_deleting_chapters_without_history(ms: ManuscriptService) -> None:
     story = _novel(ms, 3)
     ms.add_instruction(W, story, 3, _note("Nur am letzten"))

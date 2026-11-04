@@ -397,8 +397,9 @@ class ManuscriptService:
         """Delete a chapter (step 9.9, ADR-098); the chapters after it move up by one.
 
         Number and file name of each following chapter go down by one, its history
-        ``verlauf/NN.md`` moves along; the history of the deleted chapter is deleted. The
-        overall summary is left as it is. Returns the remaining chapters in order.
+        ``verlauf/NN.md`` moves along, and its short summary, if it has one, is marked
+        ``veraltet``; the history of the deleted chapter is deleted. The overall summary is left
+        as it is. Returns the remaining chapters in order.
 
         Raises:
             NotFound: The story or the chapter does not exist.

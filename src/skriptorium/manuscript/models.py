@@ -9,7 +9,9 @@ Form = Literal["roman", "kurzgeschichte", "fragment"]
 FORMS: Final[tuple[Form, ...]] = get_args(Form)
 ChapterStatus = Literal["in-arbeit", "abgeschlossen"]
 CHAPTER_STATUSES: Final[tuple[ChapterStatus, ...]] = get_args(ChapterStatus)
-SummaryStatus = Literal["fehlt", "erzeugt", "geprüft"]
+# ``veraltet``: the chapter moved up after a chapter before it was deleted (step 9.9, ADR-098);
+# its short summary still stands but is to be created again.
+SummaryStatus = Literal["fehlt", "erzeugt", "geprüft", "veraltet"]
 SUMMARY_STATUSES: Final[tuple[SummaryStatus, ...]] = get_args(SummaryStatus)
 
 # Fixed lists of the atmospheric writing style (step 5.6, ADR-053); the order is the one in

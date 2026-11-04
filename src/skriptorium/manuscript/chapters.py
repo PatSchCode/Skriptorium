@@ -109,8 +109,9 @@ class ChapterStore:
         """Delete chapter ``number`` and its history; the chapters after it move up by one.
 
         A chapter that moves up gets the new number in its header and file name, its history
-        file ``verlauf/NN.md`` moves along. Each file is written under the new name before the
-        old one is deleted. Returns the remaining chapters.
+        file ``verlauf/NN.md`` moves along and its short summary, if it has one, is marked
+        ``veraltet``. Each file is written under the new name before the old one is deleted.
+        Returns the remaining chapters.
         """
         path = self.chapter_path(world_id, story_id, number)
         following = [
@@ -125,15 +126,20 @@ class ChapterStore:
         return self.list_chapters(world_id, story_id)
 
     def _move_up(self, chapter: Chapter, histories: set[str]) -> None:
-        """Give ``chapter`` the number before its own; its history file goes along."""
+        """Give ``chapter`` the number before its own; its history file goes along.
+
+        A short summary the chapter has (``erzeugt`` or ``geprüft``) becomes ``veraltet``.
+        """
         world_id, story_id, old_number = chapter.world, chapter.story, chapter.number
         new_number = old_number - 1
         old_path = self.chapter_path(world_id, story_id, old_number)
         document = self._store.read(old_path)
         header = dict(document.header)
         header["kapitel"] = new_number
-        # TODO(fahrplan-ref: 9.9): mark the short summary as outdated (ADR-098, ADR-085) once
-        # the status value for it is decided; today it keeps its status.
+        # The short summary no longer fits the new place (ADR-098, ADR-085); a missing one
+        # stays missing.
+        if header.get("kurzfassung_status") in ("erzeugt", "geprüft"):
+            header["kurzfassung_status"] = "veraltet"
         rest = PurePosixPath(old_path).name.split("-", 1)[1]
         new_path = f"{story_dir(world_id, story_id)}/{CHAPTERS}/{new_number:02d}-{rest}"
         self._store.write(new_path, header, document.body)

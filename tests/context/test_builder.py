@@ -765,6 +765,26 @@ def test_missing_summary_is_replaced_by_the_chapter_opening(
     assert opening == f"{first}\n\n{second}"
 
 
+def test_an_outdated_summary_is_used_like_a_created_one(
+    services: tuple[CanonService, ManuscriptService],
+) -> None:
+    """After a chapter before it was deleted, a summary is ``veraltet`` but still stands for the
+    chapter in the context until it is created again (step 9.9, ADR-098)."""
+    canon, manuscripts = services
+    manuscripts.save_chapter(WORLD, STORY, 3, title="Der Verrat", text="Fünfter.")
+    manuscripts.set_chapter_summary(WORLD, STORY, 2, "Ilka erreicht den Turm.", "erzeugt")
+    manuscripts.delete_chapter(WORLD, STORY, 1)
+    assert manuscripts.get_chapter(WORLD, STORY, 1).summary_status == "veraltet"
+
+    context = build((canon, manuscripts))
+    summary = ContextBuilder(canon, manuscripts).build_chapter_summary(WORLD, STORY, 2)
+
+    assert labels(context, "kurzfassung") == ["Kapitel 1"]
+    assert labels(context, "kapitelanfang") == []
+    assert "## Kapitel 1: Der Turm\n\nIlka erreicht den Turm." in context.messages[1].content
+    assert "Ilka erreicht den Turm." in summary.messages[1].content
+
+
 def test_opening_cuts_a_long_first_paragraph() -> None:
     from skriptorium.context.builder import _opening
 
