@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] 9.11 auf die Mac-Session verlegt
+
+- Eigentümer: „weiter mit 9.11“. Rückfrage, weil das Eingangskriterium (9.10 erledigt) fehlt, die Vorlage die Zahl der Anfragen je Monat vom Server braucht (nur per SSH, ADR-025) und die Session über der Größengrenze liegt. Eigentümer per Auswahlfrage: „Neue Mac-Session“ (Empfehlung) – dort zuerst 9.9 und 9.10 einspielen, 9.10 messen, dann 9.11 mit Bestandsaufnahme, Serverzählung, Mockup und Vorlage (Entscheidungs-Klasse). Doku-PR #198 angelegt.
+
 ### 2026-11-04 – [BEOBACHTUNG] PR #197 zusammengeführt (9.10), Einspielen offen
 
 - Entwurf #196 auf Anweisung des Eigentümers mit Verweis auf #197 geschlossen. CI zu #197 auf `1fb6b68` grün (4 von 4); Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung, größtes Bündel 409 kB (unverändert). Kein Review, keine Konflikte. Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`e52d69a`). Beobachtung beendet, ausstehender Check-in gelöscht.

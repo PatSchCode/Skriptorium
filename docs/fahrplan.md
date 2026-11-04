@@ -12,7 +12,7 @@
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
 - **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; zusammengeführt (PR #195), Einspielen und Prüfung offen. Parallel 9.10 Cache-Treffer – seit 2026-11-04; entschieden (C, ADR-099), umgesetzt und zusammengeführt (PR #197)
-- **Nächster Schritt:** 9.9 und 9.10 einspielen (`main` auf `e52d69a`; nur aus der Mac-Session, ADR-025), dann Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4) an echten Anfragen. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Nächster Schritt:** 9.9 und 9.10 einspielen (`main` auf `e52d69a`; nur aus der Mac-Session, ADR-025), dann Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4) an echten Anfragen; danach in derselben Mac-Session 9.11 (Bestandsaufnahme, Zahl der Anfragen je Monat auf dem Server, Mockup, Vorlage – Eigentümer 2026-11-04). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
