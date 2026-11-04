@@ -110,7 +110,7 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **9.8:** Bild zu Bild – ein gespeichertes Bild als Grundlage eines neuen, die Herkunft nennt sie (ADR-097); erledigt 2026-10-26.
 - 🟠 **9.9:** Löschen oder Archivieren – eingespielt 2026-11-04 (ADR-098: Archiv, endgültig löschen nur aus dem Archiv, Kapitel einzeln mit Umnummerierung), deine Prüfung offen.
 - ✅ **9.10:** Cache-Treffer – erledigt 2026-11-04 (ADR-099): bei der zweiten gleichen Anfrage kommen 98–99,7 % der Eingabe aus dem Zwischenspeicher.
-- 🟠 **9.11:** Verbrauch je Welt und Geschichte – neue Seite „Verbrauch“ mit Monat oder allen Monaten, je Welt aufklappbar zu Geschichten, nach Art und Modell, mit Anteil aus dem Zwischenspeicher (ADR-100); eingespielt 2026-11-04, deine Bestätigung offen.
+- ✅ **9.11:** Verbrauch je Welt und Geschichte – neue Seite „Verbrauch“ mit Monat oder allen Monaten, je Welt aufklappbar zu Geschichten, nach Art und Modell, mit Anteil aus dem Zwischenspeicher (ADR-100); erledigt 2026-11-04.
 - ⚪ **9.12–9.14:** Erkundung zu Quellen und Recherche; Gast-Figuren ausbauen (nach deiner Probe); Kontexttreue erneut prüfen (ADR-090).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 

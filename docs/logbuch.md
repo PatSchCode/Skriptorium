@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 22:40 – [BEOBACHTUNG] 9.11 erledigt
+
+- Eigentümer prüfte die Seite „Verbrauch“ mit den Testanfragen von 9.10 und bestätigte („9.11 passt“). Fahrplan (Schritt und Übersicht ✅, aktiver Schritt jetzt 9.9), FR-037 `ERLEDIGT`, README angepasst; CHANGELOG-Eintrag bestand schon. Priorität „Kann“ von FR-037 bleibt mein Vorschlag, vom Eigentümer nicht eigens bestätigt.
+
 ### 2026-11-04 22:30 – [BEOBACHTUNG] 9.10 erledigt
 
 - Eigentümer bestätigte die Messung („Ja, 9.10 erledigt“). Fahrplan (Schritt und Übersicht ✅), README und CHANGELOG (Eintrag 9.10 nachgetragen) angepasst. Eingangskriterium von 9.11 („9.10 erledigt“) ist damit auch formal erfüllt.
