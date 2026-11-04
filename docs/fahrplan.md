@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner (9.8 erledigt 2026-10-26)
-- **Nächster Schritt:** 9.9 Löschen oder Archivieren (Vorlage mit Mockup). Querschnitt: D.11 bis 2026-10-31 (Eigentümer). Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04, Bestandsaufnahme und Vorlage
+- **Nächster Schritt:** Entscheidung des Eigentümers zur Vorlage 9.9, dann Umsetzung (neue Session). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -36,7 +36,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.6 | Herkunft von Bildern (B1) | erledigt 2026-10-25 (ADR-095) | – |
 | ✅ | 9.7 | Einstellungsseite – Modell je Aufgabe (G3, B6) | erledigt 2026-10-26 (ADR-096) | – |
 | ✅ | 9.8 | Bild zu Bild (B7) | erledigt 2026-10-26 (ADR-097) | – |
-| ⚪ | 9.9 | Löschen oder Archivieren (B5) | offen | KI: Vorlage mit Mockup |
+| 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 | KI: Vorlage mit Mockup |
 | ⚪ | 9.10 | Cache-Treffer festhalten (V.36) | offen | KI |
 | ⚪ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | offen | KI: nach 9.10 Vorlage |
 | ⚪ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | offen | KI |
@@ -64,9 +64,10 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | D.21 | Sicherheitsfunde virtualenv (Audit 2026-10-22) | erledigt 2026-10-22 | – |
 | ⚪ | D.22 | Probelauf Routine-Klasse mit Sonnet 5.5 | offen | KI – vor der nächsten Abgabe an Unteragenten |
 | ✅ | D.23 | Sicherheitsfunde filelock, undici, zod (Audit 2026-10-25) | erledigt 2026-10-25 | – |
+| 🟠 | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | in Arbeit – behoben in PR #194, CI ausstehend | KI |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25). In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25), V.43 (verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags, aus 9.9, 2026-11-04). In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
 
 ---
 
@@ -328,15 +329,15 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.9: Geschichten, Welten und Kapitel löschen oder archivieren (V.35 B5)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-04 – Bestandsaufnahme und Vorlage)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage und Mockup zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Löschen ist destruktiv (`CLAUDE.md` Abschnitt 8, Kriterium 6), Datenmodell und API (Kategorien 4 und 5)
 - **Empfohlene Klasse:** Entscheidung – destruktiver Ablauf und Datenmodell (Eskalations-Auslöser 1).
 - **Eingangskriterien:** keine
-- **Anforderungen (ab Klasse M):** neue Anforderung, in der Vorlage anzulegen
-- **Zu tun:** Für Geschichten, Welten und Kapitel klären, ob gelöscht, archiviert oder beides; die Kaskade festlegen (Bilder, Karten, Verlauf, Gast-Verbindungen, Markierungen, Verbrauchszeilen); Rückweg über die Sicherung (ADR-036) benennen.
-- **Akzeptanzkriterien:** Vorlage mit Mockup und ADR; Tests der Kaskade; Eigentümer bestätigt.
+- **Anforderungen (ab Klasse M):** FR-036 (angelegt 2026-11-04)
+- **Zu tun:** ~~Für Geschichten, Welten und Kapitel klären, ob gelöscht, archiviert oder beides; Kaskade festlegen; Rückweg benennen~~ – entschieden 2026-11-04, ADR-098 (Mockup `mockup-9.9.html`, lokal). Umsetzung nach ADR-098: (1) `storage`: Ordner löschen samt Indexzeilen; (2) `canon`/`manuscript`: Kopffeld `archiviert`, Archivieren/Zurückholen, endgültiges Löschen von Welt und Geschichte nur für Archiviertes, Kapitel löschen mit Umnummerierung von Kapiteln und `verlauf/NN.md`, Kurzfassungen der nachrückenden Kapitel als veraltet; (3) `api`: Routen, Vorschau der Löschfolgen, Entfernen der Gast-Verbindungen samt Fakten und geführten Figuren in Geschichten anderer Welten, Name als Bestätigung; (4) `ui`: Bereich „Archiv“ in den Listen, Dialog mit Folgenliste und Eintippen des Namens, Kapitel löschen; archivierte Welt nicht als neue Gast-Quelle.
+- **Akzeptanzkriterien:** Vorlage mit Mockup und ADR (erledigt 2026-11-04); Tests der Kaskade (Welt mit Gästen in fremder Welt, Geschichte, mittleres Kapitel mit Verlauf); Akzeptanzkriterium FR-036; Eigentümer bestätigt.
 - **Betroffene Module:** canon, manuscript, storage, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
@@ -795,6 +796,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Sperrdateien, Logbuch-Eintrag
 - **Notizen:** Angelegt 2026-10-25 nach dem roten Lauf zu #187. Verbleibend: 3 mittlere Funde in vitest ≤ 4.1.11 (`@vitest/mocker`, `@vitest/coverage-v8`) unter der Schwelle `high`; Behebung nur mit vitest 5 (`--force`), Linie noch nicht mindestreif – Landeplatz D.2 (Nachprüfung vitest 5 am 2027-03-03, Ablaufdaten-Register).
+
+#### D.24: Sicherheitsfund msgpack (Audit 2026-11-04)
+
+- **Status:** 🟠 IN ARBEIT (2026-11-04) – behoben auf dem Branch von PR #194: msgpack 1.2.2 → 1.2.4 (`uv.lock`); `pip-audit` lokal ohne Befund; pytest lokal 992 grün, 7 rot nur durch die in der Cloud-Session nicht erreichbare Passwortprüfung (Pwned Passwords) – ebenso ohne die Änderung; CI ausstehend. 9.9 ruht derweil mit vorliegender Entscheidung (ADR-098) bis zur nächsten Session.
+- **Phasentyp-Kontext:** STABILISIERUNG
+- **Abhängigkeiten:** keine
+- **Frist:** sofort – roter Audit-Job (Python) blockiert jeden PR (#194)
+- **Freigabepflichtig:** nein – Update innerhalb der Linie, keine Breaking Changes
+- **Empfohlene Klasse:** Routine – Abhängigkeits-Update mit Tests.
+- **Eingangskriterien:** Befund der CI (Lauf 41843125784, 2026-11-04 13:59 UTC)
+- **Anforderungen (ab Klasse M):** keine (Pflichtkategorie Dependency-Audit, `CLAUDE.md` Abschnitt 15)
+- **Zu tun:** CVE-2026-114613 in msgpack 1.2.2 (Korrektur 1.2.3; nur über pip-audit → cachecontrol, Entwicklungsgruppe). Nach Regel-001 die neueste Version der Linie 1.2 (1.2.4). Nur Entwicklungswerkzeug – kein Einspielen nötig.
+- **Akzeptanzkriterien:** Audit ohne Befund in der CI; alle Jobs grün.
+- **Betroffene Module:** keine (Entwicklungswerkzeuge)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Sperrdatei, Logbuch-Eintrag
+- **Notizen:** Angelegt 2026-11-04 nach dem roten Lauf zu #194 (Doku 9.9, nicht vom PR verursacht).
 
 #### D.22: Probelauf Routine-Klasse mit Sonnet 5.5
 
@@ -1487,6 +1505,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Angelegt 2026-10-25 in 9.6.
+
+#### V.43: Verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags
+
+- **Status:** ⏸️ VERSCHOBEN → 9.15 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 9.15 (Befund der Bestandsaufnahme zu 9.9, 2026-11-04; Einordnung durch den Eigentümer steht aus – bis dahin ohne Umsetzung)
+- **Phasentyp-Kontext:** UMSETZUNG
+- **Abhängigkeiten:** 9.9 (gleiche Kaskade wie beim Löschen einer Welt)
+- **Freigabepflichtig:** ja – Löschkaskade (Kategorie 4, destruktiv)
+- **Empfohlene Klasse:** Entscheidung – destruktiver Ablauf (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-036 (Nachbar)
+- **Zu tun:** Heute entfernt `CanonService.delete_entry` Bilder, Herkunftsdateien und Markierungen, lässt aber Fakten, geführte Figuren und Gast-Verbindungen mit der Kennung des Eintrags in Geschichten stehen (der Kontext überspringt sie; ein `@`-Verweis auf einen gelöschten Gast scheitert mit „Unbekannter Kanon-Eintrag“). Klären, ob dieselbe Kaskade wie in ADR-098 greifen soll.
+- **Akzeptanzkriterien:** Vorlage und ADR; Tests; Eigentümer bestätigt.
+- **Betroffene Module:** canon, manuscript, api
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR
+- **Notizen:** Angelegt 2026-11-04 in 9.9.
 
 #### V.41: Textqualität von Hermes 4 – Vergleich mit Denkmodus und Einstellungen je Modell
 

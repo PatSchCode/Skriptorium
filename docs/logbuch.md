@@ -29,6 +29,54 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [GELÖST] Roter Audit-Job im PR #194 durch neuen Sicherheitsfund (D.24)
+
+- Check-in zu PR #194 (Doku 9.9): Pre-Commit, TypeScript und End-to-End grün, „Python“ rot im Dependency-Audit – `pip-audit` meldet CVE-2026-114613 in msgpack 1.2.2 (Korrektur 1.2.3). Nicht vom PR verursacht (nur Doku), blockiert jeden PR; lokal reproduziert. msgpack nur über pip-audit → cachecontrol (Entwicklungsgruppe).
+- Behoben als D.24 im selben PR: `uv lock --upgrade-package msgpack` → 1.2.4 (neueste der Linie, Regel-001); `pip-audit` ohne Befund. pytest lokal: 992 grün, 7 rot (4 failed, 3 errors) – alle im Testaufbau „ohne Anbieter“, der ein Passwort über Pwned Passwords anlegt; die Prüfung ist aus der Cloud-Session nicht erreichbar („Passwortprüfung nicht erreichbar“, Folgefehler 401). Gleiches Ergebnis ohne die Änderung (gegengeprüft per `git stash`); die CI erreicht den Dienst.
+- Reibung: Die Claude-GitHub-App ist auf dem Repository nicht installiert – PR-Ereignisse kommen nicht von selbst, Prüfung per geplantem Check-in. GitHub nennt das Repository in Antworten `PatSchCode/Skriptorium` (Umleitung von `Paddel87/Skriptorium`, Ursache nicht geprüft).
+- Pre-Commit-Hook markdownlint wieder lauffähig: Ursache war, dass nodeenv ohne Vorgabe die neueste Node-Version aus dem Index nimmt und an einer Vorabversion („…0-alpha“) scheitert. Behoben ohne Repo-Änderung mit `~/.nodeenvrc` (`node = 24.21.0`, die Projektversion) in der Cloud-Session; danach liefen alle Hooks ohne Überspringen. Für künftige Cloud-Sessions wäre das ein Fall für `scripts/session-start.sh` (Kategorie 7, freigabepflichtig) – dem Eigentümer vorgelegt.
+
+### 2026-11-04 – [SESSIONENDE] 9.9 entschieden, Umsetzung in neuer Session
+
+- **Bearbeitet:** Auskunft offene Schritte/TypingMind (siehe Einträge unten); 9.9 Bestandsaufnahme, Mockup, Vorlage → ADR-098, FR-036, V.43 (Landeplatz 9.15).
+- **Stand:** Phase 9, 8 von 15; 9.9 `[IN ARBEIT]` – Entscheidung liegt vor, Code noch nicht begonnen. Keine aktiven Blocker, keine offenen STOPP-Situationen.
+- **Nächster Schritt:** 9.9 umsetzen nach ADR-098 und der Liste „Zu tun“ im Fahrplan (Reihenfolge `storage` → `canon`/`manuscript` → `api` → `ui`), Entscheidungs-Klasse empfohlen wegen des destruktiven Ablaufs. Mockup liegt nur im Scratchpad dieser Session – Inhalt steht vollständig im ADR.
+- **Offen:** D.11 (Frist 2026-10-31 überschritten, Eigentümer); D.1 ab 2026-11-05; mypy-2-Nachprüfung 2026-11-06 (D.5). Eigentümer gibt per Auswahlfrage frei, den markdownlint-Hook für diesen Commit zu überspringen (`SKIP=markdownlint-cli2`, nur dieser Hook; Ursache `nodeenv` in der Cloud-Umgebung); markdownlint-cli2 0.23.3 von Hand: 0 Funde in 196 Dateien, übrige Hooks grün. Damit sind auch die beiden Einträge der Auskunft unten committet.
+- **Modell-Bilanz:** Start Sonnet 5.5 (Routine) für die Auskunft; nach Wechsel durch den Eigentümer Opus 5.5 (Entscheidung) für 9.9 – 0 Schritte oberhalb der Empfehlung; Bestandsaufnahme an einen Suchagenten abgegeben (Lesearbeit, hält Dateiinhalte aus dem Hauptkontext; kein Kostenvorteil beim Cache-Lesen).
+- **Kontextgröße:** `get_session` meldet 191.033 Token, unverändert seit dem Modellwechsel – Wert wird offenbar nicht laufend aktualisiert (wie am 2026-10-25); tatsächliche Größe vermutlich über 200.000. Kein weiterer Schritt in dieser Session.
+- **Sessionende-Prüfungen:** README nachgezogen (9.9 🟠, entschieden); Drift: ADR-098 → 9.9 vorhanden, FR-036 → 9.9 und 9.9 → FR-036, V.43 → 9.15 in Übersicht und Schritt; Modul-Liste unverändert; Reaktiv-Quote 0 / 10 (ADR-089–098); keine `[BLOCKIERT]`-Schritte; Phase 9 weiter 15 Schritte. Ablaufdaten-Register: D.1 erreicht morgen sein Datum, Schritt vorhanden. Archiv: Logbuch ca. 700 Zeilen – kein Trigger. Quick-Start nicht berührt; Kategorie 6 nicht berührt.
+
+### 2026-11-04 – [ADR-ANGELEGT] ADR-098 Archivieren und Löschen (9.9)
+
+- Bestandsaufnahme per Suchagent (Opus-Session, nur Lesen): Löschen nur für Kanon-Einträge, Bilder, Karten, Titelbild, Gäste, Fakten; kein Archiv, kein Papierkorb, kein Ordner-Löschen in `storage`; Kapitelnummer muss `Anzahl + 1` sein, Verlauf hängt an der Nummer. Heuristiken Teil 1–4 geladen, verworfene Alternativen geprüft (nichts zum Löschen).
+- Mockup `mockup-9.9.html` (Scratchpad der Session, nicht im Repo) und Vorlage vorgelegt. Eigentümer per Auswahlfragen: A Archiv + endgültig, Gäste mit entfernen, archivierte Welt nur ausgeblendet (je Empfehlung); Kapitel jedes mit Umnummerierung (gegen die Empfehlung „nur das letzte“) → ADR-098, FR-036, Reaktiv-Quote 0 / 10 (ADR-089–098).
+- Reibung: Das erste Einfügen von ADR-098 scheiterte am nicht eindeutigen Anker „Abgeleitete Regel: keine“ (71 Treffer) – mit dem Schluss von ADR-097 als Anker wiederholt.
+- Nebenbefund ohne Änderung: Gelöschte Kanon-Einträge lassen Fakten und geführte Figuren mit ihrer Kennung stehen – als V.43 mit Landeplatz 9.15 angelegt.
+
+### 2026-11-04 – [BEOBACHTUNG] Modellwechsel auf die Entscheidungs-Klasse; 9.9 begonnen
+
+- **Modell:** Eigentümer wechselt auf `claude-opus-5-5`; `get_session` meldet eingestellt `claude-opus-5-5` (`user_switched_model`) → Entscheidungs-Klasse, passend zur Empfehlung von 9.9. Die Session wird damit nach dem `[SESSIONENDE]` von heute fortgesetzt („weiter mit 9.9“).
+- **Kontextgröße:** jetzt feststellbar, 191.033 Token (Grenze 200.000). 9.9 beginnt knapp unter der Grenze; Haltepunkt nach der Vorlage, Umsetzung in neuer Session.
+- **9.9:** auf `[IN ARBEIT]`; Bestandsaufnahme der vorhandenen Lösch-Abläufe per Suchagent (nur Lesen). Die Antwort auf die Rückfrage zum Überspringen des markdownlint-Hooks steht aus – Logbuch-Einträge weiter uncommitted.
+
+### 2026-11-04 – [SESSIONENDE] Auskunft: offene Schritte und TypingMind-Import
+
+- **Bearbeitet:** keine Fahrplan-Schritte; Auskunft über offene Schritte (Phase 9 ab 9.9, Querschnitt D.x) und Stand von V.4 (TypingMind-Import: verworfen, ADR-059, 2026-10-11).
+- **Stand:** unverändert – Phase 9, 8 von 15; kein aktiver Schritt, keine aktiven Blocker, keine offenen STOPP-Situationen. Nächster Schritt weiter 9.9 (Vorlage mit Mockup, Entscheidungs-Klasse).
+- **Offen:** D.11 (Frist 2026-10-31) ist überschritten – Rückfrage an den Eigentümer gestellt; D.1 ab 2026-11-05, mypy-2-Nachprüfung 2026-11-06 (D.5). Ob der TypingMind-Import wieder aufgenommen wird, entscheidet der Eigentümer (Kategorie 4, Entscheidungs-Klasse).
+- **Uncommitted:** Diese beiden Einträge sind nicht committet – der Pre-Commit-Hook bricht in der Cloud-Umgebung beim Einrichten der Umgebung für markdownlint ab (`nodeenv`: `ValueError … '0-alpha'` beim Auswerten der Node-Version). Kein `--no-verify` (`CLAUDE.md` Abschnitt 15). Ursache liegt in der Umgebung, nicht im Eintrag; Behebung wäre ein eigener Schritt.
+- **Modell-Bilanz:** Sonnet 5.5 (Routine), 0 Schritte oberhalb der Empfehlung, keine Abgabe an Unteragenten.
+- **Kontextgröße:** nicht feststellbar (`used_tokens` 0).
+- **Sessionende-Prüfungen:** nur dieser Eintrag geändert; README und Pflicht-Dokumente inhaltlich nicht berührt, daher keine neue Drift; Archiv-Trigger nicht erreicht (Logbuch unter 800 Zeilen); Quick-Start nicht berührt.
+
+### 2026-11-04 – [SESSIONSTART] Auskunft: offene Schritte und TypingMind-Import
+
+- **Modell:** Sonnet 5.5 (`claude-sonnet-5-5`, eingestellt und bedient laut `get_session`), Routine-Klasse. Aufgabe ist reine Auskunft, kein Fahrplan-Schritt, kein Eskalations-Auslöser – kein Schritt oberhalb der Empfehlung.
+- **Umgebung:** Cloud-Session, Branch `claude/festive-cori-lrt580`, `main` auf `d0fb6ef` (letzter Logbuch-Eintrag 2026-10-26).
+- **Wiedereinstieg:** Mindest-Lektüre vollständig (Projektkontext, Logbuch ab letztem `[SESSIONENDE]` 2026-10-25 19:01, Fahrplan „Aktueller Stand“ und Phase 9, Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker). Keine aktiven Blocker, keine offenen STOPP-Situationen. Phase 9: 8 von 15 erledigt.
+- **Kontextgröße:** `get_session` meldet `used_tokens` 0 – nicht feststellbar, Regel zur Sessiongröße entfällt.
+- **Vorhaben:** keine Änderung an Code oder Planung. Eine Wiederaufnahme von V.4 (TypingMind-Import, verworfen mit ADR-059) wäre freigabepflichtig (Kategorie 4) und liefe auf der Entscheidungs-Klasse.
+
 ### 2026-10-26 – [BEOBACHTUNG] 9.8 vom Eigentümer bestätigt
 
 - Eigentümer im Chat: „Funktioniert“ – Prüfung im Betrieb, zugleich die erste echte Probe mit einem Bild (lokal nicht möglich, Schlüssel 401). Eingespielt war `48b8f8f`. 9.8 → `[ERLEDIGT]`; Phase 9: 8 von 15. Nächster Schritt: 9.9 Löschen oder Archivieren (Vorlage mit Mockup, Entscheidungs-Klasse).
