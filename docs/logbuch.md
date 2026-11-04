@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 21:45 – [BEOBACHTUNG] PR #199 zusammengeführt und eingespielt (9.11, `7319b26`)
+
+- Eigentümer gab die Bildschirmfotos frei („Ja, push und PR“), PR #199 angelegt; CI 4 von 4 grün, Protokoll ohne neue Warnung, keine Bündelgrößen-Warnung (416,65 kB). Auf Anweisung („Merge?“) als Merge-Commit zusammengeführt (`7319b26`); #198 ist damit ebenfalls zusammengeführt (sein Commit war enthalten).
+- Vor dem Einspielen geprüft: Baum von `main` gleich dem Baum des geprüften PR-Zweigs (`fed074d`) – der grüne Lauf gilt für `main`, ohne auf den Lauf auf `main` zu warten.
+- Eingespielt nach Runbook Abschnitt 7; `/api/health` 200 nach ca. 60 s (nur HTTPS abgefragt), Anmeldeseite 200; eine SSH-Prüfung: `healthy`, `REVISION` `7319b26`, im Container `yaml.__with_libyaml__` wahr und `FAST` aktiv. November-Datei weiter 81 Zeilen, keine mit `welt` – seit dem ersten Einspielen heute keine KI-Anfrage (auch die Testanfragen zu 9.10 stehen aus).
+- Doku-Stand dazu lokal auf `docs/9.11-eingespielt`, nicht gepusht (Regel „PR erst nach Freigabe“: gebündelt mit Messung 9.10 und den Bestätigungen).
+
 ### 2026-11-04 21:20 – [BEOBACHTUNG] 9.11 umgesetzt (lokal), Bildschirmfotos zur Freigabe
 
 - Commits `50c57d8` (api), `31e0742` (storage), `a3d27d4` (ui); Prüfzahlen im Fahrplan 9.11. pytest 1094, Abdeckung 99,86 %; vitest 551; Playwright 15/15; Linter, Formatter, Typprüfer grün. Quick-Start nicht berührt (keine neue Abhängigkeit: libyaml steckt im PyYAML-Rad); Kategorie 6 nicht berührt (nur Kennungen in den Verbrauchsdateien, ADR-021).
