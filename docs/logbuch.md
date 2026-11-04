@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 22:20 – [BEOBACHTUNG] Messung 9.10 (4): Zwischenspeicher greift bei Schreiben, Weltenbauer und Kurzfassung
+
+- Testanfragen des Eigentümers 22:07–22:14 UTC in einer seiner Welten, je Ablauf zwei (Weltenbauer drei) gleiche Anfragen kurz hintereinander. Gelesen in einer SSH-Prüfung: Protokollzeilen `ki_anfrage` der letzten zwei Stunden und die November-Verbrauchsdatei (jetzt 90 Einträge, 9 neue, alle mit `welt`, Schreiben und Kurzfassungen auch mit `geschichte`). Modell `qwen/qwen3.8-max-0902`, ausführender Anbieter jedes Mal Alibaba.
+- Schreiben: 1. Anfrage 23.247 Token ein, 0 aus dem Zwischenspeicher, 0,0546 $; 2. Anfrage (2,5 min später) 23.247 ein, **23.168 gelesen (99,7 %)**, 0,0155 $ (−72 %, bei mehr Ausgabe).
+- Weltenbauer: 12.765 ein, 0 gelesen, 0,0269 $; dann 12.910 ein, **12.672 gelesen (98,2 %)**, 0,0134 $; dann 13.494 ein, 12.672 gelesen (93,9 %), 0,0092 $. Die Aufträge waren nicht ganz gleich; der gleichbleibende Anfang (Regeln und Kanon) wurde trotzdem gelesen.
+- Kurzfassung: 23.646 ein, 0 gelesen, 0,0533 $; 1 min später 23.646 ein, **23.552 gelesen (99,6 %)**, 0,0114 $ (−79 %). Die jeweils folgende Gesamtzusammenfassung (ca. 1.550 Token ein) hatte beide Male 0 gelesen; Ursache nicht untersucht (kurze Eingabe, Anfang ändert sich mit der neuen Kurzfassung).
+- `cache_geschrieben` war bei Alibaba immer 0 – der Anbieter meldet das Schreiben in den Zwischenspeicher nicht, nur das Lesen.
+- Aus den Kosten errechnet: Eingabe 2 $ je Million Token, Ausgabe 6 $, gelesene Eingabe 0,25 $ – ein Achtel des Eingabepreises. Nebenbefund aus `docs/research/modell-eignungstest.md` damit für qwen3.8-max belegt; Ergänzung dort.
+- Schon vor dem Einspielen von 9.10 kosteten einzelne Schreib-Anfragen am selben Tag nur ca. 0,014 $ statt 0,037 $ (18:51 und 18:57 UTC) – der Zwischenspeicher wirkte also schon vorher; 9.10 macht ihn sichtbar.
+- Akzeptanzkriterien 9.10 damit erfüllt bis auf die Bestätigung des Eigentümers.
+
 ### 2026-11-04 21:45 – [BEOBACHTUNG] PR #199 zusammengeführt und eingespielt (9.11, `7319b26`)
 
 - Eigentümer gab die Bildschirmfotos frei („Ja, push und PR“), PR #199 angelegt; CI 4 von 4 grün, Protokoll ohne neue Warnung, keine Bündelgrößen-Warnung (416,65 kB). Auf Anweisung („Merge?“) als Merge-Commit zusammengeführt (`7319b26`); #198 ist damit ebenfalls zusammengeführt (sein Commit war enthalten).
