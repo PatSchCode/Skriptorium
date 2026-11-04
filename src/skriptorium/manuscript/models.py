@@ -133,6 +133,17 @@ class Story:
     writing_style: WritingStyle = WritingStyle()
     # File name of the cover in the story's folder (step 7.11, ADR-075); ``None`` without one.
     cover: str | None = None
+    # In the archive (step 9.9, ADR-098): listed only there, deleted for good only from there.
+    archived: bool = False
+
+
+@dataclass(frozen=True)
+class StoryContents:
+    """What goes with a story when it is deleted for good (step 9.9, ADR-098)."""
+
+    chapters: int
+    facts: int
+    cover: bool
 
 
 @dataclass(frozen=True)

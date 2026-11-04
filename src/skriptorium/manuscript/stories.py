@@ -8,6 +8,7 @@ from pathlib import PurePosixPath
 from skriptorium.manuscript.chapters import ChapterStore
 from skriptorium.manuscript.headers import facts_from, story_from, story_header
 from skriptorium.manuscript.layout import (
+    ARCHIVED_KEY,
     COVER_KEY,
     STORY_FILE,
     cover_path,
@@ -21,6 +22,7 @@ from skriptorium.manuscript.models import (
     Form,
     Keep,
     Story,
+    StoryContents,
     StoryFact,
     WritingStyle,
 )
@@ -213,3 +215,37 @@ class StoryStore:
         document = self._store.read(story_path(world_id, story_id))
         self._store.write(document.path, document.header, summary)
         return self.get_story(world_id, story_id)
+
+    def set_archived(self, world_id: str, story_id: str, archived: bool) -> Story:
+        """Put a story into the archive or take it back; nothing else in the file changes."""
+        document = self._store.read(story_path(world_id, story_id))
+        header = dict(document.header)
+        if archived:
+            header[ARCHIVED_KEY] = True
+        else:
+            header.pop(ARCHIVED_KEY, None)
+        self._store.write(document.path, header, document.body)
+        return self.get_story(world_id, story_id)
+
+    def story_contents(self, world_id: str, story_id: str) -> StoryContents:
+        """How many chapters and facts go with the story, and whether it has a cover."""
+        story = self.get_story(world_id, story_id)
+        return StoryContents(
+            chapters=len(self._chapters.list_chapters(world_id, story_id)),
+            facts=len(story.facts),
+            cover=story.cover is not None,
+        )
+
+    def check_deletion(self, world_id: str, story_id: str, title: str) -> Story:
+        """The story, if it may be deleted for good with the typed ``title``."""
+        story = self.get_story(world_id, story_id)
+        if not story.archived:
+            raise InvalidInput("Endgültig löschen geht nur für eine archivierte Geschichte")
+        if title != story.title:
+            raise InvalidInput("Der eingetippte Titel passt nicht zur Geschichte")
+        return story
+
+    def delete_story(self, world_id: str, story_id: str, title: str) -> None:
+        """Delete an archived story with everything in its folder."""
+        self.check_deletion(world_id, story_id, title)
+        self._store.delete_tree(story_dir(world_id, story_id))

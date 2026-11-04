@@ -7,6 +7,8 @@ from typing import Final
 from skriptorium.storage import checked_identifier
 
 STYLE_KEY: Final = "schreibweise"
+# Header field of an archived story (step 9.9, ADR-098); absent means active.
+ARCHIVED_KEY: Final = "archiviert"
 STORY_FILE: Final = "story.md"
 FACTS_FILE: Final = "facts.md"
 CHAPTERS: Final = "chapters"
