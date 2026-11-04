@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] PR #195 zusammengeführt (9.9), Einspielen offen
+
+- CI auf `005ea21` grün (4 von 4), Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung (größtes Bündel 409 kB, +7 kB). Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`949b73e`). Beobachtung beendet, ausstehender Check-in gelöscht.
+- 9.9 bleibt `[IN ARBEIT]` bis Einspielen (nur aus der Mac-Session, ADR-025) und Prüfung durch den Eigentümer im Betrieb.
+
 ### 2026-11-04 – [BEOBACHTUNG] Kurzfassungs-Zustand `veraltet` entschieden und umgesetzt; 9.9 lokal fertig
 
 - Eigentümer per Auswahlfragen: neuer Zustand `veraltet` (Option A, Empfehlung) und Bestätigung der sieben Festlegungen der Umsetzung → als „Präzisiert in der Umsetzung“ in ADR-098 aufgenommen.
