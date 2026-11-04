@@ -6,6 +6,8 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Hinzugefügt (nach v1.0.0)
 
+- Gast-Figuren mit Weltbezug (2026-11-05, Schritt 9.13, ADR-102): Unter „Gäste aus anderen Welten“ hat jeder Gast ein Feld „In dieser Welt“ – Herkunft, Beziehungen, Besitz und Rolle in der Welt der Geschichte. „✨ Einpassen vorschlagen“ lässt den Weltenbauer diesen Text aus dem Eintrag der Figur und der Beschreibung der Welt vorschlagen, auf Wunsch mit einer Vorgabe; du übernimmst ihn ins Feld und speicherst. Beim Schreiben bekommt die KI den Eintrag der Figur und darunter den Weltbezug; Abschnitte über die Heimatwelt („In ‹Welt›“, „Im ‹Welt›“) lässt sie dann weg. Der Eintrag in der Heimatwelt bleibt unverändert.
+
 - Löschen und Archivieren (2026-11-04, Schritt 9.9, ADR-098): Welten und Geschichten lassen sich archivieren – sie verschwinden aus den Listen, stehen im Bereich „Archiv“ und kommen mit „Zurückholen“ unverändert wieder. Endgültig löschen geht nur aus dem Archiv: Der Dialog zeigt, was alles verschwindet (auch Gast-Auftritte in anderen Welten), und verlangt den Namen bzw. Titel genau eingetippt. Kapitel lassen sich einzeln löschen; die folgenden rücken nach, ihre Kurzfassungen sind als „veraltet“ markiert.
 
 - Cache-Treffer (2026-11-04, Schritt 9.10, ADR-099): Das Skriptorium hält bei jeder KI-Anfrage fest, wie viele Token der Eingabe der Anbieter aus seinem Zwischenspeicher gelesen hat; die Seite „Verbrauch“ zeigt den Anteil. Gemessen: Wiederholst du eine Anfrage kurz danach, kommt fast die ganze Eingabe aus dem Zwischenspeicher, und die Anfrage kostet rund ein Viertel.

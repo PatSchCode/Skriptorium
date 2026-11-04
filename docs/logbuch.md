@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 9.13 umgesetzt (lokal), Bildschirmfotos zur Abnahme
+
+- Umsetzung nach ADR-102 auf `feat/9.13-gaeste`; Einzelheiten und Zahlen im Fahrplan bei 9.13. Python 1123 bestanden (100 % Zeilen), Oberfläche 558, E2E 15; ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün.
+- Abweichung vom Mockup: Überschrift des Feldes „In dieser Welt („Die Salzmark“)“ statt „In der Salzmark“ (der Artikel lässt sich aus dem Weltnamen nicht sicher bilden); keine Kostenschätzung am Knopf, die tatsächlichen Kosten stehen nach dem Vorschlag; der Vorschlag ist nur der übernehmbare Text, ohne erklärenden Absatz davor.
+- Mini-Reibung: `vite build` im Ordner `ui` baute nach `ui/dist` statt nach `dist/ui` (Wurzel steht in der `vite.config.ts` des Projekts) – der erste E2E-Lauf prüfte deshalb den alten Build. Ordner entfernt, Build vom Projektordner, E2E erneut 15 grün. Merke: `npx vite build` nur vom Projektordner.
+- Mini-Reibung: `pytest --cov=<einzelnes Modul>` lässt unter Python 3.14 den libyaml-Schreiber in `storage` scheitern (`EmitterError`), auch in `tests/storage/test_frontmatter.py`; ohne Abdeckung und mit `--cov=skriptorium` (wie in der CI) alles grün. Messartefakt, kein Fehler im Produkt; Abdeckung nur über das ganze Paket messen.
+
 ### 2026-11-05 – [ADR-ANGELEGT] ADR-102 Weltbezug je Gast und Einpassen (9.13)
 
 - Eigentümer per Auswahlfragen zum Mockup: Bedienung so, Weltbezug je Geschichte, Heimatwelt-Abschnitt weglassen, wenn ein Weltbezug da ist. Kategorien 4, 1, 5, additiv, nicht reaktiv.
