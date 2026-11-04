@@ -29,6 +29,21 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] Erkenntnisdokument 9.12 geschrieben, Vorlage folgt
+
+- `docs/research/quellen-und-recherche.md`: V1 (Optionen A Plugin einstellen, B eigener Wikipedia-Baustein, C eigene Such-API, D nichts), H1 Namen (N1–N4) und Anleitungen; Preise aus OpenRouter-, Exa-, Wikimedia-, GeoNames- und Behind-the-Name-Seiten vom 2026-11-05.
+- Server gelesen (eine SSH-Prüfung, nur Zahlen): 141 Weltenbauer-Anfragen im Oktober und November; ca. 26 mit sprunghaft großer Eingabe (15.000–83.000 Token, fast alle Grok, 2026-10-12 bis 10-20), zusammen ca. 1,90 $ – höchstwahrscheinlich Websuchen, die Verbrauchsdatei hat dafür kein Merkmal. Seit 2026-10-21 keine mehr.
+- Befund: Die Suchgebühr (Exa 0,7 ct) ist klein; teuer ist der Suchtext im Modell, besonders bei der eigenen Suche von Grok, die OpenRouter ohne Angabe der Suchmaschine wählt.
+- Mini-Reibung: fantasynamegenerators.com lehnt automatische Abrufe ab (HTTP 403); Lizenzhinweis nur über eine Kopie gefunden. Brave-Preisseite nicht direkt abrufbar – Preise aus Übersichten, im Dokument als „vor Umsetzung prüfen“ markiert.
+
+### 2026-11-05 – [SESSIONSTART] 9.12 Quellen und Recherche (Erkundung)
+
+- **Modell (Quelle: Systemkontext):** Opus 5.5 → Entscheidungs-Klasse; passt zur Empfehlung von 9.12 (bereitet eine Abhängigkeits- und Kostenentscheidung vor).
+- **Wiedereinstieg:** `main` auf `7508191` (PR #200), Arbeitszweig `docs/9.12-quellen-recherche`. Mindest-Lektüre aus der vorigen Session im Kontext; seitdem nur die eigenen Doku-Commits. Kein aktiver Blocker.
+- **Ausgangslage 9.12:** Websuche im Weltenbauer über das OpenRouter-Plugin `web` (ADR-064, max. 5 Treffer); gemessen in 6.7: 5,9–7,0 ct je Antwort, weil 17.000–22.000 Token Suchergebnisse als Eingabe des Sprachmodells zählen – die Suchgebühr selbst ist der kleinere Teil.
+- **Datiert ab heute:** D.1 (Node 26 LTS frühestens 2026-11-05); D.5 Nachprüfung mypy 2 am 2026-11-06.
+- **Kontextgröße:** nicht feststellbar; fortgesetzte, einmal verdichtete Session (dauerhaftes „weiter hier“ des Eigentümers).
+
 ### 2026-11-04 23:00 – [SESSIONENDE] 9.9, 9.10 und 9.11 eingespielt, gemessen und abgeschlossen
 
 - **Dauer:** ca. 20:10–23:00 (fortgesetzte Session, einmal verdichtet).
