@@ -3,13 +3,17 @@
 Headers are read with a strict safe loader: YAML 1.1 turns hand-written values such as
 ``No``, ``On`` or ``012`` silently into booleans or octal numbers. The strict loader rejects
 those with :class:`InvalidInput` instead, so the author learns to quote them. Written headers
-come from ``yaml.safe_dump``, which quotes ambiguous strings and is read identically by
+come from PyYAML's safe dumper, which quotes ambiguous strings and is read identically by
 YAML 1.1 and 1.2 parsers.
+
+Both directions use PyYAML's C classes (libyaml) when the installed PyYAML has them: the monthly
+usage files are rewritten on every AI request and read whole for the statistics, and the pure
+Python classes take about six times as long (ADR-100). The rules are the same either way.
 """
 
 import re
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, Final
 
 import yaml
 
@@ -23,40 +27,59 @@ _PLAIN_INT = re.compile(r"[-+]?(0|[1-9][0-9]*)")
 _PLAIN_FLOAT = re.compile(r"[-+]?([0-9]+\.[0-9]*|\.[0-9]+)([eE][-+]?[0-9]+)?")
 
 
-class _StrictSafeLoader(yaml.SafeLoader):
-    """Safe loader that refuses YAML 1.1 values whose meaning is ambiguous."""
+_AnyLoader = yaml.SafeLoader | yaml.CSafeLoader
 
 
-def _construct_bool(loader: yaml.SafeLoader, node: yaml.Node) -> bool:
+def _construct_bool(loader: _AnyLoader, node: yaml.Node) -> bool:
     text = str(node.value)
     if text.lower() not in _PLAIN_BOOLEANS:
         raise InvalidInput(f"Mehrdeutiger Wert {text!r}, bitte in Anführungszeichen setzen")
     return text.lower() == "true"
 
 
-def _construct_int(loader: yaml.SafeLoader, node: yaml.Node) -> int:
+def _construct_int(loader: _AnyLoader, node: yaml.Node) -> int:
     text = str(node.value)
     if not _PLAIN_INT.fullmatch(text):
         raise InvalidInput(f"Mehrdeutige Zahl {text!r}, bitte in Anführungszeichen setzen")
     return int(text)
 
 
-def _construct_float(loader: yaml.SafeLoader, node: yaml.Node) -> float:
+def _construct_float(loader: _AnyLoader, node: yaml.Node) -> float:
     text = str(node.value)
     if not _PLAIN_FLOAT.fullmatch(text):
         raise InvalidInput(f"Mehrdeutige Zahl {text!r}, bitte in Anführungszeichen setzen")
     return float(text)
 
 
-def _construct_timestamp(loader: yaml.SafeLoader, node: yaml.Node) -> str:
+def _construct_timestamp(loader: _AnyLoader, node: yaml.Node) -> str:
     """Keep dates as written; the header only holds plain values."""
     return str(node.value)
 
 
-_StrictSafeLoader.add_constructor("tag:yaml.org,2002:bool", _construct_bool)
-_StrictSafeLoader.add_constructor("tag:yaml.org,2002:float", _construct_float)
-_StrictSafeLoader.add_constructor("tag:yaml.org,2002:timestamp", _construct_timestamp)
-_StrictSafeLoader.add_constructor("tag:yaml.org,2002:int", _construct_int)
+Loader = type[yaml.SafeLoader] | type[yaml.CSafeLoader]
+Dumper = type[yaml.SafeDumper] | type[yaml.CSafeDumper]
+
+
+def _strict(base: Loader) -> Loader:
+    """A safe loader on ``base`` that refuses YAML 1.1 values whose meaning is ambiguous."""
+    strict: Loader = type("StrictSafeLoader", (base,), {})
+    strict.add_constructor("tag:yaml.org,2002:bool", _construct_bool)
+    strict.add_constructor("tag:yaml.org,2002:float", _construct_float)
+    strict.add_constructor("tag:yaml.org,2002:timestamp", _construct_timestamp)
+    strict.add_constructor("tag:yaml.org,2002:int", _construct_int)
+    return strict
+
+
+PURE: Final[tuple[Loader, Dumper]] = (_strict(yaml.SafeLoader), yaml.SafeDumper)
+"""Loader and dumper in pure Python; always available."""
+
+FAST: Final[tuple[Loader, Dumper] | None] = (
+    (_strict(yaml.CSafeLoader), yaml.CSafeDumper) if yaml.__with_libyaml__ else None
+)
+"""Loader and dumper on libyaml, or ``None`` if the installed PyYAML lacks it."""
+
+# Replaced by the tests to run every case with both.
+_classes: tuple[Loader, Dumper] = FAST or PURE
 
 
 def parse(text: str) -> tuple[dict[str, HeaderValue], str]:
@@ -89,13 +112,11 @@ def parse_mapping(text: str) -> dict[str, HeaderValue]:
 
 def render_mapping(mapping: Mapping[str, HeaderValue]) -> str:
     """Build the text of a plain YAML file of named fields."""
-    return yaml.safe_dump(
-        dict(mapping), allow_unicode=True, sort_keys=False, default_flow_style=False
-    )
+    return _dump(mapping)
 
 
 def _load_header(header_text: str) -> dict[str, HeaderValue]:
-    loader = _StrictSafeLoader(header_text)
+    loader = _classes[0](header_text)
     try:
         loaded: Any = loader.get_single_data()
     except yaml.YAMLError as error:
@@ -131,7 +152,15 @@ def render(header: Mapping[str, HeaderValue], body: str) -> str:
         return body
     header_text = ""
     if header:
-        header_text = yaml.safe_dump(
-            dict(header), allow_unicode=True, sort_keys=False, default_flow_style=False
-        )
+        header_text = _dump(header)
     return f"{_DELIMITER}\n{header_text}{_DELIMITER}\n{body}"
+
+
+def _dump(mapping: Mapping[str, HeaderValue]) -> str:
+    return yaml.dump(
+        dict(mapping),
+        Dumper=_classes[1],
+        allow_unicode=True,
+        sort_keys=False,
+        default_flow_style=False,
+    )
