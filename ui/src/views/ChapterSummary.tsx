@@ -6,11 +6,12 @@ const SUMMARY_STATUS_TEXT: Record<SummaryStatus, string> = {
   fehlt: "fehlt – die KI nutzt den Kapitelanfang",
   erzeugt: "von der KI erstellt, noch nicht geprüft",
   geprüft: "geprüft",
+  veraltet: "veraltet – nach dem Löschen eines Kapitels neu erzeugen",
 };
 
 /**
  * Kurzfassung of a chapter (FR-010): shown once the chapter is completed or has one; saving
- * marks it as checked; a missing or unwanted one can be created again.
+ * marks it as checked; a missing, unwanted or outdated one (step 9.9) can be created again.
  */
 export function ChapterSummary({
   chapter,
@@ -54,7 +55,11 @@ export function ChapterSummary({
           }}
         />
       </Field>
-      <p className="note">
+      <p
+        className={
+          chapter.summary_status === "veraltet" ? "note outdated" : "note"
+        }
+      >
         Status: {SUMMARY_STATUS_TEXT[chapter.summary_status]}
       </p>
       <ErrorText message={error} />
@@ -64,7 +69,8 @@ export function ChapterSummary({
           disabled={
             busy ||
             (summary === chapter.summary &&
-              chapter.summary_status !== "erzeugt")
+              chapter.summary_status !== "erzeugt" &&
+              chapter.summary_status !== "veraltet")
           }
         >
           Als geprüft markieren

@@ -267,6 +267,55 @@ describe("the short summary in its own tab (step 6.2)", () => {
       await screen.findByRole("button", { name: "Kurzfassung" }),
     ).toBeDefined();
   });
+
+  it("marks an outdated summary, names it and lets it be checked or created again", async () => {
+    let chapter: Chapter = {
+      ...CHAPTER,
+      summary: "Ilka bricht auf.",
+      summary_status: "veraltet",
+    };
+    const { calls } = fakeApi({
+      ...PANEL,
+      [`GET ${BASE}/chapters`]: () => ok([chapter])(),
+      [`PUT ${BASE}/chapters/1/summary`]: (body) => {
+        const { summary, status } = body as {
+          summary: string;
+          status: Chapter["summary_status"];
+        };
+        chapter = { ...chapter, summary, summary_status: status };
+        return ok(chapter)();
+      },
+    });
+    const user = userEvent.setup();
+    render(<StoryPage story={STORY} />);
+
+    const tab = await screen.findByRole("button", {
+      name: /^Kurzfassung\s*– veraltet$/,
+    });
+    await user.click(tab);
+    const status = screen.getByText(
+      "Status: veraltet – nach dem Löschen eines Kapitels neu erzeugen",
+    );
+    expect(status.className).toBe("note outdated");
+    expect(
+      screen.getByRole("button", { name: "Kurzfassung neu erstellen" }),
+    ).toBeDefined();
+
+    // Unchanged, it can still be confirmed as checked.
+    await user.click(
+      screen.getByRole("button", { name: "Als geprüft markieren" }),
+    );
+    await waitFor(() => {
+      expect(calls.filter((c) => c.method === "PUT").at(-1)?.body).toEqual({
+        summary: "Ilka bricht auf.",
+        status: "geprüft",
+      });
+    });
+    expect(
+      await screen.findByRole("button", { name: "Kurzfassung" }),
+    ).toBeDefined();
+    expect(screen.getByText("Status: geprüft").className).toBe("note");
+  });
 });
 
 describe("describeSummaryFailure", () => {

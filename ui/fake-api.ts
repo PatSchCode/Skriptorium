@@ -136,6 +136,7 @@ export const WORLD = {
     file: string;
     markers: { entry: string; x: number; y: number }[];
   }[],
+  archived: false,
 };
 export const ENTRY = {
   world: "salzmark",
@@ -160,6 +161,7 @@ export const STORY = {
   model: null as string | null,
   genres: [] as string[],
   cover: null as string | null,
+  archived: false,
   writing_style: {
     tone: [] as string[],
     atmosphere: [] as string[],

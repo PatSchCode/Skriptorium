@@ -22,6 +22,7 @@ from skriptorium.canon.service import (
     ImportResult,
     MapMarker,
     World,
+    WorldContents,
     WorldMap,
 )
 from skriptorium.storage import AlreadyExists, ImageOrigin, InvalidInput, NotFound, StorageError
@@ -46,6 +47,7 @@ __all__ = [
     "StorageError",
     "TranslatedMaterial",
     "World",
+    "WorldContents",
     "WorldMap",
     "drop_empty_sections",
     "name_pattern",

@@ -1,7 +1,16 @@
-"""Chapter files of a story: reading, writing and the short summaries."""
+"""Chapter files of a story: reading, writing, deleting and the short summaries."""
+
+from pathlib import PurePosixPath
 
 from skriptorium.manuscript.headers import chapter_from, chapter_header
-from skriptorium.manuscript.layout import CHAPTERS, chapter_number, story_dir, story_path
+from skriptorium.manuscript.layout import (
+    CHAPTERS,
+    HISTORY,
+    chapter_number,
+    history_path,
+    story_dir,
+    story_path,
+)
 from skriptorium.manuscript.models import (
     KEEP,
     SUMMARY_STATUSES,
@@ -95,6 +104,53 @@ class ChapterStore:
             raise InvalidInput(f"Unbekannter Status der Kurzfassung: {status!r}")
         chapter = self.get_chapter(world_id, story_id, number)
         return self._rewrite_chapter(chapter, summary=summary, summary_status=status)
+
+    def delete_chapter(self, world_id: str, story_id: str, number: int) -> list[Chapter]:
+        """Delete chapter ``number`` and its history; the chapters after it move up by one.
+
+        A chapter that moves up gets the new number in its header and file name, its history
+        file ``verlauf/NN.md`` moves along and its short summary, if it has one, is marked
+        ``veraltet``. Each file is written under the new name before the old one is deleted.
+        Returns the remaining chapters.
+        """
+        path = self.chapter_path(world_id, story_id, number)
+        following = [
+            chapter for chapter in self.list_chapters(world_id, story_id) if chapter.number > number
+        ]
+        histories = set(self._store.list_paths(f"{story_dir(world_id, story_id)}/{HISTORY}"))
+        self._store.delete(path)
+        if history_path(world_id, story_id, number) in histories:
+            self._store.delete(history_path(world_id, story_id, number))
+        for chapter in following:
+            self._move_up(chapter, histories)
+        return self.list_chapters(world_id, story_id)
+
+    def _move_up(self, chapter: Chapter, histories: set[str]) -> None:
+        """Give ``chapter`` the number before its own; its history file goes along.
+
+        A short summary the chapter has (``erzeugt`` or ``geprüft``) becomes ``veraltet``.
+        """
+        world_id, story_id, old_number = chapter.world, chapter.story, chapter.number
+        new_number = old_number - 1
+        old_path = self.chapter_path(world_id, story_id, old_number)
+        document = self._store.read(old_path)
+        header = dict(document.header)
+        header["kapitel"] = new_number
+        # The short summary no longer fits the new place (ADR-098, ADR-085); a missing one
+        # stays missing.
+        if header.get("kurzfassung_status") in ("erzeugt", "geprüft"):
+            header["kurzfassung_status"] = "veraltet"
+        rest = PurePosixPath(old_path).name.split("-", 1)[1]
+        new_path = f"{story_dir(world_id, story_id)}/{CHAPTERS}/{new_number:02d}-{rest}"
+        self._store.write(new_path, header, document.body)
+        self._store.delete(old_path)
+        old_history = history_path(world_id, story_id, old_number)
+        if old_history in histories:
+            history = self._store.read(old_history)
+            moved = dict(history.header)
+            moved["kapitel"] = new_number
+            self._store.write(history_path(world_id, story_id, new_number), moved, history.body)
+            self._store.delete(old_history)
 
     def chapter_path(self, world_id: str, story_id: str, number: int) -> str:
         """Path of chapter ``number``; the story and the chapter must exist."""

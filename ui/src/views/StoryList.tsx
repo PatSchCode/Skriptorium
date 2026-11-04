@@ -10,13 +10,16 @@ interface WorldStories {
   stories: Story[];
 }
 
-/** All worlds with their stories; few worlds, so they are loaded together. */
+/**
+ * All worlds with their stories; few worlds, so they are loaded together. Archived worlds and
+ * stories are left out; they stand in the area "Archiv" of their list (step 9.9, ADR-098).
+ */
 async function loadAll(): Promise<WorldStories[]> {
-  const worlds = await api.worlds();
+  const worlds = (await api.worlds()).filter((world) => !world.archived);
   return Promise.all(
     worlds.map(async (world) => ({
       world,
-      stories: await api.stories(world.id),
+      stories: (await api.stories(world.id)).filter((story) => !story.archived),
     })),
   );
 }

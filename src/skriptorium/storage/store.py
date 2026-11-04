@@ -9,6 +9,8 @@ tree with the same path checks; they are not indexed.
 
 import contextlib
 import os
+import secrets
+import shutil
 import sqlite3
 import tempfile
 from collections.abc import Iterator, Mapping
@@ -37,6 +39,9 @@ SearchMode = Literal["name", "fulltext"]
 
 _INDEX_FILE = "index.sqlite"
 _SUFFIX = ".md"
+# Directories being deleted are first moved aside under this name in the data directory
+# (step 9.9, ADR-098); a leftover is removed by the next deletion.
+_ASIDE_PREFIX = ".geloescht-"
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS documents (
     path TEXT PRIMARY KEY,
@@ -146,6 +151,37 @@ class DocumentStore:
             raise StorageError(f"{path}: {error}") from error
         with self._connect() as connection:
             _remove_from_index(connection, path)
+
+    def delete_tree(self, prefix: str) -> None:
+        """Delete the directory ``prefix`` with everything below it (step 9.9, ADR-098).
+
+        The directory first moves aside in one step (a rename within the data directory), so
+        it is either complete or gone; then its documents leave the index and its files are
+        removed. Callers build ``prefix`` from checked identifiers, never from raw input.
+
+        Raises:
+            NotFound: No directory at ``prefix``.
+            InvalidInput: Bad or empty prefix.
+            StorageError: Moving the directory aside failed; nothing is changed.
+        """
+        if not prefix:
+            raise InvalidInput("Ungültiger Pfad: ''")
+        directory = self._directory(prefix)
+        if directory.is_symlink() or not directory.is_dir():
+            raise NotFound(prefix)
+        self._remove_aside()
+        aside = self._root / f"{_ASIDE_PREFIX}{secrets.token_hex(6)}"
+        try:
+            os.replace(directory, aside)
+        except OSError as error:
+            raise StorageError(f"{prefix}: {error}") from error
+        _sync_directory(directory.parent)
+        _sync_directory(self._root)
+        with self._connect() as connection:
+            _remove_tree_from_index(connection, prefix)
+        # The directory is gone from the tree; a file that cannot be removed now stays aside
+        # and is removed by the next deletion.
+        shutil.rmtree(aside, ignore_errors=True)
 
     def write_image(
         self,
@@ -323,6 +359,10 @@ class DocumentStore:
             (document.path, name, document.body),
         )
 
+    def _remove_aside(self) -> None:
+        for leftover in self._root.glob(f"{_ASIDE_PREFIX}*"):
+            shutil.rmtree(leftover, ignore_errors=True)
+
     def _file(self, path: str) -> Path:
         relative = _checked(path)
         if relative.suffix != _SUFFIX:
@@ -375,7 +415,12 @@ def _write_atomically(file: Path, data: bytes) -> None:
         with contextlib.suppress(FileNotFoundError):
             os.unlink(temporary)
         raise
-    directory = os.open(file.parent, os.O_RDONLY)
+    _sync_directory(file.parent)
+
+
+def _sync_directory(path: Path) -> None:
+    """Make a rename or a new file in ``path`` durable."""
+    directory = os.open(path, os.O_RDONLY)
     try:
         os.fsync(directory)
     finally:
@@ -385,6 +430,13 @@ def _write_atomically(file: Path, data: bytes) -> None:
 def _remove_from_index(connection: sqlite3.Connection, path: str) -> None:
     connection.execute("DELETE FROM documents WHERE path = ?", (path,))
     connection.execute("DELETE FROM fulltext WHERE path = ?", (path,))
+
+
+def _remove_tree_from_index(connection: sqlite3.Connection, prefix: str) -> None:
+    # Every path below ``prefix`` lies between "<prefix>/" and "<prefix>0" ("0" follows "/").
+    bounds = (f"{prefix}/", f"{prefix}0")
+    connection.execute("DELETE FROM documents WHERE path >= ? AND path < ?", bounds)
+    connection.execute("DELETE FROM fulltext WHERE path >= ? AND path < ?", bounds)
 
 
 def _world_of(path: str) -> str | None:

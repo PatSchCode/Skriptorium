@@ -43,6 +43,30 @@ export interface World {
   name: string;
   description: string;
   maps: WorldMap[];
+  /** In the archive (step 9.9, ADR-098): listed only there, not offered for new guests. */
+  archived: boolean;
+}
+
+/** A story of another world with guest links into a world about to be deleted (step 9.9). */
+export interface GuestUse {
+  world: string;
+  world_name: string;
+  story: string;
+  story_title: string;
+  /** Names of the guest entries. */
+  guests: string[];
+  /** Story facts that go with the guests. */
+  facts: number;
+}
+
+/** What deleting a world for good takes with it (step 9.9, ADR-098). */
+export interface WorldDeletion {
+  name: string;
+  entries: number;
+  images: number;
+  maps: number;
+  stories: number;
+  guest_uses: GuestUse[];
 }
 
 export interface CanonEntry {
@@ -71,6 +95,18 @@ export const canonApi = {
     world: string,
     change: Partial<Pick<World, "name" | "description">>,
   ) => request("PATCH", worldPath(world), change) as Promise<World>,
+  archiveWorld: (world: string) =>
+    request("POST", `${worldPath(world)}/archive`) as Promise<World>,
+  restoreWorld: (world: string) =>
+    request("POST", `${worldPath(world)}/restore`) as Promise<World>,
+  worldDeletion: (world: string) =>
+    request(
+      "GET",
+      `${worldPath(world)}/deletion-preview`,
+    ) as Promise<WorldDeletion>,
+  /** Deletes an archived world for good; `name` must be exactly its name. */
+  deleteWorld: (world: string, name: string) =>
+    request("DELETE", worldPath(world), { name }) as Promise<void>,
 
   entries: (world: string) =>
     request("GET", `${worldPath(world)}/entries`) as Promise<CanonEntry[]>,

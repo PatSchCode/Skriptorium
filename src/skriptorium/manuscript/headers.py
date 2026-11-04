@@ -4,7 +4,13 @@ from collections.abc import Sequence
 from datetime import datetime
 from pathlib import PurePosixPath
 
-from skriptorium.manuscript.layout import COVER_FILE, COVER_KEY, STYLE_KEY, chapter_number
+from skriptorium.manuscript.layout import (
+    ARCHIVED_KEY,
+    COVER_FILE,
+    COVER_KEY,
+    STYLE_KEY,
+    chapter_number,
+)
 from skriptorium.manuscript.models import (
     CHAPTER_STATUSES,
     SUMMARY_STATUSES,
@@ -116,7 +122,17 @@ def story_from(document: Document, facts: tuple[StoryFact, ...]) -> Story:
             else WritingStyle()
         ),
         cover=_cover_of(document),
+        archived=_archived_of(document),
     )
+
+
+def _archived_of(document: Document) -> bool:
+    value = document.header.get(ARCHIVED_KEY)
+    if value is None:
+        return False
+    if not isinstance(value, bool):
+        raise InvalidInput(f"{document.path}: Feld {ARCHIVED_KEY!r} muss true oder false sein")
+    return value
 
 
 def _cover_of(document: Document) -> str | None:

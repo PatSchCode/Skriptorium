@@ -9,7 +9,9 @@ Form = Literal["roman", "kurzgeschichte", "fragment"]
 FORMS: Final[tuple[Form, ...]] = get_args(Form)
 ChapterStatus = Literal["in-arbeit", "abgeschlossen"]
 CHAPTER_STATUSES: Final[tuple[ChapterStatus, ...]] = get_args(ChapterStatus)
-SummaryStatus = Literal["fehlt", "erzeugt", "geprüft"]
+# ``veraltet``: the chapter moved up after a chapter before it was deleted (step 9.9, ADR-098);
+# its short summary still stands but is to be created again.
+SummaryStatus = Literal["fehlt", "erzeugt", "geprüft", "veraltet"]
 SUMMARY_STATUSES: Final[tuple[SummaryStatus, ...]] = get_args(SummaryStatus)
 
 # Fixed lists of the atmospheric writing style (step 5.6, ADR-053); the order is the one in
@@ -133,6 +135,17 @@ class Story:
     writing_style: WritingStyle = WritingStyle()
     # File name of the cover in the story's folder (step 7.11, ADR-075); ``None`` without one.
     cover: str | None = None
+    # In the archive (step 9.9, ADR-098): listed only there, deleted for good only from there.
+    archived: bool = False
+
+
+@dataclass(frozen=True)
+class StoryContents:
+    """What goes with a story when it is deleted for good (step 9.9, ADR-098)."""
+
+    chapters: int
+    facts: int
+    cover: bool
 
 
 @dataclass(frozen=True)

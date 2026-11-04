@@ -1,5 +1,7 @@
 """Story extras: guest links, story facts and the history of instructions."""
 
+from collections.abc import Set
+
 from skriptorium.manuscript.chapters import ChapterStore
 from skriptorium.manuscript.headers import (
     facts_header,
@@ -14,6 +16,7 @@ from skriptorium.manuscript.validation import required_text
 from skriptorium.storage import (
     AlreadyExists,
     DocumentStore,
+    HeaderValue,
     InvalidInput,
     NotFound,
     checked_identifier,
@@ -48,6 +51,25 @@ class StoryExtras:
         if link not in story.guest_links:
             raise NotFound(f"{guest_world}/{entry}")
         return self._write_guest_links(story, tuple(g for g in story.guest_links if g != link))
+
+    def remove_guest_world(
+        self, world_id: str, story_id: str, guest_world: str, entries: Set[str]
+    ) -> Story:
+        """Remove all guest links into ``guest_world``, and the facts and led characters that
+        name one of ``entries`` (step 9.9, ADR-098)."""
+        story = self._stories.get_story(world_id, story_id)
+        links = tuple(link for link in story.guest_links if link.world != guest_world)
+        controlled = [c for c in story.controlled_characters if c not in entries]
+        if links != story.guest_links or len(controlled) != len(story.controlled_characters):
+            document = self._store.read(story_path(world_id, story_id))
+            header = dict(document.header)
+            header["gast_verbindungen"] = guest_links_header(links)
+            header["gefuehrte_figuren"] = list[HeaderValue](controlled)
+            self._store.write(document.path, header, document.body)
+        facts = tuple(fact for fact in story.facts if fact.entry not in entries)
+        if facts != story.facts:
+            self._store.write(facts_path(world_id, story_id), facts_header(facts), "")
+        return self._stories.get_story(world_id, story_id)
 
     def add_fact(self, world_id: str, story_id: str, entry: str, fact: str) -> Story:
         """Add a fact about ``entry`` that holds only in this story."""

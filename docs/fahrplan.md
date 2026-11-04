@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04, Bestandsaufnahme und Vorlage
-- **Nächster Schritt:** Entscheidung des Eigentümers zur Vorlage 9.9, dann Umsetzung (neue Session). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; entschieden (ADR-098) und lokal umgesetzt, Branch gepusht
+- **Nächster Schritt:** Pull Request zu 9.9 (CI), nach Merge und Einspielen Prüfung durch den Eigentümer. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -64,7 +64,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | D.21 | Sicherheitsfunde virtualenv (Audit 2026-10-22) | erledigt 2026-10-22 | – |
 | ⚪ | D.22 | Probelauf Routine-Klasse mit Sonnet 5.5 | offen | KI – vor der nächsten Abgabe an Unteragenten |
 | ✅ | D.23 | Sicherheitsfunde filelock, undici, zod (Audit 2026-10-25) | erledigt 2026-10-25 | – |
-| 🟠 | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | in Arbeit – behoben in PR #194, CI ausstehend | KI |
+| ✅ | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | erledigt 2026-11-04 | – |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
 Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25), V.43 (verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags, aus 9.9, 2026-11-04). In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
@@ -342,6 +342,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
 - **Notizen:** Aus V.35 (ADR-090).
+- **Umgesetzt (lokal, 2026-11-04, noch nicht abgenommen):** (1)–(4) nach ADR-098 auf dem Arbeitszweig; neun neue Routen (Routenzahl 71 → 80, alle mit Sitzung). Neue Tests: Python 38 (storage 9, canon 7, manuscript 12, api 8, context 2; Vertragsdatei neu geschrieben; Gesamtlauf 1030 bestanden, rot nur die 7 bekannten Pwned-Passwords-Fälle der Cloud-Umgebung; Abdeckung 99,67 %, canon 100 %, context 99,64 %), Oberfläche 13 (12 in `Archive.test.tsx`, 1 in `Summary.test.tsx`; 545 bestanden; Abdeckung 98,84 / 95,70 / 98,23 / 99,01 % Anweisungen/Zweige/Funktionen/Zeilen), E2E 15 bestanden (unverändert, kein neuer Fall). Kurzfassungen der nachrückenden Kapitel (Entscheidung des Eigentümers 2026-11-04, „A“): neuer Wert `veraltet` für `kurzfassung_status`; beim Nachrücken werden `erzeugt` und `geprüft` zu `veraltet`, `fehlt` bleibt. Neu erstellen setzt wie bisher `erzeugt`, Bestätigen `geprüft`; in der Anfrage an die KI zählt eine veraltete Kurzfassung wie eine erzeugte. Oberfläche: Status „veraltet – nach dem Löschen eines Kapitels neu erzeugen“ als Warnhinweis, Markierung am Reiter „Kurzfassung“, Rückfrage vor dem Löschen nennt die Markierung. `TODO(fahrplan-ref: 9.9)` entfernt; nichts mehr offen.
 
 #### 9.10: Cache-Treffer der KI-Anbieter festhalten (V.36)
 
@@ -799,7 +800,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 
 #### D.24: Sicherheitsfund msgpack (Audit 2026-11-04)
 
-- **Status:** 🟠 IN ARBEIT (2026-11-04) – behoben auf dem Branch von PR #194: msgpack 1.2.2 → 1.2.4 (`uv.lock`); `pip-audit` lokal ohne Befund; pytest lokal 992 grün, 7 rot nur durch die in der Cloud-Session nicht erreichbare Passwortprüfung (Pwned Passwords) – ebenso ohne die Änderung; CI ausstehend. 9.9 ruht derweil mit vorliegender Entscheidung (ADR-098) bis zur nächsten Session.
+- **Status:** ✅ ERLEDIGT (2026-11-04) – PR #194: CI grün (4 von 4, Audit ohne Befund, keine Bündelgrößen-Warnung im TypeScript-Protokoll), auf Anweisung des Eigentümers zusammengeführt (`7643a53`); kein Einspielen nötig. Verlauf: msgpack 1.2.2 → 1.2.4 (`uv.lock`); `pip-audit` lokal ohne Befund; pytest lokal 992 grün, 7 rot nur durch die in der Cloud-Session nicht erreichbare Passwortprüfung (Pwned Passwords) – ebenso ohne die Änderung.
 - **Phasentyp-Kontext:** STABILISIERUNG
 - **Abhängigkeiten:** keine
 - **Frist:** sofort – roter Audit-Job (Python) blockiert jeden PR (#194)

@@ -5,12 +5,14 @@ Layout below the data directory (docs/architecture.md section 7)::
     worlds/<world>/stories/<story>/story.md              titel, form, perspektive,
                                                          gefuehrte_figuren, gast_verbindungen,
                                                          modell (ADR-023), genre and schreibweise
-                                                         (ADR-053); body: overall summary
+                                                         (ADR-053), optional archiviert
+                                                         (ADR-098); body: overall summary
     worlds/<world>/stories/<story>/chapters/NN-<t>.md    kapitel, titel, status, kurzfassung,
                                                          kurzfassung_status, schreibweise
                                                          (optional, ADR-053); body: text
     worlds/<world>/stories/<story>/facts.md              fakten: list of eintrag and fakt
     worlds/<world>/stories/<story>/titelbild-<r>.<e>     cover (story header titelbild, ADR-075)
+    worlds/<world>/stories/<story>/verlauf/NN.md         kapitel, anweisungen (ADR-056)
 
 A novel (``roman``) has any number of chapters; a short story or fragment has exactly one,
 created with the story, because the data model keeps all manuscript text in chapter files.
@@ -24,7 +26,7 @@ The service is a facade: the work is done by ``StoryStore`` (``stories``), ``Cha
 """
 
 import contextlib
-from collections.abc import Sequence
+from collections.abc import Sequence, Set
 from datetime import datetime
 
 from skriptorium.manuscript.chapters import ChapterStore
@@ -49,6 +51,7 @@ from skriptorium.manuscript.models import (
     InstructionNote,
     Keep,
     Story,
+    StoryContents,
     StoryFact,
     SummaryStatus,
     WritingStyle,
@@ -77,6 +80,7 @@ __all__ = [
     "Keep",
     "ManuscriptService",
     "Story",
+    "StoryContents",
     "StoryFact",
     "SummaryStatus",
     "WritingStyle",
@@ -176,6 +180,57 @@ class ManuscriptService:
             NotFound: The story does not exist.
         """
         return self._stories.set_story_summary(world_id, story_id, summary)
+
+    # --- archive and deleting for good (step 9.9, ADR-098) ---------------------------------
+
+    def archive_story(self, world_id: str, story_id: str) -> Story:
+        """Put a story into the archive (header ``archiviert: true``).
+
+        Raises:
+            NotFound: The story does not exist.
+        """
+        return self._stories.set_archived(world_id, story_id, True)
+
+    def restore_story(self, world_id: str, story_id: str) -> Story:
+        """Take a story back from the archive; the header field goes away.
+
+        Raises:
+            NotFound: The story does not exist.
+        """
+        return self._stories.set_archived(world_id, story_id, False)
+
+    def story_contents(self, world_id: str, story_id: str) -> StoryContents:
+        """What goes with the story when it is deleted for good.
+
+        Raises:
+            NotFound: The story does not exist.
+        """
+        return self._stories.story_contents(world_id, story_id)
+
+    def delete_story(self, world_id: str, story_id: str, title: str) -> None:
+        """Delete an archived story for good: its folder with chapters, summaries, history,
+        facts and cover, and their rows of the search index.
+
+        Raises:
+            NotFound: The story does not exist.
+            InvalidInput: The story is not archived, or ``title`` is not exactly its title.
+            StorageError: The folder could not be moved aside; nothing is changed.
+        """
+        self._stories.delete_story(world_id, story_id, title)
+
+    def remove_guest_world(
+        self, world_id: str, story_id: str, guest_world: str, entries: Set[str]
+    ) -> Story:
+        """Remove every guest link of the story into ``guest_world``, with the story facts and
+        led characters that name one of ``entries`` (step 9.9, ADR-098).
+
+        Which identifiers belong to the guests only, and not also to the story's own world or
+        another guest, is known to the flow in ``api``; it passes them as ``entries``.
+
+        Raises:
+            NotFound: The story does not exist.
+        """
+        return self._extras.remove_guest_world(world_id, story_id, guest_world, entries)
 
     # --- guest links and story facts ------------------------------------------------------
 
@@ -337,6 +392,19 @@ class ManuscriptService:
             text=text,
             writing_style=checked,
         )
+
+    def delete_chapter(self, world_id: str, story_id: str, number: int) -> list[Chapter]:
+        """Delete a chapter (step 9.9, ADR-098); the chapters after it move up by one.
+
+        Number and file name of each following chapter go down by one, its history
+        ``verlauf/NN.md`` moves along, and its short summary, if it has one, is marked
+        ``veraltet``; the history of the deleted chapter is deleted. The overall summary is left
+        as it is. Returns the remaining chapters in order.
+
+        Raises:
+            NotFound: The story or the chapter does not exist.
+        """
+        return self._chapters.delete_chapter(world_id, story_id, number)
 
     def complete_chapter(self, world_id: str, story_id: str, number: int) -> Chapter:
         """Mark a chapter as completed; its summary is created by the flow in ``api`` (3.6).

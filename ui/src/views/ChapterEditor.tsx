@@ -1,5 +1,11 @@
 import { lazy, Suspense, useState, type ReactNode } from "react";
-import { api, type CanonEntry, type Chapter, type Story } from "../api";
+import {
+  api,
+  describeError,
+  type CanonEntry,
+  type Chapter,
+  type Story,
+} from "../api";
 import { CanonFact } from "./CanonFact";
 import { ChapterBar } from "./ChapterBar";
 import { ChapterLength } from "./ChapterLength";
@@ -36,6 +42,7 @@ export function ChapterEditor({
   tools,
   canonVersion = 0,
   onLookUp,
+  onDeleted,
 }: {
   chapter: Chapter;
   /** The story; its guests are offered in the writing panel and in "In den Kanon". */
@@ -55,6 +62,8 @@ export function ChapterEditor({
   canonVersion?: number;
   /** Show an entry named under "Herangezogen" in the bar on the right (step 5.16). */
   onLookUp?: (entry: CanonEntry) => void;
+  /** After the chapter was deleted, with the chapters that remain (step 9.9). */
+  onDeleted?: (remaining: Chapter[]) => void;
 }) {
   const draft = useChapterDraft(chapter, onSaved);
   const { text, state, save } = draft;
@@ -66,6 +75,28 @@ export function ChapterEditor({
     chapter.status === "abgeschlossen" || chapter.summary !== "";
   // Counts the moments the end of the text should come into view (steps 5.9, 5.11).
   const [ends, setEnds] = useState(0);
+
+  async function remove() {
+    if (
+      !window.confirm(
+        `Kapitel ${String(chapter.number)} „${chapter.title}“ löschen?\n\n` +
+          "Die folgenden Kapitel rücken nach; ihre Kurzfassungen werden als " +
+          "veraltet markiert. Die Gesamtzusammenfassung " +
+          "enthält dieses Kapitel noch – danach neu erzeugen. Rückweg nur " +
+          "über die tägliche Sicherung (05:00 Uhr).",
+      )
+    ) {
+      return;
+    }
+    draft.setError(null);
+    try {
+      onDeleted?.(
+        await api.deleteChapter(chapter.world, chapter.story, chapter.number),
+      );
+    } catch (reason: unknown) {
+      draft.setError(describeError(reason));
+    }
+  }
   const { summarizing, summaryNote, summarize, complete } =
     useChapterCompletion({
       chapter,
@@ -145,6 +176,7 @@ export function ChapterEditor({
           view={view}
           hasSummary={hasSummary}
           onView={setView}
+          onDelete={onDeleted === undefined ? undefined : () => void remove()}
         />
         {view === "kurzfassung" && hasSummary && (
           <section className="card chapter-summary">
