@@ -1451,6 +1451,16 @@ button.more-toggle {
   margin: 0 0 0.6rem;
 }
 
+/* A short summary that is outdated after a chapter before it was deleted (step 9.9). */
+.chapter-summary .note.outdated {
+  align-self: flex-start;
+  padding: 0.1rem 0.5rem;
+  color: var(--warn);
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-radius: 4px;
+}
+
 .view-tabs .unchecked {
   display: inline-block;
   width: 0.55rem;
@@ -1596,7 +1606,7 @@ button.more-toggle {
 
 .timeline-add-entry button {
   grid-column: 1 / -1;
-  justify-self: start;
+  align-self: flex-start;
 }
 
 /* Appearance "Buch" (step 7.5, direction C): calm, little frame, the manuscript as a page of

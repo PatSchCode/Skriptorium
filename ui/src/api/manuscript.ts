@@ -7,7 +7,8 @@ import { describeWriteError } from "./writing";
 import type { WriteErrorKind } from "./writing";
 
 export type Form = "roman" | "kurzgeschichte" | "fragment";
-export type SummaryStatus = "fehlt" | "erzeugt" | "geprüft";
+/** `veraltet`: the chapter moved up after a chapter before it was deleted (step 9.9). */
+export type SummaryStatus = "fehlt" | "erzeugt" | "geprüft" | "veraltet";
 
 export const FORMS: readonly { id: Form; label: string }[] = [
   { id: "roman", label: "Roman" },

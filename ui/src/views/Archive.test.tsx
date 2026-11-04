@@ -418,7 +418,7 @@ describe("deleting a chapter (step 9.9, ADR-098)", () => {
     };
   }
 
-  it("asks first, names the overall summary and opens the chapter that moved up", async () => {
+  it("asks first, names the summaries and opens the chapter that moved up", async () => {
     const confirm = vi.spyOn(window, "confirm").mockReturnValueOnce(false);
     const moved = { ...THIRD, number: 2 };
     const { calls } = fakeApi({
@@ -438,6 +438,9 @@ describe("deleting a chapter (step 9.9, ADR-098)", () => {
 
     await user.click(remove);
     expect(confirm.mock.calls[0]?.[0]).toContain("Kapitel 2 „Sturm“ löschen?");
+    expect(confirm.mock.calls[0]?.[0]).toContain(
+      "ihre Kurzfassungen werden als veraltet markiert",
+    );
     expect(confirm.mock.calls[0]?.[0]).toContain(
       "Die Gesamtzusammenfassung enthält dieses Kapitel noch",
     );

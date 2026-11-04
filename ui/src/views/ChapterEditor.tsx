@@ -80,7 +80,8 @@ export function ChapterEditor({
     if (
       !window.confirm(
         `Kapitel ${String(chapter.number)} „${chapter.title}“ löschen?\n\n` +
-          "Die folgenden Kapitel rücken nach. Die Gesamtzusammenfassung " +
+          "Die folgenden Kapitel rücken nach; ihre Kurzfassungen werden als " +
+          "veraltet markiert. Die Gesamtzusammenfassung " +
           "enthält dieses Kapitel noch – danach neu erzeugen. Rückweg nur " +
           "über die tägliche Sicherung (05:00 Uhr).",
       )

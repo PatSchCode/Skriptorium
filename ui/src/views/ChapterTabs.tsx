@@ -49,10 +49,16 @@ export function ChapterTabs({
           }}
         >
           Kurzfassung
-          {chapter.summary_status !== "geprüft" && (
-            <span className="unchecked" title="noch nicht geprüft">
-              <span className="sr-only"> – noch nicht geprüft</span>
+          {chapter.summary_status === "veraltet" ? (
+            <span className="unchecked" title="veraltet – neu erzeugen">
+              <span className="sr-only"> – veraltet</span>
             </span>
+          ) : (
+            chapter.summary_status !== "geprüft" && (
+              <span className="unchecked" title="noch nicht geprüft">
+                <span className="sr-only"> – noch nicht geprüft</span>
+              </span>
+            )
           )}
         </button>
       )}
