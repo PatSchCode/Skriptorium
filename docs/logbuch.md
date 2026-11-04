@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] Kurzfassungs-Zustand `veraltet` entschieden und umgesetzt; 9.9 lokal fertig
+
+- Eigentümer per Auswahlfragen: neuer Zustand `veraltet` (Option A, Empfehlung) und Bestätigung der sieben Festlegungen der Umsetzung → als „Präzisiert in der Umsetzung“ in ADR-098 aufgenommen.
+- Umsetzung durch einen zweiten Unteragenten (Opus, frischer Kontext) in 4 Commits `483af5d`…`aba1161`: `SummaryStatus` um `veraltet` erweitert; `ChapterStore._move_up` setzt `erzeugt`/`geprüft` → `veraltet`, `fehlt` bleibt; Kontext nutzt nur den Text (Test belegt: `veraltet` wie `erzeugt`); Oberfläche zeigt „veraltet – nach dem Löschen eines Kapitels neu erzeugen“, Rückfrage beim Kapitel-Löschen nennt die Markierung; „Als geprüft markieren“ auch für `veraltet` (Festlegung des Unteragenten, gleiche Logik wie bei `erzeugt`). `TODO(fahrplan-ref: 9.9)` entfernt.
+- Gegenprüfung hier: pytest 1030 grün (rot nur die 7 bekannten Fälle ohne Passwortprüfung), vitest 545 grün, Abdeckung 98,84 / 95,7 / 98,23 / 99,01 %; laut Unteragent Python 99,67 %, alle Hooks grün. Hinweis: `483af5d` allein bricht den Vertragstest, erst mit `804cb71` grün – im PR unerheblich.
+
 ### 2026-11-04 – [BEOBACHTUNG] 9.9 umgesetzt (Unteragent), geprüft, ein Punkt offen
 
 - Umsetzung durch einen Unteragenten (Opus, frischer Kontext) in 7 Commits `e91a1b1`…`ec42fff` (storage, canon, manuscript, api ×2, ui, docs); Einzelheiten im Fahrplan 9.9 und in `docs/architecture.md` Abschnitt 4 und 7. 9 neue Routen (71 → 80), alle ohne Sitzung abgewiesen.
