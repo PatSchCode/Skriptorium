@@ -2434,3 +2434,56 @@ button.story-cover-add {
 .image-generate-basis .note {
   display: block;
 }
+
+/* Archive, "⋯" and deleting for good (step 9.9, ADR-098). */
+.archive {
+  margin-top: 0.75rem;
+}
+
+.archive summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.archive .list {
+  margin-top: 0.5rem;
+}
+
+.archive .list li {
+  flex-wrap: wrap;
+}
+
+.more-actions {
+  position: relative;
+}
+
+.more-actions summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0 0.4rem;
+}
+
+.more-actions summary::-webkit-details-marker {
+  display: none;
+}
+
+.more-actions[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.view-tabs .chapter-delete {
+  margin-left: auto;
+  color: var(--danger);
+}
+
+.delete-dialog p,
+.delete-dialog ul {
+  margin: 0;
+}
+
+.delete-dialog input {
+  width: 100%;
+}

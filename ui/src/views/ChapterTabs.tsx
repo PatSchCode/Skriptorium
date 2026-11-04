@@ -3,17 +3,22 @@ import type { Chapter } from "../api";
 /** Manuscript, the history of instructions over the text (step 5.13) or the short summary. */
 export type ChapterView = "manuskript" | "verlauf" | "kurzfassung";
 
-/** The tabs over a chapter; "Kurzfassung" exists once the chapter has one (steps 3.6, 6.2). */
+/**
+ * The tabs over a chapter; "Kurzfassung" exists once the chapter has one (steps 3.6, 6.2). At
+ * the end, "Kapitel löschen …" when `onDelete` is given (step 9.9).
+ */
 export function ChapterTabs({
   chapter,
   view,
   hasSummary,
   onView,
+  onDelete,
 }: {
   chapter: Chapter;
   view: ChapterView;
   hasSummary: boolean;
   onView: (view: ChapterView) => void;
+  onDelete?: () => void;
 }) {
   return (
     <nav className="tabs view-tabs" aria-label="Ansicht des Kapitels">
@@ -49,6 +54,15 @@ export function ChapterTabs({
               <span className="sr-only"> – noch nicht geprüft</span>
             </span>
           )}
+        </button>
+      )}
+      {onDelete !== undefined && (
+        <button
+          type="button"
+          className="link chapter-delete"
+          onClick={onDelete}
+        >
+          Kapitel löschen …
         </button>
       )}
     </nav>

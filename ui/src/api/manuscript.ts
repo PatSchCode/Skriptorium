@@ -54,6 +54,16 @@ export interface Story {
   writing_style: WritingStyle;
   /** File name of the cover (step 7.11); `null` without one. */
   cover: string | null;
+  /** In the archive (step 9.9, ADR-098): listed only there. */
+  archived: boolean;
+}
+
+/** What deleting a story for good takes with it (step 9.9, ADR-098). */
+export interface StoryDeletion {
+  title: string;
+  chapters: number;
+  facts: number;
+  cover: boolean;
 }
 
 export interface Chapter {
@@ -157,6 +167,18 @@ export const manuscriptApi = {
       writing_style?: WritingStyle;
     },
   ) => request("PATCH", storyPath(world, story), change) as Promise<Story>,
+  archiveStory: (world: string, story: string) =>
+    request("POST", `${storyPath(world, story)}/archive`) as Promise<Story>,
+  restoreStory: (world: string, story: string) =>
+    request("POST", `${storyPath(world, story)}/restore`) as Promise<Story>,
+  storyDeletion: (world: string, story: string) =>
+    request(
+      "GET",
+      `${storyPath(world, story)}/deletion-preview`,
+    ) as Promise<StoryDeletion>,
+  /** Deletes an archived story for good; `title` must be exactly its title. */
+  deleteStory: (world: string, story: string, title: string) =>
+    request("DELETE", storyPath(world, story), { title }) as Promise<void>,
   addGuest: (world: string, story: string, guest: GuestLink) =>
     request(
       "POST",
@@ -194,6 +216,12 @@ export const manuscriptApi = {
       `${storyPath(world, story)}/chapters/${String(number)}`,
       change,
     ) as Promise<Chapter>,
+  /** Deletes a chapter; the following ones move up. Returns the remaining chapters. */
+  deleteChapter: (world: string, story: string, number: number) =>
+    request(
+      "DELETE",
+      `${storyPath(world, story)}/chapters/${String(number)}`,
+    ) as Promise<Chapter[]>,
   completeChapter: (world: string, story: string, number: number) =>
     request(
       "POST",

@@ -33,7 +33,10 @@ export function Guests({
   const [entry, setEntry] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const otherWorlds = (worlds.data ?? []).filter((w) => w.id !== story.world);
+  // An archived world is no source of new guests; its existing guests stay (step 9.9).
+  const otherWorlds = (worlds.data ?? []).filter(
+    (w) => w.id !== story.world && !w.archived,
+  );
   const worldName = (id: string) =>
     (worlds.data ?? []).find((w) => w.id === id)?.name ?? id;
   const choices = (offered.data ?? []).filter(

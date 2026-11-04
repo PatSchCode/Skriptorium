@@ -29,8 +29,10 @@ export type {
   CanonEntry,
   Category,
   EntryFields,
+  GuestUse,
   MapMarker,
   World,
+  WorldDeletion,
   WorldMap,
 } from "./canon";
 export { FORMS, describeSummaryFailure } from "./manuscript";
@@ -40,6 +42,7 @@ export type {
   GuestLink,
   InstructionNote,
   Story,
+  StoryDeletion,
   StoryFact,
   SummaryResult,
   SummaryStatus,

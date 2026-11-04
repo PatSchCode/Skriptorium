@@ -10,7 +10,9 @@ import {
 } from "react-router";
 import { api } from "../api";
 import {
+  chapterPath,
   NavigationContext,
+  storyPath,
   useNavigation,
   worldPath,
   type WorldArea,
@@ -290,6 +292,7 @@ function WorldRoute({ area: fixed }: { area?: WorldArea }) {
 /** A story with the chapter from the address (the first chapter without one). */
 function StoryRoute() {
   const { world = "", story = "", chapter } = useParams();
+  const navigate = useNavigate();
   const { revision } = useNavigation();
   const load = useCallback(() => api.stories(world), [world]);
   const { data, error } = useLoad(load, revision);
@@ -310,6 +313,14 @@ function StoryRoute() {
       key={found.id}
       story={found}
       chapter={Number.isInteger(number) ? number : undefined}
+      onOpenChapter={(next) => {
+        void navigate(
+          next === null
+            ? storyPath(found.world, found.id)
+            : chapterPath(found.world, found.id, next),
+          { replace: true },
+        );
+      }}
     />
   );
 }

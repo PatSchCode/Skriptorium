@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { api, type Story } from "../api";
+import { api, type Chapter, type Story } from "../api";
 import { useNavigation } from "../paths";
 import { useLoad } from "../useLoad";
 import { Canon } from "./Canon";
@@ -27,10 +27,13 @@ type SideTab = "kanon" | "geschichte";
 export function StoryPage({
   story: initial,
   chapter,
+  onOpenChapter,
 }: {
   story: Story;
   /** Number of the open chapter; the first one without it. */
   chapter?: number;
+  /** Open another chapter (its number) or the story without one (`null`), e.g. after deleting. */
+  onOpenChapter?: (number: number | null) => void;
 }) {
   // Settings saved on this page win over the story passed in until the page is left.
   const [saved, setStory] = useState<Story | null>(null);
@@ -51,8 +54,18 @@ export function StoryPage({
   const [modeRound, setModeRound] = useState(0);
   // Counts "ändern" in the line of the chapter's style; the editor of the chapter comes into view.
   const [styleRound, setStyleRound] = useState(0);
+  // Counts deleted chapters: the chapter that moves up into the place gets a fresh editor. Until
+  // the list has loaded again, the chapters the server returned stand in for it (step 9.9).
+  const [deletions, setDeletions] = useState(0);
+  const [afterDelete, setAfterDelete] = useState<{
+    before: Chapter[] | undefined;
+    chapters: Chapter[];
+  } | null>(null);
 
-  const chapters = data ?? [];
+  const chapters =
+    afterDelete !== null && afterDelete.before === data
+      ? afterDelete.chapters
+      : (data ?? []);
   const current = chapters.find((c) => c.number === chapter) ?? chapters[0];
 
   const sideToggle = (
@@ -79,7 +92,7 @@ export function StoryPage({
         <ErrorText message={error} />
         {current !== undefined ? (
           <ChapterEditor
-            key={current.number}
+            key={`${String(deletions)}:${String(current.number)}`}
             chapter={current}
             story={story}
             onSaved={() => {
@@ -91,6 +104,17 @@ export function StoryPage({
               setCanonRound((round) => round + 1);
             }}
             canonVersion={canonVersion}
+            onDeleted={(remaining) => {
+              // The chapter that moved up into the place, else the one before (step 9.9).
+              const next =
+                remaining.find((c) => c.number === current.number) ??
+                remaining.at(-1);
+              setDeletions((count) => count + 1);
+              setAfterDelete({ before: data, chapters: remaining });
+              reload();
+              refresh();
+              onOpenChapter?.(next?.number ?? null);
+            }}
             onLookUp={(entry) => {
               setLookedUp(entry.id);
               setTab("kanon");

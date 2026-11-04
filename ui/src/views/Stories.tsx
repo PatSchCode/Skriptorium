@@ -1,9 +1,22 @@
 import { useCallback, useState, type SyntheticEvent } from "react";
-import { api, describeError, FORMS, type Form, type Story } from "../api";
+import {
+  api,
+  describeError,
+  FORMS,
+  type Form,
+  type Story,
+  type StoryDeletion,
+} from "../api";
+import { useNavigation } from "../paths";
 import { useLoad } from "../useLoad";
+import { ArchiveArea, counted, MoreActions } from "./Archive";
 import { ErrorText, Field } from "./Common";
+import { DeleteDialog } from "./DeleteDialog";
 
-/** Stories of a world; open one or create a new one. */
+/**
+ * Stories of a world; open one or create a new one. Archived stories stand only in the area
+ * "Archiv" below the list, from where they come back or are deleted for good (step 9.9).
+ */
 export function Stories({
   world,
   onOpen,
@@ -11,12 +24,34 @@ export function Stories({
   world: string;
   onOpen: (story: Story) => void;
 }) {
+  const { revision, refresh } = useNavigation();
   const load = useCallback(() => api.stories(world), [world]);
-  const { data, error } = useLoad(load);
+  const { data, error, reload } = useLoad(load, revision);
   const [title, setTitle] = useState("");
   const [form, setForm] = useState<Form>("roman");
   const [perspective, setPerspective] = useState("");
   const [createError, setCreateError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState<{
+    id: string;
+    preview: StoryDeletion;
+  } | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const active = (data ?? []).filter((story) => !story.archived);
+  const archived = (data ?? []).filter((story) => story.archived);
+
+  function changed() {
+    reload();
+    refresh();
+  }
+
+  async function askDelete(id: string) {
+    setDeleteError(null);
+    try {
+      setDeleting({ id, preview: await api.storyDeletion(world, id) });
+    } catch (reason: unknown) {
+      setDeleteError(describeError(reason));
+    }
+  }
 
   async function create(event: SyntheticEvent) {
     event.preventDefault();
@@ -36,24 +71,67 @@ export function Stories({
       <section className="card">
         <h2>Geschichten</h2>
         <ErrorText message={error} />
-        {data?.length === 0 && <p>Noch keine Geschichte.</p>}
+        {data !== undefined && active.length === 0 && (
+          <p>Noch keine Geschichte.</p>
+        )}
         <ul className="list">
-          {(data ?? []).map((story) => (
+          {active.map((story) => (
             <li key={story.id}>
-              <button
-                type="button"
-                className="link"
-                onClick={() => {
-                  onOpen(story);
+              <span>
+                <button
+                  type="button"
+                  className="link"
+                  onClick={() => {
+                    onOpen(story);
+                  }}
+                >
+                  {story.title}
+                </button>
+                <small>
+                  {" "}
+                  ({FORMS.find((f) => f.id === story.form)?.label})
+                </small>
+              </span>
+              <MoreActions
+                name={story.title}
+                onArchive={async () => {
+                  await api.archiveStory(world, story.id);
+                  changed();
                 }}
-              >
-                {story.title}
-              </button>
-              <small> ({FORMS.find((f) => f.id === story.form)?.label})</small>
+              />
             </li>
           ))}
         </ul>
+        <ArchiveArea
+          items={archived.map((story) => ({
+            id: story.id,
+            label: story.title,
+          }))}
+          onRestore={async (id) => {
+            await api.restoreStory(world, id);
+            changed();
+          }}
+          onDelete={(id) => void askDelete(id)}
+        />
+        <ErrorText message={deleteError} />
       </section>
+      {deleting !== null && (
+        <DeleteDialog
+          heading={`„${deleting.preview.title}“ endgültig löschen?`}
+          name={deleting.preview.title}
+          nameLabel="Zum Bestätigen den Titel eintippen"
+          onCancel={() => {
+            setDeleting(null);
+          }}
+          onConfirm={async () => {
+            await api.deleteStory(world, deleting.id, deleting.preview.title);
+            setDeleting(null);
+            changed();
+          }}
+        >
+          <StoryConsequences preview={deleting.preview} />
+        </DeleteDialog>
+      )}
       <form className="card" onSubmit={(event) => void create(event)}>
         <h2>Neue Geschichte</h2>
         <Field label="Titel">
@@ -91,5 +169,26 @@ export function Stories({
         <button type="submit">Geschichte anlegen</button>
       </form>
     </div>
+  );
+}
+
+/** What deleting a story for good takes with it, as the server counted it. */
+function StoryConsequences({ preview }: { preview: StoryDeletion }) {
+  const parts = [
+    `${counted(preview.chapters, "Kapitel", "Kapitel")} mit Kurzfassungen und Anweisungsverlauf`,
+  ];
+  if (preview.facts > 0) {
+    parts.push(counted(preview.facts, "Fakt", "Fakten"));
+  }
+  if (preview.cover) {
+    parts.push("Titelbild");
+  }
+  return (
+    <>
+      <p>Wird gelöscht: {parts.join(", ")}.</p>
+      <p className="note">
+        Bleibt: die Kosten im Verbrauch (ohne Bezug zur Geschichte).
+      </p>
+    </>
   );
 }
