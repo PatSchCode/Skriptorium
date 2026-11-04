@@ -29,6 +29,50 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [SESSIONENDE] 9.10 entschieden (ADR-099) und umgesetzt
+
+- **Bearbeitet:** Entwurfs-PR #196 aufgegriffen; 9.10 erklärt, Wahl C → ADR-099, Umsetzung (1)–(3).
+- **Stand:** Phase 9, 8 von 15; 9.9 und 9.10 `[IN ARBEIT]` (beide warten auf Einspielen; 9.9 auf die Prüfung des Eigentümers, 9.10 auf die Messung (4)). Keine aktiven Blocker, keine offenen STOPP-Situationen.
+- **Nächster Schritt:** Branch `scp/youthful-hawking-eb5ybn` als Pull Request (ersetzt den Entwurf #196, dessen Branch diese Session nicht beschreiben darf), CI, Merge auf Anweisung; dann 9.9 und 9.10 aus der Mac-Session einspielen (ADR-025) und je Ablauf (Schreiben, Weltenbauer, Kurzfassung) zwei gleiche Anfragen hintereinander: `cache_gelesen` in der Protokollzeile bzw. Verbrauchsdatei festhalten.
+- **Offen:** D.11 (Frist 2026-10-31 überschritten, Eigentümer); D.1 ab 2026-11-05; mypy-2-Nachprüfung 2026-11-06 (D.5); D.22 Probelauf Sonnet 5.5.
+- **Modell-Bilanz:** Start Sonnet 5.5 (Routine) für Wiedereinstieg und Erklärung; nach Wechsel durch den Eigentümer Opus 5.5 (Entscheidung) für ADR und Datenmodell – passend zur Empfehlung von 9.10 bei Erweiterung der Verbrauchsdateien, 0 Schritte oberhalb der Empfehlung; keine Abgabe an Unteragenten (D.22 offen).
+- **Kontextgröße:** `get_session` meldet unverändert 211.975 Token seit dem Modellwechsel – Wert wird offenbar nicht laufend aktualisiert (wie am 2026-10-25 und heute Vormittag). Über der Grenze → kein weiterer Schritt in dieser Session.
+- **Sessionende-Prüfungen:** README nachgezogen (9.9 zusammengeführt, 9.10 umgesetzt). Drift: ADR-099 → 9.10 vorhanden, 9.10 nennt ADR-099; Reaktiv-Quote 0 / 10 (ADR-090–099) stimmt mit Teil B; Modul-Liste unverändert (ai_gateway, api); keine `[BLOCKIERT]`-Schritte; Phase 9 weiter 15 Schritte. Ablaufdaten-Register: D.1 erreicht morgen sein Datum, Schritt vorhanden. Archiv: Logbuch unter 800 Zeilen. Projektkontext unter Budget. Quick-Start nicht berührt; Kategorie 6 nicht berührt.
+
+### 2026-11-04 – [BEOBACHTUNG] 9.10 umgesetzt (C, ADR-099), Messung offen
+
+- Commits `8c31f17` (ai_gateway) und `b2faeca` (api): Cache-Token aus `usage.prompt_tokens_details` in `Usage`, Protokollzeile und Verbrauchszeile; Monatssumme und `/api/usage` unverändert. Prüfzahlen im Fahrplan 9.10.
+- pytest 1046 grün, diesmal auch die 7 Fälle mit Pwned Passwords – der Dienst ist aus dieser Cloud-Session erreichbar (am Vormittag nicht). Abdeckung 99,86 %.
+- Reibungen: Pre-Commit-Hook markdownlint scheiterte wieder an `nodeenv` (Vorabversion „0-alpha“) – neue Cloud-Umgebung, `~/.nodeenvrc` mit `node = 24.21.0` erneut angelegt, danach alle Hooks grün, nichts übersprungen. Ruff RUF002 (Gedankenstrich im Docstring) und ein mypy-Fund im neuen Test (Listenelemente als beliebige Kopfwerte) behoben.
+- README-Drift behoben: 9.9 stand noch als „Umsetzung offen“.
+- Kategorie 6 nicht berührt (nur Token-Zahlen, ADR-021); Quick-Start nicht berührt. Messung (4) braucht echte Anfragen – nach dem Einspielen aus der Mac-Session.
+
+### 2026-11-04 – [ADR-ANGELEGT] ADR-099 Cache-Token in der Verbrauchsdatei (9.10)
+
+- Eigentümer per Auswahlfrage nach Erklärung des Schritts: „C, dann Opus für den ADR“ → ADR-099 (Datenmodell, Kategorie 4, additiv; `/api/usage` unverändert), Reaktiv-Quote 0 / 10 (ADR-090–099). 9.10 von `[WARTET-AUF-FREIGABE]` auf `[IN ARBEIT]`.
+- Feldnamen gegen die OpenRouter-Dokumentation „Prompt Caching“ geprüft (2026-11-04): beide Zahlen unter `usage.prompt_tokens_details` (`cached_tokens`, `cache_write_tokens`) – nicht auf oberster Ebene von `usage`, wie der Logbuch-Eintrag vom 2026-10-18 offen ließ.
+
+### 2026-11-04 – [SESSIONSTART] Entwurfs-PR #196 aufgreifen, 9.10 fortsetzen
+
+- **Modell:** Start Sonnet 5.5 (`claude-sonnet-5-5`, eingestellt und bedient laut `get_session`), Routine-Klasse – Erklärung von 9.10 und Rückfrage A/B/C. Danach Wechsel durch den Eigentümer auf Opus 5.5 (`get_session`: `user_switched_model` `claude-opus-5-5`) → Entscheidungs-Klasse für ADR und Datenmodell, passend zur Empfehlung von 9.10 bei Erweiterung der Verbrauchsdateien.
+- **Umgebung:** Cloud-Session, Branch `scp/youthful-hawking-eb5ybn`, per Fast-Forward auf den Stand des Entwurfs-PR #196 (`39bd714`, Branch `claude/festive-cori-lrt580`) gezogen; auf den alten Branch darf diese Session nicht pushen.
+- **Wiedereinstieg:** Mindest-Lektüre (Projektkontext, Fahrplan „Aktueller Stand“ und Phase 9, Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker). Logbuch: Einträge bis zurück zum 2026-10-25 gelesen, die älteren bis zum `[SESSIONENDE]` vom 2026-10-18 nicht vollständig – Abweichung von der Mindest-Lektüre, die Einträge seit dem 2026-10-25 enthalten den vollständigen Stand von 9.9 und 9.10. Keine aktiven Blocker, keine offenen STOPP-Situationen.
+- **Kontextgröße:** zu Beginn nicht feststellbar (`used_tokens` 0); nach dem Modellwechsel 211.975 Token (Grenze 200.000). 9.10 ist kein neuer Schritt (begonnen 2026-11-04, wartete nur auf die Freigabe) – Fortsetzung eines laufenden Schritts, keine Ausnahme „weiter hier“ nötig. Nach 9.10 kein weiterer Schritt in dieser Session.
+
+### 2026-11-04 – [BEOBACHTUNG] Vorlage 9.10 vorgelegt, Zwischenstand als Entwurfs-PR
+
+- Vorlage zu V.36 Punkt (3) (Kategorien 4 und 5, additiv): A nur Protokollzeile / B Verbrauchsdatei und Anzeige / C Verbrauchsdatei jetzt, Anzeige mit 9.11 (Empfehlung). Eigentümer hat nicht gewählt, sondern „Zwischenstand als PR-Entwurf festhalten“ → 9.10 auf `[WARTET-AUF-FREIGABE]`, Vorlage im Fahrplan-Schritt; kein Code begonnen.
+
+### 2026-11-04 – [BEOBACHTUNG] 9.10 begonnen – erneut „weiter hier“, parallel zu 9.9
+
+- `get_session`: 368.414 Token (Grenze 200.000). Eigentümer per Auswahlfrage für 9.10 erneut „Weiter hier“ → zweite Ausnahme dieser Session. 9.9 bleibt `[IN ARBEIT]` (wartet auf Einspielen und Prüfung); 9.10 hängt nicht davon ab und beginnt parallel – Abweichung von „höchstens ein `[IN ARBEIT]` je Session“ (`CLAUDE.md` Abschnitt 7) mit Zustimmung des Eigentümers.
+- Modell Opus 5.5 (Entscheidung); 9.10 empfiehlt Routine, bei Erweiterung der Verbrauchsdateien Entscheidung – die Vorlage zu Punkt (3) ist Entscheidungs-Arbeit, die Umsetzung des Adapters wäre Routine (Abgabe an Sonnet 5.5 erst nach Probelauf D.22).
+
+### 2026-11-04 – [BEOBACHTUNG] PR #195 zusammengeführt (9.9), Einspielen offen
+
+- CI auf `005ea21` grün (4 von 4), Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung (größtes Bündel 409 kB, +7 kB). Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`949b73e`). Beobachtung beendet, ausstehender Check-in gelöscht.
+- 9.9 bleibt `[IN ARBEIT]` bis Einspielen (nur aus der Mac-Session, ADR-025) und Prüfung durch den Eigentümer im Betrieb.
+
 ### 2026-11-04 – [BEOBACHTUNG] Kurzfassungs-Zustand `veraltet` entschieden und umgesetzt; 9.9 lokal fertig
 
 - Eigentümer per Auswahlfragen: neuer Zustand `veraltet` (Option A, Empfehlung) und Bestätigung der sieben Festlegungen der Umsetzung → als „Präzisiert in der Umsetzung“ in ADR-098 aufgenommen.

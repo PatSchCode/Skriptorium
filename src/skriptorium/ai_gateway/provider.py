@@ -50,11 +50,17 @@ class Source:
 
 @dataclass(frozen=True)
 class Usage:
-    """Consumption of one request as reported by the provider."""
+    """Consumption of one request as reported by the provider.
+
+    ``cache_read_tokens`` and ``cache_write_tokens`` are the input tokens read from or written
+    to the provider's prompt cache (step 9.10, ADR-099); ``None`` if not reported.
+    """
 
     input_tokens: int | None
     output_tokens: int | None
     cost_usd: float | None
+    cache_read_tokens: int | None = None
+    cache_write_tokens: int | None = None
 
 
 @dataclass(frozen=True)

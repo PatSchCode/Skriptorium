@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; entschieden (ADR-098) und lokal umgesetzt, Branch gepusht
-- **Nächster Schritt:** Pull Request zu 9.9 (CI), nach Merge und Einspielen Prüfung durch den Eigentümer. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; zusammengeführt (PR #195), Einspielen und Prüfung offen. Parallel 9.10 Cache-Treffer – seit 2026-11-04; entschieden (C, ADR-099), Umsetzung läuft
+- **Nächster Schritt:** 9.9 und 9.10 einspielen (nur aus der Mac-Session, ADR-025), dann Prüfung 9.9 durch den Eigentümer und Messung 9.10 (4) an echten Anfragen. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -37,7 +37,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.7 | Einstellungsseite – Modell je Aufgabe (G3, B6) | erledigt 2026-10-26 (ADR-096) | – |
 | ✅ | 9.8 | Bild zu Bild (B7) | erledigt 2026-10-26 (ADR-097) | – |
 | 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 | KI: Vorlage mit Mockup |
-| ⚪ | 9.10 | Cache-Treffer festhalten (V.36) | offen | KI |
+| 🟠 | 9.10 | Cache-Treffer festhalten (V.36) | in Arbeit seit 2026-11-04 (C, ADR-099) | KI: Umsetzung, dann Messung nach dem Einspielen |
 | ⚪ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | offen | KI: nach 9.10 Vorlage |
 | ⚪ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | offen | KI |
 | ⚪ | 9.13 | Gast-Figuren ausbauen (V.34) | offen – Probe des Eigentümers erfolgt 2026-10-21 | KI: Vorlage |
@@ -346,7 +346,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.10: Cache-Treffer der KI-Anbieter festhalten (V.36)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-04) – Eigentümer wählte am 2026-11-04 **C** (Empfehlung): Verbrauchsdatei bekommt `cache_gelesen` und `cache_geschrieben` jetzt, Anzeige mit der Statistik von 9.11 → ADR-099. Vorher wartete der Schritt auf Freigabe (Vorlage A nur Protokollzeile / B Datei und Anzeige / C, Entwurfs-PR #196). Protokollzeile in jedem Fall (freigabefrei). Messung (4) braucht echte Anfragen – erst nach dem Einspielen (Mac-Session bzw. Alltag), in der Cloud-Session kein Schlüssel. Bestand vorher: Verbrauchszeile `zeit`, `art`, `modell`, `ergebnis`, `token_ein`, `token_aus`, `kosten_usd` (`api/usage.py`)
 - **Phasentyp-Kontext:** UMSETZUNG
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** wie V.36 – nein für die Protokollzeile; ja, falls Verbrauchsdateien oder `/api/usage` ein neues Feld bekommen (Kategorien 4 bzw. 5, additiv)
@@ -359,6 +359,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, Logbuch-Eintrag, ggf. ADR
 - **Notizen:** Aus V.36 (ADR-090).
+- **Umgesetzt (2026-11-04, Cloud-Session, noch nicht abgenommen):** (1) `Usage` um `cache_read_tokens`/`cache_write_tokens` (Vorgabe `None`), der OpenRouter-Adapter liest sie aus `usage.prompt_tokens_details` (`cached_tokens`, `cache_write_tokens`; Ort laut Dokumentation „Prompt Caching“ geprüft); fehlende, fehlerhafte oder auf oberster Ebene gemeldete Werte bleiben `None`. (2) Protokollzeile `ki_anfrage … kosten_usd=… cache_gelesen=… cache_geschrieben=…`. (3) nach ADR-099 (C): Verbrauchszeile mit `cache_gelesen`, `cache_geschrieben`; Monatssumme und `/api/usage` unverändert, Vertragstest unverändert. Tests: ai_gateway 8 neue Fälle (davon 5 mit fehlenden oder fehlerhaften Werten) und 1 erweiterter, api 1 neuer und 1 erweiterter; pytest 1046 grün, Abdeckung 99,86 %, `openrouter.py`, `provider.py`, `api/usage.py` 100 % Zeilen; ruff, ruff format, `mypy --strict`, bandit grün. Oberfläche nicht berührt. Offen: (4) Messung an echten Anfragen nach dem Einspielen, Bestätigung des Eigentümers.
 
 #### 9.11: Verbrauchsstatistik je Welt und je Geschichte (V.37)
 

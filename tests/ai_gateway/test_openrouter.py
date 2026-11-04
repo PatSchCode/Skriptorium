@@ -451,6 +451,48 @@ def test_broken_streams_are_provider_unavailable(parts: list[str | float]) -> No
     assert isinstance(error, ProviderUnavailable)
 
 
+def test_prompt_cache_counts_are_read_from_the_details() -> None:
+    reported = {**USAGE, "prompt_tokens_details": {"cached_tokens": 900, "cache_write_tokens": 0}}
+    adapter, _ = provider(Recorder(ok([text("x"), finish("stop", reported)])))
+
+    events, error = run(adapter)
+
+    assert error is None
+    assert events[-1] == Completed(Usage(1200, 80, 0.0042, 900, 0), "stop")
+
+
+@pytest.mark.parametrize(
+    "details",
+    [
+        None,
+        "kaputt",
+        {},
+        {"cached_tokens": "viele", "cache_write_tokens": True},
+        {"cached_tokens": 1.5, "cache_write_tokens": None},
+    ],
+)
+def test_missing_or_malformed_cache_counts_stay_unknown(details: object) -> None:
+    reported: dict[str, object] = dict(USAGE)
+    if details is not None:
+        reported["prompt_tokens_details"] = details
+    adapter, _ = provider(Recorder(ok([text("x"), finish("stop", reported)])))
+
+    events, error = run(adapter)
+
+    assert error is None
+    assert events[-1] == Completed(Usage(1200, 80, 0.0042), "stop")
+
+
+def test_cache_counts_on_top_level_are_not_taken() -> None:
+    # OpenRouter reports them only inside prompt_tokens_details (ADR-099).
+    reported = {**USAGE, "cached_tokens": 900, "cache_write_tokens": 300}
+    adapter, _ = provider(Recorder(ok([text("x"), finish("stop", reported)])))
+
+    events, _ = run(adapter)
+
+    assert events[-1] == Completed(Usage(1200, 80, 0.0042), "stop")
+
+
 def test_malformed_usage_and_choices_are_tolerated() -> None:
     parts: list[str | float] = [
         data({"choices": []}),
@@ -503,6 +545,7 @@ def test_one_log_line_with_metadata_only(caplog: pytest.LogCaptureFixture) -> No
         "token_ein=1200",
         "token_aus=80",
         "kosten_usd=0.0042",
+        "cache_gelesen=- cache_geschrieben=-",
         "dauer_ms=",
         "erstes_textstueck_ms=",
     ):
@@ -510,6 +553,16 @@ def test_one_log_line_with_metadata_only(caplog: pytest.LogCaptureFixture) -> No
     assert KEY not in caplog.text
     assert STORY_TEXT not in caplog.text
     assert "Der Wind" not in caplog.text
+
+
+def test_log_line_names_the_prompt_cache_counts(caplog: pytest.LogCaptureFixture) -> None:
+    caplog.set_level(logging.INFO, logger="skriptorium.ai_gateway")
+    reported = {**USAGE, "prompt_tokens_details": {"cached_tokens": 900, "cache_write_tokens": 0}}
+    adapter, _ = provider(Recorder(ok([text("x"), finish("stop", reported)])))
+
+    run(adapter)
+
+    assert "kosten_usd=0.0042 cache_gelesen=900 cache_geschrieben=0 " in log_lines(caplog)[0]
 
 
 @pytest.mark.parametrize(

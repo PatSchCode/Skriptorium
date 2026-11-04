@@ -108,8 +108,9 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **9.6:** Herkunft von Bildern – ein erzeugtes Bild behält Modell, Anweisung, Format und Kosten; „Herkunft“ beim Bild zeigt sie und erzeugt auf Wunsch neu (ADR-095); erledigt 2026-10-25.
 - ✅ **9.7:** Modell je Aufgabe – Seite „Einstellungen“ legt für jede KI-Aufgabe das Startmodell fest, auch für Kurzfassungen und Bilder (ADR-096); erledigt 2026-10-26.
 - ✅ **9.8:** Bild zu Bild – ein gespeichertes Bild als Grundlage eines neuen, die Herkunft nennt sie (ADR-097); erledigt 2026-10-26.
-- 🟠 **9.9:** Löschen oder Archivieren – entschieden (ADR-098: Archiv, endgültig löschen nur aus dem Archiv, Kapitel einzeln mit Umnummerierung), Umsetzung offen.
-- ⚪ **9.10–9.14:** Cache-Treffer, Verbrauchsstatistik je Welt und Geschichte; Erkundung zu Quellen und Recherche; Gast-Figuren ausbauen (nach deiner Probe); Kontexttreue erneut prüfen (ADR-090).
+- 🟠 **9.9:** Löschen oder Archivieren – umgesetzt und zusammengeführt (ADR-098: Archiv, endgültig löschen nur aus dem Archiv, Kapitel einzeln mit Umnummerierung), Einspielen und deine Prüfung offen.
+- 🟠 **9.10:** Cache-Treffer – umgesetzt (ADR-099: Cache-Token in Protokoll und Verbrauchsdatei, Anzeige mit 9.11), Einspielen und Messung an echten Anfragen offen.
+- ⚪ **9.11–9.14:** Verbrauchsstatistik je Welt und Geschichte; Erkundung zu Quellen und Recherche; Gast-Figuren ausbauen (nach deiner Probe); Kontexttreue erneut prüfen (ADR-090).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
 Ergebnisse der Erkundung: [Modell-Eignungstest](docs/research/modell-eignungstest.md) – damals Startmodell grok-4.7, Zweitmodell grok-4.6; seit 5.7 ist grok-4.6 voreingestellt (ADR-044).

@@ -3,7 +3,10 @@
 ``system/verbrauch/JJJJ-MM.md`` holds a header field ``anfragen``: one item per AI request with
 ``zeit`` (ISO 8601, UTC), ``art`` (schreiben, kurzfassung, gesamtzusammenfassung, weltenbau),
 ``modell``, ``ergebnis`` (``ok``, an error kind of the writing flow, ``leer`` or ``abgebrochen``),
-``token_ein``, ``token_aus`` and ``kosten_usd`` (``null`` if the provider reported nothing).
+``token_ein``, ``token_aus``, ``kosten_usd`` and, since step 9.10 (ADR-099), ``cache_gelesen``
+and ``cache_geschrieben``: input tokens read from or written to the provider's prompt cache
+(``null`` if the provider reported nothing; older items lack the two fields). The monthly sums
+leave the cache counts out until the statistics of step 9.11.
 No text, no world and no story; only metadata, as in the log (ADR-021).
 """
 
@@ -69,6 +72,8 @@ class UsageLog:
             "token_ein": usage.input_tokens if usage else None,
             "token_aus": usage.output_tokens if usage else None,
             "kosten_usd": usage.cost_usd if usage else None,
+            "cache_gelesen": usage.cache_read_tokens if usage else None,
+            "cache_geschrieben": usage.cache_write_tokens if usage else None,
         }
         path = _path(now.strftime("%Y-%m"))
         try:
