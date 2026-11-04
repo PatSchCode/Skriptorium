@@ -29,6 +29,18 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] 9.9 umgesetzt (Unteragent), geprüft, ein Punkt offen
+
+- Umsetzung durch einen Unteragenten (Opus, frischer Kontext) in 7 Commits `e91a1b1`…`ec42fff` (storage, canon, manuscript, api ×2, ui, docs); Einzelheiten im Fahrplan 9.9 und in `docs/architecture.md` Abschnitt 4 und 7. 9 neue Routen (71 → 80), alle ohne Sitzung abgewiesen.
+- Gegenprüfung hier: ruff, ruff format, `mypy --strict` (147 Dateien) grün; pytest 1028 grün, rot nur die bekannten 7 Fälle ohne erreichbare Passwortprüfung; eslint, prettier, tsc grün, vitest 544 grün, Abdeckung 98,84 / 95,69 / 98,23 / 99,01 %. Laut Unteragent Python 99,67 %, Playwright 15/15 (Chromium über `PLAYWRIGHT_CHROMIUM_EXECUTABLE`). Durchgesehen: `DocumentStore.delete_tree` – Pfad nur über `_checked`, Aufruf nur nach „archiviert und Name stimmt“, Ordner erst per `os.replace` beiseite, dann Index und Dateien.
+- Offen: Kurzfassungen nachrückender Kapitel als veraltet markieren – es gibt nur `fehlt`, `erzeugt`, `geprüft`; kein Wert erfunden, `TODO(fahrplan-ref: 9.9)` in `manuscript/chapters.py`. Rückfrage an den Eigentümer, ebenso die Festlegungen des Unteragenten über ADR-098 hinaus (u. a. Umnummerierung nicht atomar über mehrere Dateien).
+- Kategorie 6 nicht berührt (keine Anmeldung, Secrets, personenbezogenen Daten); Quick-Start nicht berührt.
+
+### 2026-11-04 – [BEOBACHTUNG] Sessiongröße überschritten – „weiter hier“ für die Umsetzung von 9.9
+
+- `get_session` meldet 310.133 Token (Grenze 200.000, Projektkontext Abschnitt 6). Nach `CLAUDE.md` Abschnitt 0 kein neuer Schritt; Eigentümer per Auswahlfrage ausdrücklich „Weiter hier“ → Ausnahme, Umsetzung von 9.9 in dieser Session. Modell weiter Opus 5.5 (Entscheidungs-Klasse).
+- Vorgehen: Die Umsetzung läuft in einem Unteragenten derselben Klasse mit frischem Kontext (Auftrag aus ADR-098 und Fahrplan 9.9) – spart gegenüber dem Weiterarbeiten im 310.000-Token-Kontext; Prüfung des Ergebnisses, Commit-Kontrolle und Push hier.
+
 ### 2026-11-04 – [BEOBACHTUNG] PR #194 zusammengeführt; D.24 erledigt
 
 - Zweiter Lauf nach D.24 (`1c29c8b`) grün, 4 von 4 Pflicht-Checks; Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung (die übrigen Protokolle nicht gelesen – `gh` liest Job-Protokolle durch den Proxy nicht). Ein Sicherheits-Check-in um 15:44 UTC ohne Neues. Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`7643a53`) → D.24 `[ERLEDIGT]`. Beobachtung beendet, ausstehender Check-in gelöscht. Kein Einspielen: nur Doku und ein Entwicklungswerkzeug.
