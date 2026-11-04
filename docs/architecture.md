@@ -350,6 +350,7 @@ data/
 - **Pflichtabschnitte oder einzelne Felder statt Textfeld (Variante C zu V.35 B2, G1/G2):** am verlässlichsten für das Programm, bremst aber beim Schreiben; „Felder statt Rauten“ vom Eigentümer nicht gewünscht – siehe ADR-092
 - **Bild zu Bild mit mehreren Grundlagen / Grundlage direkt vom Gerät ohne Ablage:** mehr Bedienung bzw. ein zweiter Weg für Dateien von außen; mehrere Grundlagen später ergänzbar, ohne Gespeichertes zu ändern – siehe ADR-097
 - **Modell je Aufgabe als Abschnitt auf „Konto“ / letzte Wahl in der Aufgabe als neue Einstellung:** Konto mischt dann Sicherheit, Kosten und Modelle; ein Ausprobieren verstellte still die Festlegung – siehe ADR-096
+- **Welten und Geschichten nur archivieren / nur löschen; Kapitel nur das letzte löschbar; Gast-Verbindungen zu einer gelöschten Welt stehen lassen; archivierte Welt ruht als Gast-Quelle:** nur archivieren lässt Fehlversuche für immer im Bestand, nur löschen macht einen Fehlklick nur über die Sicherung umkehrbar; „nur das letzte Kapitel“ (Empfehlung der KI) vom Eigentümer zugunsten der Umnummerierung verworfen; stehende Gast-Verbindungen wären tote Verweise; ruhende Gäste hätten Archivieren über die Welt hinaus wirken lassen – siehe ADR-098
 - **Denk-Token von grok-4.7 deckeln (1.024) / Denken abschalten:** Deckel verlängert das Vorab-Denken auf 162–244 s, Abschalten lehnt der Anbieter ab – siehe ADR-052 (D.16)
 
 <!-- ANCHOR:reifegrad-uebersicht -->

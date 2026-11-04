@@ -7,11 +7,11 @@
 <!-- ANCHOR:uebersicht -->
 ## 1. Übersicht (Stand vom 2026-10-18)
 
-**Status:** bestätigt vom Eigentümer am 2026-09-26 (Modus 2 Schritt 1a abgeschlossen). Nachtrag FR-025 am selben Tag (Schritt 2, Quelle: Eigentümer); FR-026 bis FR-035 nachgetragen 2026-10-08 bis 2026-10-12 (Quellen je Zeile).
+**Status:** bestätigt vom Eigentümer am 2026-09-26 (Modus 2 Schritt 1a abgeschlossen). Nachtrag FR-025 am selben Tag (Schritt 2, Quelle: Eigentümer); FR-026 bis FR-035 nachgetragen 2026-10-08 bis 2026-10-12, FR-036 am 2026-11-04 (Quellen je Zeile).
 
 | Kennzahl | Wert |
 |---|---|
-| Anforderungen gesamt | 35 (FR-001 bis FR-035) |
+| Anforderungen gesamt | 36 (FR-001 bis FR-036) |
 | davon Muss / Soll / Kann | 19 / 10 / 5 (dazu FR-006 verworfen) |
 | Muss-Anforderungen ohne Fahrplan-Schritt | 0 (alle Muss-Anforderungen erledigt; geprüft beim Vision-Abgleich 8.13, 2026-10-18) |
 | Muss-Anforderungen ohne Test (Pflicht ab Klasse G) | nicht anwendbar (Klasse M) |
@@ -112,6 +112,7 @@
 | FR-033 | Im Manuskript ist sichtbar, wie viel Text ein Kapitel hat, mit Hinweis, wenn es sich der Grenze der Kurzfassung nähert | UC-004 | Soll (Eigentümer, 2026-10-11) | Wortzahl stimmt; Hinweis ab etwa 10.000 Wörtern | 6.1 | – | ERLEDIGT 2026-10-11 (6.1; Bestätigung des Eigentümers) |
 | FR-034 | Publizieren: eine Geschichte als fertiges Dokument ausgeben (Satz, Export, Veröffentlichung; Vision 5) | UC-015 | Kann – vorläufig (Eigentümer, 2026-10-12; bei 7.4 bestätigen) | Ausgabe öffnet sich in einem gängigen Leseprogramm mit allen Kapiteln | 7.4 | `tests/manuscript/test_epub.py` | ERLEDIGT 2026-10-12 (7.4, ADR-071; Bestätigung des Eigentümers) |
 | FR-035 | Bilder und Karten zu Figuren, Orten und Welt (Vision 5) | UC-016 | Kann (Eigentümer, 2026-10-12, bestätigt mit Mockup 7.6) | Bild an einem Eintrag ablegen und wieder anzeigen; in der Sicherung enthalten | 7.6 (Einträge), 7.10 (Karten), 7.11 (Geschichten), 7.14 (Markierungen) | `tests/canon/test_entry_images.py`, `tests/api/test_entry_images.py`, `tests/canon/test_map_markers.py`, `e2e/skriptorium.spec.ts` (Bild und Karte, 9.2) | ERLEDIGT 2026-10-13 (7.6, 7.10, 7.11, 7.14; Bestätigung des Eigentümers; Bilder im Manuskript → V.23); erweitert in 9.8 um Bild zu Bild (ADR-097, `tests/api/test_image_basis.py`, `ui/src/views/ImageBasis.test.tsx`) |
+| FR-036 | Welten und Geschichten archivieren und zurückholen; Archiviertes endgültig löschen (mit Folgenliste und Eintippen des Namens); Kapitel einzeln löschen, folgende Kapitel rücken nach | UC-001, UC-011 | Soll (Eigentümer, 2026-11-04, ADR-098, Mockup 9.9) | Archivierte Welt bzw. Geschichte erscheint nur im Archiv und kommt unverändert zurück; nach endgültigem Löschen sind Ordner, Indexzeilen und Gast-Verbindungen anderer Welten zu ihr entfernt, Verbrauch bleibt; nach Löschen eines mittleren Kapitels sind Nummern, Verlauf und Kurzfassungs-Status der folgenden Kapitel nachgezogen | 9.9 | – | OFFEN |
 
 **Regeln:**
 
