@@ -12,7 +12,7 @@
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
 - **Aktiver Schritt:** 9.9 Löschen oder Archivieren – seit 2026-11-04; entschieden (ADR-098) und lokal umgesetzt, Branch gepusht
-- **Nächster Schritt:** 9.9 einspielen (PR #195 zusammengeführt, `949b73e`; nur aus der Mac-Session, ADR-025), dann Prüfung durch den Eigentümer. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Nächster Schritt:** 9.9 einspielen (PR #195 zusammengeführt, `949b73e`; nur aus der Mac-Session, ADR-025), dann Prüfung durch den Eigentümer. Parallel: Entscheidung zu 9.10 (A/B/C, Vorlage im Schritt). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -37,7 +37,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.7 | Einstellungsseite – Modell je Aufgabe (G3, B6) | erledigt 2026-10-26 (ADR-096) | – |
 | ✅ | 9.8 | Bild zu Bild (B7) | erledigt 2026-10-26 (ADR-097) | – |
 | 🟠 | 9.9 | Löschen oder Archivieren (B5) | in Arbeit seit 2026-11-04 | KI: Vorlage mit Mockup |
-| ⚪ | 9.10 | Cache-Treffer festhalten (V.36) | offen | KI |
+| 🔵 | 9.10 | Cache-Treffer festhalten (V.36) | wartet auf Freigabe seit 2026-11-04 | du: A, B oder C |
 | ⚪ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | offen | KI: nach 9.10 Vorlage |
 | ⚪ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | offen | KI |
 | ⚪ | 9.13 | Gast-Figuren ausbauen (V.34) | offen – Probe des Eigentümers erfolgt 2026-10-21 | KI: Vorlage |
@@ -346,7 +346,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.10: Cache-Treffer der KI-Anbieter festhalten (V.36)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🔵 WARTET-AUF-FREIGABE (seit 2026-11-04) – Vorlage zu Punkt (3) von V.36 vorgelegt, Antwort offen: **A** nur Protokollzeile (keine Datenänderung, keine Rückschau); **B** Verbrauchsdatei (`cache_gelesen`, `cache_geschrieben` je Anfrage) und Anteil „aus dem Zwischenspeicher“ je Monat in der heutigen Übersicht; **C** (Empfehlung, Heuristik 1.2) Verbrauchsdatei jetzt, Anzeige mit der Statistik von 9.11. Protokollzeile in jedem Fall (freigabefrei). Messung (4) braucht echte Anfragen – erst nach dem Einspielen (Mac-Session bzw. Alltag), in der Cloud-Session kein Schlüssel. Bestand: Verbrauchszeile `zeit`, `art`, `modell`, `ergebnis`, `token_ein`, `token_aus`, `kosten_usd` (`api/usage.py`)
 - **Phasentyp-Kontext:** UMSETZUNG
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** wie V.36 – nein für die Protokollzeile; ja, falls Verbrauchsdateien oder `/api/usage` ein neues Feld bekommen (Kategorien 4 bzw. 5, additiv)

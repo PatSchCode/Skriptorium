@@ -29,6 +29,15 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-04 – [BEOBACHTUNG] Vorlage 9.10 vorgelegt, Zwischenstand als Entwurfs-PR
+
+- Vorlage zu V.36 Punkt (3) (Kategorien 4 und 5, additiv): A nur Protokollzeile / B Verbrauchsdatei und Anzeige / C Verbrauchsdatei jetzt, Anzeige mit 9.11 (Empfehlung). Eigentümer hat nicht gewählt, sondern „Zwischenstand als PR-Entwurf festhalten“ → 9.10 auf `[WARTET-AUF-FREIGABE]`, Vorlage im Fahrplan-Schritt; kein Code begonnen.
+
+### 2026-11-04 – [BEOBACHTUNG] 9.10 begonnen – erneut „weiter hier“, parallel zu 9.9
+
+- `get_session`: 368.414 Token (Grenze 200.000). Eigentümer per Auswahlfrage für 9.10 erneut „Weiter hier“ → zweite Ausnahme dieser Session. 9.9 bleibt `[IN ARBEIT]` (wartet auf Einspielen und Prüfung); 9.10 hängt nicht davon ab und beginnt parallel – Abweichung von „höchstens ein `[IN ARBEIT]` je Session“ (`CLAUDE.md` Abschnitt 7) mit Zustimmung des Eigentümers.
+- Modell Opus 5.5 (Entscheidung); 9.10 empfiehlt Routine, bei Erweiterung der Verbrauchsdateien Entscheidung – die Vorlage zu Punkt (3) ist Entscheidungs-Arbeit, die Umsetzung des Adapters wäre Routine (Abgabe an Sonnet 5.5 erst nach Probelauf D.22).
+
 ### 2026-11-04 – [BEOBACHTUNG] PR #195 zusammengeführt (9.9), Einspielen offen
 
 - CI auf `005ea21` grün (4 von 4), Protokoll des TypeScript-Jobs ohne Bündelgrößen-Warnung (größtes Bündel 409 kB, +7 kB). Auf Anweisung des Eigentümers („merge“) als Merge-Commit zusammengeführt (`949b73e`). Beobachtung beendet, ausstehender Check-in gelöscht.
