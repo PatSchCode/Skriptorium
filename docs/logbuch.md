@@ -22,12 +22,53 @@
 
 Die letzten Einträge geben den aktuellen Stand wieder. Bei Sessionbeginn liest die KI mindestens den letzten `[SESSIONENDE]`-Eintrag und alle Einträge danach, um den Faden aufzunehmen.
 
-Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-Commit (Modus 2, abgeschlossen 2026-09-26). Verlauf und Begründungen der Initialisierung stehen in `docs/decisions.md` (ADR-001 bis ADR-009). Phasen 1 bis 8 sind verdichtet; Details in `docs/archiv/logbuch-phase-1.md` bis `docs/archiv/logbuch-phase-8.md`.
+Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-Commit (Modus 2, abgeschlossen 2026-09-26). Verlauf und Begründungen der Initialisierung stehen in `docs/decisions.md` (ADR-001 bis ADR-009). Phasen 1 bis 8 sind verdichtet; Details in `docs/archiv/logbuch-phase-1.md` bis `docs/archiv/logbuch-phase-8.md`. Die Einträge vom September 2026 (Reflexionen der Phasen 1 bis 3) stehen seit 2026-11-04 in `docs/archiv/logbuch-2026-09.md`.
 
 ---
 
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
+
+### 2026-11-04 23:00 – [SESSIONENDE] 9.9, 9.10 und 9.11 eingespielt, gemessen und abgeschlossen
+
+- **Dauer:** ca. 20:10–23:00 (fortgesetzte Session, einmal verdichtet).
+- **Bearbeitet:** Einspielen von 9.9 und 9.10 (`e52d69a`); 9.11 von der Vorlage über Mockup, ADR-100, Umsetzung, PR #199 bis zum Einspielen (`7319b26`); Messung 9.10 (4) an Testanfragen des Eigentümers; Abschluss von 9.9, 9.10, 9.11 nach Bestätigung des Eigentümers (FR-036, FR-037 erledigt).
+- **Stand:** Kein Schritt in Arbeit. Doku-PR #200 angelegt; Zusammenführen nach grüner CI freigegeben („Ja, nach grüner CI“). Kein Einspielen nötig (nur Dokumentation).
+- **Offen:** nichts aus dieser Session. Lokaler Zweig `feat/9.9-loeschen-archivieren` ist überholt (zusammengeführt mit #195); Löschen nur auf Wort des Eigentümers.
+- **Nächster Schritt:** 9.12 Quellen und Recherche (Erkundung). Datiert: D.1 frühestens 2026-11-05, Nachprüfung mypy 2 (D.5) am 2026-11-06.
+- **Sessionende-Prüfungen:** README gegen Fahrplan, Kontext, Architektur und Blocker abgeglichen (9.9–9.11 ✅, aktive Blocker 0). Drift zwischen Pflicht-Dokumenten: ADR-098/099/100 verweisen auf bestehende Schritte; Reifegrade unverändert; Modul-Liste unverändert; FR-036/037 mit Schritt und Status; keine `[BLOCKIERT]`-Schritte; Reaktiv-Quote unverändert 0/10; Phase 9 bei 15 von 15 geplanten Schritten. `docs/project-context.md` 349 Zeilen (Budget 600). Logbuch über 800 Zeilen → September-Scheibe nach `docs/archiv/logbuch-2026-09.md` ausgelagert (830 → 756 Zeilen). Ablaufdaten-Register: D.1 und D.5 haben Schritte, kein neuer Vorlauf erreicht.
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse, Quelle: Systemkontext). Oberhalb der Empfehlung liefen das Einspielen und die Messung 9.10 (Routine) sowie die Status-Nachträge in Fahrplan, README und Logbuch; keine Abgabe an Unteragenten – kleine Teilarbeiten mit bereits geladenem Kontext, Abgabe hätte nicht gespart.
+- **Kontextgröße:** nicht feststellbar (keine Abfrage in der Laufzeitumgebung genutzt); Session einmal verdichtet.
+
+### 2026-11-04 22:50 – [BEOBACHTUNG] 9.9 erledigt
+
+- Eigentümer prüfte Archivieren, Zurückholen, endgültiges Löschen und Kapitel löschen mit einer Wegwerf-Welt und bestätigte („9.9 passt“). Fahrplan (Schritt und Übersicht ✅), FR-036 `ERLEDIGT`, README; CHANGELOG-Eintrag 9.9 nachgetragen (fehlte). Damit ist der Block Verwaltung 9.9–9.11 abgeschlossen; nächster Schritt 9.12 (Erkundung). Keine Phasengrenze – 9.12 bis 9.15 offen.
+
+### 2026-11-04 22:40 – [BEOBACHTUNG] 9.11 erledigt
+
+- Eigentümer prüfte die Seite „Verbrauch“ mit den Testanfragen von 9.10 und bestätigte („9.11 passt“). Fahrplan (Schritt und Übersicht ✅, aktiver Schritt jetzt 9.9), FR-037 `ERLEDIGT`, README angepasst; CHANGELOG-Eintrag bestand schon. Priorität „Kann“ von FR-037 bleibt mein Vorschlag, vom Eigentümer nicht eigens bestätigt.
+
+### 2026-11-04 22:30 – [BEOBACHTUNG] 9.10 erledigt
+
+- Eigentümer bestätigte die Messung („Ja, 9.10 erledigt“). Fahrplan (Schritt und Übersicht ✅), README und CHANGELOG (Eintrag 9.10 nachgetragen) angepasst. Eingangskriterium von 9.11 („9.10 erledigt“) ist damit auch formal erfüllt.
+
+### 2026-11-04 22:20 – [BEOBACHTUNG] Messung 9.10 (4): Zwischenspeicher greift bei Schreiben, Weltenbauer und Kurzfassung
+
+- Testanfragen des Eigentümers 22:07–22:14 UTC in einer seiner Welten, je Ablauf zwei (Weltenbauer drei) gleiche Anfragen kurz hintereinander. Gelesen in einer SSH-Prüfung: Protokollzeilen `ki_anfrage` der letzten zwei Stunden und die November-Verbrauchsdatei (jetzt 90 Einträge, 9 neue, alle mit `welt`, Schreiben und Kurzfassungen auch mit `geschichte`). Modell `qwen/qwen3.8-max-0902`, ausführender Anbieter jedes Mal Alibaba.
+- Schreiben: 1. Anfrage 23.247 Token ein, 0 aus dem Zwischenspeicher, 0,0546 $; 2. Anfrage (2,5 min später) 23.247 ein, **23.168 gelesen (99,7 %)**, 0,0155 $ (−72 %, bei mehr Ausgabe).
+- Weltenbauer: 12.765 ein, 0 gelesen, 0,0269 $; dann 12.910 ein, **12.672 gelesen (98,2 %)**, 0,0134 $; dann 13.494 ein, 12.672 gelesen (93,9 %), 0,0092 $. Die Aufträge waren nicht ganz gleich; der gleichbleibende Anfang (Regeln und Kanon) wurde trotzdem gelesen.
+- Kurzfassung: 23.646 ein, 0 gelesen, 0,0533 $; 1 min später 23.646 ein, **23.552 gelesen (99,6 %)**, 0,0114 $ (−79 %). Die jeweils folgende Gesamtzusammenfassung (ca. 1.550 Token ein) hatte beide Male 0 gelesen; Ursache nicht untersucht (kurze Eingabe, Anfang ändert sich mit der neuen Kurzfassung).
+- `cache_geschrieben` war bei Alibaba immer 0 – der Anbieter meldet das Schreiben in den Zwischenspeicher nicht, nur das Lesen.
+- Aus den Kosten errechnet: Eingabe 2 $ je Million Token, Ausgabe 6 $, gelesene Eingabe 0,25 $ – ein Achtel des Eingabepreises. Nebenbefund aus `docs/research/modell-eignungstest.md` damit für qwen3.8-max belegt; Ergänzung dort.
+- Schon vor dem Einspielen von 9.10 kosteten einzelne Schreib-Anfragen am selben Tag nur ca. 0,014 $ statt 0,037 $ (18:51 und 18:57 UTC) – der Zwischenspeicher wirkte also schon vorher; 9.10 macht ihn sichtbar.
+- Akzeptanzkriterien 9.10 damit erfüllt bis auf die Bestätigung des Eigentümers.
+
+### 2026-11-04 21:45 – [BEOBACHTUNG] PR #199 zusammengeführt und eingespielt (9.11, `7319b26`)
+
+- Eigentümer gab die Bildschirmfotos frei („Ja, push und PR“), PR #199 angelegt; CI 4 von 4 grün, Protokoll ohne neue Warnung, keine Bündelgrößen-Warnung (416,65 kB). Auf Anweisung („Merge?“) als Merge-Commit zusammengeführt (`7319b26`); #198 ist damit ebenfalls zusammengeführt (sein Commit war enthalten).
+- Vor dem Einspielen geprüft: Baum von `main` gleich dem Baum des geprüften PR-Zweigs (`fed074d`) – der grüne Lauf gilt für `main`, ohne auf den Lauf auf `main` zu warten.
+- Eingespielt nach Runbook Abschnitt 7; `/api/health` 200 nach ca. 60 s (nur HTTPS abgefragt), Anmeldeseite 200; eine SSH-Prüfung: `healthy`, `REVISION` `7319b26`, im Container `yaml.__with_libyaml__` wahr und `FAST` aktiv. November-Datei weiter 81 Zeilen, keine mit `welt` – seit dem ersten Einspielen heute keine KI-Anfrage (auch die Testanfragen zu 9.10 stehen aus).
+- Doku-Stand dazu lokal auf `docs/9.11-eingespielt`, nicht gepusht (Regel „PR erst nach Freigabe“: gebündelt mit Messung 9.10 und den Bestätigungen).
 
 ### 2026-11-04 21:20 – [BEOBACHTUNG] 9.11 umgesetzt (lokal), Bildschirmfotos zur Freigabe
 
@@ -689,81 +730,6 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 ### 2026-10-08 13:00 UTC – [ADR-ANGELEGT] ADR-043 v0.1.0 als Vorabversion
 
 - Vision-Checkpoint vor Go-Live: offene Elemente D.4 (FR-010 teilweise), 5.1, 5.2, 5.3; V.1/V.2 laut Vision nicht in der ersten Version; kein externer Blick. Vorgelegt als `ENTSCHEIDUNG ERFORDERLICH`; Eigentümer: „A: Vorabversion“ (Frage-System). Go-Live vor v1.0.0 in 5.14.
-
-### 2026-09-27 12:42 – [SESSIONENDE] Phase 3 abgeschlossen
-
-- **Dauer:** 12:18–12:42 UTC.
-- **Bearbeitet:** Phasenabschluss 3 – Bewertung durch getrennte Instanz (Sonnet 5), Stellungnahme, `ENTSCHEIDUNG ERFORDERLICH`, ADR-024 (weiterbauen; Aufteilung `StoryPage.tsx` in 4.1; Kanon-Treue in 4.8); Vision-Re-Derivations-Pass; Onboarding-Re-Validation; Archivierung Fahrplan Phase 3 und Logbuch-Verdichtung (Phasenabschluss-2-Einträge ins Phase-2-Archiv nachgetragen).
-- **Vision-Abgleich (Befund):** Jedes Vision-Element hat eine Schritt-ID oder Descope-ADR; zwei Befunde behoben: 5.5 um V.4/V.5 ergänzt; Kanon-Treue beim Schreiben des Eigentümers mit Landeplatz 4.8 (ADR-024). Muss-Anforderungen: offen nur FR-022 (4.8) und FR-010 Referenzumfang (D.4).
-- **Erreichter Stand:** Phase 4 „Stabilisierung und erstes öffentliches Deployment“ bereit; kein aktiver Schritt.
-- **Offen:** Pull Request für diesen Branch (Merge nach grüner CI und Zustimmung des Eigentümers).
-- **Nächster Schritt:** neue Session – Phase 4 verfeinern, dann 4.1 Qualitäts-Härtung.
-- **Modell-Bilanz:** aktive Klasse Entscheidung (Opus 5.5, eingestellt und bedient laut Sitzungsabfrage 12:40). Schritte oberhalb der Empfehlung: 0 (Phasenabschluss verlangt Entscheidung). Abgegeben: Bewertung an Unteragenten mit Sonnet 5 (getrennte Instanz, keine Routine-Abgabe).
-- **Kontextgröße:** 203.795 Token laut Sitzungsabfrage 12:40 – knapp über der Grenze 200.000 nach dem Phasenabschluss; kein neuer Schritt in dieser Session. Sitzungskosten laut Abfrage ca. 4,23 $. Kurzzeitlimit `allowed`.
-- **Sessionende-Prüfungen:** README synchronisiert (Phase, Architektur-Reife, Nächste Schritte); project-context Status auf Phase 4; Runbook „Geprüft am“ aktualisiert. Drift-Prüfung: Schritt-Referenzen der ADRs existieren (1.x–3.x im Archiv, 4.6, D.4); ADR-024 → 4.1, 4.8 vorhanden; Modul-Liste unverändert; Reifegrad Kanon-Treue ↔ ADR-024 passt; Reaktiv-Quote 1/10 über ADR-015..024; Phase 4 unverändert 8 Schritte; Blocker 0; Anforderungen unverändert. Ablaufdaten-Register: kein Vorlauf erreicht (Guthaben-Vorlauf ab 2026-10-22). Archivierung: Fahrplan Phase 3 → `docs/archiv/fahrplan-phase-3.md`, Logbuch Phase 3 → `docs/archiv/logbuch-phase-3.md`; Abschnitte „Iterations-Reflexion“ und „Archiv“ im Fahrplan nachgezogen (standen noch auf Phase 1). project-context 338 Zeilen.
-
-### 2026-09-27 12:39 – [PHASEN-WECHSEL] Reflexion Phase 3 (UMSETZUNG) → Phase 4 (STABILISIERUNG)
-
-- **Gelernt:** Abnahme je Schritt mit echten Läufen und blinder Bewertung trägt – billig (unter 2 $ für die ganze Phase) und findet, was Tests nicht zeigen (Figuren-Schreibweise, Kurzfassungen, Gäste).
-- **Gelernt:** Die Figuren-Schreibweise war die größte Schwäche: 20 Verstöße in 15 Texten (3.3) → 0 eindeutige nach geschärfter Regel plus Erinnerung nach der Anweisung (3.4).
-- **Gelernt:** Kapitel-Kurzfassungen tragen den Handlungsstand: 3 von 3 Fortsetzungen richtig mit, 0 von 3 ohne (3.6).
-- **Gelernt:** Lücken vor Beginn eines Schritts per Frage-System vom Eigentümer entscheiden lassen – keine Rate-Implementierung in der Phase.
-- **Kippende Annahmen:** Reaktionszeit verfehlt (grok-4.7 einmal 77 s, grok-4.6 13–16 s; ADR-022, D.6); Kurzfassungen länger als vorgegeben (D.4); 3.7 und 3.8 berührten weniger Module als geplant (`manuscript` unverändert).
-- **Reifegrad:** `context`, `ai_gateway`, SSE durch Umsetzung validiert; Metriken `[BELASTBAR]` (ADR-023); Reaktionszeit zurück auf `[VORLÄUFIG]` (ADR-022); Kanon-Treue `[VORLÄUFIG]` bis 4.8 (ADR-024).
-- **ADRs der Phase:** 021–024; reaktiv 0; Quote 1/10 (ADR-015..024).
-- **Neue Erkundungsbedarfe:** D.6 vor 4.8; D.4 (Referenzumfang, Kurzfassungslänge). Beobachten: Größe der Oberflächen-Dateien (Aufteilung in 4.1, ADR-024), Wachstum von `spikes/`.
-- **Methodik-Lehren:** Sessions liefen wieder weit über die Kontextgrenze (bis ca. 360.000 Token) auf ausdrückliche Anweisung; Phasenabschluss erneut in eigener Session. Regelverstoß `git push -f` ohne Stopp (3.4, kein Schaden) – künftig nur nach Freigabe. Playwright: Auswahlfelder über ihre Rolle ansprechen. ruff RUF001/RUF002: kein Gedankenstrich in Python-Strings und Docstrings.
-- **Details:** [`docs/archiv/logbuch-phase-3.md`](archiv/logbuch-phase-3.md)
-
-### 2026-09-27 12:38 – [ADR-ANGELEGT] ADR-024
-
-- Pflichtfrage Phasenende 3: Eigentümer wählt Empfehlung A – weiterbauen; `StoryPage.tsx` (und bei Bedarf `WritingPanel.tsx`) in 4.1 aufteilen; Kanon-Treue beim echten Schreiben des Eigentümers in 4.8 messen (Frage-System). `[STRATEGISCH]`; Bewertung der getrennten Instanz (Sonnet 5) und Stellungnahme im ADR nebeneinander. Die in ADR-020 verlangte erneute Prüfung von `api` auf Heuristik 1.4 ist erfolgt: kein Gott-Modul.
-- Befund 2 des Vision-Abgleichs damit aufgelöst: 4.8 ist Landeplatz für die Beförderung von NFR Kanon-Treue.
-
-### 2026-09-27 12:24 – [BEOBACHTUNG] Vision-Re-Derivations-Pass Phasenende 3
-
-- **Quelle:** `docs/vision.md` vollständig, `docs/requirements.md` Abschnitte 3 und 5, Fahrplan Phasen 4, 5 und Querschnitt.
-- **Ergebnis:** Kernidee, fünf Szenarien, sechs Erfolgskriterien, Abgrenzungen, harte Randbedingungen und weiche Präferenzen haben je eine Schritt-ID oder eine Descope-ADR. Muss-Anforderungen: 15 erledigt, FR-010 teilweise (Referenzumfang D.4), FR-022 offen (4.8), FR-006 verworfen (ADR-009). Soll/Kann: FR-014 → 5.1, FR-019 → 5.2, FR-020 → 5.3, FR-023 → 5.4, FR-021 erledigt. Anwendungsfälle UC-001 bis UC-014 alle enthalten; Ausschlüsse unverändert. Keine `[VERSCHOBEN]`-Zeile mit Ziel in Phase 3. Keine `TODO`/`FIXME` in `src/`, `ui/src/`, `tests/`.
-- **Befund 1 (Drift):** V.4 und V.5 nennen 5.5 als Landeplatz, 5.5 führt unter „Zu tun“ und „Akzeptanzkriterien“ aber nur V.1–V.3 → 5.5 um V.4 und V.5 ergänzen.
-- **Befund 2 (Landeplatz fehlt):** Erfolgskriterium „höchstens ein Kanon-Widerspruch pro Kapitel, der beim Redigieren auffällt“ (Vision 4) ist nur im Probeschreiben der KI gemessen (3.3, blind bewertet); die Reifegrad-Übersicht führt NFR Kanon-Treue `[VORLÄUFIG]` mit „wartet auf Schreibbetrieb des Eigentümers“ – ohne Schritt-ID. Vorschlag an den Eigentümer mit der Pflichtfrage.
-
-### 2026-09-27 12:21 – [ONBOARDING-VALIDATION] Phasenabschluss 3 (Trigger 3)
-
-- **Form (Klasse M):** frischer Worktree von `c0325f4` im Scratchpad, eigenes Datenverzeichnis; README-Quick-Start exakt wie dokumentiert: `uv python install 3.14.7`, `uv sync --frozen --python 3.14.7`, `npm ci` (0 Schwachstellen), `uv run pre-commit install`, `uv run skriptorium-einrichtung` (Exit 0; Ausgabe mit dem Einrichtungscode nicht angezeigt), `npx vite build`, uvicorn.
-- **Ergebnis:** `/api/health` → `{"status":"ok"}`; `/` → 200; `/api/worlds` und `/api/usage` ohne Sitzung → 401; Server-Log nur mit Metadaten, ohne Warnung. `pytest --cov`: 377 bestanden, 99,78 %; `vitest --coverage`: 96 bestanden, 98,17 % Zeilen, 96,01 % Zweige. Smoke-Test `scripts/session-start.sh` im Worktree: Exit 0.
-- **Befund:** keiner im Onboarding-Pfad. Pre-Commit-Hook nach dem Entfernen des Worktrees im Haupt-Checkout neu installiert (Runbook-Pflicht). End-to-End-Tests nicht im Worktree wiederholt (CI-Job End-to-End).
-
-### 2026-09-27 12:20 – [SESSIONSTART] Phasenabschluss 3
-
-- **Modell:** eingestellt und bedient `claude-opus-5-5` (Sitzungsabfrage 12:20) → Entscheidungs-Klasse. Der Phasenabschluss enthält einen `ENTSCHEIDUNG ERFORDERLICH`-Block (Eskalations-Auslöser 1) – Klasse passt, kein Stopp.
-- **Kontextgröße:** 0 Token laut Sitzungsabfrage (neue Session; Wert bei Sessionbeginn nicht aktualisiert). Kurzzeitlimit (5 Stunden) `allowed`.
-- PR #17 gemergt (`c0325f4`); Branch `claude/phasenabschluss-3-mi6vna` steht auf `main`.
-- **Pflichtlektüre:** vollständig nach `CLAUDE.md` Abschnitt 2 (project-context, Logbuch ab letztem Sessionende, Fahrplan Stand und Phase 3, Architektur 1/2/9, Decisions A/C, aktive Blocker: keine).
-- **Vorhaben:** Pflichtfrage „Weiterbauen, umbauen oder neu aufsetzen“ mit getrennter Instanz (inkl. erneuter Prüfung `api` auf Heuristik 1.4, ADR-020); Vision-Re-Derivations-Pass gegen `docs/vision.md` und `docs/requirements.md`; Onboarding-Re-Validation (Trigger 3); nach der Entscheidung ADR, Archivierung von Phase 3, Logbuch-Verdichtung.
-
-### 2026-09-26 21:05 – [PHASEN-WECHSEL] Reflexion Phase 2 (UMSETZUNG) → Phase 3 (UMSETZUNG)
-
-- **Gelernt:** Die Grobverträge aus 1.4 trugen – `storage`, `canon`, `manuscript`, `api`, `ui` ohne Umbau umgesetzt; Modulgrenzen an den Imports eingehalten (getrennte Instanz, ADR-020).
-- **Gelernt:** Sicherheit nach ASVS mit Kapitelnummer je Maßnahme machte die Prüfungen durch getrennte Instanzen schnell und die Obergrenze (ADR-006) handhabbar; optionale Härtungen wurden dem Eigentümer vorgelegt statt still umgesetzt.
-- **Gelernt:** Browser-Proben brauchen echte Wege: `page.evaluate` umgeht die CSP; nur ein eingeschleustes Inline-Skript belegt sie.
-- **Kippende Annahmen:** `api` braucht Zugangsdaten in `storage` und Pwned Passwords (ADR-018, reaktiv); Editor-Bündel zu groß ohne Nachladen; Umfang von 2.6 wuchs um Einrichtung, Passwortwechsel und Sitzungsübersicht (ADR-017).
-- **Reifegrad:** `storage`, `canon`, `manuscript`, `api`, `ui` und HTTP/JSON durch Umsetzung validiert; `context`, `ai_gateway`, SSE nur durch Spikes – Validierung in Phase 3.
-- **ADRs der Phase:** 015–020; reaktiv 1 (018); Quote 1/10.
-- **Neue Erkundungsbedarfe:** keine vor 3.1; beobachten: Wachstum von `api` in 3.3 (`api.flows`, ADR-020), Tempo von `storage` bei großen Geschichten (D.4), Sitzungen im Speicher bei langem Streaming.
-- **Methodik-Lehren:** Sessions liefen dreimal weit über die Kontextgrenze (bis ca. 500.000 Token) auf ausdrückliche Anweisung; Phasenabschluss deshalb in eigener Session. Hygiene-Lücke: `data/index.sqlite` rutschte trotz `.gitignore` in den Git-Index – beim Stagen Dateilisten prüfen. Worktree-Validierung biegt den Pre-Commit-Hook um (zweimal) – Runbook ergänzt.
-- **Details:** [`docs/archiv/logbuch-phase-2.md`](archiv/logbuch-phase-2.md)
-
-### 2026-09-26 22:00 – [PHASEN-WECHSEL] Reflexion Phase 1 (ERKUNDUNG) → Phase 2 (UMSETZUNG)
-
-- **Gelernt:** Kanon-Treue hängt am Vorab-Denken der Modelle, nicht an der Kontextmenge – 8.000 bis 17.600 Token ohne Unterschied; Modelle ohne Reasoning machen 2–3× mehr Fehler.
-- **Gelernt:** grok-4.7 führt bei Kanon, Sprache und allen vier Genres; Preis ist die Wartezeit (15–50 s). Gemini hat nachgelassen – Bestätigung der Vision-Sorge um Filter und Modellverfügbarkeit.
-- **Gelernt:** Die Figuren-Schreibweise (Autor führt Ilka) bricht unter Genre-Druck am häufigsten – Schwerpunkt für Prompt und Tests in 3.3/3.4.
-- **Kippende Annahmen:** „erstes Textstück in 5 s" (ersetzt, ADR-013); „Import aus TypingMind/Notion" (zunächst Markdown, ADR-012); „Qwen als Ausweich" (grok-4.6, ADR-011).
-- **Reifegrad:** Architektur vollständig `[BELASTBAR]` außer Observability, Stateful, Sicherheit/Betrieb (Phase 3/4).
-- **ADRs der Phase:** 010–014, alle geplant, 0 reaktiv.
-- **Neue Erkundungsbedarfe:** keine vor Phase 2; beobachten: Budget oberhalb 17.600 Token (3.2/D.4), Import-Zeit gegen 30 Minuten (4.8), Filterpolitik von xAI (ADR-011).
-- **Methodik-Lehren:** Prüf-Aufträge ohne Platzhalter formulieren (zwei Pannen); Kriterien vor der Bewertung fixieren und Eichtexte mitlaufen lassen (hat die Vergleichbarkeit über Runden belegt); Sitzungsabfrage meldete Kontextgröße erst spät.
-- **Details:** [`docs/archiv/logbuch-phase-1.md`](archiv/logbuch-phase-1.md)
 
 <!-- ANCHOR:eintragstypen -->
 ## Eintragstypen (Übersicht)
