@@ -1,6 +1,6 @@
 """Data types and fixed lists of the module ``manuscript`` (re-exported by ``service``)."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from typing import Final, Literal, get_args
@@ -65,6 +65,9 @@ EXPLICITNESSES: Final[tuple[str, ...]] = ("angedeutet", "sinnlich", "explizit")
 # Longest free text of a writing style. Other texts of the module have no limit; the request
 # budget bounds this block, so the limit follows the owner's decision (ADR-053).
 FREE_TEXT_MAX: Final = 1000
+# Longest relation of a guest to the world of the story (step 9.13, ADR-102); several paragraphs,
+# far below the request budget.
+RELATION_MAX: Final = 4000
 
 
 class Keep(Enum):
@@ -78,10 +81,16 @@ KEEP: Final = Keep.KEEP
 
 @dataclass(frozen=True)
 class GuestLink:
-    """A canon entry of another world bound into one story (FR-017)."""
+    """A canon entry of another world bound into one story (FR-017).
+
+    ``relation`` tells how the guest fits the world of the story: origin, relations, belongings,
+    role there (step 9.13, ADR-102); ``""`` means none. It is not part of equality: a link is the
+    pair of world and entry.
+    """
 
     world: str
     entry: str
+    relation: str = field(default="", compare=False)
 
 
 @dataclass(frozen=True)

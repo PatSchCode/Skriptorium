@@ -40,6 +40,7 @@ from skriptorium.manuscript.models import (
     FREE_TEXT_MAX,
     GENRES,
     KEEP,
+    RELATION_MAX,
     STYLES,
     SUMMARY_STATUSES,
     TEMPOS,
@@ -68,6 +69,7 @@ __all__ = [
     "FREE_TEXT_MAX",
     "GENRES",
     "KEEP",
+    "RELATION_MAX",
     "STYLES",
     "SUMMARY_STATUSES",
     "TEMPOS",
@@ -253,6 +255,18 @@ class ManuscriptService:
             NotFound: The story or the link does not exist.
         """
         return self._extras.remove_guest_link(world_id, story_id, guest_world, entry)
+
+    def set_guest_relation(
+        self, world_id: str, story_id: str, guest_world: str, entry: str, relation: str
+    ) -> Story:
+        """Set how a guest fits the world of the story (step 9.13, ADR-102); blank text removes
+        it. The guest's entry in its home world stays as it is.
+
+        Raises:
+            NotFound: The story or the link does not exist.
+            InvalidInput: The text is longer than :data:`RELATION_MAX`.
+        """
+        return self._extras.set_guest_relation(world_id, story_id, guest_world, entry, relation)
 
     def add_fact(self, world_id: str, story_id: str, entry: str, fact: str) -> Story:
         """Add a fact about ``entry`` that holds only in this story (FR-024).

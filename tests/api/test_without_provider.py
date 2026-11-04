@@ -33,6 +33,7 @@ def keyless(data_dir: Path) -> Iterator[TestClient]:
         f"{WORLD}/entries/kael/appearance",
         f"{WORLD}/entries/kael/images/bild-000000000000.png/describe",
         f"{WORLD}/maps/karte-000000000000.png/describe",
+        f"{WORLD}/stories/am-ufer/guests/nordland/ragna/fit",
     ],
 )
 def test_models_are_not_called_without_a_key(keyless: TestClient, path: str) -> None:

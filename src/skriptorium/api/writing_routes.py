@@ -17,6 +17,7 @@ from skriptorium.api.favorites import TASKS, Task
 from skriptorium.api.flows import (
     DEFAULT_MODEL,
     DescribeOrder,
+    FitOrder,
     Scene,
     SummaryFailure,
     Turn,
@@ -24,6 +25,7 @@ from skriptorium.api.flows import (
     WriteOrder,
     prepare_appearance,
     prepare_description,
+    prepare_guest_fit,
     prepare_request,
     prepare_worldbuilder,
     stream_answer,
@@ -154,6 +156,14 @@ class AppearanceIn(BaseModel):
     """The model that takes out the looks (step 7.16); missing: the preset model."""
 
     model: str | None = None
+
+
+class FitIn(BaseModel):
+    """Model and wish for "Einpassen vorschlagen" (step 9.13); missing model: the preset of the
+    world builder."""
+
+    model: str | None = None
+    wish: str = Field(default="", max_length=1000)
 
 
 class UsageOut(BaseModel):
@@ -305,6 +315,37 @@ async def appearance(
     )
     return StreamingResponse(
         stream_answer(found.provider, prepared, "aussehen", found.usage.recorder(world_id)),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
+    )
+
+
+@router.post("/worlds/{world_id}/stories/{story_id}/guests/{guest_world}/{entry_id}/fit")
+async def fit_guest(
+    world_id: str,
+    story_id: str,
+    guest_world: str,
+    entry_id: str,
+    body: FitIn,
+    found: ServicesDep,
+) -> StreamingResponse:
+    """Stream a proposal how a guest fits the world of the story; saves nothing (ADR-102)."""
+    if found.provider is None:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "KI-Anbieter nicht eingerichtet")
+    await found.catalog.refresh()
+    order = FitOrder(
+        world_id,
+        story_id,
+        guest_world,
+        entry_id,
+        body.model or _preset(found, "weltenbau"),
+        body.wish,
+    )
+    prepared = prepare_guest_fit(found.context, order, found.catalog)
+    return StreamingResponse(
+        stream_answer(
+            found.provider, prepared, "weltenbau", found.usage.recorder(world_id, story_id)
+        ),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )

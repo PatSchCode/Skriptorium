@@ -348,6 +348,12 @@ def _manuscript(rec: _Recorder) -> str:
         {"world": "nebelreich", "entry": "nebelkoenig"},
         status=201,
     )
+    rec.put(
+        "setGuestRelation",
+        "Story",
+        f"{story}/guests/nebelreich/nebelkoenig",
+        {"relation": "Kam über das Eis und blieb."},
+    )
     rec.setup("POST", f"{story}/guests", {"world": "nebelreich", "entry": "reifpalast"})
     rec.delete("removeGuest", "Story", f"{story}/guests/nebelreich/reifpalast")
     rec.post(
@@ -458,6 +464,7 @@ def _streams(rec: _Recorder, provider: FakeProvider, story: str) -> None:
         ("describeImage", f"{kael}/images/{image}/describe"),
         ("describeMap", f"{WORLD}/maps/{sea}/describe"),
         ("appearance", f"{kael}/appearance"),
+        ("fitGuest", f"{story}/guests/nebelreich/nebelkoenig/fit"),
     ):
         rec.stream(prefix, "DescribeEvent", path, {"model": "x-ai/grok-4.6"})
 

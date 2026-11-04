@@ -11,6 +11,7 @@ from skriptorium.canon import (
     Category,
     InvalidInput,
     drop_empty_sections,
+    drop_world_sections,
     nest_headings,
 )
 
@@ -100,10 +101,16 @@ class ContextTooLarge(Exception):  # noqa: N818 - named like the error kinds of 
 
 @dataclass(frozen=True)
 class Known:
-    """An entry the story may use; ``home`` names the world of a guest, else ``None``."""
+    """An entry the story may use; ``home`` names the world of a guest, else ``None``.
+
+    A guest may have a ``relation`` to the world of the story, whose name is ``here`` (step 9.13,
+    ADR-102).
+    """
 
     entry: CanonEntry
     home: str | None = None
+    relation: str = ""
+    here: str | None = None
 
     @property
     def key(self) -> tuple[str, str]:
@@ -150,25 +157,38 @@ def fitted(system: Sequence[Part], user: Sequence[Part], budget: int) -> BuiltCo
     )
 
 
-def render(entry: CanonEntry, home: str | None = None) -> str:
+def render(
+    entry: CanonEntry, home: str | None = None, relation: str = "", here: str | None = None
+) -> str:
     """A canon entry as Markdown; item sections and timeline events are part of the body.
 
     A guest names its home world in the heading (step 3.7). Below the name (level 2) no heading
     of the text is flatter than level 3 (a heading the author wrote on level 1 or 2 moves down
     with all the others), and sections without text are left out, so an empty template does not
     clutter the request (step 9.3, ADR-092).
+
+    A guest with a ``relation`` to the world of the story (named ``here``) gets it as the section
+    "In dieser Welt" below its entry, and the sections of the entry about its home world are left
+    out (step 9.13, ADR-102); without a relation the guest stays as it was.
     """
     label = CATEGORY_LABELS[entry.category]
     if home is not None:
         label = f"{label}, Gast aus der Welt „{home}“"
     heading = f"## {entry.name} ({label})"
     aliases = f"\nAuch: {', '.join(entry.aliases)}" if entry.aliases else ""
-    body = nest_headings(drop_empty_sections(entry.body), ENTRY_BODY_LEVEL).strip()
-    return f"{heading}{aliases}\n\n{body}".strip()
+    fitted_in = home is not None and relation.strip() != ""
+    source = drop_world_sections(entry.body, home) if fitted_in and home else entry.body
+    body = nest_headings(drop_empty_sections(source), ENTRY_BODY_LEVEL).strip()
+    text = f"{heading}{aliases}\n\n{body}".strip()
+    if not fitted_in:
+        return text
+    place = f" („{here}“)" if here else ""
+    relation_text = nest_headings(relation.strip(), ENTRY_BODY_LEVEL + 1)
+    return f"{text}\n\n### In dieser Welt{place}\n\n{relation_text}"
 
 
 def render_known(known: Known) -> str:
-    return render(known.entry, known.home)
+    return render(known.entry, known.home, known.relation, known.here)
 
 
 def category_rank(entry: CanonEntry) -> tuple[int, str]:
