@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [ADR-ANGELEGT] ADR-109 Auflösung und Qualität bei „Bild erzeugen“ (10.5)
+
+- Vorlage mit `mockup-10.5.html` (lokal) und `ENTSCHEIDUNG ERFORDERLICH`; vier Auswahlfragen, Eigentümer jeweils die Empfehlung. Befund beim Lesen: Nicht nur die fehlende Auflösung macht Bilder klein, sondern auch `shrinkImage` mit 2.000 Pixel beim Übernehmen – 2K wäre sonst wirkungslos gewesen. Pillow fehlt im Container (Messskript scheiterte am Import) – Umwandeln auf dem Server wäre eine neue Abhängigkeit.
+- Reaktiv-Quote 0/10 (ADR-100 bis ADR-109). Zweig `feat/10.5-aufloesung-qualitaet` von `docs/10.4-zusammengefuehrt`.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.3 abgenommen
 
 - Probe des Eigentümers mit echter KI im Betrieb: Herauslösen klappt, neuer Abschnitt „Aussehen“, Vorschlag nur Sichtbares, Übernehmen funktioniert. 10.3 → ERLEDIGT. FR-035 schon in 10.3 ergänzt. Phase 10: 4 von 11.
