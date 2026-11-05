@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. D.1 erledigt 2026-11-05 (ADR-112). 10.7 zusammengeführt (PR #211 → `39c9db4`), wartet auf das Einspielen (Eigentümer: „Noch nicht“), dann Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
+- **Aktiver Schritt:** D.27 Vitest 4.1.12 – umgesetzt (lokal), PR auf Wort des Eigentümers. D.1 erledigt 2026-11-05 (ADR-112). 10.7 zusammengeführt (PR #211 → `39c9db4`), wartet auf das Einspielen (Eigentümer: „Noch nicht“), dann Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
 - **Nächster Schritt:** 10.7 einspielen (dann mit Node 26 gebaut) und 10.6 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -61,6 +61,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.22 | Probelauf Routine-Klasse mit Sonnet 5.5 | offen | KI – vor der nächsten Abgabe an Unteragenten |
 | ✅ | D.23 | Sicherheitsfunde filelock, undici, zod (Audit 2026-10-25) | erledigt 2026-10-25 | – |
 | ✅ | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | erledigt 2026-11-04 | – |
+| 🟠 | D.27 | Sicherheitsfunde Vitest (Audit 2026-11-05) | umgesetzt (lokal), 4.1.12 | du: PR freigeben |
 | ⚪ | D.26 | Verbrauchsspeicher neu bauen ab 3.000 Anfragen im Monat | offen – ausgelöst | KI – Monatszählung bei jeder Messung auf dem Server mitprüfen |
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
@@ -735,6 +736,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Sperrdateien, Logbuch-Eintrag
 - **Notizen:** Angelegt 2026-10-25 nach dem roten Lauf zu #187. Verbleibend: 3 mittlere Funde in vitest ≤ 4.1.11 (`@vitest/mocker`, `@vitest/coverage-v8`) unter der Schwelle `high`; Behebung nur mit vitest 5 (`--force`), Linie noch nicht mindestreif – Landeplatz D.2 (Nachprüfung vitest 5 am 2027-03-03, Ablaufdaten-Register).
+
+#### D.27: Sicherheitsfunde Vitest (Audit 2026-11-05)
+
+- **Status:** 🟠 IN ARBEIT – umgesetzt (lokal, 2026-11-06): `vitest` und `@vitest/coverage-v8` 4.1.12, transitiv `chai` 6.2.2 → 6.3.0, `std-env` und `tinyrainbow` je eine Minor; `npm audit` ohne Vitest-Befund (übrig 10 mittlere aus der `minimatch`-Kette unter ESLint); auf Node 26 grün: tsc, eslint, Prettier, 585 Komponenten-Tests (Zeilen 98,92 %), Build, 15 End-to-End-Tests. Offen: CI (PR auf Wort des Eigentümers). Eigentümer 2026-11-06: „Ja, Vitest heben“
+- **Phasentyp-Kontext:** STABILISIERUNG
+- **Abhängigkeiten:** D.1
+- **Frist:** keine harte – CI prüft `--audit-level=high`, die Befunde sind mittel
+- **Freigabepflichtig:** nein – Patch-Update innerhalb der Linie 4.1, keine Breaking Changes
+- **Empfohlene Klasse:** Routine – Abhängigkeits-Update mit Tests.
+- **Eingangskriterien:** Befund `npm audit` lokal beim Wechsel auf Node 26 (D.1, 2026-11-05)
+- **Anforderungen (ab Klasse M):** keine (Pflichtkategorie Dependency-Audit, `CLAUDE.md` Abschnitt 15)
+- **Zu tun:** GHSA-qxg6-89mg-rqv8 und GHSA-xp26-3454-mjgp in `@vitest/mocker` ≤ 4.1.11: `vitest` und `@vitest/coverage-v8` 4.1.11 → 4.1.12 (veröffentlicht 2026-10-15, Linie 4.1 mit Patches, Regel-001). Nicht Teil: `minimatch` über `@eslint/config-array` (GHSA-g3hv-75wg-m249) – npm bietet nur ESLint 9 als Ausweg (Rückschritt); bleibt offen, bis ESLint nachzieht.
+- **Akzeptanzkriterien:** `npm audit` ohne Vitest-Befund; alle Prüfungen und CI grün.
+- **Betroffene Module:** keine (Entwicklungswerkzeuge)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** `package.json`, Sperrdatei, Logbuch-Eintrag
+- **Notizen:** Angelegt 2026-11-06 nach dem Befund in D.1. Nur Testwerkzeug – kein Einspielen nötig.
 
 #### D.26: Verbrauchsspeicher neu bauen, sobald ein Monat 3.000 Anfragen erreicht
 

@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] D.27 Vitest 4.1.12 umgesetzt (lokal)
+
+- Eigentümer: „Ja, Vitest heben“. Schritt D.27 angelegt (Patch-Update, nicht freigabepflichtig). `vitest`/`@vitest/coverage-v8` 4.1.11 → 4.1.12 (2026-10-15); `npm install` zog `chai` 6.3.0, `std-env` und `tinyrainbow` je eine Minor höher (Bereiche von Vitest selbst).
+- `npm audit`: Vitest-Befunde weg; übrig 10 mittlere Befunde, alle aus `minimatch` 7.0.0–11.0.0 über `@eslint/config-array` (eslint, typescript-eslint, `@eslint/js`). Kein Ausweg außer ESLint 9 – offen gelassen, bis ESLint nachzieht; CI prüft `--audit-level=high` (0 Befunde).
+- Prüfreihe auf Node 26 grün (Zahlen bei D.27).
+
 ### 2026-11-05 – [BEOBACHTUNG] D.1 erledigt
 
 - Eigentümer: „Ja, PR und Merge“. PR #212, CI vier Jobs grün auf Node 26.12.1 (Python 1:42, Pre-Commit 2:02, TypeScript 1:33, E2E 2:10 – Chromium-Download diesmal normal), 0 `ExperimentalWarning`/`DeprecationWarning` im Protokoll, Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `4a2295b`. D.1 → ERLEDIGT.
