@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.4 umgesetzt (lokal)
+
+- Zahlen im Fahrplan bei 10.4. Verhalten unverändert: alle vorhandenen Tests ohne Änderung grün, E2E 15.
+- Mini-Reibung: Nach dem ersten Zerlegen sank die Zweig-Abdeckung um 0,09 Punkte (95,45 → 95,36 %) – die Prüfung „Entfernen gelungen?“ steht jetzt in zwei Komponenten, ihr Fehlerzweig war nie getestet. Neuer Test „Entfernen scheitert“ und Bild als Prop statt `images[at] ?? ""` → 95,49 %. Zählskript für Hooks fand `useState<…>(` nicht (Generic vor der Klammer) – von Hand nachgezählt.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.4 begonnen, oberhalb der empfohlenen Klasse
 
 - Eigentümer: „Noch nicht“ zum PR für 10.3; dann „Ja, 10.4 beginnen“ auf die Empfehlung (10.4 öffnet 10.5–10.8). 10.3 → wartet auf Freigabe, damit nur 10.4 in Arbeit ist. 10.4 auf dem Zweig von 10.3, weil beide `EntryImages.tsx` ändern.
