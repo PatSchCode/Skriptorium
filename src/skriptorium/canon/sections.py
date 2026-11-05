@@ -38,11 +38,13 @@ _ARTICLES: Final = ("der ", "die ", "das ", "den ", "dem ", "des ")
 
 APPEARANCE: Final = "Aussehen"
 """The looks of a figure, a place or an item (ADR-078, ADR-092)."""
+NATURE: Final = "Wesen"
+"""The nature of a figure; the personality of a SillyTavern card (ADR-066, ADR-107)."""
 RELATIONS: Final = "Beziehungen"
 """The relations of a figure, one list line with one ``@Name`` each (ADR-093)."""
 
 SECTIONS: Final[dict[Category, tuple[str, ...]]] = {
-    "figur": (APPEARANCE, "Wesen", "Fähigkeiten", "Geschichte", RELATIONS),
+    "figur": (APPEARANCE, NATURE, "Fähigkeiten", "Geschichte", RELATIONS),
     "ort": ("Lage", APPEARANCE, "Bewohner", "Geschichte"),
     "gegenstand": (APPEARANCE, "Zweck", "Verwendung", "Auswirkung"),
     "kultur": ("Gesellschaft", "Glaube und Bräuche", "Geschichte"),
@@ -118,11 +120,12 @@ def drop_empty_sections(markdown: str) -> str:
 def drop_world_sections(markdown: str, world: str) -> str:
     """``markdown`` without the sections about the world called ``world`` (step 9.13, ADR-102).
 
-    Such a section has a heading that starts with "In" or "Im" and names the world, without its
-    leading article and in any case: for "Das Eisenmeer" "In Das Eisenmeer", "Im Eisenmeer" or
-    "In der Stadt am Eisenmeer" (convention of 8.12: neutral parts on top, the home world in
-    "In <Welt>"). Subsections go with it; everything else stays as it was, byte for byte. Only the
-    server needs this: it shapes the request for a guest that has a relation to another world.
+    Such a section has a heading that starts with "In" or "Im" and names the world as whole
+    words, without its leading article and in any case: for "Das Eisenmeer" "In Das Eisenmeer",
+    "Im Eisenmeer" or "In der Stadt am Eisenmeer" (convention of 8.12: neutral parts on top, the
+    home world in "In <Welt>"), but for "Ys" not "In Ysas Haus" (step 10.2, ADR-107). Subsections
+    go with it; everything else stays as it was, byte for byte. Only the server needs this: it
+    shapes the request for a guest that has a relation to another world.
     """
     name = _trim(world).lower()
     for article in _ARTICLES:
@@ -131,6 +134,7 @@ def drop_world_sections(markdown: str, world: str) -> str:
             break
     if not name or f"{name} " in _ARTICLES:
         return markdown
+    named = re.compile(rf"(?<!\w){re.escape(name)}(?!\w)")
     lines = _lines_of(markdown)
     headings = _headings(lines)
     kept: list[str] = []
@@ -138,7 +142,7 @@ def drop_world_sections(markdown: str, world: str) -> str:
     while at < len(lines):
         head = headings[at]
         text = _trim(head[1]).lower() if head is not None else ""
-        if head is not None and text.startswith(("in ", "im ")) and name in text:
+        if head is not None and text.startswith(("in ", "im ")) and named.search(text):
             at = _section_end(headings, at, head[0])
         else:
             kept.append(lines[at])
@@ -172,6 +176,22 @@ def read_section(markdown: str, heading: str) -> str | None:
         if text:
             return text
     return None
+
+
+def take_section(markdown: str, heading: str) -> tuple[str | None, str]:
+    """The section :func:`read_section` finds, and ``markdown`` without it (step 10.2, ADR-107).
+
+    Without a section called ``heading`` that has text, the result is ``None`` and ``markdown``
+    unchanged. The section goes with its subsections and the blank lines up to the next heading;
+    everything else stays as it was, byte for byte. Only the server needs this: it splits a
+    figure into the fields of a SillyTavern card.
+    """
+    lines = _lines_of(markdown)
+    for section in _sections_named(lines, heading):
+        text = _body_of(lines, section)
+        if text:
+            return text, _rebuild(lines, [(section.start, section.end, [])])
+    return None, markdown
 
 
 def read_labelled(markdown: str, label: str) -> str | None:

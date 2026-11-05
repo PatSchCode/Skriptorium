@@ -42,3 +42,33 @@ def test_headings_in_code_and_names_of_only_an_article_change_nothing() -> None:
     assert drop_world_sections(fenced, "Das Eisenmeer") == fenced
     assert drop_world_sections(BODY, "Das") == BODY
     assert drop_world_sections(BODY, "  ") == BODY
+
+
+@pytest.mark.parametrize(
+    ("world", "heading"),
+    [
+        ("Ys", "In Ysas Haus"),
+        ("Ys", "Im Abyss"),
+        ("Das Eisenmeer", "Im Eisenmeerhafen"),
+        ("Die Salzmark", "In der Salzmarkstadt"),
+    ],
+)
+def test_the_world_counts_only_as_whole_words(world: str, heading: str) -> None:
+    """Step 10.2, ADR-107: word boundary instead of a part of a word."""
+    text = f"Kern.\n\n## {heading}\n\nBleibt.\n"
+    assert drop_world_sections(text, world) == text
+
+
+@pytest.mark.parametrize(
+    ("world", "heading"),
+    [
+        ("Ys", "In Ys"),
+        ("Ys", "Im alten Ys, vor dem Krieg"),
+        ("Die Salzmark", "In der Salzmark"),
+        ("Das Eisenmeer", "In der Stadt am Eisenmeer"),
+        ("Ödland", "Im Ödland"),
+    ],
+)
+def test_whole_words_anywhere_in_the_heading_still_count(world: str, heading: str) -> None:
+    text = f"Kern.\n\n## {heading}\n\nAlt.\n"
+    assert drop_world_sections(text, world) == "Kern.\n\n"

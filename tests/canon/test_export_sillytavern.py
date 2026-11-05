@@ -114,3 +114,53 @@ def test_an_unknown_own_category_is_ignored(canon: CanonService) -> None:
     }
     with pytest.raises(InvalidInput, match="keine übernehmbaren"):
         canon.translate_sillytavern("salzmark", json.dumps(book).encode())
+
+
+TEMPLATE_ORDER = (
+    "Schmugglerin.\n\n## Aussehen\nSchmal.\n\n## Wesen\nMisstrauisch.\n\n"
+    "## Fähigkeiten\nKennt jede Strömung.\n\n## Geschichte\nGeboren auf einem Kahn.\n"
+)
+
+
+def _figure(body: str) -> CanonEntry:
+    return CanonEntry("w", "mira", "figur", "Mira", (), None, body)
+
+
+@pytest.mark.parametrize("level", ["##", "###", "#"])
+def test_personality_is_only_the_section_wesen_at_any_level(level: str) -> None:
+    """Step 10.2, ADR-107: before, level 2 left it empty and level 3 took everything after."""
+    body = TEMPLATE_ORDER.replace("## ", f"{level} ")
+    card = card_for(_figure(body))
+    assert card["personality"] == "Misstrauisch."
+    assert card["description"] == (
+        f"Schmugglerin.\n\n{level} Aussehen\nSchmal.\n\n{level} Fähigkeiten\n"
+        f"Kennt jede Strömung.\n\n{level} Geschichte\nGeboren auf einem Kahn."
+    )
+    data = card["data"]
+    assert isinstance(data, dict)
+    assert (data["personality"], data["description"]) == (card["personality"], card["description"])
+
+
+def test_wesen_keeps_its_subsections_and_an_empty_wesen_stays_in_the_text() -> None:
+    nested = card_for(
+        _figure("Kurz.\n## Wesen\nRuhig.\n### Ängste\nWasser.\n## Geschichte\nAlt.\n")
+    )
+    assert nested["personality"] == "Ruhig.\n### Ängste\nWasser."
+    assert nested["description"] == "Kurz.\n## Geschichte\nAlt."
+    template = "## Aussehen\nSchmal.\n\n## Wesen\n\n## Fähigkeiten\n"
+    empty = card_for(_figure(template))
+    assert (empty["description"], empty["personality"]) == (template.strip("\n"), "")
+    former = card_for(_figure("## Wesen und Geschichte\nAlt.\n"))
+    assert (former["description"], former["personality"]) == ("## Wesen und Geschichte\nAlt.", "")
+
+
+def test_reading_back_keeps_everything_with_wesen_at_the_end(canon: CanonService) -> None:
+    canon.create_entry("salzmark", "figur", "Kael", body=TEMPLATE_ORDER)
+    card = canon.sillytavern_card("salzmark", "kael")
+    result = canon.translate_sillytavern("salzmark", json.dumps(card).encode())
+    (figure,) = parse_markdown(result.markdown).entries
+    # Level-2 sections come back on level 3 (ADR-066); "Wesen" comes last (ADR-107).
+    assert figure.body.rstrip("\n") == (
+        "Schmugglerin.\n\n### Aussehen\nSchmal.\n\n### Fähigkeiten\nKennt jede Strömung.\n\n"
+        "### Geschichte\nGeboren auf einem Kahn.\n\n### Wesen\nMisstrauisch."
+    )

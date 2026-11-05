@@ -39,6 +39,7 @@ from dataclasses import dataclass
 from typing import Final, Protocol
 
 from skriptorium.canon.categories import CATEGORIES, Category, category_for
+from skriptorium.canon.sections import NATURE, take_section
 from skriptorium.storage import InvalidInput, slugify
 
 MAX_BYTES: Final = 10 * 1024 * 1024
@@ -172,7 +173,7 @@ def _figure(card: dict[str, object], notes: list[str]) -> _Entry:
     parts = [_protect(_replace_char(_text(card.get("description")), name))]
     personality = _replace_char(_text(card.get("personality")), name)
     if personality.strip():
-        parts.append(f"### Wesen\n{_protect(personality)}")
+        parts.append(f"### {NATURE}\n{_protect(personality)}")
     body = "\n\n".join(part for part in parts if part.strip())
     left_out = [label for field, label in _CHAT_FIELDS if _filled(card.get(field))]
     if left_out:
@@ -343,8 +344,6 @@ def _own_category(item: dict[str, object]) -> Category | None:
 
 # --- Writing canon for SillyTavern (step 6.9, ADR-066) ---------------------------------------
 
-_PERSONALITY: Final = "### Wesen"
-
 
 class Exportable(Protocol):
     """What the export needs of a canon entry (``canon.CanonEntry`` has it)."""
@@ -378,18 +377,19 @@ def lorebook_for(entries: Iterable[Exportable]) -> dict[str, object]:
 def card_for(entry: Exportable) -> dict[str, object]:
     """A character card V2 as SillyTavern writes it, without lorebook and chat fields.
 
+    ``personality`` is the first section "Wesen" with text, at any level and with its
+    subsections; ``description`` is the rest of the text (step 10.2, ADR-107, rule 003).
+
     Raises:
         InvalidInput: The entry is not a figure.
     """
     if entry.category != "figur":
         raise InvalidInput("Nur Figuren lassen sich als Figurenkarte ausgeben")
-    description, _, personality = entry.body.partition(f"\n{_PERSONALITY}\n")
-    if entry.body.startswith(f"{_PERSONALITY}\n"):
-        description, personality = "", entry.body[len(_PERSONALITY) + 1 :]
+    personality, description = take_section(entry.body, NATURE)
     fields = {
         "name": entry.name,
         "description": description.strip("\n"),
-        "personality": personality.strip("\n"),
+        "personality": personality or "",
         "scenario": "",
         "first_mes": "",
         "mes_example": "",
