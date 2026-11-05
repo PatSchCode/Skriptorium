@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] Hermes 3 ohne Anbieter bei OpenRouter → V.47
+
+- Frage des Eigentümers: Hermes 3 erscheint als unbekanntes Modell. Befund: `nousresearch/hermes-3-llama-3.1-405b` und `-70b` haben 0 Anbieter (`/api/v1/models/<id>/endpoints`) und fehlen in `/api/v1/models` (454 Textmodelle); `hermes-4-405b` ist verfügbar. Server (eine SSH-Prüfung): Hermes 3 nur in den Favoriten (`system/modelle.md`) und im Anweisungsverlauf einer Geschichte; im Oktober 10 Anfragen, letzte am 2026-10-20 erfolgreich. Keine Änderung im Skriptorium als Ursache.
+- Eigentümer: entfernt den Favoriten selbst; deutlichere Anzeige als V.47 mit Landeplatz 10.11.
+
 ### 2026-11-05 – [SESSIONENDE] Phase 9 abgeschlossen, Phase 10 geplant, 10.1 zusammengeführt
 
 - **Dauer:** 2026-11-04 ca. 20:10 bis 2026-11-05 (fortgesetzte, zweimal verdichtete Session).

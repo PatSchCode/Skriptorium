@@ -65,7 +65,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105. In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -370,7 +370,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1507,6 +1507,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Daten, Skript, Tests, ADR, Mockup
 - **Notizen:** Angelegt 2026-11-05 in 9.12.
+
+#### V.47: Favoriten ohne Anbieter kenntlich machen; verständliche Meldung statt „Unbekanntes Modell“
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Frage des Eigentümers 2026-11-05: Hermes 3 erscheint als unbekanntes Modell; Antwort „Ja, als V-Schritt vormerken“)
+- **Phasentyp-Kontext:** UMSETZUNG
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** nein, solange nur Anzeige und Meldungstext sich ändern; ja, falls die Antwort von `/api/models` ein Feld bekommt (Kategorie 5, additiv)
+- **Empfohlene Klasse:** Routine – Anzeige und Meldung; Entscheidung, falls die Schnittstelle wächst.
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-028
+- **Zu tun:** Befund 2026-11-05: `nousresearch/hermes-3-llama-3.1-405b` und `-70b` haben bei OpenRouter 0 Anbieter (`/api/v1/models/<id>/endpoints`) und fehlen deshalb in `/api/v1/models`; ein Favorit bleibt erlaubt (`api/favorites.py`), eine Anfrage damit scheitert mit „Unbekanntes Modell: …“ (`api/flows`). Favoriten, die nicht im Katalog stehen, in Modellauswahl und Seite „Modelle“ mit „nicht mehr im Angebot“ markieren (wie `ui/src/views/Settings.tsx` bei Aufgaben) und die Meldung beim Schreiben verständlich fassen (z. B. „Dieses Modell bietet derzeit kein Anbieter bei OpenRouter an“).
+- **Akzeptanzkriterien:** Tests; Eigentümer bestätigt.
+- **Betroffene Module:** ui, ggf. api
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests
+- **Notizen:** Angelegt 2026-11-05. Bis dahin: Hermes 3 auf der Seite „Modelle“ aus den Favoriten nehmen (Eigentümer macht das selbst); Hermes 4 405B ist verfügbar.
 
 #### V.46: Fragenliste je Art im Weltenbauer
 
