@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.3 „Aussehen herauslösen“ für Orte und Gegenstände – seit 2026-11-05, entschieden (ADR-108), Umsetzung läuft.
-- **Nächster Schritt:** 10.3 umsetzen, PR nach Freigabe, Einspielen und Probe durch den Eigentümer; danach 10.4 Bildansichten zerlegen. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.4 Bildansichten zerlegen – seit 2026-11-05 (Umbau ohne Verhaltensänderung, auf dem Zweig von 10.3). 10.3 ist umgesetzt (lokal) und wartet auf PR (Wort des Eigentümers), Einspielen und Probe.
+- **Nächster Schritt:** 10.4 abschließen; PR für 10.3 und 10.4 auf Wort des Eigentümers, dann Einspielen und Probe von 10.3; danach 10.5 Auflösung und Qualität – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -30,8 +30,8 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 |---|---|---|---|---|
 | ✅ | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | erledigt 2026-11-05 (ADR-106) | – |
 | ✅ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | erledigt 2026-11-05 (ADR-107) | – |
-| 🟠 | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | in Arbeit seit 2026-11-05 (ADR-108) | KI: umsetzen |
-| ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
+| 🔵 | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | wartet auf Freigabe (ADR-108), umgesetzt lokal | du: PR freigeben, nach Einspielen Probe |
+| 🟠 | 10.4 | Bildansichten zerlegen | in Arbeit seit 2026-11-05 | KI: umbauen |
 | ⚪ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | offen | KI: nach 10.4 |
 | ⚪ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | offen | KI: nach 10.4 |
 | ⚪ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | offen | KI: nach 10.4 |
@@ -234,7 +234,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.3: „Aussehen herauslösen“ auch für Orte und Gegenstände (V.39)
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
+- **Status:** 🔵 WARTET-AUF-FREIGABE (umgesetzt lokal 2026-11-05; PR auf Wort des Eigentümers, dann Einspielen und Probe mit echter KI) – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.2
 - **Freigabepflichtig:** ja – ändert ADR-083 und die Anweisung an die KI
@@ -251,7 +251,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.4: Bildansichten zerlegen
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Ausgang: `ImageGenerate.tsx` 452 Zeilen, `EntryImages.tsx` 554 Zeilen
 - **Phasentyp-Kontext:** UMSETZUNG
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** nein – Umbau innerhalb eines Moduls, Verhalten unverändert

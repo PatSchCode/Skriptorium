@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.4 begonnen, oberhalb der empfohlenen Klasse
+
+- Eigentümer: „Noch nicht“ zum PR für 10.3; dann „Ja, 10.4 beginnen“ auf die Empfehlung (10.4 öffnet 10.5–10.8). 10.3 → wartet auf Freigabe, damit nur 10.4 in Arbeit ist. 10.4 auf dem Zweig von 10.3, weil beide `EntryImages.tsx` ändern.
+- Empfohlene Klasse Routine, aktiv ist die Entscheidungs-Klasse (Opus 5.5, laut Systemkontext); Warnung zu Beginn gegeben. Keine Abgabe an einen Unteragenten: Der Umbau braucht den bereits geladenen Kontext von `EntryImages.tsx`, ein Unteragent müsste ihn neu lesen.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.3 umgesetzt (lokal)
 
 - Nach ADR-108 auf `feat/10.3-aussehen-orte-gegenstaende`; Zahlen im Fahrplan bei 10.3. Keine Bildschirmfotos – die Abnahme braucht ohnehin eine echte KI-Antwort im Betrieb (Schlüssel lokal nicht gültig).
