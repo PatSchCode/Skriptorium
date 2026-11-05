@@ -346,6 +346,25 @@ describe("images of a canon entry (step 7.6)", () => {
     });
   });
 
+  it("stays on the image and shows why when removing it fails", async () => {
+    fakeApi({
+      [`DELETE ${BASE}/kael-b.jpg`]: fail(500, "Entfernen gescheitert"),
+    });
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+    const changed = vi.fn();
+    const user = userEvent.setup();
+    render(<EntryImages entry={WITH_THREE} editable onChanged={changed} />);
+    await user.click(
+      screen.getByRole("button", { name: "Bild 2 groß zeigen" }),
+    );
+    await user.click(screen.getByRole("button", { name: "Entfernen" }));
+    expect(await screen.findByText("Entfernen gescheitert")).toBeDefined();
+    expect(changed).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole("dialog", { name: "Kael, Bild 2 von 3" }),
+    ).toBeDefined();
+  });
+
   it("stays on the image and shows why when making it the main image fails", async () => {
     fakeApi({
       [`POST ${BASE}/kael-b.jpg/main`]: fail(500, "Tausch gescheitert"),
@@ -420,7 +439,7 @@ describe("images of a canon entry (step 7.6)", () => {
     ).toBe("true");
   });
 
-  it("offers to add the looks the image misses (step 9.5, ADR-094)", async () => {
+  it("offers to add the looks the image misses (steps 9.5 and 10.3, ADR-094, ADR-108)", async () => {
     fakeApi({
       "GET /api/images/models": ok({
         default: "x/y",
@@ -478,9 +497,10 @@ describe("images of a canon entry (step 7.6)", () => {
       "value",
       "Kerbe: Schneidet Taue.",
     );
-    await user.click(
-      screen.getByRole("button", { name: "✎ Im Eintrag ergänzen" }),
-    );
+    expect(
+      screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
+    ).toBeDefined();
+    await user.click(screen.getByRole("button", { name: "✎ Selbst ergänzen" }));
     expect(onEdit).toHaveBeenCalledOnce();
     unmount2();
     render(
@@ -498,8 +518,11 @@ describe("images of a canon entry (step 7.6)", () => {
       screen.getByText(/das Bild nutzt nur den ersten Satz des Textes/),
     ).toBeDefined();
     expect(
-      screen.queryByRole("button", { name: "✎ Im Eintrag ergänzen" }),
+      screen.queryByRole("button", { name: "✎ Selbst ergänzen" }),
     ).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
+    ).toBeDefined();
   });
 
   it("takes the looks out right in the window and back to it (step 9.5)", async () => {

@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.2 Abschnittsregel im Server, Export liest „Wesen“ – seit 2026-11-05, entschieden (ADR-107), Umsetzung läuft. 10.1 wartet auf Einspielen (auf Wort des Eigentümers) und Abnahme (zusammengeführt, PR #205, `c78ad0e`).
-- **Nächster Schritt:** 10.1 einspielen (auf Wort des Eigentümers) und abnehmen; danach 10.2 Abschnittsregel im Server nutzen und Export liest „Wesen“ – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.4 Bildansichten zerlegen – umgesetzt (lokal), fertig bis auf PR und CI. 10.3 ist umgesetzt (lokal) und wartet auf PR (Wort des Eigentümers), Einspielen und Probe.
+- **Nächster Schritt:** PR für 10.3 und 10.4 auf Wort des Eigentümers, dann Einspielen und Probe von 10.3; danach 10.5 Auflösung und Qualität – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,14 +24,14 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 
-**Phase 10: 0 von 11 erledigt.**
+**Phase 10: 2 von 11 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| 🔵 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | wartet auf Abnahme (ADR-106), zusammengeführt `c78ad0e` | du: einspielen lassen, abnehmen |
-| 🟠 | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | in Arbeit seit 2026-11-05 (ADR-107) | KI: umsetzen |
-| ⚪ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | offen | KI: nach 10.2 |
-| ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
+| ✅ | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | erledigt 2026-11-05 (ADR-106) | – |
+| ✅ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | erledigt 2026-11-05 (ADR-107) | – |
+| 🔵 | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | wartet auf Freigabe (ADR-108), umgesetzt lokal | du: PR freigeben, nach Einspielen Probe |
+| 🟠 | 10.4 | Bildansichten zerlegen | umgesetzt lokal, PR und CI offen | du: PR freigeben |
 | ⚪ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | offen | KI: nach 10.4 |
 | ⚪ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | offen | KI: nach 10.4 |
 | ⚪ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | offen | KI: nach 10.4 |
@@ -65,7 +65,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -200,7 +200,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.1: Löschkaskade für Kanon-Einträge (V.43)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (Abnahme nach dem Einspielen; umgesetzt und zusammengeführt, seit 2026-11-05 in Arbeit) – Bestandsaufnahme: `CanonService.delete_entry` entfernt Datei, Bilder und Kartenmarkierungen; Fakten, geführte Figuren und Gast-Verbindungen (samt Weltbezug) in Geschichten bleiben; Oberfläche fragt nur `window.confirm` (`ui/src/views/EntryForm.tsx`). Server 2026-11-05 (nur Anzahlen): 148 Einträge, 0 geführte Figuren, 0 Fakten, 1 Gast-Verbindung, 0 verwaiste Verweise. Mockup `mockup-10.1.html` (lokal) vorgelegt; Eigentümer: „Mitlöschen mit Folgenliste“, „Klick im Dialog“ → ADR-106. Umsetzung läuft
+- **Status:** ✅ ERLEDIGT (2026-11-05) – eingespielt mit Stand `7900e9d`; Abnahme durch den Eigentümer: Löschdialog für eine Figur zeigt die Folgenliste („4 Bilder“), stimmt mit der Vorschau auf dem Server überein (4 Bilder, 0 Markierungen, 0 Geschichten, 1 Erwähnung mit @); erster Versuch zeigte noch die alte Abfrage, weil die Seite vor dem Einspielen geöffnet war – nach Neuladen richtig. Bestandsaufnahme: `CanonService.delete_entry` entfernt Datei, Bilder und Kartenmarkierungen; Fakten, geführte Figuren und Gast-Verbindungen (samt Weltbezug) in Geschichten bleiben; Oberfläche fragt nur `window.confirm` (`ui/src/views/EntryForm.tsx`). Server 2026-11-05 (nur Anzahlen): 148 Einträge, 0 geführte Figuren, 0 Fakten, 1 Gast-Verbindung, 0 verwaiste Verweise. Mockup `mockup-10.1.html` (lokal) vorgelegt; Eigentümer: „Mitlöschen mit Folgenliste“, „Klick im Dialog“ → ADR-106. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Löschkaskade, destruktiv (Kategorie 4, `CLAUDE.md` Abschnitt 8, Kriterium 6)
@@ -217,7 +217,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.2: Abschnittsregel im Server nutzen; SillyTavern-Export liest „Wesen“ (V.38)
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Server 2026-11-05 (nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (alle Ebene 3), davon 2 mit zu viel in „personality“; 0 mit „Wesen und Geschichte“ oder nur Zeile „- **Wesen:** …“; 0 Überschriften „In/Im ‹Welt›“. Vergleich `mockup-10.2.html` (lokal) vorgelegt; Eigentümer: nur Abschnitt „Wesen“, Rückimport wie heute, Funktionen behalten mit ehrlicher Doku → ADR-107. Umsetzung läuft
+- **Status:** ✅ ERLEDIGT (2026-11-05) – zusammengeführt PR #206, `7900e9d`, CI vier Jobs grün, eingespielt; Abnahme durch den Eigentümer an der Karte einer Figur mit Abschnitt „Wesen“ („Wesen ist auch vorhanden“), auf dem Server nachgerechnet: „personality“ 450 Zeichen ohne Überschriften, „description“ 743 Zeichen mit Aussehen, Fähigkeiten, Geschichte, Beziehungen und ohne „Wesen“. Vorher – Server 2026-11-05 (nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (alle Ebene 3), davon 2 mit zu viel in „personality“; 0 mit „Wesen und Geschichte“ oder nur Zeile „- **Wesen:** …“; 0 Überschriften „In/Im ‹Welt›“. Vergleich `mockup-10.2.html` (lokal) vorgelegt; Eigentümer: nur Abschnitt „Wesen“, Rückimport wie heute, Funktionen behalten mit ehrlicher Doku → ADR-107. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Ausgabe der Figurenkarte ändert sich (Kategorie 5, ADR-066)
@@ -234,7 +234,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.3: „Aussehen herauslösen“ auch für Orte und Gegenstände (V.39)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🔵 WARTET-AUF-FREIGABE (umgesetzt lokal 2026-11-05; PR auf Wort des Eigentümers, dann Einspielen und Probe mit echter KI) – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.2
 - **Freigabepflichtig:** ja – ändert ADR-083 und die Anweisung an die KI
@@ -246,11 +246,12 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** context, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-108. `context/appearance.py`: Anweisung je Art (Figur unverändert, Ort, Gegenstand), gemeinsame Regeln; bei Orten ohne Abschnitt „Lage“ (`take_section`); andere Arten 422. `canon`: Konstante `LOCATION`, `take_section` und `LOCATION` exportiert. `ui`: „✨ Aussehen herauslösen“ im Eintrag auch bei Ort und Gegenstand (`EntryArticle`), im Fenster „Bild erzeugen“ für alle drei, bei Ort und Gegenstand daneben „✎ Selbst ergänzen“ (`EntryImages`). Tests: Python 7 neue bzw. umgeschriebene (Anweisung je Art, „Lage“ auf jeder Ebene samt Unterabschnitt, ungegliederter Ort, leere „Lage“, andere Arten, Route mit Ort); 1151 bestanden, Abdeckung 99,87 %, `context/appearance.py` und `canon/sections.py` 100 %. Oberfläche 1 neuer, 1 angepasster Test; 562 bestanden, 98,81 / 95,45 / 98,26 / 98,97 %. E2E 15 bestanden. ruff, ruff format, `mypy --strict`, bandit, eslint, tsc, prettier, Build grün. Probe mit echter KI steht aus (nach dem Einspielen, Eigentümer).
 - **Notizen:** Aus V.39.
 
 #### 10.4: Bildansichten zerlegen
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-05; umgesetzt lokal, DoD offen: PR, CI) – Ausgang: Hauptkomponente `ImageGenerate` 322 Zeilen und 14 Hooks, `EntryImages` 285 Zeilen und 9 Hooks. Ergebnis: `ImageGenerate` 173 Zeilen/7 Hooks mit `ImageGenerateForm`, `BasisPreview`, `FormatChoice`, `GeneratedPreview` und den Hooks `useImageRequest`, `useImageModels`, `useImagePrice`, `useElapsed` (je eigene Datei); `EntryImages` 145 Zeilen/6 Hooks mit `EntryImageStrip` (119/2) und `EntryImageView` (112/1); `ImageViewer` (166/3) und `LooksHint` in eigene Dateien. Tests: alle 562 vorhandenen unverändert grün, 1 neuer (Entfernen scheitert – deckt die nun doppelt vorhandene Prüfung ab); Abdeckung 98,82 / 95,49 / 98,28 / 98,98 % (vorher 98,81 / 95,45 / 98,26 / 98,97); E2E 15 bestanden; eslint, tsc, prettier, Build grün
 - **Phasentyp-Kontext:** UMSETZUNG
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** nein – Umbau innerhalb eines Moduls, Verhalten unverändert
@@ -371,7 +372,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1508,6 +1509,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Daten, Skript, Tests, ADR, Mockup
 - **Notizen:** Angelegt 2026-11-05 in 9.12.
+
+#### V.48: Figurenkarte erkennt „Wesen:“ im Fließtext
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Befund bei der Abnahme von 10.2, 2026-11-05; Eigentümer: „Vormerken“)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** ja – Ausgabe der Figurenkarte ändert sich (Kategorie 5, ADR-066, ADR-107)
+- **Empfohlene Klasse:** Entscheidung – berührt Regel-003 (Abschnittsregel) und ADR-107.
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-030
+- **Zu tun:** Befund 2026-11-05 (Server, nur Anzahlen): 11 Figuren in einer Welt des Eigentümers tragen das Wesen nicht als Abschnitt, sondern mitten in einem Absatz („… Wesen: offen und …“, meist im Abschnitt „Stand am Ende des Gesprächs“); ADR-107 nimmt nur den Abschnitt „Wesen“, „personality“ bleibt bei ihnen leer. In der Vorlage klären: wie weit „Wesen:“ reicht (Satzende, Absatzende, nächstes Etikett), ob der Text dann auch aus „description“ verschwindet, und ob stattdessen die Oberfläche anbietet, daraus einen Abschnitt zu machen. Bis dahin wirkt ein eigener Abschnitt „Wesen“ im Eintrag schon heute.
+- **Akzeptanzkriterien:** Vorlage mit Vergleich, ADR; Tests (Export, Rückimport); Eigentümer bestätigt an einer Karte.
+- **Betroffene Module:** canon (ggf. ui)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR, Mockup
+- **Notizen:** Angelegt 2026-11-05 bei der Abnahme von 10.2. Die Form „Wesen:“ im Fließtext erzeugt das Skriptorium selbst nicht (keine Fundstelle im Code).
 
 #### V.47: Favoriten ohne Anbieter kenntlich machen; verständliche Meldung statt „Unbekanntes Modell“
 

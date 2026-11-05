@@ -83,7 +83,7 @@ export function EntryArticle({
         }}
         onEdit={onEdit}
       />
-      {!compact && !guest && current.category === "figur" && (
+      {!compact && !guest && extractable(current) && (
         <AppearanceButton
           entry={current}
           onChanged={() => {
@@ -106,9 +106,18 @@ export function EntryArticle({
   );
 }
 
+/** Entries whose looks can be taken out: figures (7.16), places and items (10.3, ADR-108). */
+function extractable(entry: CanonEntry): boolean {
+  return (
+    entry.category === "figur" ||
+    entry.category === "ort" ||
+    entry.category === "gegenstand"
+  );
+}
+
 /**
- * "✨ Aussehen herauslösen" for a figure without a section "Aussehen" (step 7.16, ADR-078);
- * hidden once the entry names its looks.
+ * "✨ Aussehen herauslösen" for a figure, a place or an item without a section "Aussehen"
+ * (step 7.16, ADR-078; step 10.3, ADR-108); hidden once the entry names its looks.
  */
 function AppearanceButton({
   entry,

@@ -1,4 +1,4 @@
-"""Taking out the looks of a figure over the API (step 7.16, ADR-078)."""
+"""Taking out the looks of a figure, a place or an item over the API (7.16, 10.3)."""
 
 from pathlib import Path
 
@@ -52,17 +52,37 @@ def test_an_entry_too_large_for_the_budget_is_refused(
     assert provider.requests == []
 
 
-def test_an_entry_that_is_not_a_figure_is_refused(
-    writer: TestClient, provider: FakeProvider
-) -> None:
-    """Step 8.4 (ADR-083, D.18 B6): the request is refused before anything is sent."""
+def test_a_rule_is_refused(writer: TestClient, provider: FakeProvider) -> None:
+    """Steps 8.4 and 10.3 (ADR-083, ADR-108): refused before anything is sent."""
     writer.post(
         "/api/worlds/die-salzmark/entries",
-        json={"category": "ort", "name": "Karst", "body": "Hafenstadt am Salz."},
+        json={"category": "regel", "name": "Salzrecht", "body": "Wer Salz stiehlt, zahlt."},
+    )
+
+    response = writer.post("/api/worlds/die-salzmark/entries/salzrecht/appearance", json={})
+
+    assert response.status_code == 422
+    assert "Figuren, Orten und Gegenständen" in response.json()["detail"]
+    assert provider.requests == []
+
+
+def test_a_place_streams_its_looks_without_its_location(
+    writer: TestClient, provider: FakeProvider
+) -> None:
+    """Step 10.3 (ADR-108)."""
+    writer.post(
+        "/api/worlds/die-salzmark/entries",
+        json={
+            "category": "ort",
+            "name": "Karst",
+            "body": "Graue Mauern, grünes Licht.\n\n## Lage\n\nAuf der Klippe.",
+        },
     )
 
     response = writer.post("/api/worlds/die-salzmark/entries/karst/appearance", json={})
 
-    assert response.status_code == 422
-    assert "nur bei Figuren" in response.json()["detail"]
-    assert provider.requests == []
+    assert response.status_code == 200, response.text
+    system, user = provider.requests[0].messages
+    assert "eines Ortes" in system.content
+    assert "Graue Mauern" in user.content
+    assert "Klippe" not in user.content

@@ -29,6 +29,58 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.4 umgesetzt (lokal)
+
+- Zahlen im Fahrplan bei 10.4. Verhalten unverändert: alle vorhandenen Tests ohne Änderung grün, E2E 15.
+- Mini-Reibung: Nach dem ersten Zerlegen sank die Zweig-Abdeckung um 0,09 Punkte (95,45 → 95,36 %) – die Prüfung „Entfernen gelungen?“ steht jetzt in zwei Komponenten, ihr Fehlerzweig war nie getestet. Neuer Test „Entfernen scheitert“ und Bild als Prop statt `images[at] ?? ""` → 95,49 %. Zählskript für Hooks fand `useState<…>(` nicht (Generic vor der Klammer) – von Hand nachgezählt.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.4 begonnen, oberhalb der empfohlenen Klasse
+
+- Eigentümer: „Noch nicht“ zum PR für 10.3; dann „Ja, 10.4 beginnen“ auf die Empfehlung (10.4 öffnet 10.5–10.8). 10.3 → wartet auf Freigabe, damit nur 10.4 in Arbeit ist. 10.4 auf dem Zweig von 10.3, weil beide `EntryImages.tsx` ändern.
+- Empfohlene Klasse Routine, aktiv ist die Entscheidungs-Klasse (Opus 5.5, laut Systemkontext); Warnung zu Beginn gegeben. Keine Abgabe an einen Unteragenten: Der Umbau braucht den bereits geladenen Kontext von `EntryImages.tsx`, ein Unteragent müsste ihn neu lesen.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.3 umgesetzt (lokal)
+
+- Nach ADR-108 auf `feat/10.3-aussehen-orte-gegenstaende`; Zahlen im Fahrplan bei 10.3. Keine Bildschirmfotos – die Abnahme braucht ohnehin eine echte KI-Antwort im Betrieb (Schlüssel lokal nicht gültig).
+- Mini-Reibung: eigener Test erwartete Text nach `## Lage` außerhalb des Abschnitts – ein Abschnitt reicht bis zur nächsten Überschrift gleicher oder höherer Ebene (ADR-083); Beispiel berichtigt. Ersetzen per Python-Skript scheiterte an einem doppelt vorkommenden JSX-Ausschnitt (Figurenkarte und Knopf hatten dieselbe Bedingung) – mit Edit und mehr Kontext gelöst. ruff RUF002 (Gedankenstrich im Docstring) und RUF022 (`__all__` sortieren) behoben. Pre-Commit-Hook fand `mypy --strict` in einem Test (Art als `str` statt `Category`) – die lokale mypy-Prüfung lief nur über `src`; künftig `src tests` prüfen.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-108 „Aussehen herauslösen“ auch für Orte und Gegenstände (10.3)
+
+- Vorlage mit `mockup-10.3.html` (lokal, `.git/info/exclude`) und `ENTSCHEIDUNG ERFORDERLICH`; drei Auswahlfragen, Eigentümer jeweils die Empfehlung: Knopf im Eintrag und im Fenster „Bild erzeugen“, „Lage“ bleibt draußen (Server über `take_section`), daneben „✎ Selbst ergänzen“. Messung im Fahrplan bei 10.3. Reaktiv-Quote 0/10 (ADR-099 bis ADR-108).
+- Zweig `feat/10.3-aussehen-orte-gegenstaende` von `docs/10.2-zusammengefuehrt` (Doku-Commits gehen mit).
+
+### 2026-11-05 – [BEOBACHTUNG] „Wesen:“ im Fließtext → V.48
+
+- Server (nur Anzahlen und kurze Ausschnitte ohne Inhalt): 3 Figuren mit Abschnitt „Wesen“ (zwei Welten), 11 Figuren in einer Welt mit „Wesen: …“ mitten im Absatz. Die Messung zu 10.2 hatte nur Zeilen „- **Wesen:** …“ gezählt – die Form im Fließtext fehlte dort.
+- Eigentümer verstand die Frage im Kurzformat nicht; nach Erklärung mit Beispiel (Feld „personality“ bleibt leer, alles steht in „description“): „Vormerken“ → V.48, Landeplatz 10.11.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.2 abgenommen
+
+- Eigentümer an der heruntergeladenen Karte: „Wesen ist auch vorhanden.“ Auf dem Server nachgerechnet (nur Überschriften und Längen): „personality“ 450 Zeichen, „description“ mit Aussehen, Fähigkeiten, Geschichte, Beziehungen, Wort „Wesen“ dort 0-mal – kein doppelter Inhalt. 10.2 → ERLEDIGT. FR-030 war schon erledigt, keine Änderung in `docs/requirements.md`.
+- Offen: Antwort des Eigentümers zu V.48 („Wesen: …“ im Fließtext bei 11 Figuren einer Welt).
+
+### 2026-11-05 – [BEOBACHTUNG] 10.1 abgenommen
+
+- Eigentümer nach Neuladen: „Die Folgenliste entspricht jetzt 4 Bilder.“ – passt zur Vorschau auf dem Server. 10.1 → ERLEDIGT. FR-024 und FR-036 waren schon erledigt (10.1 nur Nachbar), keine Änderung in `docs/requirements.md`.
+- Offen: Abnahme 10.2 (Figurenkarte „Das Phantom“, Feld „personality“); Antwort des Eigentümers zu V.48 („Wesen: …“ im Fließtext bei 11 Figuren einer Welt).
+
+### 2026-11-05 – [GELÖST] Abnahme 10.1: alte Abfrage statt Folgenliste
+
+- Eigentümer beim Löschen von „Hannah Brandt“: nur die Frage „wirklich löschen?“, keine Folgenliste. Das ist wörtlich die alte Abfrage (`window.confirm` in `e809696`).
+- Geprüft: Server liefert das neue Bündel aus (`index-CmVil8ey.js` enthält den Dialog), einzige Löschstelle für Einträge ist `EntryForm` mit `DeleteDialog`; Vorschau für den Eintrag auf dem Server: 4 Bilder, 0 Markierungen, 0 Geschichten, 1 Erwähnung mit @ – der neue Dialog hätte das gezeigt.
+- Ursache (wahrscheinlich): Seite war vor dem Einspielen geöffnet; die Oberfläche lädt neuen Code erst beim Neuladen. Lösung: Seite neu laden. `index.html` kommt ohne `Cache-Control` (nur ETag/Last-Modified).
+
+### 2026-11-05 – [BEOBACHTUNG] 10.1 und 10.2 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039): `git archive main` → `app.neu`, `REVISION` `7900e9d`, Abbild `skriptorium:vorher` getaggt, `app.vorher` behalten, `docker compose build` und `up -d`.
+- Prüfung: `https://…/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: Container `(healthy)`, `REVISION` `7900e9d`, 0 Fehlerzeilen im Log der letzten 3 Minuten. Vorher lief `e809696`.
+- Offen: Abnahme 10.1 (Eintrag löschen, Folgenliste) und 10.2 (Figurenkarte, Feld „personality“) durch den Eigentümer. `docs/project-context.md` Status nachgezogen (stand noch auf Phase 9).
+
+### 2026-11-05 – [BEOBACHTUNG] 10.2 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #206 (mit den zwei Doku-Commits aus dem Abschluss von 10.1), CI vier Jobs grün (Python 1:43, Pre-Commit 2:02, E2E 2:14, TypeScript 2:27); einziger Hinweis der Plattform: Ubuntu-26-Umstellung, bekannt und erledigt (D.19). Zusammengeführt mit `--match-head-commit` → `7900e9d`.
+- Nicht eingespielt: Server läuft weiter `e809696`. 10.1 und 10.2 warten auf Einspielen und Abnahme; Doku-Nachtrag lokal auf `docs/10.2-zusammengefuehrt`, geht mit dem nächsten PR.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.2 umgesetzt (lokal)
 
 - Nach ADR-107 auf `feat/10.2-wesen-im-export` (abgezweigt von `docs/10.1-zusammengefuehrt`, damit die Doku-Commits mitgehen). Zahlen im Fahrplan bei 10.2. Keine Änderung an der Oberfläche, daher kein E2E-Lauf nötig und keine Bildschirmfotos; Abnahme über eine heruntergeladene Figurenkarte nach dem Einspielen.

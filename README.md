@@ -23,7 +23,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 0 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 2 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-11-05
@@ -101,7 +101,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 ## Nächste Schritte
 
 - ✅ **Phase 9** (abgeschlossen 2026-11-05): gegliederte Einträge und Beziehungen, Bilder vom Bedarf her mit Herkunft und Bild zu Bild, Modell je Aufgabe, Löschen und Archivieren, Seite „Verbrauch“ mit Cache-Treffern, Gast-Figuren mit Weltbezug, Kontexttreue belastbar bis etwa 30 Kapitel; Pflichtfrage: weiterbauen mit drei kleinen Umbauten (ADR-104).
-- 🟠 **10.1:** Löschen eines Kanon-Eintrags zeigt vorher, was in Geschichten mitgeht, und nimmt es mit (ADR-106); zusammengeführt, Einspielen und deine Abnahme offen.
+- ✅ **10.1** (erledigt 2026-11-05): Löschen eines Kanon-Eintrags zeigt vorher, was mitgeht, und nimmt es mit (ADR-106).
+- ✅ **10.2** (erledigt 2026-11-05): Die Figurenkarte für SillyTavern nimmt in „personality“ genau den Abschnitt „Wesen“ (ADR-107).
 - ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Veröffentlichung.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
