@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner.
+- **Aktiver Schritt:** 10.1 Löschkaskade für Kanon-Einträge – seit 2026-11-05, entschieden (ADR-106), Umsetzung.
 - **Nächster Schritt:** 10.1 Löschkaskade für Kanon-Einträge – Vorlage (Entscheidungs-Klasse). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -28,7 +28,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| ⚪ | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | offen | KI: Vorlage |
+| 🟠 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | in Arbeit seit 2026-11-05 (ADR-106), Umsetzung | KI |
 | ⚪ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | offen | KI: Vorlage |
 | ⚪ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | offen | KI: nach 10.2 |
 | ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
@@ -200,7 +200,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.1: Löschkaskade für Kanon-Einträge (V.43)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Bestandsaufnahme: `CanonService.delete_entry` entfernt Datei, Bilder und Kartenmarkierungen; Fakten, geführte Figuren und Gast-Verbindungen (samt Weltbezug) in Geschichten bleiben; Oberfläche fragt nur `window.confirm` (`ui/src/views/EntryForm.tsx`). Server 2026-11-05 (nur Anzahlen): 148 Einträge, 0 geführte Figuren, 0 Fakten, 1 Gast-Verbindung, 0 verwaiste Verweise. Mockup `mockup-10.1.html` (lokal) vorgelegt; Eigentümer: „Mitlöschen mit Folgenliste“, „Klick im Dialog“ → ADR-106. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Löschkaskade, destruktiv (Kategorie 4, `CLAUDE.md` Abschnitt 8, Kriterium 6)
