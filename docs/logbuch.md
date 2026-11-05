@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.7 abgenommen
+
+- Eigentümer: „Aussehen, Kleidung und Umgebung passen zum Bild und der Haken verschwindet auch wieder, nachdem man Weiterschreiben angeklickt hat.“ 10.7 → ERLEDIGT; Phase 10: 6 von 11 (10.6 weiter in Abnahme).
+- Token je Bild nachgeprüft (Server, nur Zahlen): erste Anfrage mit Bildern 2026-11-05 23:33 UTC mit Qwen 3.8 Max, 25.703 Token ein; die Anfragen davor mit Grok 4.5 lagen bei 23.162–23.240. Kein sauberer Vergleich (anderes Modell und Zählweise, Bildzahl wird nicht gespeichert) – die Schätzung 2.500 je Bild bleibt; ein Vergleich gleiche Stelle, gleiches Modell, mit und ohne Haken würde es klären.
+
 ### 2026-11-06 – [BEOBACHTUNG] 10.7, D.1 und D.27 eingespielt
 
 - Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `8e87aab` (enthält 10.7, D.1, D.27), Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `5aa544a`. Erster Bau mit `node:26.12.1-slim` auf dem Server – ohne Auffälligkeit.

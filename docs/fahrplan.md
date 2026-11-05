@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 eingespielt (Stand `8e87aab`, 2026-11-06), wartet auf die Abnahme (Bilder beim Schreiben mitschicken). 10.6 eingespielt (seit `5aa544a`), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
-- **Nächster Schritt:** 10.6 und 10.7 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner in Arbeit. D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 erledigt 2026-11-06 (eingespielt `8e87aab`). 10.6 eingespielt (seit `5aa544a`), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
+- **Nächster Schritt:** 10.6 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -34,7 +34,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
 | 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | wartet auf Abnahme (ADR-110), eingespielt `5aa544a` | du: Bild einfügen, E-Book prüfen |
-| 🔵 | 10.7 | Bilder beim Schreiben mitschicken (V.33) | wartet auf Abnahme (ADR-111), eingespielt `8e87aab` | du: Bilder beim Schreiben ausprobieren |
+| ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ⚪ | 10.10 | Textqualität von Hermes 4 messen (V.41) | offen | KI (Cloud-Session) |
@@ -302,7 +302,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.7: Bilder beim Schreiben mitschicken (V.33)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE – zusammengeführt (PR #211 → `39c9db4`), eingespielt 2026-11-06 (`8e87aab`); Abnahme offen; Token je Bild aus dem Verbrauch nachprüfen (Vorlage freigegeben 2026-11-05, ADR-111: Haken bei den Einträgen, nur Hauptbild, höchstens 4, Text gilt)
+- **Status:** ✅ ERLEDIGT 2026-11-06 – zusammengeführt (PR #211 → `39c9db4`), eingespielt 2026-11-06 (`8e87aab`); Eigentümer: „Aussehen, Kleidung und Umgebung passen zum Bild und der Haken verschwindet auch wieder, nachdem man Weiterschreiben angeklickt hat.“ Token je Bild: erste Anfrage mit Bildern (Qwen 3.8 Max, 25.703 Token ein gegen rund 23.200 bei den Grok-Anfragen davor) nicht eindeutig – anderes Modell, Bildzahl nicht gespeichert; Schätzung 2.500 bleibt (Vorlage freigegeben 2026-11-05, ADR-111: Haken bei den Einträgen, nur Hauptbild, höchstens 4, Text gilt)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Anfrage-Zusammenstellung (Kategorie 1)
