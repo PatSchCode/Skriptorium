@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.6 umgesetzt (lokal)
+
+- Nach ADR-110 auf `feat/10.6-bilder-im-manuskript`; Zahlen im Fahrplan bei 10.6.
+- Nachtrag zu ADR-110 während der Umsetzung (vor jedem Merge): Ältere Leseprogramme zeigen kein WebP, Eintragsbilder sind WebP, Pillow fehlt im Container → Kapitelbilder als JPEG; die Kopie aus dem Kanon macht der Browser (lädt, wandelt, lädt hoch), die Route `from-entry` entfällt.
+- Mini-Reibungen: (1) Werkzeugzeile des Kapitels ist ein `span` im Schreibbereich – das Fenster „Bild erzeugen“ passte nicht hinein; Knopf (`StoryPictureButton`) und Fenster (`StoryPictureDialog`) getrennt, Fenster über dem Manuskript. (2) CodeMirror erlaubt Block-Dekorationen nur aus einem `StateField`, nicht aus einem Plugin. (3) `describeError` macht aus jedem Nicht-API-Fehler „Keine Verbindung zum Server.“ – auch für unlesbare Bilder in bestehenden Wegen (Eintragsbilder); im neuen Weg eigener Text, der Altbestand ist unverändert → V.50 (Landeplatz 10.11). (4) Zwei Leerzeichen in einer Beschriftung nach Entfernen von Klammern – Leerraum zusammengefasst.
+- Abdeckung der Oberfläche leicht gesunken (Zweige 95,51 → 95,31 %), über der Schwelle 94 %; drei Tests nachgelegt (Seite der Geschichte, Fehler beim Speichern, volle Herkunft).
+
 ### 2026-11-05 – [ADR-ANGELEGT] ADR-110 Bilder im Manuskript und im E-Book (10.6)
 
 - Vorlage mit `mockup-10.6.html` (lokal) und `ENTSCHEIDUNG ERFORDERLICH`; vier Auswahlfragen, Eigentümer jeweils die Empfehlung. Mini-Reibung beim Messen: Kapitel liegen unter `stories/<id>/chapters/`, nicht `kapitel/` – zwei Fehlversuche, dann in `manuscript/layout.py` nachgesehen.

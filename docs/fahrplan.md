@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.6 Bilder im Manuskript und im E-Book – seit 2026-11-05, entschieden (ADR-110), Umsetzung läuft.
+- **Aktiver Schritt:** 10.6 Bilder im Manuskript und im E-Book – seit 2026-11-05, entschieden (ADR-110), umgesetzt (lokal); PR auf Wort des Eigentümers, dann Einspielen und E-Book mit Bild prüfen.
 - **Nächster Schritt:** 10.6 umsetzen, PR nach Freigabe, Einspielen, E-Book mit Bild prüfen; danach 10.7 Bilder beim Schreiben – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -65,7 +65,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -296,6 +296,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** manuscript, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-110 (mit Nachtrag: Kapitelbilder als JPEG, Kopie aus dem Kanon im Browser, keine Route `from-entry`). `manuscript`: `pictures.py`, Ablage `bilder/`, drei Methoden, E-Book mit `<figure>`. `context`: `readable`. `api`: drei Routen (84 → 87). `ui`: `pictures.ts` (Zeile, Einfügestelle), `picturePreviews` (Block-Widget), `StoryPictureButton`/`StoryPictureDialog`, `CanonPicturePicker`, `ManuscriptEditor` mit `pictureSrc`/`insertion`. Tests: Python 18 neue (Zeilenform, Ablage, E-Book, fehlende Datei, KI-Anfragen, Routen), Sicherheitstest Routenzahl; 1189 bestanden, 99,87 %, geänderte Dateien 100 %. Oberfläche 11 neue, 580 bestanden, 98,77 / 95,31 / 98,28 / 98,91 % (vorher 98,83 / 95,51 / 98,30 / 98,98; über allen Schwellen). E2E 15. Vertragsdatei: `addStoryPicture`. Nicht im Browser angesehen (kein lokaler Zugang mit Daten) – Sichtprüfung bei der Abnahme.
 - **Notizen:** Aus V.23.
 
 #### 10.7: Bilder beim Schreiben mitschicken (V.33)
@@ -373,7 +374,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1510,6 +1511,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Daten, Skript, Tests, ADR, Mockup
 - **Notizen:** Angelegt 2026-11-05 in 9.12.
+
+#### V.50: Verständliche Meldung bei unlesbaren Bildern
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Befund in 10.6, 2026-11-05)
+- **Phasentyp-Kontext:** UMSETZUNG
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** nein – Fehlertext in der Oberfläche (Bugfix)
+- **Empfohlene Klasse:** Routine – Meldungstext ohne Schnittstelle.
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Befund 2026-11-05: `describeError` (`ui/src/api/core.ts`) macht aus jedem Fehler, der keine Antwort des Servers ist, „Keine Verbindung zum Server.“ – auch wenn `shrinkImage` ein Bild nicht lesen kann („Dieses Bild kann der Browser nicht lesen.“). Betroffen: Hochladen von Eintragsbildern, Titelbildern, Karten und Kapitelbildern. Eigene Meldung für Fehler beim Lesen und Verkleinern zeigen.
+- **Akzeptanzkriterien:** Tests je Weg; Eigentümer bestätigt.
+- **Betroffene Module:** ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests
+- **Notizen:** Angelegt 2026-11-05 in 10.6 (nicht nebenbei behoben: keine heimliche Scope-Erweiterung).
 
 #### V.49: Hineinzoomen und Originalgröße in der Großansicht
 
