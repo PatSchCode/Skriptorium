@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [ERLEDIGT] Abnahme 9.13
+
+- Eigentümer hat Weltbezug und „Einpassen vorschlagen“ im Programm geprüft: „Hat funktioniert.“ → 9.13 `[ERLEDIGT]`. Phase 9: 14 von 15; offen nur 9.15 mit Phasengrenze.
+
 ### 2026-11-05 – [BEOBACHTUNG] Deployment `e809696` (9.13)
 
 - Auf Anweisung des Eigentümers („Erstmal einspielen“). Baum von `main` gleich dem in PR #202 geprüften Baum (`391420f`). Runbook Abschnitt 7: `REVISION` `e809696`, Rückweg `skriptorium:vorher` = `7319b26`. `/api/health` 200 nach ca. 55 s (nur über HTTPS abgefragt), Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `REVISION` `e809696`, 0 Fehlerzeilen in den ersten Minuten.
