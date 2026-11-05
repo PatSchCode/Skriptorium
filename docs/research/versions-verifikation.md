@@ -89,8 +89,8 @@ Transitive Lizenzen (64 Pakete im Lock): MIT, BSD-2/3-Clause, Apache-2.0, MPL-2.
 | typescript-eslint | 8.70.1 | 8.70.1 | Linie 8: 2024-07-31 | neueste Minor mit Patch | Peer `typescript <6.1.0`, `eslint ^10` | MIT |
 | eslint-plugin-react-hooks | 7.1.1 | 7.1.1 | Linie 7: 2025-10-08 | neueste Minor mit Patch | Peer `eslint ^10` | MIT |
 | prettier | 3.9.9 | 3.9.9 | Linie 3: 2023-07-05 | neueste Minor mit Patch | – | MIT |
-| vitest | 4.1.11 | 5.0.2 | Linie 5: 2026-09-03 | **Linie 5 unter 6 Monaten** → Linie 4, neueste Minor mit Patch | Peer `vite ^8`, Node 24 | MIT |
-| @vitest/coverage-v8 | 4.1.11 | 5.0.2 | wie vitest | folgt vitest | Peer `vitest 4.1.11` | MIT |
+| vitest | 4.1.12 (seit 2026-11-06, D.27; vorher 4.1.11) | 5.0.2 | Linie 5: 2026-09-03 | **Linie 5 unter 6 Monaten** → Linie 4, neueste Minor mit Patch | Peer `vite ^8`, Node 24 | MIT |
+| @vitest/coverage-v8 | 4.1.12 | 5.0.2 | wie vitest | folgt vitest | Peer `vitest 4.1.12` | MIT |
 | @types/react | 19.2.18 | 19.3.0 | Linie 19 | passend zu React 19.2.8; 19.3 ohne Patch | – | MIT |
 | @types/react-dom | 19.2.7 | 19.3.0 | Linie 19 | wie oben | – | MIT |
 
