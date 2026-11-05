@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.6 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #210, CI vier Jobs grün (Python 1:22, Pre-Commit 2:12, TypeScript 2:25, E2E 2:34), keine Hinweise außer der Ubuntu-26-Meldung. Zusammengeführt mit `--match-head-commit` → `5aa544a`. Server läuft weiter `56e5d1b`. Doku-Nachtrag lokal auf `docs/10.6-zusammengefuehrt`.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.6 umgesetzt (lokal)
 
 - Nach ADR-110 auf `feat/10.6-bilder-im-manuskript`; Zahlen im Fahrplan bei 10.6.
