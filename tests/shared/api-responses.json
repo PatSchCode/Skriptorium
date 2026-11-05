@@ -1081,7 +1081,8 @@
     "type": "Omit<Extract<WriteEvent, { type: \"start\" }>, \"type\">",
     "body": {
       "model": "x-ai/grok-4.7",
-      "estimated_tokens": 1472
+      "estimated_tokens": 1472,
+      "images": 0
     }
   },
   "writeText": {

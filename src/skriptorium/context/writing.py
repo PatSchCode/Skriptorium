@@ -179,12 +179,20 @@ def fixed_parts(request: Request) -> list[Part]:
     return [part for source in _FIXED_SOURCES for part in source(request)]
 
 
-def closing_parts(request: Request, instruction: str, length: Length) -> list[Part]:
-    """Seam note, instruction, requirements and the reminder of the character mode."""
+def closing_parts(
+    request: Request, instruction: str, length: Length, pictured: Sequence[str] = ()
+) -> list[Part]:
+    """Seam note, pictures, instruction, requirements and the reminder of the character mode.
+
+    ``pictured`` names the entries whose images go along, in their order (step 10.7, ADR-111);
+    without them the parts stay exactly as before.
+    """
     parts = [
         Part("anweisung", "Anweisung", f"# Anweisung\n\n{instruction.strip()}"),
         Part("anweisung", "Vorgaben", requirements(length)),
     ]
+    if pictured:
+        parts.insert(0, Part("bilder", "Bilder", pictures(pictured)))
     note = seam(request.current)
     if note:
         parts.insert(0, Part("anweisung", "Anschluss", note))
@@ -192,6 +200,22 @@ def closing_parts(request: Request, instruction: str, length: Length) -> list[Pa
     if led:
         parts.append(Part("schreibweise", "Erinnerung Figuren-Schreibweise", _reminder(led)))
     return parts
+
+
+def pictures(names: Sequence[str]) -> str:
+    """Which image belongs to which entry, and that the canon text wins (ADR-111).
+
+    The images themselves go along with the request as image parts; ``api`` attaches them.
+    """
+    listed = "\n".join(f"- Bild {number}: {name}" for number, name in enumerate(names, 1))
+    return (
+        "# Bilder\n\n"
+        "Zu dieser Anfrage gehören Bilder genannter Kanon-Einträge, in dieser Reihenfolge:\n\n"
+        f"{listed}\n\n"
+        "Nutze sie für Aussehen, Kleidung, Licht und Umgebung. Wo ein Bild dem Kanon-Text "
+        "widerspricht, gilt der Text. Erwähne die Bilder im Text nicht; sie zeigen nur, wie es "
+        "in der Geschichte aussieht."
+    )
 
 
 def remaining_room(required: Sequence[Part], budget: int) -> int:

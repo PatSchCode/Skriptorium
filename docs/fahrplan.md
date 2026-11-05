@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.6 Bilder im Manuskript und im E-Book – seit 2026-11-05, entschieden (ADR-110), umgesetzt (lokal); PR auf Wort des Eigentümers, dann Einspielen und E-Book mit Bild prüfen.
-- **Nächster Schritt:** 10.6 umsetzen, PR nach Freigabe, Einspielen, E-Book mit Bild prüfen; danach 10.7 Bilder beim Schreiben – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.7 Bilder beim Schreiben – seit 2026-11-05, entschieden (ADR-111), umgesetzt (lokal); PR auf Wort des Eigentümers, dann Einspielen und Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
+- **Nächster Schritt:** 10.6 abnehmen (Eigentümer); danach 10.7 Bilder beim Schreiben – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -33,8 +33,8 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | erledigt 2026-11-05 (ADR-108) | – |
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
-| 🟠 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | in Arbeit seit 2026-11-05 (ADR-110) | KI: umsetzen |
-| ⚪ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | offen | KI: nach 10.4 |
+| 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | wartet auf Abnahme (ADR-110), eingespielt `5aa544a` | du: Bild einfügen, E-Book prüfen |
+| 🟠 | 10.7 | Bilder beim Schreiben mitschicken (V.33) | umgesetzt (lokal, ADR-111) | du: PR freigeben |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ⚪ | 10.10 | Textqualität von Hermes 4 messen (V.41) | offen | KI (Cloud-Session) |
@@ -284,7 +284,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.6: Bilder im Manuskript und im E-Book (V.23)
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Eintragsbilder. Vergleich `mockup-10.6.html` (lokal) vorgelegt; Eigentümer: Hochladen, Erzeugen und Kanon; Kopie; Zeile mit Vorschau; Bilder bleiben bis zum Löschen der Geschichte → ADR-110. Umsetzung läuft
+- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #210, `5aa544a`, CI vier Jobs grün; eingespielt 2026-11-05; Abnahme offen) – Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Eintragsbilder. Vergleich `mockup-10.6.html` (lokal) vorgelegt; Eigentümer: Hochladen, Erzeugen und Kanon; Kopie; Zeile mit Vorschau; Bilder bleiben bis zum Löschen der Geschichte → ADR-110. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Datenmodell (Bildverweise im Kapiteltext, Kategorie 4), Editor
@@ -301,7 +301,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.7: Bilder beim Schreiben mitschicken (V.33)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (Vorlage freigegeben 2026-11-05, ADR-111: Haken bei den Einträgen, nur Hauptbild, höchstens 4, Text gilt)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Anfrage-Zusammenstellung (Kategorie 1)
@@ -313,6 +313,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** context, ai_gateway, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-111. `context`: Baustein `bilder` (`pictures`, vor der Anweisung; ohne Bilder unverändert). `api`: `WriteOrder.images`, Auswahl `_pictured` (Hauptbild, höchstens `MAX_PICTURES` = 4, Reihenfolge der Nennung inkl. Szene und Gäste), Bildteile an der letzten Nachricht, Sperre ohne Bildlesen, `start` trägt `images`, Schätzung +`PICTURE_TOKENS` (2.500) je Bild. `ui`: `PictureSwitch` (Haken, Vorschauen, Aufpreis, „ohne Bild: …“), Verbrauchszeile „mit N Bildern“. Tests: 4 neue in `tests/api/test_writing_pictures.py` (1.193 Python-Tests, 99,87 %), 5 neue in `ui/src/views/WritingPictures.test.tsx` (585 Komponenten-Tests; Zeilen 98,92 %, Zweige 95,25 %), 15 End-to-End-Tests grün. Nicht im Browser angesehen (lokal keine Daten, kein Schlüssel). Offen: Token je Bild nach den ersten Anfragen aus dem Verbrauch nachprüfen.
 - **Notizen:** Aus V.33.
 
 #### 10.8: Zweiter Bildanbieter (V.24)

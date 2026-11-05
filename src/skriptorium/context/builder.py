@@ -120,12 +120,14 @@ class ContextBuilder:
         references: Sequence[str] = (),
         budget: int = MAX_BUDGET,
         length: Length = DEFAULT_LENGTH,
+        pictured: Sequence[str] = (),
     ) -> BuiltContext:
         """Build the request for writing on in ``chapter_number``.
 
         ``references`` are identifiers of canon entries named with ``@``: entries of the story's
         world or guests bound into the story. ``length`` is the length the author chose for the
-        proposal (step 5.15).
+        proposal (step 5.15). ``pictured`` names the entries whose images ``api`` attaches, in
+        their order (step 10.7, ADR-111); the images do not count against ``budget``.
 
         Raises:
             InvalidInput: Budget outside 1-30,000 or empty instruction.
@@ -139,7 +141,7 @@ class ContextBuilder:
         request = self._load_request(world_id, story_id, chapter_number, references)
         fixed = fixed_parts(request)
         state = story_state(request.story, request.chapters, chapter_number)
-        closing = closing_parts(request, instruction, length)
+        closing = closing_parts(request, instruction, length, pictured)
         remaining = remaining_room([*fixed, *state, *closing], budget)
         canon_room = min(remaining, math.floor(budget / SAFETY_MARGIN * CANON_SHARE))
         canon = _filler_parts(request, canon_room)

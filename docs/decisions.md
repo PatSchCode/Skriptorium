@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-110). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-111). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -130,12 +130,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-110). Aus welchem Schritt ein ADR stammt, steh
 | 108 | 2026-11-05 | Aktiv | OPERATIV | UI | Anfrage | „Aussehen herauslösen“ auch für Orte und Gegenstände; „Lage“ bleibt draußen |
 | 109 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Auflösung und Qualität bei „Bild erzeugen“; erzeugte Bilder bis 4.096 Pixel |
 | 110 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Bilder im Manuskript und im E-Book |
+| 111 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | Anfrage, API | Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-101 bis ADR-110 – keiner reaktiv: ADR-101, ADR-102 und ADR-106 bis ADR-110 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-102 bis ADR-111 – keiner reaktiv: ADR-102 und ADR-106 bis ADR-111 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2618,6 +2619,30 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Sollen Bilder zur Geschichte gehören, auch wenn sie aus dem Kanon stammen – und willst du sie beim Schreiben sehen?“ → ja, als Kopie, mit Vorschau.
 - **Konfidenz zum Zeitpunkt:** mittel-hoch – Standard-Markdown, das E-Book kennt Bilder schon vom Titelbild; neu ist die Vorschau im Editor. Umkehrbarkeit mittel (die Zeilen stehen dann in Kapiteln, bleiben aber lesbarer Text).
 - **Konsequenzen:** FR-034, FR-035; Tests für Ablage, Kopie, Routen, E-Book, Anfrage ohne Bildzeilen und den Editor; E-Book mit Bild in einem Leseprogramm geprüft (Abnahme). Verworfen: nur hochladen/erzeugen (Umweg über Herunterladen), Verweis auf den Eintrag (Lücke im E-Book nach Löschen), nur Zeile (Bild erst im E-Book sichtbar), Löschen beim Speichern (Rückgängig verlöre das Bild).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-111: Bilder beim Schreiben mitschicken (10.7)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Vergleich `mockup-10.7.html` vorher/nachher; Auswahlfragen: „Bei den Einträgen“, „Nur das Hauptbild“, „Höchstens 4“, „Der Text gilt“ – jeweils die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.7 – Vorlage zu Beginn vorgesehen, ADR-105; nicht reaktiv)
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Kontext-Zusammenstellung (1: Bildteile in der Schreib-Anfrage), API-Vertrag (5, additiv: Feld `images` im Schreib-Auftrag und im Ereignis `start`)
+- **Kontext:** V.33 (aus 7.15, ADR-074). Beim Schreiben gehen nur Texte an die KI; Bilder an Kanon-Einträgen sieht sie nur beim „Bild beschreiben“. Server 2026-11-05 (nur Anzahlen): 23 Einträge mit Bildern (20 mit einem, 2 mit zwei, 1 mit sechs), Bilddateien im Median 109 KB, höchstens 473 KB. Grok 4.6, Grok 4.7 und Qwen 3.8 Max lesen Bilder, Hermes 4 nicht (Modellliste OpenRouter 2026-11-05). Eine Bildbeschreibung mit Grok 4.6 kostete 2.788 Token Eingabe, davon rund 200 Text – also etwa 2.500 Token je Bild (eine Messung).
+- **Optionen:** Schalter bei den genannten Einträgen / hinter „⋯“. Hauptbild je Eintrag / alle Bilder. Obergrenze 4 / 2 / keine. Bei Widerspruch gilt der Kanon-Text / das Bild.
+- **Entscheidung:**
+  - **Auswahl:** je genanntem Eintrag (`@`-Verweise der Anweisung, danach Ort und Figuren einer neuen Szene; Gäste eingeschlossen) nur das Hauptbild (das erste), höchstens **4** Bilder in der Reihenfolge der Nennung. Einträge ohne Bild werden übergangen.
+  - **Schalter:** Haken „Bilder mitschicken“ unter „Herangezogen:“, mit kleinen Vorschauen und geschätztem Aufpreis; er erscheint nur, wenn ein genannter Eintrag ein Bild hat, ist bei jeder Anfrage zuerst aus und nach dem Senden wieder aus (nie automatisch). Liest das gewählte Modell keine Bilder, ist er gesperrt, mit Hinweis.
+  - **Anfrage:** `context` setzt vor die Anweisung einen Teil „Bilder“, der die Bilder der Reihe nach den Einträgen zuordnet und festlegt: Bilder ergänzen Aussehen, Kleidung, Licht und Umgebung; bei Widerspruch gilt der Kanon-Text. `api` hängt die Bilder an die letzte Nachricht wie beim „Bild beschreiben“ (ADR-074); `context` kennt `ai_gateway` weiterhin nicht. Ohne Haken bleibt die Anfrage Zeichen für Zeichen gleich.
+  - **Budget:** Bilder zählen nicht gegen das Text-Budget von 30.000 Token, sie kommen obendrauf; die geschätzte Größe (Ereignis `start`) rechnet je Bild 2.500 Token hinzu. Ein Modell, das keine Bilder liest, lehnt der Server mit Meldung ab.
+  - **Anzeige:** Die Verbrauchszeile unter dem Vorschlag nennt „mit N Bildern“. Gespeichert wird nichts davon; die Verbrauchsliste zählt die Anfrage wie jede andere als `schreiben`. Die vollständige Anfrage festzuhalten bleibt 10.9.
+- **Vision-Frage, die entschied:** „Soll die KI beim Schreiben sehen, wie deine Figuren und Orte aussehen – und wer hat recht, wenn Bild und Text sich widersprechen?“ → ja, auf Knopfdruck, der Text hat recht.
+- **Konfidenz zum Zeitpunkt:** mittel – der Weg ist vom „Bild beschreiben“ erprobt; die Wirkung auf den Text und die Token je Bild sind erst einmal gemessen. Umkehrbarkeit billig (Schalter, nichts gespeichert).
+- **Konsequenzen:** FR-035; Tests für Auswahl, Obergrenze, Gäste, Szene, Sperre ohne Bildlesen, unveränderte Anfrage ohne Haken und die Oberfläche; die Token je Bild nach den ersten Anfragen aus dem Verbrauch nachprüfen. Probe nach Regel-002 entfällt: Ohne Haken bleibt die Anfrage gleich (Test), mit Haken entscheidet der Eigentümer im Alltag. Verworfen: Schalter hinter „⋯“ (erst nach Klick sichtbar), alle Bilder eines Eintrags (Kosten vervielfachen sich ohne Nutzen), Grenze 2 (Szene mit drei Figuren unvollständig), keine Grenze, Bild vor Text (Kanon ist die Quelle).
 - **Abgeleitete Regel:** keine
 
 ---

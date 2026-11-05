@@ -91,7 +91,9 @@ export function ProposalBlock({
               </button>
             )}
             {usage !== null && (
-              <span className="note cost">{describeUsage(usage)}</span>
+              <span className="note cost">
+                {describeUsage(usage, flow.pictures)}
+              </span>
             )}
           </div>
         </>

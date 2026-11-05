@@ -107,6 +107,8 @@ class WriteIn(BaseModel):
     model: str | None = None
     # Length of the proposal: kurz, mittel or lang (step 5.15).
     length: Length = DEFAULT_LENGTH
+    # Send the main images of the named entries along (step 10.7, ADR-111).
+    images: bool = False
 
 
 class TurnIn(BaseModel):
@@ -245,6 +247,7 @@ async def write(
         scene,
         model,
         body.length,
+        body.images,
     )
     prepared = prepare_request(
         found.canon, found.manuscript, found.context, order, models=found.catalog

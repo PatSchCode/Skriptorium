@@ -14,6 +14,8 @@ export interface WriteOrder {
   model: string;
   /** Missing: the server's default "mittel". */
   length?: WriteLength;
+  /** Send the main images of the named entries along (step 10.7, ADR-111); missing: no. */
+  images?: boolean;
 }
 
 /** Why a proposal ended without `done`; "verbindung" means the stream broke off. */
@@ -26,7 +28,8 @@ export type WriteErrorKind =
 
 /** Events of the proposal stream (Server-Sent Events of the write endpoint). */
 export type WriteEvent =
-  | { type: "start"; model: string; estimated_tokens: number }
+  /** `images`: how many images went along (step 10.7, ADR-111). */
+  | { type: "start"; model: string; estimated_tokens: number; images: number }
   | { type: "text"; text: string }
   /** The AI's note that it changed an instruction contradicting the canon (step 4.14). */
   | { type: "hinweis"; text: string }

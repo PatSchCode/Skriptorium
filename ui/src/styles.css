@@ -2725,3 +2725,24 @@ li.guest {
   width: 100%;
   box-sizing: border-box;
 }
+
+/* "Bilder mitschicken" under the named entries (step 10.7, ADR-111). */
+.picture-switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.picture-thumbs {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.picture-thumbs img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+}
