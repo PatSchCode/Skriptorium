@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] PR #202 zusammengeführt (9.13), Einspielen später
+
+- Eigentümer gab die Bildschirmfotos frei („Ja, PR und Merge“); PR #202 angelegt, CI 4 von 4 grün, Protokoll ohne neue Warnung (nur die von Tests ausgelösten Zugangs- und Schlüsselwarnungen). Als Merge-Commit zusammengeführt (`e809696`). Einspielen: Eigentümer „Später“.
+
 ### 2026-11-05 – [BEOBACHTUNG] 9.13 umgesetzt (lokal), Bildschirmfotos zur Abnahme
 
 - Umsetzung nach ADR-102 auf `feat/9.13-gaeste`; Einzelheiten und Zahlen im Fahrplan bei 9.13. Python 1123 bestanden (100 % Zeilen), Oberfläche 558, E2E 15; ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün.
