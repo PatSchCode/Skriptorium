@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [ONBOARDING-VALIDATION] Node 26 (D.1)
+
+- Frischer Worktree von `9fa8665`: `scripts/session-start.sh` lud Node 26.12.1 (SHA-256 passt), `npm ci`-Stand mit 270 Paketen, Pre-Commit-Hook; danach `npm run build` grün, 585/585 Komponenten-Tests, Stichprobe 152 Python-Tests (`tests/context`). Worktree danach entfernt. Kein Befund.
+
 ### 2026-11-05 – [ADR-ANGELEGT] ADR-112 Node 26 (D.1), umgesetzt (lokal)
 
 - Versionstabelle vorgelegt (Quellen: `schedule.json`, `dist/index.json`, npm-Registry, Docker Hub, CI von Vite und Vitest); Eigentümer: „26.12.1“ (Empfehlung nach der Reiferegel; 26.13.0 ohne Patch). Reaktiv-Quote 0/10 (ADR-103 bis ADR-112).
