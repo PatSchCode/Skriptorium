@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.3 abgenommen
+
+- Probe des Eigentümers mit echter KI im Betrieb: Herauslösen klappt, neuer Abschnitt „Aussehen“, Vorschlag nur Sichtbares, Übernehmen funktioniert. 10.3 → ERLEDIGT. FR-035 schon in 10.3 ergänzt. Phase 10: 4 von 11.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.3 und 10.4 eingespielt
 
 - Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `1a46b59`, Abbild `skriptorium:vorher` und `app.vorher` als Rückweg. Vorher lief `7900e9d`.

@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. 10.4 erledigt; 10.3 eingespielt (Stand `1a46b59`, 2026-11-05), wartet auf die Probe mit echter KI durch den Eigentümer.
-- **Nächster Schritt:** 10.3 erproben (Eigentümer); danach 10.5 Auflösung und Qualität – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner in Arbeit. 10.3 und 10.4 erledigt (eingespielt Stand `1a46b59`, 2026-11-05).
+- **Nächster Schritt:** 10.5 Auflösung und Qualität – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,13 +24,13 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 
-**Phase 10: 3 von 11 erledigt.**
+**Phase 10: 4 von 11 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
 | ✅ | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | erledigt 2026-11-05 (ADR-106) | – |
 | ✅ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | erledigt 2026-11-05 (ADR-107) | – |
-| 🔵 | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | wartet auf Abnahme (ADR-108), eingespielt `1a46b59` | du: Probe an einem Ort oder Gegenstand |
+| ✅ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | erledigt 2026-11-05 (ADR-108) | – |
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
 | ⚪ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | offen | KI: nach 10.4 |
 | ⚪ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | offen | KI: nach 10.4 |
@@ -234,7 +234,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.3: „Aussehen herauslösen“ auch für Orte und Gegenstände (V.39)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #207, `1a46b59`, CI vier Jobs grün; eingespielt 2026-11-05; Probe mit echter KI durch den Eigentümer offen) – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
+- **Status:** ✅ ERLEDIGT (2026-11-05) – zusammengeführt PR #207 (`1a46b59`), CI vier Jobs grün, eingespielt; Probe mit echter KI durch den Eigentümer im Betrieb: Herauslösen klappt, neuer Abschnitt „Aussehen“ im Eintrag, Vorschlag nur Sichtbares ohne Erfundenes, Übernehmen funktioniert („Ja, es hat alles funktioniert“). Vorher – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.2
 - **Freigabepflichtig:** ja – ändert ADR-083 und die Anweisung an die KI
