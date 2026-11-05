@@ -28,7 +28,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| 🟠 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | in Arbeit seit 2026-11-05 (ADR-106), Umsetzung | KI |
+| 🟠 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | in Arbeit seit 2026-11-05 (ADR-106), lokal umgesetzt | du: Bildschirmfotos freigeben |
 | ⚪ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | offen | KI: Vorlage |
 | ⚪ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | offen | KI: nach 10.2 |
 | ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
@@ -213,6 +213,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Aus V.43 und U.3 der Bewertung (ADR-104).
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-106. `manuscript`: `remove_entry_uses` (Gast-Verbindung, geführte Figur, Fakten; gemeinsamer Helfer mit `remove_guest_world`). `api/flows/removal.py`: `entry_deletion` (Bilder, Markierungen, betroffene Geschichten der eigenen und anderer Welten) und `delete_entry_with_traces` mit der Regel aus ADR-098 (Spuren bleiben, wo die Kennung in derselben Geschichte einen anderen Eintrag meinen kann). Neue Route `GET …/entries/{eintrag}/deletion-preview`; `DELETE …/entries/{eintrag}` nimmt die Spuren mit; Routen 83 → 84. `ui`: Dialog mit Folgenliste (`EntryDeletionList`) statt `window.confirm`, `DeleteDialog` ohne Eintippen bei fehlendem Namen, Erwähnungen mit `@` aus „Verweise hierher“. Tests: Python 6 neue (`tests/api/test_entry_deletion.py`) und 3 angepasste (Archivtest auf von Hand gelöschte Datei, Routenzahl, Vertragsdatei um `entryDeletion`); 1129 bestanden, Abdeckung 100 % Zeilen, `removal.py` und `extras.py` 100 %. Oberfläche 3 neue (`EntryDeletion.test.tsx`), 2 angepasste (`views.test.tsx`); 561 bestanden, 98,81 / 95,44 / 98,25 / 98,97 %. E2E 15 bestanden. Bildschirmfotos zur Abnahme vorgelegt.
 
 #### 10.2: Abschnittsregel im Server nutzen; SillyTavern-Export liest „Wesen“ (V.38)
 

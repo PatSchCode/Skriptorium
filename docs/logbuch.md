@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.1 umgesetzt (lokal), Bildschirmfotos zur Abnahme
+
+- Umsetzung nach ADR-106 auf `feat/10.1-loeschkaskade`; Zahlen im Fahrplan bei 10.1. ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün; Build vom Projektordner, E2E 15 grün.
+- Mini-Reibung: Der Archivtest aus 9.9 nutzte das alte Verhalten (gelöschter Eintrag ließ die Gast-Verbindung stehen), um den „verschwundenen Gast“ zu prüfen; jetzt wird die Datei dafür von Hand entfernt.
+- Mini-Reibung: Bildschirmfoto für das Smartphone muss gleich in Handygröße entstehen; ein nachträgliches Verkleinern öffnet die Seitenleiste über dem Dialog.
+
 ### 2026-11-05 – [ADR-ANGELEGT] ADR-106 Löschen eines Kanon-Eintrags nimmt seine Verweise mit (10.1)
 
 - Eigentümer per Auswahlfragen zum Mockup: „Mitlöschen mit Folgenliste“, „Klick im Dialog“. Kategorien 4 und 5, nicht reaktiv.
