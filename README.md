@@ -112,7 +112,7 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **9.10:** Cache-Treffer – erledigt 2026-11-04 (ADR-099): bei der zweiten gleichen Anfrage kommen 98–99,7 % der Eingabe aus dem Zwischenspeicher.
 - ✅ **9.11:** Verbrauch je Welt und Geschichte – neue Seite „Verbrauch“ mit Monat oder allen Monaten, je Welt aufklappbar zu Geschichten, nach Art und Modell, mit Anteil aus dem Zwischenspeicher (ADR-100); erledigt 2026-11-04.
 - ✅ **9.12:** Quellen und Recherche erkundet – erledigt 2026-11-05 (ADR-101): Recherche über Wikipedia und das offene D&D-Regelwerk, sparsamere Websuche, Namenslisten und Fragenliste je Art; gebaut wird in der nächsten Ausbaustufe (V.44–V.46).
-- 🟠 **9.13:** Gast-Figuren – je Gast ein Text „In dieser Welt“ und „✨ Einpassen vorschlagen“ (ADR-102); lokal umgesetzt, deine Abnahme offen.
+- 🟠 **9.13:** Gast-Figuren – je Gast ein Text „In dieser Welt“ und „✨ Einpassen vorschlagen“ (ADR-102); eingespielt 2026-11-05, deine Abnahme offen.
 - ✅ **9.14:** Kontexttreue gemessen – erledigt 2026-11-05 (ADR-103): an deiner größten Geschichte alles in der Anfrage, belastbar bis etwa 30 Kapitel.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
