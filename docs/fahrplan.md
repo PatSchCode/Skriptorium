@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** D.27 Vitest 4.1.12 – umgesetzt (lokal), PR auf Wort des Eigentümers. D.1 erledigt 2026-11-05 (ADR-112). 10.7 zusammengeführt (PR #211 → `39c9db4`), wartet auf das Einspielen (Eigentümer: „Noch nicht“), dann Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
-- **Nächster Schritt:** 10.7 einspielen (dann mit Node 26 gebaut) und 10.6 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner in Arbeit. D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 erledigt 2026-11-06 (eingespielt `8e87aab`). 10.6 eingespielt (seit `5aa544a`), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
+- **Nächster Schritt:** 10.6 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -33,8 +33,8 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | erledigt 2026-11-05 (ADR-108) | – |
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
-| 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | wartet auf Abnahme (ADR-110), eingespielt `5aa544a` | du: Bild einfügen, E-Book prüfen |
-| 🔵 | 10.7 | Bilder beim Schreiben mitschicken (V.33) | zusammengeführt `39c9db4` (ADR-111), wartet auf Einspielen | du: Einspielen freigeben |
+| 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | Befund behoben (lokal): Menü auf schmalen Bildschirmen | du: PR freigeben, dann erneut prüfen |
+| ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ⚪ | 10.10 | Textqualität von Hermes 4 messen (V.41) | offen | KI (Cloud-Session) |
@@ -61,7 +61,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.22 | Probelauf Routine-Klasse mit Sonnet 5.5 | offen | KI – vor der nächsten Abgabe an Unteragenten |
 | ✅ | D.23 | Sicherheitsfunde filelock, undici, zod (Audit 2026-10-25) | erledigt 2026-10-25 | – |
 | ✅ | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | erledigt 2026-11-04 | – |
-| 🟠 | D.27 | Sicherheitsfunde Vitest (Audit 2026-11-05) | umgesetzt (lokal), 4.1.12 | du: PR freigeben |
+| ✅ | D.27 | Sicherheitsfunde Vitest (Audit 2026-11-05) | erledigt 2026-11-06 (PR #213) | – |
 | ⚪ | D.26 | Verbrauchsspeicher neu bauen ab 3.000 Anfragen im Monat | offen – ausgelöst | KI – Monatszählung bei jeder Messung auf dem Server mitprüfen |
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
@@ -285,7 +285,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.6: Bilder im Manuskript und im E-Book (V.23)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #210, `5aa544a`, CI vier Jobs grün; eingespielt 2026-11-05; Abnahme offen) – Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Eintragsbilder. Vergleich `mockup-10.6.html` (lokal) vorgelegt; Eigentümer: Hochladen, Erzeugen und Kanon; Kopie; Zeile mit Vorschau; Bilder bleiben bis zum Löschen der Geschichte → ADR-110. Umsetzung läuft
+- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #210, `5aa544a`, CI vier Jobs grün; eingespielt 2026-11-05; Abnahme offen. Befund des Eigentümers 2026-11-06: „es erscheint kein Bild und keine Vorschau“ – auf schmalen Bildschirmen (unter 56rem) klappte „＋ Bild“ die Knöpfe hinter „⋯“ zu und versteckte sein Menü; behoben lokal auf `fix/10.6-bild-menue-schmal` mit End-to-End-Test, wartet auf PR und Einspielen) – Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Eintragsbilder. Vergleich `mockup-10.6.html` (lokal) vorgelegt; Eigentümer: Hochladen, Erzeugen und Kanon; Kopie; Zeile mit Vorschau; Bilder bleiben bis zum Löschen der Geschichte → ADR-110. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Datenmodell (Bildverweise im Kapiteltext, Kategorie 4), Editor
@@ -302,7 +302,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.7: Bilder beim Schreiben mitschicken (V.33)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE – zusammengeführt (PR #211 → `39c9db4`), Einspielen auf Wort des Eigentümers (Vorlage freigegeben 2026-11-05, ADR-111: Haken bei den Einträgen, nur Hauptbild, höchstens 4, Text gilt)
+- **Status:** ✅ ERLEDIGT 2026-11-06 – zusammengeführt (PR #211 → `39c9db4`), eingespielt 2026-11-06 (`8e87aab`); Eigentümer: „Aussehen, Kleidung und Umgebung passen zum Bild und der Haken verschwindet auch wieder, nachdem man Weiterschreiben angeklickt hat.“ Token je Bild: erste Anfrage mit Bildern (Qwen 3.8 Max, 25.703 Token ein gegen rund 23.200 bei den Grok-Anfragen davor) nicht eindeutig – anderes Modell, Bildzahl nicht gespeichert; Schätzung 2.500 bleibt (Vorlage freigegeben 2026-11-05, ADR-111: Haken bei den Einträgen, nur Hauptbild, höchstens 4, Text gilt)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Anfrage-Zusammenstellung (Kategorie 1)
@@ -739,7 +739,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 
 #### D.27: Sicherheitsfunde Vitest (Audit 2026-11-05)
 
-- **Status:** 🟠 IN ARBEIT – umgesetzt (lokal, 2026-11-06): `vitest` und `@vitest/coverage-v8` 4.1.12, transitiv `chai` 6.2.2 → 6.3.0, `std-env` und `tinyrainbow` je eine Minor; `npm audit` ohne Vitest-Befund (übrig 10 mittlere aus der `minimatch`-Kette unter ESLint); auf Node 26 grün: tsc, eslint, Prettier, 585 Komponenten-Tests (Zeilen 98,92 %), Build, 15 End-to-End-Tests. Offen: CI (PR auf Wort des Eigentümers). Eigentümer 2026-11-06: „Ja, Vitest heben“
+- **Status:** ✅ ERLEDIGT (2026-11-06) – PR #213 → `8e87aab`, CI vier Jobs grün, Hinweise nur Ubuntu-26; kein Einspielen nötig. Verlauf: `vitest`/`@vitest/coverage-v8` 4.1.12, transitiv `chai` 6.3.0, `std-env`, `tinyrainbow`; `npm audit` ohne Vitest-Befund (übrig 10 mittlere aus `minimatch` unter ESLint, offen bis ESLint nachzieht). Eigentümer 2026-11-06: „Ja, Vitest heben“
 - **Phasentyp-Kontext:** STABILISIERUNG
 - **Abhängigkeiten:** D.1
 - **Frist:** keine harte – CI prüft `--audit-level=high`, die Befunde sind mittel

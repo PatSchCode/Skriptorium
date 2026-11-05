@@ -90,6 +90,8 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Behoben (nach v1.0.0)
 
+- „＋ Bild“ auf schmalen Bildschirmen (2026-11-06, Schritt 10.6): Unter etwa 900 Pixel Breite klappte der Tipp auf „＋ Bild“ die Knöpfe hinter „⋯“ wieder zu, sodass das Menü (hochladen, erzeugen, aus dem Kanon) unsichtbar blieb. Jetzt bleibt es offen, bis du einen Weg wählst.
+
 - Figurenkarte für SillyTavern (2026-11-05, Schritt 10.2, ADR-107): „personality“ enthält jetzt genau den Abschnitt „Wesen“, auf jeder Überschriften-Ebene; bisher blieb das Feld bei `## Wesen` leer, und bei `### Wesen` gingen Fähigkeiten und Geschichte mit. Abschnitte über die Heimatwelt eines Gasts erkennt das Skriptorium nur noch am ganzen Wort des Weltnamens.
 - Figuren in der Form ihrer Vorlage beim Import (2026-10-18, Schritt 9.1, ADR-091): Stand eine Figur nur mit „Aussehen“ und „Wesen und Geschichte“ im Material, entstanden beim Import zwei falsche Einträge mit diesen Namen; jetzt bleibt es eine Figur. Beim Markieren einer Stelle „in den Kanon“ erkennt das Skriptorium einen Namen auch im Genitiv („Kaels Klinge“). Server und Oberfläche finden Abschnitte wie „Aussehen“ und Namen jetzt nach derselben Regel; deine Dateien bleiben unverändert.
 - Cursor im Anweisungsfeld (2026-10-12): Im leeren Feld saß der Cursor über und links neben dem grauen Beispieltext; jetzt steht er an der richtigen Stelle. Der Beispieltext erklärt das Feld: leer lassen zum Weiterschreiben, `@` für Kanon-Einträge.

@@ -29,6 +29,28 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [GELÖST] 10.6: Menü von „＋ Bild“ auf schmalen Bildschirmen unsichtbar
+
+- Befund des Eigentümers: „es erscheint kein Bild und keine Vorschau“. Server seit dem Einspielen: kein `POST …/stories/{story_id}/images`, kein Ordner `bilder/` in einer Geschichte – der Ablauf brach im Browser vor dem Hochladen ab.
+- Ursache: Unter 56rem liegen die Werkzeuge hinter „⋯“; jeder Knopf darin klappt sie zu (5.2) – auch „＋ Bild“, das nur sein Menü öffnet. Das Menü steckt im zugeklappten Bereich und bleibt unsichtbar. In jsdom ohne CSS nicht sichtbar, deshalb grüne Komponenten-Tests; 10.6 hatte keinen End-to-End-Test.
+- Nachgestellt mit Playwright: 1280 px – ganzer Weg grün (Kopie in die Geschichte, Zeile, Vorschau lädt); 820 px – Menü unsichtbar.
+- Lösung: Knöpfe mit `aria-expanded` (öffnen nur ein Menü) klappen nicht zu (`ComposerControls`). Komponenten-Test erweitert; neuer End-to-End-Test bei 820 px: Bild aus dem Kanon, Zeile, Vorschau (48 px breit geladen), E-Book enthält `OEBPS/bilder/bild-….jpg`. Gegenprobe ohne Korrektur: Test scheitert am Menü. Prüfreihe grün (585 Komponenten-Tests, Zweige 95,22 %; 16 End-to-End-Tests).
+- Lehre: Alles, was hinter „⋯“ liegt, im End-to-End-Test auch bei schmaler Breite prüfen.
+
+### 2026-11-06 – [BEOBACHTUNG] 10.7 abgenommen
+
+- Eigentümer: „Aussehen, Kleidung und Umgebung passen zum Bild und der Haken verschwindet auch wieder, nachdem man Weiterschreiben angeklickt hat.“ 10.7 → ERLEDIGT; Phase 10: 6 von 11 (10.6 weiter in Abnahme).
+- Token je Bild nachgeprüft (Server, nur Zahlen): erste Anfrage mit Bildern 2026-11-05 23:33 UTC mit Qwen 3.8 Max, 25.703 Token ein; die Anfragen davor mit Grok 4.5 lagen bei 23.162–23.240. Kein sauberer Vergleich (anderes Modell und Zählweise, Bildzahl wird nicht gespeichert) – die Schätzung 2.500 je Bild bleibt; ein Vergleich gleiche Stelle, gleiches Modell, mit und ohne Haken würde es klären.
+
+### 2026-11-06 – [BEOBACHTUNG] 10.7, D.1 und D.27 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `8e87aab` (enthält 10.7, D.1, D.27), Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `5aa544a`. Erster Bau mit `node:26.12.1-slim` auf dem Server – ohne Auffälligkeit.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `8e87aab`, 0 Fehlerzeilen in 3 Minuten. Offen: Abnahme 10.6 und 10.7 (Eigentümer).
+
+### 2026-11-06 – [BEOBACHTUNG] D.27 erledigt
+
+- Eigentümer: „Ja, PR und Merge“. PR #213, CI vier Jobs grün (Python 2:01, Pre-Commit 1:27, TypeScript 1:57, E2E 2:15), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `8e87aab`. D.27 → ERLEDIGT; kein Einspielen nötig (nur Testwerkzeug).
+
 ### 2026-11-06 – [BEOBACHTUNG] D.27 Vitest 4.1.12 umgesetzt (lokal)
 
 - Eigentümer: „Ja, Vitest heben“. Schritt D.27 angelegt (Patch-Update, nicht freigabepflichtig). `vitest`/`@vitest/coverage-v8` 4.1.11 → 4.1.12 (2026-10-15); `npm install` zog `chai` 6.3.0, `std-env` und `tinyrainbow` je eine Minor höher (Bereiche von Vitest selbst).

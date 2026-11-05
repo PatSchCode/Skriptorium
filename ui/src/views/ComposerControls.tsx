@@ -82,14 +82,19 @@ export function ComposerControls({
       >
         ⋯
       </button>
-      {/* After a choice behind "⋯" the extra buttons fold away again (step 5.2). */}
+      {/*
+        After a choice behind "⋯" the extra buttons fold away again (step 5.2). A button that
+        only opens a menu (it carries aria-expanded, e.g. "＋ Bild") is not yet a choice: folding
+        away there would hide its menu on narrow screens (10.6).
+      */}
       <span
         className="extra"
         onClick={(event) => {
-          if (
-            event.target instanceof Element &&
-            event.target.closest("button") !== null
-          ) {
+          const button =
+            event.target instanceof Element
+              ? event.target.closest("button")
+              : null;
+          if (button !== null && !button.hasAttribute("aria-expanded")) {
             setMore(false);
           }
         }}
