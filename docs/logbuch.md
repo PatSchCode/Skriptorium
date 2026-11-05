@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.5 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `17ea244`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `1a46b59`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `17ea244`, 0 Fehlerzeilen in 3 Minuten. Offen: Probe mit einem 2K-Bild (Eigentümer).
+
 ### 2026-11-05 – [GELÖST] CI-Neustart wegen HTTP 504 bei `actions/setup-python` (PR #208)
 
 - Eigentümer: „Ja, PR und Merge“. Erster Lauf: Python, TypeScript, E2E grün; Pre-Commit rot – `actions/setup-python@v6.3.0` bekam dreimal „Unexpected HTTP response: 504“ beim Herunterladen von Python, der Job prüfte unseren Code gar nicht. Einmal neu gestartet (`gh run rerun --failed`) → alle vier grün (Pre-Commit 2:31). Kein Code geändert.
