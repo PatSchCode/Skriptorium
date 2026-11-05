@@ -18,6 +18,7 @@ from typing import Final
 
 from skriptorium.canon import CanonService, InvalidInput, name_pattern
 from skriptorium.context.parts import estimate_tokens
+from skriptorium.context.readable import readable
 from skriptorium.manuscript import Chapter, ManuscriptService, Story
 
 # Upper bound of the findings part of a request, summaries included (ADR-087).
@@ -93,7 +94,7 @@ def find_hits(
     found: list[Passage] = []
     for story in stories:
         for chapter in sorted(manuscripts.list_chapters(world_id, story.id), key=_number):
-            found.extend(_passages(story, chapter, pattern))
+            found.extend(_passages(story, readable(chapter), pattern))
     chapters = {(passage.story, passage.number) for passage in found}
     return ManuscriptHits(
         name=name,

@@ -29,6 +29,28 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.6 umgesetzt (lokal)
+
+- Nach ADR-110 auf `feat/10.6-bilder-im-manuskript`; Zahlen im Fahrplan bei 10.6.
+- Nachtrag zu ADR-110 während der Umsetzung (vor jedem Merge): Ältere Leseprogramme zeigen kein WebP, Eintragsbilder sind WebP, Pillow fehlt im Container → Kapitelbilder als JPEG; die Kopie aus dem Kanon macht der Browser (lädt, wandelt, lädt hoch), die Route `from-entry` entfällt.
+- Mini-Reibungen: (1) Werkzeugzeile des Kapitels ist ein `span` im Schreibbereich – das Fenster „Bild erzeugen“ passte nicht hinein; Knopf (`StoryPictureButton`) und Fenster (`StoryPictureDialog`) getrennt, Fenster über dem Manuskript. (2) CodeMirror erlaubt Block-Dekorationen nur aus einem `StateField`, nicht aus einem Plugin. (3) `describeError` macht aus jedem Nicht-API-Fehler „Keine Verbindung zum Server.“ – auch für unlesbare Bilder in bestehenden Wegen (Eintragsbilder); im neuen Weg eigener Text, der Altbestand ist unverändert → V.50 (Landeplatz 10.11). (4) Zwei Leerzeichen in einer Beschriftung nach Entfernen von Klammern – Leerraum zusammengefasst.
+- Abdeckung der Oberfläche leicht gesunken (Zweige 95,51 → 95,31 %), über der Schwelle 94 %; drei Tests nachgelegt (Seite der Geschichte, Fehler beim Speichern, volle Herkunft).
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-110 Bilder im Manuskript und im E-Book (10.6)
+
+- Vorlage mit `mockup-10.6.html` (lokal) und `ENTSCHEIDUNG ERFORDERLICH`; vier Auswahlfragen, Eigentümer jeweils die Empfehlung. Mini-Reibung beim Messen: Kapitel liegen unter `stories/<id>/chapters/`, nicht `kapitel/` – zwei Fehlversuche, dann in `manuscript/layout.py` nachgesehen.
+- Reaktiv-Quote 0/10 (ADR-101 bis ADR-110). Zweig `feat/10.6-bilder-im-manuskript` von `docs/10.5-erledigt`.
+
+### 2026-11-05 – [BEOBACHTUNG] Nachtrag 10.5 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `56e5d1b`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `17ea244`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `56e5d1b`, 0 Fehlerzeilen in 3 Minuten.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.5 erledigt, V.49 vorgemerkt
+
+- PR #209 (Nachtrag Preisregel), CI vier Jobs grün, zusammengeführt mit `--match-head-commit` → `56e5d1b`. 10.5 → ERLEDIGT; Phase 10: 5 von 11. Nicht eingespielt: Server läuft `17ea244` ohne Nachtrag.
+- Eigentümer: Hineinzoomen in der Großansicht geht nicht, 4K und 2K erscheinen gleich groß. Auf Auswahlfrage „Als V.49 vormerken“ → V.49 mit Landeplatz 10.11; `MapViewer` hat schon Zoom (`useMapZoom`) als Vorbild.
+
 ### 2026-11-05 – [BEOBACHTUNG] Probe 10.5 mit 4K: abgenommen, Nachtrag Preisregel
 
 - Eigentümer hat mit Seedream 5.0 Lite in 4K erzeugt: Server 2.732 × 4.096 WebP, 294 KB, Herkunft `4K`, 0,035 $, 26 s. „Es sieht deutlich schärfer aus“ – schwer zu beurteilen, weil die Großansicht jedes Bild auf dieselbe Größe einpasst. Abnahme „Ja“.

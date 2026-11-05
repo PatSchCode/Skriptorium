@@ -677,6 +677,13 @@
       "archived": false
     }
   },
+  "addStoryPicture": {
+    "route": "POST /api/worlds/die-salzmark/stories/die-ueberfahrt/images",
+    "type": "StoryPicture",
+    "body": {
+      "file": "bild-000000000006.jpg"
+    }
+  },
   "saveChapter": {
     "route": "PUT /api/worlds/die-salzmark/stories/die-ueberfahrt/chapters/1",
     "type": "Chapter",
@@ -881,7 +888,7 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png",
+        "cover": "titelbild-000000000007.png",
         "archived": false
       }
     ]
@@ -939,7 +946,7 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png",
+        "cover": "titelbild-000000000007.png",
         "archived": false
       },
       "failure": null
@@ -998,7 +1005,7 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png",
+        "cover": "titelbild-000000000007.png",
         "archived": false
       },
       "failure": {
@@ -1060,7 +1067,7 @@
           "explicitness": "angedeutet",
           "free": "Kurze Absätze."
         },
-        "cover": "titelbild-000000000006.png",
+        "cover": "titelbild-000000000007.png",
         "archived": false
       },
       "failure": {

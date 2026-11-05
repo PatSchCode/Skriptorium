@@ -2282,6 +2282,47 @@ button.story-cover-add {
   border-top: 1px solid var(--line);
 }
 
+/* Pictures between paragraphs (step 10.6, ADR-110): dialog on a line of its own below the
+   tools, the canon choice like "Bild erzeugen", a small preview below a picture line. */
+.story-picture {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.story-picture .add-choice {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 5;
+}
+
+.canon-picture {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 32rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.canon-picture h3 {
+  margin: 0;
+}
+
+.manuscript-picture {
+  display: block;
+  max-width: min(100%, 20rem);
+  max-height: 12rem;
+  margin: 0.25rem 0 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
 /* "Bild erzeugen" (step 7.12): description, format, model, preview. */
 .image-generate {
   display: flex;

@@ -46,6 +46,7 @@ export type {
   Story,
   StoryDeletion,
   StoryFact,
+  StoryPicture,
   SummaryResult,
   SummaryStatus,
   WritingStyle,

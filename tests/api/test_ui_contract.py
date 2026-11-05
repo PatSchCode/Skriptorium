@@ -369,6 +369,13 @@ def _manuscript(rec: _Recorder) -> str:
     rec.post("setCover", "Story", f"{story}/cover", {"content": _base64(jpeg())})
     rec.delete("removeCover", "Story", f"{story}/cover")
     rec.setup("POST", f"{story}/cover", {"content": _base64(png())}, status=200)
+    rec.post(
+        "addStoryPicture",
+        "StoryPicture",
+        f"{story}/images",
+        {"content": _base64(jpeg())},
+        status=201,
+    )
 
     rec.put(
         "saveChapter",

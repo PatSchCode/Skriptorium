@@ -6,6 +6,8 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Hinzugefügt (nach v1.0.0)
 
+- Bilder im Manuskript und im E-Book (2026-11-05, Schritt 10.6, ADR-110): „＋ Bild“ bei den Werkzeugen eines Kapitels lädt ein Bild hoch, erzeugt eins (die markierte Stelle als Beschreibung) oder holt eins aus dem Kanon (Eintrag, Bild, Beschriftung). Das Bild wird in der Geschichte gespeichert (aus dem Kanon als Kopie) und steht als eigene Zeile `![Beschriftung](bild:…)` nach der Zeile des Cursors; darunter zeigt der Editor eine kleine Vorschau. Im E-Book erscheint es in voller Breite mit der Beschriftung darunter. Beim Schreiben mit der KI bleiben Bildzeilen aus der Anfrage.
+
 - Auflösung und Qualität bei „Bild erzeugen“ (2026-11-05, Schritt 10.5, ADR-109): Bietet ein Bildmodell Stufen an, wählst du im Fenster die Auflösung (z. B. 1K, 2K, 4K) und, wo vorhanden, die Qualität; voreingestellt ist 2K. Neben jeder Auflösung steht ihr Preis, soweit der Anbieter ihn nennt, sonst steht der echte Preis wie bisher nach dem Erzeugen da. Erzeugte Bilder und Titelbilder werden beim Übernehmen erst über 4.096 Pixel Seitenlänge verkleinert (bisher 2.000); hochgeladene Fotos bleiben bei 2.000. Die Herkunft nennt die Auflösung, „Neu erzeugen“ übernimmt sie.
 
 - „✨ Aussehen herauslösen“ für Orte und Gegenstände (2026-11-05, Schritt 10.3, ADR-108): wie bei Figuren im Eintrag und im Fenster „Bild erzeugen“, mit eigener Anweisung je Art; bei Orten bleibt der Abschnitt „Lage“ draußen. Im Fenster steht daneben „✎ Selbst ergänzen“.

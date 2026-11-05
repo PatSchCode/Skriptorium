@@ -3,6 +3,8 @@ import { markdown } from "@codemirror/lang-markdown";
 import { EditorSelection, EditorState } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
 import { useEffect, useRef } from "react";
+import { placePicture } from "../pictures";
+import { picturePreviews } from "./picturePreviews";
 
 /**
  * Markdown editor for the manuscript (CodeMirror 6). Shows the Markdown source only; it never
@@ -10,7 +12,9 @@ import { useEffect, useRef } from "react";
  * the marked text whenever the selection changes (empty without a selection, step 3.8).
  * The editor grows with the text and scrolls with the page around it (step 5.11); `onEnd` asks
  * the page to show the end of the text, where writing goes on: when the editor opens and when
- * new text arrives from outside, e.g. a taken-over proposal (step 5.9).
+ * new text arrives from outside, e.g. a taken-over proposal (step 5.9). With `pictureSrc` a
+ * picture line shows a small preview below it, and `insertion` puts a picture line after the
+ * line of the cursor (step 10.6, ADR-110).
  */
 export function ManuscriptEditor({
   value,
@@ -18,6 +22,8 @@ export function ManuscriptEditor({
   onSelect,
   onEnd,
   label,
+  pictureSrc,
+  insertion,
 }: {
   value: string;
   onChange: (text: string) => void;
@@ -25,6 +31,10 @@ export function ManuscriptEditor({
   /** Called when the end of the text should come into view (step 5.9). */
   onEnd?: () => void;
   label: string;
+  /** Address of a picture of the story; without it no previews. */
+  pictureSrc?: (file: string) => string;
+  /** A picture line to put in; a new `id` puts it in once. */
+  insertion?: { id: number; line: string } | null;
 }) {
   const host = useRef<HTMLDivElement>(null);
   const view = useRef<EditorView | null>(null);
@@ -32,6 +42,7 @@ export function ManuscriptEditor({
   const onSelectRef = useRef(onSelect);
   const onEndRef = useRef(onEnd);
   const initialValue = useRef(value);
+  const initialSource = useRef(pictureSrc);
 
   useEffect(() => {
     onChangeRef.current = onChange;
@@ -53,6 +64,9 @@ export function ManuscriptEditor({
           keymap.of([...defaultKeymap, ...historyKeymap]),
           markdown(),
           EditorView.lineWrapping,
+          ...(initialSource.current === undefined
+            ? []
+            : [picturePreviews(initialSource.current)]),
           EditorView.contentAttributes.of({ "aria-label": label }),
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
@@ -84,6 +98,24 @@ export function ManuscriptEditor({
       onEndRef.current?.();
     }
   }, [value]);
+
+  useEffect(() => {
+    const editor = view.current;
+    if (editor === null || insertion == null) {
+      return;
+    }
+    const placed = placePicture(
+      editor.state.doc.toString(),
+      editor.state.selection.main.head,
+      insertion.line,
+    );
+    editor.dispatch({
+      changes: { from: placed.from, to: placed.to, insert: placed.insert },
+      selection: EditorSelection.cursor(placed.cursor),
+      scrollIntoView: true,
+    });
+    editor.focus();
+  }, [insertion]);
 
   return <div className="editor manuscript" ref={host} />;
 }

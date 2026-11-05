@@ -65,6 +65,7 @@ from skriptorium.context.parts import (
     render,
     render_known,
 )
+from skriptorium.context.readable import readable
 from skriptorium.context.summaries import (
     build_chapter_summary,
     build_story_summary,
@@ -153,8 +154,9 @@ class ContextBuilder:
         """Read what the sources draw on and resolve the ``@`` references."""
         world = self._canon.get_world(world_id)
         story = self._manuscripts.get_story(world_id, story_id)
-        chapters = self._manuscripts.list_chapters(world_id, story_id)
-        current = self._manuscripts.get_chapter(world_id, story_id, chapter_number)
+        # Picture lines stay out of every request (ADR-110).
+        chapters = [readable(c) for c in self._manuscripts.list_chapters(world_id, story_id)]
+        current = readable(self._manuscripts.get_chapter(world_id, story_id, chapter_number))
         entries = self._canon.list_entries(world_id)
         guests = self._guests(story)
         by_id = {entry.id: Known(entry) for entry in entries} | {g.entry.id: g for g in guests}

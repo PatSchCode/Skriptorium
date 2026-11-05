@@ -121,6 +121,11 @@ export function describeSummaryFailure(
     : `Kurzfassung erstellt, Gesamtzusammenfassung nicht fortgeschrieben. ${reason}`;
 }
 
+/** A picture stored for the chapters (step 10.6, ADR-110); the text names its file. */
+export interface StoryPicture {
+  file: string;
+}
+
 export const manuscriptApi = {
   /** The story as an EPUB file (step 7.4); the author is only written into the file. */
   /** Address of the story's cover; the file name in the query makes a new cover load anew. */
@@ -144,6 +149,23 @@ export const manuscriptApi = {
     ) as Promise<StoredImageOrigin | null>,
   removeCover: (world: string, story: string) =>
     request("DELETE", `${storyPath(world, story)}/cover`) as Promise<Story>,
+  /**
+   * Store a picture for the chapters (step 10.6, ADR-110); `herkunft` for a generated picture
+   * or a copy from the canon.
+   */
+  addStoryPicture: (
+    world: string,
+    story: string,
+    content: string,
+    herkunft: ImageOrigin | null = null,
+  ) =>
+    request("POST", `${storyPath(world, story)}/images`, {
+      content,
+      ...(herkunft === null ? {} : { herkunft }),
+    }) as Promise<StoryPicture>,
+  /** Address of a picture of the story; its file name never changes. */
+  storyPicturePath: (world: string, story: string, file: string) =>
+    `${storyPath(world, story)}/images/${encodeURIComponent(file)}`,
   exportEpub: (
     world: string,
     story: string,

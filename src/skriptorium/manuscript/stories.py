@@ -13,6 +13,7 @@ from skriptorium.manuscript.layout import (
     STORY_FILE,
     cover_path,
     facts_path,
+    picture_path,
     story_dir,
     story_path,
 )
@@ -26,6 +27,7 @@ from skriptorium.manuscript.models import (
     StoryFact,
     WritingStyle,
 )
+from skriptorium.manuscript.pictures import PICTURE_FILE
 from skriptorium.manuscript.validation import (
     checked_choices,
     checked_form,
@@ -209,6 +211,31 @@ class StoryStore:
         # A file already gone (deleted by hand) is not an error; the story no longer names it.
         with contextlib.suppress(NotFound):
             self._store.delete_image(cover_path(world_id, story_id, file))
+
+    def add_picture(
+        self, world_id: str, story_id: str, data: bytes, origin: ImageOrigin | None = None
+    ) -> str:
+        """Store a picture for the story's chapters (ADR-110); returns its file name."""
+        self.get_story(world_id, story_id)
+        file = f"bild-{secrets.token_hex(6)}{IMAGE_SUFFIXES[inspect_image(data).kind]}"
+        self._store.write_image(picture_path(world_id, story_id, file), data, origin=origin)
+        return file
+
+    def picture(self, world_id: str, story_id: str, file: str) -> tuple[bytes, str]:
+        """The bytes and media type of a picture of the story."""
+        return self._store.read_image(self._picture_path(world_id, story_id, file))
+
+    def picture_origin(self, world_id: str, story_id: str, file: str) -> ImageOrigin | None:
+        """The origin of a picture of the story, ``None`` if it has none."""
+        path = self._picture_path(world_id, story_id, file)
+        self._store.read_image(path)
+        return self._store.read_image_origin(path)
+
+    def _picture_path(self, world_id: str, story_id: str, file: str) -> str:
+        self.get_story(world_id, story_id)
+        if not PICTURE_FILE.fullmatch(file):
+            raise NotFound(f"{world_id}/{story_id}/{file}")
+        return picture_path(world_id, story_id, file)
 
     def set_story_summary(self, world_id: str, story_id: str, summary: str) -> Story:
         """Set the overall summary of a story."""

@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-109). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-110). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -129,12 +129,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-109). Aus welchem Schritt ein ADR stammt, steh
 | 107 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Figurenkarte nimmt „Wesen“ über die Abschnittsregel; Weltabschnitte auf Wortgrenze |
 | 108 | 2026-11-05 | Aktiv | OPERATIV | UI | Anfrage | „Aussehen herauslösen“ auch für Orte und Gegenstände; „Lage“ bleibt draußen |
 | 109 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Auflösung und Qualität bei „Bild erzeugen“; erzeugte Bilder bis 4.096 Pixel |
+| 110 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Bilder im Manuskript und im E-Book |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-100 bis ADR-109 – keiner reaktiv: ADR-100 bis ADR-102 und ADR-106 bis ADR-109 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-101 bis ADR-110 – keiner reaktiv: ADR-101, ADR-102 und ADR-106 bis ADR-110 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2591,6 +2592,32 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Wie groß sollen deine Bilder standardmäßig werden – und darf ein Bild dafür doppelt so viel kosten?“ → 2K als Standard, Preis vorher sichtbar.
 - **Konfidenz zum Zeitpunkt:** hoch für Auswahl, Anfrage und Speichern; mittel für die Zuordnung der Preise je Stufe (Benennung der Anbieter uneinheitlich, Rückfall „unbekannt“ bleibt ehrlich). Umkehrbarkeit billig (Auswahl und Grenzen; gespeicherte Bilder bleiben, wie sie sind).
 - **Konsequenzen:** FR-035; Tests für Katalog, Preiszuordnung, Anfrage, Herkunft, Grenzen und das Fenster; Vertragsdatei der Antworten ergänzt; Probe mit echtem 2K-Bild durch den Eigentümer. Die Sicherung wächst je 2K/4K-Bild um etwa 1–5 MB. Verworfen: kleinste Stufe als Standard (Ursache der Frage bliebe), bei 2.000 Pixel bleiben (2K und 4K brächten nichts), Original unverändert speichern (PNG mit 15–25 MB, Metadaten blieben), Fotos ebenfalls bis 4.096 (Speicher ohne Anlass).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-110: Bilder im Manuskript und im E-Book (10.6)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Vergleich `mockup-10.6.html` vorher/nachher; Auswahlfragen: „Hochladen, Erzeugen, Kanon“, „Kopie in der Geschichte“, „Zeile mit Vorschau“, „Bleibt bis zum Löschen“ – jeweils die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[DATENMODELL]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.6 – Vorlage zu Beginn vorgesehen, ADR-105; nicht reaktiv)
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Datenmodell (4: Bildverweis im Kapiteltext, Bildordner je Geschichte), API-Vertrag (5, additiv: Bilder einer Geschichte), Editor
+- **Kontext:** V.23. Eine Geschichte kennt nur ein Titelbild (ADR-075); Bilder zwischen Absätzen gibt es weder im Editor noch im E-Book. Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Bilder an Kanon-Einträgen. Der Editor zeigt Markdown-Quelltext (CodeMirror), nie gerendertes HTML.
+- **Optionen:** Herkunft: hochladen, erzeugen und aus dem Kanon / nur hochladen und erzeugen. Kanon-Bild: Kopie in der Geschichte / Verweis auf den Eintrag. Editor: Zeile mit Vorschau / nur Zeile. Unbenutzte Bilder: bleiben bis zum Löschen der Geschichte / beim Speichern löschen.
+- **Entscheidung:**
+  - **Form im Kapiteltext:** ein eigener Absatz `![Beschriftung](bild:<datei>)`; `<datei>` ist ein Bild der Geschichte (`bild-<12 Hex>.<png|jpg|webp>`). Andere Ziele als `bild:` gelten nicht als Bild und bleiben Text.
+  - **Ablage:** im Ordner der Geschichte unter `bilder/`, mit Herkunftsdatei wie bei Eintragsbildern (ADR-095); Grenzen wie Eintragsbilder (ADR-109). Der Browser speichert Kapitelbilder wie Titelbilder als JPEG (ADR-075: jedes Leseprogramm zeigt JPEG, WebP erst ab EPUB 3.3). Ein Bild aus dem Kanon kopiert der Browser beim Einfügen: Er lädt das Eintragsbild, wandelt es in JPEG und lädt es mit seiner Herkunft in die Geschichte hoch – der Server braucht dafür keine Bildbibliothek (Pillow fehlt im Container).
+  - **Schnittstelle (additiv):** `POST …/stories/{geschichte}/images` (Inhalt, optional Herkunft) liefert den Dateinamen; `GET …/images/{datei}` liefert das Bild, `GET …/images/{datei}/origin` die Herkunft.
+  - **Editor:** „＋ Bild“ bei den Werkzeugen des Kapitels mit „Bild hochladen“, „✨ Bild erzeugen“ (vorbelegt mit der markierten Stelle) und „Aus dem Kanon …“ (Eintrag, Bild, Beschriftung); die Zeile kommt an die Stelle des Cursors, darunter zeigt der Editor eine kleine Vorschau. Die Zeile bleibt gewöhnlicher Text.
+  - **E-Book:** Eine Bildzeile wird `<figure>` mit dem Bild in voller Breite und der Beschriftung als `<figcaption>` und Alternativtext; nur Bilder, die im Text stehen und existieren, kommen ins Buch.
+  - **KI:** Bildzeilen bleiben aus jeder Anfrage an die KI heraus (Schreiben, Kurzfassungen); das Bild selbst mitzuschicken ist 10.7.
+  - **Aufräumen:** Bilder ohne Zeile bleiben, bis die Geschichte gelöscht wird.
+- **Vision-Frage, die entschied:** „Sollen Bilder zur Geschichte gehören, auch wenn sie aus dem Kanon stammen – und willst du sie beim Schreiben sehen?“ → ja, als Kopie, mit Vorschau.
+- **Konfidenz zum Zeitpunkt:** mittel-hoch – Standard-Markdown, das E-Book kennt Bilder schon vom Titelbild; neu ist die Vorschau im Editor. Umkehrbarkeit mittel (die Zeilen stehen dann in Kapiteln, bleiben aber lesbarer Text).
+- **Konsequenzen:** FR-034, FR-035; Tests für Ablage, Kopie, Routen, E-Book, Anfrage ohne Bildzeilen und den Editor; E-Book mit Bild in einem Leseprogramm geprüft (Abnahme). Verworfen: nur hochladen/erzeugen (Umweg über Herunterladen), Verweis auf den Eintrag (Lücke im E-Book nach Löschen), nur Zeile (Bild erst im E-Book sichtbar), Löschen beim Speichern (Rückgängig verlöre das Bild).
 - **Abgeleitete Regel:** keine
 
 ---

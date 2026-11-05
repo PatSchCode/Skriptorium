@@ -12,6 +12,9 @@ Layout below the data directory (docs/architecture.md section 7)::
                                                          (optional, ADR-053); body: text
     worlds/<world>/stories/<story>/facts.md              fakten: list of eintrag and fakt
     worlds/<world>/stories/<story>/titelbild-<r>.<e>     cover (story header titelbild, ADR-075)
+    worlds/<world>/stories/<story>/bilder/bild-<r>.<e>   pictures between paragraphs, named in
+                                                         the text as ``![…](bild:<file>)``
+                                                         (ADR-110)
     worlds/<world>/stories/<story>/verlauf/NN.md         kapitel, anweisungen (ADR-056)
 
 A novel (``roman``) has any number of chapters; a short story or fragment has exactly one,
@@ -57,6 +60,7 @@ from skriptorium.manuscript.models import (
     SummaryStatus,
     WritingStyle,
 )
+from skriptorium.manuscript.pictures import pictures_in
 from skriptorium.manuscript.stories import StoryStore
 from skriptorium.manuscript.validation import checked_chapter_style
 from skriptorium.storage import DocumentStore, ImageOrigin, InvalidInput, NotFound
@@ -346,7 +350,12 @@ class ManuscriptService:
             # A cover file gone missing (deleted by hand) must not stop the book.
             with contextlib.suppress(NotFound):
                 cover = self._stories.story_cover(world_id, story_id)
-        return epub_for(story, chapters, author, modified, cover=cover)
+        pictures: dict[str, tuple[bytes, str]] = {}
+        for file in {p.file for chapter in chapters for p in pictures_in(chapter.text)}:
+            # A picture gone missing (deleted by hand) is left out of the book (ADR-110).
+            with contextlib.suppress(NotFound):
+                pictures[file] = self._stories.picture(world_id, story_id, file)
+        return epub_for(story, chapters, author, modified, cover=cover, pictures=pictures)
 
     def set_story_cover(
         self, world_id: str, story_id: str, data: bytes, origin: ImageOrigin | None = None
@@ -360,6 +369,36 @@ class ManuscriptService:
             InvalidInput: Not a PNG, JPEG or WebP image, or too large.
         """
         return self._stories.set_story_cover(world_id, story_id, data, origin)
+
+    def add_story_picture(
+        self, world_id: str, story_id: str, data: bytes, origin: ImageOrigin | None = None
+    ) -> str:
+        """Store a picture for the chapters of the story (step 10.6, ADR-110).
+
+        The text names it as ``![caption](bild:<file>)``; it stays until the story is deleted.
+
+        Raises:
+            NotFound: The story does not exist.
+            InvalidInput: Not an accepted raster image or too large.
+        """
+        return self._stories.add_picture(world_id, story_id, data, origin)
+
+    def story_picture(self, world_id: str, story_id: str, file: str) -> tuple[bytes, str]:
+        """The bytes and media type of a picture of the story (ADR-110).
+
+        Raises:
+            NotFound: The story or the picture does not exist.
+        """
+        return self._stories.picture(world_id, story_id, file)
+
+    def story_picture_origin(self, world_id: str, story_id: str, file: str) -> ImageOrigin | None:
+        """The origin of a picture of the story, ``None`` if it has none (ADR-110).
+
+        Raises:
+            NotFound: The story or the picture does not exist.
+            InvalidInput: The origin file is unreadable.
+        """
+        return self._stories.picture_origin(world_id, story_id, file)
 
     def story_cover(self, world_id: str, story_id: str) -> tuple[bytes, str]:
         """The bytes and media type of the story's cover.

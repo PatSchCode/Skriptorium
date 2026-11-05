@@ -3,21 +3,23 @@
 The book holds a title page (title, author if given), a table of contents (``nav.xhtml`` and,
 for older readers, ``toc.ncx``) and one document per chapter. From the chapter's Markdown it
 takes paragraphs (lines joined as in Markdown), headings, ``*italic*``/``_italic_``,
-``**bold**`` and scene breaks (``***``, ``* * *``, ``---``, ``___``, ``⁂``). Every text is
-escaped; nothing in the manuscript becomes markup. Characters that XML does not allow are
-dropped, so each document stays well-formed.
+``**bold**``, scene breaks (``***``, ``* * *``, ``---``, ``___``, ``⁂``) and pictures
+(``![caption](bild:<file>)``, step 10.6, ADR-110) as figures. Every text is escaped; nothing in
+the manuscript becomes markup. Characters that XML does not allow are dropped, so each document
+stays well-formed.
 """
 
 import html
 import re
 import uuid
 import zipfile
-from collections.abc import Sequence
+from collections.abc import Collection, Mapping, Sequence
 from datetime import UTC, datetime
 from io import BytesIO
 from typing import Final
 
 from skriptorium.manuscript.models import Chapter, Story
+from skriptorium.manuscript.pictures import picture_of, pictures_in
 
 MEDIA_TYPE: Final = "application/epub+zip"
 _HEADING: Final = re.compile(r"^(#{1,6})\s+(.*)$")
@@ -37,6 +39,9 @@ p.break { text-align: center; margin: 1em 0; text-indent: 0; }
 p.author { text-align: center; text-indent: 0; margin-top: 1em; }
 section.cover { text-align: center; margin: 0; }
 section.cover img { max-width: 100%; max-height: 100vh; }
+figure { margin: 1em 0; text-align: center; }
+figure img { max-width: 100%; }
+figcaption { font-style: italic; font-size: 0.9em; margin-top: 0.3em; }
 """
 # File endings of the cover image in the book, by media type (step 7.11).
 _COVER_ENDINGS: Final = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}
@@ -49,12 +54,22 @@ def epub_for(
     modified: datetime,
     *,
     cover: tuple[bytes, str] | None = None,
+    pictures: Mapping[str, tuple[bytes, str]] | None = None,
 ) -> bytes:
     """The EPUB file of ``story`` with ``chapters`` in their order; ``modified`` stamps it.
 
     ``cover`` (bytes and media type, step 7.11) becomes the book's cover image and a cover page
-    before the title page; without it the book is unchanged.
+    before the title page; without it the book is unchanged. ``pictures`` maps a picture file of
+    the story to its bytes and media type (ADR-110): a picture line naming one becomes a figure,
+    one naming a missing file is left out; only pictures named in the text go into the book.
     """
+    given = pictures or {}
+    used = [
+        file
+        for file in dict.fromkeys(p.file for c in chapters for p in pictures_in(c.text))
+        if file in given
+    ]
+    images = [(f"bilder/{file}", given[file][1]) for file in used]
     cover_name = None if cover is None else f"umschlag{_COVER_ENDINGS[cover[1]]}"
     title = _clean(story.title)
     writer = _clean(author or "").strip() or None
@@ -66,7 +81,10 @@ def epub_for(
     heads = [f"{chapter.number}. {_clean(chapter.title)}" for chapter in chapters]
     files: list[tuple[str, str]] = [
         ("META-INF/container.xml", _CONTAINER),
-        ("OEBPS/content.opf", _package(title, writer, identifier, stamp, names, cover_name, cover)),
+        (
+            "OEBPS/content.opf",
+            _package(title, writer, identifier, stamp, names, cover_name, cover, images),
+        ),
         ("OEBPS/nav.xhtml", _nav(title, names, heads)),
         ("OEBPS/toc.ncx", _ncx(title, identifier, names, heads)),
         ("OEBPS/style.css", _STYLE),
@@ -76,7 +94,10 @@ def epub_for(
         files.insert(0, ("OEBPS/umschlag.xhtml", _cover_page(title, cover_name)))
     for name, head, chapter in zip(names, heads, chapters, strict=True):
         files.append(
-            (f"OEBPS/{name}", _document(head, f"<h2>{_escape(head)}</h2>\n{_body(chapter.text)}"))
+            (
+                f"OEBPS/{name}",
+                _document(head, f"<h2>{_escape(head)}</h2>\n{_body(chapter.text, used)}"),
+            )
         )
     buffer = BytesIO()
     when = stamp.timetuple()[:6]
@@ -92,11 +113,16 @@ def epub_for(
             book.writestr(
                 zipfile.ZipInfo(f"OEBPS/{cover_name}", when), cover[0], zipfile.ZIP_STORED
             )
+        for file in used:
+            book.writestr(
+                zipfile.ZipInfo(f"OEBPS/bilder/{file}", when), given[file][0], zipfile.ZIP_STORED
+            )
     return buffer.getvalue()
 
 
-def _body(markdown: str) -> str:
-    """XHTML of a chapter's Markdown: headings, paragraphs and scene breaks."""
+def _body(markdown: str, pictures: Collection[str] = ()) -> str:
+    """XHTML of a chapter's Markdown: headings, paragraphs, scene breaks and the ``pictures``
+    it names (ADR-110); a picture line naming another file is left out."""
     blocks: list[str] = []
     paragraph: list[str] = []
 
@@ -108,7 +134,12 @@ def _body(markdown: str) -> str:
     for raw in _clean(markdown).replace("\r\n", "\n").split("\n"):
         line = raw.strip()
         heading = _HEADING.match(line)
-        if not line:
+        picture = picture_of(line)
+        if picture is not None:
+            close()
+            if picture.file in pictures:
+                blocks.append(_figure(picture.file, _clean(picture.caption)))
+        elif not line:
             close()
         elif _BREAK.match(line):
             close()
@@ -120,6 +151,12 @@ def _body(markdown: str) -> str:
             paragraph.append(line)
     close()
     return "\n".join(blocks)
+
+
+def _figure(file: str, caption: str) -> str:
+    """A picture in full width, its caption below and as the text for readers that speak."""
+    below = f"<figcaption>{_escape(caption)}</figcaption>" if caption else ""
+    return f'<figure><img src="bilder/{file}" alt="{_escape(caption)}"/>{below}</figure>'
 
 
 def _inline(text: str) -> str:
@@ -201,6 +238,7 @@ def _package(
     names: Sequence[str],
     cover_name: str | None = None,
     cover: tuple[bytes, str] | None = None,
+    images: Sequence[tuple[str, str]] = (),
 ) -> str:
     creator = f"\n<dc:creator>{_escape(author)}</dc:creator>" if author else ""
     cover_meta = cover_items = cover_spine = ""
@@ -218,6 +256,10 @@ def _package(
         for index, name in enumerate(names, start=1)
     )
     spine = "\n".join(f'<itemref idref="k{index}"/>' for index in range(1, len(names) + 1))
+    pictures = "".join(
+        f'\n<item id="b{index}" href="{href}" media-type="{media}"/>'
+        for index, (href, media) in enumerate(images, start=1)
+    )
     return f"""<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="id" xml:lang="de">
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -231,7 +273,7 @@ def _package(
 <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
 <item id="css" href="style.css" media-type="text/css"/>
 {cover_items}<item id="titel" href="titel.xhtml" media-type="application/xhtml+xml"/>
-{chapters}
+{chapters}{pictures}
 </manifest>
 <spine toc="ncx">
 {cover_spine}<itemref idref="titel"/>
