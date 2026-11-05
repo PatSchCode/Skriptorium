@@ -29,6 +29,8 @@ export type {
   CanonEntry,
   Category,
   EntryFields,
+  EntryDeletion,
+  EntryUse,
   GuestUse,
   MapMarker,
   World,

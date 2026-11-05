@@ -175,6 +175,7 @@ export function Canon({
                 key={formFor?.id ?? "new"}
                 world={world}
                 entry={formFor}
+                entries={entries}
                 onClose={(saved) => {
                   setEditing(null);
                   reload();

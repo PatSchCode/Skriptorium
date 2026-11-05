@@ -5,9 +5,12 @@ import {
   describeError,
   type CanonEntry,
   type Category,
+  type EntryDeletion,
 } from "../api";
 import { templateFor } from "../sections";
 import { ErrorText, Field } from "./Common";
+import { DeleteDialog } from "./DeleteDialog";
+import { EntryDeletionList } from "./EntryDeletionList";
 
 const TIMELINE_HINT =
   "Ereignisse in ihrer Reihenfolge untereinander, z. B. als nummerierte Liste.";
@@ -28,10 +31,13 @@ function hintFor(category: Category, creating: boolean): string | undefined {
 export function EntryForm({
   world,
   entry,
+  entries = [],
   onClose,
 }: {
   world: string;
   entry: CanonEntry | null;
+  /** The entries of the world, to name those that mention this one before deleting it. */
+  entries?: readonly CanonEntry[];
   /** Saved: its identifier; deleted: `null`; cancelled: nothing. */
   onClose: (saved?: string | null) => void;
 }) {
@@ -44,6 +50,7 @@ export function EntryForm({
   // A new entry starts with the empty sections of its category (step 9.3, ADR-092).
   const [body, setBody] = useState(entry?.body ?? templateFor(category));
   const [error, setError] = useState<string | null>(null);
+  const [deletion, setDeletion] = useState<EntryDeletion | null>(null);
   const hint = hintFor(category, entry === null);
 
   /** The text follows the category while it is empty or still the template of the old one. */
@@ -80,16 +87,14 @@ export function EntryForm({
     }
   }
 
-  async function remove() {
-    if (
-      entry === null ||
-      !window.confirm(`„${entry.name}“ wirklich löschen?`)
-    ) {
+  /** First what goes with the entry (step 10.1, ADR-106), then the click in the dialog. */
+  async function askToRemove() {
+    if (entry === null) {
       return;
     }
+    setError(null);
     try {
-      await api.deleteEntry(world, entry.id);
-      onClose(null);
+      setDeletion(await api.entryDeletion(world, entry.id));
     } catch (reason: unknown) {
       setError(describeError(reason));
     }
@@ -166,12 +171,35 @@ export function EntryForm({
           <button
             type="button"
             className="danger"
-            onClick={() => void remove()}
+            onClick={() => void askToRemove()}
           >
             Löschen
           </button>
         )}
       </div>
+      {entry !== null && deletion !== null && (
+        <DeleteDialog
+          heading={`„${entry.name}“ löschen?`}
+          confirmLabel={
+            deletion.images + deletion.markers + deletion.uses.length > 0
+              ? "Endgültig löschen"
+              : "Löschen"
+          }
+          onConfirm={async () => {
+            await api.deleteEntry(world, entry.id);
+            onClose(null);
+          }}
+          onCancel={() => {
+            setDeletion(null);
+          }}
+        >
+          <EntryDeletionList
+            entry={entry}
+            deletion={deletion}
+            entries={entries}
+          />
+        </DeleteDialog>
+      )}
     </form>
   );
 }

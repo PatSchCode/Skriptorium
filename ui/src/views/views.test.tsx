@@ -486,9 +486,14 @@ describe("Canon", () => {
     const { calls } = fakeApi({
       "GET /api/worlds/salzmark/entries": ok([ENTRY]),
       "PATCH /api/worlds/salzmark/entries/kael": ok(ENTRY),
+      "GET /api/worlds/salzmark/entries/kael/deletion-preview": ok({
+        name: "Kael",
+        images: 0,
+        markers: 0,
+        uses: [],
+      }),
       "DELETE /api/worlds/salzmark/entries/kael": noContent(),
     });
-    const confirm = vi.spyOn(window, "confirm");
     const user = userEvent.setup();
     render(<CanonAt start="kael" />);
     await user.click(await screen.findByRole("button", { name: "Bearbeiten" }));
@@ -502,11 +507,17 @@ describe("Canon", () => {
     );
     await user.click(screen.getByRole("button", { name: "Speichern" }));
     await user.click(await screen.findByRole("button", { name: "Bearbeiten" }));
-    confirm.mockReturnValueOnce(false);
     await user.click(screen.getByRole("button", { name: "Löschen" }));
+    let dialog = await screen.findByRole("dialog", { name: "„Kael“ löschen?" });
+    expect(
+      within(dialog).getByText(/nur der Eintrag selbst verschwindet/),
+    ).toBeDefined();
+    await user.click(within(dialog).getByRole("button", { name: "Abbrechen" }));
+    expect(screen.queryByRole("dialog")).toBeNull();
     expect(calls.some((c) => c.method === "DELETE")).toBe(false);
-    confirm.mockReturnValueOnce(true);
     await user.click(screen.getByRole("button", { name: "Löschen" }));
+    dialog = await screen.findByRole("dialog", { name: "„Kael“ löschen?" });
+    await user.click(within(dialog).getByRole("button", { name: "Löschen" }));
     expect(
       await screen.findByText("Einen Eintrag links wählen."),
     ).toBeDefined();
@@ -520,16 +531,24 @@ describe("Canon", () => {
     fakeApi({
       "GET /api/worlds/salzmark/entries": ok([ENTRY]),
       "PATCH /api/worlds/salzmark/entries/kael": fail(422, "Name fehlt"),
+      "GET /api/worlds/salzmark/entries/kael/deletion-preview": ok({
+        name: "Kael",
+        images: 0,
+        markers: 0,
+        uses: [],
+      }),
       "DELETE /api/worlds/salzmark/entries/kael": fail(404, "weg"),
     });
-    vi.spyOn(window, "confirm").mockReturnValue(true);
     const user = userEvent.setup();
     render(<CanonAt start="kael" />);
     await user.click(await screen.findByRole("button", { name: "Bearbeiten" }));
     await user.click(screen.getByRole("button", { name: "Speichern" }));
     expect(await screen.findByText("Name fehlt")).toBeDefined();
     await user.click(screen.getByRole("button", { name: "Löschen" }));
-    expect(await screen.findByText("weg")).toBeDefined();
+    const dialog = await screen.findByRole("dialog");
+    await user.click(within(dialog).getByRole("button", { name: "Löschen" }));
+    expect(await within(dialog).findByText("weg")).toBeDefined();
+    await user.click(within(dialog).getByRole("button", { name: "Abbrechen" }));
     await user.click(screen.getByRole("button", { name: "Abbrechen" }));
     expect(
       await screen.findByRole("button", { name: "Bearbeiten" }),
