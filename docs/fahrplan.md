@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** D.1 Node 26 – seit 2026-11-05, entschieden (ADR-112), umgesetzt (lokal); PR auf Wort des Eigentümers. 10.7 zusammengeführt (PR #211 → `39c9db4`), wartet auf das Einspielen (Eigentümer: „Noch nicht“), dann Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
-- **Nächster Schritt:** D.1 zusammenführen; 10.7 einspielen und 10.6 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner in Arbeit. D.1 erledigt 2026-11-05 (ADR-112). 10.7 zusammengeführt (PR #211 → `39c9db4`), wartet auf das Einspielen (Eigentümer: „Noch nicht“), dann Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
+- **Nächster Schritt:** 10.7 einspielen (dann mit Node 26 gebaut) und 10.6 abnehmen (Eigentümer); danach 10.9 Vollständige Anfrage festhalten – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -44,7 +44,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| 🟠 | D.1 | Wechsel Node.js 24 → Node.js 26 LTS | umgesetzt (lokal, ADR-112: 26.12.1) | du: PR freigeben |
+| ✅ | D.1 | Wechsel Node.js 24 → Node.js 26 LTS | erledigt 2026-11-05 (ADR-112: 26.12.1, PR #212) | – |
 | ⚪ | D.2 | Nachprüfung TypeScript 7 | offen | KI – am 2027-01-08 |
 | ⚪ | D.3 | Nachprüfung httpx | offen | KI – am 2027-03-26 |
 | ✅ | D.4 | Prüfung „kein Kontextverlust" beim Referenzumfang | erledigt 2026-10-11 (ADR-057, an „Geschichte des Eigentümers“) | – |
@@ -388,7 +388,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 
 #### D.1: Wechsel Node.js 24 → Node.js 26 LTS
 
-- **Status:** 🟠 IN ARBEIT – umgesetzt (lokal, 2026-11-05, ADR-112: Node 26.12.1, npm 11.20.0, `@types/node` 26.6.6); offen: CI auf Node 26 grün (PR auf Wort des Eigentümers)
+- **Status:** ✅ ERLEDIGT 2026-11-05 (ADR-112: Node 26.12.1, npm 11.20.0, `@types/node` 26.6.6; PR #212 → `4a2295b`, CI vier Jobs grün auf Node 26, keine Laufzeitwarnung; Server baut ab dem nächsten Einspielen mit `node:26.12.1-slim`)
 - **Phasentyp-Kontext:** STABILISIERUNG
 - **Abhängigkeiten:** 2.1
 - **Frist:** frühestens 2026-11-05 (Mindestreife), spätestens vor 2028-04-30 (Lebensende Node 24); Vorlauf 6 Monate laut Ablaufdaten-Register

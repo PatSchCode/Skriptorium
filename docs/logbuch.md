@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] D.1 erledigt
+
+- Eigentümer: „Ja, PR und Merge“. PR #212, CI vier Jobs grün auf Node 26.12.1 (Python 1:42, Pre-Commit 2:02, TypeScript 1:33, E2E 2:10 – Chromium-Download diesmal normal), 0 `ExperimentalWarning`/`DeprecationWarning` im Protokoll, Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `4a2295b`. D.1 → ERLEDIGT.
+- Server läuft weiter `5aa544a` (gebaut mit Node 24); das nächste Einspielen baut den Oberflächen-Abschnitt mit `node:26.12.1-slim` und bringt 10.7 mit.
+
 ### 2026-11-05 – [ONBOARDING-VALIDATION] Node 26 (D.1)
 
 - Frischer Worktree von `9fa8665`: `scripts/session-start.sh` lud Node 26.12.1 (SHA-256 passt), `npm ci`-Stand mit 270 Paketen, Pre-Commit-Hook; danach `npm run build` grün, 585/585 Komponenten-Tests, Stichprobe 152 Python-Tests (`tests/context`). Worktree danach entfernt. Kein Befund.
