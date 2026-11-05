@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.7 umgesetzt (lokal)
+
+- Nach ADR-111 auf `feat/10.7-bilder-beim-schreiben` (von `main` `5aa544a` plus `docs/10.6-zusammengefuehrt`); Zahlen im Fahrplan bei 10.7. 10.6 wartet weiter auf die Abnahme; 10.7 berührt die Kapitelbilder nicht.
+- Mini-Reibungen: (1) Suche nach Verbrauchsdateien mit `glob('/**/…', recursive=True)` im Container lief über das ganze Dateisystem in die Zeitgrenze – abgebrochen, Datenpfad `/data` aus dem `Dockerfile` genommen. (2) `tsc -p .` im Ordner `ui/` findet keine `tsconfig.json`; sie liegt im Projektwurzel-Ordner. (3) `noUncheckedIndexedAccess`: `entry.images[0]` ist `string | undefined`, obwohl nur Einträge mit Bild gezeigt werden – `?? ""`. (4) Der Preis steht wie in der Modellauswahl in Cent („ca. +1,0 ct“), im Mockup stand „+0,01 $“.
+- Messung für die Schätzung: eine Bildbeschreibung mit Grok 4.6 auf dem Server, 2.788 Token Eingabe bei rund 200 Token Text → 2.500 Token je Bild; nur eine Messung, nach den ersten Anfragen nachprüfen.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-111 Bilder beim Schreiben mitschicken (10.7)
+
+- Vorlage mit `mockup-10.7.html` (lokal) und Auswahlfragen; Eigentümer jeweils die Empfehlung (Haken bei den Einträgen, nur Hauptbild, höchstens 4, Text gilt). Eigentümer prüft 10.6 später („Ich kann das jetzt nicht prüfen“).
+- Server 2026-11-05 (nur Anzahlen): 23 Einträge mit Bildern (20 mit einem), Median 109 KB. Grok 4.6/4.7 und Qwen 3.8 Max lesen Bilder, Hermes 4 nicht. Reaktiv-Quote 0/10 (ADR-102 bis ADR-111).
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.6 eingespielt
 
 - Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `5aa544a`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `56e5d1b`.
