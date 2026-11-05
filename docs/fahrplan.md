@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.7 Bilder beim Schreiben – seit 2026-11-05, entschieden (ADR-111), umgesetzt (lokal); PR auf Wort des Eigentümers, dann Einspielen und Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
+- **Aktiver Schritt:** 10.7 Bilder beim Schreiben – seit 2026-11-05, entschieden (ADR-111), umgesetzt, zusammengeführt (PR #211 → `39c9db4`); Einspielen auf Wort des Eigentümers, dann Probe im Alltag. 10.6 eingespielt (Stand `5aa544a`, 2026-11-05), wartet auf die Abnahme (Bild im Kapitel, E-Book mit Bild).
 - **Nächster Schritt:** 10.6 abnehmen (Eigentümer); danach 10.7 Bilder beim Schreiben – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -34,7 +34,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
 | 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | wartet auf Abnahme (ADR-110), eingespielt `5aa544a` | du: Bild einfügen, E-Book prüfen |
-| 🟠 | 10.7 | Bilder beim Schreiben mitschicken (V.33) | umgesetzt (lokal, ADR-111) | du: PR freigeben |
+| 🟠 | 10.7 | Bilder beim Schreiben mitschicken (V.33) | zusammengeführt `39c9db4` (ADR-111), nicht eingespielt | du: Einspielen freigeben |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ⚪ | 10.10 | Textqualität von Hermes 4 messen (V.41) | offen | KI (Cloud-Session) |

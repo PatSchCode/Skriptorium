@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.7 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #211, CI vier Jobs grün (Python 1:57, Pre-Commit 1:47, TypeScript 2:32, E2E 12:33), keine Hinweise außer der Ubuntu-26-Meldung. Zusammengeführt mit `--match-head-commit` → `39c9db4`. Server läuft weiter `5aa544a`. Doku-Nachtrag lokal auf `docs/10.7-zusammengefuehrt`.
+- Mini-Reibung: Der E2E-Job brauchte 12:33 statt sonst rund 2:30 – davon 10:43 für „Chromium für Playwright installieren“ (Download), die Tests selbst 46 s. Kein Code-Befund; tritt es wieder auf, Cache für Playwright-Browser prüfen.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.7 umgesetzt (lokal)
 
 - Nach ADR-111 auf `feat/10.7-bilder-beim-schreiben` (von `main` `5aa544a` plus `docs/10.6-zusammengefuehrt`); Zahlen im Fahrplan bei 10.7. 10.6 wartet weiter auf die Abnahme; 10.7 berührt die Kapitelbilder nicht.
