@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] D.27 erledigt
+
+- Eigentümer: „Ja, PR und Merge“. PR #213, CI vier Jobs grün (Python 2:01, Pre-Commit 1:27, TypeScript 1:57, E2E 2:15), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `8e87aab`. D.27 → ERLEDIGT; kein Einspielen nötig (nur Testwerkzeug).
+
 ### 2026-11-06 – [BEOBACHTUNG] D.27 Vitest 4.1.12 umgesetzt (lokal)
 
 - Eigentümer: „Ja, Vitest heben“. Schritt D.27 angelegt (Patch-Update, nicht freigabepflichtig). `vitest`/`@vitest/coverage-v8` 4.1.11 → 4.1.12 (2026-10-15); `npm install` zog `chai` 6.3.0, `std-env` und `tinyrainbow` je eine Minor höher (Bereiche von Vitest selbst).
