@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. 10.5 eingespielt (Stand `17ea244`, 2026-11-05), wartet auf die Probe mit einem 2K-Bild durch den Eigentümer.
-- **Nächster Schritt:** 10.5 mit einem 2K-Bild erproben (Eigentümer); danach 10.6 Bilder im Manuskript – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.5 – abgenommen (Probe 4K), Nachtrag Preisregel in Arbeit (PR, CI); danach erledigt.
+- **Nächster Schritt:** Nachtrag 10.5 zusammenführen; danach 10.6 Bilder im Manuskript – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -32,7 +32,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | erledigt 2026-11-05 (ADR-107) | – |
 | ✅ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | erledigt 2026-11-05 (ADR-108) | – |
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
-| 🔵 | 10.5 | Auflösung und Qualität bei der Bilderzeugung | wartet auf Abnahme (ADR-109), eingespielt `17ea244` | du: Probe mit einem 2K-Bild |
+| 🟠 | 10.5 | Auflösung und Qualität bei der Bilderzeugung | abgenommen, Nachtrag Preisregel in Arbeit (ADR-109) | KI: Nachtrag zusammenführen |
 | ⚪ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | offen | KI: nach 10.4 |
 | ⚪ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | offen | KI: nach 10.4 |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
@@ -267,7 +267,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.5: Auflösung und Qualität bei der Bilderzeugung
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #208, `17ea244`, CI vier Jobs grün nach einem Neustart; eingespielt 2026-11-05; Probe mit 2K-Bild offen) – Befund: zwei Ursachen – keine Auflösung in der Anfrage (Modell nimmt meist 1K) und Verkleinern im Browser auf 2.000 Pixel beim Übernehmen. Katalog 2026-11-05: 27/63 mit `resolution`, 11 mit `quality`, Preisvarianten uneinheitlich. Server: eingestellt Seedream 5.0 Pro (1K 0,045 $, 2K 0,09 $), 27 von 67 Bildern; FLUX.2 Pro 19, Grok Imagine 2.0 15. Vergleich `mockup-10.5.html` (lokal) vorgelegt; Eigentümer: 2K voreingestellt, bis 4.096 Pixel, Qualität wo angeboten, Fotos bei 2.000 → ADR-109. Umsetzung läuft
+- **Status:** 🟠 IN ARBEIT (Nachtrag) – zusammengeführt PR #208 (`17ea244`), eingespielt 2026-11-05. Probe des Eigentümers: Seedream 5.0 Pro 2K → 1.366 × 2.048, kaum Unterschied (Seedream lieferte schon vorher 2K für 0,09 $ und wurde nur auf 2.000 verkleinert); Seedream 5.0 Lite 4K → 2.732 × 4.096, 0,035 $, „deutlich schärfer“ – abgenommen. Nachtrag auf Wunsch des Eigentümers: Grundpreis ohne Varianten gilt für jede Stufe (ADR-109, Nachtrag); erledigt mit dessen Merge. Befund: zwei Ursachen – keine Auflösung in der Anfrage (Modell nimmt meist 1K) und Verkleinern im Browser auf 2.000 Pixel beim Übernehmen. Katalog 2026-11-05: 27/63 mit `resolution`, 11 mit `quality`, Preisvarianten uneinheitlich. Server: eingestellt Seedream 5.0 Pro (1K 0,045 $, 2K 0,09 $), 27 von 67 Bildern; FLUX.2 Pro 19, Grok Imagine 2.0 15. Vergleich `mockup-10.5.html` (lokal) vorgelegt; Eigentümer: 2K voreingestellt, bis 4.096 Pixel, Qualität wo angeboten, Fotos bei 2.000 → ADR-109. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Schnittstelle (Kategorie 5, additiv), Grenze gespeicherter Bilder (`storage/images.py`: 5 MB, 4.096 Pixel)
