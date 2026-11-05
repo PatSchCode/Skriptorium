@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.3 und 10.4 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #207 (10.3, 10.4 und die Doku seit dem Einspielen von 10.1/10.2), CI vier Jobs grün (Python 1:42, TypeScript 1:44, Pre-Commit 2:03, E2E 2:15), keine Hinweise außer der bekannten Ubuntu-26-Meldung (D.19). Zusammengeführt mit `--match-head-commit` → `1a46b59`.
+- 10.4 → ERLEDIGT. 10.3 wartet auf Einspielen (Wort des Eigentümers) und Probe mit echter KI. Server läuft weiter `7900e9d`. Doku-Nachtrag lokal auf `docs/10.4-zusammengefuehrt`.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.4 umgesetzt (lokal)
 
 - Zahlen im Fahrplan bei 10.4. Verhalten unverändert: alle vorhandenen Tests ohne Änderung grün, E2E 15.
