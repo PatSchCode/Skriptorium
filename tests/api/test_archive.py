@@ -210,14 +210,15 @@ def test_delete_a_middle_chapter(logged_in: TestClient) -> None:
 
 
 def test_preview_and_delete_with_several_stories_and_a_vanished_guest(
-    logged_in: TestClient,
+    logged_in: TestClient, data_dir: Path
 ) -> None:
     _set_up(logged_in)
     second = f"{SALZ}/stories/ohne-gast"
     _ok(logged_in.post(f"{second}/guests", json={"world": "glaskueste", "entry": "mira"}), 201)
     _ok(logged_in.post(f"{second}/facts", json={"entry": "mira", "fact": "Mira wartet."}), 201)
-    # An entry deleted on its own leaves its guest link behind; the preview names its identifier.
-    _ok(logged_in.delete(f"{GLAS}/entries/vale"), 204)
+    # An entry whose file was deleted by hand leaves its guest link behind; the preview names its
+    # identifier. (Deleting it in the program takes the link with it, step 10.1.)
+    (data_dir / "worlds" / "glaskueste" / "canon" / "figur" / "vale.md").unlink()
 
     preview = _ok(logged_in.get(f"{GLAS}/deletion-preview"))
     assert [(u["story"], u["guests"], u["facts"]) for u in preview["guest_uses"]] == [

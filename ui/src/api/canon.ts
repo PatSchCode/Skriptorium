@@ -69,6 +69,31 @@ export interface WorldDeletion {
   guest_uses: GuestUse[];
 }
 
+/** A story that holds traces of a canon entry about to be deleted (step 10.1, ADR-106). */
+export interface EntryUse {
+  world: string;
+  world_name: string;
+  story: string;
+  story_title: string;
+  /** The entry is a guest in this story of another world. */
+  guest: boolean;
+  /** The guest has a relation to that world (step 9.13). */
+  relation: boolean;
+  /** The author leads the entry here; goes with it. */
+  led: boolean;
+  /** Story facts about the entry that go with it. */
+  facts: number;
+}
+
+/** What deleting a canon entry takes with it (step 10.1, ADR-106). */
+export interface EntryDeletion {
+  name: string;
+  images: number;
+  /** Markers on the maps of the world. */
+  markers: number;
+  uses: EntryUse[];
+}
+
 export interface CanonEntry {
   world: string;
   id: string;
@@ -127,6 +152,13 @@ export const canonApi = {
       `${worldPath(world)}/entries/${enc(id)}`,
       change,
     ) as Promise<CanonEntry>,
+  /** What deleting the entry takes with it; changes nothing (step 10.1, ADR-106). */
+  entryDeletion: (world: string, id: string) =>
+    request(
+      "GET",
+      `${worldPath(world)}/entries/${enc(id)}/deletion-preview`,
+    ) as Promise<EntryDeletion>,
+  /** Deletes the entry with its images, markers and traces in stories (ADR-106). */
   deleteEntry: (world: string, id: string) =>
     request("DELETE", `${worldPath(world)}/entries/${enc(id)}`),
 

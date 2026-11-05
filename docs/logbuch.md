@@ -29,6 +29,22 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.1 umgesetzt (lokal), Bildschirmfotos zur Abnahme
+
+- Umsetzung nach ADR-106 auf `feat/10.1-loeschkaskade`; Zahlen im Fahrplan bei 10.1. ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün; Build vom Projektordner, E2E 15 grün.
+- Mini-Reibung: Der Archivtest aus 9.9 nutzte das alte Verhalten (gelöschter Eintrag ließ die Gast-Verbindung stehen), um den „verschwundenen Gast“ zu prüfen; jetzt wird die Datei dafür von Hand entfernt.
+- Mini-Reibung: Bildschirmfoto für das Smartphone muss gleich in Handygröße entstehen; ein nachträgliches Verkleinern öffnet die Seitenleiste über dem Dialog.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-106 Löschen eines Kanon-Eintrags nimmt seine Verweise mit (10.1)
+
+- Eigentümer per Auswahlfragen zum Mockup: „Mitlöschen mit Folgenliste“, „Klick im Dialog“. Kategorien 4 und 5, nicht reaktiv.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.1 begonnen: Bestandsaufnahme und Mockup
+
+- Code: `canon/entries.py::delete_entry` löscht die Datei, `CanonService.delete_entry` dazu Bilder und Markierungen; Geschichten werden nicht berührt. Muster für die Kaskade: `api/flows/removal.py` (Welt löschen, ADR-098; `canon` und `manuscript` kennen sich nicht, der Ablauf liegt in `api`).
+- Server (eine SSH-Prüfung, nur Anzahlen): 148 Einträge in 5 Welten; geführte Figuren 0, Fakten „nur diese Geschichte“ 0, Gast-Verbindungen 1; verwaiste Verweise 0.
+- Mockup `mockup-10.1.html` (lokal, ausgeschlossen): Dialog mit Folgenliste statt `window.confirm`.
+
 ### 2026-11-05 – [PHASEN-WECHSEL] Reflexion Phase 9 (UMSETZUNG) → Phase 10 (UMSETZUNG)
 
 - **Gelernt:** Messen schlägt Schätzen – Zwischenspeicher bei der zweiten gleichen Anfrage 98–99,7 % (9.10), echte Nutzung 1.094 Anfragen im Oktober statt geschätzter 400, Websuche teuer durch den Suchtext statt durch die Gebühr (9.12). Die Vertragsdatei aus 9.2 hat jede Änderung an Antworten (9.9, 9.11, 9.13) sichtbar gemacht.

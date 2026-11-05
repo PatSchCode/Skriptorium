@@ -2094,6 +2094,27 @@
       "archived": false
     }
   },
+  "entryDeletion": {
+    "route": "GET /api/worlds/nebelreich/entries/nebelkoenig/deletion-preview",
+    "type": "EntryDeletion",
+    "body": {
+      "name": "Nebelkönig",
+      "images": 0,
+      "markers": 0,
+      "uses": [
+        {
+          "world": "die-salzmark",
+          "world_name": "Die Salzmark",
+          "story": "die-ueberfahrt",
+          "story_title": "Die Überfahrt",
+          "guest": true,
+          "relation": true,
+          "led": false,
+          "facts": 0
+        }
+      ]
+    }
+  },
   "archiveStory": {
     "route": "POST /api/worlds/die-salzmark/stories/am-ufer/archive",
     "type": "Story",

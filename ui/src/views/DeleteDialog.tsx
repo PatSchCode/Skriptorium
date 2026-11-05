@@ -5,33 +5,38 @@ import { ErrorText } from "./Common";
 /**
  * The question before deleting a world or a story for good (step 9.9, ADR-098): what goes with
  * it, what stays, and the name to type. "Endgültig löschen" works only once the typed text is
- * exactly the name; the server checks it again. Escape cancels.
+ * exactly the name; the server checks it again. Without a `name` (a canon entry, step 10.1,
+ * ADR-106) a click confirms. Escape cancels.
  */
 export function DeleteDialog({
   heading,
   name,
   nameLabel,
+  confirmLabel = "Endgültig löschen",
   children,
   onConfirm,
   onCancel,
 }: {
   heading: string;
   /** What the author types to confirm: the name of the world or the title of the story. */
-  name: string;
+  name?: string;
   /** Label of the field, e.g. "Zum Bestätigen den Namen der Welt eintippen". */
-  nameLabel: string;
+  nameLabel?: string;
+  /** Text of the confirming button; "Endgültig löschen" by default. */
+  confirmLabel?: string;
   /** The consequences, as the server counted them. */
   children: ReactNode;
   onConfirm: () => Promise<void>;
   onCancel: () => void;
 }) {
   const field = useRef<HTMLInputElement>(null);
+  const cancel = useRef<HTMLButtonElement>(null);
   const [typed, setTyped] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    field.current?.focus();
+    (field.current ?? cancel.current)?.focus();
   }, []);
 
   async function confirm() {
@@ -66,30 +71,37 @@ export function DeleteDialog({
         <p className="note">
           Rückweg nur über die tägliche Sicherung (05:00 Uhr).
         </p>
-        <label className="stack tight">
-          <span>{nameLabel}:</span>
-          <input
-            ref={field}
-            value={typed}
-            placeholder={name}
-            autoComplete="off"
-            onChange={(event) => {
-              setTyped(event.target.value);
-            }}
-          />
-        </label>
+        {name !== undefined && (
+          <label className="stack tight">
+            <span>{nameLabel}:</span>
+            <input
+              ref={field}
+              value={typed}
+              placeholder={name}
+              autoComplete="off"
+              onChange={(event) => {
+                setTyped(event.target.value);
+              }}
+            />
+          </label>
+        )}
         <ErrorText message={error} />
         <div className="row">
-          <button type="button" className="ghost" onClick={onCancel}>
+          <button
+            type="button"
+            className="ghost"
+            ref={cancel}
+            onClick={onCancel}
+          >
             Abbrechen
           </button>
           <button
             type="button"
             className="danger"
-            disabled={typed !== name || busy}
+            disabled={(name !== undefined && typed !== name) || busy}
             onClick={() => void confirm()}
           >
-            Endgültig löschen
+            {confirmLabel}
           </button>
         </div>
       </div>

@@ -3,7 +3,16 @@
 from skriptorium.api.flows.appearance import prepare_appearance
 from skriptorium.api.flows.describe import DescribeOrder, prepare_description
 from skriptorium.api.flows.guest_fit import FitOrder, prepare_guest_fit
-from skriptorium.api.flows.removal import GuestUse, WorldDeletion, delete_world, world_deletion
+from skriptorium.api.flows.removal import (
+    EntryDeletion,
+    EntryUse,
+    GuestUse,
+    WorldDeletion,
+    delete_entry_with_traces,
+    delete_world,
+    entry_deletion,
+    world_deletion,
+)
 from skriptorium.api.flows.summary import (
     SUMMARY_TEMPERATURE,
     SummaryFailure,
@@ -37,6 +46,8 @@ __all__ = [
     "SUMMARY_TEMPERATURE",
     "TEMPERATURE",
     "DescribeOrder",
+    "EntryDeletion",
+    "EntryUse",
     "FitOrder",
     "GuestUse",
     "PreparedRequest",
@@ -47,7 +58,9 @@ __all__ = [
     "WorldDeletion",
     "WorldOrder",
     "WriteOrder",
+    "delete_entry_with_traces",
     "delete_world",
+    "entry_deletion",
     "error_kind",
     "prepare_appearance",
     "prepare_description",

@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-105). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-106). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -125,12 +125,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-105). Aus welchem Schritt ein ADR stammt, steh
 | 103 | 2026-11-05 | Aktiv | OPERATIV | PERFORMANCE | – (Erkenntnis, Reifegrad) | Kontexttreue belastbar bis etwa 30 Kapitel; Nachmessen ab 25 Kapiteln (D.25) |
 | 104 | 2026-11-05 | Aktiv | STRATEGISCH | MODUL, METHODIK | Architektur | Pflichtfrage nach Phase 9: weiterbauen mit drei kleinen Umbauten (10.1, 10.2, 10.4) |
 | 105 | 2026-11-05 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 10 geplant: Kanon-Pflege, Bilder (mit Auflösung), Schreiben nachvollziehen; V.20 verworfen; Weltenbauer und Veröffentlichung zurückgestellt |
+| 106 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Löschen eines Kanon-Eintrags nimmt seine Verweise in Geschichten mit, Folgenliste, Bestätigung per Klick |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-096 bis ADR-105 – keiner reaktiv: ADR-096 bis ADR-102 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-097 bis ADR-106 – keiner reaktiv: ADR-097 bis ADR-102 und ADR-106 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2496,6 +2497,28 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Was soll als Nächstes besser werden – der Kanon, die Bilder, das Nachvollziehen der KI-Texte oder der Weltenbauer?“ → Kanon, Bilder und Nachvollziehen; der Weltenbauer wartet.
 - **Konfidenz zum Zeitpunkt:** hoch – Auswahl aus bekannten Wünschen; Umkehrbarkeit billig.
 - **Konsequenzen:** Wucherungs-Schwelle für Phase 10: Default (Faktor 2 und mindestens 5 zusätzliche Schritte, also mehr als 22); neue Wünsche werden V-Schritte mit Landeplatz 10.11. Phasengrenze nach Phase 9 mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage (ADR-104) erledigt.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-106: Löschen eines Kanon-Eintrags nimmt seine Verweise mit (10.1)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Mockup `mockup-10.1.html` vorher/nachher; Auswahlfragen: Verweise „Mitlöschen mit Folgenliste“, Bestätigung „Klick im Dialog“ – jeweils die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[DATENMODELL]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.1 – Vorlage zu Beginn vorgesehen, ADR-105; nicht reaktiv)
+- **Reifegrad-Wirkung:** keine (keine neue Beziehung zwischen Modulen: der Ablauf über die Grenze `canon`/`manuscript` liegt in `api/flows/removal.py` wie beim Löschen einer Welt, ADR-098)
+- **Kategorie:** Datenmodell (4, destruktive Kaskade); API-Vertrag (5, additiv: Vorschau-Route, gleiche Lösch-Route mit erweiterter Wirkung)
+- **Kontext:** V.43, Befund 4 der Bewertung nach Phase 9: `CanonService.delete_entry` entfernt Datei, Bilder und Kartenmarkierungen; Fakten, geführte Figuren und Gast-Verbindungen mit der Kennung bleiben in Geschichten stehen. Da Kennungen aus dem Namen entstehen, hingen sie an einem später gleichnamig angelegten Eintrag. Server 2026-11-05: 148 Einträge, 0 geführte Figuren, 0 Fakten, 1 Gast-Verbindung, nichts verwaist.
+- **Optionen:** Verweise mitlöschen mit Folgenliste / Löschen sperren, solange Verweise bestehen / wie heute. Bestätigung: Klick im Dialog / Namen eintippen.
+- **Entscheidung:** Mitlöschen mit Folgenliste, Bestätigung per Klick.
+  - **Vorschau:** `GET /api/worlds/{welt}/entries/{eintrag}/deletion-preview` nennt Bilder, Markierungen auf Karten und je betroffener Geschichte (eigene Welt und – als Gast – andere Welten): geführte Figur, Zahl der Fakten, Gast-Verbindung mit oder ohne Weltbezug. Die Oberfläche nennt dazu die Einträge, die den Eintrag mit `@` erwähnen; deren Text bleibt.
+  - **Löschen:** `DELETE /api/worlds/{welt}/entries/{eintrag}` entfernt zusätzlich in jeder Geschichte der Welt die geführte Figur und die Fakten mit der Kennung und in Geschichten anderer Welten die Gast-Verbindung samt Weltbezug, dort auch geführte Figur und Fakten. Fakten und geführte Figuren bleiben, wo die Kennung in derselben Geschichte auch einen anderen Eintrag meinen kann (Gast mit gleicher Kennung bzw. Eintrag der eigenen Welt) – dieselbe Regel wie in ADR-098.
+  - **Bestätigung:** ein Klick auf „Endgültig löschen“ im Dialog mit der Folgenliste (ohne Folgen: „Löschen“); `window.confirm` entfällt. Rückweg nur über die tägliche Sicherung.
+- **Vision-Frage, die entschied:** „Soll das Löschen einer Figur auch ihre Spuren in deinen Geschichten mitnehmen – und reicht dir dafür ein Klick, wenn du vorher siehst, was mitgeht?“ → ja, ja.
+- **Konfidenz zum Zeitpunkt:** hoch – bekanntes Muster aus ADR-098; Umkehrbarkeit: für die Daten teuer (Löschen), für die Entscheidung billig.
+- **Konsequenzen:** FR-024 und FR-036 berührt; `docs/architecture.md` Abschnitte 3 und 4 bei der Umsetzung. Verworfen: Sperren (mehr Handarbeit vor jedem Löschen), wie heute (verwaiste Verweise), Namen eintippen (Einträge werden öfter gelöscht als Welten).
 - **Abgeleitete Regel:** keine
 
 ---

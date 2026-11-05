@@ -6,6 +6,8 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Hinzugefügt (nach v1.0.0)
 
+- Löschen eines Kanon-Eintrags mit seinen Spuren (2026-11-05, Schritt 10.1, ADR-106): „Löschen“ am Eintrag zeigt vorher, was mitgeht – Bilder, Markierungen auf Karten, die geführte Figur und Fakten „nur diese Geschichte“ in Geschichten dieser Welt und Gast-Verbindungen (mit Weltbezug) in Geschichten anderer Welten – und nennt die Einträge, die ihn mit @ erwähnen (deren Text bleibt). Ein Klick auf „Endgültig löschen“ nimmt alles mit; ein später gleichnamig angelegter Eintrag erbt keine alten Verweise mehr.
+
 - Gast-Figuren mit Weltbezug (2026-11-05, Schritt 9.13, ADR-102): Unter „Gäste aus anderen Welten“ hat jeder Gast ein Feld „In dieser Welt“ – Herkunft, Beziehungen, Besitz und Rolle in der Welt der Geschichte. „✨ Einpassen vorschlagen“ lässt den Weltenbauer diesen Text aus dem Eintrag der Figur und der Beschreibung der Welt vorschlagen, auf Wunsch mit einer Vorgabe; du übernimmst ihn ins Feld und speicherst. Beim Schreiben bekommt die KI den Eintrag der Figur und darunter den Weltbezug; Abschnitte über die Heimatwelt („In ‹Welt›“, „Im ‹Welt›“) lässt sie dann weg. Der Eintrag in der Heimatwelt bleibt unverändert.
 
 - Löschen und Archivieren (2026-11-04, Schritt 9.9, ADR-098): Welten und Geschichten lassen sich archivieren – sie verschwinden aus den Listen, stehen im Bereich „Archiv“ und kommen mit „Zurückholen“ unverändert wieder. Endgültig löschen geht nur aus dem Archiv: Der Dialog zeigt, was alles verschwindet (auch Gast-Auftritte in anderen Welten), und verlangt den Namen bzw. Titel genau eingetippt. Kapitel lassen sich einzeln löschen; die folgenden rücken nach, ihre Kurzfassungen sind als „veraltet“ markiert.

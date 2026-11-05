@@ -81,17 +81,40 @@ class StoryExtras:
         name one of ``entries`` (step 9.9, ADR-098)."""
         story = self._stories.get_story(world_id, story_id)
         links = tuple(link for link in story.guest_links if link.world != guest_world)
+        return self._drop(story, links, entries)
+
+    def remove_entry_uses(
+        self,
+        world_id: str,
+        story_id: str,
+        entry: str,
+        guest_world: str | None,
+        with_facts: bool,
+    ) -> Story:
+        """Remove what a deleted canon entry leaves in this story (step 10.1, ADR-106): the guest
+        link to ``entry`` in ``guest_world`` if one is given and, with ``with_facts``, the facts
+        and the led character with the identifier."""
+        story = self._stories.get_story(world_id, story_id)
+        links = tuple(
+            link
+            for link in story.guest_links
+            if guest_world is None or (link.world, link.entry) != (guest_world, entry)
+        )
+        return self._drop(story, links, {entry} if with_facts else set())
+
+    def _drop(self, story: Story, links: tuple[GuestLink, ...], entries: Set[str]) -> Story:
+        """Keep ``links`` and remove the facts and led characters that name one of ``entries``."""
         controlled = [c for c in story.controlled_characters if c not in entries]
         if links != story.guest_links or len(controlled) != len(story.controlled_characters):
-            document = self._store.read(story_path(world_id, story_id))
+            document = self._store.read(story_path(story.world, story.id))
             header = dict(document.header)
             header["gast_verbindungen"] = guest_links_header(links)
             header["gefuehrte_figuren"] = list[HeaderValue](controlled)
             self._store.write(document.path, header, document.body)
         facts = tuple(fact for fact in story.facts if fact.entry not in entries)
         if facts != story.facts:
-            self._store.write(facts_path(world_id, story_id), facts_header(facts), "")
-        return self._stories.get_story(world_id, story_id)
+            self._store.write(facts_path(story.world, story.id), facts_header(facts), "")
+        return self._stories.get_story(story.world, story.id)
 
     def add_fact(self, world_id: str, story_id: str, entry: str, fact: str) -> Story:
         """Add a fact about ``entry`` that holds only in this story."""
