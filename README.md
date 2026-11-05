@@ -23,16 +23,16 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 9 – Verlässlicher Kanon, Bilder und Verwaltung (Umsetzung), begonnen 2026-10-18 (ADR-089, ADR-090); Phase 8 abgeschlossen 2026-10-18. Fortschritt: 8 von 15 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 0 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
-- **Letzte Änderung:** 2026-10-13
+- **Letzte Änderung:** 2026-11-05
 - **Architektur-Reife:** Module, Schnittstellen, Datenmodell und Token-Budget BELASTBAR (ADR-013); Reaktionszeit BELASTBAR (grok-4.6 erstes Textstück meist unter 30 s, ADR-052; grok-4.7 denkt zu lange vor und kommt in 5.12 aus der Voreinstellung); Kanon-Treue BELASTBAR (erstes echtes Kapitel des Eigentümers in 4.8: 0 Widersprüche, mit qwen3.8-max); Kontexttreue BELASTBAR bis etwa 30 Kapitel (ADR-103); Sicherheitsniveau und Schutzbedarf BELASTBAR (ADR-006, ADR-007); Observability BELASTBAR (Log-Zeile und Monatskosten, ADR-021, ADR-023); Bedrohungsmodell BELASTBAR (Prüfung 4.5); Host BELASTBAR (4.2); Netz BELASTBAR (Prüfungen von außen, 4.7); Backups BELASTBAR (4.3); Secrets im Betrieb VORLÄUFIG (Gate 4.6, BELASTBAR mit D.11)
 - **Aktive Blocker:** 0
 
 ## Quick Start
 
-Stand 2026-10-13 (v1.0.0 plus Phasen 6 und 7): Server mit Anmeldung und Oberfläche für Welten, Kanon, Import (Markdown und SillyTavern) und Geschichten; KI-Weltenbauer; Export nach SillyTavern; Aufbau wie ein Chat mit Leiste links und eigener Adresse je Ansicht; Schreiben mit KI (Figuren-Schreibweise, `@`-Menü, wählbare Länge, Kapitel-Kurzfassungen, Gast-Figuren aus anderen Welten) mit `OPENROUTER_API_KEY`; markierte Textstellen in den Kanon übernehmen; Modell je Geschichte, Kosten je Anfrage und Monat; Darstellung hell, dunkel oder schwarz (AMOLED); als App installierbar. Aus Phase 7: Zeitstrahl, E-Book mit Titelbild, Aussehen „Buch“, Bilder an Kanon-Einträgen, Karten mit Zoom und Markierungen, Bilder von der KI erzeugen und beschreiben lassen.
+Stand 2026-11-05 (v1.0.0 plus Phasen 6 bis 9): Server mit Anmeldung und Oberfläche für Welten, Kanon, Import (Markdown und SillyTavern) und Geschichten; KI-Weltenbauer; Export nach SillyTavern; Aufbau wie ein Chat mit Leiste links und eigener Adresse je Ansicht; Schreiben mit KI (Figuren-Schreibweise, `@`-Menü, wählbare Länge, Kapitel-Kurzfassungen, Gast-Figuren aus anderen Welten) mit `OPENROUTER_API_KEY`; markierte Textstellen in den Kanon übernehmen; Modell je Geschichte, Kosten je Anfrage und Monat; Darstellung hell, dunkel oder schwarz (AMOLED); als App installierbar. Aus Phase 7: Zeitstrahl, E-Book mit Titelbild, Aussehen „Buch“, Bilder an Kanon-Einträgen, Karten mit Zoom und Markierungen, Bilder von der KI erzeugen und beschreiben lassen. Aus Phasen 8 und 9: Weltenbauer aus dem Manuskript, Verweise zwischen Einträgen, feste Abschnitte je Art und Beziehungen, Bilder mit Herkunft und Bild zu Bild, Modell je Aufgabe, Archivieren und Löschen, Seite „Verbrauch“, Gast-Figuren mit Weltbezug.
 
 ### Voraussetzungen
 
@@ -100,20 +100,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 
 ## Nächste Schritte
 
-- ✅ **Phase 8** (abgeschlossen 2026-10-18): Umbau von Kanon-Dienst und Kartenansicht mit höheren Mindestwerten der Tests, Übernehmen ersetzt Abschnitte, passendere Bildvorlagen, Kurzfassung nur mit dem Stand davor, Weltenbauer mit Regeln und Zeitlinie, aus dem Manuskript und mit Gespräch über die Übernahme hinweg, Zeitlinie mit Datum und Uhrzeit, Verweise zwischen Kanon-Einträgen (ADR-080 bis ADR-088). Bewertung am Phasenende: [`docs/research/bewertung-phase-8.md`](docs/research/bewertung-phase-8.md).
-- ✅ **9.1–9.2:** Fundament – Programm und KI finden Teile eines Eintrags wie „Aussehen“ verlässlich über eine gemeinsame Regel; Einträge bleiben Markdown mit festen Überschriften (9.1 erledigt, ADR-091); End-to-End-Tests für Weltenbauer, „Abschnitt ersetzen“, Bilder und Karten sowie eine Prüfung der Server-Antworten gegen die Typen der Oberfläche (9.2 erledigt, ADR-089).
-- ✅ **9.3:** gegliederte Einträge je Art – neue Einträge zeigen beim Anlegen die Abschnitte ihrer Art (z. B. Figur: Aussehen, Wesen, Fähigkeiten, Geschichte, Beziehungen), der Weltenbauer schreibt in sie (ADR-092); erledigt 2026-10-19 nach Proben mit echter KI (Weltenbauer gliedert in allen Arten; Probeschreiben ohne Verschlechterung).
-- ✅ **9.4:** Beziehungen mit Art – Zeile `- verheiratet mit @Kael` im Abschnitt „Beziehungen“, beim genannten Eintrag erscheint „Verweise hierher“ (ADR-093); erledigt 2026-10-21.
-- ✅ **9.5:** Bilder vom Bedarf her – „Bild erzeugen“ schlägt je Art die passenden Angaben vor und weist auf fehlendes „Aussehen“ hin; „Karte erzeugen“ ist mit den Orten der Welt vorbelegt (ADR-094); erledigt 2026-10-25.
-- ✅ **9.6:** Herkunft von Bildern – ein erzeugtes Bild behält Modell, Anweisung, Format und Kosten; „Herkunft“ beim Bild zeigt sie und erzeugt auf Wunsch neu (ADR-095); erledigt 2026-10-25.
-- ✅ **9.7:** Modell je Aufgabe – Seite „Einstellungen“ legt für jede KI-Aufgabe das Startmodell fest, auch für Kurzfassungen und Bilder (ADR-096); erledigt 2026-10-26.
-- ✅ **9.8:** Bild zu Bild – ein gespeichertes Bild als Grundlage eines neuen, die Herkunft nennt sie (ADR-097); erledigt 2026-10-26.
-- ✅ **9.9:** Löschen oder Archivieren – eingespielt 2026-11-04 (ADR-098: Archiv, endgültig löschen nur aus dem Archiv, Kapitel einzeln mit Umnummerierung); erledigt 2026-11-04.
-- ✅ **9.10:** Cache-Treffer – erledigt 2026-11-04 (ADR-099): bei der zweiten gleichen Anfrage kommen 98–99,7 % der Eingabe aus dem Zwischenspeicher.
-- ✅ **9.11:** Verbrauch je Welt und Geschichte – neue Seite „Verbrauch“ mit Monat oder allen Monaten, je Welt aufklappbar zu Geschichten, nach Art und Modell, mit Anteil aus dem Zwischenspeicher (ADR-100); erledigt 2026-11-04.
-- ✅ **9.12:** Quellen und Recherche erkundet – erledigt 2026-11-05 (ADR-101): Recherche über Wikipedia und das offene D&D-Regelwerk, sparsamere Websuche, Namenslisten und Fragenliste je Art; gebaut wird in der nächsten Ausbaustufe (V.44–V.46).
-- ✅ **9.13:** Gast-Figuren – je Gast ein Text „In dieser Welt“ und „✨ Einpassen vorschlagen“ (ADR-102); erledigt 2026-11-05.
-- ✅ **9.14:** Kontexttreue gemessen – erledigt 2026-11-05 (ADR-103): an deiner größten Geschichte alles in der Anfrage, belastbar bis etwa 30 Kapitel.
+- ✅ **Phase 9** (abgeschlossen 2026-11-05): gegliederte Einträge und Beziehungen, Bilder vom Bedarf her mit Herkunft und Bild zu Bild, Modell je Aufgabe, Löschen und Archivieren, Seite „Verbrauch“ mit Cache-Treffern, Gast-Figuren mit Weltbezug, Kontexttreue belastbar bis etwa 30 Kapitel; Pflichtfrage: weiterbauen mit drei kleinen Umbauten (ADR-104).
+- ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Veröffentlichung.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
 Ergebnisse der Erkundung: [Modell-Eignungstest](docs/research/modell-eignungstest.md) – damals Startmodell grok-4.7, Zweitmodell grok-4.6; seit 5.7 ist grok-4.6 voreingestellt (ADR-044).

@@ -286,7 +286,7 @@ Default „Warnungen sind Fehler". Benannte Ausnahmen:
 
 | Posten | Art (laufend / einmalig / KI-Verbrauch) | Betrag je Monat | Stand vom | Entscheidung nötig ab |
 |---|---|---|---|---|
-| KI-Anfragen über OpenRouter | KI-Verbrauch | Schätzung ca. 6–36 $ plus Ausgabe (400 Anfragen × 30.000 Token, 0,50–3 $ je 1 Mio. Token; `docs/architecture.md` Abschnitt 6) ; gemessen in 1.1 (Testwelt, bis 17.600 Token): Startmodell grok-4.7 ca. 12 $ je Monat, hochgerechnet auf die Obergrenze 30.000 Token ca. 21 $ (ADR-010, `docs/research/modell-eignungstest.md`) | 2026-09-26 | Summe über 50 € |
+| KI-Anfragen über OpenRouter | KI-Verbrauch | gemessen Oktober 2026: 1.094 Anfragen, 38,31 $ (Verbrauchsdateien, 2026-11-05; ursprüngliche Schätzung 400 Anfragen, 6–36 $ – `docs/architecture.md` Abschnitt 6); gemessen in 1.1 (Testwelt, bis 17.600 Token): Startmodell grok-4.7 ca. 12 $ je Monat, hochgerechnet auf die Obergrenze 30.000 Token ca. 21 $ (ADR-010, `docs/research/modell-eignungstest.md`) | 2026-09-26 | Summe über 50 € |
 | Hosting | laufend | vorhandener netcup-VPS (ADR-025), mitgenutzt; kein Betrag – laut Eigentümer nicht Sache des Projekts | 2026-09-27 | – |
 | Sicherungsziel MEGA S4 | laufend | vorhandener Mega-Tarif des Eigentümers mit S4 (ADR-036); kein zusätzlicher Betrag | 2026-09-30 | – |
 
