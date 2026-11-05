@@ -1,4 +1,11 @@
-import { lazy, Suspense, useState, type ReactNode } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import {
   api,
   describeError,
@@ -87,6 +94,15 @@ export function ChapterEditor({
   } | null>(null);
   // The open dialog of "＋ Bild" (step 10.6).
   const [pictureWay, setPictureWay] = useState<PictureWay | null>(null);
+  const pictureDialog = useRef<HTMLDivElement>(null);
+
+  // The dialog opens above the text; in a long chapter the marked passage lies far below it, so
+  // bring its top into view (Befund 10.6, as the form of "In den Kanon", step 5.2).
+  useEffect(() => {
+    if (pictureWay !== null) {
+      pictureDialog.current?.scrollIntoView({ block: "start" });
+    }
+  }, [pictureWay]);
 
   function insertPicture(line: string) {
     setView("manuskript");
@@ -226,16 +242,18 @@ export function ChapterEditor({
           />
         )}
         {pictureWay !== null && (
-          <StoryPictureDialog
-            world={chapter.world}
-            story={chapter.story}
-            way={pictureWay}
-            marked={canon.marked}
-            onInsert={insertPicture}
-            onClose={() => {
-              setPictureWay(null);
-            }}
-          />
+          <div ref={pictureDialog}>
+            <StoryPictureDialog
+              world={chapter.world}
+              story={chapter.story}
+              way={pictureWay}
+              marked={canon.marked}
+              onInsert={insertPicture}
+              onClose={() => {
+                setPictureWay(null);
+              }}
+            />
+          </div>
         )}
         <Suspense fallback={<p>Editor lädt …</p>}>
           <div hidden={view !== "manuskript"}>
