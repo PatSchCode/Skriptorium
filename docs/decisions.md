@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-111). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-112). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -131,12 +131,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-111). Aus welchem Schritt ein ADR stammt, steh
 | 109 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Auflösung und Qualität bei „Bild erzeugen“; erzeugte Bilder bis 4.096 Pixel |
 | 110 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Bilder im Manuskript und im E-Book |
 | 111 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | Anfrage, API | Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken |
+| 112 | 2026-11-05 | Aktiv | OPERATIV | STACK | Externe Abh. | Build der Oberfläche auf Node.js 26.12.1 LTS (npm 11.20.0) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-102 bis ADR-111 – keiner reaktiv: ADR-102 und ADR-106 bis ADR-111 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-103 bis ADR-112 – keiner reaktiv: ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2643,6 +2644,25 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Soll die KI beim Schreiben sehen, wie deine Figuren und Orte aussehen – und wer hat recht, wenn Bild und Text sich widersprechen?“ → ja, auf Knopfdruck, der Text hat recht.
 - **Konfidenz zum Zeitpunkt:** mittel – der Weg ist vom „Bild beschreiben“ erprobt; die Wirkung auf den Text und die Token je Bild sind erst einmal gemessen. Umkehrbarkeit billig (Schalter, nichts gespeichert).
 - **Konsequenzen:** FR-035; Tests für Auswahl, Obergrenze, Gäste, Szene, Sperre ohne Bildlesen, unveränderte Anfrage ohne Haken und die Oberfläche; die Token je Bild nach den ersten Anfragen aus dem Verbrauch nachprüfen. Probe nach Regel-002 entfällt: Ohne Haken bleibt die Anfrage gleich (Test), mit Haken entscheidet der Eigentümer im Alltag. Verworfen: Schalter hinter „⋯“ (erst nach Klick sichtbar), alle Bilder eines Eintrags (Kosten vervielfachen sich ohne Nutzen), Grenze 2 (Szene mit drei Figuren unvollständig), keine Grenze, Bild vor Text (Kanon ist die Quelle).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-112: Build der Oberfläche auf Node.js 26 (D.1)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Versionstabelle bestätigt, Auswahl „26.12.1“ – die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[STACK]`
+- **Phasentyp-Kontext:** STABILISIERUNG (Querschnitt D.1 aus dem Ablaufdaten-Register; Versionswechsel, keine Architekturentscheidung – nicht reaktiv)
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Externe Abhängigkeit (3: Major-Wechsel der Laufzeitumgebung für Build und Entwicklung; Versionsregel ADR-002, `CLAUDE.md` Abschnitt 15 „Versionswahl“)
+- **Kontext:** Node.js 24.21.0 baut und prüft die Oberfläche (CI, Dockerfile-Bauabschnitt, Sessionstart-Skript); im Betrieb läuft kein Node. Die Linie 26 erreicht am 2026-11-05 die Mindestreife (6 Monate, Patch-Versionen). Belege und Prüfsummen: `docs/research/versions-verifikation.md`, Abschnitt „Wechsel auf Node.js 26“.
+- **Optionen:** 26.12.1 (neueste Minor mit Patch) / 26.13.0 (erste mit LTS-Etikett, ohne Patch) / bei Node 24 bleiben (Lebensende 2028-04-30).
+- **Entscheidung:** Node.js **26.12.1** mit npm 11.20.0, `@types/node` 26.6.6, Docker-Bauabschnitt `node:26.12.1-slim`; `engines` `>=26.12.1 <27`. Alle übrigen Pakete bleiben (Vite, Vitest, ESLint, jsdom, Playwright unterstützen Node 26 nachweislich).
+- **Vision-Frage, die entschied:** keine fachliche – die App bemerkt den Wechsel nicht; Frage war nur, ob die Reiferegel gilt oder das LTS-Etikett zählt → Reiferegel.
+- **Konfidenz zum Zeitpunkt:** hoch – CI der tragenden Werkzeuge testet Node 26, lokale Prüfreihe und CI müssen grün sein. Umkehrbarkeit billig (Pins zurück auf 24.21.0).
+- **Konsequenzen:** CI, Dockerfile, `scripts/session-start.sh`, `package.json`, README, Runbook, `docs/project-context.md` Abschnitte 3 und 8 (Ablaufdaten-Register: Node 26 bis 2029-04-30). Verworfen: 26.13.0 (verstößt gegen die Reiferegel, ohne Gewinn), bei 24 bleiben (Wechsel stünde später unter Zeitdruck).
 - **Abgeleitete Regel:** keine
 
 ---
