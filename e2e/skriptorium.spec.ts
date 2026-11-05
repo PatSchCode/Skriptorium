@@ -1054,3 +1054,64 @@ test("the AI describes a map; its text is added below the section the descriptio
     "Ein Küstenland.\n\n## Geografie – Kartenblatt\n\nSteile Klippen im Norden.\n\nZwei Buchten im Süden.\n\n## Klima\n\nRau und windig.",
   );
 });
+
+test("a picture from the canon goes into a chapter on a narrow screen and into the e-book (10.6)", async ({
+  page,
+}) => {
+  // Narrow screens fold the tools behind "⋯"; "＋ Bild" must keep them open for its menu.
+  await login(page);
+  await createWorld(page, "Die Bildstadt");
+  await area(page, "Kanon").click();
+  await addEntry(page, { name: "Ysolde", text: "Ysolde führt die Fähre." });
+  await page.getByRole("button", { name: "Ysolde" }).click();
+  const [chooser] = await Promise.all([
+    page.waitForEvent("filechooser"),
+    page
+      .getByRole("button", { name: "Bild hinzufügen" })
+      .click()
+      .then(() =>
+        page.getByRole("menuitem", { name: "Bild hochladen" }).click(),
+      ),
+  ]);
+  await chooser.setFiles({
+    name: "ysolde.png",
+    mimeType: "image/png",
+    buffer: solidPng(48, 32, [180, 90, 40]),
+  });
+  await expect(
+    page.getByText("1 Bild · Tipp auf ein Bild zeigt es groß"),
+  ).toBeVisible();
+  await area(page, "Geschichten").click();
+  await page.getByLabel("Titel").fill("Die Fahrt");
+  await page.getByRole("button", { name: "Geschichte anlegen" }).click();
+  await addChapter(page, "Eins");
+  await page.getByLabel("Manuskript").click();
+  await page.keyboard.type("Erster Absatz.");
+
+  await page.setViewportSize({ width: 820, height: 900 });
+  await page.getByRole("button", { name: "Weitere Knöpfe" }).click();
+  await page.getByRole("button", { name: "＋ Bild" }).click();
+  await page.getByRole("menuitem", { name: "Aus dem Kanon …" }).click();
+  await page.getByRole("button", { name: "Einfügen" }).click();
+
+  await expect(page.getByLabel("Manuskript")).toContainText(
+    /!\[Ysolde\]\(bild:bild-[0-9a-f]{12}\.jpg\)/,
+  );
+  const preview = page.locator("img.manuscript-picture");
+  await expect
+    .poll(() =>
+      preview.evaluate((image: HTMLImageElement) => image.naturalWidth),
+    )
+    .toBe(48);
+  await page.getByRole("button", { name: "Speichern" }).click();
+  await expect(page.getByText("Gespeichert.")).toBeVisible();
+
+  const book = await page.request.post(
+    "/api/worlds/die-bildstadt/stories/die-fahrt/export/epub",
+    { data: {}, headers: { Origin: new URL(page.url()).origin } },
+  );
+  expect(book.status()).toBe(200);
+  expect((await book.body()).toString("latin1")).toMatch(
+    /OEBPS\/bilder\/bild-[0-9a-f]{12}\.jpg/,
+  );
+});

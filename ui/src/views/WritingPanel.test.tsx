@@ -538,9 +538,14 @@ describe("WritingPanel as a chat (step 5.11)", () => {
         prepare={vi.fn(() => Promise.resolve(true))}
         onAccept={vi.fn(() => Promise.resolve())}
         tools={
-          <button type="button" onClick={tool}>
-            Werkzeug
-          </button>
+          <>
+            <button type="button" onClick={tool}>
+              Werkzeug
+            </button>
+            <button type="button" aria-expanded={false}>
+              Menü
+            </button>
+          </>
         }
       />,
     );
@@ -550,6 +555,9 @@ describe("WritingPanel as a chat (step 5.11)", () => {
     await user.click(more);
     expect(more.getAttribute("aria-expanded")).toBe("true");
     await user.click(screen.getByLabelText("Neue Szene"));
+    expect(more.getAttribute("aria-expanded")).toBe("true");
+    // A button that only opens its menu (10.6, "＋ Bild") keeps them open.
+    await user.click(screen.getByRole("button", { name: "Menü" }));
     expect(more.getAttribute("aria-expanded")).toBe("true");
     await user.click(screen.getByRole("button", { name: "Werkzeug" }));
     expect(tool).toHaveBeenCalledOnce();
