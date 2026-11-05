@@ -1,13 +1,22 @@
 import { useCallback, useState, type SyntheticEvent } from "react";
-import { api, describeError, type GuestLink, type Story } from "../api";
+import {
+  api,
+  describeError,
+  type CanonEntry,
+  type GuestLink,
+  type Story,
+} from "../api";
 import { loadGuest } from "../storyEntries";
 import { useLoad } from "../useLoad";
 import { ErrorText, Field } from "./Common";
+import { GuestFit } from "./GuestFit";
 
 /**
  * Gäste aus anderen Welten (FR-017, step 3.7): entries of other worlds bound into this story
  * only. The AI knows a guest when it is named with `@`, led by the author or put into a new
- * scene; otherwise only if the budget has room after the world's own entries.
+ * scene; otherwise only if the budget has room after the world's own entries. Each guest may
+ * have a relation to the world of the story, which the world builder can propose (step 9.13,
+ * ADR-102).
  */
 export function Guests({
   story,
@@ -88,14 +97,29 @@ export function Guests({
               const found = linked.data?.[index];
               const name = found?.name ?? link.entry;
               return (
-                <li key={`${link.world}/${link.entry}`} className="row">
-                  <span>
-                    {name} aus {worldName(link.world)}
-                    {found === null && " – Eintrag fehlt in seiner Welt"}
-                  </span>
-                  <button type="button" onClick={() => void remove(link, name)}>
-                    {name} entfernen
-                  </button>
+                <li key={`${link.world}/${link.entry}`} className="guest">
+                  <div className="row">
+                    <span>
+                      {name} aus {worldName(link.world)}
+                      {found === null && " – Eintrag fehlt in seiner Welt"}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => void remove(link, name)}
+                    >
+                      {name} entfernen
+                    </button>
+                  </div>
+                  {found !== undefined && found !== null && (
+                    <GuestRelation
+                      story={story}
+                      link={link}
+                      entry={found}
+                      here={worldName(story.world)}
+                      home={worldName(link.world)}
+                      onSaved={onSaved}
+                    />
+                  )}
                 </li>
               );
             })}
@@ -143,5 +167,97 @@ export function Guests({
         />
       </div>
     </details>
+  );
+}
+
+/** The relation of one guest to the world of the story, with the world builder's proposal. */
+function GuestRelation({
+  story,
+  link,
+  entry,
+  here,
+  home,
+  onSaved,
+}: {
+  story: Story;
+  link: GuestLink;
+  entry: CanonEntry;
+  here: string;
+  home: string;
+  onSaved: (story: Story) => void;
+}) {
+  const saved = link.relation ?? "";
+  const [draft, setDraft] = useState(saved);
+  const [fitting, setFitting] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function save() {
+    setSaving(true);
+    setError(null);
+    try {
+      onSaved(
+        await api.setGuestRelation(story.world, story.id, link, draft.trim()),
+      );
+    } catch (reason: unknown) {
+      setError(describeError(reason));
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <div className="stack guest-relation">
+      <label>
+        In dieser Welt („{here}“) – Herkunft, Beziehungen, Besitz, Rolle hier
+        <textarea
+          rows={4}
+          value={draft}
+          onChange={(event) => {
+            setDraft(event.target.value);
+          }}
+        />
+      </label>
+      {fitting ? (
+        <GuestFit
+          story={story}
+          link={link}
+          name={entry.name}
+          onTake={(text) => {
+            setDraft(text);
+            setFitting(false);
+          }}
+          onClose={() => {
+            setFitting(false);
+          }}
+        />
+      ) : (
+        <div className="row">
+          <button
+            type="button"
+            className="ghost"
+            onClick={() => {
+              setFitting(true);
+            }}
+          >
+            ✨ Einpassen vorschlagen
+          </button>
+          <button
+            type="button"
+            className="primary"
+            disabled={saving || draft.trim() === saved}
+            onClick={() => void save()}
+          >
+            Speichern
+          </button>
+        </div>
+      )}
+      <p className="note">
+        Die KI bekommt beim Schreiben den Eintrag von {entry.name} und darunter
+        diesen Text; Abschnitte über {home} („In …“) lässt sie dann weg. Der
+        Eintrag in {home} bleibt, wie er ist.
+      </p>
+      <ErrorText message={error} />
+    </div>
   );
 }

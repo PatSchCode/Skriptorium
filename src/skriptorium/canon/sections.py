@@ -33,6 +33,8 @@ _LINE: Final = re.compile(r"[^\n]*\n|[^\n]+\Z")
 _LIST_MARK: Final = re.compile("^[" + _SPACE + "]*[-*][" + _SPACE + "]+")
 # Characters JavaScript's "." does not match: a heading line must not contain them.
 _LINE_BREAKS: Final = "\r" + chr(0x2028) + chr(0x2029)
+# Leading articles of a world name, left out when looking for "In <Welt>" (ADR-102).
+_ARTICLES: Final = ("der ", "die ", "das ", "den ", "dem ", "des ")
 
 APPEARANCE: Final = "Aussehen"
 """The looks of a figure, a place or an item (ADR-078, ADR-092)."""
@@ -107,6 +109,37 @@ def drop_empty_sections(markdown: str) -> str:
             headings[i] is not None or _is_blank(lines[i]) for i in range(at + 1, end)
         ):
             at = end
+        else:
+            kept.append(lines[at])
+            at += 1
+    return "".join(kept)
+
+
+def drop_world_sections(markdown: str, world: str) -> str:
+    """``markdown`` without the sections about the world called ``world`` (step 9.13, ADR-102).
+
+    Such a section has a heading that starts with "In" or "Im" and names the world, without its
+    leading article and in any case: for "Das Eisenmeer" "In Das Eisenmeer", "Im Eisenmeer" or
+    "In der Stadt am Eisenmeer" (convention of 8.12: neutral parts on top, the home world in
+    "In <Welt>"). Subsections go with it; everything else stays as it was, byte for byte. Only the
+    server needs this: it shapes the request for a guest that has a relation to another world.
+    """
+    name = _trim(world).lower()
+    for article in _ARTICLES:
+        if name.startswith(article):
+            name = _trim(name[len(article) :])
+            break
+    if not name or f"{name} " in _ARTICLES:
+        return markdown
+    lines = _lines_of(markdown)
+    headings = _headings(lines)
+    kept: list[str] = []
+    at = 0
+    while at < len(lines):
+        head = headings[at]
+        text = _trim(head[1]).lower() if head is not None else ""
+        if head is not None and text.startswith(("in ", "im ")) and name in text:
+            at = _section_end(headings, at, head[0])
         else:
             kept.append(lines[at])
             at += 1

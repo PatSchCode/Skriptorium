@@ -97,7 +97,7 @@ def build_worldbuilder(
     system = [
         Part("rahmen", "Rahmen", _frame(world.name)),
         Part("welt", world.name, f"# Welt: {world.name}\n\n{world.description}".strip()),
-        Part("eintraege", "Einträge der Welt", _index(entries)),
+        Part("eintraege", "Einträge der Welt", entry_index(entries)),
         *laws,
         *(
             [Part("fundstellen", f"Fundstellen zu {hits.name}", hits.text)]
@@ -137,7 +137,7 @@ def _role(label: str) -> Role:
     return "assistant" if label == "assistant" else "user"
 
 
-def _index(entries: Sequence[CanonEntry]) -> str:
+def entry_index(entries: Sequence[CanonEntry]) -> str:
     """Names, categories and aliases of all entries, so the AI invents nothing twice."""
     if not entries:
         return "# Einträge der Welt\n\nNoch keine."

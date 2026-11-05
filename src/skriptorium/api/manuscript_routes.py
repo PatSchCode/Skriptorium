@@ -135,6 +135,12 @@ class GuestLinkIn(BaseModel):
     entry: str
 
 
+class GuestRelationIn(BaseModel):
+    """How a guest fits the world of this story (step 9.13, ADR-102); blank removes it."""
+
+    relation: str
+
+
 class FactIn(BaseModel):
     """A fact about a canon entry that holds only in this story."""
 
@@ -248,6 +254,22 @@ def remove_guest_link(
     """Remove a guest link."""
     found.canon.get_world(world_id)
     return found.manuscript.remove_guest_link(world_id, story_id, guest_world, entry)
+
+
+@router.put("/{story_id}/guests/{guest_world}/{entry}")
+def set_guest_relation(
+    world_id: str,
+    story_id: str,
+    guest_world: str,
+    entry: str,
+    body: GuestRelationIn,
+    found: ServicesDep,
+) -> Story:
+    """Set how a guest fits the world of this story (ADR-102)."""
+    found.canon.get_world(world_id)
+    return found.manuscript.set_guest_relation(
+        world_id, story_id, guest_world, entry, body.relation
+    )
 
 
 @router.post("/{story_id}/facts", status_code=status.HTTP_201_CREATED)

@@ -2,6 +2,7 @@
 
 from skriptorium.api.flows.appearance import prepare_appearance
 from skriptorium.api.flows.describe import DescribeOrder, prepare_description
+from skriptorium.api.flows.guest_fit import FitOrder, prepare_guest_fit
 from skriptorium.api.flows.removal import GuestUse, WorldDeletion, delete_world, world_deletion
 from skriptorium.api.flows.summary import (
     SUMMARY_TEMPERATURE,
@@ -36,6 +37,7 @@ __all__ = [
     "SUMMARY_TEMPERATURE",
     "TEMPERATURE",
     "DescribeOrder",
+    "FitOrder",
     "GuestUse",
     "PreparedRequest",
     "Scene",
@@ -49,6 +51,7 @@ __all__ = [
     "error_kind",
     "prepare_appearance",
     "prepare_description",
+    "prepare_guest_fit",
     "prepare_request",
     "prepare_worldbuilder",
     "stream_answer",

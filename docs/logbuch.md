@@ -29,6 +29,24 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 9.13 umgesetzt (lokal), Bildschirmfotos zur Abnahme
+
+- Umsetzung nach ADR-102 auf `feat/9.13-gaeste`; Einzelheiten und Zahlen im Fahrplan bei 9.13. Python 1123 bestanden (100 % Zeilen), Oberfläche 558, E2E 15; ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün.
+- Abweichung vom Mockup: Überschrift des Feldes „In dieser Welt („Die Salzmark“)“ statt „In der Salzmark“ (der Artikel lässt sich aus dem Weltnamen nicht sicher bilden); keine Kostenschätzung am Knopf, die tatsächlichen Kosten stehen nach dem Vorschlag; der Vorschlag ist nur der übernehmbare Text, ohne erklärenden Absatz davor.
+- Mini-Reibung: `vite build` im Ordner `ui` baute nach `ui/dist` statt nach `dist/ui` (Wurzel steht in der `vite.config.ts` des Projekts) – der erste E2E-Lauf prüfte deshalb den alten Build. Ordner entfernt, Build vom Projektordner, E2E erneut 15 grün. Merke: `npx vite build` nur vom Projektordner.
+- Mini-Reibung: `pytest --cov=<einzelnes Modul>` lässt unter Python 3.14 den libyaml-Schreiber in `storage` scheitern (`EmitterError`), auch in `tests/storage/test_frontmatter.py`; ohne Abdeckung und mit `--cov=skriptorium` (wie in der CI) alles grün. Messartefakt, kein Fehler im Produkt; Abdeckung nur über das ganze Paket messen.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-102 Weltbezug je Gast und Einpassen (9.13)
+
+- Eigentümer per Auswahlfragen zum Mockup: Bedienung so, Weltbezug je Geschichte, Heimatwelt-Abschnitt weglassen, wenn ein Weltbezug da ist. Kategorien 4, 1, 5, additiv, nicht reaktiv.
+
+### 2026-11-05 – [BEOBACHTUNG] 9.13 begonnen: Bestandsaufnahme und Mockup
+
+- Probe des Eigentümers (2026-10-21): „Gastfiguren funktionieren auch“ – kein benannter Mangel. Server (eine SSH-Prüfung, nur Anzahlen): 5 Welten, 11 Geschichten, 0 Gast-Verbindungen, 0 Fakten „nur diese Geschichte“.
+- Rückfrage mit Empfehlung „auf später (nach 9.15)“, weil kein Mangel und keine Nutzung belegt sind; Eigentümer: „A wie geplant“.
+- Bestand im Code: `GuestLink(world, entry)` im Kopf der Geschichte (`gast_verbindungen`), Fakten je Geschichte in `facts.md`; die Anfrage zeigt einen Gast mit „Gast aus der Welt …“ in der Überschrift und den ganzen Eintrag (`context/parts.py::render`). Bedienung: `ui/src/views/Guests.tsx` in der Seitenleiste der Geschichte.
+- Mockup `mockup-9.13.html` (lokal, ausgeschlossen): Feld „In ‹Welt›“ je Gast, „✨ Einpassen vorschlagen“, Anfrage vorher/nachher, Smartphone.
+
 ### 2026-11-05 – [BEOBACHTUNG] 9.12 erledigt; V.44–V.46 und FR-038 angelegt
 
 - Akzeptanzkriterien erfüllt: Erkenntnisdokument mit Optionen und Kosten, Vorlage an den Eigentümer, Umsetzung als eigene Schritte V.44 (Recherche), V.45 (Namen), V.46 (Fragenliste) mit Landeplatz 9.15. FR-038 Namenshilfe (Kann, von mir vorgeschlagen) angelegt.

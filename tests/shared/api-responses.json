@@ -401,7 +401,41 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": ""
+        }
+      ],
+      "facts": [],
+      "summary": "",
+      "model": "x-ai/grok-4.7",
+      "genres": ["Thriller"],
+      "writing_style": {
+        "tone": ["düster", "kalt"],
+        "atmosphere": ["angespannt"],
+        "style": ["knapp"],
+        "tempo": "atemlos",
+        "explicitness": "angedeutet",
+        "free": "Kurze Absätze."
+      },
+      "cover": null,
+      "archived": false
+    }
+  },
+  "setGuestRelation": {
+    "route": "PUT /api/worlds/die-salzmark/stories/die-ueberfahrt/guests/nebelreich/nebelkoenig",
+    "type": "Story",
+    "body": {
+      "world": "die-salzmark",
+      "id": "die-ueberfahrt",
+      "title": "Die Überfahrt",
+      "form": "roman",
+      "perspective": "er",
+      "controlled_characters": ["kael"],
+      "guest_links": [
+        {
+          "world": "nebelreich",
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [],
@@ -433,7 +467,8 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [],
@@ -465,7 +500,8 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [
@@ -502,7 +538,8 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [
@@ -539,7 +576,8 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [
@@ -576,7 +614,8 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [
@@ -613,7 +652,8 @@
       "guest_links": [
         {
           "world": "nebelreich",
-          "entry": "nebelkoenig"
+          "entry": "nebelkoenig",
+          "relation": "Kam über das Eis und blieb."
         }
       ],
       "facts": [
@@ -820,7 +860,8 @@
         "guest_links": [
           {
             "world": "nebelreich",
-            "entry": "nebelkoenig"
+            "entry": "nebelkoenig",
+            "relation": "Kam über das Eis und blieb."
           }
         ],
         "facts": [
@@ -877,7 +918,8 @@
         "guest_links": [
           {
             "world": "nebelreich",
-            "entry": "nebelkoenig"
+            "entry": "nebelkoenig",
+            "relation": "Kam über das Eis und blieb."
           }
         ],
         "facts": [
@@ -935,7 +977,8 @@
         "guest_links": [
           {
             "world": "nebelreich",
-            "entry": "nebelkoenig"
+            "entry": "nebelkoenig",
+            "relation": "Kam über das Eis und blieb."
           }
         ],
         "facts": [
@@ -996,7 +1039,8 @@
         "guest_links": [
           {
             "world": "nebelreich",
-            "entry": "nebelkoenig"
+            "entry": "nebelkoenig",
+            "relation": "Kam über das Eis und blieb."
           }
         ],
         "facts": [
@@ -1030,7 +1074,7 @@
     "type": "Omit<Extract<WriteEvent, { type: \"start\" }>, \"type\">",
     "body": {
       "model": "x-ai/grok-4.7",
-      "estimated_tokens": 1450
+      "estimated_tokens": 1472
     }
   },
   "writeText": {
@@ -1220,6 +1264,32 @@
   },
   "appearanceDone": {
     "route": "POST /api/worlds/die-salzmark/entries/kael/appearance",
+    "type": "Omit<Extract<DescribeEvent, { type: \"done\" }>, \"type\">",
+    "body": {
+      "input_tokens": 1200,
+      "output_tokens": 40,
+      "cost_usd": 0.0021,
+      "finish_reason": "stop"
+    }
+  },
+  "fitGuestStart": {
+    "route": "POST /api/worlds/die-salzmark/stories/die-ueberfahrt/guests/nebelreich/nebelkoenig/fit",
+    "type": "Omit<Extract<DescribeEvent, { type: \"start\" }>, \"type\">",
+    "body": {
+      "model": "x-ai/grok-4.6",
+      "estimated_tokens": 378,
+      "web_search": false
+    }
+  },
+  "fitGuestText": {
+    "route": "POST /api/worlds/die-salzmark/stories/die-ueberfahrt/guests/nebelreich/nebelkoenig/fit",
+    "type": "Omit<Extract<DescribeEvent, { type: \"text\" }>, \"type\">",
+    "body": {
+      "text": "Der Nebel "
+    }
+  },
+  "fitGuestDone": {
+    "route": "POST /api/worlds/die-salzmark/stories/die-ueberfahrt/guests/nebelreich/nebelkoenig/fit",
     "type": "Omit<Extract<DescribeEvent, { type: \"done\" }>, \"type\">",
     "body": {
       "input_tokens": 1200,
@@ -1452,10 +1522,10 @@
     "type": "MonthUsage",
     "body": {
       "month": "2026-09",
-      "requests": 16,
-      "input_tokens": 11700,
-      "output_tokens": 390,
-      "cost_usd": 0.0229,
+      "requests": 17,
+      "input_tokens": 12900,
+      "output_tokens": 430,
+      "cost_usd": 0.025,
       "without_cost": 6
     }
   },
@@ -1467,10 +1537,10 @@
       "months": ["2026-09"],
       "total": {
         "totals": {
-          "requests": 16,
-          "input_tokens": 11700,
-          "output_tokens": 390,
-          "cost_usd": 0.0229,
+          "requests": 17,
+          "input_tokens": 12900,
+          "output_tokens": 430,
+          "cost_usd": 0.025,
           "without_cost": 6,
           "cache_read_tokens": 0,
           "cache_share": null
@@ -1487,6 +1557,16 @@
             "kind": "schreiben"
           },
           {
+            "requests": 4,
+            "input_tokens": 3300,
+            "output_tokens": 110,
+            "cost_usd": 0.0082,
+            "without_cost": 1,
+            "cache_read_tokens": 0,
+            "cache_share": null,
+            "kind": "weltenbau"
+          },
+          {
             "requests": 3,
             "input_tokens": 2400,
             "output_tokens": 80,
@@ -1495,16 +1575,6 @@
             "cache_read_tokens": 0,
             "cache_share": null,
             "kind": "kurzfassung"
-          },
-          {
-            "requests": 3,
-            "input_tokens": 2100,
-            "output_tokens": 70,
-            "cost_usd": 0.0061,
-            "without_cost": 1,
-            "cache_read_tokens": 0,
-            "cache_share": null,
-            "kind": "weltenbau"
           },
           {
             "requests": 2,
@@ -1539,10 +1609,10 @@
         ],
         "models": [
           {
-            "requests": 10,
-            "input_tokens": 9300,
-            "output_tokens": 310,
-            "cost_usd": 0.0187,
+            "requests": 11,
+            "input_tokens": 10500,
+            "output_tokens": 350,
+            "cost_usd": 0.0208,
             "without_cost": 2,
             "cache_read_tokens": 0,
             "cache_share": null,
@@ -1568,10 +1638,10 @@
           "deleted": false,
           "usage": {
             "totals": {
-              "requests": 16,
-              "input_tokens": 11700,
-              "output_tokens": 390,
-              "cost_usd": 0.0229,
+              "requests": 17,
+              "input_tokens": 12900,
+              "output_tokens": 430,
+              "cost_usd": 0.025,
               "without_cost": 6,
               "cache_read_tokens": 0,
               "cache_share": null
@@ -1588,6 +1658,16 @@
                 "kind": "schreiben"
               },
               {
+                "requests": 4,
+                "input_tokens": 3300,
+                "output_tokens": 110,
+                "cost_usd": 0.0082,
+                "without_cost": 1,
+                "cache_read_tokens": 0,
+                "cache_share": null,
+                "kind": "weltenbau"
+              },
+              {
                 "requests": 3,
                 "input_tokens": 2400,
                 "output_tokens": 80,
@@ -1596,16 +1676,6 @@
                 "cache_read_tokens": 0,
                 "cache_share": null,
                 "kind": "kurzfassung"
-              },
-              {
-                "requests": 3,
-                "input_tokens": 2100,
-                "output_tokens": 70,
-                "cost_usd": 0.0061,
-                "without_cost": 1,
-                "cache_read_tokens": 0,
-                "cache_share": null,
-                "kind": "weltenbau"
               },
               {
                 "requests": 2,
@@ -1640,10 +1710,10 @@
             ],
             "models": [
               {
-                "requests": 10,
-                "input_tokens": 9300,
-                "output_tokens": 310,
-                "cost_usd": 0.0187,
+                "requests": 11,
+                "input_tokens": 10500,
+                "output_tokens": 350,
+                "cost_usd": 0.0208,
                 "without_cost": 2,
                 "cache_read_tokens": 0,
                 "cache_share": null,
@@ -1725,10 +1795,10 @@
               "deleted": false,
               "usage": {
                 "totals": {
-                  "requests": 10,
-                  "input_tokens": 6000,
-                  "output_tokens": 200,
-                  "cost_usd": 0.0105,
+                  "requests": 11,
+                  "input_tokens": 7200,
+                  "output_tokens": 240,
+                  "cost_usd": 0.0126,
                   "without_cost": 5,
                   "cache_read_tokens": 0,
                   "cache_share": null
@@ -1763,6 +1833,16 @@
                     "cache_read_tokens": 0,
                     "cache_share": null,
                     "kind": "gesamtzusammenfassung"
+                  },
+                  {
+                    "requests": 1,
+                    "input_tokens": 1200,
+                    "output_tokens": 40,
+                    "cost_usd": 0.0021,
+                    "without_cost": 0,
+                    "cache_read_tokens": 0,
+                    "cache_share": null,
+                    "kind": "weltenbau"
                   }
                 ],
                 "models": [
@@ -1777,10 +1857,10 @@
                     "model": "x-ai/grok-4.7"
                   },
                   {
-                    "requests": 4,
-                    "input_tokens": 3600,
-                    "output_tokens": 120,
-                    "cost_usd": 0.0063,
+                    "requests": 5,
+                    "input_tokens": 4800,
+                    "output_tokens": 160,
+                    "cost_usd": 0.0084,
                     "without_cost": 1,
                     "cache_read_tokens": 0,
                     "cache_share": null,

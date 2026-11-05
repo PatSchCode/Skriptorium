@@ -156,7 +156,7 @@ def test_guest_links_and_facts(logged_in: TestClient) -> None:
     assert missing.status_code == 422
     added = logged_in.post(f"{base}/guests", json={"world": other, "entry": "ragna"})
     assert added.status_code == 201
-    assert added.json()["guest_links"] == [{"world": other, "entry": "ragna"}]
+    assert added.json()["guest_links"] == [{"world": other, "entry": "ragna", "relation": ""}]
     assert logged_in.post(
         f"{base}/guests", json={"world": other, "entry": "ragna"}
     ).status_code == (409)

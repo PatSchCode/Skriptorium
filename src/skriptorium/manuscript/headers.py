@@ -94,6 +94,21 @@ def header_pairs(document: Document, key: str, first: str, second: str) -> list[
     return pairs
 
 
+def guest_links_from(document: Document) -> tuple[GuestLink, ...]:
+    """The ``gast_verbindungen`` of a story header; ``weltbezug`` is optional (ADR-102)."""
+    pairs = header_pairs(document, "gast_verbindungen", "welt", "eintrag")
+    items = document.header.get("gast_verbindungen", [])
+    links: list[GuestLink] = []
+    for (world, entry), item in zip(pairs, items if isinstance(items, list) else [], strict=True):
+        relation = item.get("weltbezug", "") if isinstance(item, dict) else ""
+        if relation is None:
+            relation = ""
+        if not isinstance(relation, str):
+            raise InvalidInput(f"{document.path}: gast_verbindungen.weltbezug muss ein Text sein")
+        links.append(GuestLink(world, entry, relation))
+    return tuple(links)
+
+
 def story_from(document: Document, facts: tuple[StoryFact, ...]) -> Story:
     perspective = document.header.get("perspektive")
     if perspective is not None and not isinstance(perspective, str):
@@ -108,10 +123,7 @@ def story_from(document: Document, facts: tuple[StoryFact, ...]) -> Story:
         form=checked_form(header_text(document, "form")),
         perspective=perspective,
         controlled_characters=tuple(header_text_list(document, "gefuehrte_figuren")),
-        guest_links=tuple(
-            GuestLink(w, e)
-            for w, e in header_pairs(document, "gast_verbindungen", "welt", "eintrag")
-        ),
+        guest_links=guest_links_from(document),
         facts=facts,
         summary=document.body,
         model=model,
@@ -256,8 +268,15 @@ def chapter_header(
 
 
 def guest_links_header(links: Sequence[GuestLink]) -> HeaderValue:
-    """The ``gast_verbindungen`` value of a story header."""
-    return [{"welt": g.world, "eintrag": g.entry} for g in links]
+    """The ``gast_verbindungen`` value of a story header; ``weltbezug`` only where one is set, so
+    files of stories without one stay as they were (ADR-102)."""
+    items: list[HeaderValue] = []
+    for g in links:
+        item: dict[str, HeaderValue] = {"welt": g.world, "eintrag": g.entry}
+        if g.relation:
+            item["weltbezug"] = g.relation
+        items.append(item)
+    return items
 
 
 def facts_header(facts: Sequence[StoryFact]) -> dict[str, HeaderValue]:

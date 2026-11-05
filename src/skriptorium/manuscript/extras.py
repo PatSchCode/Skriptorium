@@ -10,7 +10,13 @@ from skriptorium.manuscript.headers import (
     notes_from,
 )
 from skriptorium.manuscript.layout import HISTORY, facts_path, history_path, story_dir, story_path
-from skriptorium.manuscript.models import GuestLink, InstructionNote, Story, StoryFact
+from skriptorium.manuscript.models import (
+    RELATION_MAX,
+    GuestLink,
+    InstructionNote,
+    Story,
+    StoryFact,
+)
 from skriptorium.manuscript.stories import StoryStore
 from skriptorium.manuscript.validation import required_text
 from skriptorium.storage import (
@@ -51,6 +57,22 @@ class StoryExtras:
         if link not in story.guest_links:
             raise NotFound(f"{guest_world}/{entry}")
         return self._write_guest_links(story, tuple(g for g in story.guest_links if g != link))
+
+    def set_guest_relation(
+        self, world_id: str, story_id: str, guest_world: str, entry: str, relation: str
+    ) -> Story:
+        """Set how a guest fits the world of the story; blank text removes it (ADR-102)."""
+        text = relation.strip()
+        if len(text) > RELATION_MAX:
+            raise InvalidInput(f"Weltbezug darf höchstens {RELATION_MAX} Zeichen lang sein")
+        story = self._stories.get_story(world_id, story_id)
+        link = GuestLink(guest_world, entry)
+        if link not in story.guest_links:
+            raise NotFound(f"{guest_world}/{entry}")
+        links = tuple(
+            GuestLink(g.world, g.entry, text) if g == link else g for g in story.guest_links
+        )
+        return self._write_guest_links(story, links)
 
     def remove_guest_world(
         self, world_id: str, story_id: str, guest_world: str, entries: Set[str]

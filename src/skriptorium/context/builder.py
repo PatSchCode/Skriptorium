@@ -50,6 +50,7 @@ from typing import Final
 from skriptorium.canon import CanonService, InvalidInput, NotFound
 from skriptorium.context.appearance import build_appearance
 from skriptorium.context.describe import build_entry_image_description, build_map_description
+from skriptorium.context.guest_fit import build_guest_fit
 from skriptorium.context.manuscript_hits import HitsQuery, ManuscriptHits, find_hits
 from skriptorium.context.parts import (
     MAX_BUDGET,
@@ -163,13 +164,14 @@ class ContextBuilder:
     def _guests(self, story: Story) -> list[Known]:
         """The guest entries of ``story``; a guest whose entry or world is gone is skipped."""
         guests: list[Known] = []
+        here = self._canon.get_world(story.world).name if story.guest_links else None
         for link in story.guest_links:
             try:
                 entry = self._canon.get_entry(link.world, link.entry)
                 home = self._canon.get_world(link.world).name
             except NotFound:
                 continue
-            guests.append(Known(entry, home))
+            guests.append(Known(entry, home, link.relation, here))
         return guests
 
     def build_worldbuilder(
@@ -206,6 +208,21 @@ class ContextBuilder:
         """Request to write out the looks of a figure from its entry (step 7.16); see
         :func:`skriptorium.context.appearance.build_appearance`."""
         return build_appearance(self._canon, world_id, entry_id, budget)
+
+    def build_guest_fit(
+        self,
+        world_id: str,
+        story_id: str,
+        guest_world: str,
+        entry_id: str,
+        wish: str = "",
+        budget: int = MAX_BUDGET,
+    ) -> BuiltContext:
+        """Request to fit a guest into the world of a story (step 9.13); see
+        :func:`skriptorium.context.guest_fit.build_guest_fit`."""
+        return build_guest_fit(
+            self._canon, self._manuscripts, world_id, story_id, guest_world, entry_id, wish, budget
+        )
 
     def build_map_description(
         self, world_id: str, file: str, budget: int = MAX_BUDGET
