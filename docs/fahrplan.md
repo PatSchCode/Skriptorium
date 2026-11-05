@@ -33,7 +33,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | erledigt 2026-11-05 (ADR-108) | – |
 | ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
-| 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | Befund behoben, eingespielt `25a9220`: Menü auf schmalen Bildschirmen | du: erneut prüfen (⋯ → ＋ Bild) |
+| 🔵 | 10.6 | Bilder im Manuskript und im E-Book (V.23) | Befund behoben, eingespielt `25a9220`: Menü auf schmalen Bildschirmen | du: PR freigeben (Fenster ins Bild) |
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
@@ -285,7 +285,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.6: Bilder im Manuskript und im E-Book (V.23)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #210, `5aa544a`, CI vier Jobs grün; eingespielt 2026-11-05; Abnahme offen. Befund des Eigentümers 2026-11-06: „es erscheint kein Bild und keine Vorschau“ – auf schmalen Bildschirmen (unter 56rem) klappte „＋ Bild“ die Knöpfe hinter „⋯“ zu und versteckte sein Menü; behoben mit End-to-End-Test, PR #214 → `25a9220`, CI vier Jobs grün; eingespielt 2026-11-06; erneute Abnahme offen) – Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Eintragsbilder. Vergleich `mockup-10.6.html` (lokal) vorgelegt; Eigentümer: Hochladen, Erzeugen und Kanon; Kopie; Zeile mit Vorschau; Bilder bleiben bis zum Löschen der Geschichte → ADR-110. Umsetzung läuft
+- **Status:** 🔵 WARTET-AUF-FREIGABE (zusammengeführt 2026-11-05, PR #210, `5aa544a`, CI vier Jobs grün; eingespielt 2026-11-05; Abnahme offen. Befund des Eigentümers 2026-11-06: „es erscheint kein Bild und keine Vorschau“ – auf schmalen Bildschirmen (unter 56rem) klappte „＋ Bild“ die Knöpfe hinter „⋯“ zu und versteckte sein Menü; behoben mit End-to-End-Test, PR #214 → `25a9220`, CI vier Jobs grün; eingespielt 2026-11-06. Zweiter Befund des Eigentümers 2026-11-06 (Desktop): „Aus dem Kanon“ – „passiert gar nichts“; das Fenster öffnete sich über dem Text außerhalb des Bildes (vom Eigentümer durch Hochscrollen bestätigt) – behoben lokal auf `fix/10.6-bildfenster-sichtbar` mit End-to-End-Test; erneute Abnahme offen) – Server 2026-11-05 (nur Anzahlen): 11 Geschichten, 33 Kapitel (Median rund 10.000 Wörter), 0 Bilder in Kapiteln, 30 Eintragsbilder. Vergleich `mockup-10.6.html` (lokal) vorgelegt; Eigentümer: Hochladen, Erzeugen und Kanon; Kopie; Zeile mit Vorschau; Bilder bleiben bis zum Löschen der Geschichte → ADR-110. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Datenmodell (Bildverweise im Kapiteltext, Kategorie 4), Editor
