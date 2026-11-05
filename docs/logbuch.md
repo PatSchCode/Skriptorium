@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] „Wesen:“ im Fließtext → V.48
+
+- Server (nur Anzahlen und kurze Ausschnitte ohne Inhalt): 3 Figuren mit Abschnitt „Wesen“ (zwei Welten), 11 Figuren in einer Welt mit „Wesen: …“ mitten im Absatz. Die Messung zu 10.2 hatte nur Zeilen „- **Wesen:** …“ gezählt – die Form im Fließtext fehlte dort.
+- Eigentümer verstand die Frage im Kurzformat nicht; nach Erklärung mit Beispiel (Feld „personality“ bleibt leer, alles steht in „description“): „Vormerken“ → V.48, Landeplatz 10.11.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.2 abgenommen
 
 - Eigentümer an der heruntergeladenen Karte: „Wesen ist auch vorhanden.“ Auf dem Server nachgerechnet (nur Überschriften und Längen): „personality“ 450 Zeichen, „description“ mit Aussehen, Fähigkeiten, Geschichte, Beziehungen, Wort „Wesen“ dort 0-mal – kein doppelter Inhalt. 10.2 → ERLEDIGT. FR-030 war schon erledigt, keine Änderung in `docs/requirements.md`.

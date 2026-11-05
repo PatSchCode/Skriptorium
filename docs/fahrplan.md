@@ -65,7 +65,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -371,7 +371,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1508,6 +1508,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Daten, Skript, Tests, ADR, Mockup
 - **Notizen:** Angelegt 2026-11-05 in 9.12.
+
+#### V.48: Figurenkarte erkennt „Wesen:“ im Fließtext
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Befund bei der Abnahme von 10.2, 2026-11-05; Eigentümer: „Vormerken“)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** ja – Ausgabe der Figurenkarte ändert sich (Kategorie 5, ADR-066, ADR-107)
+- **Empfohlene Klasse:** Entscheidung – berührt Regel-003 (Abschnittsregel) und ADR-107.
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-030
+- **Zu tun:** Befund 2026-11-05 (Server, nur Anzahlen): 11 Figuren in einer Welt des Eigentümers tragen das Wesen nicht als Abschnitt, sondern mitten in einem Absatz („… Wesen: offen und …“, meist im Abschnitt „Stand am Ende des Gesprächs“); ADR-107 nimmt nur den Abschnitt „Wesen“, „personality“ bleibt bei ihnen leer. In der Vorlage klären: wie weit „Wesen:“ reicht (Satzende, Absatzende, nächstes Etikett), ob der Text dann auch aus „description“ verschwindet, und ob stattdessen die Oberfläche anbietet, daraus einen Abschnitt zu machen. Bis dahin wirkt ein eigener Abschnitt „Wesen“ im Eintrag schon heute.
+- **Akzeptanzkriterien:** Vorlage mit Vergleich, ADR; Tests (Export, Rückimport); Eigentümer bestätigt an einer Karte.
+- **Betroffene Module:** canon (ggf. ui)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR, Mockup
+- **Notizen:** Angelegt 2026-11-05 bei der Abnahme von 10.2. Die Form „Wesen:“ im Fließtext erzeugt das Skriptorium selbst nicht (keine Fundstelle im Code).
 
 #### V.47: Favoriten ohne Anbieter kenntlich machen; verständliche Meldung statt „Unbekanntes Modell“
 
