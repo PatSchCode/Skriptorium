@@ -42,10 +42,12 @@ NATURE: Final = "Wesen"
 """The nature of a figure; the personality of a SillyTavern card (ADR-066, ADR-107)."""
 RELATIONS: Final = "Beziehungen"
 """The relations of a figure, one list line with one ``@Name`` each (ADR-093)."""
+LOCATION: Final = "Lage"
+"""Where a place lies; an image of it gets it on top of its looks (ADR-094, ADR-108)."""
 
 SECTIONS: Final[dict[Category, tuple[str, ...]]] = {
     "figur": (APPEARANCE, NATURE, "Fähigkeiten", "Geschichte", RELATIONS),
-    "ort": ("Lage", APPEARANCE, "Bewohner", "Geschichte"),
+    "ort": (LOCATION, APPEARANCE, "Bewohner", "Geschichte"),
     "gegenstand": (APPEARANCE, "Zweck", "Verwendung", "Auswirkung"),
     "kultur": ("Gesellschaft", "Glaube und Bräuche", "Geschichte"),
 }

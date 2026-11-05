@@ -44,6 +44,28 @@ describe("taking out the looks of a figure (step 7.16)", () => {
     ).toBeNull();
   });
 
+  it("is offered to places and items too, not to other kinds (step 10.3, ADR-108)", () => {
+    for (const category of ["ort", "gegenstand"] as const) {
+      const { unmount } = render(
+        <EntryArticle
+          world="salzmark"
+          current={{ ...FIGURE, category, body: "Grauer Stein." }}
+          compact={false}
+          onEdit={vi.fn()}
+          onSaved={vi.fn()}
+        />,
+      );
+      expect(
+        screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
+      ).toBeDefined();
+      unmount();
+    }
+    article({ ...FIGURE, category: "kultur", body: "Grauer Stein." });
+    expect(
+      screen.queryByRole("button", { name: "✨ Aussehen herauslösen" }),
+    ).toBeNull();
+  });
+
   it("streams a proposal and takes it over as a section, the rest stays", async () => {
     const feed = sseFeed();
     const { calls } = fakeApi({

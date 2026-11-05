@@ -12,8 +12,9 @@ import { describeUsage, type Usage } from "./useWriteFlow";
 const NO_APPEARANCE = "KEIN AUSSEHEN";
 
 /**
- * "✨ Aussehen herauslösen" (step 7.16, ADR-078): a text model reads the figure's entry once and
- * proposes only the visible; the author changes it and takes it over as the section "Aussehen".
+ * "✨ Aussehen herauslösen" (step 7.16, ADR-078; places and items since step 10.3, ADR-108): a
+ * text model reads the entry once and proposes only the visible; the author changes it and takes
+ * it over as the section "Aussehen".
  * The rest of the entry stays as it is.
  */
 export function AppearanceExtract({

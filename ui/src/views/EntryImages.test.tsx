@@ -420,7 +420,7 @@ describe("images of a canon entry (step 7.6)", () => {
     ).toBe("true");
   });
 
-  it("offers to add the looks the image misses (step 9.5, ADR-094)", async () => {
+  it("offers to add the looks the image misses (steps 9.5 and 10.3, ADR-094, ADR-108)", async () => {
     fakeApi({
       "GET /api/images/models": ok({
         default: "x/y",
@@ -478,9 +478,10 @@ describe("images of a canon entry (step 7.6)", () => {
       "value",
       "Kerbe: Schneidet Taue.",
     );
-    await user.click(
-      screen.getByRole("button", { name: "✎ Im Eintrag ergänzen" }),
-    );
+    expect(
+      screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
+    ).toBeDefined();
+    await user.click(screen.getByRole("button", { name: "✎ Selbst ergänzen" }));
     expect(onEdit).toHaveBeenCalledOnce();
     unmount2();
     render(
@@ -498,8 +499,11 @@ describe("images of a canon entry (step 7.6)", () => {
       screen.getByText(/das Bild nutzt nur den ersten Satz des Textes/),
     ).toBeDefined();
     expect(
-      screen.queryByRole("button", { name: "✎ Im Eintrag ergänzen" }),
+      screen.queryByRole("button", { name: "✎ Selbst ergänzen" }),
     ).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
+    ).toBeDefined();
   });
 
   it("takes the looks out right in the window and back to it (step 9.5)", async () => {

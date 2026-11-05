@@ -5,6 +5,7 @@ from skriptorium.canon.importers import TranslatedMaterial
 from skriptorium.canon.names import name_pattern
 from skriptorium.canon.sections import (
     APPEARANCE,
+    LOCATION,
     RELATIONS,
     SECTIONS,
     drop_empty_sections,
@@ -13,6 +14,7 @@ from skriptorium.canon.sections import (
     put_section,
     read_part,
     read_section,
+    take_section,
 )
 from skriptorium.canon.service import (
     MAX_MARKERS_PER_MAP,
@@ -31,6 +33,7 @@ from skriptorium.storage import AlreadyExists, ImageOrigin, InvalidInput, NotFou
 __all__ = [
     "APPEARANCE",
     "CATEGORIES",
+    "LOCATION",
     "MAX_MARKERS_PER_MAP",
     "RELATIONS",
     "SECTIONS",
@@ -57,4 +60,5 @@ __all__ = [
     "put_section",
     "read_part",
     "read_section",
+    "take_section",
 ]
