@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.1 und 10.2 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039): `git archive main` → `app.neu`, `REVISION` `7900e9d`, Abbild `skriptorium:vorher` getaggt, `app.vorher` behalten, `docker compose build` und `up -d`.
+- Prüfung: `https://…/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: Container `(healthy)`, `REVISION` `7900e9d`, 0 Fehlerzeilen im Log der letzten 3 Minuten. Vorher lief `e809696`.
+- Offen: Abnahme 10.1 (Eintrag löschen, Folgenliste) und 10.2 (Figurenkarte, Feld „personality“) durch den Eigentümer. `docs/project-context.md` Status nachgezogen (stand noch auf Phase 9).
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.2 zusammengeführt
 
 - Eigentümer: „Ja, PR und Merge“. PR #206 (mit den zwei Doku-Commits aus dem Abschluss von 10.1), CI vier Jobs grün (Python 1:43, Pre-Commit 2:02, E2E 2:14, TypeScript 2:27); einziger Hinweis der Plattform: Ubuntu-26-Umstellung, bekannt und erledigt (D.19). Zusammengeführt mit `--match-head-commit` → `7900e9d`.
