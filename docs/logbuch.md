@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [GELÖST] Abnahme 10.1: alte Abfrage statt Folgenliste
+
+- Eigentümer beim Löschen von „Hannah Brandt“: nur die Frage „wirklich löschen?“, keine Folgenliste. Das ist wörtlich die alte Abfrage (`window.confirm` in `e809696`).
+- Geprüft: Server liefert das neue Bündel aus (`index-CmVil8ey.js` enthält den Dialog), einzige Löschstelle für Einträge ist `EntryForm` mit `DeleteDialog`; Vorschau für den Eintrag auf dem Server: 4 Bilder, 0 Markierungen, 0 Geschichten, 1 Erwähnung mit @ – der neue Dialog hätte das gezeigt.
+- Ursache (wahrscheinlich): Seite war vor dem Einspielen geöffnet; die Oberfläche lädt neuen Code erst beim Neuladen. Lösung: Seite neu laden. `index.html` kommt ohne `Cache-Control` (nur ETag/Last-Modified).
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.1 und 10.2 eingespielt
 
 - Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039): `git archive main` → `app.neu`, `REVISION` `7900e9d`, Abbild `skriptorium:vorher` getaggt, `app.vorher` behalten, `docker compose build` und `up -d`.
