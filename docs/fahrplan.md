@@ -24,7 +24,7 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-8.md`](archiv/fahrplan-phase-8.md).
 
-**Phase 9: 8 von 15 erledigt.**
+**Phase 9: 12 von 15 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
