@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.7, D.1 und D.27 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `8e87aab` (enthält 10.7, D.1, D.27), Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `5aa544a`. Erster Bau mit `node:26.12.1-slim` auf dem Server – ohne Auffälligkeit.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `8e87aab`, 0 Fehlerzeilen in 3 Minuten. Offen: Abnahme 10.6 und 10.7 (Eigentümer).
+
 ### 2026-11-06 – [BEOBACHTUNG] D.27 erledigt
 
 - Eigentümer: „Ja, PR und Merge“. PR #213, CI vier Jobs grün (Python 2:01, Pre-Commit 1:27, TypeScript 1:57, E2E 2:15), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `8e87aab`. D.27 → ERLEDIGT; kein Einspielen nötig (nur Testwerkzeug).
