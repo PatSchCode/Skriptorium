@@ -8,6 +8,7 @@ import { coverPrompt } from "../imagePrompts";
 import { StoryCover } from "./StoryCover";
 
 vi.mock("../files", () => ({
+  GENERATED_SIDE: 4096,
   IMAGE_SIDE: 2000,
   shrinkImage: vi.fn(() => Promise.resolve(new Blob(["klein"]))),
   base64: vi.fn(() => Promise.resolve("a2xlaW4=")),
@@ -232,8 +233,9 @@ describe("cover of a story (step 7.11)", () => {
     await waitFor(() => {
       expect(saved).toHaveBeenCalledWith(WITH_COVER);
     });
+    // A generated cover keeps up to 4096 pixels (step 10.5, ADR-109).
     expect(vi.mocked(shrinkImage).mock.calls.at(-1)?.slice(1)).toEqual([
-      2000,
+      4096,
       true,
     ]);
     expect(withoutOrigins(calls).at(-1)?.body).toEqual({

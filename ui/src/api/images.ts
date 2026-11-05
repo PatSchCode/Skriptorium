@@ -1,14 +1,23 @@
 /**
- * Generating images with the AI (steps 7.12, 9.8, ADR-077, ADR-097); a preview only, nothing is
- * stored.
+ * Generating images with the AI (steps 7.12, 9.8, 10.5, ADR-077, ADR-097, ADR-109); a preview
+ * only, nothing is stored.
  */
 
 import { request } from "./core";
 
 export interface ImageModelList {
   default: string;
-  /** `references`: how many images the model takes as a basis (step 9.8). */
-  models: { id: string; name: string; references: number }[];
+  /**
+   * `references`: how many images the model takes as a basis (step 9.8); `resolutions` and
+   * `qualities`: the levels it offers, empty or missing for none (step 10.5, ADR-109).
+   */
+  models: {
+    id: string;
+    name: string;
+    references: number;
+    resolutions?: string[];
+    qualities?: string[];
+  }[];
   available: boolean;
   /** False without a key; generating then answers 503. */
   ready: boolean;
@@ -44,6 +53,15 @@ export interface ImageOrigin {
   cost_usd: number | null;
   /** The image it was made from, e.g. "Bild 1 von Kael" (step 9.8, ADR-097). */
   basis?: string;
+  /** The levels chosen, if the model offered any (step 10.5, ADR-109). */
+  resolution?: string;
+  quality?: string;
+}
+
+/** The levels of one image, `null` where the model offers none (step 10.5, ADR-109). */
+export interface ImageLevels {
+  resolution: string | null;
+  quality: string | null;
 }
 
 /** The stored origin with the date it was taken over; `null` for an uploaded image. */
@@ -54,6 +72,9 @@ export interface StoredImageOrigin {
   cost_usd: number | null;
   date: string;
   basis: string | null;
+  /** Missing or `null` for older origins and models without levels (step 10.5). */
+  resolution?: string | null;
+  quality?: string | null;
 }
 
 export interface GeneratedImage {
@@ -72,17 +93,30 @@ export interface ImageTarget {
 export const imagesApi = {
   imageModels: () =>
     request("GET", "/api/images/models") as Promise<ImageModelList>,
-  imagePrice: (model: string) =>
-    request(
+  /** The price of one image, at `levels` where given (step 10.5, ADR-109). */
+  imagePrice: (model: string, levels?: ImageLevels) => {
+    const query = [
+      `model=${encodeURIComponent(model)}`,
+      ...(levels?.resolution == null
+        ? []
+        : [`resolution=${encodeURIComponent(levels.resolution)}`]),
+      ...(levels?.quality == null
+        ? []
+        : [`quality=${encodeURIComponent(levels.quality)}`]),
+    ];
+    return request(
       "GET",
-      `/api/images/price?model=${encodeURIComponent(model)}`,
-    ) as Promise<ImagePrice>,
+      `/api/images/price?${query.join("&")}`,
+    ) as Promise<ImagePrice>;
+  },
   generateImage: (
     order: {
       model: string;
       prompt: string;
       aspect_ratio: AspectRatio;
       reference?: ImageReference;
+      resolution?: string;
+      quality?: string;
     } & ImageTarget,
   ) =>
     request("POST", "/api/images/generate", order) as Promise<GeneratedImage>,

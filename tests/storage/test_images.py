@@ -77,7 +77,7 @@ def test_reads_the_size_past_fill_bytes_and_standalone_markers(skipped: bytes) -
 
 def test_refuses_images_above_the_size_limit() -> None:
     data = png() + b"\x00" * MAX_IMAGE_BYTES
-    with pytest.raises(InvalidInput, match="5 MB"):
+    with pytest.raises(InvalidInput, match="12 MB"):
         inspect_image(data)
 
 

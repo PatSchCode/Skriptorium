@@ -1,5 +1,5 @@
-"""Generating images (roadmap steps 7.12, 9.8, ADR-077, ADR-097): the provider interface and the
-catalog.
+"""Generating images (roadmap steps 7.12, 9.8, 10.5, ADR-077, ADR-097, ADR-109): the provider
+interface and the catalog.
 
 Image providers are a building block of their own, next to the text providers: an adapter
 implements :class:`ImageProvider`, so further providers (V.24) are added without changing the
@@ -36,6 +36,9 @@ class ImageModel:
     aspect_ratios: tuple[str, ...]
     # How many images it takes as a basis (``input_references``), 0 for none (ADR-097).
     references: int = 0
+    # The levels it offers, as the catalog names them (ADR-109); empty for none.
+    resolutions: tuple[str, ...] = ()
+    qualities: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -55,6 +58,10 @@ class ImageEndpoint:
     price: ImagePrice | None
     # What an image given as a basis costs, if the provider names it (ADR-097).
     input_price: ImagePrice | None = None
+    # Output prices the provider names per variant, e.g. ``("2k", ...)``, and its price without
+    # a variant, if it names one (ADR-109); ``price`` falls back to a variant, this does not.
+    variants: tuple[tuple[str, ImagePrice], ...] = ()
+    plain: ImagePrice | None = None
 
 
 @dataclass(frozen=True)
@@ -71,13 +78,15 @@ class ImageReference:
 
 @dataclass(frozen=True)
 class ImageOrder:
-    """What the caller asks for: model, prompt, aspect ratio such as ``2:3`` and, optionally,
-    one image as the basis."""
+    """What the caller asks for: model, prompt, aspect ratio such as ``2:3``, optionally one
+    image as the basis and the resolution and quality the model offers (ADR-109)."""
 
     model: str
     prompt: str
     aspect_ratio: str
     reference: ImageReference | None = None
+    resolution: str | None = None
+    quality: str | None = None
 
 
 @dataclass(frozen=True)
@@ -142,6 +151,10 @@ class ImageCatalog:
         found = self._models.get(model)
         return 0 if found is None else found.references
 
+    def model(self, model: str) -> ImageModel | None:
+        """The model with its levels; ``None`` if unknown."""
+        return self._models.get(model)
+
     async def refresh(self) -> None:
         """Load the list unless it is younger than an hour; a failure keeps the old state."""
         now = self._clock()
@@ -176,9 +189,26 @@ class ImageCatalog:
         self._endpoints[model] = (now, found)
         return found
 
-    async def price(self, model: str) -> ImagePrice | None:
-        """The price of the model's first provider that names one."""
-        return next((e.price for e in await self.endpoints(model) if e.price), None)
+    async def price(
+        self, model: str, resolution: str | None = None, quality: str | None = None
+    ) -> ImagePrice | None:
+        """The price of one image at the model's first provider that names one.
+
+        With a ``resolution`` or ``quality`` (ADR-109) the price of that level, see
+        :func:`level_price`; ``None`` if no provider names it.
+        """
+        if resolution is None and quality is None:
+            return next((e.price for e in await self.endpoints(model) if e.price), None)
+        found = self._models.get(model)
+        smallest = found.resolutions[0] if found and found.resolutions else None
+        return next(
+            (
+                price
+                for endpoint in await self.endpoints(model)
+                if (price := level_price(endpoint, smallest, resolution, quality))
+            ),
+            None,
+        )
 
     async def input_price(self, model: str) -> ImagePrice | None:
         """What an image given as a basis costs at the first provider that names it."""
@@ -219,7 +249,50 @@ def _model(item: Mapping[str, object]) -> ImageModel | None:
         name=name if isinstance(name, str) and name else model_id,
         aspect_ratios=tuple(_values(parameters.get("aspect_ratio"))),
         references=most if isinstance(most, int) and not isinstance(most, bool) and most > 0 else 0,
+        resolutions=_levels(parameters.get("resolution")),
+        qualities=_levels(parameters.get("quality")),
     )
+
+
+# A level is sent to the provider and shown in the interface; anything unusual is left out.
+_LEVEL: Final = re.compile(r"[A-Za-z0-9._-]{1,20}")
+
+
+def _levels(value: object) -> tuple[str, ...]:
+    """The offered values of a level parameter, without duplicates and odd ones."""
+    return tuple(dict.fromkeys(v for v in _values(value) if _LEVEL.fullmatch(v)))
+
+
+def level_price(
+    endpoint: ImageEndpoint, smallest: str | None, resolution: str | None, quality: str | None
+) -> ImagePrice | None:
+    """The price of one image at ``resolution`` and ``quality`` at this provider (ADR-109).
+
+    Providers name their prices unevenly: the variant naming the level
+    (``<quality>_<resolution>``, then ``<resolution>``, then ``<quality>``, in lower case) wins;
+    above the ``smallest`` resolution a variant ``high_resolution`` counts; at the smallest (or
+    without a resolution) the base price; a price per token holds for every level. Otherwise
+    ``None``: the real cost is reported after generating.
+    """
+    variants = dict(endpoint.variants)
+    wanted = [
+        name.lower()
+        for name in (
+            f"{quality}_{resolution}" if quality and resolution else None,
+            resolution,
+            quality,
+        )
+        if name
+    ]
+    named = next((variants[name] for name in wanted if name in variants), None)
+    if named is not None:
+        return named
+    base = endpoint.plain
+    if base is not None and base.unit == "token":
+        return base
+    if resolution is not None and resolution != smallest:
+        return variants.get("high_resolution")
+    return base
 
 
 def _endpoints(body: object) -> tuple[ImageEndpoint, ...]:
@@ -241,13 +314,44 @@ def _endpoints(body: object) -> tuple[ImageEndpoint, ...]:
         )
         pricing = item.get("pricing")
         found.append(
-            ImageEndpoint(provider, keys, _price(pricing), _price(pricing, billable="input_image"))
+            ImageEndpoint(
+                provider,
+                keys,
+                _price(pricing),
+                _price(pricing, billable="input_image"),
+                _variant_prices(pricing),
+                _price(pricing, plain_only=True),
+            )
         )
     return tuple(found)
 
 
-def _price(value: object, billable: str = "output_image") -> ImagePrice | None:
-    """The base price of ``billable``: its first entry without a variant, else its first entry.
+def _variant_prices(value: object) -> tuple[tuple[str, ImagePrice], ...]:
+    """The output prices named per variant, first one per name (ADR-109)."""
+    if not isinstance(value, list):
+        return ()
+    found: dict[str, ImagePrice] = {}
+    for entry in value:
+        if not isinstance(entry, dict) or entry.get("billable", "output_image") != "output_image":
+            continue
+        variant, cost, unit = entry.get("variant"), entry.get("cost_usd"), entry.get("unit")
+        if (
+            isinstance(variant, str)
+            and variant
+            and isinstance(cost, int | float)
+            and not isinstance(cost, bool)
+            and cost >= 0
+            and isinstance(unit, str)
+        ):
+            found.setdefault(variant.lower(), ImagePrice(float(cost), unit))
+    return tuple(found.items())
+
+
+def _price(
+    value: object, billable: str = "output_image", *, plain_only: bool = False
+) -> ImagePrice | None:
+    """The base price of ``billable``: its first entry without a variant, else (unless
+    ``plain_only``) its first entry.
 
     Entries without ``billable`` count as the output image (the form before 9.8).
     """
@@ -257,7 +361,7 @@ def _price(value: object, billable: str = "output_image") -> ImagePrice | None:
         e for e in value if isinstance(e, dict) and e.get("billable", "output_image") == billable
     ]
     plain = [e for e in entries if not e.get("variant")]
-    for entry in plain + entries:
+    for entry in plain if plain_only else plain + entries:
         cost, unit = entry.get("cost_usd"), entry.get("unit")
         if isinstance(cost, int | float) and cost >= 0 and isinstance(unit, str):
             return ImagePrice(float(cost), unit)

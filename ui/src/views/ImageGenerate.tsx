@@ -5,6 +5,7 @@ import {
   formatCost,
   type AspectRatio,
   type GeneratedImage,
+  type ImageLevels,
   type ImageOrigin,
   type ImagePrice,
   type ImageTarget,
@@ -12,8 +13,9 @@ import {
 import { ErrorText } from "./Common";
 import type { Basis } from "./ImageOriginPanel";
 import { useElapsed } from "./useElapsed";
+import { useImageLevels } from "./useImageLevels";
 import { useImageModels } from "./useImageModels";
-import { useImagePrice } from "./useImagePrice";
+import { useImagePrices } from "./useImagePrices";
 import { useImageRequest } from "./useImageRequest";
 
 const FORMATS: readonly { id: AspectRatio; label: string }[] = [
@@ -21,6 +23,9 @@ const FORMATS: readonly { id: AspectRatio; label: string }[] = [
   { id: "1:1", label: "Quadrat" },
   { id: "3:2", label: "Quer" },
 ];
+
+/** No levels chosen beforehand: the presets apply (step 10.5). */
+const NO_LEVELS: ImageLevels = { resolution: null, quality: null };
 
 /**
  * "Bild erzeugen" (step 7.12, ADR-077): a description from the canon to change, format and model
@@ -30,12 +35,14 @@ const FORMATS: readonly { id: AspectRatio; label: string }[] = [
  * image goes along to the model: the description says what should change, only models that take
  * a basis are offered, and the format follows the basis until the author picks one. The `target`
  * (world, and story for a cover) only files the request in the usage statistics (step 9.11).
+ * Where the model offers them, resolution and quality are chosen too (step 10.5, ADR-109).
  */
 export function ImageGenerate({
   title,
   initialPrompt,
   initialFormat,
   initialModel = null,
+  initialLevels = NO_LEVELS,
   takeOverLabel = "Übernehmen",
   hint = null,
   extra = null,
@@ -49,6 +56,8 @@ export function ImageGenerate({
   initialFormat: AspectRatio;
   /** The model to preselect, e.g. when generating anew from an origin (step 9.6). */
   initialModel?: string | null;
+  /** The levels to preselect where the model offers them (step 10.5). */
+  initialLevels?: ImageLevels;
   takeOverLabel?: string;
   /**
    * A note above the description, e.g. that an entry has no looks yet (step 7.16), with a button
@@ -69,9 +78,23 @@ export function ImageGenerate({
   const [result, setResult] = useState<GeneratedImage | null>(null);
   const [error, setError] = useState<string | null>(null);
   const choice = useImageModels(initialModel, basis !== null, setError);
-  const price = useImagePrice(choice.model);
+  const levels = useImageLevels(
+    choice.model,
+    choice.models?.find((m) => m.id === choice.model),
+    initialLevels,
+  );
+  const prices = useImagePrices(
+    choice.model,
+    levels.resolutions,
+    levels.quality,
+  );
   const elapsed = useElapsed(busy);
   const prompt = request.prompt.trim();
+  // Only levels the model offers are sent and kept (ADR-109).
+  const chosenLevels = {
+    ...(levels.resolution === null ? {} : { resolution: levels.resolution }),
+    ...(levels.quality === null ? {} : { quality: levels.quality }),
+  };
 
   async function generate() {
     elapsed.start();
@@ -84,6 +107,7 @@ export function ImageGenerate({
           model: choice.model,
           prompt,
           aspect_ratio: request.format,
+          ...chosenLevels,
           ...target,
           ...(basis === null ? {} : { reference: basis.reference }),
         }),
@@ -107,6 +131,7 @@ export function ImageGenerate({
         prompt,
         aspect_ratio: request.format,
         cost_usd: result.cost_usd,
+        ...chosenLevels,
         ...(basis === null ? {} : { basis: shortLabel(basis.label) }),
       });
       onClose();
@@ -133,7 +158,8 @@ export function ImageGenerate({
           request={request}
           choice={choice}
           initialModel={initialModel}
-          price={price}
+          levels={levels}
+          priceOf={prices.priceOf}
           busy={busy}
           failed={error !== null}
         />
@@ -216,7 +242,8 @@ function ImageGenerateForm({
   request,
   choice,
   initialModel,
-  price,
+  levels,
+  priceOf,
   busy,
   failed,
 }: {
@@ -226,12 +253,14 @@ function ImageGenerateForm({
   request: ReturnType<typeof useImageRequest>;
   choice: ReturnType<typeof useImageModels>;
   initialModel: string | null;
-  price: ImagePrice | null;
+  levels: ReturnType<typeof useImageLevels>;
+  priceOf: (resolution: string | null) => ImagePrice | null;
   busy: boolean;
   /** An error is shown already; then no note about missing models. */
   failed: boolean;
 }) {
   const { models } = choice;
+  const price = priceOf(levels.resolution);
   return (
     <>
       {hint !== null && <div className="image-generate-hint">{hint}</div>}
@@ -293,8 +322,33 @@ function ImageGenerateForm({
             : "Gerade nimmt kein Bildmodell ein Ausgangsbild an."}
         </p>
       )}
+      {levels.resolutions.length > 0 && (
+        <LevelChoice
+          label="Auflösung"
+          values={levels.resolutions}
+          chosen={levels.resolution}
+          busy={busy}
+          onPick={levels.pickResolution}
+          describe={(resolution) => {
+            const known = priceOf(resolution);
+            return known?.unit === "image" && known.cost_usd !== null
+              ? `${resolution} ${formatCost(known.cost_usd)}`
+              : resolution;
+          }}
+        />
+      )}
+      {levels.qualities.length > 0 && (
+        <LevelChoice
+          label="Qualität"
+          values={levels.qualities}
+          chosen={levels.quality}
+          busy={busy}
+          onPick={levels.pickQuality}
+          describe={(quality) => QUALITIES[quality] ?? quality}
+        />
+      )}
       <p className="note">
-        {describePrice(price)}
+        {describePrice(price, levels.resolution)}
         {basis !== null && price !== null && ` · ${describeBasisPrice(price)}`}
       </p>
     </>
@@ -324,6 +378,60 @@ function BasisPreview({
       <div>
         <b>Grundlage</b>
         <span className="note">{basis.label} · geht mit an das Bildmodell</span>
+      </div>
+    </div>
+  );
+}
+
+/** Names of the quality levels the catalog uses; others are shown as they come. */
+const QUALITIES: Readonly<Record<string, string>> = {
+  auto: "automatisch",
+  low: "niedrig",
+  medium: "mittel",
+  high: "hoch",
+  xhigh: "sehr hoch",
+  max: "höchste",
+};
+
+/** One level of the image the model offers: resolution or quality (step 10.5, ADR-109). */
+function LevelChoice({
+  label,
+  values,
+  chosen,
+  busy,
+  onPick,
+  describe,
+}: {
+  label: string;
+  values: readonly string[];
+  chosen: string | null;
+  busy: boolean;
+  onPick: (value: string) => void;
+  describe: (value: string) => string;
+}) {
+  return (
+    <div className="image-generate-field">
+      {label}
+      <div
+        className="image-generate-formats"
+        role="radiogroup"
+        aria-label={label}
+      >
+        {values.map((value) => (
+          <button
+            key={value}
+            type="button"
+            role="radio"
+            aria-checked={chosen === value}
+            className={chosen === value ? "chosen" : undefined}
+            disabled={busy}
+            onClick={() => {
+              onPick(value);
+            }}
+          >
+            {describe(value)}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -389,16 +497,21 @@ function GeneratedPreview({
   );
 }
 
-/** The price shown before generating. */
-export function describePrice(price: ImagePrice | null): string {
+/** The price shown before generating, at the chosen `resolution` if any (step 10.5). */
+export function describePrice(
+  price: ImagePrice | null,
+  resolution: string | null = null,
+): string {
   if (price === null) {
     return "Preis wird geladen …";
   }
   if (price.cost_usd === null || price.unit === null) {
-    return "Preis unbekannt";
+    return resolution === null
+      ? "Preis unbekannt"
+      : `Preis für ${resolution} nicht ausgewiesen – die Kosten stehen nach dem Erzeugen da`;
   }
   if (price.unit === "image") {
-    return `ca. ${formatCost(price.cost_usd)} je Bild`;
+    return `ca. ${formatCost(price.cost_usd)} je Bild${resolution === null ? "" : ` (${resolution})`}`;
   }
   if (price.unit === "megapixel") {
     return `ca. ${formatCost(price.cost_usd)} je Bild (1 Megapixel)`;

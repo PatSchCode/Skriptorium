@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api, describeError } from "../api";
+import { api, describeError, type ImageModelList } from "../api";
 
 /**
  * The image models "Bild erzeugen" offers (step 7.12, ADR-077) and the chosen one: with a basis
@@ -11,9 +11,8 @@ export function useImageModels(
   withBasis: boolean,
   onError: (message: string) => void,
 ) {
-  const [models, setModels] = useState<{ id: string; name: string }[] | null>(
-    null,
-  );
+  // With their levels (step 10.5, ADR-109).
+  const [models, setModels] = useState<ImageModelList["models"] | null>(null);
   const [model, setModel] = useState("");
   const [ready, setReady] = useState(true);
 

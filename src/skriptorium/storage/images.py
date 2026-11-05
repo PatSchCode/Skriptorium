@@ -12,8 +12,9 @@ from skriptorium.storage.errors import InvalidInput
 
 ImageKind = Literal["png", "jpeg", "webp"]
 
-MAX_IMAGE_BYTES: Final = 5 * 1024 * 1024
-"""Largest accepted image file; the browser shrinks photos well below this before upload."""
+MAX_IMAGE_BYTES: Final = 12 * 1024 * 1024
+"""Largest accepted image file: room for generated images up to 4,096 pixels (ADR-109); the
+browser shrinks photos well below this before upload."""
 
 MAX_IMAGE_SIDE: Final = 4096
 """Longest accepted side in pixels."""

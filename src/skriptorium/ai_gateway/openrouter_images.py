@@ -146,6 +146,11 @@ def _payload(order: ImageOrder, endpoints: tuple[ImageEndpoint, ...]) -> dict[st
         "aspect_ratio": order.aspect_ratio,
         "n": 1,
     }
+    # Only when chosen (ADR-109); a model without levels gets the request as before.
+    if order.resolution is not None:
+        payload["resolution"] = order.resolution
+    if order.quality is not None:
+        payload["quality"] = order.quality
     if order.reference is not None:
         encoded = base64.b64encode(order.reference.data).decode("ascii")
         payload["input_references"] = [
