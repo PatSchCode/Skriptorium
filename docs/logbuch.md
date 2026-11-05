@@ -29,6 +29,21 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [SESSIONENDE] Phase 9 abgeschlossen, Phase 10 geplant, 10.1 zusammengeführt
+
+- **Dauer:** 2026-11-04 ca. 20:10 bis 2026-11-05 (fortgesetzte, zweimal verdichtete Session).
+- **Bearbeitet seit dem letzten Sessionende:** 9.12 Erkundung Quellen und Recherche (ADR-101); 9.13 Gast-Figuren mit Weltbezug (ADR-102, eingespielt `e809696`, bestätigt); 9.14 Kontexttreue gemessen (ADR-103, `[BELASTBAR]` bis ~30 Kapitel); 9.15 Phasenabschluss mit Vision-Abgleich, Onboarding-Prüfung, getrennter Instanz (ADR-104) und Planung Phase 10 (ADR-105); 10.1 Löschkaskade für Kanon-Einträge (ADR-106, PR #205, `c78ad0e`). PRs #200–#205 zusammengeführt.
+- **Stand:** 10.1 in `main`, nicht eingespielt (Eigentümer: „Später“); Doku dazu lokal auf `docs/10.1-zusammengefuehrt`, nicht gepusht. Auf dem Server läuft `e809696`.
+- **Offen:** Einspielen und Abnahme 10.1; überholter lokaler Zweig `feat/9.9-loeschen-archivieren` (nur auf Wort des Eigentümers löschen).
+- **Nächster Schritt:** 10.1 einspielen und abnehmen, dann 10.2 (Vorlage). Datiert: D.1 (Node 26) seit 2026-11-05 fällig, D.5 (mypy 2) am 2026-11-06; D.11 Frist 2026-10-31 überschritten (Eigentümer).
+- **Sessionende-Prüfungen:** README gegen Fahrplan, Kontext, Architektur, Blocker abgeglichen (Phase 10, 10.1, 0 Blocker). Drift: ADR-104 bis ADR-106 verweisen auf bestehende Schritte; Reifegrad nur NFR Kontexttreue geändert (ADR-103, Tabelle angepasst); Modul-Liste unverändert; FR-036/FR-038 mit Schritt; Reaktiv-Quote 0/10; Phase 10 bei 11 von 11 geplanten Schritten. `docs/project-context.md` unter 600 Zeilen; Logbuch nach Verdichtung ca. 175 Zeilen. Ablaufdaten-Register: D.1 und D.5 haben Schritte.
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse, Quelle: Systemkontext). Oberhalb der Empfehlung: Einspielen, Doku-Nachträge und README-Pflege (Routine); 10.4 und 9.x nicht berührt. Abgegeben: die Pflichtfrage an einen Unteragenten mit Sonnet als getrennte Instanz (methodisch vorgeschrieben, nicht aus Kostengründen); sonst keine Abgabe – kleine Teilarbeiten mit geladenem Kontext.
+- **Kontextgröße:** nicht feststellbar; Session zweimal verdichtet, Weiterarbeit nach dauerhaftem „weiter hier“ des Eigentümers.
+
+### 2026-11-05 – [BEOBACHTUNG] PR #205 zusammengeführt (10.1), Einspielen später
+
+- Eigentümer gab die Bildschirmfotos frei („Ja, PR und Merge“); CI 4 von 4 grün, Protokoll ohne neue Warnung. Merge-Commit `c78ad0e`. Einspielen: „Später“.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.1 umgesetzt (lokal), Bildschirmfotos zur Abnahme
 
 - Umsetzung nach ADR-106 auf `feat/10.1-loeschkaskade`; Zahlen im Fahrplan bei 10.1. ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün; Build vom Projektordner, E2E 15 grün.

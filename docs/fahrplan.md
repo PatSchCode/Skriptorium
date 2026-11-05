@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.1 Löschkaskade für Kanon-Einträge – seit 2026-11-05, entschieden (ADR-106), Umsetzung.
-- **Nächster Schritt:** 10.1 Löschkaskade für Kanon-Einträge – Vorlage (Entscheidungs-Klasse). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.1 Löschkaskade für Kanon-Einträge – seit 2026-11-05, entschieden (ADR-106), zusammengeführt (PR #205, `c78ad0e`); Einspielen auf Wunsch des Eigentümers später, danach seine Abnahme.
+- **Nächster Schritt:** 10.1 einspielen (auf Wort des Eigentümers) und abnehmen; danach 10.2 Abschnittsregel im Server nutzen und Export liest „Wesen“ – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -28,7 +28,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| 🟠 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | in Arbeit seit 2026-11-05 (ADR-106), lokal umgesetzt | du: Bildschirmfotos freigeben |
+| 🟠 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | in Arbeit seit 2026-11-05 (ADR-106), zusammengeführt `c78ad0e` | du: einspielen lassen, abnehmen |
 | ⚪ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | offen | KI: Vorlage |
 | ⚪ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | offen | KI: nach 10.2 |
 | ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
