@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.5 umgesetzt (lokal)
+
+- Nach ADR-109 auf `feat/10.5-aufloesung-qualitaet`; Zahlen im Fahrplan bei 10.5. Abnahme braucht ein echtes 2K-Bild im Betrieb (Schlüssel lokal nicht gültig).
+- Mini-Reibungen: (1) Grok hat keinen Grundpreis; `_price` fiel auf die erste Variante zurück (`low_1k`) – als Grundpreis für 1K/mittel wäre ein falscher Preis erschienen. Eigener Wert `plain` nur für den Preis ohne Variante. (2) Sieben UI-Tests scheiterten an Attrappen von `../files` ohne `GENERATED_SIDE` – die Attrappe muss jede benutzte Konstante kennen. (3) `ok()` der Test-API liefert eine Handler-Funktion, kein Ergebnis – in einem eigenen Handler direkt `{status, body}` zurückgeben. (4) mypy leitete den Typ einer Testtabelle zu eng ab (`list[dict]`), Typangabe ergänzt.
+- DoD-Lücke entdeckt: CHANGELOG fehlte für 10.2 und 10.3 – nachgetragen.
+
 ### 2026-11-05 – [ADR-ANGELEGT] ADR-109 Auflösung und Qualität bei „Bild erzeugen“ (10.5)
 
 - Vorlage mit `mockup-10.5.html` (lokal) und `ENTSCHEIDUNG ERFORDERLICH`; vier Auswahlfragen, Eigentümer jeweils die Empfehlung. Befund beim Lesen: Nicht nur die fehlende Auflösung macht Bilder klein, sondern auch `shrinkImage` mit 2.000 Pixel beim Übernehmen – 2K wäre sonst wirkungslos gewesen. Pillow fehlt im Container (Messskript scheiterte am Import) – Umwandeln auf dem Server wäre eine neue Abhängigkeit.

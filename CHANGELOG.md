@@ -6,6 +6,10 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Hinzugefügt (nach v1.0.0)
 
+- Auflösung und Qualität bei „Bild erzeugen“ (2026-11-05, Schritt 10.5, ADR-109): Bietet ein Bildmodell Stufen an, wählst du im Fenster die Auflösung (z. B. 1K, 2K, 4K) und, wo vorhanden, die Qualität; voreingestellt ist 2K. Neben jeder Auflösung steht ihr Preis, soweit der Anbieter ihn nennt, sonst steht der echte Preis wie bisher nach dem Erzeugen da. Erzeugte Bilder und Titelbilder werden beim Übernehmen erst über 4.096 Pixel Seitenlänge verkleinert (bisher 2.000); hochgeladene Fotos bleiben bei 2.000. Die Herkunft nennt die Auflösung, „Neu erzeugen“ übernimmt sie.
+
+- „✨ Aussehen herauslösen“ für Orte und Gegenstände (2026-11-05, Schritt 10.3, ADR-108): wie bei Figuren im Eintrag und im Fenster „Bild erzeugen“, mit eigener Anweisung je Art; bei Orten bleibt der Abschnitt „Lage“ draußen. Im Fenster steht daneben „✎ Selbst ergänzen“.
+
 - Löschen eines Kanon-Eintrags mit seinen Spuren (2026-11-05, Schritt 10.1, ADR-106): „Löschen“ am Eintrag zeigt vorher, was mitgeht – Bilder, Markierungen auf Karten, die geführte Figur und Fakten „nur diese Geschichte“ in Geschichten dieser Welt und Gast-Verbindungen (mit Weltbezug) in Geschichten anderer Welten – und nennt die Einträge, die ihn mit @ erwähnen (deren Text bleibt). Ein Klick auf „Endgültig löschen“ nimmt alles mit; ein später gleichnamig angelegter Eintrag erbt keine alten Verweise mehr.
 
 - Gast-Figuren mit Weltbezug (2026-11-05, Schritt 9.13, ADR-102): Unter „Gäste aus anderen Welten“ hat jeder Gast ein Feld „In dieser Welt“ – Herkunft, Beziehungen, Besitz und Rolle in der Welt der Geschichte. „✨ Einpassen vorschlagen“ lässt den Weltenbauer diesen Text aus dem Eintrag der Figur und der Beschreibung der Welt vorschlagen, auf Wunsch mit einer Vorgabe; du übernimmst ihn ins Feld und speicherst. Beim Schreiben bekommt die KI den Eintrag der Figur und darunter den Weltbezug; Abschnitte über die Heimatwelt („In ‹Welt›“, „Im ‹Welt›“) lässt sie dann weg. Der Eintrag in der Heimatwelt bleibt unverändert.
@@ -82,6 +86,7 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Behoben (nach v1.0.0)
 
+- Figurenkarte für SillyTavern (2026-11-05, Schritt 10.2, ADR-107): „personality“ enthält jetzt genau den Abschnitt „Wesen“, auf jeder Überschriften-Ebene; bisher blieb das Feld bei `## Wesen` leer, und bei `### Wesen` gingen Fähigkeiten und Geschichte mit. Abschnitte über die Heimatwelt eines Gasts erkennt das Skriptorium nur noch am ganzen Wort des Weltnamens.
 - Figuren in der Form ihrer Vorlage beim Import (2026-10-18, Schritt 9.1, ADR-091): Stand eine Figur nur mit „Aussehen“ und „Wesen und Geschichte“ im Material, entstanden beim Import zwei falsche Einträge mit diesen Namen; jetzt bleibt es eine Figur. Beim Markieren einer Stelle „in den Kanon“ erkennt das Skriptorium einen Namen auch im Genitiv („Kaels Klinge“). Server und Oberfläche finden Abschnitte wie „Aussehen“ und Namen jetzt nach derselben Regel; deine Dateien bleiben unverändert.
 - Cursor im Anweisungsfeld (2026-10-12): Im leeren Feld saß der Cursor über und links neben dem grauen Beispieltext; jetzt steht er an der richtigen Stelle. Der Beispieltext erklärt das Feld: leer lassen zum Weiterschreiben, `@` für Kanon-Einträge.
 - Gegenstände aus dem Weltenbauer (2026-10-12, Schritt 7.9): Schrieb die KI „Zweck“, „Verwendung“ und „Auswirkung“ auf dieselbe Ebene wie den Gegenstand, entstanden beim Import vier Einträge. Diese Abschnitte gehören jetzt immer zum Eintrag davor – auch beim Import von Hand.

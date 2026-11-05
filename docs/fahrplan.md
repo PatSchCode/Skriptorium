@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.5 Auflösung und Qualität – seit 2026-11-05, entschieden (ADR-109), Umsetzung läuft.
+- **Aktiver Schritt:** 10.5 Auflösung und Qualität – seit 2026-11-05, entschieden (ADR-109), umgesetzt (lokal); PR auf Wort des Eigentümers, dann Einspielen und Probe mit 2K-Bild.
 - **Nächster Schritt:** 10.5 umsetzen, PR nach Freigabe, Einspielen und Probe mit 2K-Bild; danach 10.6 Bilder im Manuskript – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -279,6 +279,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** ai_gateway, storage, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-109. `storage`: Herkunft mit `aufloesung`/`qualitaet`, Bildgrenze 12 MB. `ai_gateway`: Stufen im Katalog, `ImageOrder.resolution`/`quality`, Preise je Stufe (`level_price`, Grundpreis ohne Variante getrennt von `price`). `api`: Stufen in Modellliste, Preis und Erzeugen (422 bei nicht angebotenen), Herkunft; gelieferte Bilder bis 40 MB. `ui`: `useImageLevels` (2K/„auto“ voreingestellt, Herkunft übernimmt), `useImagePrices` (Preis je Auflösung), Auswahl „Auflösung“ mit Preisen und „Qualität“ mit deutschen Namen, Herkunft zeigt die Auflösung, erzeugte Bilder und Titelbilder bis 4.096 Pixel (`GENERATED_SIDE`). Tests: Python 18 neue (Katalog, Preisstufen, Anfrage, API, Herkunft), 1169 bestanden, 99,87 %, geänderte Dateien 100 %; Oberfläche 6 neue, 4 angepasste (Saat, Titelbild 4.096, Attrappe `GENERATED_SIDE`), 569 bestanden, 98,83 / 95,51 / 98,30 / 98,98 %; E2E 15. Vertragsdatei: `resolutions`, `qualities` je Modell. ruff, mypy, bandit, eslint, tsc, prettier, Build grün. CHANGELOG für 10.2, 10.3 und 10.5 nachgetragen (10.2 und 10.3 fehlten).
 - **Notizen:** Neu in 9.15 (ADR-105).
 
 #### 10.6: Bilder im Manuskript und im E-Book (V.23)
