@@ -37,6 +37,11 @@ MODELS = {
             "supported_parameters": {"resolution": _enum("1K", "2K", "4K", "2K; drop", 7)},
         },
         {"id": "black-forest-labs/flux.2-pro", "name": "FLUX.2 Pro", "supported_parameters": {}},
+        {
+            "id": "seed/seedream-lite",
+            "name": "Seedream Lite",
+            "supported_parameters": {"resolution": _enum("2K", "4K")},
+        },
     ]
 }
 PRICES: dict[str, list[object]] = {
@@ -53,6 +58,10 @@ PRICES: dict[str, list[object]] = {
     ],
     "google/gemini-image": [{"unit": "token", "cost_usd": 0.00012}],
     "black-forest-labs/flux.2-pro": [{"unit": "megapixel", "cost_usd": 0.03}],
+    "seed/seedream-lite": [
+        {"unit": "image", "cost_usd": 0.035},
+        {"billable": "input_image", "unit": "image", "cost_usd": 0.003},
+    ],
 }
 
 
@@ -102,6 +111,9 @@ def test_the_catalog_keeps_the_offered_levels_once_and_drops_odd_ones() -> None:
         ("seed/seedream", "1K", None, ImagePrice(0.045, "image")),
         # A price per token holds for every level.
         ("google/gemini-image", "4K", None, ImagePrice(0.00012, "token")),
+        # So does the base price of a provider without any variant (probe 2026-11-05).
+        ("seed/seedream-lite", "4K", None, ImagePrice(0.035, "image")),
+        ("seed/seedream-lite", "2K", None, ImagePrice(0.035, "image")),
         # Nothing names it: unknown, the real cost comes after generating.
         ("x-ai/grok-imagine", "1K", "medium", None),
         # Without a level as before.

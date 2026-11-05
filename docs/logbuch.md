@@ -29,6 +29,26 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] Probe 10.5 mit 4K: abgenommen, Nachtrag Preisregel
+
+- Eigentümer hat mit Seedream 5.0 Lite in 4K erzeugt: Server 2.732 × 4.096 WebP, 294 KB, Herkunft `4K`, 0,035 $, 26 s. „Es sieht deutlich schärfer aus“ – schwer zu beurteilen, weil die Großansicht jedes Bild auf dieselbe Größe einpasst. Abnahme „Ja“.
+- Vor dem Erzeugen stand „Preis für 4K nicht ausgewiesen“, abgerechnet wurde der Grundpreis. Eigentümer: Regel ändern. Nachtrag auf `fix/10.5-preis-ohne-stufen`: Grundpreis eines Anbieters ohne jede Preisvariante gilt für jede Stufe. 2 neue Testfälle, 1171 Python-Tests bestanden.
+
+### 2026-11-05 – [BEOBACHTUNG] Probe 10.5: 2K-Bild sieht aus wie vorher
+
+- Eigentümer: neues 2K-Bild einer Figur „genauso“ wie bisher. Server (nur Zahlen): neues Bild 1.366 × 2.048 WebP, 108 KB, Herkunft `2K`, 0,09 $. Die fünf vorigen Seedream-5.0-Pro-Bilder: je 1.333 × 2.000, ebenfalls 0,09 $ – Seedream lieferte also schon ohne Angabe 2K (Variante `high_resolution`) und wurde nur von 2.048 auf 2.000 Pixel verkleinert. Der vorher angezeigte Preis „ca. 0,045 $“ (Grundpreis) war für dieses Modell falsch, die Abrechnung lag immer bei 0,09 $.
+- Folge: Für Seedream 5.0 Pro bringt 10.5 nur 48 Pixel mehr; größere Bilder gibt es nur mit einem 4K-Modell (Katalog: z. B. Seedream 5.0 Lite 2K/4K 0,035 $, Seedream 4.5 bis 4K 0,04 $, Gemini/Nano Banana 4K nach Token, FLUX.3 4K 0,61 $). 10.5 bleibt bis zur Antwort des Eigentümers auf „wartet auf Abnahme“.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.5 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `17ea244`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `1a46b59`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `17ea244`, 0 Fehlerzeilen in 3 Minuten. Offen: Probe mit einem 2K-Bild (Eigentümer).
+
+### 2026-11-05 – [GELÖST] CI-Neustart wegen HTTP 504 bei `actions/setup-python` (PR #208)
+
+- Eigentümer: „Ja, PR und Merge“. Erster Lauf: Python, TypeScript, E2E grün; Pre-Commit rot – `actions/setup-python@v6.3.0` bekam dreimal „Unexpected HTTP response: 504“ beim Herunterladen von Python, der Job prüfte unseren Code gar nicht. Einmal neu gestartet (`gh run rerun --failed`) → alle vier grün (Pre-Commit 2:31). Kein Code geändert.
+- Zusammengeführt mit `--match-head-commit` → `17ea244`. 10.5 wartet auf Einspielen und Probe. Doku-Nachtrag lokal auf `docs/10.5-zusammengefuehrt`.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.5 umgesetzt (lokal)
 
 - Nach ADR-109 auf `feat/10.5-aufloesung-qualitaet`; Zahlen im Fahrplan bei 10.5. Abnahme braucht ein echtes 2K-Bild im Betrieb (Schlüssel lokal nicht gültig).
