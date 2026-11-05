@@ -18,6 +18,7 @@ from skriptorium.canon.sections import (
     read_labelled,
     read_part,
     read_section,
+    take_section,
     template_for,
 )
 
@@ -169,3 +170,33 @@ def test_moving_headings_leaves_everything_else_alone() -> None:
     )
     # Headings in code blocks do not decide the shift.
     assert nest_headings("```\n# Code\n```\n### Echt\n", 3) == "```\n# Code\n```\n### Echt\n"
+
+
+def test_taking_a_section_returns_its_text_and_the_rest() -> None:
+    """Step 10.2, ADR-107: the same section ``read_section`` finds, cut out byte for byte."""
+    text = (
+        "Kurz.\r\n\r\n## Aussehen\r\nGroß.\r\n\r\n## Wesen\r\nTreu.\r\n\r\n"
+        "## Fähigkeiten\r\nRudern."
+    )
+    assert take_section(text, "wesen") == (
+        "Treu.",
+        "Kurz.\r\n\r\n## Aussehen\r\nGroß.\r\n\r\n## Fähigkeiten\r\nRudern.",
+    )
+
+
+def test_taking_goes_with_subsections_at_any_level() -> None:
+    text = "# Kael\n## Wesen\nRuhig.\n### Ängste\nWasser.\n## Geschichte\nAlt.\n"
+    taken, rest = take_section(text, "Wesen")
+    assert taken == read_section(text, "Wesen") == "Ruhig.\n### Ängste\nWasser."
+    assert rest == "# Kael\n## Geschichte\nAlt.\n"
+
+
+def test_taking_skips_empty_sections_and_finds_nothing_without_text() -> None:
+    text = "## Wesen\n\n## Aussehen\nGroß.\n### Wesen\nStill.\n"
+    assert take_section(text, "Wesen") == ("Still.", "## Wesen\n\n## Aussehen\nGroß.\n")
+    template = "## Aussehen\n\n## Wesen\n\n## Fähigkeiten\n"
+    assert take_section(template, "Wesen") == (None, template)
+    assert take_section("```\n## Wesen\nCode.\n```\n", "Wesen") == (
+        None,
+        "```\n## Wesen\nCode.\n```\n",
+    )

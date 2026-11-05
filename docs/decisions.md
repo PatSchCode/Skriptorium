@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-106). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-107). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -126,12 +126,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-106). Aus welchem Schritt ein ADR stammt, steh
 | 104 | 2026-11-05 | Aktiv | STRATEGISCH | MODUL, METHODIK | Architektur | Pflichtfrage nach Phase 9: weiterbauen mit drei kleinen Umbauten (10.1, 10.2, 10.4) |
 | 105 | 2026-11-05 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 10 geplant: Kanon-Pflege, Bilder (mit Auflösung), Schreiben nachvollziehen; V.20 verworfen; Weltenbauer und Veröffentlichung zurückgestellt |
 | 106 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Löschen eines Kanon-Eintrags nimmt seine Verweise in Geschichten mit, Folgenliste, Bestätigung per Klick |
+| 107 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Figurenkarte nimmt „Wesen“ über die Abschnittsregel; Weltabschnitte auf Wortgrenze |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-097 bis ADR-106 – keiner reaktiv: ADR-097 bis ADR-102 und ADR-106 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-098 bis ADR-107 – keiner reaktiv: ADR-098 bis ADR-102, ADR-106 und ADR-107 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2523,6 +2524,29 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 
 ---
 
+#### ADR-107: Figurenkarte nimmt „Wesen“ über die Abschnittsregel; Weltabschnitte auf Wortgrenze (10.2)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Vergleich `mockup-10.2.html` vorher/nachher; Auswahlfragen: „Nur Abschnitt Wesen“, Rückimport „Am Ende, wie heute“, Funktionen „Behalten, Doku ehrlich“ – jeweils die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.2 – Vorlage zu Beginn vorgesehen, ADR-105; nicht reaktiv)
+- **Reifegrad-Wirkung:** keine (Änderung innerhalb von `canon`)
+- **Kategorie:** API-Vertrag (5, Inhalt der ausgegebenen Figurenkarte ändert sich; Änderung zu ADR-066); berührt Regel-003
+- **Kontext:** V.38 und Befunde 1 und 2 der Bewertung nach Phase 9 (U.2, ADR-104). `card_for` trennte „personality“ an der wörtlichen Zeile `### Wesen` und nahm alles danach: Bei `## Wesen` (Vorlage seit 9.3, ADR-092) blieb „personality“ leer, bei `### Wesen` mitten im Text gingen Fähigkeiten, Geschichte und Beziehungen mit. Server 2026-11-05 (nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (alle Ebene 3), davon 2 mit zu viel in „personality“; 0 Figuren mit „Wesen und Geschichte“ oder nur einer Zeile „- **Wesen:** …“; 0 Überschriften „In/Im ‹Welt›“. Die Lesefunktionen der Abschnittsregel im Server hatten keinen Aufrufer.
+- **Optionen:** „personality“ = nur Abschnitt „Wesen“ / immer leer. Rückimport: „Wesen“ am Ende wie heute / an seinem Platz einsortiert. Ungenutzte Funktionen: behalten mit ehrlicher Doku / zurücknehmen.
+- **Entscheidung:**
+  - **Figurenkarte:** „personality“ ist der erste Abschnitt „Wesen“ mit Text – jede Ebene, mit Unterabschnitten, gefunden nach der gemeinsamen Abschnittsregel (`read_section`); „description“ ist der Text ohne genau diesen Abschnitt. Ohne Wesen-Text bleibt der Text ganz in „description“. Der frühere Name „Wesen und Geschichte“ zählt nicht als Wesen.
+  - **Rückimport:** unverändert – der Import aus 6.8 hängt „personality“ als `### Wesen` ans Ende. Inhalt vollständig; stand „Wesen“ nicht am Ende, ändert sich die Reihenfolge der Abschnitte.
+  - **Weltabschnitte:** `drop_world_sections` erkennt den Weltnamen in einer Überschrift „In …“/„Im …“ nur noch als ganzes Wort bzw. ganze Wortfolge (Wortgrenze statt Teilstring): „Im Eisenmeer“ und „In der Stadt am Eisenmeer“ fallen weg, „In Ysas Haus“ bei einer Welt „Ys“ nicht.
+  - **Ungenutzte Funktionen:** `read_part`, `read_labelled`, `put_section`, `append_section` bleiben als zweite Umsetzung der Regel, geprüft an denselben gemeinsamen Testfällen wie die Oberfläche; Regel-003 und `docs/architecture.md` sagen offen, dass der Server Abschnitte liest und nur die Oberfläche sie schreibt.
+- **Vision-Frage, die entschied:** „Soll eine Figur in SillyTavern Feld für Feld so ankommen, wie du sie im Skriptorium gegliedert hast?“ → ja; die Reihenfolge beim Wiedereinlesen ist dafür nicht wichtig.
+- **Konfidenz zum Zeitpunkt:** hoch – Ursache und Bestand gemessen, Änderung auf zwei Funktionen begrenzt. Umkehrbarkeit billig (nur die ausgegebene Datei bzw. die Anfrage ändert sich, gespeichert wird nichts).
+- **Konsequenzen:** FR-030; Tests für beide Ebenen, Unterabschnitte und den Rückimport; Regel-003 und `docs/architecture.md` Abschnitt 3 (canon) berichtigt. Verworfen: „personality“ leer (Feld wäre in SillyTavern nutzlos), Einsortieren beim Rückimport (neue Einfügefunktion für einen seltenen Weg), Zurücknehmen (10.3 bräuchte `read_part` vermutlich wieder).
+- **Abgeleitete Regel:** keine (Regel-003 berichtigt)
+
+---
+
 <!-- ANCHOR:teil-c-entscheidungsregeln -->
 ## Teil C: Entscheidungsregeln
 
@@ -2570,6 +2594,7 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Gilt für:** jede Stelle im Server oder in der Oberfläche, die einen Teil eines Kanon-Eintrags oder der Weltbeschreibung liest, schreibt, ersetzt, entfernt oder umbenennt (z. B. „Aussehen“, „Zweck“, „Geografie – Name“).
 - **Regel:** Im Server über die Abschnittsregel in `canon`, in der Oberfläche über `ui/src/sections.ts`; Abschnittsnamen je Kategorie nur aus der Liste in `canon` (die Oberfläche spiegelt sie, durch einen Test gekoppelt). Ändert sich die Regel, ändern sich beide Seiten im selben Commit, und die gemeinsamen Testfälle bekommen den neuen Fall.
 - **Ausnahmen:** keine
+- **Stand (ADR-107):** Der Server liest Abschnitte über `read_section` (Figurenkarte für SillyTavern) und formt die Anfrage an die KI (`drop_empty_sections`, `drop_world_sections`, `nest_headings`); geschrieben werden Abschnitte nur in der Oberfläche. `read_part`, `read_labelled`, `put_section` und `append_section` haben im Server keinen Aufrufer und bleiben als zweite Umsetzung, geprüft an denselben gemeinsamen Testfällen.
 - **Gegenbeispiel:** Im Import eine eigene Menge `{"zweck", "verwendung", …}` pflegen oder in einer Komponente „Aussehen“ per eigenem regulären Ausdruck suchen.
 
 <!-- ANCHOR:teil-d-geschaeftsentscheidungen -->

@@ -29,6 +29,44 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.2 umgesetzt (lokal)
+
+- Nach ADR-107 auf `feat/10.2-wesen-im-export` (abgezweigt von `docs/10.1-zusammengefuehrt`, damit die Doku-Commits mitgehen). Zahlen im Fahrplan bei 10.2. Keine Änderung an der Oberfläche, daher kein E2E-Lauf nötig und keine Bildschirmfotos; Abnahme über eine heruntergeladene Figurenkarte nach dem Einspielen.
+- Mini-Reibung: `grep --include=*.py` scheitert in zsh ohne Anführungszeichen („no matches found“) – wie schon in 10.1; Muster in Anführungszeichen setzen.
+- Statuspflege: 10.1 auf „wartet auf Freigabe“ (Abnahme nach dem Einspielen) gesetzt, damit nur 10.2 in Arbeit ist; `docs/architecture.md` Routenzahl 83 → 84 nachgezogen (Drift aus 10.1).
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-107 Figurenkarte nimmt „Wesen“ über die Abschnittsregel (10.2)
+
+- Vergleich `mockup-10.2.html` (lokal, ausgeschlossen) vorgelegt. Server (eine Prüfung plus eine Nachzählung, nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (Ebene 3), 2 davon mit zu viel in „personality“; 0 „Wesen und Geschichte“, 0 Zeilen „- **Wesen:** …“, 0 Überschriften „In/Im ‹Welt›“.
+- Eigentümer per Auswahlfragen: „Nur Abschnitt Wesen“, Rückimport „Am Ende, wie heute“, Funktionen „Behalten, Doku ehrlich“ – jeweils die Empfehlung. Kategorie 5, nicht reaktiv; Regel-003 um den Stand ergänzt.
+
+### 2026-11-05 – [SESSIONSTART] 10.2 vorbereiten
+
+- **Modell:** Opus 5.5 (Entscheidungs-Klasse), Quelle: Systemkontext; keine Sitzungsabfrage in dieser Umgebung.
+- **Stand:** `origin/main` = `c78ad0e` (10.1), lokal `docs/10.1-zusammengefuehrt` mit zwei ungepushten Doku-Commits; Server `e809696`. Mindest-Lektüre gelesen.
+- **Vorhaben:** Eigentümer: „Wollen wir schon mal den nächsten Schritt machen?“ → 10.2 Vorlage; 10.1 bleibt bis zu seinem Wort uneingespielt.
+- **Kontextgröße:** nicht feststellbar (Session nach Verdichtung fortgesetzt).
+
+### 2026-11-05 – [BEOBACHTUNG] Hermes 3 ohne Anbieter bei OpenRouter → V.47
+
+- Frage des Eigentümers: Hermes 3 erscheint als unbekanntes Modell. Befund: `nousresearch/hermes-3-llama-3.1-405b` und `-70b` haben 0 Anbieter (`/api/v1/models/<id>/endpoints`) und fehlen in `/api/v1/models` (454 Textmodelle); `hermes-4-405b` ist verfügbar. Server (eine SSH-Prüfung): Hermes 3 nur in den Favoriten (`system/modelle.md`) und im Anweisungsverlauf einer Geschichte; im Oktober 10 Anfragen, letzte am 2026-10-20 erfolgreich. Keine Änderung im Skriptorium als Ursache.
+- Eigentümer: entfernt den Favoriten selbst; deutlichere Anzeige als V.47 mit Landeplatz 10.11.
+
+### 2026-11-05 – [SESSIONENDE] Phase 9 abgeschlossen, Phase 10 geplant, 10.1 zusammengeführt
+
+- **Dauer:** 2026-11-04 ca. 20:10 bis 2026-11-05 (fortgesetzte, zweimal verdichtete Session).
+- **Bearbeitet seit dem letzten Sessionende:** 9.12 Erkundung Quellen und Recherche (ADR-101); 9.13 Gast-Figuren mit Weltbezug (ADR-102, eingespielt `e809696`, bestätigt); 9.14 Kontexttreue gemessen (ADR-103, `[BELASTBAR]` bis ~30 Kapitel); 9.15 Phasenabschluss mit Vision-Abgleich, Onboarding-Prüfung, getrennter Instanz (ADR-104) und Planung Phase 10 (ADR-105); 10.1 Löschkaskade für Kanon-Einträge (ADR-106, PR #205, `c78ad0e`). PRs #200–#205 zusammengeführt.
+- **Stand:** 10.1 in `main`, nicht eingespielt (Eigentümer: „Später“); Doku dazu lokal auf `docs/10.1-zusammengefuehrt`, nicht gepusht. Auf dem Server läuft `e809696`.
+- **Offen:** Einspielen und Abnahme 10.1; überholter lokaler Zweig `feat/9.9-loeschen-archivieren` (nur auf Wort des Eigentümers löschen).
+- **Nächster Schritt:** 10.1 einspielen und abnehmen, dann 10.2 (Vorlage). Datiert: D.1 (Node 26) seit 2026-11-05 fällig, D.5 (mypy 2) am 2026-11-06; D.11 Frist 2026-10-31 überschritten (Eigentümer).
+- **Sessionende-Prüfungen:** README gegen Fahrplan, Kontext, Architektur, Blocker abgeglichen (Phase 10, 10.1, 0 Blocker). Drift: ADR-104 bis ADR-106 verweisen auf bestehende Schritte; Reifegrad nur NFR Kontexttreue geändert (ADR-103, Tabelle angepasst); Modul-Liste unverändert; FR-036/FR-038 mit Schritt; Reaktiv-Quote 0/10; Phase 10 bei 11 von 11 geplanten Schritten. `docs/project-context.md` unter 600 Zeilen; Logbuch nach Verdichtung ca. 175 Zeilen. Ablaufdaten-Register: D.1 und D.5 haben Schritte.
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse, Quelle: Systemkontext). Oberhalb der Empfehlung: Einspielen, Doku-Nachträge und README-Pflege (Routine); 10.4 und 9.x nicht berührt. Abgegeben: die Pflichtfrage an einen Unteragenten mit Sonnet als getrennte Instanz (methodisch vorgeschrieben, nicht aus Kostengründen); sonst keine Abgabe – kleine Teilarbeiten mit geladenem Kontext.
+- **Kontextgröße:** nicht feststellbar; Session zweimal verdichtet, Weiterarbeit nach dauerhaftem „weiter hier“ des Eigentümers.
+
+### 2026-11-05 – [BEOBACHTUNG] PR #205 zusammengeführt (10.1), Einspielen später
+
+- Eigentümer gab die Bildschirmfotos frei („Ja, PR und Merge“); CI 4 von 4 grün, Protokoll ohne neue Warnung. Merge-Commit `c78ad0e`. Einspielen: „Später“.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.1 umgesetzt (lokal), Bildschirmfotos zur Abnahme
 
 - Umsetzung nach ADR-106 auf `feat/10.1-loeschkaskade`; Zahlen im Fahrplan bei 10.1. ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün; Build vom Projektordner, E2E 15 grün.
