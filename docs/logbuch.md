@@ -29,6 +29,16 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.3 umgesetzt (lokal)
+
+- Nach ADR-108 auf `feat/10.3-aussehen-orte-gegenstaende`; Zahlen im Fahrplan bei 10.3. Keine Bildschirmfotos – die Abnahme braucht ohnehin eine echte KI-Antwort im Betrieb (Schlüssel lokal nicht gültig).
+- Mini-Reibung: eigener Test erwartete Text nach `## Lage` außerhalb des Abschnitts – ein Abschnitt reicht bis zur nächsten Überschrift gleicher oder höherer Ebene (ADR-083); Beispiel berichtigt. Ersetzen per Python-Skript scheiterte an einem doppelt vorkommenden JSX-Ausschnitt (Figurenkarte und Knopf hatten dieselbe Bedingung) – mit Edit und mehr Kontext gelöst. ruff RUF002 (Gedankenstrich im Docstring) und RUF022 (`__all__` sortieren) behoben. Pre-Commit-Hook fand `mypy --strict` in einem Test (Art als `str` statt `Category`) – die lokale mypy-Prüfung lief nur über `src`; künftig `src tests` prüfen.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-108 „Aussehen herauslösen“ auch für Orte und Gegenstände (10.3)
+
+- Vorlage mit `mockup-10.3.html` (lokal, `.git/info/exclude`) und `ENTSCHEIDUNG ERFORDERLICH`; drei Auswahlfragen, Eigentümer jeweils die Empfehlung: Knopf im Eintrag und im Fenster „Bild erzeugen“, „Lage“ bleibt draußen (Server über `take_section`), daneben „✎ Selbst ergänzen“. Messung im Fahrplan bei 10.3. Reaktiv-Quote 0/10 (ADR-099 bis ADR-108).
+- Zweig `feat/10.3-aussehen-orte-gegenstaende` von `docs/10.2-zusammengefuehrt` (Doku-Commits gehen mit).
+
 ### 2026-11-05 – [BEOBACHTUNG] „Wesen:“ im Fließtext → V.48
 
 - Server (nur Anzahlen und kurze Ausschnitte ohne Inhalt): 3 Figuren mit Abschnitt „Wesen“ (zwei Welten), 11 Figuren in einer Welt mit „Wesen: …“ mitten im Absatz. Die Messung zu 10.2 hatte nur Zeilen „- **Wesen:** …“ gezählt – die Form im Fließtext fehlte dort.

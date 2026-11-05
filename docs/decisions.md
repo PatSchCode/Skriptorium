@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-107). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-108). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -127,12 +127,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-107). Aus welchem Schritt ein ADR stammt, steh
 | 105 | 2026-11-05 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 10 geplant: Kanon-Pflege, Bilder (mit Auflösung), Schreiben nachvollziehen; V.20 verworfen; Weltenbauer und Veröffentlichung zurückgestellt |
 | 106 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Löschen eines Kanon-Eintrags nimmt seine Verweise in Geschichten mit, Folgenliste, Bestätigung per Klick |
 | 107 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Figurenkarte nimmt „Wesen“ über die Abschnittsregel; Weltabschnitte auf Wortgrenze |
+| 108 | 2026-11-05 | Aktiv | OPERATIV | UI | Anfrage | „Aussehen herauslösen“ auch für Orte und Gegenstände; „Lage“ bleibt draußen |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-098 bis ADR-107 – keiner reaktiv: ADR-098 bis ADR-102, ADR-106 und ADR-107 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-099 bis ADR-108 – keiner reaktiv: ADR-099 bis ADR-102 und ADR-106 bis ADR-108 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2547,6 +2548,28 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 
 ---
 
+#### ADR-108: „Aussehen herauslösen“ auch für Orte und Gegenstände; „Lage“ bleibt draußen (10.3)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Vergleich `mockup-10.3.html` vorher/nachher; Auswahlfragen: Knopf „Im Eintrag und im Fenster“, „Lage bleibt draußen“, „Beide Knöpfe“ – jeweils die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[UI]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.3 – Vorlage zu Beginn vorgesehen, ADR-105; nicht reaktiv)
+- **Reifegrad-Wirkung:** keine (Änderung innerhalb von `context`, `api` und `ui`)
+- **Kategorie:** Anfrage an die KI (ändert ADR-083 – Herauslösen nur für Figuren – und die Bedienung aus ADR-094); berührt Regel-003
+- **Kontext:** V.39. Server 2026-11-05 (nur Anzahlen): 19 Orte, keiner mit „Aussehen“, keiner gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck, Verwendung, Auswirkung. Ohne „Aussehen“ bekommt ein Bild nur den Namen und den Textanfang bzw. den ersten Satz aus „Zweck“ (ADR-094). Grobe Wortzählung: bei 6 Orten und 13 Gegenständen steht erkennbar Sichtbares im Text.
+- **Optionen:** Knopf im Eintrag und im Fenster „Bild erzeugen“ / nur im Fenster. „Lage“ eines Ortes aus der Anfrage nehmen / mitlesen. Im Fenster „✨ Aussehen herauslösen“ neben „✎ Selbst ergänzen“ / nur „✨“.
+- **Entscheidung:**
+  - **Anfrage:** `build_appearance` nimmt Figur, Ort und Gegenstand an, mit eigener Anweisung je Art: Ort – Bauweise, Größe, Material, Farben, Licht, Gelände und Pflanzen, sichtbare Spuren von Alter oder Zerstörung, ohne Lage und Weg, Bewohner, Geschichte, Bedeutung, Ereignisse; Gegenstand – Form, Größe, Material, Farbe, Oberfläche, Verzierungen, Inschriften, Zustand, ohne Zweck, Verwendung, Wirkung, Herkunft, Besitzer; Figur unverändert. Für alle: nur Übernehmen, nichts erfinden, Fließtext bis etwa 120 Wörter, sonst „KEIN AUSSEHEN“. Andere Arten lehnt der Server weiter ab.
+  - **„Lage“:** Bei einem Ort nimmt der Server den Abschnitt „Lage“ vor der Anfrage heraus (`take_section`, gemeinsame Abschnittsregel, Regel-003) – das Bild bekommt „Lage“ ohnehin dazu (ADR-094). Ungegliederte Orte gehen ganz hinein; dort wirkt nur die Anweisung.
+  - **Oberfläche:** „✨ Aussehen herauslösen“ steht wie bei Figuren im Eintrag (solange „Aussehen“ fehlt) und im Fenster „Bild erzeugen“; dort bei Ort und Gegenstand daneben „✎ Selbst ergänzen“ (bisher „✎ Im Eintrag ergänzen“, öffnet Bearbeiten). Übernehmen wie bei Figuren (ADR-083: leerer Abschnitt wird gefüllt, gefüllter fragt nach, sonst neuer Abschnitt am Ende).
+- **Vision-Frage, die entschied:** „Sollen Bilder von Orten und Gegenständen zeigen, wie sie in deinem Text aussehen – auch wenn du dafür nicht selbst einen Abschnitt schreibst?“ → ja, mit Vorschlag der KI, den du vor dem Übernehmen änderst.
+- **Konfidenz zum Zeitpunkt:** hoch – derselbe Ablauf wie bei Figuren, nur Anweisung und Freigabe der Arten neu. Umkehrbarkeit billig (Anfrage und Oberfläche; gespeichert wird nur, was der Autor übernimmt).
+- **Konsequenzen:** FR-035; Tests der Anfrage je Art und der Knöpfe; Probe mit echter KI an einem Ort und einem Gegenstand (Eigentümer im Betrieb). Verworfen: Knopf nur im Fenster (Hinweis käme erst, wenn ein Bild ansteht), „Lage“ mitlesen (stünde im Bild doppelt), nur „✨“ (bei Einträgen ohne Sichtbares bliebe nur der Umweg über „Bearbeiten“).
+- **Abgeleitete Regel:** keine (Regel-003: weiterer Leser im Server)
+
+---
+
 <!-- ANCHOR:teil-c-entscheidungsregeln -->
 ## Teil C: Entscheidungsregeln
 
@@ -2594,7 +2617,7 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Gilt für:** jede Stelle im Server oder in der Oberfläche, die einen Teil eines Kanon-Eintrags oder der Weltbeschreibung liest, schreibt, ersetzt, entfernt oder umbenennt (z. B. „Aussehen“, „Zweck“, „Geografie – Name“).
 - **Regel:** Im Server über die Abschnittsregel in `canon`, in der Oberfläche über `ui/src/sections.ts`; Abschnittsnamen je Kategorie nur aus der Liste in `canon` (die Oberfläche spiegelt sie, durch einen Test gekoppelt). Ändert sich die Regel, ändern sich beide Seiten im selben Commit, und die gemeinsamen Testfälle bekommen den neuen Fall.
 - **Ausnahmen:** keine
-- **Stand (ADR-107):** Der Server liest Abschnitte über `read_section` (Figurenkarte für SillyTavern) und formt die Anfrage an die KI (`drop_empty_sections`, `drop_world_sections`, `nest_headings`); geschrieben werden Abschnitte nur in der Oberfläche. `read_part`, `read_labelled`, `put_section` und `append_section` haben im Server keinen Aufrufer und bleiben als zweite Umsetzung, geprüft an denselben gemeinsamen Testfällen.
+- **Stand (ADR-108):** Der Server liest Abschnitte über `read_section` bzw. `take_section` (Figurenkarte für SillyTavern, ADR-107; „Lage“ vor dem Herauslösen des Aussehens eines Ortes, ADR-108) und formt die Anfrage an die KI (`drop_empty_sections`, `drop_world_sections`, `nest_headings`); geschrieben werden Abschnitte nur in der Oberfläche. `read_part`, `read_labelled`, `put_section` und `append_section` haben im Server keinen Aufrufer und bleiben als zweite Umsetzung, geprüft an denselben gemeinsamen Testfällen.
 - **Gegenbeispiel:** Im Import eine eigene Menge `{"zweck", "verwendung", …}` pflegen oder in einer Komponente „Aussehen“ per eigenem regulären Ausdruck suchen.
 
 <!-- ANCHOR:teil-d-geschaeftsentscheidungen -->
