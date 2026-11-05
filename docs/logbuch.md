@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.5 erledigt, V.49 vorgemerkt
+
+- PR #209 (Nachtrag Preisregel), CI vier Jobs grün, zusammengeführt mit `--match-head-commit` → `56e5d1b`. 10.5 → ERLEDIGT; Phase 10: 5 von 11. Nicht eingespielt: Server läuft `17ea244` ohne Nachtrag.
+- Eigentümer: Hineinzoomen in der Großansicht geht nicht, 4K und 2K erscheinen gleich groß. Auf Auswahlfrage „Als V.49 vormerken“ → V.49 mit Landeplatz 10.11; `MapViewer` hat schon Zoom (`useMapZoom`) als Vorbild.
+
 ### 2026-11-05 – [BEOBACHTUNG] Probe 10.5 mit 4K: abgenommen, Nachtrag Preisregel
 
 - Eigentümer hat mit Seedream 5.0 Lite in 4K erzeugt: Server 2.732 × 4.096 WebP, 294 KB, Herkunft `4K`, 0,035 $, 26 s. „Es sieht deutlich schärfer aus“ – schwer zu beurteilen, weil die Großansicht jedes Bild auf dieselbe Größe einpasst. Abnahme „Ja“.
