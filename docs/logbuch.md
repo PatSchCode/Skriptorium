@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] Korrektur zu 10.6 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #214, CI vier Jobs grün (Python 1:17, Pre-Commit 1:49, TypeScript 2:01, E2E 2:18 mit dem neuen Test), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `25a9220`. Server läuft weiter `8e87aab`.
+
 ### 2026-11-06 – [GELÖST] 10.6: Menü von „＋ Bild“ auf schmalen Bildschirmen unsichtbar
 
 - Befund des Eigentümers: „es erscheint kein Bild und keine Vorschau“. Server seit dem Einspielen: kein `POST …/stories/{story_id}/images`, kein Ordner `bilder/` in einer Geschichte – der Ablauf brach im Browser vor dem Hochladen ab.
