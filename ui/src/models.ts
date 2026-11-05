@@ -74,6 +74,23 @@ export function optionLabel(
 const WEB_SEARCH_TOKENS = 22_000;
 const WEB_SEARCH_FEE = 0.01;
 
+/**
+ * Input tokens of one image sent along when writing (step 10.7, ADR-111): a description with
+ * grok-4.6 took 2,788 tokens, about 200 of them text (2026-11-05). Same value as on the server.
+ */
+const PICTURE_TOKENS = 2_500;
+
+/** Estimated extra cost of `count` images for `model` in dollars; `null` if its price is unknown. */
+export function pictureSurcharge(
+  model: CatalogModel | undefined,
+  count: number,
+): number | null {
+  if (model?.input_price == null) {
+    return null;
+  }
+  return (count * PICTURE_TOKENS * model.input_price) / 1_000_000;
+}
+
 /** Estimated extra cost of web search for `model` in dollars; `null` if its price is unknown. */
 export function webSearchSurcharge(
   model: CatalogModel | undefined,

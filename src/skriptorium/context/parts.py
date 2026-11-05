@@ -52,6 +52,7 @@ BlockKind = Literal[
     "kapiteltext",
     "seiten",
     "anweisung",
+    "bilder",
     "auffuellung",
     "eintraege",
     "gespraech",

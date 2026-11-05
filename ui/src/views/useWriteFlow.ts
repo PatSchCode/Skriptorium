@@ -49,6 +49,8 @@ export function useWriteFlow({
   const [historyError, setHistoryError] = useState<string | null>(null);
   const [lastOrder, setLastOrder] = useState<WriteOrder | null>(null);
   const [usage, setUsage] = useState<Usage | null>(null);
+  // Images that went along with the proposal (step 10.7, ADR-111).
+  const [pictures, setPictures] = useState(0);
   const [editing, setEditing] = useState(false);
   const controller = useRef<AbortController | null>(null);
   const busy = phase === "thinking" || phase === "writing";
@@ -84,6 +86,7 @@ export function useWriteFlow({
     setAborted(false);
     setError(null);
     setUsage(null);
+    setPictures(0);
     setLastOrder(order);
     if (!(await prepare())) {
       setPhase("idle");
@@ -96,14 +99,16 @@ export function useWriteFlow({
         api.writePath(world, story, chapter),
         order,
         (event) => {
-          if (event.type === "text") {
+          if (event.type === "start") {
+            setPictures(event.images);
+          } else if (event.type === "text") {
             setPhase("writing");
             setProposal((text) => text + event.text);
           } else if (event.type === "hinweis") {
             setNote(event.text);
           } else if (event.type === "error") {
             setFailure(event.kind);
-          } else if (event.type === "done") {
+          } else {
             setUsage(event);
           }
         },
@@ -183,6 +188,7 @@ export function useWriteFlow({
     historyError,
     lastOrder,
     usage,
+    pictures,
     editing,
     setEditing,
     send,
@@ -192,13 +198,20 @@ export function useWriteFlow({
   };
 }
 
-/** Tokens and cost of one proposal (step 3.9); the provider may leave out the cost. */
-export function describeUsage(usage: Usage): string {
+/**
+ * Tokens and cost of one proposal (step 3.9); the provider may leave out the cost. `pictures`
+ * names the images that went along (step 10.7, ADR-111).
+ */
+export function describeUsage(usage: Usage, pictures = 0): string {
   const tokens = (count: number | null) =>
     count === null ? "?" : count.toLocaleString("de-DE");
   const cost =
     usage.cost_usd === null
       ? "Kosten nicht gemeldet"
       : `Kosten ${formatCost(usage.cost_usd)}`;
-  return `Verbrauch: ${tokens(usage.input_tokens)} Token ein, ${tokens(usage.output_tokens)} aus · ${cost}`;
+  const sent =
+    pictures === 0
+      ? ""
+      : ` · mit ${String(pictures)} ${pictures === 1 ? "Bild" : "Bildern"}`;
+  return `Verbrauch: ${tokens(usage.input_tokens)} Token ein, ${tokens(usage.output_tokens)} aus · ${cost}${sent}`;
 }

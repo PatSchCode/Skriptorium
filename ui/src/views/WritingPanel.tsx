@@ -19,6 +19,7 @@ import { useLoad } from "../useLoad";
 import { ComposerControls } from "./ComposerControls";
 import { ErrorText } from "./Common";
 import { ModelManager } from "./ModelManager";
+import { PictureSwitch, picturedEntries } from "./PictureSwitch";
 import { ProposalBlock } from "./ProposalBlock";
 import { ReferenceNotes } from "./ReferenceNotes";
 import { SceneForm } from "./SceneForm";
@@ -126,6 +127,8 @@ export function WritingPanel({
   const [place, setPlace] = useState("");
   const [characters, setCharacters] = useState<string[]>([]);
   const [goal, setGoal] = useState("");
+  // Images go along only when ticked for this request (step 10.7, ADR-111).
+  const [withPictures, setWithPictures] = useState(false);
   const instructionLabel = useId();
 
   const flow = useWriteFlow({
@@ -147,7 +150,7 @@ export function WritingPanel({
   const { scroller, composer } = useChatScroll(endSignal, phase, flow.proposal);
 
   function newOrder(): WriteOrder {
-    return {
+    const order: WriteOrder = {
       instruction,
       references: referenced.map((entry) => entry.id),
       model: chosenModel,
@@ -156,6 +159,7 @@ export function WritingPanel({
         ? { place: place === "" ? null : place, characters, goal }
         : null,
     };
+    return sendsPictures ? { ...order, images: true } : order;
   }
 
   const storyEntries = entries.data ?? [];
@@ -165,6 +169,25 @@ export function WritingPanel({
   const suggested = suggestions(instruction, storyEntries);
   const shown = (entry: CanonEntry) =>
     entry.world === world ? entry.name : `${entry.name} (Gast)`;
+  // Named as on the server: the references, then place and characters of a new scene.
+  const named = sceneOpen
+    ? [
+        ...referenced,
+        ...[place, ...characters]
+          .map((id) => storyEntries.find((entry) => entry.id === id))
+          .filter((entry) => entry !== undefined),
+      ].filter(
+        (entry, index, all) =>
+          all.findIndex((e) => e.id === entry.id) === index,
+      )
+    : referenced;
+  const chosenCatalogModel = modelList?.catalog.find(
+    (model) => model.id === chosenModel,
+  );
+  const sendsPictures =
+    withPictures &&
+    (chosenCatalogModel?.reads_images ?? false) &&
+    picturedEntries(named).length > 0;
 
   return (
     <section className="chat" aria-label="Schreiben mit der KI">
@@ -248,6 +271,14 @@ export function WritingPanel({
             onInstruction={setInstruction}
             onLookUp={onLookUp}
           />
+          <PictureSwitch
+            named={named}
+            model={chosenCatalogModel}
+            modelId={chosenModel}
+            checked={withPictures}
+            disabled={busy}
+            onChange={setWithPictures}
+          />
           <ComposerControls
             offered={choice.offered}
             modelList={modelList}
@@ -265,7 +296,10 @@ export function WritingPanel({
             seconds={flow.seconds}
             busy={busy}
             onStop={flow.stop}
-            onSend={() => void flow.send(newOrder())}
+            onSend={() => {
+              void flow.send(newOrder());
+              setWithPictures(false);
+            }}
           />
         </div>
       </div>

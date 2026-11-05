@@ -13,6 +13,11 @@ References, place and characters are entries of the story's world or guests the 
 from other worlds (FR-017, step 3.7); a guest wins over an entry of the world with the same
 identifier, as in the checks of the story endpoints.
 
+On request the main images of the named entries go along as image parts (step 10.7, ADR-111):
+at most :data:`MAX_PICTURES`, in the order the entries are named, only for models that read
+images. ``context`` words which image belongs to which entry; the images do not count against
+the text budget.
+
 Every request is counted through ``record`` when the stream ends: finished, failed or aborted
 (ADR-023, step 3.9).
 
@@ -32,8 +37,10 @@ from skriptorium.ai_gateway import (
     Completed,
     CompletionRequest,
     GatewayError,
+    ImagePart,
     InvalidRequest,
     Message,
+    ModelCatalog,
     ModelConfig,
     ModelProvider,
     ModelRefused,
@@ -62,6 +69,11 @@ CONTINUE: Final = (
     "Setze das Manuskript an seinem Ende fort: nur den unmittelbar nächsten Moment der Szene, "
     "ohne Zeitsprung."
 )
+# Images per request at most (owner, ADR-111).
+MAX_PICTURES: Final = 4
+# Input tokens of one image: a description with grok-4.6 took 2,788 tokens, about 200 of them
+# text (2026-11-05, ADR-111); checked again against the consumption after the first requests.
+PICTURE_TOKENS: Final = 2500
 
 # Counts one AI request: kind, model, usage reported by the provider, outcome (ADR-023).
 UsageRecorder = Callable[[Kind, str, Usage | None, str], None]
@@ -91,14 +103,17 @@ class WriteOrder:
     scene: Scene | None = None
     model: str = DEFAULT_MODEL
     length: Length = DEFAULT_LENGTH
+    # The main images of the named entries go along (step 10.7, ADR-111).
+    images: bool = False
 
 
 @dataclass(frozen=True)
 class PreparedRequest:
-    """The request for ``ai_gateway`` and the estimated size of its context."""
+    """The request for ``ai_gateway``, the estimated size of its context and its image count."""
 
     completion: CompletionRequest
     estimated_tokens: int
+    pictures: int = 0
 
 
 def prepare_request(
@@ -111,12 +126,15 @@ def prepare_request(
     """Check the order and build the request; runs before anything is streamed.
 
     Raises:
-        InvalidInput: Unknown model, unknown or unsuitable canon entry, empty scene, or the
-            context does not fit the budget (message names the largest blocks).
+        InvalidInput: Unknown model, unknown or unsuitable canon entry, empty scene, images for
+            a model that does not read them, or the context does not fit the budget (message
+            names the largest blocks).
         NotFound: World, story or chapter does not exist.
     """
     if order.model not in models:
         raise InvalidInput(f"Unbekanntes Modell: {order.model}")
+    if order.images and not (isinstance(models, ModelCatalog) and models.reads_images(order.model)):
+        raise InvalidInput("Dieses Modell kann keine Bilder lesen - bitte ohne Bilder senden")
     canon.get_world(order.world)
     story = manuscripts.get_story(order.world, order.story)
     homes = {link.entry: link.world for link in story.guest_links}
@@ -131,22 +149,40 @@ def prepare_request(
         references += scene_refs
     elif not instruction:
         instruction = CONTINUE
+    named = list(dict.fromkeys(references))
+    pictured = _pictured([entry(reference) for reference in named]) if order.images else []
     try:
         built = builder.build(
             order.world,
             order.story,
             order.chapter,
             instruction,
-            list(dict.fromkeys(references)),
+            named,
             length=order.length,
+            pictured=[found.name for found in pictured],
         )
     except ContextTooLarge as error:
         raise InvalidInput(str(error)) from error
-    messages = tuple(Message(message.role, message.content) for message in built.messages)
+    messages = [Message(message.role, message.content) for message in built.messages]
+    if pictured:
+        images = tuple(
+            ImagePart(media_type, data)
+            for data, media_type in (
+                canon.entry_image(found.world, found.id, found.images[0]) for found in pictured
+            )
+        )
+        last = messages[-1]
+        messages[-1] = Message(last.role, last.content, images=images)
     return PreparedRequest(
-        CompletionRequest(order.model, messages, MAX_OUTPUT_TOKENS, TEMPERATURE),
-        built.estimated_tokens,
+        CompletionRequest(order.model, tuple(messages), MAX_OUTPUT_TOKENS, TEMPERATURE),
+        built.estimated_tokens + PICTURE_TOKENS * len(pictured),
+        len(pictured),
     )
+
+
+def _pictured(named: Sequence[CanonEntry]) -> list[CanonEntry]:
+    """The named entries whose main image goes along: those with images, at most four."""
+    return [found for found in named if found.images][:MAX_PICTURES]
 
 
 def _entry(
@@ -203,7 +239,12 @@ async def stream_events(
     """
     completion = prepared.completion
     yield _event(
-        "start", {"model": completion.model, "estimated_tokens": prepared.estimated_tokens}
+        "start",
+        {
+            "model": completion.model,
+            "estimated_tokens": prepared.estimated_tokens,
+            "images": prepared.pictures,
+        },
     )
     usage: Usage | None = None
     outcome = "abgebrochen"
