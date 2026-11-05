@@ -1,4 +1,4 @@
-"""Tests for the origin of generated images in a companion file (step 9.6, ADR-095)."""
+"""Tests for the origin of generated images in a companion file (steps 9.6, 10.5)."""
 
 import os
 from pathlib import Path
@@ -145,3 +145,18 @@ def test_the_basis_of_an_image_made_from_another_round_trips(store: DocumentStor
     assert "grundlage" not in origin_to_mapping(ORIGIN)
     with pytest.raises(InvalidInput, match="Grundlage"):
         origin_from_mapping({**origin_to_mapping(ORIGIN), "grundlage": 3})
+
+
+def test_resolution_and_quality_round_trip(store: DocumentStore) -> None:
+    """Step 10.5, ADR-109: both are kept when chosen; older files lack them."""
+    made = ImageOrigin("m", "p", "2:3", 0.09, "2026-11-05T10:00:00+00:00", None, "2K", "medium")
+    store.write_image(IMAGE, png(), origin=made)
+    assert store.read_image_origin(IMAGE) == made
+    mapping = origin_to_mapping(made)
+    assert (mapping["aufloesung"], mapping["qualitaet"]) == ("2K", "medium")
+    assert "aufloesung" not in origin_to_mapping(ORIGIN)
+    assert "qualitaet" not in origin_to_mapping(ORIGIN)
+    assert origin_from_mapping(origin_to_mapping(ORIGIN)).resolution is None
+    for field in ("aufloesung", "qualitaet"):
+        with pytest.raises(InvalidInput, match="Auflösung oder Qualität"):
+            origin_from_mapping({**origin_to_mapping(ORIGIN), field: 2})

@@ -77,6 +77,7 @@ export type {
   AspectRatio,
   GeneratedImage,
   ImageModelList,
+  ImageLevels,
   ImageOrigin,
   ImagePrice,
   ImageReference,

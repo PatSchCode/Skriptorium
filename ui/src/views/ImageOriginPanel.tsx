@@ -3,6 +3,7 @@ import {
   describeError,
   formatCost,
   type AspectRatio,
+  type ImageLevels,
   type ImageReference,
   type StoredImageOrigin,
 } from "../api";
@@ -26,6 +27,8 @@ export interface GenerateSeed {
   format: AspectRatio;
   model: string | null;
   basis?: Basis;
+  /** Resolution and quality of the origin (step 10.5, ADR-109). */
+  levels?: ImageLevels;
 }
 
 const FORMATS: readonly string[] = ["2:3", "1:1", "3:2"];
@@ -41,6 +44,10 @@ export function seedOf(
       ? (origin.aspect_ratio as AspectRatio)
       : format,
     model: origin.model,
+    levels: {
+      resolution: origin.resolution ?? null,
+      quality: origin.quality ?? null,
+    },
   };
 }
 
@@ -99,6 +106,15 @@ export function ImageOriginPanel({
             ? "nicht gemeldet"
             : formatCost(origin.cost_usd)}
         </dd>
+        {origin.resolution != null && (
+          <>
+            <dt>Auflösung</dt>
+            <dd>
+              {origin.resolution}
+              {origin.quality == null ? "" : ` · Qualität ${origin.quality}`}
+            </dd>
+          </>
+        )}
         {origin.basis !== null && (
           <>
             <dt>Grundlage</dt>

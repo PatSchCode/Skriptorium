@@ -11,7 +11,7 @@ import base64
 from datetime import UTC, datetime
 from typing import Annotated, Final, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field, field_validator
 
 from skriptorium.ai_gateway import (
@@ -30,7 +30,7 @@ from skriptorium.storage import InvalidInput, inspect_image
 router = APIRouter(prefix="/api/images", dependencies=[Depends(current_session)])
 
 # What a provider may deliver; the browser shrinks it before it is stored.
-_MAX_DELIVERED_BYTES: Final = 25 * 1024 * 1024
+_MAX_DELIVERED_BYTES: Final = 40 * 1024 * 1024  # a 4K PNG (ADR-109)
 _MAX_DELIVERED_SIDE: Final = 8192
 _MEDIA_TYPES: Final = {"png": "image/png", "jpeg": "image/jpeg", "webp": "image/webp"}
 
@@ -38,11 +38,14 @@ AspectRatio = Literal["2:3", "1:1", "3:2", "16:9", "9:16", "3:4", "4:3"]
 
 
 class ImageModelOut(BaseModel):
-    """One image model; ``references`` is how many images it takes as a basis (ADR-097)."""
+    """One image model; ``references`` is how many images it takes as a basis (ADR-097),
+    ``resolutions`` and ``qualities`` the levels it offers, empty for none (ADR-109)."""
 
     id: str
     name: str
     references: int
+    resolutions: list[str]
+    qualities: list[str]
 
 
 class ImageModelList(BaseModel):
@@ -69,6 +72,8 @@ class ImagePriceOut(BaseModel):
 
 
 _Id = Annotated[str, Field(min_length=1, max_length=200)]
+# A level as the catalog names it, e.g. "2K" or "medium" (ADR-109).
+_Level = Annotated[str, Field(min_length=1, max_length=20)]
 
 
 class ReferenceIn(BaseModel):
@@ -89,6 +94,9 @@ class GenerateIn(BaseModel):
     aspect_ratio: AspectRatio = "1:1"
     # One stored image to build on (ADR-097).
     reference: ReferenceIn | None = None
+    # Levels the model offers (ADR-109); without them the model's own default.
+    resolution: _Level | None = None
+    quality: _Level | None = None
     # Where the image is meant to go, for the usage statistics (ADR-100): a world for an entry
     # image or a map, a world and a story for a cover.
     world: _Id | None = None
@@ -120,6 +128,9 @@ class ImageOriginIn(BaseModel):
     cost_usd: Annotated[float | None, Field(ge=0)] = None
     # A short description of the image it was made from, e.g. "Bild 1 von Kael" (ADR-097).
     basis: Annotated[str | None, Field(min_length=1, max_length=200)] = None
+    # The levels chosen, if the model offered any (ADR-109).
+    resolution: _Level | None = None
+    quality: _Level | None = None
 
 
 class ImageOriginOut(BaseModel):
@@ -131,6 +142,8 @@ class ImageOriginOut(BaseModel):
     cost_usd: float | None
     date: str
     basis: str | None
+    resolution: str | None = None
+    quality: str | None = None
 
 
 def origin_from(given: ImageOriginIn | None) -> ImageOrigin | None:
@@ -139,7 +152,14 @@ def origin_from(given: ImageOriginIn | None) -> ImageOrigin | None:
         return None
     now = datetime.now(UTC).isoformat(timespec="seconds")
     return ImageOrigin(
-        given.model, given.prompt, given.aspect_ratio, given.cost_usd, now, given.basis
+        given.model,
+        given.prompt,
+        given.aspect_ratio,
+        given.cost_usd,
+        now,
+        given.basis,
+        given.resolution,
+        given.quality,
     )
 
 
@@ -154,6 +174,8 @@ def origin_out(origin: ImageOrigin | None) -> ImageOriginOut | None:
         cost_usd=origin.cost_usd,
         date=origin.date,
         basis=origin.basis,
+        resolution=origin.resolution,
+        quality=origin.quality,
     )
 
 
@@ -164,7 +186,13 @@ async def list_image_models(found: ServicesDep) -> ImageModelList:
     return ImageModelList(
         default=found.favorites.preset("bilderzeugung", found.image_catalog, DEFAULT_IMAGE_MODEL),
         models=[
-            ImageModelOut(id=m.id, name=m.name, references=m.references)
+            ImageModelOut(
+                id=m.id,
+                name=m.name,
+                references=m.references,
+                resolutions=list(m.resolutions),
+                qualities=list(m.qualities),
+            )
             for m in found.image_catalog.models()
         ],
         available=found.image_catalog.available,
@@ -173,12 +201,16 @@ async def list_image_models(found: ServicesDep) -> ImageModelList:
 
 
 @router.get("/price")
-async def image_price(model: str, found: ServicesDep) -> ImagePriceOut:
-    """The price of one image of ``model`` at its first provider."""
+async def image_price(
+    model: str,
+    found: ServicesDep,
+    resolution: Annotated[str | None, Query(max_length=20)] = None,
+    quality: Annotated[str | None, Query(max_length=20)] = None,
+) -> ImagePriceOut:
+    """The price of one image of ``model`` at its first provider, at the given levels (ADR-109)."""
     await found.image_catalog.refresh()
-    if model not in found.image_catalog:
-        raise InvalidInput(f"Unbekanntes Bildmodell: {model}")
-    price = await found.image_catalog.price(model)
+    _check_levels(found, model, resolution, quality)
+    price = await found.image_catalog.price(model, resolution, quality)
     given = await found.image_catalog.input_price(model)
     return ImagePriceOut(
         cost_usd=price.cost_usd if price else None,
@@ -194,15 +226,16 @@ async def generate_image(body: GenerateIn, found: ServicesDep) -> GeneratedOut:
     if found.images is None:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "KI-Anbieter nicht eingerichtet")
     await found.image_catalog.refresh()
-    if body.model not in found.image_catalog:
-        raise InvalidInput(f"Unbekanntes Bildmodell: {body.model}")
+    _check_levels(found, body.model, body.resolution, body.quality)
     reference = None
     if body.reference is not None:
         if found.image_catalog.references(body.model) < 1:
             raise InvalidInput("Dieses Bildmodell nimmt kein Ausgangsbild an")
         reference = ImageReference(*_basis(body.reference, found))
     record = found.usage.recorder(body.world, body.story)
-    order = ImageOrder(body.model, body.prompt, body.aspect_ratio, reference)
+    order = ImageOrder(
+        body.model, body.prompt, body.aspect_ratio, reference, body.resolution, body.quality
+    )
     try:
         image = await found.images.generate(order)
     except GatewayError as error:
@@ -223,6 +256,21 @@ async def generate_image(body: GenerateIn, found: ServicesDep) -> GeneratedOut:
         cost_usd=image.cost_usd,
         model=body.model,
     )
+
+
+def _check_levels(found: Services, model: str, resolution: str | None, quality: str | None) -> None:
+    """Refuse an unknown model and levels it does not offer (ADR-109).
+
+    Raises:
+        InvalidInput: Unknown model, or a resolution or quality it does not offer.
+    """
+    known = found.image_catalog.model(model)
+    if known is None:
+        raise InvalidInput(f"Unbekanntes Bildmodell: {model}")
+    if resolution is not None and resolution not in known.resolutions:
+        raise InvalidInput("Diese Auflösung bietet das Bildmodell nicht an")
+    if quality is not None and quality not in known.qualities:
+        raise InvalidInput("Diese Qualität bietet das Bildmodell nicht an")
 
 
 def _basis(reference: ReferenceIn, found: Services) -> tuple[bytes, str]:

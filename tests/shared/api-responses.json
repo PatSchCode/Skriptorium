@@ -1896,12 +1896,16 @@
         {
           "id": "black-forest-labs/flux.2-pro",
           "name": "Black Forest Labs: FLUX.2 Pro",
-          "references": 8
+          "references": 8,
+          "resolutions": [],
+          "qualities": []
         },
         {
           "id": "bytedance-seed/seedream-4.5",
           "name": "ByteDance Seed: Seedream 4.5",
-          "references": 0
+          "references": 0,
+          "resolutions": ["1K", "2K"],
+          "qualities": ["auto", "high"]
         }
       ],
       "available": true,

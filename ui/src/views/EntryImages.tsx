@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import { api, describeError, type CanonEntry } from "../api";
-import { base64, shrinkImage } from "../files";
+import { base64, GENERATED_SIDE, shrinkImage } from "../files";
 import { ErrorText } from "./Common";
 import { entryPrompt, lacksAppearance } from "../imagePrompts";
 import { APPEARANCE } from "../sections";
@@ -112,13 +112,14 @@ export function EntryImages({
           }
           initialFormat={seed?.format ?? defaultFormat(entry)}
           initialModel={seed?.model ?? null}
+          initialLevels={seed?.levels}
           basis={seed?.basis ?? null}
           onTakeOver={async (image, origin) => {
             onChanged(
               await api.addImage(
                 entry.world,
                 entry.id,
-                await base64(await shrinkImage(image)),
+                await base64(await shrinkImage(image, GENERATED_SIDE)),
                 origin,
               ),
             );

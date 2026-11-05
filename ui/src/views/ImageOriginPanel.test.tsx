@@ -22,6 +22,7 @@ import { StoryCover } from "./StoryCover";
 import { WorldMaps } from "./WorldMaps";
 
 vi.mock("../files", () => ({
+  GENERATED_SIDE: 4096,
   IMAGE_SIDE: 2000,
   MAP_SIDE: 6000,
   shrinkImage: vi.fn(() => Promise.resolve(new Blob(["klein"]))),
@@ -120,7 +121,12 @@ describe("origin of a generated image (step 9.6, ADR-095)", () => {
       prompt: ORIGIN.prompt,
       format: "3:2",
       model: "x/zwei",
+      levels: { resolution: null, quality: null },
     });
+    // Step 10.5 (ADR-109): the levels of the origin go along.
+    expect(
+      seedOf({ ...ORIGIN, resolution: "2K", quality: "high" }, "2:3").levels,
+    ).toEqual({ resolution: "2K", quality: "high" });
     expect(seedOf({ ...ORIGIN, aspect_ratio: "16:9" }, "2:3").format).toBe(
       "2:3",
     );

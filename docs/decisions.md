@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-108). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-05 (ADR-001 bis ADR-109). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -128,12 +128,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-108). Aus welchem Schritt ein ADR stammt, steh
 | 106 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Löschen eines Kanon-Eintrags nimmt seine Verweise in Geschichten mit, Folgenliste, Bestätigung per Klick |
 | 107 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Figurenkarte nimmt „Wesen“ über die Abschnittsregel; Weltabschnitte auf Wortgrenze |
 | 108 | 2026-11-05 | Aktiv | OPERATIV | UI | Anfrage | „Aussehen herauslösen“ auch für Orte und Gegenstände; „Lage“ bleibt draußen |
+| 109 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | API | Auflösung und Qualität bei „Bild erzeugen“; erzeugte Bilder bis 4.096 Pixel |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-099 bis ADR-108 – keiner reaktiv: ADR-099 bis ADR-102 und ADR-106 bis ADR-108 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-100 bis ADR-109 – keiner reaktiv: ADR-100 bis ADR-102 und ADR-106 bis ADR-109 Datenmodell, Schnittstelle, Abhängigkeit bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2567,6 +2568,30 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Konfidenz zum Zeitpunkt:** hoch – derselbe Ablauf wie bei Figuren, nur Anweisung und Freigabe der Arten neu. Umkehrbarkeit billig (Anfrage und Oberfläche; gespeichert wird nur, was der Autor übernimmt).
 - **Konsequenzen:** FR-035; Tests der Anfrage je Art und der Knöpfe; Probe mit echter KI an einem Ort und einem Gegenstand (Eigentümer im Betrieb). Verworfen: Knopf nur im Fenster (Hinweis käme erst, wenn ein Bild ansteht), „Lage“ mitlesen (stünde im Bild doppelt), nur „✨“ (bei Einträgen ohne Sichtbares bliebe nur der Umweg über „Bearbeiten“).
 - **Abgeleitete Regel:** keine (Regel-003: weiterer Leser im Server)
+
+---
+
+#### ADR-109: Auflösung und Qualität bei „Bild erzeugen“; erzeugte Bilder bis 4.096 Pixel (10.5)
+
+- **Datum:** 2026-11-05
+- **Entscheider:** Eigentümer (Vergleich `mockup-10.5.html` vorher/nachher; Auswahlfragen: Voreinstellung „2K, wo angeboten“, Speichern „Bis 4.096 Pixel“, Qualität „Ja, wo angeboten“, Fotos „Bleiben bei 2.000“ – jeweils die Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.5 – Vorlage zu Beginn vorgesehen, ADR-105; nicht reaktiv)
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** API-Vertrag (5, additiv: Auflösung und Qualität in Modellliste, Preis, Anfrage und Herkunft), Datenmodell (4, additiv: zwei Felder der Bildherkunft), Speichergrenze
+- **Kontext:** Frage des Eigentümers „Bilder kommen immer klein“. Zwei Ursachen: Das Skriptorium schickt nur `aspect_ratio`, das Modell nimmt seine kleinste Stufe (meist 1K, etwa 1 Megapixel); und der Browser verkleinert beim Übernehmen jedes Bild auf 2.000 Pixel (`files.ts`, `IMAGE_SIDE`). Katalog 2026-11-05: 27 von 63 Modellen mit `resolution` (1K/2K, teils 512, 768, 1.5K, 4K), 11 mit `quality`. Preise je Stufe benennen die Anbieter uneinheitlich (Varianten `2k`, `4k`, `low_2k`, `high_resolution`, sonst nur ein Grundpreis oder Abrechnung nach Token). Server 2026-11-05: eingestellt ist Seedream 5.0 Pro (1K 0,045 $, 2K 0,09 $), 27 von 67 erzeugten Bildern; Pillow ist im Container nicht installiert.
+- **Optionen:** Voreinstellung 2K / kleinste Stufe. Speichern bis 4.096 Pixel / bei 2.000 bleiben. Qualität anbieten / nur Auflösung. Hochgeladene Fotos bei 2.000 / auch bis 4.096.
+- **Entscheidung:**
+  - **Katalog und Anfrage:** Ein Bildmodell kennt seine Stufen `resolutions` und `qualities` (Werte wie im Katalog). `POST /api/images/generate` nimmt optional `resolution` und `quality`; ein Wert, den das Modell nicht anbietet, wird mit 422 abgelehnt. An OpenRouter gehen sie nur mit, wenn gesetzt.
+  - **Voreinstellung:** Auflösung „2K“, wenn angeboten, sonst die erste Stufe des Modells; Qualität „auto“, wenn angeboten, sonst die erste Stufe. Modelle ohne Stufen: keine Auswahl, Anfrage wie bisher.
+  - **Preis je Stufe:** `GET /api/images/price` nimmt optional `resolution` und `quality`. Gesucht wird die Preisvariante, die die Stufe nennt (`<qualität>_<auflösung>`, dann `<auflösung>`, klein geschrieben); sonst für Stufen über der kleinsten die Variante `high_resolution`; sonst für die kleinste Stufe der Grundpreis; sonst „Preis unbekannt“ – der echte Preis steht wie bisher nach dem Erzeugen da. Abrechnung nach Token bleibt „nach Verbrauch“.
+  - **Speichern:** Erzeugte Bilder (Eintragsbilder und Titelbilder) verkleinert der Browser beim Übernehmen erst über 4.096 Pixel Seitenlänge (und weiter unter 16 Megapixel Leinwand für Safari); hochgeladene Fotos bleiben bei 2.000 Pixel. Die Server-Grenze je Bild steigt von 5 auf 12 MB (wie Karten), die Seitenlänge bleibt 4.096; die Grenze für gelieferte Bilder vor der Vorschau steigt von 25 auf 40 MB.
+  - **Herkunft:** speichert Auflösung und Qualität, wenn gewählt (`aufloesung`, `qualitaet`; ältere Herkünfte ohne sie bleiben gültig); die Großansicht nennt die Auflösung, „Neu erzeugen“ übernimmt beide.
+- **Vision-Frage, die entschied:** „Wie groß sollen deine Bilder standardmäßig werden – und darf ein Bild dafür doppelt so viel kosten?“ → 2K als Standard, Preis vorher sichtbar.
+- **Konfidenz zum Zeitpunkt:** hoch für Auswahl, Anfrage und Speichern; mittel für die Zuordnung der Preise je Stufe (Benennung der Anbieter uneinheitlich, Rückfall „unbekannt“ bleibt ehrlich). Umkehrbarkeit billig (Auswahl und Grenzen; gespeicherte Bilder bleiben, wie sie sind).
+- **Konsequenzen:** FR-035; Tests für Katalog, Preiszuordnung, Anfrage, Herkunft, Grenzen und das Fenster; Vertragsdatei der Antworten ergänzt; Probe mit echtem 2K-Bild durch den Eigentümer. Die Sicherung wächst je 2K/4K-Bild um etwa 1–5 MB. Verworfen: kleinste Stufe als Standard (Ursache der Frage bliebe), bei 2.000 Pixel bleiben (2K und 4K brächten nichts), Original unverändert speichern (PNG mit 15–25 MB, Metadaten blieben), Fotos ebenfalls bis 4.096 (Speicher ohne Anlass).
+- **Abgeleitete Regel:** keine
 
 ---
 

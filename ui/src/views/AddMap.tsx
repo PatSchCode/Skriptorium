@@ -113,6 +113,7 @@ export function AddMap({
           }
           initialFormat={seed?.format ?? "3:2"}
           initialModel={seed?.model ?? null}
+          initialLevels={seed?.levels}
           basis={seed?.basis ?? null}
           takeOverLabel="Für diese Karte verwenden"
           onTakeOver={(image, taken) => {

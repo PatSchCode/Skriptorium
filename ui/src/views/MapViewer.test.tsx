@@ -6,6 +6,7 @@ import type { CanonEntry, World } from "../api";
 import { WorldMaps } from "./WorldMaps";
 
 vi.mock("../files", () => ({
+  GENERATED_SIDE: 4096,
   IMAGE_SIDE: 2000,
   MAP_SIDE: 6000,
   shrinkImage: vi.fn(() => Promise.resolve(new Blob(["klein"]))),

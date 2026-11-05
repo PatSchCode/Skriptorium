@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.4 Bildansichten zerlegen – umgesetzt (lokal), fertig bis auf PR und CI. 10.3 ist umgesetzt (lokal) und wartet auf PR (Wort des Eigentümers), Einspielen und Probe.
-- **Nächster Schritt:** PR für 10.3 und 10.4 auf Wort des Eigentümers, dann Einspielen und Probe von 10.3; danach 10.5 Auflösung und Qualität – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.5 Auflösung und Qualität – seit 2026-11-05, entschieden (ADR-109), umgesetzt (lokal); PR auf Wort des Eigentümers, dann Einspielen und Probe mit 2K-Bild.
+- **Nächster Schritt:** 10.5 umsetzen, PR nach Freigabe, Einspielen und Probe mit 2K-Bild; danach 10.6 Bilder im Manuskript – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,15 +24,15 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 
-**Phase 10: 2 von 11 erledigt.**
+**Phase 10: 4 von 11 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
 | ✅ | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | erledigt 2026-11-05 (ADR-106) | – |
 | ✅ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | erledigt 2026-11-05 (ADR-107) | – |
-| 🔵 | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | wartet auf Freigabe (ADR-108), umgesetzt lokal | du: PR freigeben, nach Einspielen Probe |
-| 🟠 | 10.4 | Bildansichten zerlegen | umgesetzt lokal, PR und CI offen | du: PR freigeben |
-| ⚪ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | offen | KI: nach 10.4 |
+| ✅ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | erledigt 2026-11-05 (ADR-108) | – |
+| ✅ | 10.4 | Bildansichten zerlegen | erledigt 2026-11-05 | – |
+| 🟠 | 10.5 | Auflösung und Qualität bei der Bilderzeugung | in Arbeit seit 2026-11-05 (ADR-109) | KI: umsetzen |
 | ⚪ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | offen | KI: nach 10.4 |
 | ⚪ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | offen | KI: nach 10.4 |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
@@ -234,7 +234,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.3: „Aussehen herauslösen“ auch für Orte und Gegenstände (V.39)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (umgesetzt lokal 2026-11-05; PR auf Wort des Eigentümers, dann Einspielen und Probe mit echter KI) – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
+- **Status:** ✅ ERLEDIGT (2026-11-05) – zusammengeführt PR #207 (`1a46b59`), CI vier Jobs grün, eingespielt; Probe mit echter KI durch den Eigentümer im Betrieb: Herauslösen klappt, neuer Abschnitt „Aussehen“ im Eintrag, Vorschlag nur Sichtbares ohne Erfundenes, Übernehmen funktioniert („Ja, es hat alles funktioniert“). Vorher – Server 2026-11-05 (nur Anzahlen): 19 Orte, 0 mit „Aussehen“, 0 gegliedert; 44 Gegenstände, 4 mit „Aussehen“, 39 mit Zweck/Verwendung/Auswirkung; grobe Wortzählung: Sichtbares bei 6 Orten und 13 Gegenständen. Vergleich `mockup-10.3.html` (lokal) vorgelegt; Eigentümer: Knopf im Eintrag und im Fenster, „Lage“ bleibt draußen, beide Knöpfe → ADR-108. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.2
 - **Freigabepflichtig:** ja – ändert ADR-083 und die Anweisung an die KI
@@ -251,7 +251,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.4: Bildansichten zerlegen
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-05; umgesetzt lokal, DoD offen: PR, CI) – Ausgang: Hauptkomponente `ImageGenerate` 322 Zeilen und 14 Hooks, `EntryImages` 285 Zeilen und 9 Hooks. Ergebnis: `ImageGenerate` 173 Zeilen/7 Hooks mit `ImageGenerateForm`, `BasisPreview`, `FormatChoice`, `GeneratedPreview` und den Hooks `useImageRequest`, `useImageModels`, `useImagePrice`, `useElapsed` (je eigene Datei); `EntryImages` 145 Zeilen/6 Hooks mit `EntryImageStrip` (119/2) und `EntryImageView` (112/1); `ImageViewer` (166/3) und `LooksHint` in eigene Dateien. Tests: alle 562 vorhandenen unverändert grün, 1 neuer (Entfernen scheitert – deckt die nun doppelt vorhandene Prüfung ab); Abdeckung 98,82 / 95,49 / 98,28 / 98,98 % (vorher 98,81 / 95,45 / 98,26 / 98,97); E2E 15 bestanden; eslint, tsc, prettier, Build grün
+- **Status:** ✅ ERLEDIGT (2026-11-05) – zusammengeführt mit PR #207 (`1a46b59`), CI vier Jobs grün; Akzeptanzkriterien erfüllt (vorhandene Tests unverändert grün, Abdeckung nicht gesunken, E2E grün). Ausgang: Hauptkomponente `ImageGenerate` 322 Zeilen und 14 Hooks, `EntryImages` 285 Zeilen und 9 Hooks. Ergebnis: `ImageGenerate` 173 Zeilen/7 Hooks mit `ImageGenerateForm`, `BasisPreview`, `FormatChoice`, `GeneratedPreview` und den Hooks `useImageRequest`, `useImageModels`, `useImagePrice`, `useElapsed` (je eigene Datei); `EntryImages` 145 Zeilen/6 Hooks mit `EntryImageStrip` (119/2) und `EntryImageView` (112/1); `ImageViewer` (166/3) und `LooksHint` in eigene Dateien. Tests: alle 562 vorhandenen unverändert grün, 1 neuer (Entfernen scheitert – deckt die nun doppelt vorhandene Prüfung ab); Abdeckung 98,82 / 95,49 / 98,28 / 98,98 % (vorher 98,81 / 95,45 / 98,26 / 98,97); E2E 15 bestanden; eslint, tsc, prettier, Build grün
 - **Phasentyp-Kontext:** UMSETZUNG
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** nein – Umbau innerhalb eines Moduls, Verhalten unverändert
@@ -267,7 +267,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.5: Auflösung und Qualität bei der Bilderzeugung
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Befund: zwei Ursachen – keine Auflösung in der Anfrage (Modell nimmt meist 1K) und Verkleinern im Browser auf 2.000 Pixel beim Übernehmen. Katalog 2026-11-05: 27/63 mit `resolution`, 11 mit `quality`, Preisvarianten uneinheitlich. Server: eingestellt Seedream 5.0 Pro (1K 0,045 $, 2K 0,09 $), 27 von 67 Bildern; FLUX.2 Pro 19, Grok Imagine 2.0 15. Vergleich `mockup-10.5.html` (lokal) vorgelegt; Eigentümer: 2K voreingestellt, bis 4.096 Pixel, Qualität wo angeboten, Fotos bei 2.000 → ADR-109. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4
 - **Freigabepflichtig:** ja – Schnittstelle (Kategorie 5, additiv), Grenze gespeicherter Bilder (`storage/images.py`: 5 MB, 4.096 Pixel)
@@ -279,6 +279,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** ai_gateway, storage, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR, Mockup
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-109. `storage`: Herkunft mit `aufloesung`/`qualitaet`, Bildgrenze 12 MB. `ai_gateway`: Stufen im Katalog, `ImageOrder.resolution`/`quality`, Preise je Stufe (`level_price`, Grundpreis ohne Variante getrennt von `price`). `api`: Stufen in Modellliste, Preis und Erzeugen (422 bei nicht angebotenen), Herkunft; gelieferte Bilder bis 40 MB. `ui`: `useImageLevels` (2K/„auto“ voreingestellt, Herkunft übernimmt), `useImagePrices` (Preis je Auflösung), Auswahl „Auflösung“ mit Preisen und „Qualität“ mit deutschen Namen, Herkunft zeigt die Auflösung, erzeugte Bilder und Titelbilder bis 4.096 Pixel (`GENERATED_SIDE`). Tests: Python 18 neue (Katalog, Preisstufen, Anfrage, API, Herkunft), 1169 bestanden, 99,87 %, geänderte Dateien 100 %; Oberfläche 6 neue, 4 angepasste (Saat, Titelbild 4.096, Attrappe `GENERATED_SIDE`), 569 bestanden, 98,83 / 95,51 / 98,30 / 98,98 %; E2E 15. Vertragsdatei: `resolutions`, `qualities` je Modell. ruff, mypy, bandit, eslint, tsc, prettier, Build grün. CHANGELOG für 10.2, 10.3 und 10.5 nachgetragen (10.2 und 10.3 fehlten).
 - **Notizen:** Neu in 9.15 (ADR-105).
 
 #### 10.6: Bilder im Manuskript und im E-Book (V.23)

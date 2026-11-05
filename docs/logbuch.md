@@ -29,6 +29,31 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.5 umgesetzt (lokal)
+
+- Nach ADR-109 auf `feat/10.5-aufloesung-qualitaet`; Zahlen im Fahrplan bei 10.5. Abnahme braucht ein echtes 2K-Bild im Betrieb (Schlüssel lokal nicht gültig).
+- Mini-Reibungen: (1) Grok hat keinen Grundpreis; `_price` fiel auf die erste Variante zurück (`low_1k`) – als Grundpreis für 1K/mittel wäre ein falscher Preis erschienen. Eigener Wert `plain` nur für den Preis ohne Variante. (2) Sieben UI-Tests scheiterten an Attrappen von `../files` ohne `GENERATED_SIDE` – die Attrappe muss jede benutzte Konstante kennen. (3) `ok()` der Test-API liefert eine Handler-Funktion, kein Ergebnis – in einem eigenen Handler direkt `{status, body}` zurückgeben. (4) mypy leitete den Typ einer Testtabelle zu eng ab (`list[dict]`), Typangabe ergänzt.
+- DoD-Lücke entdeckt: CHANGELOG fehlte für 10.2 und 10.3 – nachgetragen.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-109 Auflösung und Qualität bei „Bild erzeugen“ (10.5)
+
+- Vorlage mit `mockup-10.5.html` (lokal) und `ENTSCHEIDUNG ERFORDERLICH`; vier Auswahlfragen, Eigentümer jeweils die Empfehlung. Befund beim Lesen: Nicht nur die fehlende Auflösung macht Bilder klein, sondern auch `shrinkImage` mit 2.000 Pixel beim Übernehmen – 2K wäre sonst wirkungslos gewesen. Pillow fehlt im Container (Messskript scheiterte am Import) – Umwandeln auf dem Server wäre eine neue Abhängigkeit.
+- Reaktiv-Quote 0/10 (ADR-100 bis ADR-109). Zweig `feat/10.5-aufloesung-qualitaet` von `docs/10.4-zusammengefuehrt`.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.3 abgenommen
+
+- Probe des Eigentümers mit echter KI im Betrieb: Herauslösen klappt, neuer Abschnitt „Aussehen“, Vorschlag nur Sichtbares, Übernehmen funktioniert. 10.3 → ERLEDIGT. FR-035 schon in 10.3 ergänzt. Phase 10: 4 von 11.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.3 und 10.4 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `1a46b59`, Abbild `skriptorium:vorher` und `app.vorher` als Rückweg. Vorher lief `7900e9d`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `1a46b59`, 0 Fehlerzeilen in 3 Minuten. Offen: Probe 10.3 mit echter KI (Eigentümer).
+
+### 2026-11-05 – [BEOBACHTUNG] 10.3 und 10.4 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #207 (10.3, 10.4 und die Doku seit dem Einspielen von 10.1/10.2), CI vier Jobs grün (Python 1:42, TypeScript 1:44, Pre-Commit 2:03, E2E 2:15), keine Hinweise außer der bekannten Ubuntu-26-Meldung (D.19). Zusammengeführt mit `--match-head-commit` → `1a46b59`.
+- 10.4 → ERLEDIGT. 10.3 wartet auf Einspielen (Wort des Eigentümers) und Probe mit echter KI. Server läuft weiter `7900e9d`. Doku-Nachtrag lokal auf `docs/10.4-zusammengefuehrt`.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.4 umgesetzt (lokal)
 
 - Zahlen im Fahrplan bei 10.4. Verhalten unverändert: alle vorhandenen Tests ohne Änderung grün, E2E 15.

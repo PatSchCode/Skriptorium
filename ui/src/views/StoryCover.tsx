@@ -1,6 +1,6 @@
 import { useId, useRef, useState, type ChangeEvent } from "react";
 import { api, describeError, type Story } from "../api";
-import { base64, IMAGE_SIDE, shrinkImage } from "../files";
+import { base64, GENERATED_SIDE, IMAGE_SIDE, shrinkImage } from "../files";
 import { coverPrompt } from "../imagePrompts";
 import { ErrorText } from "./Common";
 import { ImageGenerate } from "./ImageGenerate";
@@ -173,6 +173,7 @@ export function StoryCover({
           initialPrompt={seed?.prompt ?? coverPrompt(story)}
           initialFormat={seed?.format ?? "2:3"}
           initialModel={seed?.model ?? null}
+          initialLevels={seed?.levels}
           basis={seed?.basis ?? null}
           // A story has one cover: taking over replaces it, also when made from it (step 9.8).
           takeOverLabel={
@@ -185,7 +186,7 @@ export function StoryCover({
               await api.setCover(
                 story.world,
                 story.id,
-                await base64(await shrinkImage(image, IMAGE_SIDE, true)),
+                await base64(await shrinkImage(image, GENERATED_SIDE, true)),
                 origin,
               ),
             );

@@ -6,6 +6,12 @@
 /** Longest side of an uploaded image in pixels; the server accepts up to 4096. */
 export const IMAGE_SIDE = 2000;
 
+/**
+ * Longest side of a generated image taken over (step 10.5, ADR-109): 2K and 4K images keep their
+ * size up to the server's limit; uploaded photos stay at `IMAGE_SIDE`.
+ */
+export const GENERATED_SIDE = 4096;
+
 /** Longest side of an uploaded map in pixels (step 7.10, ADR-073); the server's limit. */
 export const MAP_SIDE = 6000;
 

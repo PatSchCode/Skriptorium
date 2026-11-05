@@ -194,7 +194,11 @@ IMAGE_MODELS = {
         {
             "id": "bytedance-seed/seedream-4.5",
             "name": "ByteDance Seed: Seedream 4.5",
-            "supported_parameters": {},
+            # Levels of step 10.5 (ADR-109).
+            "supported_parameters": {
+                "resolution": {"type": "enum", "values": ["1K", "2K"]},
+                "quality": {"type": "enum", "values": ["auto", "high"]},
+            },
         },
         {
             "id": "recraft/recraft-v4-vector",
@@ -222,6 +226,7 @@ IMAGE_ENDPOINTS = {
                 "pricing": [
                     {"billable": "input_image", "unit": "image", "cost_usd": 0},
                     {"unit": "image", "cost_usd": 0.04},
+                    {"variant": "2k", "unit": "image", "cost_usd": 0.08},
                 ],
             }
         ]
