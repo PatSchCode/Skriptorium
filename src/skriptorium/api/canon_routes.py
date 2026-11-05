@@ -9,7 +9,14 @@ from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, Field
 
 from skriptorium.api.context import ServicesDep, current_session
-from skriptorium.api.flows import WorldDeletion, delete_world, world_deletion
+from skriptorium.api.flows import (
+    EntryDeletion,
+    WorldDeletion,
+    delete_entry_with_traces,
+    delete_world,
+    entry_deletion,
+    world_deletion,
+)
 from skriptorium.api.image_routes import ImageOriginIn, ImageOriginOut, origin_from, origin_out
 from skriptorium.canon import (
     MAX_MARKERS_PER_MAP,
@@ -248,10 +255,16 @@ def update_entry(world_id: str, entry_id: str, body: EntryChange, found: Service
     return found.canon.update_entry(world_id, entry_id, **_given(body))
 
 
+@router.get("/{world_id}/entries/{entry_id}/deletion-preview")
+def preview_entry_deletion(world_id: str, entry_id: str, found: ServicesDep) -> EntryDeletion:
+    """What deleting a canon entry takes with it (step 10.1, ADR-106); changes nothing."""
+    return entry_deletion(found.canon, found.manuscript, world_id, entry_id)
+
+
 @router.delete("/{world_id}/entries/{entry_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_entry(world_id: str, entry_id: str, found: ServicesDep) -> None:
-    """Delete a canon entry."""
-    found.canon.delete_entry(world_id, entry_id)
+    """Delete a canon entry with its images, markers and its traces in stories (ADR-106)."""
+    delete_entry_with_traces(found.canon, found.manuscript, world_id, entry_id)
 
 
 @router.post("/{world_id}/entries/{entry_id}/images", status_code=status.HTTP_201_CREATED)

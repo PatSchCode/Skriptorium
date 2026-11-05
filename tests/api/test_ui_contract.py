@@ -551,11 +551,13 @@ def _account(rec: _Recorder, clock: FakeClock) -> None:
 
 
 def _archive(rec: _Recorder, story: str) -> None:
-    """Archive, preview of deleting for good, restore (step 9.9, ADR-098); delete a chapter."""
+    """Archive, preview of deleting for good, restore (step 9.9, ADR-098); delete a chapter;
+    preview of deleting a canon entry (step 10.1, ADR-106)."""
     guests = "/api/worlds/nebelreich"
     rec.post("archiveWorld", "World", f"{guests}/archive")
     rec.get("worldDeletion", "WorldDeletion", f"{guests}/deletion-preview")
     rec.post("restoreWorld", "World", f"{guests}/restore")
+    rec.get("entryDeletion", "EntryDeletion", f"{guests}/entries/nebelkoenig/deletion-preview")
     short = f"{WORLD}/stories/am-ufer"
     rec.post("archiveStory", "Story", f"{short}/archive")
     rec.get("storyDeletion", "StoryDeletion", f"{story}/deletion-preview")

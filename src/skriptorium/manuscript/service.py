@@ -234,6 +234,24 @@ class ManuscriptService:
         """
         return self._extras.remove_guest_world(world_id, story_id, guest_world, entries)
 
+    def remove_entry_uses(
+        self,
+        world_id: str,
+        story_id: str,
+        entry: str,
+        guest_world: str | None,
+        with_facts: bool,
+    ) -> Story:
+        """Remove what a deleted canon entry leaves in a story (step 10.1, ADR-106): the guest
+        link to ``entry`` in ``guest_world`` if given and, with ``with_facts``, the facts and the
+        led character with the identifier. Whether the identifier may also mean another entry
+        of the story is known to the flow in ``api``; it passes ``with_facts``.
+
+        Raises:
+            NotFound: The story does not exist.
+        """
+        return self._extras.remove_entry_uses(world_id, story_id, entry, guest_world, with_facts)
+
     # --- guest links and story facts ------------------------------------------------------
 
     def add_guest_link(self, world_id: str, story_id: str, guest_world: str, entry: str) -> Story:
