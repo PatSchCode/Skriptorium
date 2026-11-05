@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.3 und 10.4 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `1a46b59`, Abbild `skriptorium:vorher` und `app.vorher` als Rückweg. Vorher lief `7900e9d`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `1a46b59`, 0 Fehlerzeilen in 3 Minuten. Offen: Probe 10.3 mit echter KI (Eigentümer).
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.3 und 10.4 zusammengeführt
 
 - Eigentümer: „Ja, PR und Merge“. PR #207 (10.3, 10.4 und die Doku seit dem Einspielen von 10.1/10.2), CI vier Jobs grün (Python 1:42, TypeScript 1:44, Pre-Commit 2:03, E2E 2:15), keine Hinweise außer der bekannten Ubuntu-26-Meldung (D.19). Zusammengeführt mit `--match-head-commit` → `1a46b59`.
