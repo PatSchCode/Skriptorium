@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [GELÖST] 10.6: Menü von „＋ Bild“ auf schmalen Bildschirmen unsichtbar
+
+- Befund des Eigentümers: „es erscheint kein Bild und keine Vorschau“. Server seit dem Einspielen: kein `POST …/stories/{story_id}/images`, kein Ordner `bilder/` in einer Geschichte – der Ablauf brach im Browser vor dem Hochladen ab.
+- Ursache: Unter 56rem liegen die Werkzeuge hinter „⋯“; jeder Knopf darin klappt sie zu (5.2) – auch „＋ Bild“, das nur sein Menü öffnet. Das Menü steckt im zugeklappten Bereich und bleibt unsichtbar. In jsdom ohne CSS nicht sichtbar, deshalb grüne Komponenten-Tests; 10.6 hatte keinen End-to-End-Test.
+- Nachgestellt mit Playwright: 1280 px – ganzer Weg grün (Kopie in die Geschichte, Zeile, Vorschau lädt); 820 px – Menü unsichtbar.
+- Lösung: Knöpfe mit `aria-expanded` (öffnen nur ein Menü) klappen nicht zu (`ComposerControls`). Komponenten-Test erweitert; neuer End-to-End-Test bei 820 px: Bild aus dem Kanon, Zeile, Vorschau (48 px breit geladen), E-Book enthält `OEBPS/bilder/bild-….jpg`. Gegenprobe ohne Korrektur: Test scheitert am Menü. Prüfreihe grün (585 Komponenten-Tests, Zweige 95,22 %; 16 End-to-End-Tests).
+- Lehre: Alles, was hinter „⋯“ liegt, im End-to-End-Test auch bei schmaler Breite prüfen.
+
 ### 2026-11-06 – [BEOBACHTUNG] 10.7 abgenommen
 
 - Eigentümer: „Aussehen, Kleidung und Umgebung passen zum Bild und der Haken verschwindet auch wieder, nachdem man Weiterschreiben angeklickt hat.“ 10.7 → ERLEDIGT; Phase 10: 6 von 11 (10.6 weiter in Abnahme).
