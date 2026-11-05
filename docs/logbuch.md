@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.6 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `5aa544a`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `56e5d1b`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `5aa544a`, 0 Fehlerzeilen in 3 Minuten. Offen: Abnahme 10.6 (Eigentümer).
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.6 zusammengeführt
 
 - Eigentümer: „Ja, PR und Merge“. PR #210, CI vier Jobs grün (Python 1:22, Pre-Commit 2:12, TypeScript 2:25, E2E 2:34), keine Hinweise außer der Ubuntu-26-Meldung. Zusammengeführt mit `--match-head-commit` → `5aa544a`. Server läuft weiter `56e5d1b`. Doku-Nachtrag lokal auf `docs/10.6-zusammengefuehrt`.
