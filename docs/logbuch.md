@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] Nachtrag 10.5 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `56e5d1b`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `17ea244`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `56e5d1b`, 0 Fehlerzeilen in 3 Minuten.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.5 erledigt, V.49 vorgemerkt
 
 - PR #209 (Nachtrag Preisregel), CI vier Jobs grün, zusammengeführt mit `--match-head-commit` → `56e5d1b`. 10.5 → ERLEDIGT; Phase 10: 5 von 11. Nicht eingespielt: Server läuft `17ea244` ohne Nachtrag.
