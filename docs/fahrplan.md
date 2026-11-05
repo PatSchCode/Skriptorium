@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. 10.1 abgenommen (2026-11-05). 10.2 ist eingespielt (Stand `7900e9d`) und wartet auf die Abnahme des Eigentümers.
-- **Nächster Schritt:** 10.2 abnehmen (Eigentümer: Figurenkarte „Das Phantom“); danach 10.3 Aussehen herauslösen für Orte und Gegenstände – Vorlage mit Vergleich. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner in Arbeit. 10.1 und 10.2 abgenommen (2026-11-05, eingespielt Stand `7900e9d`).
+- **Nächster Schritt:** 10.3 Aussehen herauslösen für Orte und Gegenstände – Vorlage mit Vergleich. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,12 +24,12 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 
-**Phase 10: 1 von 11 erledigt.**
+**Phase 10: 2 von 11 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
 | ✅ | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | erledigt 2026-11-05 (ADR-106) | – |
-| 🔵 | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | wartet auf Abnahme (ADR-107), eingespielt `7900e9d` | du: Figurenkarte herunterladen, „personality“ prüfen |
+| ✅ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | erledigt 2026-11-05 (ADR-107) | – |
 | ⚪ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | offen | KI: nach 10.2 |
 | ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
 | ⚪ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | offen | KI: nach 10.4 |
@@ -217,7 +217,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.2: Abschnittsregel im Server nutzen; SillyTavern-Export liest „Wesen“ (V.38)
 
-- **Status:** 🔵 WARTET-AUF-FREIGABE (Abnahme durch den Eigentümer; zusammengeführt 2026-11-05, PR #206, `7900e9d`, CI vier Jobs grün; eingespielt 2026-11-05) – Server 2026-11-05 (nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (alle Ebene 3), davon 2 mit zu viel in „personality“; 0 mit „Wesen und Geschichte“ oder nur Zeile „- **Wesen:** …“; 0 Überschriften „In/Im ‹Welt›“. Vergleich `mockup-10.2.html` (lokal) vorgelegt; Eigentümer: nur Abschnitt „Wesen“, Rückimport wie heute, Funktionen behalten mit ehrlicher Doku → ADR-107. Umsetzung läuft
+- **Status:** ✅ ERLEDIGT (2026-11-05) – zusammengeführt PR #206, `7900e9d`, CI vier Jobs grün, eingespielt; Abnahme durch den Eigentümer an der Karte einer Figur mit Abschnitt „Wesen“ („Wesen ist auch vorhanden“), auf dem Server nachgerechnet: „personality“ 450 Zeichen ohne Überschriften, „description“ 743 Zeichen mit Aussehen, Fähigkeiten, Geschichte, Beziehungen und ohne „Wesen“. Vorher – Server 2026-11-05 (nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (alle Ebene 3), davon 2 mit zu viel in „personality“; 0 mit „Wesen und Geschichte“ oder nur Zeile „- **Wesen:** …“; 0 Überschriften „In/Im ‹Welt›“. Vergleich `mockup-10.2.html` (lokal) vorgelegt; Eigentümer: nur Abschnitt „Wesen“, Rückimport wie heute, Funktionen behalten mit ehrlicher Doku → ADR-107. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Ausgabe der Figurenkarte ändert sich (Kategorie 5, ADR-066)

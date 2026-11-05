@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.2 abgenommen
+
+- Eigentümer an der heruntergeladenen Karte: „Wesen ist auch vorhanden.“ Auf dem Server nachgerechnet (nur Überschriften und Längen): „personality“ 450 Zeichen, „description“ mit Aussehen, Fähigkeiten, Geschichte, Beziehungen, Wort „Wesen“ dort 0-mal – kein doppelter Inhalt. 10.2 → ERLEDIGT. FR-030 war schon erledigt, keine Änderung in `docs/requirements.md`.
+- Offen: Antwort des Eigentümers zu V.48 („Wesen: …“ im Fließtext bei 11 Figuren einer Welt).
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.1 abgenommen
 
 - Eigentümer nach Neuladen: „Die Folgenliste entspricht jetzt 4 Bilder.“ – passt zur Vorschau auf dem Server. 10.1 → ERLEDIGT. FR-024 und FR-036 waren schon erledigt (10.1 nur Nachbar), keine Änderung in `docs/requirements.md`.
