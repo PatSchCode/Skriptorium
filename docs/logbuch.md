@@ -29,6 +29,25 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [ERLEDIGT] Abnahme 9.13
+
+- Eigentümer hat Weltbezug und „Einpassen vorschlagen“ im Programm geprüft: „Hat funktioniert.“ → 9.13 `[ERLEDIGT]`. Phase 9: 14 von 15; offen nur 9.15 mit Phasengrenze.
+
+### 2026-11-05 – [BEOBACHTUNG] Deployment `e809696` (9.13)
+
+- Auf Anweisung des Eigentümers („Erstmal einspielen“). Baum von `main` gleich dem in PR #202 geprüften Baum (`391420f`). Runbook Abschnitt 7: `REVISION` `e809696`, Rückweg `skriptorium:vorher` = `7319b26`. `/api/health` 200 nach ca. 55 s (nur über HTTPS abgefragt), Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `REVISION` `e809696`, 0 Fehlerzeilen in den ersten Minuten.
+- Mini-Reibung: erster Aufruf brach lokal vor jedem Server-Zugriff ab (`git rev-parse --short` mit zwei Namen) – nichts auf dem Server verändert, zweiter Aufruf korrekt.
+
+### 2026-11-05 – [REIFEGRAD-WECHSEL] NFR Kontexttreue Referenzumfang → `[BELASTBAR]` (ADR-103, 9.14)
+
+- Messung auf dem Server (eine SSH-Prüfung; Skript im Container, ohne KI, nur Zahlen ausgegeben, keine Titel, Namen oder Texte): 11 Geschichten; größte 94.682 Wörter in 9 Kapiteln (zweitgrößte 73.090 in 8). Anfrage für Kapitel 9 der größten: geschätzt 29.793 von 30.000 Token; Handlungsstand (560 Wörter) und Kurzfassungen 1–8 (alle geprüft) vollständig; alle 20 Kanon-Einträge (6 Regeln, 14 Auffüllung, 5.701 Token); letzte Seiten 14.944 Token. Mit 5 Figuren per `@` ebenfalls 20 von 20, gleiche Größe. Damit ist auch die Technik-Prüfung aus ADR-062 erbracht.
+- Hochrechnung: ca. 390 Token Kurzfassung je Kapitel; unter 5.000 Token Seiten ab ca. 34 Kapiteln, Ablehnung ab ca. 60. Eigentümer: „Belastbar bis ~30 Kapitel“ → ADR-103, neuer Querschnitt-Schritt D.25 (nachmessen ab 25 Kapiteln).
+- 9.13 ist zu dem Zeitpunkt nicht eingespielt; die Messung betrifft eine Geschichte ohne Gäste, der Stand auf dem Server (`7319b26`) baut die Anfrage dafür gleich.
+
+### 2026-11-05 – [BEOBACHTUNG] PR #202 zusammengeführt (9.13), Einspielen später
+
+- Eigentümer gab die Bildschirmfotos frei („Ja, PR und Merge“); PR #202 angelegt, CI 4 von 4 grün, Protokoll ohne neue Warnung (nur die von Tests ausgelösten Zugangs- und Schlüsselwarnungen). Als Merge-Commit zusammengeführt (`e809696`). Einspielen: Eigentümer „Später“.
+
 ### 2026-11-05 – [BEOBACHTUNG] 9.13 umgesetzt (lokal), Bildschirmfotos zur Abnahme
 
 - Umsetzung nach ADR-102 auf `feat/9.13-gaeste`; Einzelheiten und Zahlen im Fahrplan bei 9.13. Python 1123 bestanden (100 % Zeilen), Oberfläche 558, E2E 15; ruff, ruff format, `mypy --strict`, bandit, ESLint, Prettier, tsc grün.

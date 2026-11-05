@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-10-26 (9.8 erledigt – Bild zu Bild, ADR-097, PR #192, eingespielt `48b8f8f`, vom Eigentümer bestätigt); 2026-10-26 (9.7 erledigt – Modell je Aufgabe, ADR-096, PR #190, eingespielt `7bc5333`, vom Eigentümer bestätigt); 2026-10-25 (9.6 erledigt – Herkunft von Bildern, ADR-095, PR #187, eingespielt `adda4b9`, vom Eigentümer bestätigt); 2026-10-25 (9.5 erledigt – Bilder vom Bedarf her, ADR-094, PR #184, vom Eigentümer bestätigt; 9.6 begonnen); 2026-10-21 (9.4 erledigt, ADR-093); 2026-10-19 (9.3 erledigt – feste Abschnitte je Art, ADR-092; Code PR #177, Proben PR #179, beide mit grüner CI zusammengeführt; Proben zu 9.3 im dritten Versuch gelaufen – Regel-002 und Weltenbauer; zuvor zweiter Versuch ohne Schlüssel, Werkzeug für die Weltenbauer-Probe vorbereitet); 2026-10-18 (9.2 erledigt – vier End-to-End-Tests, Vertragstest Server ↔ Oberfläche, CI-Schrittnamen; PR #175; 9.1 erledigt – ADR-091, PR #173; D.19 angelegt; zuvor Phase 8 abgeschlossen: 8.13 erledigt – Pflichtfrage ADR-089, Planung ADR-090); am selben Tag V.36 und V.37 angelegt, 8.9 und 8.11 bestätigt; 2026-10-16 V.35 angelegt
 - **Laufende Phase:** Phase 9 „Verlässlicher Kanon, Bilder und Verwaltung“ (Phase 8 abgeschlossen 2026-10-18)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 9.13 Gast-Figuren ausbauen – seit 2026-11-05, entschieden (ADR-102), Umsetzung. Erledigt: 9.12 Quellen und Recherche (2026-11-05, ADR-101); 9.9, 9.10, 9.11 (2026-11-04)
-- **Nächster Schritt:** Umsetzung 9.13 nach ADR-102; danach 9.14 Kontexttreue. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner. Erledigt 2026-11-05: 9.12 Quellen und Recherche (ADR-101), 9.13 Gast-Figuren (ADR-102, eingespielt `e809696`), 9.14 Kontexttreue (ADR-103); 2026-11-04: 9.9, 9.10, 9.11
+- **Nächster Schritt:** 9.15 Planung der nächsten Ausbaustufe mit Phasengrenze (Vision-Abgleich, Pflichtfrage mit getrennter Instanz). 9.14 erledigt 2026-11-05 (ADR-103). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,7 +24,7 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-8.md`](archiv/fahrplan-phase-8.md).
 
-**Phase 9: 8 von 15 erledigt.**
+**Phase 9: 14 von 15 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
@@ -40,8 +40,8 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ✅ | 9.10 | Cache-Treffer festhalten (V.36) | erledigt 2026-11-04 (ADR-099; 98–99,7 % Treffer bei der zweiten gleichen Anfrage) | – |
 | ✅ | 9.11 | Verbrauchsstatistik je Welt und Geschichte (V.37) | erledigt 2026-11-04 (ADR-100), eingespielt `7319b26` | – |
 | ✅ | 9.12 | Quellen und Recherche – Erkundung (H1, V1) | erledigt 2026-11-05 (ADR-101; Umsetzung V.44–V.46 → 9.15) | – |
-| 🟠 | 9.13 | Gast-Figuren ausbauen (V.34) | in Arbeit seit 2026-11-05 (ADR-102), Umsetzung | KI |
-| ⚪ | 9.14 | Kontexttreue erneut prüfen | offen | KI: nach 9.4 |
+| ✅ | 9.13 | Gast-Figuren ausbauen (V.34) | erledigt 2026-11-05 (ADR-102), eingespielt `e809696` | – |
+| ✅ | 9.14 | Kontexttreue erneut prüfen | erledigt 2026-11-05 (ADR-103, belastbar bis ~30 Kapitel) | – |
 | ⚪ | 9.15 | Planung der nächsten Ausbaustufe | offen | KI |
 
 **Querschnitt (offen):**
@@ -65,6 +65,7 @@ Phase 8 abgeschlossen 2026-10-18 (13 von 13 erledigt) – Details im Archiv [`do
 | ⚪ | D.22 | Probelauf Routine-Klasse mit Sonnet 5.5 | offen | KI – vor der nächsten Abgabe an Unteragenten |
 | ✅ | D.23 | Sicherheitsfunde filelock, undici, zod (Audit 2026-10-25) | erledigt 2026-10-25 | – |
 | ✅ | D.24 | Sicherheitsfund msgpack (Audit 2026-11-04) | erledigt 2026-11-04 | – |
+| ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
 Verschoben auf die übernächste Ausbaustufe (Landeplatz 9.15): V.20, V.21, V.23, V.24, V.33 (weiter verschoben 2026-10-18, ADR-090), V.38 (Befund in 9.3, 2026-10-18), V.39 (aus 9.5, 2026-10-21), V.40 (Rückmeldung des Eigentümers zu Sperren, 2026-10-22), V.41 (Textqualität von Hermes, 2026-10-22), V.42 (vollständige Anfrage beim KI-Text, aus 9.6, 2026-10-25), V.43 (verwaiste Kennungen nach dem Löschen eines Kanon-Eintrags, aus 9.9, 2026-11-04), V.44 (Recherche über Wikipedia und D&D-Regelwerk, sparsamere Websuche), V.45 (Namenslisten), V.46 (Fragenliste je Art) – alle drei aus 9.12, 2026-11-05, ADR-101. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. In Phase 8 übernommen (2026-10-13, ADR-081): V.29 → 8.4, V.31 → 8.5, V.30 → 8.6, V.32 → 8.7, V.27 → 8.8, V.22 → 8.9, V.28 → 8.10, V.25 → 8.11, V.26 → 8.12 (Erkundung). In Phase 7 übernommen (2026-10-12, ADR-068): V.16 → 7.2, V.14 → 7.3, V.1 → 7.4, V.8 → 7.5, V.2 → 7.6. Früher: in Phase 6 übernommen (2026-10-11, ADR-059): V.6 → 6.8, V.7 → 6.9, V.9 → 6.7, V.10 → 6.3, V.12 und V.17 → 6.1, V.13 → 6.4, V.15 → 6.2, V.18 → 6.5, V.19 → 6.6. Verworfen (ADR-059): V.3, V.4, V.5, V.11.
@@ -399,7 +400,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.13: Gast-Figuren ausbauen – Weltbezug je Gast (V.34)
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Bestandsaufnahme: Probe des Eigentümers 2026-10-21 ohne benannten Mangel („Gastfiguren funktionieren auch“); auf dem Server 0 Gast-Verbindungen und 0 Fakten „nur diese Geschichte“ in 11 Geschichten (5 Welten). Eigentümer auf Rückfrage (Empfehlung war „auf später“): „A wie geplant“. Mockup `mockup-9.13.html` (lokal) vorgelegt; Auswahlfragen: Bedienung wie Mockup, Geltung je Geschichte, Heimatwelt-Abschnitt weglassen, wenn ein Weltbezug da ist → ADR-102. Umsetzung läuft
+- **Status:** ✅ ERLEDIGT (2026-11-05) – eingespielt `e809696`, Eigentümer bestätigt („Hat funktioniert.“). Verlauf: Bestandsaufnahme: Probe des Eigentümers 2026-10-21 ohne benannten Mangel („Gastfiguren funktionieren auch“); auf dem Server 0 Gast-Verbindungen und 0 Fakten „nur diese Geschichte“ in 11 Geschichten (5 Welten). Eigentümer auf Rückfrage (Empfehlung war „auf später“): „A wie geplant“. Mockup `mockup-9.13.html` (lokal) vorgelegt; Auswahlfragen: Bedienung wie Mockup, Geltung je Geschichte, Heimatwelt-Abschnitt weglassen, wenn ein Weltbezug da ist → ADR-102. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 9.1
 - **Freigabepflichtig:** ja – wie V.34: Datenmodell und Kontext-Zusammenstellung (Kategorien 1 und 4)
@@ -416,7 +417,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 9.14: Kontexttreue beim Referenzumfang erneut prüfen
 
-- **Status:** ⚪ OFFEN
+- **Status:** ✅ ERLEDIGT (2026-11-05) – Messung an der größten Geschichte des Eigentümers (94.682 Wörter, 9 Kapitel): Anfrage für Kapitel 9 geschätzt 29.793 von 30.000 Token, Handlungsstand und alle 8 Kurzfassungen, alle 20 Kanon-Einträge, letzte Seiten 14.944 Token. Eigentümer: „Belastbar bis ~30 Kapitel“ → ADR-103, NFR `[BELASTBAR]` mit Grenze; Nachmessen als D.25
 - **Phasentyp-Kontext:** ERKUNDUNG innerhalb der UMSETZUNG-Phase
 - **Schritt-Art (nur ERKUNDUNG):** Messung
 - **Zeitbox (nur ERKUNDUNG):** eine Session
@@ -801,6 +802,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Sperrdateien, Logbuch-Eintrag
 - **Notizen:** Angelegt 2026-10-25 nach dem roten Lauf zu #187. Verbleibend: 3 mittlere Funde in vitest ≤ 4.1.11 (`@vitest/mocker`, `@vitest/coverage-v8`) unter der Schwelle `high`; Behebung nur mit vitest 5 (`--force`), Linie noch nicht mindestreif – Landeplatz D.2 (Nachprüfung vitest 5 am 2027-03-03, Ablaufdaten-Register).
+
+#### D.25: Kontexttreue nachmessen, sobald eine Geschichte 25 Kapitel hat
+
+- **Status:** ⚪ OFFEN (ausgelöst; angelegt 2026-11-05, ADR-103)
+- **Phasentyp-Kontext:** STABILISIERUNG
+- **Abhängigkeiten:** keine
+- **Frist:** sobald eine Geschichte 25 Kapitel erreicht; geprüft bei jeder lesenden Zählung auf dem Server
+- **Freigabepflichtig:** nein für die Messung; eine Neueinstufung oder eine Änderung der Kontext-Zusammenstellung per ADR
+- **Empfohlene Klasse:** Entscheidung – kann einen Architektur-Bestandteil zurückstufen (Eskalations-Auslöser 4 sinngemäß).
+- **Eingangskriterien:** eine Geschichte mit mindestens 25 Kapiteln
+- **Anforderungen (ab Klasse M):** FR-010
+- **Zu tun:** Verfahren wie 9.14 (Anfrage im Container ohne KI bauen, nur Zahlen): Größe, Handlungsstand, Kurzfassungen, Kanon-Einträge, Token der letzten Seiten. Bei weniger als ca. 5.000 Token wörtlicher Seiten eine Vorlage (z. B. Kurzfassungen älterer Kapitel verdichten).
+- **Akzeptanzkriterien:** Messung im Logbuch; ADR (Grenze bestätigt, verschoben oder Umbau-Vorschlag).
+- **Betroffene Module:** keine (nur lesen); ggf. context
+- **Reifegrad-Wirkung:** NFR Kontexttreue Referenzumfang bleibt `[BELASTBAR]` oder wird mit Begründung zurückgestuft
+- **Artefakte:** Logbuch-Eintrag, ADR
+- **Notizen:** Stand 2026-11-05: größte Geschichte 9 Kapitel.
 
 #### D.24: Sicherheitsfund msgpack (Audit 2026-11-04)
 

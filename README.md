@@ -27,7 +27,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-10-13
-- **Architektur-Reife:** Module, Schnittstellen, Datenmodell und Token-Budget BELASTBAR (ADR-013); Reaktionszeit BELASTBAR (grok-4.6 erstes Textstück meist unter 30 s, ADR-052; grok-4.7 denkt zu lange vor und kommt in 5.12 aus der Voreinstellung); Kanon-Treue BELASTBAR (erstes echtes Kapitel des Eigentümers in 4.8: 0 Widersprüche, mit qwen3.8-max); Sicherheitsniveau und Schutzbedarf BELASTBAR (ADR-006, ADR-007); Observability BELASTBAR (Log-Zeile und Monatskosten, ADR-021, ADR-023); Bedrohungsmodell BELASTBAR (Prüfung 4.5); Host BELASTBAR (4.2); Netz BELASTBAR (Prüfungen von außen, 4.7); Backups BELASTBAR (4.3); Secrets im Betrieb VORLÄUFIG (Gate 4.6, BELASTBAR mit D.11)
+- **Architektur-Reife:** Module, Schnittstellen, Datenmodell und Token-Budget BELASTBAR (ADR-013); Reaktionszeit BELASTBAR (grok-4.6 erstes Textstück meist unter 30 s, ADR-052; grok-4.7 denkt zu lange vor und kommt in 5.12 aus der Voreinstellung); Kanon-Treue BELASTBAR (erstes echtes Kapitel des Eigentümers in 4.8: 0 Widersprüche, mit qwen3.8-max); Kontexttreue BELASTBAR bis etwa 30 Kapitel (ADR-103); Sicherheitsniveau und Schutzbedarf BELASTBAR (ADR-006, ADR-007); Observability BELASTBAR (Log-Zeile und Monatskosten, ADR-021, ADR-023); Bedrohungsmodell BELASTBAR (Prüfung 4.5); Host BELASTBAR (4.2); Netz BELASTBAR (Prüfungen von außen, 4.7); Backups BELASTBAR (4.3); Secrets im Betrieb VORLÄUFIG (Gate 4.6, BELASTBAR mit D.11)
 - **Aktive Blocker:** 0
 
 ## Quick Start
@@ -112,8 +112,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **9.10:** Cache-Treffer – erledigt 2026-11-04 (ADR-099): bei der zweiten gleichen Anfrage kommen 98–99,7 % der Eingabe aus dem Zwischenspeicher.
 - ✅ **9.11:** Verbrauch je Welt und Geschichte – neue Seite „Verbrauch“ mit Monat oder allen Monaten, je Welt aufklappbar zu Geschichten, nach Art und Modell, mit Anteil aus dem Zwischenspeicher (ADR-100); erledigt 2026-11-04.
 - ✅ **9.12:** Quellen und Recherche erkundet – erledigt 2026-11-05 (ADR-101): Recherche über Wikipedia und das offene D&D-Regelwerk, sparsamere Websuche, Namenslisten und Fragenliste je Art; gebaut wird in der nächsten Ausbaustufe (V.44–V.46).
-- 🟠 **9.13:** Gast-Figuren – je Gast ein Text „In dieser Welt“ und „✨ Einpassen vorschlagen“ (ADR-102); lokal umgesetzt, deine Abnahme offen.
-- ⚪ **9.14:** Kontexttreue erneut prüfen (ADR-090).
+- ✅ **9.13:** Gast-Figuren – je Gast ein Text „In dieser Welt“ und „✨ Einpassen vorschlagen“ (ADR-102); erledigt 2026-11-05.
+- ✅ **9.14:** Kontexttreue gemessen – erledigt 2026-11-05 (ADR-103): an deiner größten Geschichte alles in der Anfrage, belastbar bis etwa 30 Kapitel.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
 Ergebnisse der Erkundung: [Modell-Eignungstest](docs/research/modell-eignungstest.md) – damals Startmodell grok-4.7, Zweitmodell grok-4.6; seit 5.7 ist grok-4.6 voreingestellt (ADR-044).
