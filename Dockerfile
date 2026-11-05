@@ -2,7 +2,7 @@
 # Three stages: build the user interface with Node, install the Python dependencies with uv,
 # run with plain Python as an unprivileged user. Node and uv are not part of the final image.
 
-FROM node:24.21.0-slim AS ui
+FROM node:26.12.1-slim AS ui
 WORKDIR /build
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts

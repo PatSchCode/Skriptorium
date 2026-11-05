@@ -45,6 +45,9 @@ export default defineConfig({
     root: ".",
     environment: "jsdom",
     setupFiles: ["ui/test-setup.ts"],
+    // Node 26 has its own localStorage (Web Storage); without a storage file it is unusable and
+    // hides the one of jsdom. Off in the test workers, the tests use jsdom's (ADR-112).
+    execArgv: ["--no-experimental-webstorage"],
     // @panzoom/panzoom declares "type": "module" but its "main" is a UMD file that exports
     // nothing under Node; the build uses its "module" entry, the tests the same file.
     alias: {

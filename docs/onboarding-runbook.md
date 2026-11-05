@@ -27,7 +27,7 @@ Dieses Runbook führt vom frischen Klon bis zum laufenden Server mit Gesundheits
 
 ## 2. Voraussetzungen pro Plattform
 
-Unterstützt sind Linux und macOS arm64 (`docs/project-context.md` Abschnitt 3, Plattform-Matrix); Windows nicht. Versionen: Python 3.14.7, uv 0.12.19, Node.js 24.21.0 mit npm 11.19.0, git, curl.
+Unterstützt sind Linux und macOS arm64 (`docs/project-context.md` Abschnitt 3, Plattform-Matrix); Windows nicht. Versionen: Python 3.14.7, uv 0.12.19, Node.js 26.12.1 mit npm 11.20.0, git, curl.
 
 ### Linux (Cloud-Session des Coding-Agents)
 
@@ -39,7 +39,7 @@ Nichts von Hand: Der SessionStart-Hook (`.claude/settings.json` → `scripts/ses
 # uv 0.12.19 (z. B. in eine eigene venv)
 python3 -m venv ~/.cache/skriptorium-tools/uv-0.12.19
 ~/.cache/skriptorium-tools/uv-0.12.19/bin/pip install "uv==0.12.19"
-# Node.js 24.21.0: Archiv von https://nodejs.org/dist/v24.21.0/ laden und SHA-256 gegen SHASUMS256.txt prüfen
+# Node.js 26.12.1: Archiv von https://nodejs.org/dist/v26.12.1/ laden und SHA-256 gegen SHASUMS256.txt prüfen
 export PATH="$HOME/.cache/skriptorium-tools/uv-0.12.19/bin:<pfad-zu-node>/bin:$PATH"
 ```
 

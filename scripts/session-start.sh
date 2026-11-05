@@ -17,17 +17,17 @@ set -euo pipefail
 platform="$(uname -s)-$(uname -m)"
 if [ "${CLAUDE_CODE_REMOTE:-}" = "true" ] && [ "${platform}" = "Linux-x86_64" ]; then
   node_platform="linux-x64"
-  node_sha256="fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
+  node_sha256="6170b2d474e1c626f43cff3adc118df9fe3b573258a4fc3d850c8dbc6b079bbd"
 elif [ "${platform}" = "Darwin-arm64" ]; then
   node_platform="darwin-arm64"
-  node_sha256="6239d4cf92d864487ec8cd3615038f7b67e7f58b77b21cd2f09ea9fbd68065fe"
+  node_sha256="18830bf448fe187c650dc28c98aa8c968ed1d40b6dd032c081e70a384a1bf660"
 else
   exit 0
 fi
 
 UV_VERSION="0.12.19"
 PYTHON_VERSION="3.14.7"
-NODE_VERSION="24.21.0"
+NODE_VERSION="26.12.1"
 
 project_dir="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 tools_dir="${HOME}/.cache/skriptorium-tools"

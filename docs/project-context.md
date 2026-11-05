@@ -50,8 +50,8 @@ Auswahl nach der Regel „ausgereifte Linie" (`CLAUDE.md` Abschnitt 15, „Versi
   - CodeMirror 6 (@codemirror/state 6.7.6, view 6.43.13, autocomplete 6.20.3, lang-markdown 6.5.2) — Verifiziert: 2026-09-26, Quelle: npm-Registry
   - @panzoom/panzoom 4.6 (4.6.2), MIT, ohne weitere Pakete — Zoom der Karten (ADR-073); Verifiziert: 2026-10-12, Quelle: npm-Registry
 - **Datenbank / Speicher:** Markdown-Dateien mit YAML-Kopf als Quelle der Wahrheit; SQLite (in Python enthalten, Version folgt Python 3.14) als abgeleiteter, jederzeit neu aufbaubarer Suchindex – ADR-003
-- **Laufzeitumgebung:** Node.js 24 LTS (24.21.0) nur für Build und Entwicklung der Oberfläche — Verifiziert: 2026-09-26, Quelle: nodejs.org, Release-Plan `schedule.json`. Betrieb: Python 3.14 mit uvicorn auf einem VPS (ADR-006), vorhandener netcup-VPS (ADR-025)
-- **Package Manager:** uv 0.12 (0.12.19) für Python; npm 11 (11.19.0, mit Node 24 gebündelt) für die Oberfläche — Verifiziert: 2026-09-26, Quelle: PyPI, nodejs.org
+- **Laufzeitumgebung:** Node.js 26 LTS (26.12.1) nur für Build und Entwicklung der Oberfläche (seit 2026-11-05, D.1, ADR-112; vorher 24.21.0) — Verifiziert: 2026-11-05, Quelle: nodejs.org, Release-Plan `schedule.json`, `dist/index.json`. Betrieb: Python 3.14 mit uvicorn auf einem VPS (ADR-006), vorhandener netcup-VPS (ADR-025)
+- **Package Manager:** uv 0.12 (0.12.19) für Python; npm 11 (11.20.0, mit Node 26 gebündelt) für die Oberfläche — Verifiziert: uv 2026-09-26, npm 2026-11-05, Quelle: PyPI, nodejs.org
 
 ### Empfohlen (freigabefrei nutzbar)
 
@@ -266,7 +266,7 @@ Default „Warnungen sind Fehler". Benannte Ausnahmen:
 
 | Was | Ablauf / Lebensende | Vorlauf | Quelle | Fahrplan-Schritt |
 |---|---|---|---|---|
-| Node.js 24 LTS (nur Build) | 2028-04-30 | 6 Monate | Node-Release-Plan `schedule.json` | D.1 – Wechsel auf Node 26 LTS frühestens 2026-11-05 |
+| Node.js 26 LTS (nur Build, seit 2026-11-05, ADR-112) | 2029-04-30 | 6 Monate | Node-Release-Plan `schedule.json` | – (Schritt bei Erreichen des Vorlaufs 2028-10-30 anlegen: Wechsel auf Node 28 LTS, dessen Mindestreife etwa 2028-10) |
 | Python 3.14 | 2030-10 | 6 Monate | PEP 745 | – (Vorlauf nach Projektdauer) |
 | httpx 0.28 – Python 3.14 nicht offiziell deklariert, Pflege schwach | Nachprüfung 2027-03-26 | – | PyPI; auf 3.14.7 validiert 2026-09-26 (Schritt 1.3, `spikes/httpx-python-314/README.md`) | D.3 – Nachprüfung 2027-03-26 |
 | TypeScript 7 – neue Linie, noch nicht reif | Nachprüfung 2027-01-08 | – | TypeScript-Devblog | D.2 |

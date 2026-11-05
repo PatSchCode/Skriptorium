@@ -116,6 +116,22 @@ Die bisher in `ci.yml` eingetragenen v7-Actions erfüllen die Mindestreife nicht
 
 Starlette 1.7.0 (transitiv über FastAPI 0.141.1) meldet beim Import von `fastapi.testclient`: „Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead." (`StarletteDeprecationWarning`). Mit `filterwarnings = error` bricht jeder Test ab. `httpx2` ist die von Pydantic übernommene Fortführung von httpx (<https://github.com/pydantic/httpx2>, BSD-3-Clause); Linie 2 erschien am 2026-05-12 und erreicht die Mindestreife erst am 2026-11-12. Vorschlag: benannte Ausnahme im Warnungs-Bestand bis zum Wechsel; Wechsel von Tests und `ai_gateway` auf httpx2 als datierter Schritt (Offener Punkt 11).
 
+### Wechsel auf Node.js 26 (D.1, 2026-11-05, ADR-112)
+
+Quellen abgerufen 2026-11-05: `https://raw.githubusercontent.com/nodejs/Release/main/schedule.json`, `https://nodejs.org/dist/index.json`, `https://nodejs.org/dist/v26.12.1/SHASUMS256.txt`, npm-Registry (`engines`), Docker Hub (`library/node`), CI-Konfiguration von Vite und Vitest (`main`).
+
+| Bestandteil | bisher | neu | Begründung | Kompatibilität |
+|---|---|---|---|---|
+| Node.js | 24.21.0 | 26.12.1 | Linie 26 seit 2026-05-05 (6 Monate am 2026-11-05), LTS seit 2026-10-28, Lebensende 2029-04-30; 26.12 ist die neueste Minor mit Patch (26.12.1, Sicherheits-Release 2026-10-21), 26.13.0 noch ohne Patch | – |
+| npm | 11.19.0 | 11.20.0 | mit 26.12.1 gebündelt | – |
+| @types/node | 24.19.0 | 26.6.6 | neueste Minor der Linie 26 mit Patch | – |
+| Docker `node:…-slim` | 24.21.0 | 26.12.1 | Abbild vorhanden | – |
+| vite 8.3.4, @vitejs/plugin-react 6.1.1 | – | unverändert | – | `engines ^20.19.0 \|\| >=22.12.0`; CI von Vite testet Node 20, 22, 24, 26 |
+| vitest 4.1.11, eslint 10.9.1, jsdom 29.1.1 | – | unverändert | – | `engines … >=24`; CI von Vitest testet Node 24 und 26 |
+| @playwright/test 1.62.1, typescript 6.0.3, prettier 3.9.9 | – | unverändert | – | `engines >=20` bzw. älter |
+
+SHA-256 der Archive (für `scripts/session-start.sh`): `node-v26.12.1-linux-x64.tar.xz` `6170b2d474e1c626f43cff3adc118df9fe3b573258a4fc3d850c8dbc6b079bbd`, `node-v26.12.1-darwin-arm64.tar.xz` `18830bf448fe187c650dc28c98aa8c968ed1d40b6dd032c081e70a384a1bf660`.
+
 ### Offene Punkte (Fortsetzung)
 
 - **9 – Linien ohne Patch-Versionen** (pytest-cov 7, setup-python v6, setup-node v6, pre-commit-hooks v6): Diese Hersteller liefern Korrekturen als Minor- statt als Patch-Versionen. Streng nach Mindestreife und Regel-001 fielen sie auf ältere Linien zurück (pytest-cov 6.2.1 ohne deklariertes Python 3.13/3.14; setup-python v5.1.1 und setup-node v4 aus 2024). Zur Entscheidung.

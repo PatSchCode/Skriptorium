@@ -29,6 +29,23 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [ONBOARDING-VALIDATION] Node 26 (D.1)
+
+- Frischer Worktree von `9fa8665`: `scripts/session-start.sh` lud Node 26.12.1 (SHA-256 passt), `npm ci`-Stand mit 270 Paketen, Pre-Commit-Hook; danach `npm run build` grün, 585/585 Komponenten-Tests, Stichprobe 152 Python-Tests (`tests/context`). Worktree danach entfernt. Kein Befund.
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-112 Node 26 (D.1), umgesetzt (lokal)
+
+- Versionstabelle vorgelegt (Quellen: `schedule.json`, `dist/index.json`, npm-Registry, Docker Hub, CI von Vite und Vitest); Eigentümer: „26.12.1“ (Empfehlung nach der Reiferegel; 26.13.0 ohne Patch). Reaktiv-Quote 0/10 (ADR-103 bis ADR-112).
+- Umgestellt: CI, Dockerfile, `scripts/session-start.sh` (neue SHA-256), `package.json` (`engines`, `@types/node` 26.6.6; transitiv `undici-types` 7.24.6 → 8.9.0), README, Runbook, Projektkontext, Ablaufdaten-Register (Node 26 bis 2029-04-30).
+- [GELÖST] Auf Node 26 scheiterten 18 von 585 Komponenten-Tests (`theme.test.tsx`, `CanonFact.test.tsx`) mit `ExperimentalWarning: localStorage is not available because --localstorage-file was not provided`: Node 26 bringt ein eigenes `localStorage` mit, das ohne Speicherdatei unbrauchbar ist und das von jsdom verdeckt. Lösung: `execArgv: ["--no-experimental-webstorage"]` in `vite.config.ts` (Test-Worker); danach 585/585 grün, 0 Warnungen. Die App selbst ist nicht betroffen (Browser).
+- Geprüft auf Node 26.12.1 lokal: tsc, eslint, Prettier (Repo-Dateien), 585 Komponenten-Tests (Zeilen 98,92 %), `vite build`, 15 End-to-End-Tests; Docker-Bauabschnitt `ui` mit `node:26.12.1-slim` gebaut (arm64, Probe danach gelöscht).
+- [BEOBACHTUNG] `npm audit` meldet zwei mittlere Befunde in Entwicklungswerkzeugen, unabhängig vom Node-Wechsel: `@vitest/mocker` ≤ 4.1.11 (GHSA-qxg6-89mg-rqv8, GHSA-xp26-3454-mjgp; behoben in vitest 4.1.12) und `minimatch` 7.0.0–11.0.0 über `@eslint/config-array` (GHSA-g3hv-75wg-m249; npm schlägt eslint 9 vor, also Rückschritt). Die CI prüft `--audit-level=high` und bleibt grün; nicht nebenbei behoben (keine Scope-Erweiterung) – dem Eigentümer vorgelegt.
+
+### 2026-11-05 – [BEOBACHTUNG] 10.7 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #211, CI vier Jobs grün (Python 1:57, Pre-Commit 1:47, TypeScript 2:32, E2E 12:33), keine Hinweise außer der Ubuntu-26-Meldung. Zusammengeführt mit `--match-head-commit` → `39c9db4`. Server läuft weiter `5aa544a`. Doku-Nachtrag lokal auf `docs/10.7-zusammengefuehrt`.
+- Mini-Reibung: Der E2E-Job brauchte 12:33 statt sonst rund 2:30 – davon 10:43 für „Chromium für Playwright installieren“ (Download), die Tests selbst 46 s. Kein Code-Befund; tritt es wieder auf, Cache für Playwright-Browser prüfen.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.7 umgesetzt (lokal)
 
 - Nach ADR-111 auf `feat/10.7-bilder-beim-schreiben` (von `main` `5aa544a` plus `docs/10.6-zusammengefuehrt`); Zahlen im Fahrplan bei 10.7. 10.6 wartet weiter auf die Abnahme; 10.7 berührt die Kapitelbilder nicht.
