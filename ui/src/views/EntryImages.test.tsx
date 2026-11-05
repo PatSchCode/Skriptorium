@@ -346,6 +346,25 @@ describe("images of a canon entry (step 7.6)", () => {
     });
   });
 
+  it("stays on the image and shows why when removing it fails", async () => {
+    fakeApi({
+      [`DELETE ${BASE}/kael-b.jpg`]: fail(500, "Entfernen gescheitert"),
+    });
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+    const changed = vi.fn();
+    const user = userEvent.setup();
+    render(<EntryImages entry={WITH_THREE} editable onChanged={changed} />);
+    await user.click(
+      screen.getByRole("button", { name: "Bild 2 groß zeigen" }),
+    );
+    await user.click(screen.getByRole("button", { name: "Entfernen" }));
+    expect(await screen.findByText("Entfernen gescheitert")).toBeDefined();
+    expect(changed).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole("dialog", { name: "Kael, Bild 2 von 3" }),
+    ).toBeDefined();
+  });
+
   it("stays on the image and shows why when making it the main image fails", async () => {
     fakeApi({
       [`POST ${BASE}/kael-b.jpg/main`]: fail(500, "Tausch gescheitert"),

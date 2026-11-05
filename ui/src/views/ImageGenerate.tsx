@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   api,
   describeError,
@@ -11,6 +11,10 @@ import {
 } from "../api";
 import { ErrorText } from "./Common";
 import type { Basis } from "./ImageOriginPanel";
+import { useElapsed } from "./useElapsed";
+import { useImageModels } from "./useImageModels";
+import { useImagePrice } from "./useImagePrice";
+import { useImageRequest } from "./useImageRequest";
 
 const FORMATS: readonly { id: AspectRatio; label: string }[] = [
   { id: "2:3", label: "Hochformat" },
@@ -60,110 +64,26 @@ export function ImageGenerate({
   onTakeOver: (image: Blob, origin: ImageOrigin) => Promise<void>;
   onClose: () => void;
 }) {
-  const [prompt, setPrompt] = useState(initialPrompt);
-  // A new starting text (places chosen, looks added) replaces the description (step 9.5).
-  const [shownInitial, setShownInitial] = useState(initialPrompt);
-  if (initialPrompt !== shownInitial) {
-    setShownInitial(initialPrompt);
-    setPrompt(initialPrompt);
-  }
-  const [format, setFormat] = useState<AspectRatio>(initialFormat);
-  // Until the author picks a format, it follows the proportions of the basis.
-  const [formatPicked, setFormatPicked] = useState(false);
-  const [models, setModels] = useState<{ id: string; name: string }[] | null>(
-    null,
-  );
-  const [model, setModel] = useState("");
-  // The price with the model it belongs to, so a stale one is never shown.
-  const [priced, setPriced] = useState<{
-    model: string;
-    price: ImagePrice;
-  } | null>(null);
-  const [ready, setReady] = useState(true);
+  const request = useImageRequest(initialPrompt, initialFormat);
   const [busy, setBusy] = useState(false);
-  const [startedAt, setStartedAt] = useState(0);
-  const [now, setNow] = useState(0);
   const [result, setResult] = useState<GeneratedImage | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const withBasis = basis !== null;
-
-  useEffect(() => {
-    let current = true;
-    api
-      .imageModels()
-      .then((list) => {
-        if (!current) {
-          return;
-        }
-        const offered = withBasis
-          ? list.models.filter((m) => m.references > 0)
-          : list.models;
-        setModels(offered);
-        setReady(list.ready);
-        const wanted = [initialModel, list.default];
-        const preset =
-          wanted.find((id) => offered.some((m) => m.id === id)) ??
-          offered[0]?.id ??
-          "";
-        setModel(preset);
-      })
-      .catch((reason: unknown) => {
-        if (current) {
-          setError(describeError(reason));
-          setModels([]);
-        }
-      });
-    return () => {
-      current = false;
-    };
-  }, [initialModel, withBasis]);
-
-  useEffect(() => {
-    if (model === "") {
-      return;
-    }
-    let current = true;
-    api
-      .imagePrice(model)
-      .then((found) => {
-        if (current) {
-          setPriced({ model, price: found });
-        }
-      })
-      .catch(() => {
-        if (current) {
-          setPriced({ model, price: { cost_usd: null, unit: null } });
-        }
-      });
-    return () => {
-      current = false;
-    };
-  }, [model]);
-
-  useEffect(() => {
-    if (!busy) {
-      return;
-    }
-    const timer = window.setInterval(() => {
-      setNow(Date.now());
-    }, 1000);
-    return () => {
-      window.clearInterval(timer);
-    };
-  }, [busy]);
+  const choice = useImageModels(initialModel, basis !== null, setError);
+  const price = useImagePrice(choice.model);
+  const elapsed = useElapsed(busy);
+  const prompt = request.prompt.trim();
 
   async function generate() {
-    setStartedAt(Date.now());
-    setNow(Date.now());
+    elapsed.start();
     setBusy(true);
     setError(null);
     setResult(null);
     try {
       setResult(
         await api.generateImage({
-          model,
-          prompt: prompt.trim(),
-          aspect_ratio: format,
+          model: choice.model,
+          prompt,
+          aspect_ratio: request.format,
           ...target,
           ...(basis === null ? {} : { reference: basis.reference }),
         }),
@@ -184,8 +104,8 @@ export function ImageGenerate({
     try {
       await onTakeOver(blobOf(result), {
         model: result.model,
-        prompt: prompt.trim(),
-        aspect_ratio: format,
+        prompt,
+        aspect_ratio: request.format,
         cost_usd: result.cost_usd,
         ...(basis === null ? {} : { basis: shortLabel(basis.label) }),
       });
@@ -196,138 +116,38 @@ export function ImageGenerate({
     }
   }
 
-  const name = models?.find((m) => m.id === model)?.name ?? model;
-  const price = priced?.model === model ? priced.price : null;
-  const seconds = Math.max(0, Math.round((now - startedAt) / 1000));
-
   return (
     <div className="image-generate" role="group" aria-label={title}>
       <h3>{title}</h3>
-      {!ready && (
+      {!choice.ready && (
         <p className="note">
           Der KI-Anbieter ist nicht eingerichtet – Bilder erzeugen geht gerade
           nicht.
         </p>
       )}
       {result === null ? (
-        <>
-          {hint !== null && <div className="image-generate-hint">{hint}</div>}
-          {extra}
-          {basis !== null && (
-            <div className="image-generate-basis">
-              <img
-                src={basis.src}
-                alt=""
-                onLoad={(event) => {
-                  const { naturalWidth, naturalHeight } = event.currentTarget;
-                  if (!formatPicked && naturalWidth > 0 && naturalHeight > 0) {
-                    setFormat(nearestFormat(naturalWidth / naturalHeight));
-                  }
-                }}
-              />
-              <div>
-                <b>Grundlage</b>
-                <span className="note">
-                  {basis.label} · geht mit an das Bildmodell
-                </span>
-              </div>
-            </div>
-          )}
-          <label className="image-generate-field">
-            {basis === null
-              ? "Bildbeschreibung (änderbar)"
-              : "Was soll sich ändern?"}
-            <textarea
-              rows={5}
-              maxLength={4000}
-              value={prompt}
-              placeholder={
-                basis === null
-                  ? undefined
-                  : "z. B. derselbe Mann im Winter, mit schwerem Wollmantel"
-              }
-              disabled={busy}
-              onChange={(event) => {
-                setPrompt(event.target.value);
-              }}
-            />
-          </label>
-          <div
-            className="image-generate-formats"
-            role="radiogroup"
-            aria-label="Format"
-          >
-            {FORMATS.map((entry) => (
-              <button
-                key={entry.id}
-                type="button"
-                role="radio"
-                aria-checked={format === entry.id}
-                className={format === entry.id ? "chosen" : undefined}
-                disabled={busy}
-                onClick={() => {
-                  setFormat(entry.id);
-                  setFormatPicked(true);
-                }}
-              >
-                {entry.label}
-              </button>
-            ))}
-          </div>
-          {models !== null && models.length > 0 && (
-            <label className="image-generate-field">
-              Modell
-              <select
-                value={model}
-                disabled={busy}
-                onChange={(event) => {
-                  setModel(event.target.value);
-                }}
-              >
-                {models.map((entry) => (
-                  <option key={entry.id} value={entry.id}>
-                    {entry.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
-          {models !== null && models.length > 0 && initialModel === null && (
-            <p className="note">
-              Aus den Einstellungen. Eine andere Wahl gilt nur für dieses Bild.
-            </p>
-          )}
-          {models !== null && models.length === 0 && error === null && (
-            <p className="note">
-              {basis === null
-                ? "Gerade sind keine Bildmodelle verfügbar."
-                : "Gerade nimmt kein Bildmodell ein Ausgangsbild an."}
-            </p>
-          )}
-          <p className="note">
-            {describePrice(price)}
-            {basis !== null &&
-              price !== null &&
-              ` · ${describeBasisPrice(price)}`}
-          </p>
-        </>
+        <ImageGenerateForm
+          hint={hint}
+          extra={extra}
+          basis={basis}
+          request={request}
+          choice={choice}
+          initialModel={initialModel}
+          price={price}
+          busy={busy}
+          failed={error !== null}
+        />
       ) : (
-        <>
-          <img
-            className="image-generate-preview"
-            src={`data:${result.media_type};base64,${result.content}`}
-            alt="Vorschau des erzeugten Bildes"
-          />
-          <p className="note">
-            {name} ·{" "}
-            {result.cost_usd === null
-              ? "Kosten nicht gemeldet"
-              : `Kosten ${formatCost(result.cost_usd)}`}
-          </p>
-        </>
+        <GeneratedPreview
+          result={result}
+          name={
+            choice.models?.find((m) => m.id === choice.model)?.name ??
+            choice.model
+          }
+        />
       )}
       {busy && result === null && (
-        <p className="note">Bild wird erzeugt … {String(seconds)} s</p>
+        <p className="note">Bild wird erzeugt … {String(elapsed.seconds)} s</p>
       )}
       <ErrorText message={error} />
       <div className="row">
@@ -335,7 +155,9 @@ export function ImageGenerate({
           <button
             type="button"
             className="primary"
-            disabled={busy || !ready || model === "" || prompt.trim() === ""}
+            disabled={
+              busy || !choice.ready || choice.model === "" || prompt === ""
+            }
             onClick={() => void generate()}
           >
             ✨ Erzeugen
@@ -380,6 +202,190 @@ export function ImageGenerate({
         </button>
       </div>
     </div>
+  );
+}
+
+/**
+ * What the author fills in before generating: hint and extra choices of the caller, the basis,
+ * the description, format, model and the price beforehand.
+ */
+function ImageGenerateForm({
+  hint,
+  extra,
+  basis,
+  request,
+  choice,
+  initialModel,
+  price,
+  busy,
+  failed,
+}: {
+  hint: ReactNode;
+  extra: ReactNode;
+  basis: Basis | null;
+  request: ReturnType<typeof useImageRequest>;
+  choice: ReturnType<typeof useImageModels>;
+  initialModel: string | null;
+  price: ImagePrice | null;
+  busy: boolean;
+  /** An error is shown already; then no note about missing models. */
+  failed: boolean;
+}) {
+  const { models } = choice;
+  return (
+    <>
+      {hint !== null && <div className="image-generate-hint">{hint}</div>}
+      {extra}
+      {basis !== null && (
+        <BasisPreview basis={basis} onProportions={request.followBasis} />
+      )}
+      <label className="image-generate-field">
+        {basis === null
+          ? "Bildbeschreibung (änderbar)"
+          : "Was soll sich ändern?"}
+        <textarea
+          rows={5}
+          maxLength={4000}
+          value={request.prompt}
+          placeholder={
+            basis === null
+              ? undefined
+              : "z. B. derselbe Mann im Winter, mit schwerem Wollmantel"
+          }
+          disabled={busy}
+          onChange={(event) => {
+            request.setPrompt(event.target.value);
+          }}
+        />
+      </label>
+      <FormatChoice
+        format={request.format}
+        busy={busy}
+        onPick={request.pickFormat}
+      />
+      {models !== null && models.length > 0 && (
+        <label className="image-generate-field">
+          Modell
+          <select
+            value={choice.model}
+            disabled={busy}
+            onChange={(event) => {
+              choice.setModel(event.target.value);
+            }}
+          >
+            {models.map((entry) => (
+              <option key={entry.id} value={entry.id}>
+                {entry.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      {models !== null && models.length > 0 && initialModel === null && (
+        <p className="note">
+          Aus den Einstellungen. Eine andere Wahl gilt nur für dieses Bild.
+        </p>
+      )}
+      {models !== null && models.length === 0 && !failed && (
+        <p className="note">
+          {basis === null
+            ? "Gerade sind keine Bildmodelle verfügbar."
+            : "Gerade nimmt kein Bildmodell ein Ausgangsbild an."}
+        </p>
+      )}
+      <p className="note">
+        {describePrice(price)}
+        {basis !== null && price !== null && ` · ${describeBasisPrice(price)}`}
+      </p>
+    </>
+  );
+}
+
+/** The stored image a new one is made from (step 9.8); reports its proportions once loaded. */
+function BasisPreview({
+  basis,
+  onProportions,
+}: {
+  basis: Basis;
+  onProportions: (format: AspectRatio) => void;
+}) {
+  return (
+    <div className="image-generate-basis">
+      <img
+        src={basis.src}
+        alt=""
+        onLoad={(event) => {
+          const { naturalWidth, naturalHeight } = event.currentTarget;
+          if (naturalWidth > 0 && naturalHeight > 0) {
+            onProportions(nearestFormat(naturalWidth / naturalHeight));
+          }
+        }}
+      />
+      <div>
+        <b>Grundlage</b>
+        <span className="note">{basis.label} · geht mit an das Bildmodell</span>
+      </div>
+    </div>
+  );
+}
+
+/** Portrait, square or landscape. */
+function FormatChoice({
+  format,
+  busy,
+  onPick,
+}: {
+  format: AspectRatio;
+  busy: boolean;
+  onPick: (format: AspectRatio) => void;
+}) {
+  return (
+    <div
+      className="image-generate-formats"
+      role="radiogroup"
+      aria-label="Format"
+    >
+      {FORMATS.map((entry) => (
+        <button
+          key={entry.id}
+          type="button"
+          role="radio"
+          aria-checked={format === entry.id}
+          className={format === entry.id ? "chosen" : undefined}
+          disabled={busy}
+          onClick={() => {
+            onPick(entry.id);
+          }}
+        >
+          {entry.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** The generated image before it is taken over, with the model and the real cost. */
+function GeneratedPreview({
+  result,
+  name,
+}: {
+  result: GeneratedImage;
+  name: string;
+}) {
+  return (
+    <>
+      <img
+        className="image-generate-preview"
+        src={`data:${result.media_type};base64,${result.content}`}
+        alt="Vorschau des erzeugten Bildes"
+      />
+      <p className="note">
+        {name} ·{" "}
+        {result.cost_usd === null
+          ? "Kosten nicht gemeldet"
+          : `Kosten ${formatCost(result.cost_usd)}`}
+      </p>
+    </>
   );
 }
 

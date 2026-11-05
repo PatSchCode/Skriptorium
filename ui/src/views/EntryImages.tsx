@@ -1,16 +1,9 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ChangeEvent,
-  type ReactNode,
-} from "react";
+import { useRef, useState, type ChangeEvent } from "react";
 import { api, describeError, type CanonEntry } from "../api";
 import { base64, shrinkImage } from "../files";
 import { ErrorText } from "./Common";
 import { entryPrompt, lacksAppearance } from "../imagePrompts";
-import { APPEARANCE, PURPOSE, readSection } from "../sections";
-import { AppearanceExtract } from "./AppearanceExtract";
+import { APPEARANCE } from "../sections";
 import { ImageDescription } from "./ImageDescription";
 import { ImageGenerate } from "./ImageGenerate";
 import {
@@ -18,6 +11,8 @@ import {
   seedOf,
   type GenerateSeed,
 } from "./ImageOriginPanel";
+import { ImageViewer } from "./ImageViewer";
+import { LooksHint } from "./LooksHint";
 import { SectionConflict } from "./SectionConflict";
 import { useSectionChoice } from "./useSectionChoice";
 
@@ -44,17 +39,15 @@ export function EntryImages({
   onEdit?: () => void;
 }) {
   const [shown, setShown] = useState<number | null>(null);
-  const [describing, setDescribing] = useState<string | null>(null);
-  const [choosing, setChoosing] = useState(false);
   const [generating, setGenerating] = useState(false);
-  // Set when an image is generated anew from the origin of another (step 9.6).
+  // Set when an image is generated anew from another (origin or basis, steps 9.6 and 9.8).
   const [seed, setSeed] = useState<GenerateSeed | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const picker = useRef<HTMLInputElement>(null);
   const { place, asking } = useSectionChoice();
   const images = entry.images;
   const source = (image: string) => api.imagePath(entry.world, entry.id, image);
+  const canAdd = editable && images.length < MAX_IMAGES;
 
   if (images.length === 0 && !editable) {
     return null;
@@ -74,106 +67,34 @@ export function EntryImages({
     }
   }
 
-  async function add(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    event.target.value = "";
-    if (file === undefined) {
-      return;
-    }
-    await change(async () =>
-      api.addImage(
-        entry.world,
-        entry.id,
-        await base64(await shrinkImage(file)),
-      ),
-    );
+  function generateFrom(from: GenerateSeed) {
+    setSeed(from);
+    setGenerating(true);
+    setShown(null);
   }
 
   return (
     <div className="entry-images">
-      {images[0] !== undefined && (
-        <button
-          type="button"
-          className="entry-image-main"
-          onClick={() => {
-            setShown(0);
-          }}
-        >
-          <img src={source(images[0])} alt={`${entry.name}, Hauptbild`} />
-        </button>
-      )}
-      {(images.length > 1 || editable) && (
-        <div className="entry-image-thumbs">
-          {images.map((image, at) => (
-            <button
-              key={image}
-              type="button"
-              className={at === 0 ? "chosen" : undefined}
-              aria-label={`Bild ${String(at + 1)} groß zeigen`}
-              onClick={() => {
-                setShown(at);
-              }}
-            >
-              <img src={source(image)} alt="" />
-            </button>
-          ))}
-          {editable && images.length < MAX_IMAGES && (
-            <button
-              type="button"
-              className="entry-image-add"
-              aria-label="Bild hinzufügen"
-              title="Bild hinzufügen"
-              aria-expanded={choosing}
-              disabled={busy}
-              onClick={() => {
-                setChoosing((open) => !open);
-              }}
-            >
-              ＋
-            </button>
-          )}
-          {choosing && (
-            <div className="add-choice" role="menu">
-              <button
-                type="button"
-                role="menuitem"
-                onClick={() => {
-                  setChoosing(false);
-                  picker.current?.click();
-                }}
-              >
-                Bild hochladen
-              </button>
-              <button
-                type="button"
-                role="menuitem"
-                onClick={() => {
-                  setChoosing(false);
-                  setGenerating(true);
-                }}
-              >
-                ✨ Bild erzeugen
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-      {editable && (
-        <input
-          ref={picker}
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={(event) => void add(event)}
-        />
-      )}
-      <p className="note entry-image-note">
-        {busy
-          ? "Bild wird verkleinert und gespeichert …"
-          : images.length === 0
-            ? "Noch kein Bild – „＋“ fügt eins hinzu"
-            : `${String(images.length)} ${images.length === 1 ? "Bild" : "Bilder"} · Tipp auf ein Bild zeigt es groß`}
-      </p>
+      <EntryImageStrip
+        entry={entry}
+        source={source}
+        editable={editable}
+        canAdd={canAdd}
+        busy={busy}
+        onShow={setShown}
+        onUpload={(file) =>
+          void change(async () =>
+            api.addImage(
+              entry.world,
+              entry.id,
+              await base64(await shrinkImage(file)),
+            ),
+          )
+        }
+        onGenerate={() => {
+          setGenerating(true);
+        }}
+      />
       <ErrorText message={error} />
       {generating && (
         <ImageGenerate
@@ -209,108 +130,42 @@ export function EntryImages({
         />
       )}
       {shown !== null && images[shown] !== undefined && (
-        <ImageViewer
-          name={entry.name}
-          images={images}
+        <EntryImageView
+          entry={entry}
           at={shown}
+          image={images[shown]}
           source={source}
           editable={editable}
+          canAdd={canAdd}
           busy={busy}
-          onMove={(at) => {
-            setShown(at);
-            setDescribing(null);
-          }}
+          place={place}
+          onMove={setShown}
           onClose={() => {
             setShown(null);
-            setDescribing(null);
           }}
-          onDescribe={setDescribing}
-          onBuildOn={
-            editable && images.length < MAX_IMAGES
-              ? (image) => {
-                  setSeed({
-                    prompt: "",
-                    format: defaultFormat(entry),
-                    model: null,
-                    basis: {
-                      reference: {
-                        world: entry.world,
-                        entry: entry.id,
-                        image,
-                      },
-                      label: `Bild ${String(images.indexOf(image) + 1)} von ${entry.name}`,
-                      src: source(image),
-                    },
-                  });
-                  setGenerating(true);
-                  setShown(null);
-                  setDescribing(null);
-                }
-              : undefined
-          }
+          onGenerate={generateFrom}
+          onChanged={onChanged}
           onMain={(image) =>
-            void change(() =>
-              api.setMainImage(entry.world, entry.id, image),
-            ).then((done) => {
-              if (done) {
-                setShown(0);
-              }
-            })
-          }
-          onRemove={(image) => {
-            if (!window.confirm("Dieses Bild wirklich entfernen?")) {
-              return;
-            }
-            void change(() =>
-              api.removeImage(entry.world, entry.id, image),
-            ).then((done) => {
-              if (done) {
-                setShown(images.length > 1 ? Math.max(0, shown - 1) : null);
-                setDescribing(null);
-              }
-            });
-          }}
-        >
-          <ImageOriginPanel
-            key={images[shown]}
-            load={() =>
-              api.imageOrigin(entry.world, entry.id, images[shown] ?? "")
-            }
-            onRegenerate={
-              editable && images.length < MAX_IMAGES
-                ? (origin) => {
-                    setSeed(seedOf(origin, defaultFormat(entry)));
-                    setGenerating(true);
-                    setShown(null);
-                    setDescribing(null);
-                  }
-                : undefined
-            }
-          />
-          {describing !== null && (
-            <ImageDescription
-              key={describing}
-              title={`Aussehen von ${entry.name}`}
-              path={api.describeImagePath(entry.world, entry.id, describing)}
-              takeOverLabel="Übernehmen als „Aussehen“"
-              onTakeOver={async (text) => {
-                // The current text, in case it changed elsewhere meanwhile.
-                const fresh = await api.entry(entry.world, entry.id);
-                const body = await place(fresh.body, APPEARANCE, text);
-                if (body === null) {
-                  return false;
+            change(() => api.setMainImage(entry.world, entry.id, image)).then(
+              (done) => {
+                if (done) {
+                  setShown(0);
                 }
-                onChanged(
-                  await api.updateEntry(entry.world, entry.id, { body }),
-                );
-                return true;
-              }}
-              onClose={() => {
-                setDescribing(null);
-              }}
-            />
-          )}
-        </ImageViewer>
+                return done;
+              },
+            )
+          }
+          onRemove={(image) =>
+            change(() => api.removeImage(entry.world, entry.id, image)).then(
+              (done) => {
+                if (done) {
+                  setShown(images.length > 1 ? Math.max(0, shown - 1) : null);
+                }
+                return done;
+              },
+            )
+          }
+        />
       )}
       <SectionConflict asking={asking} />
     </div>
@@ -322,233 +177,242 @@ function defaultFormat(entry: CanonEntry): "2:3" | "3:2" {
   return entry.category === "figur" ? "2:3" : "3:2";
 }
 
-/** One image large over the page; arrow keys browse, Escape closes. */
-function ImageViewer({
-  name,
-  images,
-  at,
+/** The main image, the previews and "＋" with its choice: upload or generate (step 9.5). */
+function EntryImageStrip({
+  entry,
   source,
   editable,
+  canAdd,
   busy,
-  onMove,
-  onClose,
-  onMain,
-  onRemove,
-  onDescribe,
-  onBuildOn,
-  children,
+  onShow,
+  onUpload,
+  onGenerate,
 }: {
-  name: string;
-  images: readonly string[];
-  at: number;
+  entry: CanonEntry;
   source: (image: string) => string;
   editable: boolean;
+  canAdd: boolean;
   busy: boolean;
-  onMove: (at: number) => void;
-  onClose: () => void;
-  onMain: (image: string) => void;
-  onRemove: (image: string) => void;
-  onDescribe: (image: string) => void;
-  /** Opens "Bild erzeugen" with the image as basis (step 9.8); missing: no button. */
-  onBuildOn?: (image: string) => void;
-  /** Shown under the bar: the description of the image (step 7.13). */
-  children?: ReactNode;
+  onShow: (at: number) => void;
+  onUpload: (file: File) => void;
+  onGenerate: () => void;
 }) {
-  const close = useRef<HTMLButtonElement>(null);
-  const image = images[at] ?? "";
-  const count = images.length;
-  const label = `${name}, Bild ${String(at + 1)} von ${String(count)}`;
+  const [choosing, setChoosing] = useState(false);
+  const picker = useRef<HTMLInputElement>(null);
+  const images = entry.images;
 
-  useEffect(() => {
-    close.current?.focus();
-  }, []);
-
-  useEffect(() => {
-    function key(event: KeyboardEvent) {
-      const target = event.target;
-      const typing =
-        target instanceof HTMLTextAreaElement ||
-        target instanceof HTMLInputElement ||
-        target instanceof HTMLSelectElement;
-      // Keys in a field (the description) stay in the field.
-      if (typing) {
-        return;
-      }
-      if (event.key === "Escape") {
-        onClose();
-      } else if (event.key === "ArrowLeft" && count > 1) {
-        onMove((at - 1 + count) % count);
-      } else if (event.key === "ArrowRight" && count > 1) {
-        onMove((at + 1) % count);
-      }
+  function add(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (file !== undefined) {
+      onUpload(file);
     }
-    window.addEventListener("keydown", key);
-    return () => {
-      window.removeEventListener("keydown", key);
-    };
-  }, [at, count, onClose, onMove]);
+  }
 
   return (
-    <div
-      className="overlay image-viewer-veil"
-      onClick={(event) => {
-        if (event.target === event.currentTarget) {
-          onClose();
-        }
-      }}
-    >
-      <div
-        className={
-          children === undefined || children === false || children === null
-            ? "image-viewer"
-            : "image-viewer describing"
-        }
-        role="dialog"
-        aria-modal="true"
-        aria-label={label}
-      >
-        <img src={source(image)} alt={label} />
-        <div className="image-viewer-bar">
-          {count > 1 && (
-            <>
+    <>
+      {images[0] !== undefined && (
+        <button
+          type="button"
+          className="entry-image-main"
+          onClick={() => {
+            onShow(0);
+          }}
+        >
+          <img src={source(images[0])} alt={`${entry.name}, Hauptbild`} />
+        </button>
+      )}
+      {(images.length > 1 || editable) && (
+        <div className="entry-image-thumbs">
+          {images.map((image, at) => (
+            <button
+              key={image}
+              type="button"
+              className={at === 0 ? "chosen" : undefined}
+              aria-label={`Bild ${String(at + 1)} groß zeigen`}
+              onClick={() => {
+                onShow(at);
+              }}
+            >
+              <img src={source(image)} alt="" />
+            </button>
+          ))}
+          {canAdd && (
+            <button
+              type="button"
+              className="entry-image-add"
+              aria-label="Bild hinzufügen"
+              title="Bild hinzufügen"
+              aria-expanded={choosing}
+              disabled={busy}
+              onClick={() => {
+                setChoosing((open) => !open);
+              }}
+            >
+              ＋
+            </button>
+          )}
+          {choosing && (
+            <div className="add-choice" role="menu">
               <button
                 type="button"
-                className="ghost"
+                role="menuitem"
                 onClick={() => {
-                  onMove((at - 1 + count) % count);
+                  setChoosing(false);
+                  picker.current?.click();
                 }}
               >
-                ‹ voriges
+                Bild hochladen
               </button>
               <button
                 type="button"
-                className="ghost"
+                role="menuitem"
                 onClick={() => {
-                  onMove((at + 1) % count);
+                  setChoosing(false);
+                  onGenerate();
                 }}
               >
-                nächstes ›
+                ✨ Bild erzeugen
               </button>
-            </>
+            </div>
           )}
-          {editable && (
-            <button
-              type="button"
-              className="ghost"
-              disabled={busy}
-              onClick={() => {
-                onDescribe(image);
-              }}
-            >
-              ✨ Von der KI beschreiben lassen
-            </button>
-          )}
-          {onBuildOn !== undefined && (
-            <button
-              type="button"
-              className="ghost"
-              disabled={busy}
-              onClick={() => {
-                onBuildOn(image);
-              }}
-            >
-              ✨ Als Grundlage für ein neues Bild
-            </button>
-          )}
-          <span className="image-viewer-gap" />
-          {editable && at > 0 && (
-            <button
-              type="button"
-              className="ghost"
-              disabled={busy}
-              onClick={() => {
-                onMain(image);
-              }}
-            >
-              Zum Hauptbild machen
-            </button>
-          )}
-          {editable && (
-            <button
-              type="button"
-              className="ghost"
-              disabled={busy}
-              onClick={() => {
-                onRemove(image);
-              }}
-            >
-              Entfernen
-            </button>
-          )}
-          <button ref={close} type="button" className="ghost" onClick={onClose}>
-            Schließen
-          </button>
         </div>
-        {children}
-      </div>
-    </div>
+      )}
+      {editable && (
+        <input
+          ref={picker}
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={add}
+        />
+      )}
+      <p className="note entry-image-note">
+        {busy
+          ? "Bild wird verkleinert und gespeichert …"
+          : images.length === 0
+            ? "Noch kein Bild – „＋“ fügt eins hinzu"
+            : `${String(images.length)} ${images.length === 1 ? "Bild" : "Bilder"} · Tipp auf ein Bild zeigt es groß`}
+      </p>
+    </>
   );
 }
 
 /**
- * What an image of an entry without "Aussehen" misses, with a way to add it (step 9.5,
- * ADR-094): "✨ Aussehen herauslösen" right here (ADR-078; places and items since step 10.3,
- * ADR-108), for a place or an item also "✎ Selbst ergänzen" (opens editing).
+ * One image of the entry large (`ImageViewer`) with its origin (step 9.6) and, on request, its
+ * description by the AI taken over as "Aussehen" (step 7.13); "Als Grundlage" and "Neu erzeugen"
+ * open "Bild erzeugen" with a seed (steps 9.6 and 9.8). `onMain` and `onRemove` resolve to
+ * whether the change went through.
  */
-function LooksHint({
+function EntryImageView({
   entry,
-  onEdit,
+  at,
+  image: shownImage,
+  source,
+  editable,
+  canAdd,
+  busy,
+  place,
+  onMove,
+  onClose,
+  onGenerate,
   onChanged,
+  onMain,
+  onRemove,
 }: {
   entry: CanonEntry;
-  onEdit?: () => void;
+  at: number;
+  /** The image at `at`. */
+  image: string;
+  source: (image: string) => string;
+  editable: boolean;
+  canAdd: boolean;
+  busy: boolean;
+  place: ReturnType<typeof useSectionChoice>["place"];
+  onMove: (at: number) => void;
+  onClose: () => void;
+  onGenerate: (seed: GenerateSeed) => void;
   onChanged: (entry: CanonEntry) => void;
+  onMain: (image: string) => Promise<boolean>;
+  onRemove: (image: string) => Promise<boolean>;
 }) {
-  const [extracting, setExtracting] = useState(false);
-  if (extracting) {
-    return (
-      <AppearanceExtract
-        entry={entry}
-        onChanged={(changed) => {
-          setExtracting(false);
-          onChanged(changed);
-        }}
-        onClose={() => {
-          setExtracting(false);
-        }}
-      />
-    );
-  }
-  const figure = entry.category === "figur";
+  const [describing, setDescribing] = useState<string | null>(null);
+  const images = entry.images;
+
   return (
-    <p className="row appearance-hint">
-      <button
-        type="button"
-        className="ghost"
-        onClick={() => {
-          setExtracting(true);
-        }}
-      >
-        ✨ Aussehen herauslösen
-      </button>
-      {!figure && onEdit !== undefined && (
-        <button type="button" className="ghost" onClick={onEdit}>
-          ✎ Selbst ergänzen
-        </button>
+    <ImageViewer
+      name={entry.name}
+      images={images}
+      at={at}
+      source={source}
+      editable={editable}
+      busy={busy}
+      onMove={(to) => {
+        onMove(to);
+        setDescribing(null);
+      }}
+      onClose={onClose}
+      onDescribe={setDescribing}
+      onBuildOn={
+        canAdd
+          ? (image) => {
+              onGenerate({
+                prompt: "",
+                format: defaultFormat(entry),
+                model: null,
+                basis: {
+                  reference: { world: entry.world, entry: entry.id, image },
+                  label: `Bild ${String(images.indexOf(image) + 1)} von ${entry.name}`,
+                  src: source(image),
+                },
+              });
+            }
+          : undefined
+      }
+      onMain={(image) => void onMain(image)}
+      onRemove={(image) => {
+        if (!window.confirm("Dieses Bild wirklich entfernen?")) {
+          return;
+        }
+        void onRemove(image).then((done) => {
+          if (done) {
+            setDescribing(null);
+          }
+        });
+      }}
+    >
+      <ImageOriginPanel
+        key={shownImage}
+        load={() => api.imageOrigin(entry.world, entry.id, shownImage)}
+        onRegenerate={
+          canAdd
+            ? (origin) => {
+                onGenerate(seedOf(origin, defaultFormat(entry)));
+              }
+            : undefined
+        }
+      />
+      {describing !== null && (
+        <ImageDescription
+          key={describing}
+          title={`Aussehen von ${entry.name}`}
+          path={api.describeImagePath(entry.world, entry.id, describing)}
+          takeOverLabel="Übernehmen als „Aussehen“"
+          onTakeOver={async (text) => {
+            // The current text, in case it changed elsewhere meanwhile.
+            const fresh = await api.entry(entry.world, entry.id);
+            const body = await place(fresh.body, APPEARANCE, text);
+            if (body === null) {
+              return false;
+            }
+            onChanged(await api.updateEntry(entry.world, entry.id, { body }));
+            return true;
+          }}
+          onClose={() => {
+            setDescribing(null);
+          }}
+        />
       )}
-      <span className="note">
-        – {entry.name} hat noch kein „Aussehen“;{" "}
-        {figure
-          ? "ohne es kennt das Bild nur den Namen"
-          : `das Bild nutzt nur ${
-              entry.category !== "gegenstand"
-                ? "den Anfang des Textes"
-                : readSection(entry.body, PURPOSE) === null
-                  ? "den ersten Satz des Textes"
-                  : "den ersten Satz aus „Zweck“"
-            }`}
-        .
-      </span>
-    </p>
+    </ImageViewer>
   );
 }
