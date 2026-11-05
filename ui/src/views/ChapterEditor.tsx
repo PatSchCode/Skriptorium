@@ -13,6 +13,11 @@ import { ChapterSummary } from "./ChapterSummary";
 import { ChapterTabs, type ChapterView } from "./ChapterTabs";
 import { ErrorText } from "./Common";
 import { InstructionHistory } from "./InstructionHistory";
+import {
+  StoryPictureButton,
+  StoryPictureDialog,
+  type PictureWay,
+} from "./StoryPictureButton";
 import { useCanonTake } from "./useCanonTake";
 import { useChapterCompletion } from "./useChapterCompletion";
 import { useChapterDraft } from "./useChapterDraft";
@@ -75,6 +80,18 @@ export function ChapterEditor({
     chapter.status === "abgeschlossen" || chapter.summary !== "";
   // Counts the moments the end of the text should come into view (steps 5.9, 5.11).
   const [ends, setEnds] = useState(0);
+  // A picture line to put in after the line of the cursor (step 10.6, ADR-110).
+  const [insertion, setInsertion] = useState<{
+    id: number;
+    line: string;
+  } | null>(null);
+  // The open dialog of "＋ Bild" (step 10.6).
+  const [pictureWay, setPictureWay] = useState<PictureWay | null>(null);
+
+  function insertPicture(line: string) {
+    setView("manuskript");
+    setInsertion((before) => ({ id: (before?.id ?? 0) + 1, line }));
+  }
 
   async function remove() {
     if (
@@ -156,6 +173,12 @@ export function ChapterEditor({
             >
               In den Kanon
             </button>
+            <StoryPictureButton
+              world={chapter.world}
+              story={chapter.story}
+              onWay={setPictureWay}
+              onInsert={insertPicture}
+            />
             {chapter.status === "abgeschlossen" ? (
               <span className="note">Kapitel abgeschlossen</span>
             ) : (
@@ -202,6 +225,18 @@ export function ChapterEditor({
             round={noted}
           />
         )}
+        {pictureWay !== null && (
+          <StoryPictureDialog
+            world={chapter.world}
+            story={chapter.story}
+            way={pictureWay}
+            marked={canon.marked}
+            onInsert={insertPicture}
+            onClose={() => {
+              setPictureWay(null);
+            }}
+          />
+        )}
         <Suspense fallback={<p>Editor lädt …</p>}>
           <div hidden={view !== "manuskript"}>
             <ManuscriptEditor
@@ -212,6 +247,10 @@ export function ChapterEditor({
               onEnd={() => {
                 setEnds((value) => value + 1);
               }}
+              pictureSrc={(file) =>
+                api.storyPicturePath(chapter.world, chapter.story, file)
+              }
+              insertion={insertion}
             />
             <ChapterLength
               world={chapter.world}

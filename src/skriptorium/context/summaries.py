@@ -12,7 +12,8 @@ from skriptorium.context.parts import (
     check_budget,
     fitted,
 )
-from skriptorium.manuscript import Chapter, ManuscriptService
+from skriptorium.context.readable import readable
+from skriptorium.manuscript import Chapter, ManuscriptService, without_pictures
 
 
 def _summary_frame(world_name: str, story_title: str) -> str:
@@ -68,7 +69,7 @@ def build_chapter_summary(
         ContextTooLarge: The chapter does not fit the budget.
     """
     check_budget(budget)
-    chapter = manuscripts.get_chapter(world_id, story_id, chapter_number)
+    chapter = readable(manuscripts.get_chapter(world_id, story_id, chapter_number))
     if not chapter.text.strip():
         raise InvalidInput(f"Kapitel {chapter_number} hat noch keinen Text")
     system, user = _chapter_summary_parts(canon, manuscripts, world_id, story_id, chapter)
@@ -118,7 +119,7 @@ def _chapter_summary_parts(
     world = canon.get_world(world_id)
     story = manuscripts.get_story(world_id, story_id)
     system = [Part("rahmen", "Rahmen", _summary_frame(world.name, story.title))]
-    text = chapter.text if text is None else text
+    text = without_pictures(chapter.text if text is None else text)
     user: list[Part] = []
     user.append(
         Part(

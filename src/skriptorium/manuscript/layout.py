@@ -14,6 +14,8 @@ FACTS_FILE: Final = "facts.md"
 CHAPTERS: Final = "chapters"
 HISTORY: Final = "verlauf"
 COVER_KEY: Final = "titelbild"
+# Folder of the pictures between paragraphs (step 10.6, ADR-110).
+PICTURES: Final = "bilder"
 # Names of cover files as this module creates them; nothing else is ever read or served.
 COVER_FILE: Final = re.compile(r"titelbild-[0-9a-f]{12}\.(?:png|jpg|webp)")
 
@@ -36,6 +38,10 @@ def history_path(world_id: str, story_id: str, number: int) -> str:
 
 def cover_path(world_id: str, story_id: str, file: str) -> str:
     return f"{story_dir(world_id, story_id)}/{file}"
+
+
+def picture_path(world_id: str, story_id: str, file: str) -> str:
+    return f"{story_dir(world_id, story_id)}/{PICTURES}/{file}"
 
 
 def chapter_number(path: str) -> int | None:

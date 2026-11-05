@@ -458,3 +458,39 @@ def get_cover_origin(world_id: str, story_id: str, found: ServicesDep) -> ImageO
 def remove_cover(world_id: str, story_id: str, found: ServicesDep) -> Story:
     """Remove the story's cover and delete it."""
     return found.manuscript.remove_story_cover(world_id, story_id)
+
+
+class PictureName(BaseModel):
+    """The file name of a stored picture, as the chapter text names it (ADR-110)."""
+
+    file: str
+
+
+@router.post("/{story_id}/images", status_code=status.HTTP_201_CREATED)
+def add_picture(world_id: str, story_id: str, body: CoverFile, found: ServicesDep) -> PictureName:
+    """Store a picture for the chapters (step 10.6, ADR-110); the text names it
+    ``![caption](bild:<file>)``. A picture from the canon comes as a copy made by the browser."""
+    try:
+        data = base64.b64decode(body.content, validate=True)
+    except binascii.Error, ValueError:
+        raise InvalidInput("Datei nicht lesbar übertragen") from None
+    return PictureName(
+        file=found.manuscript.add_story_picture(
+            world_id, story_id, data, origin_from(body.herkunft)
+        )
+    )
+
+
+@router.get("/{story_id}/images/{file}")
+def get_picture(world_id: str, story_id: str, file: str, found: ServicesDep) -> Response:
+    """A picture of the story, with the media type of its checked format."""
+    data, media_type = found.manuscript.story_picture(world_id, story_id, file)
+    return Response(data, media_type=media_type)
+
+
+@router.get("/{story_id}/images/{file}/origin")
+def get_picture_origin(
+    world_id: str, story_id: str, file: str, found: ServicesDep
+) -> ImageOriginOut | None:
+    """How a picture of the story was generated; ``null`` for an uploaded one (ADR-110)."""
+    return origin_out(found.manuscript.story_picture_origin(world_id, story_id, file))

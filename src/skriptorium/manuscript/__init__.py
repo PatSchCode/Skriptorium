@@ -1,5 +1,6 @@
 """Stories, chapters and story-specific settings (module ``manuscript``)."""
 
+from skriptorium.manuscript.pictures import without_pictures
 from skriptorium.manuscript.service import (
     ATMOSPHERES,
     CHAPTER_STATUSES,
@@ -54,4 +55,5 @@ __all__ = [
     "StoryFact",
     "SummaryStatus",
     "WritingStyle",
+    "without_pictures",
 ]
