@@ -271,8 +271,9 @@ def level_price(
     Providers name their prices unevenly: the variant naming the level
     (``<quality>_<resolution>``, then ``<resolution>``, then ``<quality>``, in lower case) wins;
     above the ``smallest`` resolution a variant ``high_resolution`` counts; at the smallest (or
-    without a resolution) the base price; a price per token holds for every level. Otherwise
-    ``None``: the real cost is reported after generating.
+    without a resolution) the base price. A price per token, and the base price of a provider
+    that names no variants at all, hold for every level (Seedream 5.0 Lite: 0.035 $ at 2K and
+    4K, probe 2026-11-05). Otherwise ``None``: the real cost is reported after generating.
     """
     variants = dict(endpoint.variants)
     wanted = [
@@ -288,7 +289,7 @@ def level_price(
     if named is not None:
         return named
     base = endpoint.plain
-    if base is not None and base.unit == "token":
+    if base is not None and (base.unit == "token" or not variants):
         return base
     if resolution is not None and resolution != smallest:
         return variants.get("high_resolution")
