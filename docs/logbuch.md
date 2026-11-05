@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] Probe 10.5: 2K-Bild sieht aus wie vorher
+
+- Eigentümer: neues 2K-Bild einer Figur „genauso“ wie bisher. Server (nur Zahlen): neues Bild 1.366 × 2.048 WebP, 108 KB, Herkunft `2K`, 0,09 $. Die fünf vorigen Seedream-5.0-Pro-Bilder: je 1.333 × 2.000, ebenfalls 0,09 $ – Seedream lieferte also schon ohne Angabe 2K (Variante `high_resolution`) und wurde nur von 2.048 auf 2.000 Pixel verkleinert. Der vorher angezeigte Preis „ca. 0,045 $“ (Grundpreis) war für dieses Modell falsch, die Abrechnung lag immer bei 0,09 $.
+- Folge: Für Seedream 5.0 Pro bringt 10.5 nur 48 Pixel mehr; größere Bilder gibt es nur mit einem 4K-Modell (Katalog: z. B. Seedream 5.0 Lite 2K/4K 0,035 $, Seedream 4.5 bis 4K 0,04 $, Gemini/Nano Banana 4K nach Token, FLUX.3 4K 0,61 $). 10.5 bleibt bis zur Antwort des Eigentümers auf „wartet auf Abnahme“.
+
 ### 2026-11-05 – [BEOBACHTUNG] 10.5 eingespielt
 
 - Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `17ea244`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `1a46b59`.
