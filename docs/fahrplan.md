@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-05 (Phase 9 abgeschlossen: 9.15 Planung mit Vision-Abgleich, Onboarding-Prüfung und Pflichtfrage – ADR-104, ADR-105; Phase 10 geplant). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.1 Löschkaskade für Kanon-Einträge – seit 2026-11-05, entschieden (ADR-106), zusammengeführt (PR #205, `c78ad0e`); Einspielen auf Wunsch des Eigentümers später, danach seine Abnahme.
+- **Aktiver Schritt:** 10.2 Abschnittsregel im Server, Export liest „Wesen“ – seit 2026-11-05, entschieden (ADR-107), Umsetzung läuft. 10.1 wartet auf Einspielen (auf Wort des Eigentümers) und Abnahme (zusammengeführt, PR #205, `c78ad0e`).
 - **Nächster Schritt:** 10.1 einspielen (auf Wort des Eigentümers) und abnehmen; danach 10.2 Abschnittsregel im Server nutzen und Export liest „Wesen“ – Vorlage. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.1 frühestens 2026-11-05; D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -28,8 +28,8 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| 🟠 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | in Arbeit seit 2026-11-05 (ADR-106), zusammengeführt `c78ad0e` | du: einspielen lassen, abnehmen |
-| ⚪ | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | offen | KI: Vorlage |
+| 🔵 | 10.1 | Löschkaskade für Kanon-Einträge (V.43) | wartet auf Abnahme (ADR-106), zusammengeführt `c78ad0e` | du: einspielen lassen, abnehmen |
+| 🟠 | 10.2 | Abschnittsregel im Server nutzen; Export liest „Wesen“ (V.38) | in Arbeit seit 2026-11-05 (ADR-107) | KI: umsetzen |
 | ⚪ | 10.3 | Aussehen herauslösen für Orte und Gegenstände (V.39) | offen | KI: nach 10.2 |
 | ⚪ | 10.4 | Bildansichten zerlegen | offen | KI |
 | ⚪ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | offen | KI: nach 10.4 |
@@ -200,7 +200,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.1: Löschkaskade für Kanon-Einträge (V.43)
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Bestandsaufnahme: `CanonService.delete_entry` entfernt Datei, Bilder und Kartenmarkierungen; Fakten, geführte Figuren und Gast-Verbindungen (samt Weltbezug) in Geschichten bleiben; Oberfläche fragt nur `window.confirm` (`ui/src/views/EntryForm.tsx`). Server 2026-11-05 (nur Anzahlen): 148 Einträge, 0 geführte Figuren, 0 Fakten, 1 Gast-Verbindung, 0 verwaiste Verweise. Mockup `mockup-10.1.html` (lokal) vorgelegt; Eigentümer: „Mitlöschen mit Folgenliste“, „Klick im Dialog“ → ADR-106. Umsetzung läuft
+- **Status:** 🔵 WARTET-AUF-FREIGABE (Abnahme nach dem Einspielen; umgesetzt und zusammengeführt, seit 2026-11-05 in Arbeit) – Bestandsaufnahme: `CanonService.delete_entry` entfernt Datei, Bilder und Kartenmarkierungen; Fakten, geführte Figuren und Gast-Verbindungen (samt Weltbezug) in Geschichten bleiben; Oberfläche fragt nur `window.confirm` (`ui/src/views/EntryForm.tsx`). Server 2026-11-05 (nur Anzahlen): 148 Einträge, 0 geführte Figuren, 0 Fakten, 1 Gast-Verbindung, 0 verwaiste Verweise. Mockup `mockup-10.1.html` (lokal) vorgelegt; Eigentümer: „Mitlöschen mit Folgenliste“, „Klick im Dialog“ → ADR-106. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Löschkaskade, destruktiv (Kategorie 4, `CLAUDE.md` Abschnitt 8, Kriterium 6)
@@ -217,7 +217,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.2: Abschnittsregel im Server nutzen; SillyTavern-Export liest „Wesen“ (V.38)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-05) – Server 2026-11-05 (nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (alle Ebene 3), davon 2 mit zu viel in „personality“; 0 mit „Wesen und Geschichte“ oder nur Zeile „- **Wesen:** …“; 0 Überschriften „In/Im ‹Welt›“. Vergleich `mockup-10.2.html` (lokal) vorgelegt; Eigentümer: nur Abschnitt „Wesen“, Rückimport wie heute, Funktionen behalten mit ehrlicher Doku → ADR-107. Umsetzung läuft
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – Ausgabe der Figurenkarte ändert sich (Kategorie 5, ADR-066)
@@ -230,6 +230,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Aus V.38 und U.2 der Bewertung (ADR-104).
+- **Umgesetzt (lokal, 2026-11-05, noch nicht abgenommen):** nach ADR-107. `canon/sections.py`: neues `take_section` (Abschnitt wie `read_section`, dazu der Text ohne ihn; nur im Server, wie `drop_world_sections`), Konstante `NATURE` = „Wesen“; `drop_world_sections` vergleicht auf Wortgrenze. `canon/importers/sillytavern.py`: `card_for` über `take_section`, Import schreibt `### {NATURE}`. Oberfläche und gemeinsame Testfälle unverändert. Tests: 17 neue (Export 5 mit Ebenen 1–3, Unterabschnitten, leerem Wesen, früherem Namen, Rückimport; Abschnitte 3; Weltabschnitte 9); 1146 bestanden, Abdeckung 99,87 % gesamt, `sections.py` und `sillytavern.py` 100 %. ruff, ruff format, `mypy --strict`, bandit grün.
 
 #### 10.3: „Aussehen herauslösen“ auch für Orte und Gegenstände (V.39)
 

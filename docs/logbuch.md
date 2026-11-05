@@ -29,6 +29,24 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-05 – [BEOBACHTUNG] 10.2 umgesetzt (lokal)
+
+- Nach ADR-107 auf `feat/10.2-wesen-im-export` (abgezweigt von `docs/10.1-zusammengefuehrt`, damit die Doku-Commits mitgehen). Zahlen im Fahrplan bei 10.2. Keine Änderung an der Oberfläche, daher kein E2E-Lauf nötig und keine Bildschirmfotos; Abnahme über eine heruntergeladene Figurenkarte nach dem Einspielen.
+- Mini-Reibung: `grep --include=*.py` scheitert in zsh ohne Anführungszeichen („no matches found“) – wie schon in 10.1; Muster in Anführungszeichen setzen.
+- Statuspflege: 10.1 auf „wartet auf Freigabe“ (Abnahme nach dem Einspielen) gesetzt, damit nur 10.2 in Arbeit ist; `docs/architecture.md` Routenzahl 83 → 84 nachgezogen (Drift aus 10.1).
+
+### 2026-11-05 – [ADR-ANGELEGT] ADR-107 Figurenkarte nimmt „Wesen“ über die Abschnittsregel (10.2)
+
+- Vergleich `mockup-10.2.html` (lokal, ausgeschlossen) vorgelegt. Server (eine Prüfung plus eine Nachzählung, nur Anzahlen): 29 Figuren, 3 mit Wesen-Text (Ebene 3), 2 davon mit zu viel in „personality“; 0 „Wesen und Geschichte“, 0 Zeilen „- **Wesen:** …“, 0 Überschriften „In/Im ‹Welt›“.
+- Eigentümer per Auswahlfragen: „Nur Abschnitt Wesen“, Rückimport „Am Ende, wie heute“, Funktionen „Behalten, Doku ehrlich“ – jeweils die Empfehlung. Kategorie 5, nicht reaktiv; Regel-003 um den Stand ergänzt.
+
+### 2026-11-05 – [SESSIONSTART] 10.2 vorbereiten
+
+- **Modell:** Opus 5.5 (Entscheidungs-Klasse), Quelle: Systemkontext; keine Sitzungsabfrage in dieser Umgebung.
+- **Stand:** `origin/main` = `c78ad0e` (10.1), lokal `docs/10.1-zusammengefuehrt` mit zwei ungepushten Doku-Commits; Server `e809696`. Mindest-Lektüre gelesen.
+- **Vorhaben:** Eigentümer: „Wollen wir schon mal den nächsten Schritt machen?“ → 10.2 Vorlage; 10.1 bleibt bis zu seinem Wort uneingespielt.
+- **Kontextgröße:** nicht feststellbar (Session nach Verdichtung fortgesetzt).
+
 ### 2026-11-05 – [BEOBACHTUNG] Hermes 3 ohne Anbieter bei OpenRouter → V.47
 
 - Frage des Eigentümers: Hermes 3 erscheint als unbekanntes Modell. Befund: `nousresearch/hermes-3-llama-3.1-405b` und `-70b` haben 0 Anbieter (`/api/v1/models/<id>/endpoints`) und fehlen in `/api/v1/models` (454 Textmodelle); `hermes-4-405b` ist verfügbar. Server (eine SSH-Prüfung): Hermes 3 nur in den Favoriten (`system/modelle.md`) und im Anweisungsverlauf einer Geschichte; im Oktober 10 Anfragen, letzte am 2026-10-20 erfolgreich. Keine Änderung im Skriptorium als Ursache.
