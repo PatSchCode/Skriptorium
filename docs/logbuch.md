@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.6 abgenommen
+
+- Eigentümer nach dem Einspielen von `de64667`: „Hat funktioniert.“ 10.6 → ERLEDIGT; Phase 10: 7 von 11 (offen 10.8, 10.9, 10.10, 10.11).
+- Bis zur Abnahme zwei Befunde, beide nur in der Oberfläche und nur im echten Browser sichtbar (schmale Breite; langes Kapitel) – je behoben mit End-to-End-Test (PR #214, #215).
+
 ### 2026-11-06 – [BEOBACHTUNG] Zweite Korrektur zu 10.6 eingespielt
 
 - Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `de64667`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `25a9220`.
