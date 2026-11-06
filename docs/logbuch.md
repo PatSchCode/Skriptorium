@@ -29,6 +29,31 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [SESSIONENDE] 10.6 und 10.7 erledigt, Node 26, nächstes Mal 10.10
+
+- **Dauer:** 2026-11-05 (Sessionstart „10.2 vorbereiten“) bis 2026-11-06 (fortgesetzte, mehrfach verdichtete Session).
+- **Bearbeitet seit dem letzten Sessionende:** 10.2 (ADR-107), 10.3 (ADR-108), 10.4, 10.5 (ADR-109 mit Nachtrag), 10.6 (ADR-110; zwei Befunde des Eigentümers behoben: Menü hinter „⋯“ auf schmalen Bildschirmen, PR #214; Bildfenster außerhalb des Bildes bei langen Kapiteln, PR #215 – je mit End-to-End-Test), 10.7 Bilder beim Schreiben (ADR-111, PR #211), D.1 Node 26.12.1 (ADR-112, PR #212), D.27 Vitest 4.1.12 (PR #213). Alle abgenommen bzw. erledigt; Phase 10: 7 von 11.
+- **Stand:** `main` = `de64667`, auf dem Server eingespielt (`de64667`, gesund). Doku-Nachträge seit `de64667` liegen lokal auf `docs/10.6-fenster-zusammengefuehrt` (Merge und Einspielen der zweiten Korrektur, Abnahme 10.6, dieser Sessionende-Eintrag) – nicht gepusht.
+- **Offen:** Doku-Zweig in `main` bringen, damit die nächste (Cloud-)Session den Stand sieht; `minimatch` unter ESLint (mittel, kein Ausweg außer ESLint 9); Token je Bild (10.7) bei Gelegenheit mit gleichem Modell mit/ohne Haken vergleichen; überholter lokaler Zweig `feat/9.9-loeschen-archivieren` (nur auf Wort des Eigentümers löschen).
+- **Nächster Schritt:** **10.10 Textqualität von Hermes 4 messen** (Eigentümer: „beim nächsten Mal 10.10“) – in einer Cloud-Session (Schlüssel für KI-Läufe gilt nur dort), Regel-002 an beiden Testgeschichten. Datiert: D.5 (httpx2, mypy 2) ab 2026-11-12; D.11 Frist 2026-10-31 überschritten (Eigentümer).
+- **Sessionende-Prüfungen:** README gegen Fahrplan, Kontext, Architektur, Blocker abgeglichen (7 von 11, 10.10 als Nächstes, 0 Blocker, Letzte Änderung 2026-11-06). Drift: ADR-111 → 10.7, ADR-112 → D.1 vorhanden; Reifegrade unverändert; Modul-Liste unverändert; FR-034/FR-035 mit Schritt und Test; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-103 bis ADR-112); Phase 10 bei 11 von 11 geplanten Schritten. Größen: Logbuch 440+ Zeilen (Trigger 1.600 bei Klasse K bzw. 800), `docs/project-context.md` 349 Zeilen (Budget 600). Ablaufdaten-Register: Node 26 bis 2029-04-30 eingetragen; mypy-2-Nachprüfung (2026-11-06) hat ihren Schritt D.5.
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse, Quelle: Systemkontext). Oberhalb der Empfehlung: D.27 (Routine), die beiden Korrekturen zu 10.6 (Bugfix, Routine), Einspielen, Doku-Nachträge und README-Pflege (Routine). Abgegeben: nichts – Abgabe an die Routine-Klasse ruht bis zum Probelauf D.22; kleine Teilarbeiten mit geladenem Kontext.
+- **Kontextgröße:** nicht feststellbar; Session mehrfach verdichtet.
+
+### 2026-11-06 – [BEOBACHTUNG] 10.6 abgenommen
+
+- Eigentümer nach dem Einspielen von `de64667`: „Hat funktioniert.“ 10.6 → ERLEDIGT; Phase 10: 7 von 11 (offen 10.8, 10.9, 10.10, 10.11).
+- Bis zur Abnahme zwei Befunde, beide nur in der Oberfläche und nur im echten Browser sichtbar (schmale Breite; langes Kapitel) – je behoben mit End-to-End-Test (PR #214, #215).
+
+### 2026-11-06 – [BEOBACHTUNG] Zweite Korrektur zu 10.6 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `de64667`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `25a9220`.
+- Prüfung: `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `de64667`, 0 Fehlerzeilen in 3 Minuten. Offen: erneute Abnahme 10.6 (Eigentümer).
+
+### 2026-11-06 – [BEOBACHTUNG] Zweite Korrektur zu 10.6 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #215, CI vier Jobs grün (Python 1:55, Pre-Commit 2:01, TypeScript 2:05, E2E 1:55), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `de64667`. Server läuft weiter `25a9220`.
+
 ### 2026-11-06 – [GELÖST] 10.6: Bildfenster öffnet sich außerhalb des sichtbaren Bereichs
 
 - Befund des Eigentümers (Desktop, keine „⋯“): Absatz markiert, „＋ Bild“ → Menü erscheint, „Aus dem Kanon …“ → „passiert gar nichts“. Seine Vermutung, durch Hochscrollen bestätigt: Das Fenster stand oben über dem Text.
