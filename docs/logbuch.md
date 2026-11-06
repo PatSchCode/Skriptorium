@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] Zweite Korrektur zu 10.6 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #215, CI vier Jobs grün (Python 1:55, Pre-Commit 2:01, TypeScript 2:05, E2E 1:55), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `de64667`. Server läuft weiter `25a9220`.
+
 ### 2026-11-06 – [GELÖST] 10.6: Bildfenster öffnet sich außerhalb des sichtbaren Bereichs
 
 - Befund des Eigentümers (Desktop, keine „⋯“): Absatz markiert, „＋ Bild“ → Menü erscheint, „Aus dem Kanon …“ → „passiert gar nichts“. Seine Vermutung, durch Hochscrollen bestätigt: Das Fenster stand oben über dem Text.
