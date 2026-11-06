@@ -1,0 +1,9 @@
+{
+  "modell": "x-ai/grok-4.6",
+  "temperatur": 0.8,
+  "zusaetze": {},
+  "denken": {
+    "effort": "low"
+  },
+  "laenge": "mittel"
+}
