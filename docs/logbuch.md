@@ -29,6 +29,15 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.10 Messung Hermes 4 nach Regel-002
+
+- Bericht: `spikes/hermes-10.10/README.md` (Tabellen, Befunde, Grenzen); Stand `main` `478e5fd`, Länge „mittel“, je Variante 3 Ketten an Salzmark und Glimmergrund; 2,59 $.
+- Varianten: grok-4.6 (Bezug), Hermes wie heute (Denken aus, Temperatur 0,8), `frequency_penalty` 0,3, dazu Temperatur 0,6, `repetition_penalty` 1,05.
+- Denken bei Hermes nicht nutzbar: einziger Anbieter Nebius liefert den Denktext ohne Trennmarke im Antworttext (an der echten Anfrage rund 300 Wörter deutscher Denktext vor der Prosa).
+- Schleifen nachgestellt: Hermes wie heute in Glimmergrund 2 von 3 Ketten mit Endlosschleife (1.839 Wörter; 6.438 Wörter bis zur Grenze von 8.000 Token). Keine Einstellung beseitigt die Entgleisungen: `frequency_penalty` → Wortsalat, mit Temperatur 0,6 ein Satz über 1.247 Wörter samt Anfragetext; `repetition_penalty` ohne Totalausfall, Vorschläge bis 647 Wörter.
+- Verblindete Bewertung (je Geschichte und Thema eine getrennte Instanz, Sonnet; 3 Funde von Hand bestätigt): Gesamtnote grok-4.6 3,33 / 4,00, Hermes heute 2,67 / 1,33, bestes Hermes (fp03-t06) 3,33 / 2,67 – nach Regel-002 eine Wirkung auf die Gesamtnote, aber „wörtlich %“ in der Salzmark gegenläufig schlechter. Kanon-Proben Glimmergrund: grok-4.6 0,33 widersprochen, Hermes 2,0–2,67.
+- Hermes kostet je Kette ein Sechstel bis ein Drittel von grok-4.6.
+
 ### 2026-11-06 – [GELÖST] Pre-Commit in der Cloud-Session: markdownlint lässt sich nicht einrichten
 
 - Befund: Erster Commit der Session scheiterte im Hook `markdownlint-cli2` beim Einrichten: `nodeenv --prebuilt` bricht ab mit `ValueError: invalid literal for int() … '0-alpha'`.
