@@ -1,0 +1,12 @@
+{
+  "geschichte": "salzmark",
+  "schritt": 4,
+  "anweisung": "Gunda warnt mich vor Fenn Asch: Er stottert, wenn er lügt, und er stottert viel. Sie sagt, Asch habe gestern gefragt, ob die Varn wieder in der Stadt ist.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 126,
+  "sekunden": 5.8,
+  "token_ein": 9838,
+  "token_aus": 221,
+  "kosten_usd": 0.003261654,
+  "finish_reason": "stop"
+}

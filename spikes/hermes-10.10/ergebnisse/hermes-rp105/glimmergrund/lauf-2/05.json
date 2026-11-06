@@ -1,0 +1,12 @@
+{
+  "geschichte": "glimmergrund",
+  "schritt": 5,
+  "anweisung": "(leer: Weiter)",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 161,
+  "sekunden": 12.8,
+  "token_ein": 27323,
+  "token_aus": 272,
+  "kosten_usd": 0.019265994,
+  "finish_reason": "stop"
+}

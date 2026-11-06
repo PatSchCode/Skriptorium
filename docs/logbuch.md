@@ -29,6 +29,52 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [SESSIONENDE] 10.10 erledigt (ADR-113), nächstes Mal 10.9 oder 10.8
+
+- **Dauer:** 2026-11-06, ca. 00:20–01:20 UTC (Cloud-Session, Branch `scp/zealous-meitner-g94yap`).
+- **Bearbeitet:** 10.10 Textqualität von Hermes 4 – Messung nach Regel-002 (5 Varianten, 30 Ketten), Nachlauf auf Wahl des Eigentümers (12 Ketten), zwei verblindete Bewertungsrunden (je 4 getrennte Instanzen); Entscheidung „nichts übernehmen“ → ADR-113, 10.10 ERLEDIGT. Neu: V.51 (Längengrenze, Landeplatz 10.11), D.28 (Pre-Commit in der Cloud-Session, freigabepflichtig). KI-Kosten 3,20 $ (Schlüssel der Cloud-Session).
+- **Stand:** Alles auf `scp/zealous-meitner-g94yap` committet und gepusht; noch **nicht** in `main` (kein Pull Request – nur auf Wunsch des Eigentümers). Kein Code des Produkts geändert, kein Einspielen nötig.
+- **Offen:** Pull Request für den Branch (Eigentümer); D.28 Lösung wählen; `minimatch` unter ESLint; Token je Bild (10.7) mit/ohne Haken vergleichen; überholter lokaler Zweig `feat/9.9-loeschen-archivieren` auf dem Mac.
+- **Nächster Schritt:** 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup) oder 10.8 Zweiter Bildanbieter – Wahl des Eigentümers. Datiert: D.5 ab 2026-11-12; D.11 Frist 2026-10-31 überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.10 erledigt, nächste Schritte), Kontext, Blocker (0) abgeglichen; Übersicht im Fahrplan stand auf „5 von 11“ (Drift seit 10.6/10.7) – berichtigt auf 8 von 11. Drift: ADR-113 → 10.10 vorhanden; V.51 und D.28 mit Schritt; Reifegrade unverändert; Modul-Liste unverändert; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-104 bis ADR-113); Phase 10 bei 11 geplanten Schritten. Größen: Logbuch 500 Zeilen (Trigger 800), `docs/project-context.md` 349 Zeilen (Budget 600). Ablaufdaten-Register: mypy-2-Nachprüfung heute fällig, Schritt D.5 vorhanden (ab 2026-11-12).
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse; Sitzungsabfrage: eingestellt und bedient `claude-opus-5-5`). Schritt 10.10 auf seiner Empfehlung (Entscheidung); oberhalb: D.28-Anlage und Doku-Pflege (Routine), nicht abgegeben (kleine Teilarbeiten mit geladenem Kontext; Routine-Abgabe ruht bis D.22). Abgegeben: 8 verblindete Bewertungen an getrennte Instanzen (Sonnet) – als Messinstrument, nicht als Routine-Abgabe.
+- **Kontextgröße:** 382.725 Token (Sitzungsabfrage) – über der Grenze 200.000 seit dem Ende der ersten Messrunde; der Nachlauf gehörte zum laufenden Schritt 10.10, danach kein neuer Schritt begonnen. Nächste Session neu beginnen.
+
+### 2026-11-06 – [BEOBACHTUNG] 10.10 Nachlauf: keine Wirkung der Einstellung
+
+- Je 3 weitere Ketten `hermes` und `hermes-fp03-t06` (0,61 $), neu verblindet bewertet (12 Ketten je Geschichte, vier neue Instanzen). Über 6 Ketten je Seite: Gesamtnote Salzmark 3,00 → 2,67, Glimmergrund 2,00 → 3,17; nach Regel-002 keine Wirkung – der Befund aus 3 Ketten war Streuung (wie bei 8.11 und 9.3).
+- Grobe Schleifen in Glimmergrund seltener (längster Vorschlag 1.247 gegen 6.438 Wörter), aber nicht beseitigt; Kanon-Proben mit der Einstellung im Mittel schlechter (3,00 gegen 1,83, innerhalb der Spannweite). Bericht: `spikes/hermes-10.10/README.md`, Abschnitt „Nachlauf“.
+
+### 2026-11-06 – [BEOBACHTUNG] 10.10: Eigentümer wählt Nachlauf
+
+- Vorlage nach der Messung (A nichts übernehmen – empfohlen, B Einstellung je Modell, C Nachlauf). Eigentümer: „Hermes nutze ich nur, wenn andere Modelle sperren“; auf Nachfrage „Nachlauf zuerst“. Über die Längengrenze gegen Endlosschleifen (V-Schritt, Landeplatz 10.11) entscheidet er nach dem Nachlauf.
+- Nachlauf: je 3 weitere Ketten `hermes` und `hermes-fp03-t06` an beiden Geschichten (`ergebnisse/hermes-2/`, `…/hermes-fp03-t06-2/`), danach neue verblindete Bewertung aller 12 Ketten je Geschichte.
+- Kontextgröße der Session 322.538 Token (Grenze 200.000): der Nachlauf gehört zum laufenden Schritt 10.10; danach beginnt in dieser Session kein neuer Schritt.
+
+### 2026-11-06 – [BEOBACHTUNG] 10.10 Messung Hermes 4 nach Regel-002
+
+- Bericht: `spikes/hermes-10.10/README.md` (Tabellen, Befunde, Grenzen); Stand `main` `478e5fd`, Länge „mittel“, je Variante 3 Ketten an Salzmark und Glimmergrund; 2,59 $.
+- Varianten: grok-4.6 (Bezug), Hermes wie heute (Denken aus, Temperatur 0,8), `frequency_penalty` 0,3, dazu Temperatur 0,6, `repetition_penalty` 1,05.
+- Denken bei Hermes nicht nutzbar: einziger Anbieter Nebius liefert den Denktext ohne Trennmarke im Antworttext (an der echten Anfrage rund 300 Wörter deutscher Denktext vor der Prosa).
+- Schleifen nachgestellt: Hermes wie heute in Glimmergrund 2 von 3 Ketten mit Endlosschleife (1.839 Wörter; 6.438 Wörter bis zur Grenze von 8.000 Token). Keine Einstellung beseitigt die Entgleisungen: `frequency_penalty` → Wortsalat, mit Temperatur 0,6 ein Satz über 1.247 Wörter samt Anfragetext; `repetition_penalty` ohne Totalausfall, Vorschläge bis 647 Wörter.
+- Verblindete Bewertung (je Geschichte und Thema eine getrennte Instanz, Sonnet; 3 Funde von Hand bestätigt): Gesamtnote grok-4.6 3,33 / 4,00, Hermes heute 2,67 / 1,33, bestes Hermes (fp03-t06) 3,33 / 2,67 – nach Regel-002 eine Wirkung auf die Gesamtnote, aber „wörtlich %“ in der Salzmark gegenläufig schlechter. Kanon-Proben Glimmergrund: grok-4.6 0,33 widersprochen, Hermes 2,0–2,67.
+- Hermes kostet je Kette ein Sechstel bis ein Drittel von grok-4.6.
+
+### 2026-11-06 – [GELÖST] Pre-Commit in der Cloud-Session: markdownlint lässt sich nicht einrichten
+
+- Befund: Erster Commit der Session scheiterte im Hook `markdownlint-cli2` beim Einrichten: `nodeenv --prebuilt` bricht ab mit `ValueError: invalid literal for int() … '0-alpha'`.
+- Ursache: pre-commit nutzt ein vorhandenes Node nur, wenn `node` und `npm` **nicht** im Home-Verzeichnis liegen (`pre_commit/lang_base.py`, `exe_exists`). `scripts/session-start.sh` legt Node 26.12.1 nach `/root/.cache/skriptorium-tools/…` und stellt es im `PATH` nach vorn – pre-commit übergeht es und lädt per nodeenv das „neueste“ Node; der Index von nodejs.org führt inzwischen eine Alpha-Version, an deren Nummer nodeenv scheitert. Auf dem Mac nicht aufgefallen (Hook-Umgebung dort schon eingerichtet).
+- Lösung für diese Session: Commit mit `PATH=/usr/local/bin:$PATH` (System-Node 22.23.4 der Cloud-Umgebung, nur für den Hook); alle Hooks liefen, kein `--no-verify`.
+- Offen: dauerhafte Lösung → D.28 (freigabepflichtig, Kategorie 7).
+
+### 2026-11-06 – [SESSIONSTART] 10.10 Textqualität von Hermes 4 messen
+
+- **Umgebung:** Cloud-Session (Branch `scp/zealous-meitner-g94yap`, Stand `478e5fd` = `main` mit den Doku-Nachträgen aus PR #216).
+- **Modell:** eingestellt `claude-opus-5-5`, bedient laut Sitzungsabfrage `claude-opus-5-5` (`session_context.model`; `last_served_model` nicht gemeldet) → Entscheidungs-Klasse. Empfohlene Klasse für 10.10: Entscheidung – passt.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens` 0 bei Sessionbeginn; Grenze 200.000 wird nach jedem Schritt geprüft.
+- **Mindest-Lektüre:** Kontext vollständig, Logbuch ab letztem Sessionende, Fahrplan (Stand, Phase 10, V.41), Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker (keine).
+- **Vorhaben:** 10.10 nach V.41 – Messung nach Regel-002 an Salzmark und zweiter Testgeschichte: grok-4.6 (Bezug), Hermes 4 wie heute, mit Reasoning, mit Strafen gegen Wiederholung und ggf. niedrigerer Temperatur; Kosten vorher schätzen.
+
 ### 2026-11-06 – [SESSIONENDE] 10.6 und 10.7 erledigt, Node 26, nächstes Mal 10.10
 
 - **Dauer:** 2026-11-05 (Sessionstart „10.2 vorbereiten“) bis 2026-11-06 (fortgesetzte, mehrfach verdichtete Session).

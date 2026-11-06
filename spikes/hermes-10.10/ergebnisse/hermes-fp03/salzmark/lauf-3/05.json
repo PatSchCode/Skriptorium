@@ -1,0 +1,12 @@
+{
+  "geschichte": "salzmark",
+  "schritt": 5,
+  "anweisung": "(leer: Weiter)",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 214,
+  "sekunden": 9.3,
+  "token_ein": 10189,
+  "token_aus": 376,
+  "kosten_usd": 0.00379071,
+  "finish_reason": "stop"
+}

@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-06 (Phase 10: 10.1–10.7 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
+- **Stand vom:** 2026-11-06 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 erledigt 2026-11-06 (eingespielt `8e87aab`). 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
-- **Nächster Schritt:** 10.10 Textqualität von Hermes 4 messen (Wunsch des Eigentümers zum Sessionende 2026-11-06) – **in einer Cloud-Session**, weil nur dort der Schlüssel für KI-Läufe gilt; Messung nach Regel-002 an beiden Testgeschichten. Danach 10.9 bzw. 10.8. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner in Arbeit. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
+- **Nächster Schritt:** 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup) bzw. 10.8 Zweiter Bildanbieter – Reihenfolge wählt der Eigentümer; danach 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,7 +24,7 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 
-**Phase 10: 5 von 11 erledigt.**
+**Phase 10: 8 von 11 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
@@ -37,13 +37,14 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
 | ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
-| ⚪ | 10.10 | Textqualität von Hermes 4 messen (V.41) | offen | KI (Cloud-Session) |
+| ✅ | 10.10 | Textqualität von Hermes 4 messen (V.41) | erledigt 2026-11-06 (ADR-113: nichts übernehmen) | – |
 | ⚪ | 10.11 | Planung der nächsten Ausbaustufe | offen | KI |
 
 **Querschnitt (offen):**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
+| ⚪ | D.28 | Pre-Commit-Hook markdownlint in der Cloud-Session | offen | du: Freigabe der Lösung (Kategorie 7) |
 | ✅ | D.1 | Wechsel Node.js 24 → Node.js 26 LTS | erledigt 2026-11-05 (ADR-112: 26.12.1, PR #212) | – |
 | ⚪ | D.2 | Nachprüfung TypeScript 7 | offen | KI – am 2027-01-08 |
 | ⚪ | D.3 | Nachprüfung httpx | offen | KI – am 2027-03-26 |
@@ -66,7 +67,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -351,7 +352,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.10: Textqualität von Hermes 4 messen (V.41)
 
-- **Status:** ⚪ OFFEN – als Nächstes (Eigentümer 2026-11-06: „beim nächsten Mal 10.10“; Cloud-Session)
+- **Status:** ✅ ERLEDIGT (2026-11-06) – Messung nach Regel-002 in der Cloud-Session, Bericht `spikes/hermes-10.10/README.md` (42 Ketten, 3,20 $ KI-Kosten; zwei verblindete Bewertungsrunden); Ergebnis: Denken bei Hermes nicht nutzbar (Denktext ohne Trennmarke im Vorschlag), Schleifen nachgestellt, keine Einstellung mit Wirkung nach Regel-002 (Nachlauf auf Wahl des Eigentümers). Eigentümer: „Hermes nutze ich nur, wenn andere Modelle sperren“, „Ja, nichts übernehmen“ → ADR-113. Folgevorschlag Längengrenze → V.51
 - **Phasentyp-Kontext:** ERKUNDUNG innerhalb der UMSETZUNG-Phase
 - **Schritt-Art (nur ERKUNDUNG):** Messung
 - **Zeitbox (nur ERKUNDUNG):** eine Session
@@ -365,7 +366,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** ai_gateway, api (nur bei Umsetzung)
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Logbuch-Eintrag, ADR
-- **Notizen:** Aus V.41.
+- **Notizen:** Aus V.41. Abweichung von V.41: Variante „mit Denken“ nur als Einzelanfrage gemessen (Denktext im Antworttext, `denken.py`); Strafen als drei Varianten (`frequency_penalty` 0,3, dazu Temperatur 0,6, `repetition_penalty` 1,05).
 
 #### 10.11: Planung der nächsten Ausbaustufe
 
@@ -376,7 +377,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -736,6 +737,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Sperrdateien, Logbuch-Eintrag
 - **Notizen:** Angelegt 2026-10-25 nach dem roten Lauf zu #187. Verbleibend: 3 mittlere Funde in vitest ≤ 4.1.11 (`@vitest/mocker`, `@vitest/coverage-v8`) unter der Schwelle `high`; Behebung nur mit vitest 5 (`--force`), Linie noch nicht mindestreif – Landeplatz D.2 (Nachprüfung vitest 5 am 2027-03-03, Ablaufdaten-Register).
+
+#### D.28: Pre-Commit-Hook markdownlint in der Cloud-Session
+
+- **Status:** ⚪ OFFEN – Vorschlag an den Eigentümer steht aus
+- **Phasentyp-Kontext:** STABILISIERUNG
+- **Abhängigkeiten:** D.1
+- **Frist:** keine harte – Behelf je Commit vorhanden
+- **Freigabepflichtig:** ja – `.pre-commit-config.yaml` oder `scripts/session-start.sh` (Build-Pipeline, `CLAUDE.md` Abschnitt 4, Kategorie 7)
+- **Empfohlene Klasse:** Routine – Werkzeug-Konfiguration nach Freigabe.
+- **Eingangskriterien:** Befund 2026-11-06 (Logbuch, „Pre-Commit in der Cloud-Session“)
+- **Anforderungen (ab Klasse M):** keine (Durchsetzung nach `CLAUDE.md` Abschnitt 15)
+- **Zu tun:** pre-commit übergeht Node im Home-Verzeichnis (`/root/.cache/skriptorium-tools/…`) und lädt per nodeenv ein „neuestes“ Node, das an einer Alpha-Nummer im Index scheitert. Optionen vorlegen: `language_version: system` für `markdownlint-cli2`, Node außerhalb des Home-Verzeichnisses ablegen, oder `language_version` fest auf 26.12.1. Behelf bis dahin: Commit mit `PATH=/usr/local/bin:$PATH`.
+- **Akzeptanzkriterien:** Commit in frischer Cloud-Session ohne Behelf; Mac unverändert; CI grün.
+- **Betroffene Module:** keine (Entwicklungswerkzeuge)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Konfiguration, Logbuch-Eintrag
+- **Notizen:** Angelegt 2026-11-06 in der Session zu 10.10.
 
 #### D.27: Sicherheitsfunde Vitest (Audit 2026-11-05)
 
@@ -1530,6 +1548,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Daten, Skript, Tests, ADR, Mockup
 - **Notizen:** Angelegt 2026-11-05 in 9.12.
+
+#### V.51: Obergrenze der Antwortlänge je Stufe gegen Endlosschleifen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Eigentümer 2026-11-06: „Ja, V-Schritt anlegen“)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** keine
+- **Freigabepflichtig:** ja – Anfrage an die KI (`max_tokens`, Kategorie 1 prüfen)
+- **Empfohlene Klasse:** Entscheidung – ändert jede Schreib-Anfrage (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-018
+- **Zu tun:** Heute gilt `MAX_OUTPUT_TOKENS` 8.000 für jede Länge (`api/flows/writing.py`). In 10.10 lief Hermes 4 in Endlosschleifen bis 6.438 Wörter (8.000 Token, 188 s); bei „mittel“ (150–300 Wörter) lagen die längsten sauberen Vorschläge bei rund 500 Wörtern, ca. 900 Token. Vorlage: Grenze je Stufe (z. B. „mittel“ ca. 1.500 Token), Verhalten bei Abbruch (Hinweis „abgeschnitten“, `finish_reason` `length`), Wirkung auf Modelle mit Denken (Denk-Token zählen bei manchen Anbietern mit).
+- **Akzeptanzkriterien:** Vorlage, ADR; Tests; Probe nach Regel-002, dass saubere Vorschläge nicht gekürzt werden; Eigentümer bestätigt.
+- **Betroffene Module:** api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR
+- **Notizen:** Angelegt 2026-11-06 in 10.10 (`spikes/hermes-10.10/README.md`).
 
 #### V.50: Verständliche Meldung bei unlesbaren Bildern
 

@@ -1,0 +1,30 @@
+{
+  "salzmark": {
+    "K01": "hermes-fp03-t06-2/lauf-2",
+    "K02": "hermes-fp03-t06-2/lauf-1",
+    "K03": "hermes/lauf-2",
+    "K04": "hermes-fp03-t06/lauf-1",
+    "K05": "hermes/lauf-3",
+    "K06": "hermes-2/lauf-2",
+    "K07": "hermes/lauf-1",
+    "K08": "hermes-fp03-t06/lauf-2",
+    "K09": "hermes-fp03-t06-2/lauf-3",
+    "K10": "hermes-2/lauf-1",
+    "K11": "hermes-2/lauf-3",
+    "K12": "hermes-fp03-t06/lauf-3"
+  },
+  "glimmergrund": {
+    "K01": "hermes/lauf-2",
+    "K02": "hermes/lauf-3",
+    "K03": "hermes-fp03-t06-2/lauf-1",
+    "K04": "hermes-fp03-t06-2/lauf-3",
+    "K05": "hermes-2/lauf-1",
+    "K06": "hermes-fp03-t06/lauf-2",
+    "K07": "hermes-fp03-t06/lauf-1",
+    "K08": "hermes-fp03-t06/lauf-3",
+    "K09": "hermes/lauf-1",
+    "K10": "hermes-2/lauf-3",
+    "K11": "hermes-2/lauf-2",
+    "K12": "hermes-fp03-t06-2/lauf-2"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "geschichte": "glimmergrund",
+  "schritt": 6,
+  "anweisung": "Am nächsten Morgen gehe ich zu Doktor Salm ins Lazarett und bitte ihn, mir zu beschreiben, wie die geborgenen Lampen der Toten aussahen, als man sie fand.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 225,
+  "sekunden": 11.0,
+  "token_ein": 27255,
+  "token_aus": 413,
+  "kosten_usd": 0.008542116,
+  "finish_reason": "stop"
+}

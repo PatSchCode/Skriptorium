@@ -1,0 +1,12 @@
+{
+  "geschichte": "salzmark",
+  "schritt": 3,
+  "anweisung": "Die nächsten Tage schleppe ich Salz für einen Händler aus der Oberstadt, um nicht aufzufallen. Am dritten Abend kommt Gunda zu mir in die Kammer herauf.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 222,
+  "sekunden": 10.7,
+  "token_ein": 9448,
+  "token_aus": 408,
+  "kosten_usd": 0.003684384,
+  "finish_reason": "stop"
+}

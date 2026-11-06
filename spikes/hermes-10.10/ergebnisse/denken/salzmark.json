@@ -1,0 +1,11 @@
+{
+  "geschichte": "salzmark",
+  "woerter": 498,
+  "absaetze": 14,
+  "englisch_anteil_erster_absatz": 0.0,
+  "englisch_anteil_gesamt": 0.002,
+  "think_marke": false,
+  "token_aus": 931,
+  "kosten_usd": 0.011632302,
+  "finish_reason": "stop"
+}

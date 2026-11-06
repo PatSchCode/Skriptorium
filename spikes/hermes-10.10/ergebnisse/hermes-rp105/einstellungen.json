@@ -1,0 +1,11 @@
+{
+  "modell": "nousresearch/hermes-4-405b",
+  "temperatur": 0.8,
+  "zusaetze": {
+    "repetition_penalty": 1.05
+  },
+  "denken": {
+    "enabled": false
+  },
+  "laenge": "mittel"
+}

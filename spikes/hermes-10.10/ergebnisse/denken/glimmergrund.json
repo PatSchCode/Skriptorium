@@ -1,0 +1,11 @@
+{
+  "geschichte": "glimmergrund",
+  "woerter": 389,
+  "absaetze": 11,
+  "englisch_anteil_erster_absatz": 0.0,
+  "englisch_anteil_gesamt": 0.0,
+  "think_marke": false,
+  "token_aus": 744,
+  "kosten_usd": 0.028402902,
+  "finish_reason": "stop"
+}

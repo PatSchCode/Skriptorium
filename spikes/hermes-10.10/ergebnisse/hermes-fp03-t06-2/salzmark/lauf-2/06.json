@@ -1,0 +1,12 @@
+{
+  "geschichte": "salzmark",
+  "schritt": 6,
+  "anweisung": "Nach der fünften Nacht kommt Pell mit seinem Bericht: vier Männer in der Wachstube, Wachwechsel zur zweiten Glocke nach Mitternacht, und einmal ist Asch nachts mit einem Bündel aus dem Haus gegangen.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 329,
+  "sekunden": 13.5,
+  "token_ein": 10808,
+  "token_aus": 572,
+  "kosten_usd": 0.004719528,
+  "finish_reason": "stop"
+}

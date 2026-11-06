@@ -1,0 +1,12 @@
+{
+  "geschichte": "salzmark",
+  "schritt": 2,
+  "anweisung": "Ich biete Pell eine Silberschale pro Nacht. Pell fragt, was passiert, wenn sie ihn erwischen; ich sage ihm, dann sei er eben ein Junge, der hinter Fässern schläft.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 165,
+  "sekunden": 7.2,
+  "token_ein": 9318,
+  "token_aus": 276,
+  "kosten_usd": 0.00339174,
+  "finish_reason": "stop"
+}
