@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [GELÖST] Pre-Commit in der Cloud-Session: markdownlint lässt sich nicht einrichten
+
+- Befund: Erster Commit der Session scheiterte im Hook `markdownlint-cli2` beim Einrichten: `nodeenv --prebuilt` bricht ab mit `ValueError: invalid literal for int() … '0-alpha'`.
+- Ursache: pre-commit nutzt ein vorhandenes Node nur, wenn `node` und `npm` **nicht** im Home-Verzeichnis liegen (`pre_commit/lang_base.py`, `exe_exists`). `scripts/session-start.sh` legt Node 26.12.1 nach `/root/.cache/skriptorium-tools/…` und stellt es im `PATH` nach vorn – pre-commit übergeht es und lädt per nodeenv das „neueste“ Node; der Index von nodejs.org führt inzwischen eine Alpha-Version, an deren Nummer nodeenv scheitert. Auf dem Mac nicht aufgefallen (Hook-Umgebung dort schon eingerichtet).
+- Lösung für diese Session: Commit mit `PATH=/usr/local/bin:$PATH` (System-Node 22.23.4 der Cloud-Umgebung, nur für den Hook); alle Hooks liefen, kein `--no-verify`.
+- Offen: dauerhafte Lösung → D.28 (freigabepflichtig, Kategorie 7).
+
 ### 2026-11-06 – [SESSIONSTART] 10.10 Textqualität von Hermes 4 messen
 
 - **Umgebung:** Cloud-Session (Branch `scp/zealous-meitner-g94yap`, Stand `478e5fd` = `main` mit den Doku-Nachträgen aus PR #216).

@@ -737,6 +737,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Artefakte:** Sperrdateien, Logbuch-Eintrag
 - **Notizen:** Angelegt 2026-10-25 nach dem roten Lauf zu #187. Verbleibend: 3 mittlere Funde in vitest ≤ 4.1.11 (`@vitest/mocker`, `@vitest/coverage-v8`) unter der Schwelle `high`; Behebung nur mit vitest 5 (`--force`), Linie noch nicht mindestreif – Landeplatz D.2 (Nachprüfung vitest 5 am 2027-03-03, Ablaufdaten-Register).
 
+#### D.28: Pre-Commit-Hook markdownlint in der Cloud-Session
+
+- **Status:** ⚪ OFFEN – Vorschlag an den Eigentümer steht aus
+- **Phasentyp-Kontext:** STABILISIERUNG
+- **Abhängigkeiten:** D.1
+- **Frist:** keine harte – Behelf je Commit vorhanden
+- **Freigabepflichtig:** ja – `.pre-commit-config.yaml` oder `scripts/session-start.sh` (Build-Pipeline, `CLAUDE.md` Abschnitt 4, Kategorie 7)
+- **Empfohlene Klasse:** Routine – Werkzeug-Konfiguration nach Freigabe.
+- **Eingangskriterien:** Befund 2026-11-06 (Logbuch, „Pre-Commit in der Cloud-Session“)
+- **Anforderungen (ab Klasse M):** keine (Durchsetzung nach `CLAUDE.md` Abschnitt 15)
+- **Zu tun:** pre-commit übergeht Node im Home-Verzeichnis (`/root/.cache/skriptorium-tools/…`) und lädt per nodeenv ein „neuestes“ Node, das an einer Alpha-Nummer im Index scheitert. Optionen vorlegen: `language_version: system` für `markdownlint-cli2`, Node außerhalb des Home-Verzeichnisses ablegen, oder `language_version` fest auf 26.12.1. Behelf bis dahin: Commit mit `PATH=/usr/local/bin:$PATH`.
+- **Akzeptanzkriterien:** Commit in frischer Cloud-Session ohne Behelf; Mac unverändert; CI grün.
+- **Betroffene Module:** keine (Entwicklungswerkzeuge)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Konfiguration, Logbuch-Eintrag
+- **Notizen:** Angelegt 2026-11-06 in der Session zu 10.10.
+
 #### D.27: Sicherheitsfunde Vitest (Audit 2026-11-05)
 
 - **Status:** ✅ ERLEDIGT (2026-11-06) – PR #213 → `8e87aab`, CI vier Jobs grün, Hinweise nur Ubuntu-26; kein Einspielen nötig. Verlauf: `vitest`/`@vitest/coverage-v8` 4.1.12, transitiv `chai` 6.3.0, `std-env`, `tinyrainbow`; `npm audit` ohne Vitest-Befund (übrig 10 mittlere aus `minimatch` unter ESLint, offen bis ESLint nachzieht). Eigentümer 2026-11-06: „Ja, Vitest heben“
