@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [SESSIONSTART] 10.10 Textqualität von Hermes 4 messen
+
+- **Umgebung:** Cloud-Session (Branch `scp/zealous-meitner-g94yap`, Stand `478e5fd` = `main` mit den Doku-Nachträgen aus PR #216).
+- **Modell:** eingestellt `claude-opus-5-5`, bedient laut Sitzungsabfrage `claude-opus-5-5` (`session_context.model`; `last_served_model` nicht gemeldet) → Entscheidungs-Klasse. Empfohlene Klasse für 10.10: Entscheidung – passt.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens` 0 bei Sessionbeginn; Grenze 200.000 wird nach jedem Schritt geprüft.
+- **Mindest-Lektüre:** Kontext vollständig, Logbuch ab letztem Sessionende, Fahrplan (Stand, Phase 10, V.41), Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker (keine).
+- **Vorhaben:** 10.10 nach V.41 – Messung nach Regel-002 an Salzmark und zweiter Testgeschichte: grok-4.6 (Bezug), Hermes 4 wie heute, mit Reasoning, mit Strafen gegen Wiederholung und ggf. niedrigerer Temperatur; Kosten vorher schätzen.
+
 ### 2026-11-06 – [SESSIONENDE] 10.6 und 10.7 erledigt, Node 26, nächstes Mal 10.10
 
 - **Dauer:** 2026-11-05 (Sessionstart „10.2 vorbereiten“) bis 2026-11-06 (fortgesetzte, mehrfach verdichtete Session).
