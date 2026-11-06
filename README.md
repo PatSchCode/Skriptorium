@@ -23,7 +23,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 7 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 8 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-11-06
@@ -108,7 +108,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **10.5** (erledigt 2026-11-05): Auflösung und Qualität bei „Bild erzeugen“, voreingestellt 2K; erzeugte Bilder bis 4.096 Pixel (ADR-109).
 - ✅ **10.6** (erledigt 2026-11-06): Bilder zwischen den Absätzen eines Kapitels und im E-Book – hochladen, erzeugen oder aus dem Kanon (ADR-110).
 - ✅ **10.7** (erledigt 2026-11-06): Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken (ADR-111).
-- ⚪ **10.10** (als Nächstes, Cloud-Session): Textqualität von Hermes 4 messen; danach 10.9 vollständige Anfrage festhalten und 10.8 zweiter Bildanbieter.
+- ✅ **10.10** (erledigt 2026-11-06): Hermes 4 gemessen – Einstellungen helfen nicht, Hermes bleibt wählbar wie heute; Längengrenze gegen Endlosschleifen geplant (ADR-113, V.51).
+- ⚪ **Als Nächstes:** 10.9 vollständige Anfrage festhalten und 10.8 zweiter Bildanbieter; danach 10.11 Planung.
 - ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Veröffentlichung.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 

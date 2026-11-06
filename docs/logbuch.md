@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [SESSIONENDE] 10.10 erledigt (ADR-113), nächstes Mal 10.9 oder 10.8
+
+- **Dauer:** 2026-11-06, ca. 00:20–01:20 UTC (Cloud-Session, Branch `scp/zealous-meitner-g94yap`).
+- **Bearbeitet:** 10.10 Textqualität von Hermes 4 – Messung nach Regel-002 (5 Varianten, 30 Ketten), Nachlauf auf Wahl des Eigentümers (12 Ketten), zwei verblindete Bewertungsrunden (je 4 getrennte Instanzen); Entscheidung „nichts übernehmen“ → ADR-113, 10.10 ERLEDIGT. Neu: V.51 (Längengrenze, Landeplatz 10.11), D.28 (Pre-Commit in der Cloud-Session, freigabepflichtig). KI-Kosten 3,20 $ (Schlüssel der Cloud-Session).
+- **Stand:** Alles auf `scp/zealous-meitner-g94yap` committet und gepusht; noch **nicht** in `main` (kein Pull Request – nur auf Wunsch des Eigentümers). Kein Code des Produkts geändert, kein Einspielen nötig.
+- **Offen:** Pull Request für den Branch (Eigentümer); D.28 Lösung wählen; `minimatch` unter ESLint; Token je Bild (10.7) mit/ohne Haken vergleichen; überholter lokaler Zweig `feat/9.9-loeschen-archivieren` auf dem Mac.
+- **Nächster Schritt:** 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup) oder 10.8 Zweiter Bildanbieter – Wahl des Eigentümers. Datiert: D.5 ab 2026-11-12; D.11 Frist 2026-10-31 überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.10 erledigt, nächste Schritte), Kontext, Blocker (0) abgeglichen; Übersicht im Fahrplan stand auf „5 von 11“ (Drift seit 10.6/10.7) – berichtigt auf 8 von 11. Drift: ADR-113 → 10.10 vorhanden; V.51 und D.28 mit Schritt; Reifegrade unverändert; Modul-Liste unverändert; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-104 bis ADR-113); Phase 10 bei 11 geplanten Schritten. Größen: Logbuch 500 Zeilen (Trigger 800), `docs/project-context.md` 349 Zeilen (Budget 600). Ablaufdaten-Register: mypy-2-Nachprüfung heute fällig, Schritt D.5 vorhanden (ab 2026-11-12).
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse; Sitzungsabfrage: eingestellt und bedient `claude-opus-5-5`). Schritt 10.10 auf seiner Empfehlung (Entscheidung); oberhalb: D.28-Anlage und Doku-Pflege (Routine), nicht abgegeben (kleine Teilarbeiten mit geladenem Kontext; Routine-Abgabe ruht bis D.22). Abgegeben: 8 verblindete Bewertungen an getrennte Instanzen (Sonnet) – als Messinstrument, nicht als Routine-Abgabe.
+- **Kontextgröße:** 382.725 Token (Sitzungsabfrage) – über der Grenze 200.000 seit dem Ende der ersten Messrunde; der Nachlauf gehörte zum laufenden Schritt 10.10, danach kein neuer Schritt begonnen. Nächste Session neu beginnen.
+
 ### 2026-11-06 – [BEOBACHTUNG] 10.10 Nachlauf: keine Wirkung der Einstellung
 
 - Je 3 weitere Ketten `hermes` und `hermes-fp03-t06` (0,61 $), neu verblindet bewertet (12 Ketten je Geschichte, vier neue Instanzen). Über 6 Ketten je Seite: Gesamtnote Salzmark 3,00 → 2,67, Glimmergrund 2,00 → 3,17; nach Regel-002 keine Wirkung – der Befund aus 3 Ketten war Streuung (wie bei 8.11 und 9.3).

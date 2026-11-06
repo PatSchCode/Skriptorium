@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-05 (ADR-001 bis ADR-112). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-06 (ADR-001 bis ADR-113). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -132,12 +132,13 @@ Stand 2026-11-05 (ADR-001 bis ADR-112). Aus welchem Schritt ein ADR stammt, steh
 | 110 | 2026-11-05 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Bilder im Manuskript und im E-Book |
 | 111 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | Anfrage, API | Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken |
 | 112 | 2026-11-05 | Aktiv | OPERATIV | STACK | Externe Abh. | Build der Oberfläche auf Node.js 26.12.1 LTS (npm 11.20.0) |
+| 113 | 2026-11-06 | Aktiv | ERKENNTNIS | PERFORMANCE | – (Ergebnis Schritt 10.10) | Hermes 4 bleibt wie heute: Denken nicht nutzbar, keine Einstellung mit Wirkung; Längengrenze als V.51 |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-103 bis ADR-112 – keiner reaktiv: ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-103 Erkenntnis aus geplanter Messung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-104 bis ADR-113 – keiner reaktiv: ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2663,6 +2664,26 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** keine fachliche – die App bemerkt den Wechsel nicht; Frage war nur, ob die Reiferegel gilt oder das LTS-Etikett zählt → Reiferegel.
 - **Konfidenz zum Zeitpunkt:** hoch – CI der tragenden Werkzeuge testet Node 26, lokale Prüfreihe und CI müssen grün sein. Umkehrbarkeit billig (Pins zurück auf 24.21.0).
 - **Konsequenzen:** CI, Dockerfile, `scripts/session-start.sh`, `package.json`, README, Runbook, `docs/project-context.md` Abschnitte 3 und 8 (Ablaufdaten-Register: Node 26 bis 2029-04-30). Verworfen: 26.13.0 (verstößt gegen die Reiferegel, ohne Gewinn), bei 24 bleiben (Wechsel stünde später unter Zeitdruck).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-113: Hermes 4 bleibt wie heute (10.10)
+
+- **Datum:** 2026-11-06
+- **Entscheider:** Eigentümer („Hermes nutze ich nur, wenn andere Modelle sperren“; nach dem Nachlauf „Ja, nichts übernehmen“ – die Empfehlung; Längengrenze „Ja, V-Schritt anlegen“)
+- **Status:** Aktiv
+- **Tags:** `[ERKENNTNIS]` `[PERFORMANCE]`
+- **Phasentyp-Kontext:** ERKUNDUNG innerhalb der UMSETZUNG-Phase 10 (Schritt 10.10, geplant in ADR-105) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine (NFR Kanon-Treue und Reaktionszeit beziehen sich auf grok-4.6)
+- **Kategorie:** Anfrage an die KI (1, geprüft – keine Änderung)
+- **Kontext:** Eigentümer 2026-10-22: Hermes 4 (`nousresearch/hermes-4-405b`) sperrt nicht, schreibt aber schwächer, „endlose Wiederholungen, selten“ (V.41). Messung nach Regel-002 in der Cloud-Session, Bericht `spikes/hermes-10.10/README.md`: grok-4.6 als Bezug, Hermes wie heute (Denken aus, Temperatur 0,8), `frequency_penalty` 0,3, dazu Temperatur 0,6, `repetition_penalty` 1,05 – je 3 Ketten an beiden Testgeschichten, Nachlauf mit je 3 weiteren Ketten für Hermes heute und die beste Einstellung; zwei verblindete Bewertungsrunden (Sprache und Kanon, je Geschichte eine getrennte Instanz). 42 Ketten, 3,20 $.
+- **Befunde:** (1) Denken ist bei Hermes nicht nutzbar: Der einzige Anbieter (Nebius, fp8) liefert den Denktext ohne Trennmarke im Antworttext (an der echten Anfrage rund 300 Wörter vor der Prosa). (2) Die Schleifen sind nachgestellt: Hermes wie heute in Glimmergrund in 3 von 6 Ketten mit Vorschlägen über 1.000 Wörter, bis 6.438 Wörter an der Grenze von 8.000 Token. (3) Keine Einstellung wirkt nach Regel-002: Die bessere Gesamtnote der besten Einstellung aus 3 Ketten hielt im Nachlauf nicht (Salzmark 3,00 → 2,67, Glimmergrund 2,00 → 3,17); `frequency_penalty` erzeugt Wortsalat; grobe Schleifen werden seltener, aber nicht beseitigt (längster Vorschlag 1.247 Wörter samt Anfragetext). (4) grok-4.6 bleibt klar besser beim Kanon (Glimmergrund 0,33 widersprochene Proben gegen 1,83–3,00) und ohne Schleife; Hermes kostet ein Sechstel bis ein Drittel.
+- **Optionen:** A nichts übernehmen; B Einstellung je Modell für Hermes (`frequency_penalty` 0,3, Temperatur 0,6); C Nachlauf vor der Wahl (gewählt, danach A).
+- **Entscheidung:** A. Hermes 4 bleibt wählbar wie heute (aus dem Katalog, Denken aus, Temperatur 0,8); keine Einstellungen je Modell. Eine Obergrenze der Antwortlänge je Stufe gegen Endlosschleifen aller Modelle wird als V.51 mit Landeplatz 10.11 geplant.
+- **Vision-Frage, die entschied:** Wie oft schreibt der Eigentümer mit Hermes? → nur, wenn andere Modelle sperren; ein Umbau für ein Ausweichmodell ohne belegte Wirkung lohnt nicht.
+- **Konfidenz zum Zeitpunkt:** mittel – Schleifen und Denktext klar belegt; „keine Wirkung“ an 6 Ketten je Seite mit Noten eines Bewerters je Runde. Umkehrbarkeit billig (Einstellungen lassen sich später nachrüsten).
+- **Konsequenzen:** kein Code; neu V.51; Werkzeug `spikes/hermes-10.10/` für spätere Modellvergleiche (Einstellungen je Variante ohne Eingriff ins Produkt, Schleifen-Kennzahlen, Verblindung). Verworfen: B (keine Wirkung nach Regel-002, Kanon im Mittel schlechter).
 - **Abgeleitete Regel:** keine
 
 ---
