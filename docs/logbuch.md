@@ -29,6 +29,23 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [GELÖST] 10.6: Bildfenster öffnet sich außerhalb des sichtbaren Bereichs
+
+- Befund des Eigentümers (Desktop, keine „⋯“): Absatz markiert, „＋ Bild“ → Menü erscheint, „Aus dem Kanon …“ → „passiert gar nichts“. Seine Vermutung, durch Hochscrollen bestätigt: Das Fenster stand oben über dem Text.
+- Ursache: `StoryPictureDialog` steht in `ChapterEditor` über dem Manuskript; bei Kapiteln von rund 10.000 Wörtern liegt die markierte Stelle weit darunter. Das Formular „In den Kanon“ wird seit 5.2 ins Bild gerollt (`useCanonTake`), das Bildfenster nicht. Der erste End-to-End-Test hatte ein Kapitel mit einem Satz und sah das nicht.
+- Nachgestellt mit Playwright (1280 px, 80 Absätze, Cursor am Ende): Fenster vorhanden, sichtbar zu 0 %.
+- Lösung: beim Öffnen `scrollIntoView({ block: "start" })` wie in 5.2 (gilt auch für „✨ Bild erzeugen“). Neuer End-to-End-Test: Fenster im Bild, Zeile nach Absatz 80, Vorschau im Bild; vorher rot, danach grün. Prüfreihe grün (585 Komponenten-Tests, 17 End-to-End-Tests).
+- Lehre: Abläufe im Kapitel im End-to-End-Test mit langem Text prüfen – die Kapitel des Eigentümers haben im Mittel rund 10.000 Wörter.
+
+### 2026-11-06 – [BEOBACHTUNG] Korrektur zu 10.6 eingespielt
+
+- Eigentümer: „Ja, einspielen“. Nach Runbook (ADR-039), `REVISION` `25a9220`, Rückweg `skriptorium:vorher` und `app.vorher`. Vorher lief `8e87aab`.
+- Prüfung: `/api/health` 200 nach 65 s, Anmeldeseite 200; eine SSH-Prüfung: `(healthy)`, `25a9220`, 0 Fehlerzeilen in 3 Minuten. Offen: erneute Abnahme 10.6 (Eigentümer).
+
+### 2026-11-06 – [BEOBACHTUNG] Korrektur zu 10.6 zusammengeführt
+
+- Eigentümer: „Ja, PR und Merge“. PR #214, CI vier Jobs grün (Python 1:17, Pre-Commit 1:49, TypeScript 2:01, E2E 2:18 mit dem neuen Test), Hinweise nur Ubuntu-26. Zusammengeführt mit `--match-head-commit` → `25a9220`. Server läuft weiter `8e87aab`.
+
 ### 2026-11-06 – [GELÖST] 10.6: Menü von „＋ Bild“ auf schmalen Bildschirmen unsichtbar
 
 - Befund des Eigentümers: „es erscheint kein Bild und keine Vorschau“. Server seit dem Einspielen: kein `POST …/stories/{story_id}/images`, kein Ordner `bilder/` in einer Geschichte – der Ablauf brach im Browser vor dem Hochladen ab.

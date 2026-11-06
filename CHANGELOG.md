@@ -90,6 +90,8 @@ Alle nutzerrelevanten Änderungen werden hier festgehalten. Format angelehnt an 
 
 ### Behoben (nach v1.0.0)
 
+- Fenster „Aus dem Kanon …“ und „✨ Bild erzeugen“ im Kapitel (2026-11-06, Schritt 10.6): Sie öffnen sich über dem Text; in einem langen Kapitel lagen sie dadurch außerhalb des sichtbaren Bereichs, und es schien nichts zu passieren. Jetzt rollt die Seite beim Öffnen zum Fenster.
+
 - „＋ Bild“ auf schmalen Bildschirmen (2026-11-06, Schritt 10.6): Unter etwa 900 Pixel Breite klappte der Tipp auf „＋ Bild“ die Knöpfe hinter „⋯“ wieder zu, sodass das Menü (hochladen, erzeugen, aus dem Kanon) unsichtbar blieb. Jetzt bleibt es offen, bis du einen Weg wählst.
 
 - Figurenkarte für SillyTavern (2026-11-05, Schritt 10.2, ADR-107): „personality“ enthält jetzt genau den Abschnitt „Wesen“, auf jeder Überschriften-Ebene; bisher blieb das Feld bei `## Wesen` leer, und bei `### Wesen` gingen Fähigkeiten und Geschichte mit. Abschnitte über die Heimatwelt eines Gasts erkennt das Skriptorium nur noch am ganzen Wort des Weltnamens.

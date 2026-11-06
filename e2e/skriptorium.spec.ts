@@ -1115,3 +1115,52 @@ test("a picture from the canon goes into a chapter on a narrow screen and into t
     /OEBPS\/bilder\/bild-[0-9a-f]{12}\.jpg/,
   );
 });
+
+test("the picture dialog comes into view below a long chapter on a wide screen (10.6)", async ({
+  page,
+}) => {
+  // The dialog opens above the text; in a long chapter the marked passage is far below it.
+  await login(page);
+  await createWorld(page, "Die Langstadt");
+  await area(page, "Kanon").click();
+  await addEntry(page, { name: "Ysolde", text: "Ysolde führt die Fähre." });
+  await page.getByRole("button", { name: "Ysolde" }).click();
+  const [chooser] = await Promise.all([
+    page.waitForEvent("filechooser"),
+    page
+      .getByRole("button", { name: "Bild hinzufügen" })
+      .click()
+      .then(() =>
+        page.getByRole("menuitem", { name: "Bild hochladen" }).click(),
+      ),
+  ]);
+  await chooser.setFiles({
+    name: "ysolde.png",
+    mimeType: "image/png",
+    buffer: solidPng(48, 32, [180, 90, 40]),
+  });
+  await expect(
+    page.getByText("1 Bild · Tipp auf ein Bild zeigt es groß"),
+  ).toBeVisible();
+  await area(page, "Geschichten").click();
+  await page.getByLabel("Titel").fill("Die lange Fahrt");
+  await page.getByRole("button", { name: "Geschichte anlegen" }).click();
+  await addChapter(page, "Eins");
+  await page.getByLabel("Manuskript").click();
+  await page.keyboard.insertText(
+    Array.from(
+      { length: 80 },
+      (_, at) => `Absatz ${String(at + 1)} über die Fähre und den Nebel.`,
+    ).join("\n\n"),
+  );
+
+  await page.getByRole("button", { name: "＋ Bild" }).click();
+  await page.getByRole("menuitem", { name: "Aus dem Kanon …" }).click();
+  const dialog = page.getByRole("group", { name: "Bild aus dem Kanon" });
+  await expect(dialog).toBeInViewport();
+  await dialog.getByRole("button", { name: "Einfügen" }).click();
+  await expect(page.getByLabel("Manuskript")).toContainText(
+    /Absatz 80 über die Fähre und den Nebel\.\s*!\[Ysolde\]\(bild:bild-[0-9a-f]{12}\.jpg\)/,
+  );
+  await expect(page.locator("img.manuscript-picture")).toBeInViewport();
+});
