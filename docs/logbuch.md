@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.10: Eigentümer wählt Nachlauf
+
+- Vorlage nach der Messung (A nichts übernehmen – empfohlen, B Einstellung je Modell, C Nachlauf). Eigentümer: „Hermes nutze ich nur, wenn andere Modelle sperren“; auf Nachfrage „Nachlauf zuerst“. Über die Längengrenze gegen Endlosschleifen (V-Schritt, Landeplatz 10.11) entscheidet er nach dem Nachlauf.
+- Nachlauf: je 3 weitere Ketten `hermes` und `hermes-fp03-t06` an beiden Geschichten (`ergebnisse/hermes-2/`, `…/hermes-fp03-t06-2/`), danach neue verblindete Bewertung aller 12 Ketten je Geschichte.
+- Kontextgröße der Session 322.538 Token (Grenze 200.000): der Nachlauf gehört zum laufenden Schritt 10.10; danach beginnt in dieser Session kein neuer Schritt.
+
 ### 2026-11-06 – [BEOBACHTUNG] 10.10 Messung Hermes 4 nach Regel-002
 
 - Bericht: `spikes/hermes-10.10/README.md` (Tabellen, Befunde, Grenzen); Stand `main` `478e5fd`, Länge „mittel“, je Variante 3 Ketten an Salzmark und Glimmergrund; 2,59 $.

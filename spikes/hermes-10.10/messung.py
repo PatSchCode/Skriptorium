@@ -14,8 +14,9 @@ Varianten (``VARIANTEN`` unten):
 - ``hermes-rp105``: ``repetition_penalty`` 1,05 statt ``frequency_penalty``.
 
 Aufruf:
-    VARIANTE=NAME [LAENGE=mittel] [LAEUFE=3] [GESCHICHTEN=salzmark,glimmergrund]
+    VARIANTE=NAME [AUSGABE=ORDNER] [LAENGE=mittel] [LAEUFE=3] [GESCHICHTEN=salzmark,glimmergrund]
     uv run python spikes/hermes-10.10/messung.py
+``AUSGABE`` (Standard: Name der Variante) trennt Nachläufe, z. B. ``hermes-2``.
 Ergebnisse unter ``ergebnisse/<VARIANTE>/<geschichte>/lauf-<n>/`` wie in ``spikes/regel-002``;
 dazu ``einstellungen.json`` je Variante. Schlüssel aus ``OPENROUTER_API_KEY``.
 
@@ -111,7 +112,7 @@ async def main() -> None:
     regel002.prepare_request = functools.partial(regel002.prepare_request, models=models)
     inner = OpenRouterProvider(os.environ["OPENROUTER_API_KEY"], models=models)
     provider = Eingestellt(inner, variante)
-    out_base = ROOT / "ergebnisse" / name
+    out_base = ROOT / "ergebnisse" / os.environ.get("AUSGABE", name)
     out_base.mkdir(parents=True, exist_ok=True)
     settings = {
         "modell": variante.model,
