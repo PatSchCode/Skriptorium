@@ -1,0 +1,12 @@
+{
+  "geschichte": "glimmergrund",
+  "schritt": 3,
+  "anweisung": "Am Abend bin ich beim Direktor zum Essen eingeladen. Ich komme zur verabredeten Uhrzeit nach der Kirchenuhr. Nach dem Essen bringt seine Frau ein Getränk für alle.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 226,
+  "sekunden": 10.4,
+  "token_ein": 27160,
+  "token_aus": 420,
+  "kosten_usd": 0.007493112,
+  "finish_reason": "stop"
+}

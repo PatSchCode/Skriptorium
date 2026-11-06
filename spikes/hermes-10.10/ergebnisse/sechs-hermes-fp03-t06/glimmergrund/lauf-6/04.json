@@ -1,0 +1,12 @@
+{
+  "geschichte": "glimmergrund",
+  "schritt": 4,
+  "anweisung": "Zurück in der Nassen Sohle schiebt mir jemand eine Nachricht unter der Tür durch. Ich lese sie, dann schreibe ich Lenka Vorst eine Antwort und bitte Rosl, sie ihr zu bringen.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 402,
+  "sekunden": 21.2,
+  "token_ein": 27301,
+  "token_aus": 711,
+  "kosten_usd": 0.020548044,
+  "finish_reason": "stop"
+}
