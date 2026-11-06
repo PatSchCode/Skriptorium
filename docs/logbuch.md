@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.10 zusammengeführt
+
+- Eigentümer: „Pr anlegen“, „Merge“. PR #217, CI vier Jobs grün (Pre-Commit 1:29, Python 1:38, TypeScript 1:56, E2E 2:02), keine Kommentare. Zusammengeführt (Merge-Commit, Kopf `934693c` geprüft) → `c8c2ea6`. Kein Einspielen nötig (kein Code des Produkts geändert); Server läuft weiter `de64667`.
+
 ### 2026-11-06 – [SESSIONENDE] 10.10 erledigt (ADR-113), nächstes Mal 10.9 oder 10.8
 
 - **Dauer:** 2026-11-06, ca. 00:20–01:20 UTC (Cloud-Session, Branch `scp/zealous-meitner-g94yap`).
