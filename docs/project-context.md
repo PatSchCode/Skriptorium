@@ -108,6 +108,7 @@ Modularer Monolith (ADR-003): ein Python-Server (FastAPI) liefert die React-Ober
 | Service | Zweck | Authentifizierung | Ausfallverhalten |
 |---|---|---|---|
 | OpenRouter | Zugang zu KI-Modellen verschiedener Anbieter, freie Modellwahl (FR-018) | API-Schlüssel, nur serverseitig, nie im Browser | Text des Autors geht nie verloren; Fehlermeldung statt stillem Abbruch; Wiederholen mit anderem Modell (`docs/architecture.md` Abschnitt 5) |
+| Runware | zweiter Bildanbieter neben OpenRouter, vor allem offene Bildmodelle (ADR-114, 10.8 – Anbindung in Arbeit) | API-Schlüssel, nur serverseitig (Ablage und Kosten-Bremse in der zweiten Vorlage zu 10.8) | wie OpenRouter; Bilder über OpenRouter unberührt |
 | weitere KI-Anbieter | künftig parallel zu OpenRouter (FR-025) | je Anbieter | wie OpenRouter |
 | MEGA S4 (Objektspeicher) | Ziel der täglichen Sicherung des Datenverzeichnisses per Duplicati (ADR-036) | Zugangsschlüssel eines eigenen IAM-Benutzers, per Bucket-Richtlinie nur auf den Sicherungs-Bucket; nur auf dem Server und beim Eigentümer; Inhalt vor dem Hochladen verschlüsselt | Sicherung schlägt fehl, Betrieb unberührt; Wiederherstellung nur mit Passphrase, die der Eigentümer auch außerhalb des Servers verwahrt |
 | Have I Been Pwned – Pwned Passwords | Prüfung neuer Passwörter gegen geleakte Passwörter (ADR-017); Daten CC BY 4.0, Namensnennung am Passwortfeld und in der README | keine; nur 5 Hex-Zeichen des SHA-1-Hashes verlassen den Server | Festlegen oder Ändern des Passworts wird abgelehnt, bis der Dienst erreichbar ist; Anmeldung unberührt |

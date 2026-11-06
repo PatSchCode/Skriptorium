@@ -11,7 +11,7 @@
 - **Stand vom:** 2026-11-06 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
+- **Aktiver Schritt:** 10.8 Zweiter Bildanbieter – Runware gewählt 2026-11-07 (ADR-114); wartet auf die Probe des Eigentümers im Playground, danach zweite Vorlage. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
 - **Nächster Schritt:** 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup) bzw. 10.8 Zweiter Bildanbieter – Reihenfolge wählt der Eigentümer; danach 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -35,7 +35,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
 | ✅ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | erledigt 2026-11-06 (ADR-110; zwei Korrekturen PR #214, #215) | – |
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
-| ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
+| 🟠 | 10.8 | Zweiter Bildanbieter (V.24) | in Arbeit – Runware gewählt (ADR-114) | du: Probe im Runware-Playground |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ✅ | 10.10 | Textqualität von Hermes 4 messen (V.41) | erledigt 2026-11-06 (ADR-113: nichts übernehmen) | – |
 | ⚪ | 10.11 | Planung der nächsten Ausbaustufe | offen | KI |
@@ -320,7 +320,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.8: Zweiter Bildanbieter (V.24)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114; Vorlage mit Runware / Replicate / fal.ai / keiner, Nachprüfung der Preise in `docs/research/bildanbieter.md`). Als Nächstes: Probe des Eigentümers im Runware-Playground (kleines Vorab-Guthaben ohne Nachladen), danach zweite Vorlage (Modell-Liste, Zuordnung Modell → Anbieter, Mockup der Bildauswahl, Schlüssel und Kosten-Bremse)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4, 10.5
 - **Freigabepflichtig:** ja – neuer externer Dienst (Kategorie 3), Schlüssel im Betrieb (Kategorie 6)

@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-06 (ADR-001 bis ADR-113). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-07 (ADR-001 bis ADR-114). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -133,12 +133,13 @@ Stand 2026-11-06 (ADR-001 bis ADR-113). Aus welchem Schritt ein ADR stammt, steh
 | 111 | 2026-11-05 | Aktiv | OPERATIV | SCHNITTSTELLE | Anfrage, API | Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken |
 | 112 | 2026-11-05 | Aktiv | OPERATIV | STACK | Externe Abh. | Build der Oberfläche auf Node.js 26.12.1 LTS (npm 11.20.0) |
 | 113 | 2026-11-06 | Aktiv | ERKENNTNIS | PERFORMANCE | – (Ergebnis Schritt 10.10) | Hermes 4 bleibt wie heute: Denken nicht nutzbar, keine Einstellung mit Wirkung; Längengrenze als V.51 |
+| 114 | 2026-11-07 | Aktiv | OPERATIV | ABHÄNGIGKEIT | Externe Abh. | Runware als zweiter Bildanbieter (10.8) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-104 bis ADR-113 – keiner reaktiv: ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung; ADR-104 Pflichtfrage, ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-105 bis ADR-114 – keiner reaktiv: ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung; ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2684,6 +2685,25 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** Wie oft schreibt der Eigentümer mit Hermes? → nur, wenn andere Modelle sperren; ein Umbau für ein Ausweichmodell ohne belegte Wirkung lohnt nicht.
 - **Konfidenz zum Zeitpunkt:** mittel – Schleifen und Denktext klar belegt; „keine Wirkung“ an 6 Ketten je Seite mit Noten eines Bewerters je Runde. Umkehrbarkeit billig (Einstellungen lassen sich später nachrüsten).
 - **Konsequenzen:** kein Code; neu V.51; Werkzeug `spikes/hermes-10.10/` für spätere Modellvergleiche (Einstellungen je Variante ohne Eingriff ins Produkt, Schleifen-Kennzahlen, Verblindung). Verworfen: B (keine Wirkung nach Regel-002, Kanon im Mittel schlechter).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-114: Runware als zweiter Bildanbieter (10.8)
+
+- **Datum:** 2026-11-07
+- **Entscheider:** Eigentümer („Runware“, nach Vorlage mit Optionen Runware / Replicate / fal.ai / keiner und Nachfrage zur Freischaltung bei fal.ai)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[ABHÄNGIGKEIT]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.8 – Vorlage zu Beginn vorgesehen, ADR-105) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Externe Dienste (Kategorie 3); Schlüssel im Betrieb (Kategorie 6) folgt in der zweiten Vorlage
+- **Kontext:** V.24 (ADR-076). Nachprüfung 2026-11-07 (`docs/research/bildanbieter.md`, Abschnitt „Nachprüfung für 10.8“): OpenRouter führt 63 Bildmodelle, fast nur geschlossene Modelle mit Filtern beim Hersteller; ein zweiter Anbieter bringt vor allem offene Modelle mit eigenem Filterschalter (FLUX dev, Z-Image, HiDream, SDXL, Pony, Community-Modelle) und niedrigere Preise. fal.ai prüft bei offenen Modellen immer, solange das Konto nicht freigeschaltet ist (schwarzes Bild bei Treffer; Weg zur Freischaltung nicht dokumentiert); Replicate verbietet Folter- und Verstümmelungsmotive in den Bedingungen; Runware prüft nur auf Anforderung (Integrationsdoku, nicht aus erster Hand belegt).
+- **Optionen:** A Runware; B Replicate; C fal.ai; D keiner (V.24 verwerfen).
+- **Entscheidung:** A – Runware wird als zweiter Bildanbieter neben OpenRouter angebunden. OpenRouter bleibt für alle heutigen Bildmodelle. Vor dem Bau: (1) Probe des Eigentümers im Runware-Playground mit kleinem Vorab-Guthaben ohne automatisches Nachladen (Eingangskriterium aus V.24); (2) zweite Vorlage mit Modell-Liste, Zuordnung Modell → Anbieter (`Services.images` hat heute einen Platz), Darstellung in der Bildauswahl (Mockup), Schlüssel als Umgebungsvariable nur auf dem Server und in der Cloud-Session, Kosten-Bremse und getrennter Prüfung.
+- **Vision-Frage, die entschied:** „Was soll ein zweiter Bildanbieter bringen?“ → offene Modelle ohne Freischaltungs-Hürde für düstere, nicht pornografische Motive. Ob heute Bilder an Filtern scheitern, hat der Eigentümer nicht beantwortet – offen für die zweite Vorlage.
+- **Konfidenz zum Zeitpunkt:** mittel – Preise und Kataloge am 2026-11-07 geprüft; Voreinstellung der Prüfung und Verfügbarkeit der offenen Modelle bei Runware erst mit der Probe belegt. Umkehrbarkeit billig (ein Adapter, eine Umgebungsvariable).
+- **Konsequenzen:** neues Konto und neuer Schlüssel beim Eigentümer; `.env.example`, `docs/project-context.md` Abschnitt 5 und Kostenregister werden mit dem Bau ergänzt. Verworfen: B (Bedingungen schließen Motive aus, die in den Geschichten vorkommen können), C (Freischaltung ungewiss), D (Wunsch nach mehr Diversität, ADR-076).
 - **Abgeleitete Regel:** keine
 
 ---

@@ -29,6 +29,21 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [ADR] ADR-114: Runware als zweiter Bildanbieter
+
+- Vorlage 10.8 mit vier Optionen (Runware, Replicate, fal.ai, keiner) nach Nachprüfung von Katalogen und Preisen (`docs/research/bildanbieter.md`, „Nachprüfung für 10.8“). Befund: OpenRouter führt inzwischen 63 Bildmodelle; ein zweiter Anbieter bringt vor allem offene Modelle mit eigenem Filterschalter.
+- Nachfrage des Eigentümers: Freischaltung bei fal.ai und Unterschied zu Runware. Nachgeprüft: fal-Schemata (FLUX dev, Z-Image Turbo, Pony V7) verlangen weiter eine Freischaltung des Kontos, sonst immer Prüfung mit schwarzem Bild; Runware prüft laut Integrationsdoku nur auf Anforderung (offizielle Seite 404).
+- Eigentümer: „Runware“ → ADR-114. Offen: Frage, ob heute Bilder an Filtern scheitern (nicht beantwortet); Probe im Playground; zweite Vorlage.
+
+### 2026-11-06 – [SESSIONSTART] 10.8 Zweiter Bildanbieter – Stopp wegen Modellklasse
+
+- **Umgebung:** lokale Session auf dem Mac des Eigentümers (macOS, `main` = `c8c2ea6` nach `git pull --ff-only`, 11 Commits aus PR #217 nachgezogen). KI-Läufe mit dem Schlüssel gelten nur in der Cloud-Session.
+- **Modell:** eingestellt `claude-sonnet-5-5`, Sitzungsabfrage (`get_session`) meldet dasselbe → **Routine-Klasse**. Empfohlene Klasse für 10.8: **Entscheidung** (Abhängigkeit und Secrets, Eskalations-Auslöser 1) → Pflicht-Eskalation, Stopp mit `Benötigte Klasse: Entscheidung`.
+- **Kontextgröße:** Sitzungsabfrage liefert keinen Wert für die Kontextgröße; nicht feststellbar.
+- **Mindest-Lektüre:** Kontext vollständig, Logbuch ab letztem Sessionende, Fahrplan (Stand, Phase 10), Architektur 1/2/9, Entscheidungen Teil A (Auszug) und Teil C, aktive Blocker (keine). Abgleich: Fahrplan-Übersicht „8 von 11“ passt zur Schrittliste.
+- **Vorhaben:** 10.8 nach V.24 – Vorlage, ADR, aktuelle Preise, getrennte Prüfung des Umgangs mit dem Schlüssel; Arbeit beginnt nach Modellwechsel. Kein Code, kein Fahrplan-Status geändert.
+- **Modellwechsel:** Eigentümer wechselte per `/model` auf `claude-opus-5-5` („Ja, gewechselt“); Sitzungsabfrage bestätigt `claude-opus-5-5` → **Entscheidungs-Klasse**, Stopp aufgehoben.
+
 ### 2026-11-06 – [SESSIONENDE] 10.10 erledigt (ADR-113), nächstes Mal 10.9 oder 10.8
 
 - **Dauer:** 2026-11-06, ca. 00:20–01:20 UTC (Cloud-Session, Branch `scp/zealous-meitner-g94yap`).

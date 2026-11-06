@@ -4,6 +4,17 @@
 
 Stand 2026-10-12. Anlass: Vorschlag des Eigentümers, Bilder in 7.12 über fal.ai statt OpenRouter zu erzeugen; Auftrag: „prüfen, welche Modelle mit API bei fal.ai verfügbar sind und wo sich Filter abschalten lassen“.
 
+## Nachprüfung für 10.8 (2026-11-07)
+
+- **OpenRouter heute:** 63 Bildmodelle im öffentlichen Katalog (`/api/v1/images/models`, selbst abgefragt), u. a. FLUX.2/FLUX 3, Seedream 4.5–5.0, Gemini/Nano Banana, GPT Image 1–2.6, Qwen Image 2.1–3, Krea 2, Recraft V3–V4.1, Grok Imagine 2.0, MAI Image, Hunyuan Image 3.5. Offene Modelle mit abschaltbarem Filter (FLUX.1 [dev], Z-Image, HiDream, SDXL, Pony, LoRA-Varianten) fehlen. Ein zweiter Anbieter bringt also vor allem **offene Modelle mit eigenem Filterschalter** und niedrigere Preise dafür, kaum neue geschlossene Modelle.
+- **Runware** (Preisseite): FLUX 3 Klein 0,003 $ (512 × 512, 16 Schritte), Qwen-Image-2.1-Turbo 0,014 $, Seedream 5.0 Flash 0,019 $, FLUX 3 Image 0,041 $ (0,75K), Qwen-Image-2.1-Pro 0,075 $ je Bild; „Community 300k+“. Startguthaben jetzt **2 $ nur mit Geschäfts-E-Mail** (2026-10-12: rund 1.000 Bilder). API: `POST https://api.runware.ai/v1`, Liste von Aufgaben (`taskType: imageInference`, `model` als Kennung wie `xai:grok-imagine@image-2.0`, `positivePrompt`, `width`, `height`), Kosten nur mit `includeCost: true`, Bild-Adressen 7 Tage gültig (`ttl`). Offene Modelle (Z-Image, HiDream, FLUX dev) stehen nicht auf der Preisseite – Verfügbarkeit erst mit Schlüssel (Modellsuche) belegbar.
+- **Replicate** (Preisseite): FLUX schnell 0,003 $, FLUX dev 0,025 $, FLUX 1.1 pro 0,04 $, Recraft V3 0,04 $, Ideogram V3 Quality 0,09 $ je Bild; übrige nach Rechenzeit.
+- **fal.ai** (Preisseite): Z-Image Turbo 0,005 $ und FLUX 2 0,012 $ je Megapixel, FLUX.1 [dev] 0,025 $ je Megapixel, Seedream 4.5 0,04 $, Seedream 5.0 Pro 0,0675 $, Nano Banana Pro 0,15 $ je Bild; Vorab-Guthaben.
+- **Filter nachgeprüft:** fal – Feldbeschreibung von `enable_safety_checker` bei `fal-ai/flux/dev`, `fal-ai/z-image/turbo`, `fal-ai/pony-v7` unverändert: „Disabling it requires account authorization; unauthorized requests are always checked, and images flagged as unsafe are returned as black images.“ Wie man die Freischaltung bekommt, nennt die Doku weiter nicht. Runware – Prüfung laut Integrationsdoku (Pipedream, `checkNSFW`) nur auf Anforderung in der Anfrage, sonst keine; kostet dann extra. Offizielle Seite zur Inhaltsprüfung nicht mehr erreichbar (404) – Voreinstellung damit nicht aus erster Hand belegt.
+- Unverändert seit 2026-10-12 (nicht neu geprüft): Nutzungsbedingungen unten.
+
+Quellen: <https://openrouter.ai/api/v1/images/models>, <https://runware.ai/pricing>, <https://runware.ai/docs/image-inference/api-reference>, <https://runware.ai/models>, <https://replicate.com/pricing>, <https://fal.ai/pricing> (alle abgerufen 2026-11-07).
+
 ## Vorgehen
 
 - Öffentlicher Modellkatalog `https://api.fal.ai/v1/models?category=text-to-image&status=active` (ohne Schlüssel lesbar): **203 aktive Text-zu-Bild-Modelle**, alle per API aufrufbar.
