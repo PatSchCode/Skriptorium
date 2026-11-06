@@ -95,3 +95,20 @@ Stichprobe der bauenden KI gegen die Texte (3 von 3 bestätigt): Pell hält eine
 5. **Kosten:** Hermes kostet je Kette ein Sechstel (Salzmark) bis ein Drittel (Glimmergrund) von grok-4.6.
 
 **Grenzen:** 3 Ketten je Variante und Geschichte; seltene Ereignisse wie Endlosschleifen (Eigentümer: „selten“) streuen stark. Je Thema ein Bewerter mit ganzzahligen Noten; bei 8.11 und 9.3 verschwanden Wirkungen aus 3 Ketten im Nachlauf. Die Bewertung der Sprache ist ein neues Werkzeug ohne Vergleich zu früheren Messungen.
+
+## Nachlauf (2026-11-06, Wahl des Eigentümers „Nachlauf zuerst“)
+
+Je 3 weitere Ketten `hermes` und `hermes-fp03-t06` im gleichen Aufbau (`ergebnisse/hermes-2/`, `…/hermes-fp03-t06-2/`; 0,32 $ + 0,29 $). Ausgewertet über 6 Ketten je Seite (`ergebnisse/sechs-*/` als zusammengeführte Kopien, `ergebnisse/auswertung-nachlauf.md`); **neue** verblindete Bewertung aller 12 Ketten je Geschichte durch vier neue Instanzen (Sonnet), neue Zufallsfolge (`ergebnisse/bewertung-2/`).
+
+| Kennzahl, Mittel (Spannweite) | Salzmark heute | Salzmark fp03-t06 | Glimmergrund heute | Glimmergrund fp03-t06 |
+|---|---|---|---|---|
+| wörtlich % | 3,13 (0,63–8,09) | 5,27 (3,22–6,20) | 3,83 (0,90–7,78) | 2,31 (0,79–7,14) |
+| Satz doppelt | 0,17 (0–1) | 0,33 (0–1) | 32,2 (0–190) | 0 (0–0) |
+| 8er im Vorschlag | 1,7 (0–8) | 0 (0–0) | 77,3 (0–386) | 26,8 (0–157) |
+| längster Vorschlag | 331 (272–506) | 336 (272–444) | 1.910 (339–6.438) | 520 (303–1.247) |
+| Deutsch (Note) | 3,50 (3–4) | 3,50 (3–4) | 3,17 (2–4) | 3,83 (2–5) |
+| Stil (Note) | 3,33 (3–4) | 3,33 (3–4) | 2,67 (2–4) | 3,33 (2–4) |
+| Gesamt (Note) | 3,00 (2–4) | 2,67 (2–4) | 2,00 (1–3) | 3,17 (1–4) |
+| Widersprüche eindeutig (Salzmark) / Proben widersprochen (Glimmergrund) | 0,33 (0–1) | 0,67 (0–2) | 1,83 (1–4) | 3,00 (2–5) |
+
+**Ergebnis nach Regel-002:** Die Wirkung auf die Gesamtnote aus den ersten 3 Ketten hält nicht – in der Salzmark liegt `fp03-t06` jetzt sogar unter `heute` (2,67 gegen 3,00), nur in Glimmergrund darüber. Keine Kennzahl liegt in beiden Geschichten außerhalb der Spannweite von `heute`; „wörtlich %“ in der Salzmark und die Kanon-Proben in Glimmergrund sind mit der Einstellung im Mittel schlechter (innerhalb der Spannweite). **Keine Wirkung der Einstellung.** Einzig belastbar ist der Unterschied bei den groben Schleifen in Glimmergrund (längster Vorschlag 1.247 gegen 6.438 Wörter, 0 gegen 190 doppelte Sätze) – auch mit der Einstellung bleibt dort aber eine Entgleisung über 1.247 Wörter mit Anfragetext.

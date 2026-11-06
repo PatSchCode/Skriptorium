@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-06 – [BEOBACHTUNG] 10.10 Nachlauf: keine Wirkung der Einstellung
+
+- Je 3 weitere Ketten `hermes` und `hermes-fp03-t06` (0,61 $), neu verblindet bewertet (12 Ketten je Geschichte, vier neue Instanzen). Über 6 Ketten je Seite: Gesamtnote Salzmark 3,00 → 2,67, Glimmergrund 2,00 → 3,17; nach Regel-002 keine Wirkung – der Befund aus 3 Ketten war Streuung (wie bei 8.11 und 9.3).
+- Grobe Schleifen in Glimmergrund seltener (längster Vorschlag 1.247 gegen 6.438 Wörter), aber nicht beseitigt; Kanon-Proben mit der Einstellung im Mittel schlechter (3,00 gegen 1,83, innerhalb der Spannweite). Bericht: `spikes/hermes-10.10/README.md`, Abschnitt „Nachlauf“.
+
 ### 2026-11-06 – [BEOBACHTUNG] 10.10: Eigentümer wählt Nachlauf
 
 - Vorlage nach der Messung (A nichts übernehmen – empfohlen, B Einstellung je Modell, C Nachlauf). Eigentümer: „Hermes nutze ich nur, wenn andere Modelle sperren“; auf Nachfrage „Nachlauf zuerst“. Über die Längengrenze gegen Endlosschleifen (V-Schritt, Landeplatz 10.11) entscheidet er nach dem Nachlauf.
