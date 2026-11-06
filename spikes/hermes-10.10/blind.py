@@ -4,10 +4,12 @@ Kopiert je Geschichte die Vorschläge ``01.txt`` … ``07.txt`` jeder Kette (ohn
 Modellnamen) in ``<ZIEL>/<geschichte>/Knn/`` und ``start.txt`` daneben; die Zuordnung steht in
 ``ergebnisse/bewertung/mapping.json`` und wird den Bewertern nicht gezeigt.
 
-Aufruf: uv run python spikes/hermes-10.10/blind.py ZIEL VARIANTE [VARIANTE …]
+Aufruf: [BEWERTUNG=bewertung-2] uv run python spikes/hermes-10.10/blind.py ZIEL VARIANTE [VARIANTE …]
+``BEWERTUNG`` (Standard ``bewertung``) ist der Ordner unter ``ergebnisse/`` für die Zuordnung.
 """
 
 import json
+import os
 import random
 import shutil
 import sys
@@ -37,7 +39,7 @@ def main() -> None:
                 shutil.copy(run / f"{step:02d}.txt", dest / f"{step:02d}.txt")
             mapping[story][key] = f"{run.parent.parent.name}/{run.name}"
         shutil.copy(chains[0] / "start.txt", target / story / "start.txt")
-    out = ROOT / "ergebnisse" / "bewertung"
+    out = ROOT / "ergebnisse" / os.environ.get("BEWERTUNG", "bewertung")
     out.mkdir(parents=True, exist_ok=True)
     (out / "mapping.json").write_text(
         json.dumps(mapping, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
