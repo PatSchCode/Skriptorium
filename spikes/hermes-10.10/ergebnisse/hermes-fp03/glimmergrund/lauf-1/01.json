@@ -1,0 +1,12 @@
+{
+  "geschichte": "glimmergrund",
+  "schritt": 1,
+  "anweisung": "Ich frage Brack, wer von den Stollen unten auf der Tiefen Sohle zuletzt in Betrieb war und wie viele es dort überhaupt gab. Brack antwortet kurz. Ich frage ihn, wer den Schlüssel zum neuen Schloss hat.",
+  "modell": "nousresearch/hermes-4-405b",
+  "woerter": 76,
+  "sekunden": 4.5,
+  "token_ein": 26436,
+  "token_aus": 150,
+  "kosten_usd": 0.005682996,
+  "finish_reason": "stop"
+}

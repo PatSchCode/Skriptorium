@@ -11,7 +11,7 @@ Wiederholungen“) – innerhalb eines Vorschlags, nicht zwischen Vorschlägen:
 - **längster Vorschlag** in Wörtern;
 - **nicht stop:** Vorschläge mit ``finish_reason`` ungleich ``stop`` (z. B. ``length`` nach einer
   Endlosschleife bis zur Grenze von 8.000 Token);
-- **Englisch:** Wörter einer kleinen englischen Funktionswortliste in der Kette (Sprachwechsel).
+- **Englisch:** Wörter einer kleinen englischen Funktionswortliste in der Kette (Sprachwechsel; ohne „was“, das auch deutsch ist).
 
 Aufruf: uv run python spikes/hermes-10.10/auswertung.py VARIANTE [VARIANTE …]
 Schreibt ``ergebnisse/auswertung.md`` mit einer Tabelle je Geschichte (Mittel und Spannweite).
@@ -29,7 +29,7 @@ sys.path.insert(0, str(ROOT.parent / "regel-002"))
 import auswertung as basis  # noqa: E402
 
 SENTENCE = re.compile(r"(?<=[.!?…])\s+|\n+")
-ENGLISH = re.compile(r"\b(the|and|of|to|is|was|he|she|it|that|with|you|but|not)\b", re.I)
+ENGLISH = re.compile(r"\b(the|and|of|to|is|he|she|it|that|with|you|but|not)\b", re.I)
 
 
 def schleifen(path: Path) -> dict[str, float]:
