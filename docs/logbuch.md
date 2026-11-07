@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Volle Körperbeschreibung bei Bademode: Figur zurück, Surf-Shorts werden Slip
+
+- Badeanzug und Bikini mit Figur wie im Referenzbild und jungem Gesicht; Surf-Set knapper. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Mittelweg am See: jung trotz Sonne, Figur bleibt schlanker
 
 - Alter vorn reicht auch bei Sonne; „athletic curvy build“ ändert die Figur kaum. Details in `docs/research/bildanbieter.md`.
