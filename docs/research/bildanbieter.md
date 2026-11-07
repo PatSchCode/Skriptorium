@@ -49,7 +49,7 @@ falling just past her shoulders, dark brown almond-shaped eyes, full natural eye
 left cheek, slim build, average height
 ```
 
-Erste Porträts auf Z-Image-Turbo (Seeds 101, 202, 303, 404; weißes T-Shirt, grauer Hintergrund; je 0,0013 $): alle vier sehr ähnlich – die geringe Vielfalt von Turbo hilft hier, die Figur wiederzuerkennen. Abweichung: Der Leberfleck auf der linken Wange fehlt in allen vier. Auswahl des Eigentümers offen.
+Erste Porträts auf Z-Image-Turbo (Seeds 101, 202, 303, 404; weißes T-Shirt, grauer Hintergrund; je 0,0013 $): alle vier sehr ähnlich – die geringe Vielfalt von Turbo hilft hier, die Figur wiederzuerkennen. Abweichung: Der Leberfleck auf der linken Wange fehlt in allen vier. Auswahl des Eigentümers offen. Ganzkörperaufnahmen (Wunsch des Eigentümers; stehend, frontal, weißes T-Shirt, Jeans, Turnschuhe, grauer Studiohintergrund; „small distinct dark mole“; gleiche Seeds, 0,0013–0,0026 $): vollständig von Kopf bis Fuß, Figur stimmig; Gesicht wirkt bei Seeds 202 und 303 jünger, bei 101 und 404 erwachsener; Leberfleck in dieser Größe nicht erkennbar.
 
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
