@@ -215,6 +215,8 @@ pronounced curvy hourglass figure with a narrow waist, noticeably wide hips, ful
 
 Modell Krea 2 Turbo, Seed 505, 832×1216, ohne LoRA.
 
+Brustform (Eigentümer: rund, groß, fest): „large round firm breasts“ statt „full bust“, Sport-BH und grüner Triangel-Bikini, Seeds 505 und 101, zwei Anläufe (Beschreibung hinten bzw. vorn im Prompt; zusammen 0,030 $). **Auf Krea 2 Turbo praktisch ohne Wirkung** – Oberweite bleibt klein bis mittel, im Bikini insgesamt schlanke Figur; auch die Stellung vorn im Prompt ändert nichts. Bestätigt die frühere Beobachtung: Krea 2 Turbo setzt Körperwörter kaum um (kein CFG, kein Negativ-Prompt). Mögliche Wege: Z-Image (Grundmodell) setzte die Oberweite beim ersten Avatar sichtbar um; Mystic XXX vergrößert, wirkt aber verjüngend; Waist slider positiv macht insgesamt voller.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
