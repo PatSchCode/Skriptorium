@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Armbinder-LoRAs gesucht
+
+- Suche auf Wunsch des Eigentümers: für Z-Image-Turbo vier (Armbinder-Flux, ArmRestraints-Set, MonoGlove, Bolero-Zwangsjacke), für Krea 2 drei (Armbinder, Boxtie armbinder, Bolero-Zwangsjacke); alle im passenden Format. Nichts hochgeladen. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Eigentümer: Kettenhandschellen
 
 - Eigentümer: „wir bleiben bei Kettenhandschellen“ → für Handschellen Z-Image-Turbo mit „cuffed behind back“ (`skriptorium:1756180@2568521`); die Scharnier-LoRA (`skriptorium:3020654@3429711`) bleibt ungenutzt im Konto.
