@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] MOSS Image: nur bei fal.ai, dort mit Prüfung und ohne LoRAs → V.55
+
+- Interesse des Eigentümers an MOSS Image. Geprüft (nur lesend): OpenRouter nein, Runware nein (auch kein Upload, Architektur nicht vorgesehen), fal.ai ja (`fal-ai/moss-image`, 0,05 $ je Megapixel, Prüfung ohne Freischaltung immer an, kein LoRA-Feld), Replicate ungeprüft. Offenes Modell (Apache-2.0); selbst betreiben ausgeschlossen (Projektkontext Abschnitt 3). Als V.55 mit Landeplatz 10.11 angelegt.
+
 ### 2026-11-07 – [BEOBACHTUNG] Alten Shibari-Upload löschen – geht nicht per API
 
 - Eigentümer: Upload `skriptorium:591433@3318444` löschen. Runware-Doku und CLI (`runware model …`: search, show, schema, pricing, examples, upload) kennen kein Löschen eigener Modelle; `delete` gibt es nur für Medien (`mediaStorage`). Nicht dokumentierte Aufrufe nicht ausprobiert. Weg: Dashboard von Runware durch den Eigentümer (ob dort angeboten, nicht geprüft) oder Ersetzen durch erneuten Upload (V.54). Bis dahin unschädlich: privat, lädt nicht, Speicher im Beta kostenlos.
