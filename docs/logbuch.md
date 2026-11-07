@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Rope Bondage (Krea 2), 0,6: Figur hält, Arme hinten nicht stimmig
+
+- Vorderansicht stimmig, Rückansicht mit falscher Armhaltung. Leberfleck erstmals sichtbar. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea mit Seed 404 angenommen
 
 - Eigentümer nimmt Seed 404 an. Rezept in `docs/research/bildanbieter.md`, Stand in V.54 nachgetragen.
