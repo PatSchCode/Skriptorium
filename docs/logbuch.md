@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Metalstocks bei 1,0 mit Seitenansicht: gleiches Muster in sechs Seeds
+
+- Hals weiter nicht im Balken, Rückenausschnitt trotz Gegenanweisung. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Metalstocks mit tiefer Vorbeuge: Vorbeuge gelingt, Hals im Balken nicht
 
 - Zwei Anläufe, je sechs Bilder; tiefe Vorbeuge und vollständiger Pranger schließen sich bisher aus. Details in `docs/research/bildanbieter.md`.
