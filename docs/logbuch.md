@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Megapack wirkt bei Knebel deutlich
+
+- Wunsch des Eigentümers: Vergleich mit Knebel am See. Krea 2 Turbo, Seed 777, Gewicht 1,0, Prompt: Frau im Sommerkleid am Seeufer, Hände hinten mit Seil, roter Ballknebel mit Lederriemen. Ohne LoRA 0,0037 $, mit Megapack 0,0037 $ (vorher 0,0124 $ – Abrechnung nach Rechenzeit; *Deutung:* LoRA diesmal schon geladen).
+- Ergebnis: ohne LoRA weder Knebel noch Fesseln – das Grundmodell lässt beides einfach weg; mit Megapack Ballknebel mit Riemen, Seil um Oberarme und Handgelenke hinten. Knebel sitzt leicht seitlich im Mund. Mittlere Pixelabweichung 26,3 von 255.
+- Folge: Die LoRAs lohnen sich bei Motiven, die Krea 2 allein nicht darstellt (hier: Knebel, Fesselung überhaupt); bei einfachen Seilszenen kaum (Eintrag darunter).
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Wirkung der Seil-LoRAs gering – Krea 2 Turbo kann Seile schon
 
 - Eigentümer: „Die Bilder der unterschiedlichen LoRAs sehen identisch aus.“ Kontrollvergleich auf Krea 2 Turbo, gleicher Prompt (Frau auf Stuhl im Keller, Seil um Rumpf, Hände hinten, Knöchel an Stuhlbeinen), Seed 777, Gewicht 1,0: ohne LoRA 0,0037 $, Megapack 0,0124 $, Rope Bondage 0,0149 $.
