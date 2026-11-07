@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] Bewertung Shibari korrigiert
+
+- Eigentümer meinte den Shibari-Vergleich (Frau im Schneidersitz): Mit LoRA ist die Seilverbindung realistischer. In voller Auflösung bestätigt: ohne LoRA dekoratives, aufgelegtes Muster ohne Spannung; mit „Rope tied shibari“ tragende Seilführung um Oberarme und Rumpf, ins Material eingeschnitten, Beine mehrfach gebunden. Meine Bewertung („kein Gewinn“) hatte das ordentlichere Muster höher gewichtet als die Funktion – falsch; korrigiert. Die Hogtie-Korrektur (Eintrag darunter) entstand aus einem Missverständnis der Rückmeldung, ist aber in voller Auflösung belegt und bleibt.
+
 ### 2026-11-07 – [GELÖST] Bewertung Hogtie korrigiert
 
 - Eigentümer: Mit LoRA war die Seilverbindung realistischer. In voller Auflösung nachgeprüft: Mit „Bound on stomach“ verbindet eine weiße Kordel mit Schnallen Knöchel und gebundene Hände (echte Hogtie-Verbindung); ohne LoRA führt das Juteseil nur zur Hüfte. Meine erste Bewertung („weißer Stab, schlechter“) beruhte auf der verkleinerten Übersicht – falsch. Recherche korrigiert. Lehre: Einzelheiten von Fesselungen nur in voller Auflösung beurteilen.
