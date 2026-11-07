@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar in Sport-BH und Shorts mit Rope Bondage: Seilwirkung auf der Haut sichtbar
+
+- Seil eng auf der Haut mit leichter Wölbung; Seed 404 hinten bestes Takate Kote bisher. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Getting Gagged (Krea 2): Handlung erst bei 1,0, Stoff wird durchscheinend
 
 - Details in `docs/research/bildanbieter.md`.
