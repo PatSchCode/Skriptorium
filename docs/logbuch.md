@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea 1,0 mit „single sleeve“: Form stimmt, Sitz und Kleidung nicht
+
+- Ein einziger geschnürter Ärmel, aber seitlich statt mittig hinter dem Rücken; Kleidung wird zu Netzstoff und Leder. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Armbinder, Gewicht 0,6: keiner der beiden LoRAs gelingt
 
 - Z-Image-Turbo (Armbinder-Flux): Armbinder erkennbar, Figur verloren (Gesicht, Haare, Kleidung, Körper). Krea 2 (Armbinder): Figur erhalten, aber zwei getrennte Ärmel statt eines Armbinders. Details in `docs/research/bildanbieter.md`.
