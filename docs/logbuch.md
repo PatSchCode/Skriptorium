@@ -31,7 +31,7 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 
 ### 2026-11-07 – [BEOBACHTUNG] Zweiter Testavatar: drei Runden, auf Wunsch abgebrochen
 
-- Festlegungen schrittweise abgefragt (Nordeuropa, 26, kupferrot, grüne Augen, Sommersprossen, kurvig, 172 cm). Krea 2 Turbo passt am besten; rundere Gesichtsbeschreibung verdrängte die Kurven. Keine Referenz festgelegt. Details in `docs/research/bildanbieter.md`.
+- Festlegungen schrittweise abgefragt (Nordeuropa, 26, kupferrot, grüne Augen, Sommersprossen, kurvig, 172 cm). Krea 2 Turbo passt am besten; rundere Gesichtsbeschreibung verdrängte die Kurven. Danach Referenz festgelegt: Runde 3, Krea 2 Turbo, Seed 505. Details in `docs/research/bildanbieter.md`.
 
 ### 2026-11-07 – [BEOBACHTUNG] Wäsche-LoRAs (Krea 2): Krea kann Wäsche schon ohne LoRA
 

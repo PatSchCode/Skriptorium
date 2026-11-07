@@ -203,7 +203,17 @@ Erste Entwürfe (Studio, Seeds 101 und 404): **Z-Image (Grundmodell)** (CFG 3, N
 Zweite Runde (Eigentümer: beide nachschärfen; Seeds 101 und 404; Shorts als eng anliegende Radlerhose): **Z-Image** mit „defined cheekbones and jawline … fit curvy … toned“ und Negativ „chubby, round face“ (je 0,0096 $) – jetzt schlank-athletisch mit flachem Bauch, aber kaum noch kurvig; Gesicht kantiger, Mitte zwanzig, sehr viele Sommersprossen. **Krea 2 Turbo** mit „young adult … smooth fresh skin and a soft youthful face … pronounced curvy“ (je 0,0037 $) – passt am besten: Mitte zwanzig, deutlich kurviger, Haar lang bis zum Rücken, feine Sommersprossen, grüne Augen. **Krea 2 Turbo mit Mystic XXX 0,6** (0,0037–0,005 $) – noch kurviger, aber Gesicht runder und deutlich jünger wirkend; für diese Figur nicht verwenden.
 
 Dritte Runde (Eigentümer: Gesicht etwas runder und hübscher; nur Krea 2 Turbo, Seeds 101, 404, 505, 606; je 0,0037 $): Zusatz „a pretty soft oval face with gently rounded cheeks, delicate features and full lips, clearly a grown woman in her mid twenties“. Gesicht weicher und ovaler, weiter klar erwachsen (Mitte zwanzig); **Nebenwirkung: Figur deutlich schlanker, Kurven fast verschwunden** – die längere Gesichtsbeschreibung verdrängt die Körperbeschreibung. Am rundesten 505 (Haar bis zur Taille, Figur am ehesten kurvig).
-**Stand: auf Wunsch des Eigentümers abgebrochen (2026-11-07), keine Referenz festgelegt.** Offener Punkt beim Wiederaufnehmen: neue Gesichtsbeschreibung behalten und die Figur weiter vorn im Prompt betonen, oder einen der Entwürfe (Runde 2 Krea 404/101, Runde 3 Seed 505) übernehmen.
+**Referenz festgelegt (Eigentümer, 2026-11-07): Runde 3, Krea 2 Turbo, Seed 505** (Referenzbild `a2c_krea_505.png` im Scratchpad). Beschreibung des zweiten Testavatars:
+
+```text
+a 26-year-old young adult Scandinavian woman in her mid twenties with smooth fresh skin, a pretty soft oval face with gently
+rounded cheeks, delicate features and full lips, clearly a grown woman in her mid twenties, fair skin, many freckles across
+her nose and cheeks, long straight copper red hair falling well past her shoulder blades to the middle of her back, green
+eyes, natural eyebrows, about 172 cm tall, wearing a plain black sports bra and tight black athletic bike shorts, barefoot,
+pronounced curvy hourglass figure with a narrow waist, noticeably wide hips, full round thighs and a full bust
+```
+
+Modell Krea 2 Turbo, Seed 505, 832×1216, ohne LoRA.
 
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
