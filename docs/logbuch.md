@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Modellvergleich: Z-Image-Familie vorn
+
+- Ziel des Eigentümers: möglichst fotorealistisch, Modell ohne Einschränkungen, fehlende Dinge per LoRA. Vergleich von sieben Grundmodellen bei Runware (Porträt, Knebel am See; Motiv 3 weggelassen), 14 Bilder, 0,078 $. Tabelle und Bewertung in `docs/research/bildanbieter.md`.
+- Kurz: Z-Image-Turbo (0,13 Cent, 4 s) natürlichstes Porträt und Knebel ohne LoRA (Hände aber vorn); Z-Image-NSFW-Unlock und Juggernaut Z folgen der Fesselung am besten; Krea 2 Turbo lässt Knebel und Fesseln ohne LoRA weg; SDXL-Modelle (epiCRealism, LUSTIFY) detailreich, aber mit Zusatzteilen im Knebel-Motiv; HiDream wirkt retuschiert.
+
 ### 2026-11-07 – [BEOBACHTUNG] MOSS Image: nur bei fal.ai, dort mit Prüfung und ohne LoRAs → V.55
 
 - Interesse des Eigentümers an MOSS Image. Geprüft (nur lesend): OpenRouter nein, Runware nein (auch kein Upload, Architektur nicht vorgesehen), fal.ai ja (`fal-ai/moss-image`, 0,05 $ je Megapixel, Prüfung ohne Freischaltung immer an, kein LoRA-Feld), Replicate ungeprüft. Offenes Modell (Apache-2.0); selbst betreiben ausgeschlossen (Projektkontext Abschnitt 3). Als V.55 mit Landeplatz 10.11 angelegt.
