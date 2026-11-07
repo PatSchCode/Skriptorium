@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Rope Bondage, Rückansicht, sechs Seeds: Armhaltung jetzt in allen richtig
+
+- Genauere Beschreibung der Armhaltung brachte gestapelte Unterarme in allen sechs Seeds; Handgelenke einzeln statt zusammen gebunden; Seed 101 mit dritter Hand; am besten 303, 404, 606. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Rope Bondage (Krea 2), 0,6: Figur hält, Arme hinten nicht stimmig
 
 - Vorderansicht stimmig, Rückansicht mit falscher Armhaltung. Leberfleck erstmals sichtbar. Details in `docs/research/bildanbieter.md`.
