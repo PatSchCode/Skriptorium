@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Plastic Zip-Cuffs für Krea 2 – Stand zum Weitermachen
+
+- Hinweis des Eigentümers: Die LoRA gibt es auch für Krea 2. Geprüft (nur lesend, `docs/research/bildanbieter.md`): Krea-2-Versionen `@3386627` und `@3358423` bei Runware nicht gelistet; Grundmodelle `krea:krea@2-raw` / `krea:krea@2-turbo` (offene Gewichte, LoRAs möglich, ca. 0,015 $) vorhanden; Nutzung der LoRA nur per eigenem privatem Upload zu Runware; Civitai-Download braucht Anmeldung.
+- Vorgelegt: (1) Eigentümer lädt selbst hoch, (2) Upload durch die KI mit Civitai-Schlüssel über das sichere Formular, (3) erstmal nicht. Antwort: „Merk dir wo wir sind, wir machen morgen weiter“ – **Frage offen**, nichts hochgeladen, kein Code geändert.
+- Gefundene Lücke (noch nicht behoben): `api/runware_models.py` `_FAMILIES` kennt `krea_oss_2` und `krea_oss_2_turbo` nicht als eine Familie – eine Turbo-LoRA würde bei Krea 2 Raw nicht angeboten (Runware: Turbo-LoRAs laufen auch auf Raw). Ein Eintrag plus Test, innerhalb von 10.8.
+- **Wiedereinstieg morgen:** Upload-Frage beantworten lassen; Familien-Lücke schließen; vor einem Upload klären, ob `modelSearch` private Modelle findet und ob CLI/Dashboard eine lokale Datei annehmen; dann wie im Sessionende darüber (CI von #218, Bestätigung, Einspielen).
+
 ### 2026-11-07 – [SESSIONENDE] 10.8 gebaut und geprüft, Pull Request #218 aktualisiert
 
 - **Dauer:** 2026-11-07 ca. 01:08 bis 02:20 (Cloud-Session, zweimal Neustart des Arbeitsprozesses ohne Verlust).
