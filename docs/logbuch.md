@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Alle LoRAs von „sarahpeterson“ aussortiert
+
+- **Entscheidung des Eigentümers** nach Durchsicht aller Modelle des Erstellers auf Civitai: lieblos gemacht, mehr Fehler und Inkonsistenzen als Nutzen (Handschellen; Bound on stomach zeigt Hogtie und gleichzeitig eine Hand am Buch), Qualität fragwürdig, Frauen stark überzeichnet – kein Inhalt mit Anspruch.
+- **Betroffen:** die fünf Uploads Rope tied shibari, Handcuffed, Bound on stomach, Bite gag und cuffed behind back (über die Civitai-API geprüft: auch „cuffed behind back“ stammt von „sarahpeterson“) sowie alle weiteren der Reihe. Vermerk in `docs/research/bildanbieter.md` und in V.54. Uploads bleiben im Runware-Konto, Löschen per API nicht möglich.
+- **Verbleibend brauchbar:** Z-Image-Turbo – Large Ball Gag (FloorInspector), Armbinder (AI_After_Dark); Krea 2 – Plastic Zip-Cuffs, Megapack, Rope Bondage, Metal Bondage, Tape Bondage, Armbinder.
+- **Nebenbei:** PR 218 auf Entwurf gestellt (Wunsch des Eigentümers); die CI läuft bei Entwürfen nicht.
+
 ### 2026-11-07 – [BEOBACHTUNG] Reihe „Sarah Petersons“: Name des Erstellers, Trainingsumfang unbekannt
 
 - Frage des Eigentümers nach den Trainingsbildern. Befund: „sarahpeterson“ ist der Benutzername des Erstellers bei Civitai (Reihe für SD 1.5, SDXL, Chroma, Z-Image, Flux Klein, Qwen), kein Hinweis im Text auf eine bestimmte abgebildete Person. Dateiköpfe der vier Z-Image-LoRAs nennen keine Bildanzahl; nur Schritte (2.901–4.248) und je eine Bildbeschreibung, die nur aus dem Auslösewort besteht (`ss_tag_frequency` mit Zähler 1 – *Deutung, nicht belegt:* sehr kleiner Datensatz oder unvollständige Angabe). Wer auf den Trainingsbildern zu sehen ist, lässt sich aus Datei und Beschreibung nicht feststellen; Beispielbilder bei Civitai nicht angesehen.
