@@ -229,6 +229,15 @@ Nachtest mit betont schmaler Taille („fit curvy … slim narrow waist, a flat 
 
 **Keines davon ist bei Runware vorhanden**; ein direkter Aufruf mit `civitai:…`-Kennung scheitert mit `invalidModel`. Nutzbar nur über einen privaten Upload als Checkpoint (`modelUpload`, Kategorie checkpoint). Dateigrößen: Krea-2-Feinabstimmungen 12–13 GB (fp8/int8), bf16 bis 24 GB; Zenith 5,7 GB (fp8) bzw. 11,5 GB (bf16); UnCanny 8,3 GB (fp8). Ob Runware Speicher für eigene Checkpoints berechnet und welche Formate (fp8, int8, gguf) es annimmt, ist offen. Vorteil der Krea-2-Feinabstimmungen: gleiche Architektur, die Joschek-LoRAs sollten dort laufen.
 
+**Bedingungen für eigene Checkpoints bei Runware (Doku „Model Upload“, abgerufen 2026-11-07):**
+
+- Aufgabe `modelUpload`, Kategorie `checkpoint`; Pflichtfelder `category`, `format`, `name`, `version`, `downloadURL`, bei Checkpoints zusätzlich `architecture`. Optional `type` (`base`/`inpainting`), `defaultSteps`, `defaultCFG`, `defaultScheduler`, `defaultStrength`, `private` (Standard: privat).
+- Architekturen für Checkpoints (15): u. a. `krea_oss_2`, `krea_oss_2_turbo`, `z_image`, `z_image_turbo`, `flux1d`, `sdxl`, `pony`, `illustrious`. **Chroma ist nicht dabei** – Chroma-Checkpoints (UnCanny, GonzaLomo Chroma) lassen sich nicht hochladen.
+- Format nur `safetensors`; zu Genauigkeit (fp8, int8, bf16) und Dateiaufbau (nur Diffusionsmodell oder mit Text-Encoder/VAE) sagt die Doku nichts. Die Civitai-Dateien der Krea-2-Feinabstimmungen sind reine Diffusionsmodelle in fp8 bzw. int8 – ob Runware sie annimmt, zeigt erst ein Versuch. GGUF entfällt.
+- Keine Größengrenze genannt.
+- Kosten: **Upload derzeit in der Beta und kostenlos**; danach 0,05 $ je GB und Monat (aufgerundet, täglich abgerechnet), Beta-Zeit wird nicht nachberechnet. Beispiel: 12–13 GB ≈ 0,65 $/Monat, 24 GB ≈ 1,20 $/Monat. Positives Guthaben nötig.
+- Löschen eigener Modelle ist in der Doku nicht beschrieben (wie schon bei LoRAs festgestellt).
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
