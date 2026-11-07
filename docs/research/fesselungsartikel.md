@@ -58,6 +58,13 @@ Allgemein gilt für jede Beurteilung:
 |---|---|---|
 | **Brustklemmen** (Kleeblatt) | Kleine Stahlklemmen, die sich bei Zug fester schließen, meist durch eine dünne Kette verbunden; sitzen direkt auf der Brustwarze, Kette hängt locker durch. | Klemmen übergroß, auf der Haut daneben, Kette straff ohne Grund. |
 
+<!-- ANCHOR:keuschheit -->
+## Keuschheitsgürtel
+
+| Artikel | Aufbau und Sitz | Typische Bildfehler |
+|---|---|---|
+| **Keuschheitsgürtel** (Stahl) | Starres Taillenband aus Edelstahl, eng über den Hüftknochen; senkrechtes Schild zwischen den Beinen, mit Gummi oder Silikon gesäumt, vorn am Taillenband befestigt; Verschluss mit Vorhängeschloss oder integriertem Schloss vorn. Teils hinten zwei Stahlketten oder Bänder statt eines vollen Schilds. | Lederband über Unterwäsche, Schild aus Stoff, Schloss ohne Funktion, Band locker auf der Taille. |
+
 <!-- ANCHOR:zwangsmittel -->
 ## Armbinder, Zwangsjacke, Joch, Pranger
 
