@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Takate Kote – keine der Varianten trifft die Fesselung
+
+- Wunsch des Eigentümers. Krea 2 Turbo, Seed 777, Gewicht 1,0, Prompt: Frau im Yukata kniend auf Tatami, Takate Kote (Unterarme waagerecht hinter dem Rücken, zwei Seilbänder über und unter der Brust, Seil unter den Armen). Ohne LoRA 0,0037 $, Rope Bondage 0,005 $, Megapack 0,005 $.
+- Ohne LoRA: kein Seil, Arme vorne verschränkt („folded“ falsch gedeutet). Rope Bondage: drei Seilbänder um Brust und Taille, Hände hinten auf Hüfthöhe – kommt am nächsten, aber keine waagerecht gestapelten Unterarme. Megapack: zwei Bänder um die Brust, Handgelenke hinten seitlich gebunden. Bei keiner Fassung ist die eigentliche Box-Fesselung von hinten erkennbar.
+- Möglichkeiten (nicht erprobt): Ansicht von hinten oder schräg hinten im Prompt, Gewicht 1,2, die spezialisierte LoRA 縛り/shibari (`591433@3318444`, 25.521 Downloads) hochladen.
+- Nebenbefund: Alle drei PNG-Dateien von Runware genau 3.037.407 Byte groß, Inhalt verschieden (Prüfsummen) – vermutlich kaum komprimiert.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Megapack wirkt bei Knebel deutlich
 
 - Wunsch des Eigentümers: Vergleich mit Knebel am See. Krea 2 Turbo, Seed 777, Gewicht 1,0, Prompt: Frau im Sommerkleid am Seeufer, Hände hinten mit Seil, roter Ballknebel mit Lederriemen. Ohne LoRA 0,0037 $, mit Megapack 0,0037 $ (vorher 0,0124 $ – Abrechnung nach Rechenzeit; *Deutung:* LoRA diesmal schon geladen).
