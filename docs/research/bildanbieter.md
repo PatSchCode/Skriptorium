@@ -18,6 +18,34 @@ Quellen zum Nachtrag: <https://runware.ai/terms>, <https://offlinecreator.com/po
 
 Quellen: <https://openrouter.ai/api/v1/images/models>, <https://runware.ai/pricing>, <https://runware.ai/docs/image-inference/api-reference>, <https://runware.ai/models>, <https://replicate.com/pricing>, <https://fal.ai/pricing> (alle abgerufen 2026-11-07).
 
+## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
+
+Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
+
+- **Offene Modelle, von Runware betrieben (Preis je Bild laut Schema):**
+
+| Modell | Kennung (AIR) | Beispielpreis |
+|---|---|---|
+| FLUX.2 [dev] | `runware:400@1` | 0,009 $ (1024², 20 Schritte); 0,0205 $ (50 Schritte) |
+| FLUX.2 [klein] 4B / 9B | `runware:400@4` / `runware:400@2` | – (nicht ausgewertet) |
+| FLUX.1 [dev] | `runware:101@1` | 0,0038 $ (1024², 28 Schritte) |
+| FLUX.1 Krea [dev] | `runware:107@1` | 0,0098 $ |
+| FLUX.1 [schnell] | `runware:100@1` | 0,0013 $ |
+| Z-Image | `runware:z-image@0` | 0,0045 $ (1024², 20 Schritte) |
+| Z-Image-Turbo | `runware:z-image@turbo` | 0,0032 $ (1024²), 0,0141 $ (2048²) |
+| HiDream-I1 Dev / Fast / Full | `runware:97@2` / `@3` / `@1` | 0,0045 / 0,0038 / 0,009 $ (1024²) |
+| Juggernaut Z (auf Z-Image) | `rundiffusion:200@100` | – |
+
+- **Geschlossene Modelle zum Vergleich:** Seedream 5.0 Flash 0,0193 $, Qwen-Image-2.1-Turbo 0,0141 $, FLUX 1.1 [pro] 0,04 $ – deckungsgleich mit der Preisseite; OpenRouter führt diese Familien ohnehin.
+- **Community-Modelle (aus Civitai, Kennung `civitai:<Modell>@<Version>`):** Pony-Basis 1.155 Treffer, Illustrious 167, NoobAI 43; gefunden u. a. LUSTIFY! (`civitai:573152@…`, mehrere Versionen), epiCRealismXL-Lightning, RealVisXL V5.0, CyberRealistic Pony, „Z Image Ultimate NSFW Unlock Turbo“. **Nicht gefunden:** BigASP, Chroma, Pony V7. Die Familien Pony, Illustrious, NoobAI und SDXL haben ein eigenes Schema ohne Preis: Abrechnung nach Rechenzeit, Kosten erst nach dem Lauf (`includeCost: true`). Pony und Illustrious: Schema nennt „tag-based prompting“.
+- **Feld `nsfwLevel`** je Treffer (z. B. 31 bei LUSTIFY!, 1 bei den offiziellen Modellen). *Deutung, nicht belegt:* übernommen aus Civitai, dort Bitmaske der Altersstufen (1 PG … 16 XXX, 31 = alle Stufen).
+- **Inhaltsprüfung:** 122 von 127 Text-zu-Bild-Schemata im offiziellen Verzeichnis haben `safety.checkContent` (an/aus, „Increases total generation time“); **keines nennt eine Voreinstellung**. Ohne Schalter nur 5 Vektor-Modelle (ohnehin ausgeschlossen, ADR-077). Die BFL-Pro-Modelle haben zusätzlich `safetyTolerance`. Folge: Der Adapter setzt `checkContent` ausdrücklich, statt sich auf eine Voreinstellung zu verlassen. Geschlossene Modelle filtern beim Hersteller weiter.
+- **Kosten und Konto:** Guthaben 21,07 $; bisher 29 Anfragen für 3,99 $ (Probe im Playground, alle am 2026-11-07); die Aufschlüsselung je Modell (`getUsageActivity`) lieferte für den Zeitraum keine Zeilen. In der Doku keine Ausgabengrenze je Schlüssel gefunden – Bremse ist das Vorab-Guthaben ohne automatisches Nachladen. Kosten je Anfrage mit `includeCost: true` im Feld `cost`.
+- **Ablauf:** Synchrone Anfragen, die nach 120 s noch laufen, kommen als `processing` zurück (dann Abfrage per `getResponse`); 429 mit `Retry-After` bei voller Warteschlange; 503/504 vorübergehend.
+- **Daten:** Runware nutzt API-Daten nie zum Training; „Zero Data Retention“ nur für Unternehmenskonten. Erzeugte Bilder liegen bis zum Ablauf von `ttl` bereit.
+
+Quellen (abgerufen 2026-11-07): API `https://api.runware.ai/v1` (`modelSearch`, `accountManagement`), <https://runware.ai/docs/models/index.json>, Schemata unter `https://runware.ai/docs/models/<id>/schema.json`, <https://runware.ai/docs/models-api/pricing>, <https://runware.ai/docs/models-api/account-management>, <https://runware.ai/docs/models-api/rate-limits>, <https://runware.ai/docs/models-api/zero-data-retention>, <https://runware.ai/llms.txt>.
+
 ## Vorgehen
 
 - Öffentlicher Modellkatalog `https://api.fal.ai/v1/models?category=text-to-image&status=active` (ohne Schlüssel lesbar): **203 aktive Text-zu-Bild-Modelle**, alle per API aufrufbar.

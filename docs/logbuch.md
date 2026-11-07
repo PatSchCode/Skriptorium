@@ -29,6 +29,21 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Modellsuche bei Runware
+
+- Nur lesend, kein Bild erzeugt; Befunde in `docs/research/bildanbieter.md` („Modellsuche mit Schlüssel“). FLUX.2 [dev], FLUX.1 [dev], Z-Image (Turbo), HiDream I1 verfügbar, 0,003–0,02 $ je Bild; Community-Modelle aus Civitai (Pony, Illustrious, NoobAI, LUSTIFY!) über `civitai:<Modell>@<Version>`, abgerechnet nach Rechenzeit. Nicht gefunden: BigASP, Chroma, Pony V7.
+- Inhaltsprüfung `safety.checkContent` in 122 von 127 Bildschemata, nirgends mit Voreinstellung – der Adapter muss sie ausdrücklich setzen.
+- Reibung: Die Doku-Adressen aus dem Recherche-Stand vom 2026-10-12 leiten um oder liefern 404; Einstieg jetzt über `https://runware.ai/llms.txt` und `docs/models/index.json`. `getUsageActivity` braucht `groupBy` als Liste, nicht als Text (Fehler `invalidGroupBy`), und lieferte trotzdem keine Zeilen für die 29 Anfragen aus dem Playground.
+- Vorsicht: `accountManagement`/`getDetails` gibt die Schlüssel des Kontos mit aus – ausgewertet wurden nur Guthaben (21,07 $) und Verbrauch (3,99 $, 29 Anfragen); kein Wert in der Ausgabe.
+
+### 2026-11-07 – [SESSIONSTART] 10.8 Zweiter Bildanbieter – Modellsuche bei Runware
+
+- **Umgebung:** Cloud-Session (Linux), Branch `feat/10.8-zweiter-bildanbieter` (`a4bf01c`) vom Remote ausgecheckt; vom Werkzeug vorgegeben war `claude/happy-lovelace-abnbdc`, der Eigentümer hat ausdrücklich den Feature-Branch genannt. `RUNWARE_API_KEY` gesetzt (nur Vorhandensein und Länge geprüft), `OPENROUTER_API_KEY` gesetzt.
+- **Modell:** eingestellt `claude-opus-5-5`, bedient `claude-opus-5-5` (Sitzungsabfrage `get_session`) → **Entscheidungs-Klasse**, entspricht der Empfehlung für 10.8.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens: 0` – kein verwertbarer Wert, Regel der Sessiongröße entfällt.
+- **Mindest-Lektüre:** Kontext vollständig, Logbuch ab letztem Sessionende, Fahrplan (Stand, Phase 10), Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker (keine).
+- **Vorhaben:** 10.8 fortsetzen – Modellsuche bei Runware nur lesend, danach zweite Vorlage.
+
 ### 2026-11-07 – [SESSIONENDE] 10.8 Runware gewählt, weiter in der Cloud-Session
 
 - **Dauer:** 2026-11-06 ca. 22:50 bis 2026-11-07 (lokale Session auf dem Mac).
