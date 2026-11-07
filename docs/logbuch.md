@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] German Handcuffs brauchbar; kleinere Schellen per Prompt
+
+- Eigentümer bestätigt German Handcuffs als brauchbar (V.54 nachgetragen). Wunsch: Schellen passend zum Handgelenk. Zusatz „small, slim … snugly … true-to-scale“ im Prompt macht Schellen schmaler und enger, Kette kürzer; 0,6 und 0,4 kaum verschieden. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit German Handcuffs (Krea 2 Turbo): Reihenfolge im Prompt entscheidet
 
 - Gewicht 0,6, Handschellen hinter der Avatar-Beschreibung: Hände nicht hinter dem Rücken. Handschellen vor die Beschreibung gestellt: bei 0,6 und 1,0 korrekt hinter der Stuhllehne. Details und Kosten in `docs/research/bildanbieter.md` (Abschnitt Testavatar). Skript `szene.py` im Scratchpad nimmt das Modell jetzt aus der Umgebungsvariable `MODEL`.
