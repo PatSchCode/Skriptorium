@@ -32,6 +32,7 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 ### 2026-11-07 – [BEOBACHTUNG] Harness Gag erzwingt gebundenes Haar
 
 - Zwei Anläufe für offenes Haar (9 Bilder) ohne Erfolg. Details in `docs/research/bildanbieter.md`.
+- Eigentümer: Offenes Haar unter einem Kopfgeschirr ist unrealistisch; das gebundene Haar ist richtig. Erste Kombination gilt.
 
 ### 2026-11-07 – [BEOBACHTUNG] Zwei LoRAs kombiniert (Leather Cuffs + Harness Gag): funktioniert
 
