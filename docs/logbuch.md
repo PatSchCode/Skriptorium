@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] 10.8: Krea 2 Raw und Turbo als eine Familie
+
+- `api/runware_models.py` `_FAMILIES`: `krea_oss_2` und `krea_oss_2_turbo` → Familie `krea_oss_2`; Test in `test_families_decide_which_lora_fits` (Turbo und Raw passen, Krea 2 Medium `krea_2` nicht). 1.273 Tests grün, Abdeckung 99,92 %.
+- Gegenprobe über den Server-Weg mit echtem Schlüssel (ohne Bild): `krea:krea@2-turbo` und `skriptorium:2964163@3386627` hinzugefügt → die LoRA steht bei Turbo unter „passende LoRAs“.
+
 ### 2026-11-07 – [GELÖST] 10.8: Plastic Zip-Cuffs läuft sauber auf Krea 2 Turbo
 
 - Gleicher Aufbau wie der Vergleich mit Raw (Seed 4242, keine Schritte/CFG), Modell `krea:krea@2-turbo`: ohne LoRA 0,0037 $ – sauber, Fesseln als breite Armbänder; mit LoRA 0,6 0,0136 $ – **sauber, ohne Bildfehler**, Kabelbinder richtig geformt, keine Verletzungen im Gesicht.

@@ -70,6 +70,11 @@ def test_families_decide_which_lora_fits() -> None:
     sdxl = RunwareModel(EPIC, "Epic", "sdxl")
     assert family("pony") == family("illustrious") == "sdxl"
     assert family("hidreamdev") == "hidreamdev"
+    assert family("krea_oss_2_turbo") == family("krea_oss_2")
+    krea_lora = Lora("skriptorium:2964163@3386627", "Kabelbinder", "krea_oss_2", "", 0.6)
+    assert fits(krea_lora, RunwareModel("krea:krea@2-turbo", "Krea 2 Turbo", "krea_oss_2_turbo"))
+    assert fits(krea_lora, RunwareModel("krea:krea@2-raw", "Krea 2 Raw", "krea_oss_2"))
+    assert not fits(krea_lora, RunwareModel("krea:krea@2-medium", "Krea 2 Medium", "krea_2"))
     assert fits(Lora(CUFFS, "Cuffs", "pony", "", 1), sdxl)
     assert not fits(Lora(FLUX_LORA, "Flux", "flux1d", "", 1), sdxl)
     assert not fits(Lora(CUFFS, "?", "", "", 1), RunwareModel(EPIC, "?", ""))

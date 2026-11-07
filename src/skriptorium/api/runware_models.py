@@ -46,6 +46,10 @@ _FAMILIES: Final[Mapping[str, str]] = {
     "sd1xlcm": "sd1",
     "flux1d": "flux1",
     "flux1s": "flux1",
+    # Runware: LoRAs for Krea 2 Turbo also run on Krea 2 Raw; one trained on Raw ran cleanly on
+    # Turbo (probe 2026-11-07, 10.8).
+    "krea_oss_2": "krea_oss_2",
+    "krea_oss_2_turbo": "krea_oss_2",
 }
 
 
