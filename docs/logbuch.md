@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Panel Gag (Krea 2): erst bei 1,0
+
+- Bei 0,6 kein Knebel, bei 1,0 vollständig. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Spider Gag: Gurt realistisch, wenn er auf der Haut unter dem Haar verläuft
 
 - Zopf löst das Gurtproblem, lässt sie aber jünger wirken; offenes Haar über dem Gurt ist die bessere Lösung. Details in `docs/research/bildanbieter.md`.
