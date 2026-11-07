@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Alten Shibari-Upload löschen – geht nicht per API
+
+- Eigentümer: Upload `skriptorium:591433@3318444` löschen. Runware-Doku und CLI (`runware model …`: search, show, schema, pricing, examples, upload) kennen kein Löschen eigener Modelle; `delete` gibt es nur für Medien (`mediaStorage`). Nicht dokumentierte Aufrufe nicht ausprobiert. Weg: Dashboard von Runware durch den Eigentümer (ob dort angeboten, nicht geprüft) oder Ersetzen durch erneuten Upload (V.54). Bis dahin unschädlich: privat, lädt nicht, Speicher im Beta kostenlos.
+
 ### 2026-11-07 – [BEOBACHTUNG] V.54 angelegt: weitere LoRAs später
 
 - Eigentümer fragte, warum der S4-Schlüssel nicht als Netzwerk-Secret geht. Antwort: S3/S4 signiert jede Anfrage mit dem geheimen Schlüssel (wechselnde Signatur), ein fester Kopfzeilen-Schlüssel vom Proxy reicht nicht – der Schlüssel müsste im Container liegen (Umgebungsvariable) oder der Mac erzeugt eine vorab signierte Upload-Adresse.
