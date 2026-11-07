@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Megapack 0,8 vom Eigentümer bestätigt
+
+- In V.54 nachgetragen.
+
 ### 2026-11-07 – [BEOBACHTUNG] Megapack mit Gewicht 0,8: Knebel sicher, Gesicht weitgehend erhalten
 
 - 0,8 als Mittelweg zwischen 0,6 (kein Knebel) und 1,0 (Gesicht verschoben). Details in `docs/research/bildanbieter.md`.
