@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Shiny Latex Bodysuits (Krea 2): echter Latex ab 0,6
+
+- Ohne LoRA nur matter Elasthan. Einmal Antwort ohne Bild von Runware, Wiederholung lief. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Bolero Straitjacket (Krea 2): stimmig ab 0,6, weiß gegen schwarz
 
 - Details in `docs/research/bildanbieter.md`.
