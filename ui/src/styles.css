@@ -2746,3 +2746,38 @@ li.guest {
   border-radius: 3px;
   border: 1px solid var(--line);
 }
+
+/* Bildmodelle bei Runware in den Einstellungen (step 10.8, ADR-115). */
+.runware-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto;
+  gap: 0.25rem 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.runware-row input[type="number"] {
+  width: 5rem;
+}
+
+.runware-row .note {
+  grid-column: 1 / -2;
+  overflow-wrap: anywhere;
+}
+
+/* LoRAs im Dialog "Bild erzeugen" (ADR-115). */
+.image-generate-loras {
+  border: 1px solid var(--line, currentColor);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.image-generate-loras input[type="number"] {
+  width: 5rem;
+}
+
+@media (max-width: 640px) {
+  .runware-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

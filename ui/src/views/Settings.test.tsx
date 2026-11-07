@@ -192,6 +192,51 @@ describe("settings: model per task (step 9.7, ADR-096)", () => {
     );
   });
 
+  it("offers the Runware models and saves one for generating images (ADR-115)", async () => {
+    const { calls } = settingsApi(list({ bilderzeugung: "runware:400@1" }), {
+      "GET /api/images/models": ok({
+        ...IMAGE_MODELS,
+        runware: [
+          {
+            id: "runware:400@1",
+            name: "FLUX.2 [dev]",
+            architecture: "flux_2_dev",
+            addition: "",
+            loras: [],
+          },
+          {
+            id: "civitai:277058@1405120",
+            name: "epiCRealism XL VXIV",
+            architecture: "sdxl",
+            addition: "",
+            loras: [],
+          },
+        ],
+        loras: [],
+        runware_ready: true,
+      }),
+    });
+    const user = userEvent.setup();
+    render(<Settings />);
+
+    await waitFor(() => {
+      expect(row("Bilder erzeugen").value).toBe("runware:400@1");
+    });
+    expect(optionTexts(row("Bilder erzeugen"))).toContain(
+      "epiCRealism XL VXIV (Runware)",
+    );
+    expect(screen.queryByText(/Nicht mehr im Angebot/)).toBeNull();
+    expect(
+      screen.getByRole("region", { name: "Bildmodelle bei Runware" }),
+    ).toBeDefined();
+    await user.selectOptions(row("Bilder erzeugen"), "civitai:277058@1405120");
+    await waitFor(() => {
+      expect(calls.at(-1)?.body).toEqual({
+        tasks: { ...NO_TASK_MODELS, bilderzeugung: "civitai:277058@1405120" },
+      });
+    });
+  });
+
   it("warns about nothing while the lists cannot be loaded", async () => {
     settingsApi(
       {

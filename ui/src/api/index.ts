@@ -83,6 +83,9 @@ export type {
   ImagePrice,
   ImageReference,
   ImageTarget,
+  LoraChoice,
+  RunwareLora,
+  RunwareModel,
   StoredImageOrigin,
 } from "./images";
 export type { DescribeEvent } from "./describe";
