@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Drei Körperbau-Entwürfe für den Testavatar
+
+- Auf Wunsch des Eigentümers: A athletisch, B kurvig, C groß und langbeinig (Seed 101, 0,0039 $). B klar anders, A und C ähnlich (Körpergröße ohne Bezugsobjekt nicht darstellbar). Bewusst kein sehr zierlicher Entwurf (wirkt leicht jünger). Wahl offen.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar festgelegt: Seed 101
 
 - Eigentümer wählt Seed 101. Testavatar = Beschreibung und Standardkleidung aus `docs/research/bildanbieter.md` („Testavatar“), Z-Image-Turbo, Seed 101.
