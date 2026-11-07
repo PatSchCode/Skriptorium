@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Tape Bondage, Rückansicht, sechs Seeds: Knöchel jetzt zusammen, Knie nie
+
+- Handgelenke, Mund und Knöchel in allen sechs stimmig, Knie in keinem getaped; Figur leicht verjüngt, am besten 303. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Tape Bondage (Krea 2), 0,6: Handgelenke und Mund gut, Beine teils unvollständig
 
 - Von vorn stimmig; von hinten Knöchel einzeln umwickelt, Knie frei; Figur leicht verjüngt. Details in `docs/research/bildanbieter.md`.
