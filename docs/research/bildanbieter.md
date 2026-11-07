@@ -200,6 +200,8 @@ black athletic shorts, barefoot
 
 Erste Entwürfe (Studio, Seeds 101 und 404): **Z-Image (Grundmodell)** (CFG 3, Negativ-Prompt; je 0,0096 $) – Merkmale genau (kupferrot, sehr lang, grüne Augen, viele Sommersprossen), Figur weich und fülliger als „kurvig“, Gesicht rund, wirkt Anfang zwanzig. **Krea 2 Turbo** (je 0,0037 $) – sehr fotografisch, Sommersprossen fein, grüne Augen, Haar kürzer (bis Brust), Figur schlank und kaum kurvig, Gesicht schmal und wirkt eher Anfang dreißig; Shorts weit geschnitten.
 
+Zweite Runde (Eigentümer: beide nachschärfen; Seeds 101 und 404; Shorts als eng anliegende Radlerhose): **Z-Image** mit „defined cheekbones and jawline … fit curvy … toned“ und Negativ „chubby, round face“ (je 0,0096 $) – jetzt schlank-athletisch mit flachem Bauch, aber kaum noch kurvig; Gesicht kantiger, Mitte zwanzig, sehr viele Sommersprossen. **Krea 2 Turbo** mit „young adult … smooth fresh skin and a soft youthful face … pronounced curvy“ (je 0,0037 $) – passt am besten: Mitte zwanzig, deutlich kurviger, Haar lang bis zum Rücken, feine Sommersprossen, grüne Augen. **Krea 2 Turbo mit Mystic XXX 0,6** (0,0037–0,005 $) – noch kurviger, aber Gesicht runder und deutlich jünger wirkend; für diese Figur nicht verwenden.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
