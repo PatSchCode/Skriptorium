@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [SESSIONENDE] 10.8 gebaut und geprüft, Pull Request #218 aktualisiert
+
+- **Dauer:** 2026-11-07 ca. 01:08 bis 02:20 (Cloud-Session, zweimal Neustart des Arbeitsprozesses ohne Verlust).
+- **Bearbeitet:** 10.8 – Modellsuche und Probebilder bei Runware, zweite Vorlage (ADR-115, V.52), Prüfung der Civitai-Wunschmodelle, Bau (Server `24d955e`, Oberfläche `ade0df6`), Probe über den eigenen Server-Weg, getrennte Prüfung, Härtung `778e165` mit Nachprüfung; Doku (Kontext, Architektur, Anforderungen, README, CHANGELOG, Runbook). Pull Request [PatSchCode/Skriptorium#218](https://github.com/PatSchCode/Skriptorium/pull/218) – Titel und Beschreibung auf den Bau umgestellt (das Repository liegt jetzt unter `PatSchCode`).
+- **Stand:** 10.8 `[IN ARBEIT]` – Code fertig, Tests grün (Python 1.273, 99,88 %; Oberfläche 597; End-to-End 17), getrennt geprüft ohne Befund hoch/mittel. CI des Pull Requests noch nicht gesehen.
+- **Offen:** Bestätigung des Eigentümers (Akzeptanzkriterium); Einspielen vom Mac: `RUNWARE_API_KEY` in `/opt/docker/skriptorium/.env` (mit dem zeilenweisen Befehl aus dem Runbook), Compose-Datei auf Durchreichen prüfen, dann Probe auf dem Server. Danach 10.8 `[ERLEDIGT]`.
+- **Nächster Schritt:** CI von #218 prüfen, mergen nach Freigabe, Einspielen auf Anweisung; dann 10.9. Datiert: D.5 ab 2026-11-12; D.11 Frist überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.8 in Arbeit) abgeglichen; Drift: ADR-115 → 10.8 und V.52 vorhanden, Reaktiv-Quote 0/10 (ADR-106 bis ADR-115), Reifegrade unverändert (Erweiterungen vermerkt), Modul-Liste unverändert, 0 Blocker, Phase 10 bei 11 Schritten; FR-025/FR-035 nachgetragen. Größen: Logbuch rund 630 Zeilen (Trigger 800), Kontext 351 Zeilen (Budget 600). Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** durchgehend Opus 5.5 (Entscheidungs-Klasse, Sitzungsabfrage), Empfehlung für 10.8; oberhalb: Logbuch, README, Doku-Pflege (Routine), nicht abgegeben (Routine-Abgabe ruht bis D.22). Abgegeben: zwei getrennte Prüfungen an Unteragenten auf Sonnet (als getrennte Instanz, nicht zur Ersparnis).
+- **Kontextgröße:** 486.458 Token am Ende (Grenze 200.000; überschritten ab etwa 262.000 nach ADR-115, Eigentümer: „Weiter hier“).
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: optionale Befunde umgesetzt, Nachprüfung ohne Befund
 
 - Eigentümer: „Beide umsetzen“ → `778e165`: Runware-Antwort gestreamt gelesen, Abbruch ab 56 MB vor dem Dekodieren; beschädigte `system/runware-modelle.md` zeigt die Startliste (Warnzeile `runware_liste_defekt`), Erzeugen damit bleibt abgelehnt. 1.273 Python-Tests grün, Abdeckung 99,88 %.
