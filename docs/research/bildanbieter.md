@@ -44,7 +44,12 @@ Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Gut
 - **Ablauf:** Synchrone Anfragen, die nach 120 s noch laufen, kommen als `processing` zurück (dann Abfrage per `getResponse`); 429 mit `Retry-After` bei voller Warteschlange; 503/504 vorübergehend.
 - **Daten:** Runware nutzt API-Daten nie zum Training; „Zero Data Retention“ nur für Unternehmenskonten. Erzeugte Bilder liegen bis zum Ablauf von `ttl` bereit.
 
-Quellen (abgerufen 2026-11-07): API `https://api.runware.ai/v1` (`modelSearch`, `accountManagement`), <https://runware.ai/docs/models/index.json>, Schemata unter `https://runware.ai/docs/models/<id>/schema.json`, <https://runware.ai/docs/models-api/pricing>, <https://runware.ai/docs/models-api/account-management>, <https://runware.ai/docs/models-api/rate-limits>, <https://runware.ai/docs/models-api/zero-data-retention>, <https://runware.ai/llms.txt>.
+- **Wunschmodelle des Eigentümers (2026-11-07, Abgleich Civitai-API ↔ Runware-Suche):**
+  - *epiCRealism XL*, Version „VXVI – LastFAME DMD2 (Realism)“ (`civitai:277058@1552721`, Checkpoint, SDXL 1.0, März 2025): Das Modell führt Runware mit 20 Versionen (v1.0 bis VXIV, z. B. `civitai:277058@1405120` „VXIV-EyeCandy“, `civitai:277058@1346244` „VXIII-aB3AST“), dazu `beam:277058@1522905` „VXVI 0.1“ – **die verlinkte Version fehlt in der Suche**. Ob Runware nicht gelistete Civitai-Versionen beim ersten Aufruf nachlädt, zeigt nur eine Probe.
+  - *Plastic Zip-Cuffs* (`civitai:2964163@3427755`, **LoRA**, Auslösewort `pla5ticz1pcuff5`, Oktober 2026): bei Runware nicht gefunden. Grundmodell „MOSS Image“ – bei Runware weder im Verzeichnis noch in der Suche; die LoRA ist dort damit nicht nutzbar. Ähnliche LoRAs für Pony/SDXL gibt es (z. B. Handschellen, `civitai:536201@596079`, `civitai:425173@473735`).
+  - Folge für die Bauweise: LoRAs sind Zusätze zu einem Grundmodell (Feld `lora` mit Kennung und Gewicht in `imageInference`), kein eigenes Modell. Die Modell-Liste aus der zweiten Vorlage kennt bisher nur Grundmodelle.
+
+Quellen (abgerufen 2026-11-07): API `https://api.runware.ai/v1` (`modelSearch`, `accountManagement`), <https://runware.ai/docs/models/index.json>, Schemata unter `https://runware.ai/docs/models/<id>/schema.json`, <https://runware.ai/docs/models-api/pricing>, <https://runware.ai/docs/models-api/account-management>, <https://runware.ai/docs/models-api/rate-limits>, <https://runware.ai/docs/models-api/zero-data-retention>, <https://runware.ai/llms.txt>, `https://civitai.com/api/v1/model-versions/<id>`.
 
 ## Vorgehen
 

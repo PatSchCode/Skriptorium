@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Wunschmodelle aus Civitai geprüft
+
+- Eigentümer nennt zwei Civitai-Links (Domain `civitai.red`, gleiche Kennungen wie `civitai.com`). Ergebnis in `docs/research/bildanbieter.md`: epiCRealism XL bei Runware in 20 Versionen, die gewünschte „VXVI – LastFAME DMD2“ (`@1552721`) nicht gelistet; Plastic Zip-Cuffs ist eine LoRA für das Grundmodell „MOSS Image“, das Runware nicht anbietet – dort nicht nutzbar.
+- Neu für die Vorlage: LoRAs (Zusätze zu einem Grundmodell) waren in der Modell-Liste nicht vorgesehen. Rückfrage an den Eigentümer: Probebild mit der nicht gelisteten Version, LoRA-Unterstützung ja oder nein.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: zweite Vorlage teilweise beantwortet
 
 - Vorlage mit vier Fragen (Inhaltsvorgabe, Modell-Liste, Schlagwort-Prompts, Technik) und Mockup der Bildauswahl gestellt.
