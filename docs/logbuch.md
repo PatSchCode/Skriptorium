@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Megapack (Krea 2), 0,6: Seil an Handgelenken sehr gut, Knebel fehlt
+
+- Tuchknebel in keinem der drei Seeds, Handgelenk-Seil überzeugend, Knöchel nur einseitig. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Plastic Zip-Cuffs (Krea 2), 0,6: auf Anhieb stimmig
 
 - Kabelbinder-Handschellen in allen drei Seeds eng und glaubwürdig, Figur erhalten; Arme nicht hinter der Lehne. Details in `docs/research/bildanbieter.md`.
