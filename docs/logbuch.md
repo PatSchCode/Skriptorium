@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [SESSIONENDE] 10.8 Runware gewählt, weiter in der Cloud-Session
+
+- **Dauer:** 2026-11-06 ca. 22:50 bis 2026-11-07 (lokale Session auf dem Mac).
+- **Bearbeitet:** 10.8 – Modellwechsel auf die Entscheidungs-Klasse, Nachprüfung von Katalogen, Preisen und Filtern (`docs/research/bildanbieter.md`), Vorlage mit vier Optionen, Erklärung der Freischaltung bei fal.ai, Wahl Runware (ADR-114); Hilfe zur Probe des Eigentümers im Playground (Modelle, Prompts, Scheduler); Wunsch nach Erwachseneninhalten festgehalten, Bedingungen von Runware §10 geprüft (offen formuliert), Community-Modelle über Kennungen `civitai:<Modell>@<Version>` (Runware-CLI).
+- **Stand:** Branch `feat/10.8-zweiter-bildanbieter`, nur Doku, als Pull Request zum Weiterarbeiten in der Cloud-Session (Wunsch des Eigentümers). Kein Code geändert, kein Einspielen nötig.
+- **Offen:** Eigentümer legt `RUNWARE_API_KEY` in der Cloud-Umgebung an. Dort: Modellsuche bei Runware nur lesend (Verfügbarkeit von FLUX.2 [dev], Z-Image Turbo, HiDream I1 und der Kandidaten für Erwachseneninhalte, Voreinstellung der Inhaltsprüfung), Wert des Schlüssels nie ausgeben (nur gesetzt/nicht gesetzt). Danach zweite Vorlage zu 10.8: Modell-Liste, Zuordnung Modell → Anbieter, Mockup der Bildauswahl, Vorbelegung bei Modellen mit Schlagwort-Prompts, Stil-Zusatz als Option, neue Inhaltsvorgabe statt „keine pornografischen Inhalte“ (ADR-077), Schlüssel und Kosten-Bremse, getrennte Prüfung. Unbeantwortet: welche Modelle im Playground taugten, ob die düstere Szene durchging, ob heute Bilder an Filtern scheitern. In der Cloud-Session greift D.28 (Pre-Commit-Hook markdownlint; Umweg `PATH=/usr/local/bin:$PATH` nur für den Commit).
+- **Nächster Schritt:** 10.8 in der Cloud-Session fortsetzen (Modellsuche, dann zweite Vorlage). Datiert: D.5 ab 2026-11-12; D.11 Frist 2026-10-31 überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.8 in Arbeit, 10.9 als Nächstes), Kontext (Runware in Abschnitt 5), Blocker (0) abgeglichen. Drift: ADR-114 → 10.8 vorhanden; Reaktiv-Quote 0/10 (ADR-105 bis ADR-114) nachgezogen; Reifegrade unverändert; Modul-Liste unverändert; 0 blockierte Schritte; Phase 10 bei 11 geplanten Schritten. Größen: Logbuch rund 530 Zeilen (Trigger 800), `docs/project-context.md` 350 Zeilen (Budget 600). Ablaufdaten-Register: kein neuer Vorlauf erreicht.
+- **Modell-Bilanz:** Beginn auf Sonnet 5.5 (Routine) → Stopp nach Abschnitt 0, Wechsel auf Opus 5.5 (Entscheidungs-Klasse; Sitzungsabfrage bestätigt). Schritt 10.8 auf seiner Empfehlung; oberhalb: Doku-Pflege, Logbuch und README (Routine), nicht abgegeben (kleine Teilarbeiten mit geladenem Kontext; Routine-Abgabe ruht bis D.22).
+- **Kontextgröße:** nicht feststellbar (Sitzungsabfrage meldet keinen Wert).
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Probe im Playground, neuer Wunsch Erwachseneninhalte
 
 - Eigentümer probiert im Runware-Playground (Prompt-Vorschläge und Scheduler-Frage beantwortet: Voreinstellung lassen): „Bisher scheint das, was ich brauche, brauchbar zu sein. Nur das Prompting ist halt sehr umfangreich.“ Modelle und Filterergebnis der düsteren Szene noch nicht gemeldet.
