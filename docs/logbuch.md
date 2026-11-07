@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Nachschärfen auf Z-Image: höhere Auflösung, aber glattere Haut
+
+- Hochrechnen und Bild-zu-Bild (0,15/0,3) glätten die Hautstruktur; kein Gewinn an Natürlichkeit. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Z-Image mit niedrigerem CFG: Natürlichkeits-Wörter wirken stärker als der CFG-Wert
 
 - CFG 3 und 2,5 kaum verschieden; „candid photo, natural skin texture …“ macht das Bild deutlich natürlicher. Details in `docs/research/bildanbieter.md`.
