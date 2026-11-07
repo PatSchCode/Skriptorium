@@ -29,6 +29,25 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Bau fertig, Probe über den eigenen Server-Weg
+
+- Server (`24d955e`): Adapter `ai_gateway/runware.py` (Bild als base64, `includeCost`, `checkContent: false`, LoRAs, Modellsuche), Liste `system/runware-modelle.md` (`api/runware_models.py`), Zuordnung am Kennungsformat in `image_routes.py`, Routen `POST`/`PUT /api/images/runware` (89 Routen). Tests: 40 Adapter, 37 Routen/Liste; Python-Abdeckung 99,88 %, `runware.py`, `runware_models.py`, `image_routes.py` je 100 %.
+- Oberfläche (`ade0df6`): Gruppen OpenRouter/Runware im Dialog, LoRAs mit Gewicht, Bereich „Bildmodelle bei Runware“ in den Einstellungen; 597 Tests, Abdeckung 98,81 / 95,22 / 98,36 / 98,95 %. End-to-End 17 von 17 grün.
+- Probe über `create_app` mit echtem Schlüssel (Testclient, eigenes Datenverzeichnis): LoRA `civitai:536201@596079` per Kennung übernommen (Auslösewort „handcuffs, cuffs“, Gewicht 0,8); Link zur nicht gelisteten Version mit Meldung abgelehnt; epiCRealism XL VXIV mit LoRA 0,7 → Bild in 9,5 s für 0,0037 $, LoRA sichtbar wirksam (Pony-LoRA auf SDXL-Modell, gleiche Familie).
+- Getrennte Prüfung (Kategorie 6) gestartet, Ergebnis folgt.
+
+### 2026-11-07 – [GELÖST] 10.8: Reibungen beim Bau
+
+- Pre-Commit prüft mit mypy auch ungestagte, aber vorhandene Testdateien → Server-Teil als ein Commit statt zwei.
+- Vertragsdatei `tests/shared/api-responses.json` zeigte `runware_ready: true`, weil in der Cloud-Session der echte Schlüssel gesetzt ist → Test-Fixture bekommt einen gefälschten Runware-Server (`FakeRunware`), sonst wäre die CI ohne Schlüssel rot.
+- Gewichtsfeld: Leeren setzte sofort 0 → eigenes Feld `WeightInput` (Zwischenstände beim Tippen, beim Verlassen wieder der gültige Wert).
+- Playwright 1.62.1 findet den vorinstallierten Browser nicht unter seinem Pfad → Lauf mit Hilfskonfiguration (`launchOptions.executablePath` `/opt/pw-browsers/chromium`), danach gelöscht; nichts im Repo geändert.
+- Notfall-Handbuch: Der Befehl zum Schlüsseltausch schrieb `.env` ganz neu und hätte den zweiten Schlüssel gelöscht → ersetzt nur noch die eine Zeile (an einer Probe-Datei geprüft). Offen fürs Einspielen: ob die Compose-Datei auf dem VPS `RUNWARE_API_KEY` in den Container durchreicht (nur lokal beim Eigentümer einsehbar).
+
+### 2026-11-07 – [BEOBACHTUNG] Sessiongröße überschritten, Eigentümer: „Weiter hier“
+
+- Sitzungsabfrage nach ADR-115: 261.581 Token Kontext (Grenze 200.000, `docs/project-context.md` Abschnitt 6); zu Sessionbeginn meldete die Abfrage 0. Vorschlag „neue Session für den Bau“; Eigentümer: „Weiter hier“ – Abweichung nach `CLAUDE.md` Abschnitt 0 („Sessiongröße“, Ausnahme). Bau von 10.8 läuft in dieser Session weiter.
+
 ### 2026-11-07 – [ADR-ANGELEGT] ADR-115: Runware – Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen
 
 - Zweite Vorlage zu 10.8 vollständig beantwortet (Auswahlfragen, siehe ADR-115): Prüfung bei Runware fest aus; Fließtext-Prompt, Schlagwort-Knopf als V.52 → 10.11; Technik wie vorgeschlagen; LoRAs gleich in 10.8; Liste in den Einstellungen mit Prüfung per `modelSearch`.
