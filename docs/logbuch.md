@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar angelegt
+
+- Vorgabe des Eigentümers: 21 Jahre, weiblich, südamerikanisch. Beschreibung und erste vier Porträts (Z-Image-Turbo, 0,0052 $) in `docs/research/bildanbieter.md` („Testavatar“). Die vier sind sehr ähnlich; der Leberfleck fehlt. Auswahl offen.
+
 ### 2026-11-07 – [BEOBACHTUNG] Eigentümer: beide Armbinder brauchbar
 
 - Eigentümer: „ja beide definitiv brauchbar“ → `skriptorium:691492@2536151` (Z-Image-Turbo) und `skriptorium:2767766@3119356` (Krea 2) als nutzbare LoRAs vorgemerkt.

@@ -39,6 +39,18 @@ Anlass: Modellvergleich (oben) mit der Z-Image-Familie vorn; Ziel des Eigentüme
 - **Test Armbinder (2026-11-07):** privat hochgeladen `skriptorium:691492@2536151` (Armbinder-Flux, `z_image_turbo`, `@rm81ndr`) und `skriptorium:2767766@3119356` (Armbinder, `krea_oss_2`, `BDSMArmbinder`). Motiv: erwachsene Frau in Rollkragenpullover und Hose im Keller, Dreiviertelansicht von hinten, Seed 777, Gewicht 1,0; in voller Auflösung beurteilt. Ohne LoRA kein Armbinder (Z-Image-Turbo 0,0013 $: Lederschellen und Gurt, Hände gefaltet; Krea 2 Turbo 0,0037 $: ein einzelner Lederärmel, anderer Arm frei). Mit LoRA beide überzeugend: Z-Image-Turbo (0,0025 $) – geschnürter Armbinder bis zu den Händen, Schulterriemen mit Ring, oben etwas flach; Krea 2 Turbo (0,0136 $) – geschnürt, Schulterriemen mit Schnallen, spitz zulaufend, sehr glaubwürdig. Folge: Armbinder nur mit LoRA; auf Z-Image-Turbo die günstigere, auf Krea 2 Turbo die etwas detailreichere Fassung.
 - **Offen:** Ob LoRAs für Z-Image (Base) auf Turbo wirken und umgekehrt; das Skriptorium behandelt `z_image` und `z_image_turbo` bisher als getrennte Familien.
 
+## Testavatar (2026-11-07, Wunsch des Eigentümers)
+
+Feste Testfigur für weitere Bildvergleiche. Vorgabe des Eigentümers: 21 Jahre, weiblich, südamerikanisch. Beschreibung (englisch, so im Prompt):
+
+```text
+a 21-year-old young adult South American woman of Colombian descent, warm tan skin, dark brown wavy hair
+falling just past her shoulders, dark brown almond-shaped eyes, full natural eyebrows, a small mole on her
+left cheek, slim build, average height
+```
+
+Erste Porträts auf Z-Image-Turbo (Seeds 101, 202, 303, 404; weißes T-Shirt, grauer Hintergrund; je 0,0013 $): alle vier sehr ähnlich – die geringe Vielfalt von Turbo hilft hier, die Figur wiederzuerkennen. Abweichung: Der Leberfleck auf der linken Wange fehlt in allen vier. Auswahl des Eigentümers offen.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
