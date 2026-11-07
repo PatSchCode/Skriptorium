@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Ballet Ankle Heels (Krea 2): echte Ballettstiefel ab 0,6
+
+- Testavatar 21. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Female Chastity Harness (Krea 2): stimmig erst bei 1,0
 
 - Prüffigur 45 Jahre mit Sport-BH. Details in `docs/research/bildanbieter.md`.

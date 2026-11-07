@@ -75,6 +75,13 @@ Allgemein gilt für jede Beurteilung:
 | **Joch** (Yoke) | Steifes Brett oder Stahlstange über den Schultern; **Hals in der Mitte** und **Handgelenke an den Enden** in Aussparungen oder Schellen eingeschlossen, Hände neben dem Kopf; Scharnier und Schloss. | Hals frei (Brett unter dem Kinn), überzählige leere Aussparungen, Hände halten das Brett. |
 | **Pranger** (Stocks / Pillory) | Fest stehendes Gestell mit waagerechtem Klappbalken; Hals in der Mitte, Handgelenke links und rechts **im selben Balken**; Höhe bestimmt die Haltung (hoch = aufrecht, hüfthoch = stark vorgebeugt mit dem Kopf durch den Balken). | Kopf über dem Balken, Halsring lose mit Kette, Hände an anderer Stelle. |
 
+<!-- ANCHOR:schuhe -->
+## Schuhe
+
+| Artikel | Aufbau und Sitz | Typische Bildfehler |
+|---|---|---|
+| **Ballettstiefel** (Ballet Heels) | Schaft bis über den Knöchel, vorn geschnürt, oft abschließbar; Fuß vollständig gestreckt, der Spann steht senkrecht in Linie mit dem Schienbein, Stand auf der verstärkten Spitze; sehr hoher, dünner Absatz, der den Boden kaum berührt. | Fuß im Winkel wie bei gewöhnlichen High Heels, Plateau unter dem Ballen, Spitze zu breit. |
+
 <!-- ANCHOR:kleidung -->
 ## Kleidung im Zusammenhang
 
