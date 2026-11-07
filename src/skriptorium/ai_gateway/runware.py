@@ -14,6 +14,7 @@ The adapter never calls ``accountManagement``: its answer lists the keys of the 
 
 import base64
 import binascii
+import json
 import logging
 import math
 import os
@@ -41,6 +42,8 @@ _CONNECT_TIMEOUT_SECONDS: Final = 10.0
 # A sync request waits up to 120 s at Runware; then the task continues without us.
 _READ_TIMEOUT_SECONDS: Final = 150.0
 MAX_PROMPT_CHARS: Final = 4000
+# The largest answer read: a 40 MB image as base64 (4/3) plus room for the JSON around it.
+MAX_ANSWER_BYTES: Final = 56 * 1024 * 1024
 MAX_LORAS: Final = 5
 # Fixed content check (ADR-115): off, sent explicitly.
 CHECK_CONTENT: Final = False
@@ -173,10 +176,14 @@ class RunwareImageProvider:
         """
         task_id = str(uuid.uuid4())
         failure: str | None = None
+        status = 0
+        content = b""
         try:
-            response = await self._client.post(
-                _URL, json=[{**task, "taskUUID": task_id}], headers=self._headers
-            )
+            async with self._client.stream(
+                "POST", _URL, json=[{**task, "taskUUID": task_id}], headers=self._headers
+            ) as response:
+                status = response.status_code
+                content = await _bounded(response)
         except httpx.HTTPError as exc:
             failure = type(exc).__name__
         if failure is not None:
@@ -184,13 +191,13 @@ class RunwareImageProvider:
             # authorization header and must not stay reachable via __context__.
             raise ProviderUnavailable(f"Verbindung fehlgeschlagen ({failure})")
         try:
-            body = response.json()
+            body = json.loads(content)
         except ValueError:
             body = None
         errors = body.get("errors") if isinstance(body, dict) else None
         if isinstance(errors, list) and errors:
-            raise _error(response.status_code, errors[0])
-        _check_status(response.status_code)
+            raise _error(status, errors[0])
+        _check_status(status)
         data = body.get("data") if isinstance(body, dict) else None
         row = next(
             (
@@ -205,6 +212,33 @@ class RunwareImageProvider:
         if row.get("status") == "processing":
             raise ProviderUnavailable("Das Bild war nach zwei Minuten noch nicht fertig")
         return row
+
+
+class _TooLarge(httpx.HTTPError):
+    """The answer is larger than :data:`MAX_ANSWER_BYTES`; reported like a broken connection."""
+
+
+async def _bounded(response: httpx.Response) -> bytes:
+    """The body of ``response``, read in pieces and refused once it grows too large.
+
+    A base64 image up to the size the server takes (40 MB, ``image_routes``) plus the JSON around
+    it fits; a larger answer is cut off before it fills the memory (finding 1 of the separate
+    review of 10.8).
+
+    Raises:
+        httpx.HTTPError: The answer exceeds the bound, or the connection broke.
+    """
+    declared = response.headers.get("content-length", "")
+    if declared.isdigit() and int(declared) > MAX_ANSWER_BYTES:
+        raise _TooLarge("Antwort zu groß")
+    chunks: list[bytes] = []
+    size = 0
+    async for chunk in response.aiter_bytes():
+        size += len(chunk)
+        if size > MAX_ANSWER_BYTES:
+            raise _TooLarge("Antwort zu groß")
+        chunks.append(chunk)
+    return b"".join(chunks)
 
 
 def full_prompt(prompt: str, *additions: str) -> str:

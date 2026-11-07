@@ -412,3 +412,19 @@ def test_runware_from_environment(monkeypatch: pytest.MonkeyPatch) -> None:
     assert _runware_from_environment() is None
     monkeypatch.setenv("RUNWARE_API_KEY", "rw-test")
     assert _runware_from_environment() is not None
+
+
+def test_a_broken_list_shows_the_start_list(
+    logged_in: TestClient, caplog: pytest.LogCaptureFixture
+) -> None:
+    services_of(logged_in).runware_models._store.write(PATH, {"grundmodelle": "kaputt"}, "")
+    response = logged_in.get("/api/images/models")
+    assert response.status_code == 200
+    body = response.json()
+    assert [m["id"] for m in body["runware"]] == [m.id for m in START]
+    assert body["loras"] == []
+    assert "runware_liste_defekt" in caplog.text
+    refused = logged_in.post("/api/images/generate", json={"model": EPIC, "prompt": "x"})
+    assert refused.status_code == 422
+    preset = logged_in.put("/api/models/aufgaben", json={"tasks": {"bilderzeugung": EPIC}})
+    assert preset.status_code == 422

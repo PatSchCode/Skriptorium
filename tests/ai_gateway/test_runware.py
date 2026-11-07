@@ -4,7 +4,7 @@ import asyncio
 import base64
 import json
 import logging
-from collections.abc import Callable
+from collections.abc import AsyncIterator, Callable
 
 import httpx
 import pytest
@@ -292,3 +292,24 @@ def test_full_prompt_appends_non_empty_additions() -> None:
     assert full_prompt(" Kael ", "", " score_9 ", "handcuffs") == "Kael, score_9, handcuffs"
     assert full_prompt("", "a") == "a"
     assert len(full_prompt("x" * 5000, "y")) == MAX_PROMPT_CHARS
+
+
+@pytest.mark.parametrize("declared", [True, False])
+def test_an_oversized_answer_is_cut_off(monkeypatch: pytest.MonkeyPatch, declared: bool) -> None:
+    import skriptorium.ai_gateway.runware as module
+
+    monkeypatch.setattr(module, "MAX_ANSWER_BYTES", 100)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if declared:
+            return httpx.Response(200, content=b"x" * 101)
+
+        # Without a declared length the body comes in pieces.
+        async def pieces() -> AsyncIterator[bytes]:
+            yield b"x" * 60
+            yield b"x" * 60
+
+        return httpx.Response(200, content=pieces())
+
+    with pytest.raises(ProviderUnavailable, match="Verbindung fehlgeschlagen"):
+        asyncio.run(_adapter(handler).generate(ImageOrder("runware:400@1", "x", "1:1")))

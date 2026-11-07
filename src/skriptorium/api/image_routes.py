@@ -14,6 +14,7 @@ the list only after Runware listed it.
 """
 
 import base64
+import logging
 from collections.abc import Container
 from datetime import UTC, datetime
 from typing import Annotated, Final, Literal
@@ -34,9 +35,19 @@ from skriptorium.ai_gateway import (
     full_prompt,
 )
 from skriptorium.api.context import Services, ServicesDep, current_session
-from skriptorium.api.runware_models import Lora, RunwareModel, fits, identifier, is_runware
+from skriptorium.api.runware_models import PATH as RUNWARE_PATH
+from skriptorium.api.runware_models import START as RUNWARE_START
+from skriptorium.api.runware_models import (
+    Lora,
+    RunwareModel,
+    fits,
+    identifier,
+    is_runware,
+)
 from skriptorium.canon import ImageOrigin
 from skriptorium.storage import InvalidInput, inspect_image
+
+_log = logging.getLogger("skriptorium.api")
 
 router = APIRouter(prefix="/api/images", dependencies=[Depends(current_session)])
 
@@ -265,7 +276,10 @@ class Selectable(Container[str]):
         if not isinstance(model, str):
             return False
         if is_runware(model):
-            return self._found.runware_models.model(model) is not None
+            try:
+                return self._found.runware_models.model(model) is not None
+            except InvalidInput:
+                return False
         return model in self._found.image_catalog
 
 
@@ -330,8 +344,14 @@ async def set_runware_models(body: RunwareListIn, found: ServicesDep) -> ImageMo
 
 
 def _runware_lists(found: Services) -> dict[str, object]:
-    models = found.runware_models.models()
-    loras = found.runware_models.loras()
+    """The Runware lists for the answer; a broken file (edited by hand) shows the start list and
+    no LoRAs instead of blocking every image (finding 2 of the separate review of 10.8)."""
+    try:
+        models = found.runware_models.models()
+        loras = found.runware_models.loras()
+    except InvalidInput:
+        _log.warning("runware_liste_defekt datei=%s", RUNWARE_PATH)
+        models, loras = list(RUNWARE_START), []
     return {
         "runware": [
             RunwareModelOut(
