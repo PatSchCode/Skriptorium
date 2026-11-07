@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Metal Bondage, Rückansicht, sechs Seeds: Handschellen hinten in fünf von sechs
+
+- Genauere Armhaltung bringt verkettete Schellen hinter dem Rücken (außer Seed 202); Figur teils verjüngt, am besten 303 und 606. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Metal Bondage (Krea 2), 0,6: Füße und Halsband gut, Handgelenke ohne Kette
 
 - Handschellen nicht hinter dem Rücken und nicht verbunden; Figur von vorn verjüngt. Details in `docs/research/bildanbieter.md`.
