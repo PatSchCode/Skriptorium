@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: drei weitere LoRAs – zwei wirken stark, Shibari lädt nicht
+
+- Eigentümer wählt alle drei geprüften Kandidaten. Privat hochgeladen: `skriptorium:2728181@3066750` (Metal Bondage), `skriptorium:591433@3318444` (Shibari, Gewicht 0,4, Auslösewort), `skriptorium:2351806@3096239` (Tape Bondage); alle nach einigen Minuten in der Modellsuche.
+- Vergleich auf Krea 2 Turbo (Seed 777, je ohne und mit LoRA, bekleidete erwachsene Figuren): Metal Bondage (Gewicht 1,0, 0,0136 $) – ohne LoRA Schellen an den Handgelenken mit loser Kette, mit LoRA Handschellen an der Wand und Fußschellen mit Kette sichtbar; Abweichung 34,6. Tape Bondage (1,0, 0,0161 $) – ohne LoRA gar kein Klebeband (und eine ältere Frau ohne Fesseln), mit LoRA Klebeband über dem Mund, um Rumpf und Stuhl, an den Beinen; Abweichung 38,6. Nebenwirkung Tape: Kleidung wechselt von Hose zu Rock mit Strumpfhose.
+- Shibari: Bild mit LoRA → HTTP 400 `failedLoraLoad` („incompatible format or configuration“) – das kohya-Format des Dateikopfs (`lora_unet_…`) nimmt Runware für Krea 2 nicht. Upload liegt trotzdem im Konto. Möglichkeiten: Datei ins diffusers-Format umwandeln und neu hochladen (Lizenz erlaubt Abwandlungen), oder den Upload löschen.
+
 ### 2026-11-07 – [SESSIONENDE] Nachtrag: LoRAs erprobt, Wiedereinstieg
 
 - **Seit dem letzten Sessionende:** Civitai-Schlüssel als Netzwerk-Secret; drei LoRAs privat zu Runware hochgeladen (`skriptorium:2964163@3386627`, `…2767605@3115420`, `…2742699@3142259`), auf Krea 2 Turbo sauber (Raw mit Bildfehlern); Krea 2 Raw/Turbo als eine Familie im Code (`fb29b82`); Proben zu Seil, Knebel, Takate Kote, Kinbaku; V.53 (fester Seed) angelegt. KI-Kosten der Proben zusammen rund 0,20 $ (Runware-Guthaben).
