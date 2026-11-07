@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] 10.8: Hände bei der Box-Fesselung – mehrere Seeds statt genauer Beschreibung
+
+- Weg 1 auf Wunsch des Eigentümers: einfachere Beschreibung (Kinbaku-Prompt ohne Handdetails), Rope Bondage 1,2, Krea 2 Turbo, fünf Seeds (11, 222, 3333, 4444, 5555), je 0,0037 $, zusammen 0,0185 $.
+- Ergebnis: Seed 5555 unbrauchbar (drei statt zwei Figuren); bei 11, 222, 3333, 4444 Unterarme waagerecht übereinander, Handgelenke mittig gebunden, Hände locker am anderen Unterarm – deutlich besser als mit der ausführlichen Handbeschreibung. Am saubersten 4444, dann 222.
+- Folge für die Arbeit mit dem Skriptorium: bei schwierigen Posen mehrmals „Neu erzeugen“ statt die Beschreibung aufzublähen. Feste Seeds kann das Skriptorium heute nicht vorgeben (jedes Bild ein neuer Zufallswert).
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Hände bei der Box-Fesselung – genaue Beschreibung verschlechtert sie
 
 - Eigentümer: „Die Hände passen nicht.“ Prompt um Handhaltung ergänzt (Handgelenke in der Rückenmitte gekreuzt und gebunden, Handflächen flach am anderen Unterarm, Finger locker); Seeds 777 und 1903, sonst unverändert; je 0,0037 $.
