@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] Spreader-Gag-Bewertung korrigiert; Nachschlagedokument Fesselungsartikel angelegt
+
+- Eigentümer: Serie hat nicht funktioniert, nur 404 bei 1,0 kommt dem Vorbild nahe. Bestätigt – ich hatte nach sauberer Zeichnung statt nach echtem Aufbau bewertet. Neu: `docs/research/fesselungsartikel.md` mit Aufbau, Sitz und typischen Bildfehlern je Artikel als Prüfliste für künftige Bewertungen.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Spreader Gag (Krea 2): gut bei 0,6, bei 1,0 unstimmig
 
 - Details in `docs/research/bildanbieter.md`.
