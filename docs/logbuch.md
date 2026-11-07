@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Plastic Zip-Cuffs (Krea 2), 0,6: auf Anhieb stimmig
+
+- Kabelbinder-Handschellen in allen drei Seeds eng und glaubwürdig, Figur erhalten; Arme nicht hinter der Lehne. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Tape Bondage: Handgelenke eng in einem Wickel, Kreuzwicklung nicht darstellbar
 
 - Handgelenke in allen drei Seeds eng nebeneinander in gemeinsamem Wickel mit sichtbaren Lagen; keine Kreuzwicklung, Knöchel-Band nur um einen Knöchel. Details in `docs/research/bildanbieter.md`.
