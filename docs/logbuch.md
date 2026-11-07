@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea 1,0, von hinten, Kleidung festgehalten: Kleidung bleibt
+
+- Ausdrückliche Stoffangabe hält die Kleidung gegen die LoRA. Armbinder näher an der Mitte, ein Arm wirkt noch frei. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea 1,0 mit „single sleeve“: Form stimmt, Sitz und Kleidung nicht
 
 - Ein einziger geschnürter Ärmel, aber seitlich statt mittig hinter dem Rücken; Kleidung wird zu Netzstoff und Leder. Details in `docs/research/bildanbieter.md`.
