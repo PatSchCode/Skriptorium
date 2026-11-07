@@ -129,6 +129,14 @@ Nur für Z-Image-Turbo: Realistic Skin & Face – Professional photography (Nika
 
 Bewusst nicht aufgenommen: Figuren-LoRAs bestimmter (auch erfundener) Personen, weil sie das Gesicht des Avatars ersetzen; LoRAs von „sarahpeterson“ (aussortiert); reine Nackt-LoRAs. Dateiformat (diffusers/kohya) vor einem Upload prüfen.
 
+**Test der Fotorealismus-LoRAs (2026-11-07).** Privat hochgeladen (Architektur `z_image` bzw. `krea_oss_2`): Realistic Skin Texture ZIB `skriptorium:580857@2965913`, Amateur Photography ZIB `skriptorium:652699@2772577`, Famegrid Realism ZIB `skriptorium:2088956@2733658` (Schlüssel `transformer.…lora_down/up`; bei Redaktionsschluss noch in Verarbeitung), auf Hinweis des Eigentümers außerdem [KREA 2] Mystic XXX v3 (alcaitiff) `skriptorium:2728644@3116175`, Waist slider Krea 2 (NoiseWriggler) `skriptorium:2777139@3127275`, Realism Engine Ideogram 4 + Krea 2 v3 (razzz) `skriptorium:2688234@3109006`. Prüfbilder: Porträt (kurzer „instagram photo“-Prompt mit Natürlichkeits-Wörtern) und Ganzkörper im Bikini am Strand, Seed 101.
+
+- **Realistic Skin Texture auf Z-Image (Grundmodell), 0,6** (0,0149 $): deutlich fotografischer – sichtbare Hautstruktur, natürlicheres Licht, Leberfleck klein und glaubwürdig statt schwarzer Punkt, Haut am Strand weniger ölig; Figur und Gesicht erhalten. **Empfehlung für Z-Image.**
+- **Amateur Photography** und **Realism Engine** (auch die verkleinerte Fassung von ksol8 `2768167@3116107`): LoKr-Format, bei Runware `failedLoraLoad` – nicht nutzbar.
+- **Krea 2 Turbo ohne LoRA** (kein Negativ-Prompt möglich, 0,0037 $): sehr fotografisch und natürlich, aber das Porträt wirkt **deutlich älter als 21** (eher Mitte dreißig), am Strand jung, schlank und wenig kurvig.
+- **Mystic XXX, 0,6** (0,0037 $): Porträt jünger als ohne (eher Mitte zwanzig), sehr natürliche Fotowirkung; am Strand kurviger und mit größerer Oberweite, weiter natürlich. Nackt nicht verlangt und nicht entstanden.
+- **Waist slider** (Strand; Runware erlaubt Gewichte nur von −4 bis 4, die Anwendung bisher nur −2 bis 2): Vorzeichen anders als erwartet – **negativ macht schlanker** (−3: schmalere Taille, insgesamt zierlicher), positiv voller (+3, +4: breitere Taille und Hüfte, fülligerer Körper). Gesicht stabil.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.

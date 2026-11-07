@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Fotorealismus-LoRAs: Skin Texture für Z-Image überzeugt, LoKr-LoRAs laden nicht
+
+- Realistic Skin Texture macht Z-Image deutlich fotografischer. Amateur Photography und Realism Engine (LoKr) laden bei Runware nicht. Krea 2 Turbo sehr natürlich, Porträt aber zu alt; Mystic XXX verjüngt und rundet. Waist slider: negativ = schlanker; Runware begrenzt LoRA-Gewichte auf ±4, die Anwendung auf ±2. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Nachschärfen auf Z-Image: höhere Auflösung, aber glattere Haut
 
 - Hochrechnen und Bild-zu-Bild (0,15/0,3) glätten die Hautstruktur; kein Gewinn an Natürlichkeit. Details in `docs/research/bildanbieter.md`.
