@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Probebild Krea 2 Raw mit eigener LoRA – läuft, aber Bildfehler
+
+- Über den Server-Weg (Testclient, eigenes Datenverzeichnis): `krea:krea@2-raw` und `skriptorium:2964163@3386627` per „Prüfen und hinzufügen“ übernommen (Familie `krea_oss_2`, LoRA wird beim Grundmodell angeboten, Auslösewort angehängt); Bild 832 × 1216 in 40 s für 0,0186 $.
+- Ergebnis: Die Kabelbinder sind da (übergroß), aber deutliche Bildfehler – weiße, rot-blau umrandete Flächen über Haar, Mantel und Bank; dazu Verletzungen im Gesicht, die der Prompt nicht verlangte. Ursache offen: Gewicht 1,0 zu hoch, oder die Voreinstellungen von Runware für Schritte und CFG bei Krea 2 Raw (der Adapter schickt keine), oder die LoRA selbst (V0.4, 32 Trainingsbilder). Klärung nur mit Vergleichsbildern (ohne LoRA, Gewicht 0,6).
+
 ### 2026-11-07 – [GELÖST] 10.8: LoRA Plastic Zip-Cuffs (Krea 2) privat zu Runware hochgeladen
 
 - Auf Frage des Eigentümers („kannst du das Modell direkt zu Runware hochladen?“): `modelUpload` mit `downloadURL` = signierte, kurzlebige Speicheradresse, auf die Civitai den angemeldeten Download weiterleitet (Host `b2.civitai.com`, Token nur für diese Datei; der Civitai-Schlüssel ging nicht an Runware; Adresse nicht ausgegeben, danach gelöscht).
