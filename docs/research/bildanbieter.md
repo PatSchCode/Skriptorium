@@ -189,6 +189,17 @@ Bewusst nicht aufgenommen: Schuluniform-LoRAs (Gefahr jugendlich wirkender Figur
 
 Folge: Für Wäsche ist auf Krea 2 keine LoRA nötig; Lingerie Construction bei 0,8 sichert die Befestigungen, Cinzia nur für ihren eigenen Stil.
 
+**Zweiter Testavatar – Festlegungen des Eigentümers (2026-11-07, schrittweise abgefragt):** weiblich, eigenständige Testfigur, Mitte bis Ende 20 (im Prompt 26), Nordeuropa, lange glatte kupferrote Haare, grüne Augen, Sommersprossen, kurvig, ca. 172 cm, Standardkleidung schwarzer Sport-BH und Shorts; beide Modelle vergleichen. Beschreibung:
+
+```text
+a 26-year-old adult Scandinavian woman in her mid twenties with mature adult facial features, fair skin, many freckles across
+her nose and cheeks, long straight copper red hair falling well past her shoulder blades, green eyes, natural eyebrows, curvy
+hourglass figure, about 172 cm tall, narrow waist, wide hips, full thighs, full bust, wearing a plain black sports bra and
+black athletic shorts, barefoot
+```
+
+Erste Entwürfe (Studio, Seeds 101 und 404): **Z-Image (Grundmodell)** (CFG 3, Negativ-Prompt; je 0,0096 $) – Merkmale genau (kupferrot, sehr lang, grüne Augen, viele Sommersprossen), Figur weich und fülliger als „kurvig“, Gesicht rund, wirkt Anfang zwanzig. **Krea 2 Turbo** (je 0,0037 $) – sehr fotografisch, Sommersprossen fein, grüne Augen, Haar kürzer (bis Brust), Figur schlank und kaum kurvig, Gesicht schmal und wirkt eher Anfang dreißig; Shorts weit geschnitten.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
