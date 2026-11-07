@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Suche nach anderem Checkpoint bei Runware
+
+- Kandidaten: Z-Image (Grundmodell), Juggernaut Z, Krea 2 Raw, SDXL-Fotorealismus (RealVisXL, epiCRealism XL, LUSTIFY), Qwen-Image; Chroma nicht vorhanden. Liste in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Oberweite im Bikini: Abstufung erkennbar, aber mild
 
 - Details in `docs/research/bildanbieter.md`.
