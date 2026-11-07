@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Rigid und hinged Cuffs: kaum etwas vorhanden
+
+- Suche auf Wunsch des Eigentümers. Nur „Hinged Handcuffs (held)“ für Krea 2 (gehalten, nicht angelegt) und „Rigidstock Cuff“ (Stockfessel, FLUX/Pony/Illustrious, kohya). Nichts hochgeladen. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Handschellen hinter dem Rücken: die Ansicht von hinten entscheidet
 
 - Test „cuffed behind back“ (Z-Image-Turbo) und German Handcuffs (Krea 2 Turbo), je ohne/mit, Verhörraum von schräg hinten, 0,021 $. Alle vier zeigen die Handschellen hinten; am überzeugendsten Z-Image-Turbo mit LoRA (eng sitzend, Arme hinter der Lehne). Details in `docs/research/bildanbieter.md`. Hände in voller Auflösung geprüft (Lehre aus den Korrekturen).
