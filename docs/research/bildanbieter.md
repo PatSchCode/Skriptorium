@@ -18,6 +18,20 @@ Quellen zum Nachtrag: <https://runware.ai/terms>, <https://offlinecreator.com/po
 
 Quellen: <https://openrouter.ai/api/v1/images/models>, <https://runware.ai/pricing>, <https://runware.ai/docs/image-inference/api-reference>, <https://runware.ai/models>, <https://replicate.com/pricing>, <https://fal.ai/pricing> (alle abgerufen 2026-11-07).
 
+## Erkundung Z-Image (2026-11-07, Wunsch des Eigentümers)
+
+Anlass: Modellvergleich (oben) mit der Z-Image-Familie vorn; Ziel des Eigentümers: fotorealistisch, Modell ohne Einschränkungen, Lücken per LoRA. Nur lesend, keine Bilder.
+
+- **Z-Image und Z-Image-Turbo** (Tongyi-MAI/Alibaba, je 6 Mrd. Parameter, Apache-2.0; Turbo seit 2025-11-25, Z-Image seit 2026-01-23). Laut Herstellerkarte: *Z-Image* ist das unverdichtete Grundmodell – volle CFG, Negativ-Prompt, 28–50 Schritte, hohe Vielfalt je Seed, „gute Basis für LoRA-Training“; *Z-Image-Turbo* ist daraus verdichtet und nachtrainiert (RL) – 8 Schritte, kein CFG, kein Negativ-Prompt, Bildqualität „sehr hoch“, Vielfalt „niedrig“, selbst schlecht weiter trainierbar. Bei Runware: Z-Image 0,0045 $ (1024², 20 Schritte), Turbo 0,0032 $ (1024²); im Vergleich oben Turbo 0,0013 $ bei 832 × 1216 in 4 s. Folge: Turbo für den Alltag (billig, schnell, sehr fotorealistisch, gleiche Szene sieht mit neuem Seed ähnlich aus); Z-Image, wenn Negativ-Prompt oder mehr Abwechslung gebraucht wird.
+- **LoRAs bei Civitai** (Basis `ZImageTurbo` bzw. `ZImageBase`, mit Erwachseneninhalten, Suche nach Downloads und Begriffen): 1.123 gefunden, 843 Turbo, 280 Base. Nach Themen (Name/Schlagworte; ohne Hinweise auf Minderjährige, Prominente, Cosplay): Fesselung 104, Metall/Ketten/Handschellen 70, Knebel 33, Klebeband 10, Geschirr/Halsband/Leder/Latex 151, Kleidung 368, Realismus 393. Viele sind sexuell ausgerichtet; Auswahl mit Bezug auf die bisherigen Themen:
+  - Realismus und Hände: Hands XL (… + zit) `200255@2534692` (313.117 Downloads, Hände), Lenovo UltraReal `1662740@2452071` (218.087), Realistic Skin Texture `580857@2674760` (194.359), NiceGirls UltraReal `1862761@2526600` (156.817), Detailed Perfection (Hände, Füße, Gesicht) `411088@2577477` (138.437).
+  - Knebel: Large Ball Gag `999177@2731175` (7.136), Harness Panel Gag `1209663@2525128` (6.823), Joschek's Ballgags for Z-Image `2246853@2537559` (1.541).
+  - Fesselung: rope_bondage V2 (ZiT) `2277824@2922476`, Pole Stand `105616@2485319` (9.528), Reihe „Sarah Petersons … BDSM“ (Seil, Handschellen, Fußfesseln, Hogtie, Klebeband-Knebel; je ~1.400–1.900), Tape bound `2205944@2483725`, Joschek's Metal Collars `2190698@2466624`, chain_collar `2217833@2496919`.
+  - Kleidung: u. a. armored dress `92654@2466454` (6.665), Ancient Chinese outfit `2174846@2899835`, Latex-Anzüge (`2282950@2569711`, `2277929@2563842`), bondage outfit v3 `2053543@2902957`; Kleidung insgesamt die größte Gruppe, oft für ein bestimmtes Stück (Uniform, Kleid, historische Tracht).
+- **Bei Runware vorhanden:** 63 LoRAs für `z_image_turbo`, 1 für `z_image`; zu Fesselung, Knebel, Handschellen, Klebeband, Leder/Latex, Kleidung, Händen keine – Nutzung nur über eigenen Upload (V.54).
+- **Dateiformat:** Stichprobe von fünf Kandidaten (Ball Gag, Hands, Ballgags, rope_bondage V2, Lenovo UltraReal) – alle diffusers/PEFT (`diffusion_model.layers.…lora_A`), wie die bei Runware funktionierenden Krea-LoRAs; kein kohya-Fall wie Shibari. Ob Runware sie für Z-Image lädt, zeigt erst ein Upload.
+- **Offen:** Ob LoRAs für Z-Image (Base) auf Turbo wirken und umgekehrt; das Skriptorium behandelt `z_image` und `z_image_turbo` bisher als getrennte Familien.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.

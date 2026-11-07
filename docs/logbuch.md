@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Erkundung Z-Image: Unterschied Base/Turbo, LoRA-Lage
+
+- Auftrag des Eigentümers: Unterschied Z-Image / Z-Image-Turbo, vorhandene LoRAs, Kleidung und die bisherigen Themen. Ergebnis in `docs/research/bildanbieter.md` („Erkundung Z-Image“): Turbo = verdichtet, 8 Schritte, ohne CFG/Negativ-Prompt, sehr fotorealistisch, wenig Vielfalt; Z-Image = Grundmodell, 28–50 Schritte, CFG und Negativ-Prompt, mehr Vielfalt. Civitai 1.123 LoRAs (843 Turbo); bei Runware zu den Themen keine – Upload nötig. Stichprobe Dateiformat: alle passend (diffusers). Hand-LoRA mit 313.117 Downloads gefunden (Handproblem bei Fesselungen).
+
 ### 2026-11-07 – [BEOBACHTUNG] Modellvergleich: Z-Image-Familie vorn
 
 - Ziel des Eigentümers: möglichst fotorealistisch, Modell ohne Einschränkungen, fehlende Dinge per LoRA. Vergleich von sieben Grundmodellen bei Runware (Porträt, Knebel am See; Motiv 3 weggelassen), 14 Bilder, 0,078 $. Tabelle und Bewertung in `docs/research/bildanbieter.md`.
