@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: optionale Befunde umgesetzt, Nachprüfung ohne Befund
+
+- Eigentümer: „Beide umsetzen“ → `778e165`: Runware-Antwort gestreamt gelesen, Abbruch ab 56 MB vor dem Dekodieren; beschädigte `system/runware-modelle.md` zeigt die Startliste (Warnzeile `runware_liste_defekt`), Erzeugen damit bleibt abgelehnt. 1.273 Python-Tests grün, Abdeckung 99,88 %.
+- Getrennte Nachprüfung (Sonnet, nur `git show 778e165`): kein Befund mittel oder höher. Hinweise ohne Änderung: eine entpackte Teilmenge kann die Grenze kurz überschreiten (begrenzt); 150 s gelten je Lesevorgang (wie vorher); bei kaputter Liste zeigt die Auswahl Modelle, die dann mit 422 scheitern – ein Feld zur Erklärung wäre optional, nicht umgesetzt (Fall nur bei Handbearbeitung der Datei).
+- Eigentümer: „Pull Request anlegen“.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: getrennte Prüfung ohne Befund hoch oder mittel
 
 - Getrennte Instanz (Unteragent auf Sonnet, nur Diff `c8c2ea6..HEAD`, Bedrohungsmodell und Regeln; kein Gesprächsverlauf, kein Netz zu den Anbietern), 2026-11-07: keine Befunde hoch oder mittel, keine Anforderung von ASVS 5.0.0 L1 / Auth L2 verletzt; 102 Tests grün nachgeprüft.
