@@ -110,7 +110,7 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **10.6** (erledigt 2026-11-06): Bilder zwischen den Absätzen eines Kapitels und im E-Book – hochladen, erzeugen oder aus dem Kanon (ADR-110).
 - ✅ **10.7** (erledigt 2026-11-06): Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken (ADR-111).
 - ✅ **10.10** (erledigt 2026-11-06): Hermes 4 gemessen – Einstellungen helfen nicht, Hermes bleibt wählbar wie heute; Längengrenze gegen Endlosschleifen geplant (ADR-113, V.51).
-- 🟠 **In Arbeit:** 10.8 zweiter Bildanbieter – Runware angebunden (ADR-114, ADR-115): Modelle und LoRAs in den Einstellungen, Inhaltsprüfung aus; wartet auf getrennte Prüfung, Bestätigung des Eigentümers und Einspielen.
+- 🟠 **In Arbeit:** 10.8 zweiter Bildanbieter – Runware angebunden (ADR-114, ADR-115): Modelle und LoRAs in den Einstellungen, Inhaltsprüfung aus; getrennte Prüfung erfolgt, wartet auf Bestätigung des Eigentümers und Einspielen. Erkundung der Bildmodelle und LoRAs abgeschlossen, Folgewünsche in V.56.
 - ⚪ **Als Nächstes:** 10.9 vollständige Anfrage festhalten; danach 10.11 Planung.
 - ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Veröffentlichung.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).

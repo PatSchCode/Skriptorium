@@ -67,7 +67,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06), V.52 (Schlagwort-Prompts, aus 10.8, 2026-11-07, ADR-115), V.53 (fester Seed beim Bilderzeugen, aus 10.8, 2026-11-07), V.54 (weitere LoRAs, u. a. Shibari, aus 10.8, 2026-11-07), V.55 (MOSS Image, aus 10.8, 2026-11-07). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06), V.52 (Schlagwort-Prompts, aus 10.8, 2026-11-07, ADR-115), V.53 (fester Seed beim Bilderzeugen, aus 10.8, 2026-11-07), V.54 (weitere LoRAs, u. a. Shibari, aus 10.8, 2026-11-07), V.55 (MOSS Image, aus 10.8, 2026-11-07), V.56 (Erkenntnisse der Bildmodell-Erkundung, aus 10.8, 2026-11-07). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -320,7 +320,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.8: Zweiter Bildanbieter (V.24)
 
-- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114). Zweite Vorlage beantwortet 2026-11-07 (ADR-115): Erwachseneninhalte ohne Prüfung bei Runware, mehrere Bildanbieter nach Kennungsformat, Grundmodelle und LoRAs in den Einstellungen, Schlüssel nur serverseitig, Kosten-Bremse über Vorab-Guthaben; Modellsuche und Probebild in `docs/research/bildanbieter.md`. Gebaut 2026-11-07 (`24d955e`, `ade0df6`; Tests grün, Probe mit echtem Bild 0,0037 $), getrennte Prüfung ohne Befund hoch/mittel. Zwei optionale Befunde umgesetzt (`778e165`, nachgeprüft). Krea 2 Raw/Turbo als eine Familie; eigene LoRA `skriptorium:2964163@3386627` privat hochgeladen, sauber auf Krea 2 Turbo (auf Raw Bildfehler). Offen: Bestätigung des Eigentümers, Einspielen (Schlüssel auf dem VPS, Durchreichen in der Compose-Datei prüfen)
+- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114). Zweite Vorlage beantwortet 2026-11-07 (ADR-115): Erwachseneninhalte ohne Prüfung bei Runware, mehrere Bildanbieter nach Kennungsformat, Grundmodelle und LoRAs in den Einstellungen, Schlüssel nur serverseitig, Kosten-Bremse über Vorab-Guthaben; Modellsuche und Probebild in `docs/research/bildanbieter.md`. Gebaut 2026-11-07 (`24d955e`, `ade0df6`; Tests grün, Probe mit echtem Bild 0,0037 $), getrennte Prüfung ohne Befund hoch/mittel. Zwei optionale Befunde umgesetzt (`778e165`, nachgeprüft). Krea 2 Raw/Turbo als eine Familie; eigene LoRA `skriptorium:2964163@3386627` privat hochgeladen, sauber auf Krea 2 Turbo (auf Raw Bildfehler). Offen: Bestätigung des Eigentümers, Einspielen (Schlüssel auf dem VPS, Durchreichen in der Compose-Datei prüfen). Erkundung der Bildmodelle und LoRAs 2026-11-07 (ohne Code; Ergebnisse in `docs/research/bildanbieter.md`, Folgewünsche V.56); PR 218 als Entwurf
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4, 10.5
 - **Freigabepflichtig:** ja – neuer externer Dienst (Kategorie 3), Schlüssel im Betrieb (Kategorie 6)
@@ -377,7 +377,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51, V.52, V.53, V.54, V.55 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51, V.52, V.53, V.54, V.55, V.56 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1565,6 +1565,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Angelegt 2026-11-06 in 10.10 (`spikes/hermes-10.10/README.md`).
+
+#### V.56: Erkenntnisse aus der Bildmodell-Erkundung in die Anwendung übernehmen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (angelegt 2026-11-07 nach der Erkundung in 10.8/V.54)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** teils – Schnittstellen der Einstellungen (Kategorie 5), ggf. neuer Anbieter oder eigener Checkpoint (Kategorie 3)
+- **Empfohlene Klasse:** Entscheidung – Vorlage mit mehreren Optionen (Eskalations-Auslöser 1).
+- **Eingangskriterien:** 10.8 abgeschlossen
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Aus `docs/research/bildanbieter.md` abgeleitete Wünsche prüfen und vorlegen: (1) LoRA-Gewicht in den Einstellungen von ±2 auf den Runware-Bereich ±4 erweitern (Regler-LoRAs wie Waist slider); (2) Negativ-Prompt je Grundmodell nur anbieten, wo er wirkt (Z-Image Grundmodell ja; Krea 2 Turbo/Z-Image-Turbo nicht unterstützt; Krea 2 Raw erzeugt damit Bildfehler); (3) Voreinstellungen je Grundmodell (Schritte, CFG) mitspeichern; (4) Empfohlenes Gewicht je LoRA aus den Tests als Startwert (meist 0,6, einige 0,8–1,0); (5) Hinweise zum Prompt-Aufbau in der Bedienung (Fesselung/Kleidung zuerst, Alter vorn, Ansicht von hinten); (6) Entscheidung über eigenen Checkpoint (Upload einer Krea-2-Feinabstimmung bei Runware) oder Civitai als weiteren Anbieter.
+- **Akzeptanzkriterien:** Vorlage mit Optionen, ADR, Umsetzung der freigegebenen Punkte mit Tests.
+- **Betroffene Module:** ai_gateway, api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Vorlage, ADR, Code, Tests
+- **Notizen:** Grundlage: Erkundung vom 2026-11-07 (Testavatare, Joschek-LoRAs, Checkpoint-Vergleich).
 
 #### V.55: MOSS Image nutzbar machen
 
