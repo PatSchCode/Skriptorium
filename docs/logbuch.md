@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Harness Gag erzwingt gebundenes Haar
+
+- Zwei Anläufe für offenes Haar (9 Bilder) ohne Erfolg. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Zwei LoRAs kombiniert (Leather Cuffs + Harness Gag): funktioniert
 
 - Beide Elemente in allen drei Seeds, Hände stimmig; Haar wird zum Zopf. Details in `docs/research/bildanbieter.md`.
