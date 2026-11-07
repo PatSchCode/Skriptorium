@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Spreader Gag (Krea 2): gut bei 0,6, bei 1,0 unstimmig
+
+- Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Harness Gag erzwingt gebundenes Haar
 
 - Zwei Anläufe für offenes Haar (9 Bilder) ohne Erfolg. Details in `docs/research/bildanbieter.md`.
