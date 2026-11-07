@@ -1576,7 +1576,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Empfohlene Klasse:** Entscheidung – neuer Dienst (Eskalations-Auslöser 1).
 - **Eingangskriterien:** MOSS Image bei einem Anbieter mit abschaltbarer Prüfung verfügbar, oder Entscheidung für fal.ai mit Prüfung
 - **Anforderungen (ab Klasse M):** FR-025, FR-035
-- **Zu tun:** Verfügbarkeit bei Runware nachprüfen (Verzeichnis, Modellsuche, erlaubte Architekturen für den Upload); Replicate mit Schlüssel prüfen; sonst Vorlage: fal.ai als dritter Anbieter nur für Motive, die dessen Prüfung passieren (0,05 $ je Megapixel, keine LoRAs) – oder warten.
+- **Zu tun:** Verfügbarkeit bei Runware nachprüfen (Verzeichnis, Modellsuche, erlaubte Architekturen für den Upload); Replicate mit Schlüssel prüfen; sonst Vorlage: fal.ai als dritter Anbieter nur für Motive, die dessen Prüfung passieren (0,05 $ je Megapixel, keine LoRAs) – oder warten. Weitere Wege (Nachfrage 2026-11-07): Runware Model Serving (Gewichte an Runware, Abrechnung je Bild, Annahme von MOSS bei Runware anfragen), Runware Serverless (eigener Container, ab 1,10 $ je GPU-Stunde), RunPod Serverless (Preise ungeprüft) – alle mit eigener Inhaltsprüfung und LoRAs, aber Grenzfall zu Vision Abschnitt 6 / Projektkontext Abschnitt 3 („kein selbst betriebenes Modell“) → Entscheidung mit ADR.
 - **Akzeptanzkriterien:** Vorlage, ADR; bei Umsetzung Tests und Probe mit echtem Bild; Eigentümer bestätigt.
 - **Betroffene Module:** ai_gateway, api, ui (nur bei Umsetzung)
 - **Reifegrad-Wirkung:** keine
