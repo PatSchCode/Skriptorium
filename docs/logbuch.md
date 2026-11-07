@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Eigentümer: beide Armbinder brauchbar
+
+- Eigentümer: „ja beide definitiv brauchbar“ → `skriptorium:691492@2536151` (Z-Image-Turbo) und `skriptorium:2767766@3119356` (Krea 2) als nutzbare LoRAs vorgemerkt.
+
 ### 2026-11-07 – [BEOBACHTUNG] Armbinder: nur mit LoRA, dann auf beiden Modellen gut
 
 - Test Armbinder-Flux (Z-Image-Turbo) und Armbinder (Krea 2 Turbo), je ohne/mit, 0,021 $. Ohne LoRA in keinem Modell ein Armbinder; mit LoRA beide glaubwürdig (Schnürung, Schulterriemen), Krea etwas detailreicher, Z-Image günstiger. Details in `docs/research/bildanbieter.md`.
