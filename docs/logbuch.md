@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Sechs Bademoden am Testavatar: alle wie verlangt
+
+- Nur beim Tankini Slip statt Shorts. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Kleidung zuerst im Prompt: vier von fünf Stilen jetzt wie verlangt
 
 - Reihenfolge Kleidung → Person, Körper knapp, Längen genannt; Rock-Stil noch mit schmalem Spalt; Figur weniger kurvig. Details in `docs/research/bildanbieter.md`.
