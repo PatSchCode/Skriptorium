@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit German Handcuffs (Krea 2 Turbo): Reihenfolge im Prompt entscheidet
+
+- Gewicht 0,6, Handschellen hinter der Avatar-Beschreibung: Hände nicht hinter dem Rücken. Handschellen vor die Beschreibung gestellt: bei 0,6 und 1,0 korrekt hinter der Stuhllehne. Details und Kosten in `docs/research/bildanbieter.md` (Abschnitt Testavatar). Skript `szene.py` im Scratchpad nimmt das Modell jetzt aus der Umgebungsvariable `MODEL`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Alle LoRAs von „sarahpeterson“ aussortiert
 
 - **Entscheidung des Eigentümers** nach Durchsicht aller Modelle des Erstellers auf Civitai: lieblos gemacht, mehr Fehler und Inkonsistenzen als Nutzen (Handschellen; Bound on stomach zeigt Hogtie und gleichzeitig eine Hand am Buch), Qualität fragwürdig, Frauen stark überzeichnet – kein Inhalt mit Anspruch.
