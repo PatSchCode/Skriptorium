@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Leather Cuffs (Krea 2): sehr glaubwürdig ab 0,6
+
+- Lederfesseln an Hand- und Fußgelenken mit Karabinern, Hände natürlich; ohne LoRA keine Fesseln. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Alter bei Krea 2 Turbo: 21 behalten, Seed-Wahl wirkt am stärksten
 
 - Eigentümer fragte nach Alter 18 im Prompt; abgeraten (Jugend-Bildsprache, Risiko minderjährig wirkender Figuren). Alter vorn, weiches Licht, glatte Haut: leicht jünger; Seeds 101 und 404 am nächsten an 21. Details in `docs/research/bildanbieter.md`.
