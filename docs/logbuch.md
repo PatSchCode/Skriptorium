@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Handschellen hinter dem Rücken: die Ansicht von hinten entscheidet
+
+- Test „cuffed behind back“ (Z-Image-Turbo) und German Handcuffs (Krea 2 Turbo), je ohne/mit, Verhörraum von schräg hinten, 0,021 $. Alle vier zeigen die Handschellen hinten; am überzeugendsten Z-Image-Turbo mit LoRA (eng sitzend, Arme hinter der Lehne). Details in `docs/research/bildanbieter.md`. Hände in voller Auflösung geprüft (Lehre aus den Korrekturen).
+
 ### 2026-11-07 – [BEOBACHTUNG] Handschellen-LoRAs gesucht
 
 - Auf Wunsch des Eigentümers (realistische, tragende Fesselung bevorzugt). Liste in `docs/research/bildanbieter.md`: für Z-Image-Turbo „cuffed behind back“ und „arms behind back“ aus der Reihe Sarah Petersons; für Krea 2 German Handcuffs, Leather Cuffs, Standing Arrest u. a.; „Metal Cuffs (Police Style)“ im kohya-Format (vermutlich nicht ladbar). Nichts hochgeladen.
