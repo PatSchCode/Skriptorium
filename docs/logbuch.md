@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Pool mit voller Körperbeschreibung: gleiches Muster, Shorts entfallen auch hier
+
+- Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Strand mit voller Körperbeschreibung: einheitlichste Reihe, Shorts entfallen
 
 - Vier Bademoden wie verlangt mit Figur und jungem Gesicht; Tankini und Surf werden zu Badeanzügen. Details in `docs/research/bildanbieter.md`.
