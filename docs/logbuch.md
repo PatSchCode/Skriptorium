@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Wäsche-LoRAs (Krea 2): Krea kann Wäsche schon ohne LoRA
+
+- Lingerie Construction sichert Strapse; Cinzia mit schwebenden Clips. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Bowing Down (Krea 2): beständig, aber Hüfte erhoben
 
 - Alle Joschek-LoRAs für Krea 2 sind damit getestet. Details in `docs/research/bildanbieter.md`.

@@ -96,6 +96,8 @@ Allgemein gilt für jede Beurteilung:
 - **Blickdichter Stoff:** LoRAs mit hohem Gewicht machen eng anliegende, dünne Stoffe gern durchscheinend; dicke, lockere Kleidung (Strick, Jeans) bleibt stabil.
 - **Sport-BH und Shorts:** eignen sich, um Seil- und Riemenverläufe auf der Haut zu beurteilen, ohne dass die Kleidung knapper wird.
 
+- **Strumpfhaltergürtel und Strapse:** Gürtel um die Taille oder Hüfte, je Bein meist zwei Strapse (vorn und seitlich), die mit einem Clip den verstärkten Strumpfrand greifen; Strapse straff. Bildfehler: Clip schwebt über dem Strumpf, Strap endet lose, Strumpfrand läuft hinter dem Strap vorbei.
+
 <!-- ANCHOR:verwendung -->
 ## Verwendung
 

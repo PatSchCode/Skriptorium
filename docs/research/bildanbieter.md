@@ -179,6 +179,16 @@ Bewusst nicht aufgenommen: Figuren-LoRAs bestimmter (auch erfundener) Personen, 
 
 Bewusst nicht aufgenommen: Schuluniform-LoRAs (Gefahr jugendlich wirkender Figuren), Werkzeuge zum Entfernen von Kleidung, Marken- und Franchise-Kleidung (Star Wars, McDonald's, Anime-Uniformen). Hinweis: LoRAs von bolero537 für mehrere Grundmodelle lagen früher im kohya-Format vor (Shibari) – Dateikopf vor dem Upload prüfen.
 
+**Test der Wäsche-LoRAs (2026-11-07):** Laced Lingerie `skriptorium:1844408@3148593`, Lingerie Construction (lngcon) `skriptorium:2935877@3323262`, Cinzia Lingerie `skriptorium:2815591@3222067` – alle diffusers, nach gut einer Minute bereit. Testavatar 21, schwarze Spitzen-Wäsche mit Strumpfhaltergürtel und Strümpfen, Schlafzimmer, Krea 2 Turbo, Gewicht 0,8 (Empfehlung der Ersteller), Seeds 101 und 404 (zusammen 0,071 $); Strapshalter in voller Auflösung geprüft.
+
+- **Ohne LoRA bereits stimmig:** BH, Slip, Strumpfhaltergürtel, Strapse an den Strumpfrand geklippt. Krea 2 kann Wäsche von sich aus.
+- **Laced Lingerie:** gleiche Wäsche, mehr Spitze am Gürtel; Figur fülliger und Oberweite größer als beim Avatar; Strapse befestigt.
+- **Lingerie Construction:** kaum vom Bild ohne LoRA zu unterscheiden; Strapse sauber am Strumpfrand befestigt (wofür die LoRA gedacht ist) – in beiden Seeds der ordentlichste Verschluss.
+- **Cinzia:** eigener Stil (Triangel-Spitzen-BH, hohe Spitzentaille, Strümpfe mit breitem Spitzenrand); **Strapse enden teils über dem Spitzenrand, ohne ihn zu greifen** (bei 101 links schwebend).
+- Gesicht und Alter in allen erhalten, nichts freizügiger als verlangt.
+
+Folge: Für Wäsche ist auf Krea 2 keine LoRA nötig; Lingerie Construction bei 0,8 sichert die Befestigungen, Cinzia nur für ihren eigenen Stil.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
