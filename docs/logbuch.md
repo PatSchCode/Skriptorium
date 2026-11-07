@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Bowing Down (Krea 2): beständig, aber Hüfte erhoben
+
+- Alle Joschek-LoRAs für Krea 2 sind damit getestet. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Lip Biting (Krea 2): Wirkung schwach
 
 - Details in `docs/research/bildanbieter.md`.
