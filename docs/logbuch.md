@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Eigentümer: Kettenhandschellen
+
+- Eigentümer: „wir bleiben bei Kettenhandschellen“ → für Handschellen Z-Image-Turbo mit „cuffed behind back“ (`skriptorium:1756180@2568521`); die Scharnier-LoRA (`skriptorium:3020654@3429711`) bleibt ungenutzt im Konto.
+
 ### 2026-11-07 – [BEOBACHTUNG] Scharnier-Handschellen: nur mit LoRA auf Krea 2
 
 - Test auf Wunsch des Eigentümers, 0,019 $: Prompt allein liefert bei Z-Image-Turbo Kettenhandschellen, bei Krea 2 Turbo gar keine; mit „Hinged Handcuffs (held)“ (`skriptorium:3020654@3429711`, Krea 2) angelegte Schellen mit starrem Stahlteil hinter der Lehne. Hände in voller Auflösung geprüft.
