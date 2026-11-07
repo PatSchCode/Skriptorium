@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Kinbaku mit zwei Figuren – Ansicht von hinten trifft die Box-Fesselung
+
+- Wunsch des Eigentümers: enges Kinbaku, Trainerin ebenfalls gebunden. Krea 2 Turbo, Rope Bondage Gewicht 1,2, Seed 777, Querformat 1216 × 832, Prompt mit Dreiviertelansicht von hinten, zwei erwachsene Frauen kniend im Dojo, schwarze enge Kleidung, Unterarme waagerecht gestapelt, Bänder über und unter der Brust, Längsseil am Rücken; 0,005 $.
+- Ergebnis: beide gebunden; Unterarme waagerecht hinter dem Rücken, zwei Brustbänder, Knoten und Längsseil am Rücken gut erkennbar – deutlich näher an Takate Kote als die Ansicht von vorn. Abweichung: Schulterseile laufen als X nach oben (eher Geschirr), Hände greifen die Ellbogen.
+- Folge: Bei Fesselungen auf dem Rücken die Ansicht von hinten oder schräg hinten in den Prompt; Gewicht 1,2 ohne sichtbare Bildfehler.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Takate Kote – keine der Varianten trifft die Fesselung
 
 - Wunsch des Eigentümers. Krea 2 Turbo, Seed 777, Gewicht 1,0, Prompt: Frau im Yukata kniend auf Tatami, Takate Kote (Unterarme waagerecht hinter dem Rücken, zwei Seilbänder über und unter der Brust, Seil unter den Armen). Ohne LoRA 0,0037 $, Rope Bondage 0,005 $, Megapack 0,005 $.
