@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Zwei LoRAs kombiniert (Leather Cuffs + Harness Gag): funktioniert
+
+- Beide Elemente in allen drei Seeds, Hände stimmig; Haar wird zum Zopf. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [GELÖST] Fehlbewertung Seed 101 (Hände) korrigiert
 
 - Eigentümer: bei Seed 101 passt die Anatomie der Hände nicht. Nachgeprüft, bestätigt; Bewertung in der Recherche korrigiert. Ursache: Hände nicht in voller Auflösung geprüft, nur Seil-Ausschnitte. Lehre (erneut): bei Fesselung hinter dem Rücken immer die Hände im Ausschnitt prüfen.
