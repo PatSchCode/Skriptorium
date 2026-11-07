@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: zweite Vorlage teilweise beantwortet
+
+- Vorlage mit vier Fragen (Inhaltsvorgabe, Modell-Liste, Schlagwort-Prompts, Technik) und Mockup der Bildauswahl gestellt.
+- Antworten des Eigentümers: Inhalte „Erlauben, Prüfung aus“ (Runware `checkContent` fest aus im Code; Darstellungen Minderjähriger bleiben verboten); Schlagworte „Fließtext, ich passe an“ (Knopf „in Schlagworte umsetzen“ wird V.52 mit Landeplatz 10.11); Technik „Ja, so bauen“ (Zuordnung am Kennungsformat, `RUNWARE_API_KEY` nur auf Server und in der Cloud-Session, Kosten-Bremse über Vorab-Guthaben, Kosten per `includeCost`, getrennte Prüfung).
+- Modell-Liste offen: „civitai will ich jetzt klären“ – Rückfrage läuft. ADR folgt, wenn alle vier Punkte beantwortet sind; kein Code vorher.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Modellsuche bei Runware
 
 - Nur lesend, kein Bild erzeugt; Befunde in `docs/research/bildanbieter.md` („Modellsuche mit Schlüssel“). FLUX.2 [dev], FLUX.1 [dev], Z-Image (Turbo), HiDream I1 verfügbar, 0,003–0,02 $ je Bild; Community-Modelle aus Civitai (Pony, Illustrious, NoobAI, LUSTIFY!) über `civitai:<Modell>@<Version>`, abgerechnet nach Rechenzeit. Nicht gefunden: BigASP, Chroma, Pony V7.

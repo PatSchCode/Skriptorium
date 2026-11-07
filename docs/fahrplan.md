@@ -320,7 +320,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.8: Zweiter Bildanbieter (V.24)
 
-- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114; Vorlage mit Runware / Replicate / fal.ai / keiner, Nachprüfung der Preise in `docs/research/bildanbieter.md`). Probe des Eigentümers im Playground erfolgt („brauchbar“); Modellsuche mit Schlüssel 2026-11-07 in der Cloud-Session (`docs/research/bildanbieter.md`, „Modellsuche mit Schlüssel“). Als Nächstes: zweite Vorlage (Inhaltsvorgabe, Modell-Liste, Zuordnung Modell → Anbieter, Mockup der Bildauswahl, Schlagwort-Prompts, Schlüssel und Kosten-Bremse) – wartet auf Antwort des Eigentümers
+- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114; Vorlage mit Runware / Replicate / fal.ai / keiner, Nachprüfung der Preise in `docs/research/bildanbieter.md`). Probe des Eigentümers im Playground erfolgt („brauchbar“); Modellsuche mit Schlüssel 2026-11-07 in der Cloud-Session (`docs/research/bildanbieter.md`, „Modellsuche mit Schlüssel“). Als Nächstes: zweite Vorlage (Inhaltsvorgabe, Modell-Liste, Zuordnung Modell → Anbieter, Mockup der Bildauswahl, Schlagwort-Prompts, Schlüssel und Kosten-Bremse) gestellt 2026-11-07; beantwortet bis auf die Modell-Liste (Klärung zu Civitai läuft, Logbuch)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4, 10.5
 - **Freigabepflichtig:** ja – neuer externer Dienst (Kategorie 3), Schlüssel im Betrieb (Kategorie 6)
