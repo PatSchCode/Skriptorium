@@ -44,12 +44,15 @@ Anlass: Modellvergleich (oben) mit der Z-Image-Familie vorn; Ziel des Eigentüme
 Feste Testfigur für weitere Bildvergleiche. Vorgabe des Eigentümers: 21 Jahre, weiblich, südamerikanisch. Beschreibung (englisch, so im Prompt):
 
 ```text
-a 21-year-old young adult South American woman of Colombian descent, warm tan skin, dark brown wavy hair
-falling just past her shoulders, dark brown almond-shaped eyes, full natural eyebrows, a small mole on her
-left cheek, slim build, average height
+a 21-year-old adult South American woman with mature adult facial features, of Colombian descent, warm tan
+skin, dark brown wavy hair falling just past her shoulders, dark brown almond-shaped eyes, full natural
+eyebrows, a small distinct dark mole on her left cheek, slim build, average height
+
+Standardkleidung für Vergleiche: a form-fitting black long-sleeve top and tight black leggings that show her
+figure, barefoot
 ```
 
-Erste Porträts auf Z-Image-Turbo (Seeds 101, 202, 303, 404; weißes T-Shirt, grauer Hintergrund; je 0,0013 $): alle vier sehr ähnlich – die geringe Vielfalt von Turbo hilft hier, die Figur wiederzuerkennen. Abweichung: Der Leberfleck auf der linken Wange fehlt in allen vier. Auswahl des Eigentümers offen. Ganzkörperaufnahmen (Wunsch des Eigentümers; stehend, frontal, weißes T-Shirt, Jeans, Turnschuhe, grauer Studiohintergrund; „small distinct dark mole“; gleiche Seeds, 0,0013–0,0026 $): vollständig von Kopf bis Fuß, Figur stimmig; Gesicht wirkt bei Seeds 202 und 303 jünger, bei 101 und 404 erwachsener; Leberfleck in dieser Größe nicht erkennbar.
+Erste Porträts auf Z-Image-Turbo (Seeds 101, 202, 303, 404; weißes T-Shirt, grauer Hintergrund; je 0,0013 $): alle vier sehr ähnlich – die geringe Vielfalt von Turbo hilft hier, die Figur wiederzuerkennen. Abweichung: Der Leberfleck auf der linken Wange fehlt in allen vier. Auswahl des Eigentümers offen. Ganzkörperaufnahmen (Wunsch des Eigentümers; stehend, frontal, weißes T-Shirt, Jeans, Turnschuhe, grauer Studiohintergrund; „small distinct dark mole“; gleiche Seeds, 0,0013–0,0026 $): vollständig von Kopf bis Fuß, Figur stimmig; Gesicht wirkt bei Seeds 202 und 303 jünger, bei 101 und 404 erwachsener; Leberfleck in dieser Größe nicht erkennbar. Auf Wunsch des Eigentümers („muss figurbetont sein“, damit Veränderungen der Figur erkennbar sind) Standardkleidung eng anliegend und „mature adult facial features“ ergänzt: vier Ganzkörperbilder (0,0052 $) einheitlich, alle klar erwachsen, Figur gut erkennbar.
 
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 

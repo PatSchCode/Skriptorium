@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit figurbetonter Kleidung
+
+- Eigentümer: Kleidung muss figurbetont sein, damit Vergleiche aussagekräftig sind. Standardkleidung jetzt schwarzes enges Langarm-Oberteil und Leggings, barfuß; Beschreibung um „mature adult facial features“ ergänzt (vorher wirkten zwei Seeds jünger). Vier Ganzkörperbilder einheitlich und klar erwachsen. Beschreibung in `docs/research/bildanbieter.md` aktualisiert.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar als Ganzkörperaufnahme
 
 - Wunsch des Eigentümers nach vollständigen Porträtaufnahmen: vier Ganzkörperbilder (Z-Image-Turbo, gleiche Seeds, 0,0065 $). Figur stimmig; bei Seeds 202 und 303 wirkt das Gesicht jünger – für eine klar erwachsene Testfigur 101 oder 404 empfohlen.
