@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar: Körperbau B kurvig
+
+- Eigentümer wählt Entwurf B (kurvig). Testavatar vollständig festgelegt (Beschreibung, Körperbau, Standardkleidung, Z-Image-Turbo, Seed 101) in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Drei Körperbau-Entwürfe für den Testavatar
 
 - Auf Wunsch des Eigentümers: A athletisch, B kurvig, C groß und langbeinig (Seed 101, 0,0039 $). B klar anders, A und C ähnlich (Körpergröße ohne Bezugsobjekt nicht darstellbar). Bewusst kein sehr zierlicher Entwurf (wirkt leicht jünger). Wahl offen.
