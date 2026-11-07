@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Megapack mit Gewicht 1,0: Knebel in allen drei Seeds, Gesicht verschoben
+
+- Tuchknebel glaubwürdig; Gesicht runder, Haare kürzer. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Megapack (Krea 2), 0,6: Seil an Handgelenken sehr gut, Knebel fehlt
 
 - Tuchknebel in keinem der drei Seeds, Handgelenk-Seil überzeugend, Knöchel nur einseitig. Details in `docs/research/bildanbieter.md`.
