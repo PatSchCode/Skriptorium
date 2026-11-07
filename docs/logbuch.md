@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: zwei weitere LoRAs hochgeladen und erprobt
+
+- Eigentümer wählt aus der Liste: Bondage & Gags Megapack (`2767605@3115420`) und Joschek's Rope Bondage v2 (`2742699@3142259`). Dateiköpfe: beide auf Krea 2 Raw, Rang 64 (431 bzw. 678 Trainingsbilder), keine Auslösewörter – beschreibende Prompts. Lizenz: keine Abwandlungen, Namensnennung beim Weitergeben, kommerziell nur Bilderzeugungsdienste (*Deutung:* privater Upload für eigene, nicht verkaufte Bilder unberührt).
+- Privat hochgeladen als `skriptorium:2767605@3115420` und `skriptorium:2742699@3142259` (Architektur `krea_oss_2`); nach wenigen Minuten in der Modellsuche.
+- Reibungen: Pythons `http.client` geht nicht über den Proxy (kein Civitai-Schlüssel, 401) → Weiterleitung mit curl holen; diese Dateien liegen bei Cloudflare R2 (`…r2.cloudflarestorage.com`) statt bei `b2.civitai.com`; die Antwort des Uploads ließ sich nicht auswerten, die Bereitstellung wurde über die Modellsuche bestätigt.
+- Probebilder auf Krea 2 Turbo (Seed 4242, Gewicht 1,0, bekleidete erwachsene Figur): Megapack, Frau auf Stuhl im Keller mit Seil um Rumpf und Stuhlbeine, 0,0096 $ – sauber, Hände nicht ganz wie verlangt hinter der Lehne; Rope Bondage, Frau in Scheune, Arme hinten, Seil um Oberkörper, 0,0083 $ – sauber, folgt dem Prompt. Keine Bildfehler wie bei Raw.
+
 ### 2026-11-07 – [GELÖST] 10.8: Krea 2 Raw und Turbo als eine Familie
 
 - `api/runware_models.py` `_FAMILIES`: `krea_oss_2` und `krea_oss_2_turbo` → Familie `krea_oss_2`; Test in `test_families_decide_which_lora_fits` (Turbo und Raw passen, Krea 2 Medium `krea_2` nicht). 1.273 Tests grün, Abdeckung 99,92 %.
