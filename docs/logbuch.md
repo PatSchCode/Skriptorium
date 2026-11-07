@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Bademoden am Pool: alle sechs wie verlangt
+
+- Tankini mit Shorts und Surf-Set mit Boardshorts gelingen hier; Gesicht am einheitlichsten. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Bademoden am Strand: Bademode bleibt, Licht und Haare ändern sich
 
 - Tankini weiter mit Slip, Surf-Shorts kürzer; Haut dunkler, Haare lockiger. Details in `docs/research/bildanbieter.md`.
