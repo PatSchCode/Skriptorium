@@ -1,6 +1,8 @@
 """Fixtures for the ``api`` tests: app on a temporary data directory, cheap scrypt, fake time,
 a fake AI provider."""
 
+import base64
+import json
 from collections.abc import AsyncIterator, Iterator, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
@@ -20,6 +22,7 @@ from skriptorium.ai_gateway import (
     ImageCatalog,
     ImageOrder,
     ModelCatalog,
+    RunwareImageProvider,
     StreamEvent,
     TextChunk,
     Usage,
@@ -271,6 +274,68 @@ def images() -> FakeImages:
     return FakeImages(image=png(1024, 1536))
 
 
+# What the fake Runware lists in its model search (ADR-115).
+RUNWARE_MODELS: dict[str, dict[str, object]] = {
+    "civitai:277058@1405120": {
+        "name": "epiCRealism XL",
+        "version": "VXIV-EyeCandy (Realism) WiP",
+        "category": "checkpoint",
+        "architecture": "sdxl",
+    },
+    "civitai:548016@861939": {
+        "name": "PonyXL MIX",
+        "version": "v2",
+        "category": "checkpoint",
+        "architecture": "pony",
+    },
+    "civitai:536201@596079": {
+        "name": "[PonyV6 XL] Handcuffs",
+        "version": "v1Pony",
+        "category": "lora",
+        "architecture": "pony",
+        "positiveTriggerWords": "handcuffs, cuffs,",
+        "defaultWeight": 0.8,
+    },
+    "civitai:1@2": {
+        "name": "Flux Stil",
+        "version": "1",
+        "category": "lora",
+        "architecture": "flux1d",
+    },
+    "civitai:3@4": {"name": "Steuernetz", "category": "controlnet", "architecture": "sdxl"},
+}
+
+
+@dataclass
+class FakeRunware:
+    """Stands in for Runware's API: model search and image generation."""
+
+    tasks: list[dict[str, object]] = field(default_factory=list)
+    status: int = 200
+    errors: list[dict[str, object]] | None = None
+    image: bytes = field(default_factory=lambda: png(832, 1216))
+    cost: object = 0.0025
+
+    def __call__(self, request: httpx.Request) -> httpx.Response:
+        task = json.loads(request.content)[0]
+        self.tasks.append(task)
+        if self.errors is not None:
+            return httpx.Response(self.status, json={"errors": self.errors})
+        row: dict[str, object] = {"taskType": task["taskType"], "taskUUID": task["taskUUID"]}
+        if task["taskType"] == "modelSearch":
+            found = RUNWARE_MODELS.get(str(task["search"]))
+            row["results"] = [] if found is None else [{"air": task["search"], **found}]
+        else:
+            row["imageBase64Data"] = base64.b64encode(self.image).decode("ascii")
+            row["cost"] = self.cost
+        return httpx.Response(self.status, json={"data": [row]})
+
+
+@pytest.fixture
+def runware_server() -> FakeRunware:
+    return FakeRunware()
+
+
 @pytest.fixture
 def client(
     data_dir: Path,
@@ -279,6 +344,7 @@ def client(
     provider: FakeProvider,
     catalog: ModelCatalog,
     images: FakeImages,
+    runware_server: FakeRunware,
 ) -> Iterator[TestClient]:
     app = create_app(
         Settings(data_dir=data_dir, ui_dir=data_dir / "no-ui"),
@@ -289,6 +355,9 @@ def client(
         catalog=catalog,
         image_provider_factory=lambda _: images,
         image_catalog=ImageCatalog(transport=httpx.MockTransport(fake_image_server)),
+        runware_factory=lambda: RunwareImageProvider(
+            "test-key", transport=httpx.MockTransport(runware_server)
+        ),
     )
     with TestClient(app, base_url=ORIGIN, headers={"Origin": ORIGIN}) as test_client:
         yield test_client

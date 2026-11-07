@@ -20,6 +20,7 @@ from skriptorium.ai_gateway.images import (
     ImagePrice,
     ImageProvider,
     ImageReference,
+    LoraChoice,
 )
 from skriptorium.ai_gateway.models import DEFAULT_MODELS, ModelConfig, config_for
 from skriptorium.ai_gateway.openrouter import KEY_VARIABLE, OpenRouterProvider
@@ -35,11 +36,18 @@ from skriptorium.ai_gateway.provider import (
     TextChunk,
     Usage,
 )
+from skriptorium.ai_gateway.runware import (
+    RUNWARE_KEY_VARIABLE,
+    RunwareImageProvider,
+    RunwareModelInfo,
+    full_prompt,
+)
 
 __all__ = [
     "DEFAULT_IMAGE_MODEL",
     "DEFAULT_MODELS",
     "KEY_VARIABLE",
+    "RUNWARE_KEY_VARIABLE",
     "CatalogModel",
     "Completed",
     "CompletionRequest",
@@ -53,6 +61,7 @@ __all__ = [
     "ImageProvider",
     "ImageReference",
     "InvalidRequest",
+    "LoraChoice",
     "Message",
     "ModelCatalog",
     "ModelConfig",
@@ -62,9 +71,12 @@ __all__ = [
     "OpenRouterProvider",
     "ProviderUnavailable",
     "RateLimited",
+    "RunwareImageProvider",
+    "RunwareModelInfo",
     "Source",
     "StreamEvent",
     "TextChunk",
     "Usage",
     "config_for",
+    "full_prompt",
 ]

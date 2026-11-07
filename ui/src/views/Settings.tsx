@@ -10,6 +10,7 @@ import { optionLabel, shortName } from "../models";
 import { useLoad } from "../useLoad";
 import { ErrorText } from "./Common";
 import { ModelManager } from "./ModelManager";
+import { RunwareSettings } from "./RunwareSettings";
 
 /** Which models a task can take: text models, text models that read images, image models. */
 type TaskKind = "text" | "reading" | "image";
@@ -71,6 +72,8 @@ export function Settings() {
   const models = useLoad(loadModels);
   const images = useLoad(loadImages);
   const [savedList, setSavedList] = useState<ModelList | null>(null);
+  const [savedImages, setSavedImages] = useState<ImageModelList | null>(null);
+  const imageList = savedImages ?? images.data;
   const [error, setError] = useState<string | null>(null);
   const [managing, setManaging] = useState(false);
   const list = savedList ?? models.data;
@@ -119,9 +122,9 @@ export function Settings() {
                   row.kind,
                   list.tasks[row.task],
                   list,
-                  images.data,
+                  imageList,
                 )}
-                gone={isGone(row.kind, list.tasks[row.task], list, images.data)}
+                gone={isGone(row.kind, list.tasks[row.task], list, imageList)}
                 onChoose={(value) => void choose(list, row.task, value)}
               />
             ))}
@@ -145,6 +148,9 @@ export function Settings() {
           Jede Änderung wird sofort gespeichert und gilt auf allen Geräten.
         </p>
       </section>
+      {imageList !== undefined && (
+        <RunwareSettings list={imageList} onChange={setSavedImages} />
+      )}
       {managing && list !== undefined && (
         <ModelManager
           list={list}
@@ -241,10 +247,14 @@ function choices(
   images: ImageModelList | undefined,
 ): Choice[] {
   if (kind === "image") {
-    const found = (images?.models ?? []).map((m) => ({
-      id: m.id,
-      label: m.name,
-    }));
+    const found = [
+      ...(images?.models ?? []).map((m) => ({ id: m.id, label: m.name })),
+      // The owner's models at Runware (step 10.8, ADR-115).
+      ...(images?.runware ?? []).map((m) => ({
+        id: m.id,
+        label: `${m.name} (Runware)`,
+      })),
+    ];
     return withSaved(found, saved, (id) => id);
   }
   const label = (id: string) =>
@@ -293,7 +303,8 @@ function isGone(
     return (
       images !== undefined &&
       images.available &&
-      !images.models.some((m) => m.id === saved)
+      !images.models.some((m) => m.id === saved) &&
+      !(images.runware ?? []).some((m) => m.id === saved)
     );
   }
   return list.catalog_available && !list.catalog.some((m) => m.id === saved);

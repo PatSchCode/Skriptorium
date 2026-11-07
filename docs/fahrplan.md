@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-06 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
+- **Stand vom:** 2026-11-07 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
-- **Nächster Schritt:** 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup) bzw. 10.8 Zweiter Bildanbieter – Reihenfolge wählt der Eigentümer; danach 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.8 Zweiter Bildanbieter – Runware gewählt 2026-11-07 (ADR-114); Probe des Eigentümers im Playground läuft („brauchbar“), neuer Wunsch Erwachseneninhalte; Modellsuche mit `RUNWARE_API_KEY` erledigt 2026-11-07 (Cloud-Session), zweite Vorlage entschieden (ADR-115), gebaut und getrennt geprüft – wartet auf Bestätigung und Einspielen. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
+- **Nächster Schritt:** 10.8: Bestätigung des Eigentümers, Einspielen mit `RUNWARE_API_KEY` auf dem VPS; danach 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup), dann 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -35,7 +35,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
 | ✅ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | erledigt 2026-11-06 (ADR-110; zwei Korrekturen PR #214, #215) | – |
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
-| ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
+| 🟠 | 10.8 | Zweiter Bildanbieter (V.24) | in Arbeit – Runware gewählt (ADR-114) | du: Probe im Runware-Playground |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ✅ | 10.10 | Textqualität von Hermes 4 messen (V.41) | erledigt 2026-11-06 (ADR-113: nichts übernehmen) | – |
 | ⚪ | 10.11 | Planung der nächsten Ausbaustufe | offen | KI |
@@ -67,7 +67,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06), V.52 (Schlagwort-Prompts, aus 10.8, 2026-11-07, ADR-115), V.53 (fester Seed beim Bilderzeugen, aus 10.8, 2026-11-07). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -320,7 +320,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.8: Zweiter Bildanbieter (V.24)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114). Zweite Vorlage beantwortet 2026-11-07 (ADR-115): Erwachseneninhalte ohne Prüfung bei Runware, mehrere Bildanbieter nach Kennungsformat, Grundmodelle und LoRAs in den Einstellungen, Schlüssel nur serverseitig, Kosten-Bremse über Vorab-Guthaben; Modellsuche und Probebild in `docs/research/bildanbieter.md`. Gebaut 2026-11-07 (`24d955e`, `ade0df6`; Tests grün, Probe mit echtem Bild 0,0037 $), getrennte Prüfung ohne Befund hoch/mittel. Zwei optionale Befunde umgesetzt (`778e165`, nachgeprüft). Krea 2 Raw/Turbo als eine Familie; eigene LoRA `skriptorium:2964163@3386627` privat hochgeladen, sauber auf Krea 2 Turbo (auf Raw Bildfehler). Offen: Bestätigung des Eigentümers, Einspielen (Schlüssel auf dem VPS, Durchreichen in der Compose-Datei prüfen)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4, 10.5
 - **Freigabepflichtig:** ja – neuer externer Dienst (Kategorie 3), Schlüssel im Betrieb (Kategorie 6)
@@ -377,7 +377,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51, V.52, V.53 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1565,6 +1565,40 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Angelegt 2026-11-06 in 10.10 (`spikes/hermes-10.10/README.md`).
+
+#### V.53: Fester Startwert (Seed) beim Bilderzeugen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Eigentümer 2026-11-07: „nimm den festen Seed als Wunsch für 10.11 auf“)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** ja – Herkunft eines Bildes um den Startwert erweitern (Kategorie 4), Feld in der Anfrage (Kategorie 5, additiv)
+- **Empfohlene Klasse:** Entscheidung – Datenmodell (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Startwert im Dialog „Bild erzeugen“ wählbar (zufällig oder fest), den verwendeten Startwert nach dem Erzeugen anzeigen und in der Herkunft des Bildes (ADR-095) festhalten, damit „Neu erzeugen“ ein gutes Bild mit leicht geändertem Prompt wiederholen kann. Klären: welche Anbieter einen Startwert annehmen (Runware: Feld `seed`, Antwort meldet ihn; OpenRouter: je Modell prüfen).
+- **Akzeptanzkriterien:** Vorlage mit Mockup, ADR; Tests; Probe mit echtem Bild (gleicher Startwert und Prompt → gleiches Bild); Eigentümer bestätigt.
+- **Betroffene Module:** ai_gateway, api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR, Mockup
+- **Notizen:** Angelegt 2026-11-07 in 10.8 nach den Proben mit fünf Seeds (Box-Fesselung, Logbuch): Bei schwierigen Posen hilft das Wählen unter mehreren Startwerten; heute bekommt jedes Bild einen neuen Zufallswert.
+
+#### V.52: Prompt in Schlagworte umsetzen (Pony, Illustrious)
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Eigentümer 2026-11-07: „Fließtext, ich passe an“, ADR-115)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** ja – neue Anfrage an ein Textmodell (Kategorie 1 prüfen)
+- **Empfohlene Klasse:** Entscheidung – neue KI-Aufgabe (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Knopf im Dialog „Bild erzeugen“, der den Fließtext aus dem Kanon über das Textmodell in Schlagworte (Booru-Tags) für Pony- und Illustrious-Modelle umsetzt; Kosten je Aufruf anzeigen.
+- **Akzeptanzkriterien:** Vorlage, ADR; Tests; Probe mit echtem Bild; Eigentümer bestätigt.
+- **Betroffene Module:** context, api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR
+- **Notizen:** Angelegt 2026-11-07 in der zweiten Vorlage zu 10.8.
 
 #### V.50: Verständliche Meldung bei unlesbaren Bildern
 

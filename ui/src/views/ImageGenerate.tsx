@@ -9,14 +9,17 @@ import {
   type ImageOrigin,
   type ImagePrice,
   type ImageTarget,
+  type LoraChoice,
+  type RunwareLora,
 } from "../api";
 import { ErrorText } from "./Common";
 import type { Basis } from "./ImageOriginPanel";
 import { useElapsed } from "./useElapsed";
 import { useImageLevels } from "./useImageLevels";
-import { useImageModels } from "./useImageModels";
+import { useImageModels, type OfferedModel } from "./useImageModels";
 import { useImagePrices } from "./useImagePrices";
 import { useImageRequest } from "./useImageRequest";
+import { WeightInput } from "./WeightInput";
 
 const FORMATS: readonly { id: AspectRatio; label: string }[] = [
   { id: "2:3", label: "Hochformat" },
@@ -36,6 +39,8 @@ const NO_LEVELS: ImageLevels = { resolution: null, quality: null };
  * a basis are offered, and the format follows the basis until the author picks one. The `target`
  * (world, and story for a cover) only files the request in the usage statistics (step 9.11).
  * Where the model offers them, resolution and quality are chosen too (step 10.5, ADR-109).
+ * Models of the owner's list at Runware (step 10.8, ADR-115) come in a group of their own; for
+ * them LoRAs that fit the model can be added, each with its weight.
  */
 export function ImageGenerate({
   title,
@@ -78,6 +83,15 @@ export function ImageGenerate({
   const [result, setResult] = useState<GeneratedImage | null>(null);
   const [error, setError] = useState<string | null>(null);
   const choice = useImageModels(initialModel, basis !== null, setError);
+  // Weight per LoRA the author ticked (ADR-115); only those that fit the model go along.
+  const [ticked, setTicked] = useState<Readonly<Record<string, number>>>({});
+  const runware = choice.chosen?.runware;
+  const chosenLoras: LoraChoice[] =
+    runware === undefined
+      ? []
+      : runware.loras
+          .filter((id) => id in ticked)
+          .map((id) => ({ id, weight: ticked[id] ?? 1 }));
   const levels = useImageLevels(
     choice.model,
     choice.models?.find((m) => m.id === choice.model),
@@ -110,6 +124,7 @@ export function ImageGenerate({
           ...chosenLevels,
           ...target,
           ...(basis === null ? {} : { reference: basis.reference }),
+          ...(chosenLoras.length === 0 ? {} : { loras: chosenLoras }),
         }),
       );
     } catch (reason: unknown) {
@@ -146,8 +161,9 @@ export function ImageGenerate({
       <h3>{title}</h3>
       {!choice.ready && (
         <p className="note">
-          Der KI-Anbieter ist nicht eingerichtet – Bilder erzeugen geht gerade
-          nicht.
+          {runware === undefined
+            ? "Der KI-Anbieter ist nicht eingerichtet – Bilder erzeugen geht gerade nicht."
+            : "Runware ist nicht eingerichtet – mit diesem Modell geht es gerade nicht."}
         </p>
       )}
       {result === null ? (
@@ -160,6 +176,9 @@ export function ImageGenerate({
           initialModel={initialModel}
           levels={levels}
           priceOf={prices.priceOf}
+          loras={choice.loras}
+          ticked={ticked}
+          onTick={setTicked}
           busy={busy}
           failed={error !== null}
         />
@@ -244,6 +263,9 @@ function ImageGenerateForm({
   initialModel,
   levels,
   priceOf,
+  loras,
+  ticked,
+  onTick,
   busy,
   failed,
 }: {
@@ -255,12 +277,21 @@ function ImageGenerateForm({
   initialModel: string | null;
   levels: ReturnType<typeof useImageLevels>;
   priceOf: (resolution: string | null) => ImagePrice | null;
+  loras: readonly RunwareLora[];
+  ticked: Readonly<Record<string, number>>;
+  onTick: (ticked: Readonly<Record<string, number>>) => void;
   busy: boolean;
   /** An error is shown already; then no note about missing models. */
   failed: boolean;
 }) {
   const { models } = choice;
   const price = priceOf(levels.resolution);
+  const runware = choice.chosen?.runware;
+  const fitting = loras.filter((lora) => runware?.loras.includes(lora.id));
+  const appended = [
+    runware?.addition ?? "",
+    ...fitting.filter((l) => l.id in ticked).map((l) => l.trigger),
+  ].filter((text) => text.trim() !== "");
   return (
     <>
       {hint !== null && <div className="image-generate-hint">{hint}</div>}
@@ -302,11 +333,7 @@ function ImageGenerateForm({
               choice.setModel(event.target.value);
             }}
           >
-            {models.map((entry) => (
-              <option key={entry.id} value={entry.id}>
-                {entry.name}
-              </option>
-            ))}
+            <ModelOptions models={models} />
           </select>
         </label>
       )}
@@ -347,11 +374,100 @@ function ImageGenerateForm({
           describe={(quality) => QUALITIES[quality] ?? quality}
         />
       )}
+      {fitting.length > 0 && (
+        <LoraChoices
+          loras={fitting}
+          ticked={ticked}
+          busy={busy}
+          onTick={onTick}
+        />
+      )}
+      {appended.length > 0 && (
+        <p className="note">
+          Angehängt an die Beschreibung: {appended.join(", ")}
+        </p>
+      )}
       <p className="note">
-        {describePrice(price, levels.resolution)}
+        {runware === undefined
+          ? describePrice(price, levels.resolution)
+          : "Abrechnung nach Rechenzeit – die Kosten stehen nach dem Erzeugen da"}
         {basis !== null && price !== null && ` · ${describeBasisPrice(price)}`}
       </p>
     </>
+  );
+}
+
+/** The models, in two groups as soon as the Runware list has any (ADR-115). */
+function ModelOptions({ models }: { models: readonly OfferedModel[] }) {
+  const own = models.filter((m) => m.runware === undefined);
+  const runware = models.filter((m) => m.runware !== undefined);
+  const options = (list: readonly OfferedModel[]) =>
+    list.map((entry) => (
+      <option key={entry.id} value={entry.id}>
+        {entry.name}
+      </option>
+    ));
+  if (runware.length === 0) {
+    return <>{options(own)}</>;
+  }
+  return (
+    <>
+      <optgroup label="OpenRouter">{options(own)}</optgroup>
+      <optgroup label="Runware">{options(runware)}</optgroup>
+    </>
+  );
+}
+
+/** LoRAs that fit the chosen Runware model, each to tick and weigh (ADR-115). */
+function LoraChoices({
+  loras,
+  ticked,
+  busy,
+  onTick,
+}: {
+  loras: readonly RunwareLora[];
+  ticked: Readonly<Record<string, number>>;
+  busy: boolean;
+  onTick: (ticked: Readonly<Record<string, number>>) => void;
+}) {
+  return (
+    <fieldset className="image-generate-field image-generate-loras">
+      <legend>Zusätze (LoRAs)</legend>
+      {loras.map((lora) => {
+        const on = lora.id in ticked;
+        return (
+          <div key={lora.id} className="row">
+            <label>
+              <input
+                type="checkbox"
+                checked={on}
+                disabled={busy}
+                onChange={() => {
+                  onTick(
+                    on
+                      ? Object.fromEntries(
+                          Object.entries(ticked).filter(
+                            ([id]) => id !== lora.id,
+                          ),
+                        )
+                      : { ...ticked, [lora.id]: lora.weight },
+                  );
+                }}
+              />{" "}
+              {lora.name}
+            </label>
+            <WeightInput
+              label={`Gewicht ${lora.name}`}
+              value={ticked[lora.id] ?? lora.weight}
+              disabled={busy || !on}
+              onChange={(weight) => {
+                onTick({ ...ticked, [lora.id]: weight });
+              }}
+            />
+          </div>
+        );
+      })}
+    </fieldset>
   );
 }
 

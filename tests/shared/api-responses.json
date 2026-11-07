@@ -1917,7 +1917,39 @@
         }
       ],
       "available": true,
-      "ready": true
+      "ready": true,
+      "runware": [
+        {
+          "id": "runware:400@1",
+          "name": "FLUX.2 [dev]",
+          "architecture": "flux_2_dev",
+          "addition": "",
+          "loras": []
+        },
+        {
+          "id": "runware:z-image@turbo",
+          "name": "Z-Image-Turbo",
+          "architecture": "z_image_turbo",
+          "addition": "",
+          "loras": []
+        },
+        {
+          "id": "runware:97@2",
+          "name": "HiDream-I1 Dev",
+          "architecture": "hidreamdev",
+          "addition": "",
+          "loras": []
+        },
+        {
+          "id": "civitai:277058@1405120",
+          "name": "epiCRealism XL VXIV",
+          "architecture": "sdxl",
+          "addition": "",
+          "loras": []
+        }
+      ],
+      "loras": [],
+      "runware_ready": true
     }
   },
   "imagePrice": {
