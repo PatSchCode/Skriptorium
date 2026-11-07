@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Avatar wirkt am See älter: Alter vorn im Prompt und weiches Licht helfen
+
+- Eigentümer bemerkt älteres Aussehen am See. Alter an den Anfang, weiches Licht: wirkt wie 21, aber Figur schlanker. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Bademoden am See: vier wie verlangt, Tankini und Surf-Shorts abweichend
 
 - Gesamtbild über vier Umgebungen: Badeanzug und Bikini verlässlich, Shorts zur Bademode Glückssache. Details in `docs/research/bildanbieter.md`.
