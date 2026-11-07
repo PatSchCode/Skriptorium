@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: erstes Probebild über die Runware-API
+
+- Freigabe des Eigentümers: Probebild ja, LoRAs „gleich in 10.8“.
+- Gewünschte Version epiCRealism XL `@1552721` abgelehnt (`invalidModel`, ohne Kosten): Runware lädt nicht gelistete Civitai-Versionen nicht nach. Gelistete Version `@1405120`: Bild in 7 s für 0,0025 $, `checkContent: false` gesetzt. Folge: Kennungen beim Hinzufügen per `modelSearch` prüfen.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Wunschmodelle aus Civitai geprüft
 
 - Eigentümer nennt zwei Civitai-Links (Domain `civitai.red`, gleiche Kennungen wie `civitai.com`). Ergebnis in `docs/research/bildanbieter.md`: epiCRealism XL bei Runware in 20 Versionen, die gewünschte „VXVI – LastFAME DMD2“ (`@1552721`) nicht gelistet; Plastic Zip-Cuffs ist eine LoRA für das Grundmodell „MOSS Image“, das Runware nicht anbietet – dort nicht nutzbar.
