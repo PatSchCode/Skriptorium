@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Armbinder: nur mit LoRA, dann auf beiden Modellen gut
+
+- Test Armbinder-Flux (Z-Image-Turbo) und Armbinder (Krea 2 Turbo), je ohne/mit, 0,021 $. Ohne LoRA in keinem Modell ein Armbinder; mit LoRA beide glaubwürdig (Schnürung, Schulterriemen), Krea etwas detailreicher, Z-Image günstiger. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Armbinder-LoRAs gesucht
 
 - Suche auf Wunsch des Eigentümers: für Z-Image-Turbo vier (Armbinder-Flux, ArmRestraints-Set, MonoGlove, Bolero-Zwangsjacke), für Krea 2 drei (Armbinder, Boxtie armbinder, Bolero-Zwangsjacke); alle im passenden Format. Nichts hochgeladen. Details in `docs/research/bildanbieter.md`.
