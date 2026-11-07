@@ -96,6 +96,15 @@ Die LoRA-Tests oben liefen mit dem bisherigen (kolumbianischen, kurvigen) Avatar
 - Weitere: Qwen-Image (`alibaba:qwen-image@…`, `runware:108@1`), HiDream-I1 (Fast/Dev/Full), FLUX 3 und FLUX.2 [klein/pro/max].
 - **Chroma nicht gefunden** (Suchen „chroma“, „chroma1“, „lodestones“, „chroma hd“) – bei Runware nur über eigenen Upload.
 
+**Vergleich von vier Checkpoints (2026-11-07):** Testavatar mit voller Körperbeschreibung, Alter vorn, „large bust“; zwei Prüfbilder (roter Bikini; Wanderkleidung mit langer Hose) im Studio, Seed 101, 30 Schritte, CFG 4 (LUSTIFY 5), mit Negativ-Prompt (Bikini: „small bust, flat chest, older woman, …“; Wandern: „cropped top, bare midriff, exposed stomach, shorts, hot pants, bare legs, older woman, …“).
+
+- **Z-Image (Grundmodell)** `runware:z-image@0` (0,0096 $ je Bild): Bikini wie verlangt, Oberweite sichtbar größer als bei Turbo, Figur deutlich kurvig; Wandern mit geschlossener Jacke und langer Hose trotz voller Körperbeschreibung – **der Negativ-Prompt löst das Shorts-Problem**. Leberfleck sichtbar. Figur insgesamt fülliger als „athletic“.
+- **Juggernaut Z** `rundiffusion:200@100` (0,0133 $): fast wie Z-Image, Bikini mit noch kräftigeren Oberschenkeln; Wandern wie verlangt, Figur noch fülliger. Leberfleck sichtbar.
+- **Krea 2 Raw** `krea:krea@2-raw` (0,0434 $ bzw. 0,0179 $): Bikini **unbrauchbar** (rote und gelbe Flecken über dem Bild, Ausschnitt abgeschnitten – Einstellungen 30 Schritte/CFG 4 passen offenbar nicht); Wandern technisch sauber, Figur schlank, Gesicht wirkt **jünger als 21** – so nicht verwendbar.
+- **LUSTIFY! ENDGAME** `civitai:573152@1094291` (0,0025 $): folgt dem Prompt kaum – Bikini als Sport-BH und String in Pose von hinten, statt Wanderkleidung ein **Aktbild** (nicht verlangt; Bild gelöscht, nicht weitergegeben). Für gezielte Kleidung ungeeignet.
+
+Folge: Z-Image (Grundmodell) und Juggernaut Z setzen Körper und Kleidung zugleich um, weil der Negativ-Prompt das Knappe ausschließt; beide etwa 7- bis 10-mal teurer als Turbo, aber immer noch rund 1 Cent je Bild. Die Figur gerät fülliger; „athletic“ wäre dort stärker zu betonen.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
