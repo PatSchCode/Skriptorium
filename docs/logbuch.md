@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Hände bei der Box-Fesselung – genaue Beschreibung verschlechtert sie
+
+- Eigentümer: „Die Hände passen nicht.“ Prompt um Handhaltung ergänzt (Handgelenke in der Rückenmitte gekreuzt und gebunden, Handflächen flach am anderen Unterarm, Finger locker); Seeds 777 und 1903, sonst unverändert; je 0,0037 $.
+- Ergebnis: Handgelenke jetzt mittig gestapelt und umwickelt, aber Hände zeigen mit offenen Handflächen nach außen, bei Seed 777 hat die jüngere Figur zu viele Hände. Die ausführliche Handbeschreibung macht das Modell eher unsicherer.
+- Möglichkeiten (nicht erprobt): mehrere Seeds erzeugen und das beste wählen; Hände nur knapp beschreiben oder verdecken (Ausschnitt, Ärmel); Hände nachträglich ausbessern (Inpainting – das Skriptorium kann das heute nicht, wäre ein neuer V-Schritt).
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Kinbaku mit zwei Figuren – Ansicht von hinten trifft die Box-Fesselung
 
 - Wunsch des Eigentümers: enges Kinbaku, Trainerin ebenfalls gebunden. Krea 2 Turbo, Rope Bondage Gewicht 1,2, Seed 777, Querformat 1216 × 832, Prompt mit Dreiviertelansicht von hinten, zwei erwachsene Frauen kniend im Dojo, schwarze enge Kleidung, Unterarme waagerecht gestapelt, Bänder über und unter der Brust, Längsseil am Rücken; 0,005 $.
