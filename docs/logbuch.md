@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Spider Gag (Krea 2): gut ab 0,6
+
+- Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Shiny Latex Bodysuits (Krea 2): echter Latex ab 0,6
 
 - Ohne LoRA nur matter Elasthan. Einmal Antwort ohne Bild von Runware, Wiederholung lief. Details in `docs/research/bildanbieter.md`.
