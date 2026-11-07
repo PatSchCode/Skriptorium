@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Yoke (Krea 2): stimmig erst bei 1,0
+
+- Bei 0,6 Hals nicht im Joch, bei 1,0 vollständig. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Harness Gag (Krea 2): sehr glaubwürdig ab 0,6
 
 - Kopfgeschirr mit Ballknebel in beiden Seeds; ohne LoRA keiner. Details in `docs/research/bildanbieter.md`.
