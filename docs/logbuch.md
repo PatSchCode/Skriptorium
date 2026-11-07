@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Z-Image-Turbo mit drei LoRAs: Ball Gag hilft, Hands wenig, UltraReal schadet
+
+- Auf Wunsch des Eigentümers drei LoRAs privat hochgeladen (Hands, Large Ball Gag, Lenovo UltraReal; `z_image_turbo`), alle laden fehlerfrei. Je ein Vergleich ohne/mit LoRA, Seed 777, zusammen 0,0114 $. Details in `docs/research/bildanbieter.md`.
+- Large Ball Gag: deutlich besser (Riemen, Hände hinten). Hands: kleine Verbesserung, aber das Kinbaku-Motiv scheitert an Z-Image-Turbo selbst (drei Frauen, kaum Seilbilder). Lenovo UltraReal: Porträt glatter und jünger, schlechter als ohne.
+- Reibung: Upload-Skript war fest auf `krea_oss_2` eingestellt – Architektur jetzt über `ARCH` wählbar.
+
 ### 2026-11-07 – [BEOBACHTUNG] Erkundung Z-Image: Unterschied Base/Turbo, LoRA-Lage
 
 - Auftrag des Eigentümers: Unterschied Z-Image / Z-Image-Turbo, vorhandene LoRAs, Kleidung und die bisherigen Themen. Ergebnis in `docs/research/bildanbieter.md` („Erkundung Z-Image“): Turbo = verdichtet, 8 Schritte, ohne CFG/Negativ-Prompt, sehr fotorealistisch, wenig Vielfalt; Z-Image = Grundmodell, 28–50 Schritte, CFG und Negativ-Prompt, mehr Vielfalt. Civitai 1.123 LoRAs (843 Turbo); bei Runware zu den Themen keine – Upload nötig. Stichprobe Dateiformat: alle passend (diffusers). Hand-LoRA mit 313.117 Downloads gefunden (Handproblem bei Fesselungen).
