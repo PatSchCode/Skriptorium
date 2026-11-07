@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Armbinder, Gewicht 0,6: keiner der beiden LoRAs gelingt
+
+- Z-Image-Turbo (Armbinder-Flux): Armbinder erkennbar, Figur verloren (Gesicht, Haare, Kleidung, Körper). Krea 2 (Armbinder): Figur erhalten, aber zwei getrennte Ärmel statt eines Armbinders. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] German Handcuffs brauchbar; kleinere Schellen per Prompt
 
 - Eigentümer bestätigt German Handcuffs als brauchbar (V.54 nachgetragen). Wunsch: Schellen passend zum Handgelenk. Zusatz „small, slim … snugly … true-to-scale“ im Prompt macht Schellen schmaler und enger, Kette kürzer; 0,6 und 0,4 kaum verschieden. Details in `docs/research/bildanbieter.md`.
