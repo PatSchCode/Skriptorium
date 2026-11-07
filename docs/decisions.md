@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-07 (ADR-001 bis ADR-114). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-07 (ADR-001 bis ADR-115). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -134,12 +134,13 @@ Stand 2026-11-07 (ADR-001 bis ADR-114). Aus welchem Schritt ein ADR stammt, steh
 | 112 | 2026-11-05 | Aktiv | OPERATIV | STACK | Externe Abh. | Build der Oberfläche auf Node.js 26.12.1 LTS (npm 11.20.0) |
 | 113 | 2026-11-06 | Aktiv | ERKENNTNIS | PERFORMANCE | – (Ergebnis Schritt 10.10) | Hermes 4 bleibt wie heute: Denken nicht nutzbar, keine Einstellung mit Wirkung; Längengrenze als V.51 |
 | 114 | 2026-11-07 | Aktiv | OPERATIV | ABHÄNGIGKEIT | Externe Abh. | Runware als zweiter Bildanbieter (10.8) |
+| 115 | 2026-11-07 | Aktiv | OPERATIV | SECURITY, DATENMODELL, SCHNITTSTELLE | Sicherheit, Datenmodell, Architektur, API | Runware: Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen (10.8) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-105 bis ADR-114 – keiner reaktiv: ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung; ADR-105 Planung (Methodik). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-106 bis ADR-115 – keiner reaktiv: ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2704,6 +2705,34 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Was soll ein zweiter Bildanbieter bringen?“ → offene Modelle ohne Freischaltungs-Hürde für düstere, nicht pornografische Motive. Ob heute Bilder an Filtern scheitern, hat der Eigentümer nicht beantwortet – offen für die zweite Vorlage.
 - **Konfidenz zum Zeitpunkt:** mittel – Preise und Kataloge am 2026-11-07 geprüft; Voreinstellung der Prüfung und Verfügbarkeit der offenen Modelle bei Runware erst mit der Probe belegt. Umkehrbarkeit billig (ein Adapter, eine Umgebungsvariable).
 - **Konsequenzen:** neues Konto und neuer Schlüssel beim Eigentümer; `.env.example`, `docs/project-context.md` Abschnitt 5 und Kostenregister werden mit dem Bau ergänzt. Verworfen: B (Bedingungen schließen Motive aus, die in den Geschichten vorkommen können), C (Freischaltung ungewiss), D (Wunsch nach mehr Diversität, ADR-076).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-115: Bilder über Runware – Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen (10.8)
+
+- **Datum:** 2026-11-07
+- **Entscheider:** Eigentümer (zweite Vorlage zu 10.8, Auswahlfragen: Inhalte „Erlauben, Prüfung aus“; Schlagworte „Fließtext, ich passe an“; Technik „Ja, so bauen“; nach Klärung zu Civitai: Probebild „Ja“, LoRAs „Gleich in 10.8“, Modell-Liste „Ja, so bauen“)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[SICHERHEIT]` `[DATENMODELL]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.8 – zweite Vorlage vor dem Bau vorgesehen, ADR-114) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Sicherheit (Kategorie 6: Inhaltsvorgabe, Schlüssel), Datenmodell (Kategorie 4: Liste unter `system/`), Architektur (Kategorie 1: mehrere Bildanbieter in `ai_gateway`), API (Kategorie 5, additiv)
+- **Kontext:** ADR-114 (Runware gewählt). Modellsuche und Probe in der Cloud-Session (`docs/research/bildanbieter.md`, „Modellsuche mit Schlüssel“): offene Modelle 0,003–0,02 $ je Bild; Community-Modelle aus Civitai nach Rechenzeit; `safety.checkContent` ohne Voreinstellung; nicht gelistete Civitai-Versionen lehnt Runware ab (`invalidModel`); epiCRealism XL VXIV 0,0025 $ in 7 s. Neuer Wunsch des Eigentümers: Erwachseneninhalte bis Bondage; die Wunsch-LoRA „Plastic Zip-Cuffs“ braucht das Grundmodell „MOSS Image“, das Runware nicht führt. Runwares Bedingungen §10 lassen offen, ob Inhalte zwischen fiktiven Erwachsenen erlaubt sind.
+- **Optionen:** Inhalte A erlauben (Prüfung aus) / B wie bisher (Prüfung an) / C je Bild; Liste A fest im Code / B in den Einstellungen; Schlagworte A Fließtext / B Umsetzungs-Knopf; LoRAs A später / B in 10.8.
+- **Entscheidung:**
+  - **Inhaltsvorgabe:** Bei Runware wird `safety.checkContent` fest auf `false` gesetzt (im Code, Änderung nur per ADR – wie ADR-077). Erwachseneninhalte zwischen fiktiven Erwachsenen sind damit gewollt; sexuelle Darstellungen Minderjähriger bleiben ausgeschlossen (Runware §10, Gesetz). Ersetzt für Runware die Vorgabe „keine pornografischen Inhalte“ aus ADR-076/ADR-077; für OpenRouter bleibt ADR-077 unverändert (Hersteller-Filter, festgelegte Stufen).
+  - **Mehrere Bildanbieter:** `Services.images` wird zu einer Zuordnung Anbieter → Adapter; das Ziel einer Anfrage folgt aus dem Kennungsformat (OpenRouter `a/b`, Runware-AIR `quelle:modell@version`). Ohne `RUNWARE_API_KEY` gibt es keine Runware-Gruppe. Bildauswahl als eine Liste mit Gruppen „OpenRouter“ und „Runware“.
+  - **Liste in den Einstellungen:** neue Datei unter `system/` mit Grundmodellen (Kennung, Name, optionaler Zusatz zum Prompt) und LoRAs (Kennung, Name, Basis, Auslösewort, Standardgewicht). Hinzufügen per Kennung oder Civitai-Link; der Server prüft per `modelSearch` (Art, Basis), übernimmt ein gemeldetes Auslösewort (änderbar) und lehnt Unbekanntes ab. Vorbelegt: FLUX.2 [dev] `runware:400@1`, Z-Image-Turbo `runware:z-image@turbo`, HiDream-I1 Dev `runware:97@2`, epiCRealism XL VXIV `civitai:277058@1405120`.
+  - **LoRAs in 10.8:** Im Dialog „Bild erzeugen“ sind bei einem Runware-Grundmodell die LoRAs mit passender Basis wählbar, je mit Gewicht; ihr Auslösewort wird an den Prompt gehängt.
+  - **Prompt:** weiter Fließtext aus dem Kanon, änderbar; der Zusatz des Modells wird angehängt. Knopf „in Schlagworte umsetzen“ → V.52 (Landeplatz 10.11).
+  - **Schlüssel:** `RUNWARE_API_KEY` als Umgebungsvariable nur auf dem Server und in der Cloud-Session, Eintrag in `.env.example`, nie im Browser oder Log; der Server ruft `accountManagement` nicht auf (die Antwort enthält die Schlüssel des Kontos).
+  - **Kosten-Bremse:** Vorab-Guthaben ohne automatisches Nachladen (keine Ausgabengrenze je Schlüssel bei Runware gefunden); Kosten je Bild per `includeCost` in der Verbrauchsdatei (Art `bilderzeugung`); Preis vorher nur für Modelle mit festem Satz, sonst „Preis nach dem Erzeugen“.
+  - **Prüfung:** getrennte Instanz vor dem Einspielen (Kategorie 6).
+  - Verworfen: Prüfung an (blockiert gewünschte Motive); Schalter je Bild (ADR-077); feste Liste im Code (jedes Community-Modell bräuchte einen Code-Schritt); LoRAs später (Wunsch des Eigentümers).
+- **Vision-Frage, die entschied:** „Sollen die Bilder über Runware auch explizite Erwachseneninhalte zeigen dürfen – mit dem Risiko einer Kontosperre?“ → ja.
+- **Konfidenz zum Zeitpunkt:** hoch für Ablauf und Kosten (Probe); mittel für Runwares Auslegung von §10 (Risiko: Sperre, Verlust höchstens des Restguthabens). Umkehrbarkeit billig (Konstante, Datei unter `system/`).
+- **Konsequenzen:** `docs/project-context.md` Abschnitte 5 und 8 (Kostenregister), `.env.example`, `docs/architecture.md` (Beziehung `ai_gateway` → Runware) mit dem Bau; Mockup der Bildauswahl und der Einstellungen im Logbuch (`[ADR-ANGELEGT]` ADR-115); Tests; Probe mit echtem Bild nach dem Bau.
 - **Abgeleitete Regel:** keine
 
 ---

@@ -29,6 +29,31 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [ADR-ANGELEGT] ADR-115: Runware – Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen
+
+- Zweite Vorlage zu 10.8 vollständig beantwortet (Auswahlfragen, siehe ADR-115): Prüfung bei Runware fest aus; Fließtext-Prompt, Schlagwort-Knopf als V.52 → 10.11; Technik wie vorgeschlagen; LoRAs gleich in 10.8; Liste in den Einstellungen mit Prüfung per `modelSearch`.
+- Mockup (vom Eigentümer mit „Ja, so bauen“ bestätigt):
+
+```text
+Einstellungen › Bildmodelle bei Runware
+  Grundmodelle                                   Zusatz zum Prompt
+  FLUX.2 [dev]            runware:400@1          –
+  Z-Image-Turbo           runware:z-image@turbo  –
+  HiDream I1 Dev          runware:97@2           –
+  epiCRealism XL VXIV     civitai:277058@1405120 –
+  [ Kennung oder Civitai-Link einfügen ] [Prüfen und hinzufügen]
+  LoRAs                                   Basis   Auslösewort   Gewicht
+  [ Kennung oder Civitai-Link einfügen ] [Prüfen und hinzufügen]
+
+Bild erzeugen
+  Modell  [ epiCRealism XL VXIV (Runware) ▾ ]   (Gruppen OpenRouter / Runware)
+  Zusätze [✓] <LoRA>  Gewicht [0,8]     ← nur LoRAs mit passender Basis
+  Prompt  [ … aus dem Kanon … ] (Zusatz und Auslösewort werden angehängt)
+  Preis   ab 0,0025 $ bzw. „Preis nach dem Erzeugen“
+```
+
+- Reaktiv-Quote 0/10 (ADR-106 bis ADR-115).
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: erstes Probebild über die Runware-API
 
 - Freigabe des Eigentümers: Probebild ja, LoRAs „gleich in 10.8“.
