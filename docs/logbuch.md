@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea, sechs Seeds: Form und Kleidung stabil, Sitz schwankt
+
+- Form, Kleidung und Gesicht in allen sechs stabil; Sitz bei allen leicht links der Mitte, am besten Seed 404. Stützt den Wunsch V.53 (fester Seed). Details in `docs/research/bildanbieter.md`. Skript `szene.py` nimmt den Seed jetzt aus `SEED`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea 1,0, von hinten, Kleidung festgehalten: Kleidung bleibt
 
 - Ausdrückliche Stoffangabe hält die Kleidung gegen die LoRA. Armbinder näher an der Mitte, ein Arm wirkt noch frei. Details in `docs/research/bildanbieter.md`.
