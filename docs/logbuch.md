@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Tape Bondage: Handgelenke eng in einem Wickel, Kreuzwicklung nicht darstellbar
+
+- Handgelenke in allen drei Seeds eng nebeneinander in gemeinsamem Wickel mit sichtbaren Lagen; keine Kreuzwicklung, Knöchel-Band nur um einen Knöchel. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Tape Bondage: schmale Wickel per Prompt, LoRA unter 0,6 wirkungslos
 
 - Eigentümer: Wickel unrealistisch breit. Beschreibung „one tape width wide … wrapped around the same spot many times“ ergibt bei 0,6 schmale Bänder; bei 0,4 und ohne LoRA kein Klebeband. Details in `docs/research/bildanbieter.md`.
