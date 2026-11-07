@@ -75,6 +75,13 @@ Allgemein gilt für jede Beurteilung:
 | **Joch** (Yoke) | Steifes Brett oder Stahlstange über den Schultern; **Hals in der Mitte** und **Handgelenke an den Enden** in Aussparungen oder Schellen eingeschlossen, Hände neben dem Kopf; Scharnier und Schloss. | Hals frei (Brett unter dem Kinn), überzählige leere Aussparungen, Hände halten das Brett. |
 | **Pranger** (Stocks / Pillory) | Fest stehendes Gestell mit waagerechtem Klappbalken; Hals in der Mitte, Handgelenke links und rechts **im selben Balken**; Höhe bestimmt die Haltung (hoch = aufrecht, hüfthoch = stark vorgebeugt mit dem Kopf durch den Balken). | Kopf über dem Balken, Halsring lose mit Kette, Hände an anderer Stelle. |
 
+<!-- ANCHOR:ganzanzug -->
+## Ganzanzug und Haube
+
+| Artikel | Aufbau und Sitz | Typische Bildfehler |
+|---|---|---|
+| **Gimp-Anzug** | Ganzkörperanzug aus Latex oder Leder mit angesetzten Handschuhen und Füßlingen, dazu geschlossene Haube, die den Kopf ganz umschließt; Öffnungen nur für Augen und Nasenlöcher, Mund offen oder mit Reißverschluss; Reißverschluss meist hinten an Haube und Rücken; liegt faltenfrei an. | Matter Stoff statt Latex, Gesicht frei (nur Kapuze), Haube ohne Atemöffnung. |
+
 <!-- ANCHOR:schuhe -->
 ## Schuhe
 

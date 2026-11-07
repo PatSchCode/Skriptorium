@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Gimp (Krea 2): einheitlich, mit Latex-LoRA am besten
+
+- Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Touch (Krea 2): Wirkung gering
 
 - Umarmung gelingt schon ohne LoRA; LoRA macht Griff fester. Details in `docs/research/bildanbieter.md`.
