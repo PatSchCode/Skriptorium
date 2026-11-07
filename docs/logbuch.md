@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Vergleich Krea 2 Raw ohne und mit LoRA – Fehler kommen von der LoRA
+
+- Direkt über die API, Einstellungen wie der Adapter (keine Schritte/CFG), Seed 4242, gleicher Prompt (mit LoRA plus Auslösewort): ohne LoRA 0,0122 $, mit LoRA 0,6 0,0128 $.
+- Ohne LoRA: sauberes Bild ohne Bildfehler; die Fesseln sehen aber aus wie klobige Kunststoff-Manschetten, nicht wie Kabelbinder. Verletzungen im Gesicht auch ohne LoRA → kommen vom Grundmodell bzw. vom Prompt („grim“, „interrogation room“), nicht von der LoRA.
+- Mit LoRA 0,6: Kabelbinder richtig geformt, aber dieselben weißen, rot-blau umrandeten Bildfehler wie bei 1,0 → Ursache ist die LoRA in der Umgebung von Runware (Gewicht allein erklärt es nicht; Voreinstellungen ebenso nicht, da das Bild ohne LoRA sauber ist). Vermutung, nicht belegt: Die LoRA (diffusers-Format, ai-toolkit) passt nicht sauber zur Krea-2-Umsetzung bzw. Optimierung von Runware.
+- Mögliche nächste Proben (mit Freigabe): Gewicht 0,3; dieselbe LoRA auf `krea:krea@2-turbo`; die ältere Version V0.1 (`@3358423`); Meldung an Runware.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Probebild Krea 2 Raw mit eigener LoRA – läuft, aber Bildfehler
 
 - Über den Server-Weg (Testclient, eigenes Datenverzeichnis): `krea:krea@2-raw` und `skriptorium:2964163@3386627` per „Prüfen und hinzufügen“ übernommen (Familie `krea_oss_2`, LoRA wird beim Grundmodell angeboten, Auslösewort angehängt); Bild 832 × 1216 in 40 s für 0,0186 $.
