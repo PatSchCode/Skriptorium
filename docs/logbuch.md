@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Rope tied shibari: Fesselung gut, Gesicht wandert
+
+- Z-Image-Turbo, Seed 101, `skriptorium:1501202@2605811` Gewicht 1,0, Ansicht von vorne und von hinten (je 0,0025 $).
+- Fesselung: vorne Seilbänder über und unter der Brust und an der Taille, Beine an Oberschenkeln, Knien und Knöcheln gebunden, Arme hinten; hinten Handgelenke gebunden, Brustbänder, Seil über die Schultern, Knöchel gebunden – straff und glaubwürdig.
+- Abweichungen vom Referenzbild: Gesicht deutlich älter und anders, Haare kürzer und glatt; vorne V-Ausschnitt statt Rundhals, hinten dunkelblaue statt schwarze Leggings. Die LoRA zieht das Aussehen weg vom Testavatar. Figur (kurvig) bleibt erhalten.
+- Gegenmittel (nicht erprobt): Gewicht 0,6–0,7. Unklar, ob „Sarah Petersons“ der Name des Autors oder einer realen Person auf den Trainingsbildern ist – im zweiten Fall würde die LoRA Züge einer echten Person übertragen.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar: Körperbau B kurvig
 
 - Eigentümer wählt Entwurf B (kurvig). Testavatar vollständig festgelegt (Beschreibung, Körperbau, Standardkleidung, Z-Image-Turbo, Seed 101) in `docs/research/bildanbieter.md`.
