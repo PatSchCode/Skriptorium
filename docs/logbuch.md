@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Hogtied (Krea 2): stimmig ab 0,6; Famegrid nicht verarbeitet
+
+- Hogtie mit Verbindungsseil in beiden Seeds; ohne LoRA keiner. Famegrid nach über 40 Minuten bei Runware nicht bereit. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Leather Cuffs (Krea 2): sehr glaubwürdig ab 0,6
 
 - Lederfesseln an Hand- und Fußgelenken mit Karabinern, Hände natürlich; ohne LoRA keine Fesseln. Details in `docs/research/bildanbieter.md`.
