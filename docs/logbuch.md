@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Probe im Playground, neuer Wunsch Erwachseneninhalte
+
+- Eigentümer probiert im Runware-Playground (Prompt-Vorschläge und Scheduler-Frage beantwortet: Voreinstellung lassen): „Bisher scheint das, was ich brauche, brauchbar zu sein. Nur das Prompting ist halt sehr umfangreich.“ Modelle und Filterergebnis der düsteren Szene noch nicht gemeldet.
+- Neuer Wunsch: Modelle, die Erwachseneninhalte liefern, „vielleicht sogar Bondage“. Das ändert die bisherige Vorgabe „keine pornografischen Inhalte geplant“ (ADR-076, ADR-077, ADR-114 Vision-Frage) – Gegenstand der zweiten Vorlage zu 10.8, kein Eingriff vorher. Befund: Runwares Bedingungen §10 lassen offen, ob Erwachseneninhalte erlaubt sind (`docs/research/bildanbieter.md`); Kandidaten nur offene bzw. Community-Modelle, teils mit Schlagwort-Prompts statt Fließtext.
+
 ### 2026-11-07 – [ADR] ADR-114: Runware als zweiter Bildanbieter
 
 - Vorlage 10.8 mit vier Optionen (Runware, Replicate, fal.ai, keiner) nach Nachprüfung von Katalogen und Preisen (`docs/research/bildanbieter.md`, „Nachprüfung für 10.8“). Befund: OpenRouter führt inzwischen 63 Bildmodelle; ein zweiter Anbieter bringt vor allem offene Modelle mit eigenem Filterschalter.
