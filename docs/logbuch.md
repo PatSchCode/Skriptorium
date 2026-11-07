@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] Bildfehler bei Krea 2 Raw: Ursache ist der Negativ-Prompt
+
+- Mit Negativ-Prompt Farbflecken in jeder Einstellung, ohne sauber. Raw setzt Körperwörter aber nicht besser um als Turbo. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Zweiter Testavatar: drei Runden, auf Wunsch abgebrochen
 
 - Festlegungen schrittweise abgefragt (Nordeuropa, 26, kupferrot, grüne Augen, Sommersprossen, kurvig, 172 cm). Krea 2 Turbo passt am besten; rundere Gesichtsbeschreibung verdrängte die Kurven. Danach Referenz festgelegt: Runde 3, Krea 2 Turbo, Seed 505. Details in `docs/research/bildanbieter.md`.
