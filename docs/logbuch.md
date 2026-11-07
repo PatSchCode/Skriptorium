@@ -35,6 +35,7 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 - Vorgelegt: (1) Eigentümer lädt selbst hoch, (2) Upload durch die KI mit Civitai-Schlüssel über das sichere Formular, (3) erstmal nicht. Antwort: „Merk dir wo wir sind, wir machen morgen weiter“ – **Frage offen**, nichts hochgeladen, kein Code geändert.
 - Gefundene Lücke (noch nicht behoben): `api/runware_models.py` `_FAMILIES` kennt `krea_oss_2` und `krea_oss_2_turbo` nicht als eine Familie – eine Turbo-LoRA würde bei Krea 2 Raw nicht angeboten (Runware: Turbo-LoRAs laufen auch auf Raw). Ein Eintrag plus Test, innerhalb von 10.8.
 - Civitai-Schlüssel vom Eigentümer als Netzwerk-Secret der Umgebung für `civitai.com` hinterlegt (Proxy setzt ihn ein, kein Wert im Container oder Gespräch). Probe nur mit Status: Download-Adresse der LoRA antwortet jetzt 307 (Weiterleitung) statt 401 – Zugang wirkt; nichts heruntergeladen.
+- LoRA identifiziert über den Dateikopf (Teilabruf, 65 KB statt 218 MB): Krea 2 Raw, Rang 32, 32 Trainingsbilder – Upload mit Architektur `krea_oss_2` (Details `docs/research/bildanbieter.md`).
 - **Wiedereinstieg morgen:** Upload-Frage beantworten lassen (Download durch die KI ist jetzt möglich); Familien-Lücke schließen; vor einem Upload klären, ob `modelSearch` private Modelle findet und ob CLI/Dashboard eine lokale Datei annehmen; dann wie im Sessionende darüber (CI von #218, Bestätigung, Einspielen).
 
 ### 2026-11-07 – [SESSIONENDE] 10.8 gebaut und geprüft, Pull Request #218 aktualisiert
