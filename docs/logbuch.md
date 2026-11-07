@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Oberweite in drei Stufen: Unterschiede gering
+
+- „small“ etwas kleiner, „medium“ und „full“ kaum verschieden; schwarzer Bodysuit und Zusatz „in proportion“ dämpfen. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Pool mit voller Körperbeschreibung: gleiches Muster, Shorts entfallen auch hier
 
 - Details in `docs/research/bildanbieter.md`.
