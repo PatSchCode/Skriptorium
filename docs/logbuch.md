@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Z-Image mit niedrigerem CFG: Natürlichkeits-Wörter wirken stärker als der CFG-Wert
+
+- CFG 3 und 2,5 kaum verschieden; „candid photo, natural skin texture …“ macht das Bild deutlich natürlicher. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Civitai-Bild nachgestellt: SDXL-Grundmodell mit kurzem Prompt
 
 - Erzeugungsdaten über die Civitai-Schnittstelle gelesen und ohne Hires nachgestellt; Vergleich mit Testavatar auf SDXL und Z-Image. Details in `docs/research/bildanbieter.md`.
