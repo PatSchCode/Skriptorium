@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Wirkung der Seil-LoRAs gering – Krea 2 Turbo kann Seile schon
+
+- Eigentümer: „Die Bilder der unterschiedlichen LoRAs sehen identisch aus.“ Kontrollvergleich auf Krea 2 Turbo, gleicher Prompt (Frau auf Stuhl im Keller, Seil um Rumpf, Hände hinten, Knöchel an Stuhlbeinen), Seed 777, Gewicht 1,0: ohne LoRA 0,0037 $, Megapack 0,0124 $, Rope Bondage 0,0149 $.
+- Ergebnis: Schon ohne LoRA Seil um Rumpf und Handgelenk; die LoRAs ändern Einzelheiten – Megapack fesselt zusätzlich die Knöchel und lässt Seil herabhängen, Rope Bondage legt ein Brustgeschirr (Seil über und unter der Brust) und bindet die Knöchel. Mittlere Pixelabweichung zur Fassung ohne LoRA 18,6 (Megapack) und 11,4 (Rope) von 255. Hände in keiner Fassung hinter der Lehne.
+- Deutung: Bei einfachen Seilmotiven bringt das Grundmodell das meiste selbst; die LoRAs sollten sich bei Motiven zeigen, die Krea 2 allein nicht kann (Knebel, Klebeband, Hogtie, Aufhängung) – noch nicht geprüft.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: zwei weitere LoRAs hochgeladen und erprobt
 
 - Eigentümer wählt aus der Liste: Bondage & Gags Megapack (`2767605@3115420`) und Joschek's Rope Bondage v2 (`2742699@3142259`). Dateiköpfe: beide auf Krea 2 Raw, Rang 64 (431 bzw. 678 Trainingsbilder), keine Auslösewörter – beschreibende Prompts. Lizenz: keine Abwandlungen, Namensnennung beim Weitergeben, kommerziell nur Bilderzeugungsdienste (*Deutung:* privater Upload für eigene, nicht verkaufte Bilder unberührt).
