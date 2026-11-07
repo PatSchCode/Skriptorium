@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [SESSIONENDE] Nachtrag: LoRAs erprobt, Wiedereinstieg
+
+- **Seit dem letzten Sessionende:** Civitai-Schlüssel als Netzwerk-Secret; drei LoRAs privat zu Runware hochgeladen (`skriptorium:2964163@3386627`, `…2767605@3115420`, `…2742699@3142259`), auf Krea 2 Turbo sauber (Raw mit Bildfehlern); Krea 2 Raw/Turbo als eine Familie im Code (`fb29b82`); Proben zu Seil, Knebel, Takate Kote, Kinbaku; V.53 (fester Seed) angelegt. KI-Kosten der Proben zusammen rund 0,20 $ (Runware-Guthaben).
+- **Wiedereinstieg:** neue Session auf `feat/10.8-zweiter-bildanbieter`; CI von [PatSchCode/Skriptorium#218](https://github.com/PatSchCode/Skriptorium/pull/218) prüfen; Bestätigung des Eigentümers zu 10.8; Einspielen vom Mac (`RUNWARE_API_KEY` mit dem zeilenweisen Befehl aus dem Runbook in `.env`, Durchreichen in der Compose-Datei prüfen); danach 10.9.
+- **Kontextgröße:** weit über der Grenze (Eigentümer: „Weiter hier“); nächste Session neu beginnen.
+
 ### 2026-11-07 – [BEOBACHTUNG] V.53 angelegt: fester Seed beim Bilderzeugen
 
 - Eigentümer: „nimm den festen Seed als Wunsch für 10.11 auf“ → V.53 im Fahrplan, Landeplatz 10.11 (Startwert wählbar, anzeigen, in der Herkunft festhalten; Unterstützung je Anbieter klären). Kein Code.
