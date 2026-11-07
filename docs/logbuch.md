@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Touch (Krea 2): Wirkung gering
+
+- Umarmung gelingt schon ohne LoRA; LoRA macht Griff fester. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Ballet Ankle Heels (Krea 2): echte Ballettstiefel ab 0,6
 
 - Testavatar 21. Details in `docs/research/bildanbieter.md`.
