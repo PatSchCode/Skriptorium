@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Large Ball Gag, Gewicht 0,6: Figur bleibt erkennbar
+
+- Z-Image-Turbo, Seed 101, `skriptorium:999177@2731175` Gewicht 0,6, sitzend auf Stuhl, von vorne; Knebel, Hände hinter der Lehne und Knöchel ausdrücklich im Prompt (0,0025 $).
+- Ergebnis: Gesicht, welliges Haar, Kleidung und kurvige Figur nahe an der Referenz; roter Ballknebel mit Riemen sitzt, Hände hinter der Lehne, Knöchel an den Stuhlbeinen gebunden. Bislang die beste Kombination aus Wiedererkennung und LoRA-Wirkung.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar, Shibari 0,6 mit Beinfesselung im Prompt
 
 - Weg 1 auf Wunsch des Eigentümers: Gewicht 0,6, Prompt um „legs bound together with rope at the thighs, knees and ankles“ ergänzt (je 0,0025 $).
