@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Spider Gag: Gurt realistisch, wenn er auf der Haut unter dem Haar verläuft
+
+- Zopf löst das Gurtproblem, lässt sie aber jünger wirken; offenes Haar über dem Gurt ist die bessere Lösung. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Spider Gag (Krea 2): gut ab 0,6
 
 - Details in `docs/research/bildanbieter.md`.
