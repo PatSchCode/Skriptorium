@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Shibari, Gewicht 0,6: Gesicht näher, Fesselung schwächer
+
+- Wie zuvor, aber Gewicht 0,6 (je 0,0025 $). Vergleich mit Referenz (Seed 101) und Gewicht 1,0, Gesichter vergrößert.
+- Gesicht: von vorne deutlich näher an der Referenz (jünger, welliges Haar), aber nicht gleich; von hinten weiter glattes, kürzeres Haar und älter. Kleidung jetzt durchgehend schwarz.
+- Fesselung: Brust- und Taillenbänder, Arme bzw. Handgelenke hinten gebunden – aber die Beine sind nicht mehr gebunden (bei 1,0 von der LoRA selbst ergänzt, im Prompt nicht verlangt).
+- Folge: Zielkonflikt Wiedererkennung gegen Wirkung der LoRA. Offen: 0,6 mit Beinfesselung ausdrücklich im Prompt, oder 0,8; dauerhaft eine eigene Figuren-LoRA.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Rope tied shibari: Fesselung gut, Gesicht wandert
 
 - Z-Image-Turbo, Seed 101, `skriptorium:1501202@2605811` Gewicht 1,0, Ansicht von vorne und von hinten (je 0,0025 $).
