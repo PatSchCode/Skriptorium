@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Ball Gags (Krea 2): sicher ab 0,6
+
+- Ohne LoRA kein Knebel; 0,6 glaubwürdig mit erhaltenem Gesicht; 1,5 verzerrt. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Fotorealismus-LoRAs: Skin Texture für Z-Image überzeugt, LoKr-LoRAs laden nicht
 
 - Realistic Skin Texture macht Z-Image deutlich fotografischer. Amateur Photography und Realism Engine (LoKr) laden bei Runware nicht. Krea 2 Turbo sehr natürlich, Porträt aber zu alt; Mystic XXX verjüngt und rundet. Waist slider: negativ = schlanker; Runware begrenzt LoRA-Gewichte auf ±4, die Anwendung auf ±2. Details in `docs/research/bildanbieter.md`.

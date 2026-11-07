@@ -136,6 +136,7 @@ Bewusst nicht aufgenommen: Figuren-LoRAs bestimmter (auch erfundener) Personen, 
 - **Krea 2 Turbo ohne LoRA** (kein Negativ-Prompt möglich, 0,0037 $): sehr fotografisch und natürlich, aber das Porträt wirkt **deutlich älter als 21** (eher Mitte dreißig), am Strand jung, schlank und wenig kurvig.
 - **Mystic XXX, 0,6** (0,0037 $): Porträt jünger als ohne (eher Mitte zwanzig), sehr natürliche Fotowirkung; am Strand kurviger und mit größerer Oberweite, weiter natürlich. Nackt nicht verlangt und nicht entstanden.
 - **Waist slider** (Strand; Runware erlaubt Gewichte nur von −4 bis 4, die Anwendung bisher nur −2 bis 2): Vorzeichen anders als erwartet – **negativ macht schlanker** (−3: schmalere Taille, insgesamt zierlicher), positiv voller (+3, +4: breitere Taille und Hüfte, fülligerer Körper). Gesicht stabil.
+- **Joschek's Ball Gags for Krea 2 v2** `skriptorium:2727310@3096554` (Auslösewort `ball gag`, Ersteller empfiehlt Gewicht 1,5; Porträt im Bodysuit, Knebel zuerst im Prompt): **ohne LoRA gar kein Knebel**. Bei 0,6 (0,0149 $) roter Ballknebel mit schwarzem Lederriemen und Schnalle, Lippen um den Ball, glaubwürdig; Gesicht natürlich, Leberfleck sichtbar, wirkt Mitte zwanzig. 1,0 (0,0037 $) ebenso, Ausschnitt enger. 1,5 (0,0037 $) Gesicht voller und verzerrte Perspektive. **Empfehlung 0,6.** Damit für Krea 2 eine Knebel-LoRA, die schon bei 0,6 sicher wirkt (Megapack brauchte 0,8).
 
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
