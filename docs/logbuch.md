@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] SDXL-Checkpoints scheiden aus
+
+- RealVisXL, epiCRealism XL, CyberRealistic XL: schwache Prompt-Treue, ein unverlangtes Bild mit nacktem Oberkörper trotz Negativ-Prompt, Gesichter jünger als 21. Problematische Bilder gelöscht, nicht weitergegeben. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Vergleich von vier Checkpoints: Z-Image und Juggernaut Z vorn
 
 - Negativ-Prompt löst das Shorts-Problem bei voller Körperbeschreibung. Krea 2 Raw mit Bildfehlern bzw. zu jung wirkend, LUSTIFY ignoriert die Kleidung und lieferte ungefragt ein Aktbild (gelöscht, nicht weitergegeben). Details in `docs/research/bildanbieter.md`.

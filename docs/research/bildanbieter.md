@@ -105,6 +105,15 @@ Die LoRA-Tests oben liefen mit dem bisherigen (kolumbianischen, kurvigen) Avatar
 
 Folge: Z-Image (Grundmodell) und Juggernaut Z setzen Körper und Kleidung zugleich um, weil der Negativ-Prompt das Knappe ausschließt; beide etwa 7- bis 10-mal teurer als Turbo, aber immer noch rund 1 Cent je Bild. Die Figur gerät fülliger; „athletic“ wäre dort stärker zu betonen.
 
+**SDXL-Fotorealismus im Vergleich (2026-11-07):** RealVisXL V5.0 `civitai:139562@169921`, epiCRealism XL `beam:277058@1522905`, CyberRealistic XL `watisha:147@147`; je 0,0025 $, 30 Schritte, CFG 5, Seed 101; Prompt wegen der 77-Token-Grenze gekürzt, Negativ-Prompt mit „nude, nsfw, topless, …“ und den Kleidungs-Ausschlüssen.
+
+- Alle drei folgen dem Prompt schlechter als Z-Image: Studio-Vorgabe ignoriert (Wanderbilder draußen in Wald und Bergen), Posen statt „arms at sides“, beim Bikini teils Dessous-Optik (RealVisXL mit Pailletten-BH), Proportionen übertrieben.
+- **epiCRealism XL lieferte beim Wanderbild trotz „topless, nude“ im Negativ-Prompt ein Bild mit nacktem Oberkörper** – nicht verlangt, gelöscht und nicht weitergegeben.
+- Gesichter wirken bei allen dreien **jünger als 21**, teils deutlich; zusammen mit Bademode nicht vertretbar. Die Bikinibilder von RealVisXL und epiCRealism XL wurden deshalb gelöscht und nicht weitergegeben.
+- Positiv: lange Hosen und geschlossene Jacken beim Wandern (RealVisXL, CyberRealistic XL).
+
+Folge: **SDXL scheidet aus** – schwache Prompt-Treue, unverlangte Nacktheit trotz Negativ-Prompt und eine Neigung zu jung wirkenden Gesichtern. Z-Image (Grundmodell) bleibt der beste Kandidat.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
