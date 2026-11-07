@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] 10.8: LoRA Plastic Zip-Cuffs (Krea 2) privat zu Runware hochgeladen
+
+- Auf Frage des Eigentümers („kannst du das Modell direkt zu Runware hochladen?“): `modelUpload` mit `downloadURL` = signierte, kurzlebige Speicheradresse, auf die Civitai den angemeldeten Download weiterleitet (Host `b2.civitai.com`, Token nur für diese Datei; der Civitai-Schlüssel ging nicht an Runware; Adresse nicht ausgegeben, danach gelöscht).
+- Reibung: erster Versuch `missingAIR` – eigene Kennung nötig; Präfix des Kontos laut `getDetails`/`AIRSource` = `skriptorium` (nur dieses Feld gelesen) → `skriptorium:2964163@3386627`.
+- Antwort zuerst nur `validated`, danach im Hintergrund verarbeitet; nach wenigen Minuten in `modelSearch` gefunden: LoRA, `krea_oss_2`, privat, Auslösewort `pla5ticz1pcuff5`, Gewicht 1. Damit belegt: Die Modellsuche findet private Modelle des eigenen Kontos – „Prüfen und hinzufügen“ funktioniert dafür.
+- Offen: Probebild mit `krea:krea@2-raw` + LoRA; Familien-Lücke Raw/Turbo im Code.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Plastic Zip-Cuffs für Krea 2 – Stand zum Weitermachen
 
 - Hinweis des Eigentümers: Die LoRA gibt es auch für Krea 2. Geprüft (nur lesend, `docs/research/bildanbieter.md`): Krea-2-Versionen `@3386627` und `@3358423` bei Runware nicht gelistet; Grundmodelle `krea:krea@2-raw` / `krea:krea@2-turbo` (offene Gewichte, LoRAs möglich, ca. 0,015 $) vorhanden; Nutzung der LoRA nur per eigenem privatem Upload zu Runware; Civitai-Download braucht Anmeldung.
@@ -36,7 +43,7 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 - Gefundene Lücke (noch nicht behoben): `api/runware_models.py` `_FAMILIES` kennt `krea_oss_2` und `krea_oss_2_turbo` nicht als eine Familie – eine Turbo-LoRA würde bei Krea 2 Raw nicht angeboten (Runware: Turbo-LoRAs laufen auch auf Raw). Ein Eintrag plus Test, innerhalb von 10.8.
 - Civitai-Schlüssel vom Eigentümer als Netzwerk-Secret der Umgebung für `civitai.com` hinterlegt (Proxy setzt ihn ein, kein Wert im Container oder Gespräch). Probe nur mit Status: Download-Adresse der LoRA antwortet jetzt 307 (Weiterleitung) statt 401 – Zugang wirkt; nichts heruntergeladen.
 - LoRA identifiziert über den Dateikopf (Teilabruf, 65 KB statt 218 MB): Krea 2 Raw, Rang 32, 32 Trainingsbilder – Upload mit Architektur `krea_oss_2` (Details `docs/research/bildanbieter.md`).
-- **Wiedereinstieg morgen:** Upload-Frage beantworten lassen (Download durch die KI ist jetzt möglich); Familien-Lücke schließen; vor einem Upload klären, ob `modelSearch` private Modelle findet und ob CLI/Dashboard eine lokale Datei annehmen; dann wie im Sessionende darüber (CI von #218, Bestätigung, Einspielen).
+- **Wiedereinstieg morgen:** Upload erledigt (siehe Eintrag darüber); Familien-Lücke schließen; vor einem Upload klären, ob `modelSearch` private Modelle findet und ob CLI/Dashboard eine lokale Datei annehmen; dann wie im Sessionende darüber (CI von #218, Bestätigung, Einspielen).
 
 ### 2026-11-07 – [SESSIONENDE] 10.8 gebaut und geprüft, Pull Request #218 aktualisiert
 
