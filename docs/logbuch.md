@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [GELÖST] 10.8: Plastic Zip-Cuffs läuft sauber auf Krea 2 Turbo
+
+- Gleicher Aufbau wie der Vergleich mit Raw (Seed 4242, keine Schritte/CFG), Modell `krea:krea@2-turbo`: ohne LoRA 0,0037 $ – sauber, Fesseln als breite Armbänder; mit LoRA 0,6 0,0136 $ – **sauber, ohne Bildfehler**, Kabelbinder richtig geformt, keine Verletzungen im Gesicht.
+- Folge: Die LoRA (Architektur `krea_oss_2`) mit Krea 2 Turbo nutzen, nicht mit Raw. Damit der Dialog sie bei Turbo anbietet, muss die Familien-Lücke in `api/runware_models.py` geschlossen werden (`krea_oss_2_turbo` → Familie `krea_oss_2`) – heute würde sie nur bei Raw erscheinen.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Vergleich Krea 2 Raw ohne und mit LoRA – Fehler kommen von der LoRA
 
 - Direkt über die API, Einstellungen wie der Adapter (keine Schritte/CFG), Seed 4242, gleicher Prompt (mit LoRA plus Auslösewort): ohne LoRA 0,0122 $, mit LoRA 0,6 0,0128 $.
