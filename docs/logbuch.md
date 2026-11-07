@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar, Shibari 0,6 mit Beinfesselung im Prompt
+
+- Weg 1 auf Wunsch des Eigentümers: Gewicht 0,6, Prompt um „legs bound together with rope at the thighs, knees and ankles“ ergänzt (je 0,0025 $).
+- Von vorne: Gesicht nahe an der Referenz (welliges Haar), Brust- und Taillenbänder, Beine an Oberschenkeln, Knien und Knöcheln gebunden – vollständige Fesselung bei erhaltener Wiedererkennung. Ausschnitt etwas eckiger als die Standardkleidung.
+- Von hinten: Handgelenke hinten gebunden, Brustband, Längsseil; Beine nur an den Knöcheln sichtbar gebunden; Gesicht weiter älter mit glattem Haar – die Rückenansicht bleibt der schwache Punkt.
+- Folge: Für den Testavatar mit Fessel-LoRAs Gewicht 0,6 und alle gewünschten Fesselungen ausdrücklich im Prompt.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Shibari, Gewicht 0,6: Gesicht näher, Fesselung schwächer
 
 - Wie zuvor, aber Gewicht 0,6 (je 0,0025 $). Vergleich mit Referenz (Seed 101) und Gewicht 1,0, Gesichter vergrößert.
