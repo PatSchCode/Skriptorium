@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Kleidung zuerst im Prompt: vier von fünf Stilen jetzt wie verlangt
+
+- Reihenfolge Kleidung → Person, Körper knapp, Längen genannt; Rock-Stil noch mit schmalem Spalt; Figur weniger kurvig. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Zehn Kleidungsstile: fünf wie verlangt, vier freizügiger, Tracht gescheitert
 
 - Körperbeschreibung zieht bei lockerer Kleidung Bauchfreiheit und kurze Säume nach sich. Einmal `internalError` bei Runware, Wiederholung lief. Details in `docs/research/bildanbieter.md`.
