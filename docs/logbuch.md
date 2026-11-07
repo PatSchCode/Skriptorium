@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Metal Bondage (Krea 2), 0,6: Füße und Halsband gut, Handgelenke ohne Kette
+
+- Handschellen nicht hinter dem Rücken und nicht verbunden; Figur von vorn verjüngt. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Rope Bondage, Rückansicht, sechs Seeds: Armhaltung jetzt in allen richtig
 
 - Genauere Beschreibung der Armhaltung brachte gestapelte Unterarme in allen sechs Seeds; Handgelenke einzeln statt zusammen gebunden; Seed 101 mit dritter Hand; am besten 303, 404, 606. Details in `docs/research/bildanbieter.md`.
