@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Testavatar festgelegt: Seed 101
+
+- Eigentümer wählt Seed 101. Testavatar = Beschreibung und Standardkleidung aus `docs/research/bildanbieter.md` („Testavatar“), Z-Image-Turbo, Seed 101.
+
 ### 2026-11-07 – [BEOBACHTUNG] Testavatar mit figurbetonter Kleidung
 
 - Eigentümer: Kleidung muss figurbetont sein, damit Vergleiche aussagekräftig sind. Standardkleidung jetzt schwarzes enges Langarm-Oberteil und Leggings, barfuß; Beschreibung um „mature adult facial features“ ergänzt (vorher wirkten zwei Seeds jünger). Vier Ganzkörperbilder einheitlich und klar erwachsen. Beschreibung in `docs/research/bildanbieter.md` aktualisiert.
