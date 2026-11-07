@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Lip Biting (Krea 2): Wirkung schwach
+
+- Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Kneeling Hands on Thighs: bei Runware nicht verarbeitet, Test abgebrochen
 
 - Zwei Uploads, über 30 Minuten `loraModelNotReady`; Abbruch auf Wunsch des Eigentümers.
