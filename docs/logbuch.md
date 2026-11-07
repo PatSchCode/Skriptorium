@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Alle mit dem Testavatar geprüften LoRAs als brauchbar bestätigt
+
+- Eigentümer bestätigt zusätzlich Large Ball Gag, Rope Bondage, Metal Bondage, Tape Bondage und Plastic Zip-Cuffs. Gesamtstand in V.54 und `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Megapack 0,8 vom Eigentümer bestätigt
 
 - In V.54 nachgetragen.
