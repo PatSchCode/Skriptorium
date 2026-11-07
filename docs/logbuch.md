@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Zehn Kleidungsstile: fünf wie verlangt, vier freizügiger, Tracht gescheitert
+
+- Körperbeschreibung zieht bei lockerer Kleidung Bauchfreiheit und kurze Säume nach sich. Einmal `internalError` bei Runware, Wiederholung lief. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Neuer Testavatar: Mexiko, sportlich-kurvig, Bodysuit
 
 - Eigentümer wählt Herkunft Mexiko und Proportions-Entwurf 3. Bauchfreies Top trotz Gegenanweisung; gelöst mit „toned core“ und Bodysuit. Neue Beschreibung in `docs/research/bildanbieter.md`.

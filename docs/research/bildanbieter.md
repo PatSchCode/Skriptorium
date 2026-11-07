@@ -86,6 +86,8 @@ leggings that show her figure, barefoot
 
 Die LoRA-Tests oben liefen mit dem bisherigen (kolumbianischen, kurvigen) Avatar; Gewichte und Prompt-Hinweise gelten weiter, die Ähnlichkeit wäre mit dem neuen Avatar neu zu prüfen.
 
+**Zehn Kleidungsstile am neuen Avatar (2026-11-07, Z-Image-Turbo, Seed 101, je 0,0013 $; Bodysuit durch den Stil ersetzt):** Wie verlangt: 01 Alltag (T-Shirt, Jeans, Turnschuhe), 02 Büro (Blazer, Bluse, Bleistiftrock, Pumps), 04 Abend (rotes Satinkleid, bodenlang; Träger statt dezentem Ausschnitt), 06 Winter (Wollmantel, Schal, Rollkragen, Stiefel), 09 Uniform (Polizeiuniform mit Gürtel). **Freizügiger als verlangt:** 03 Sommerkleid vorn hoch geschlitzt bzw. kurz statt Midi; 05 Sport mit bauchfreier Jacke; 07 Rock mit bauchfreiem Top unter der Lederjacke; 10 Outdoor mit bauchfreier Jacke und kurzen Shorts statt Wanderhose; **08 Tracht gescheitert** – Bluse bauchfrei, Rock offen mit sichtbarem Slip, keine Tracht mehr. Erster Lauf von 08 brach mit `internalError` ab, Wiederholung lief. Folge: Die Körperbeschreibung („toned core, strong muscular thighs, round firm buttocks“) zieht bei lockerer Kleidung freien Bauch und kurze Säume nach sich; enge oder formelle Kleidung bleibt wie verlangt.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
