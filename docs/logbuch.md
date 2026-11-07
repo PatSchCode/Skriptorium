@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Nipple Clamps (Krea 2): stimmig bei 0,6, eigene Prüffigur 45 Jahre
+
+- Nacktbild-Test zunächst abgelehnt (Altersunsicherheit des 21-jährigen Avatars); auf Vorschlag des Eigentümers mit 45-jähriger Prüffigur durchgeführt. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Sidesuspension (Krea 2): erkennbar, aber nicht stimmig
 
 - Erste Bewertung nach der neuen Prüfliste; Eintrag „Seitliche Aufhängung“ ergänzt. Details in `docs/research/bildanbieter.md`.

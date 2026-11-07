@@ -51,6 +51,13 @@ Allgemein gilt für jede Beurteilung:
 | **Tuchknebel** (Cleave Gag) | Stoffstreifen zwischen den Zähnen, zieht die Mundwinkel nach hinten, im Nacken verknotet. | Tuch nur über dem Mund (dann „Over-the-mouth“), Knoten fehlt. |
 | **Klebeband** | Siehe oben. | – |
 
+<!-- ANCHOR:klemmen -->
+## Klemmen
+
+| Artikel | Aufbau und Sitz | Typische Bildfehler |
+|---|---|---|
+| **Brustklemmen** (Kleeblatt) | Kleine Stahlklemmen, die sich bei Zug fester schließen, meist durch eine dünne Kette verbunden; sitzen direkt auf der Brustwarze, Kette hängt locker durch. | Klemmen übergroß, auf der Haut daneben, Kette straff ohne Grund. |
+
 <!-- ANCHOR:zwangsmittel -->
 ## Armbinder, Zwangsjacke, Joch, Pranger
 
