@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] V.53 angelegt: fester Seed beim Bilderzeugen
+
+- Eigentümer: „nimm den festen Seed als Wunsch für 10.11 auf“ → V.53 im Fahrplan, Landeplatz 10.11 (Startwert wählbar, anzeigen, in der Herkunft festhalten; Unterstützung je Anbieter klären). Kein Code.
+
 ### 2026-11-07 – [GELÖST] 10.8: Hände bei der Box-Fesselung – mehrere Seeds statt genauer Beschreibung
 
 - Weg 1 auf Wunsch des Eigentümers: einfachere Beschreibung (Kinbaku-Prompt ohne Handdetails), Rope Bondage 1,2, Krea 2 Turbo, fünf Seeds (11, 222, 3333, 4444, 5555), je 0,0037 $, zusammen 0,0185 $.
