@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Strand mit voller Körperbeschreibung: einheitlichste Reihe, Shorts entfallen
+
+- Vier Bademoden wie verlangt mit Figur und jungem Gesicht; Tankini und Surf werden zu Badeanzügen. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Volle Körperbeschreibung bei Bademode: Figur zurück, Surf-Shorts werden Slip
 
 - Badeanzug und Bikini mit Figur wie im Referenzbild und jungem Gesicht; Surf-Set knapper. Details in `docs/research/bildanbieter.md`.
