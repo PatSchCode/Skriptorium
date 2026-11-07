@@ -73,6 +73,19 @@ Testavatar mit Bondage & Gags Megapack `skriptorium:2767605@3115420` (Krea 2 Tur
 
 **Herkunft als Stellgröße (Nachfrage des Eigentümers, 2026-11-07):** Gleicher Prompt wie Körperbau B, nur die Herkunft getauscht – „Mexican … of Mexican descent“ und „Central American … of Guatemalan descent“ statt „South American … of Colombian descent“ (Z-Image-Turbo, Seed 101, je 0,0013 $). Unterschiede gering: Haut etwas heller und gleichmäßiger, Gesicht an den Wangen etwas breiter und runder, Brauen stärker geformt, Eindruck etwas stärker geschminkt; Haare, Augen und Körperbau praktisch gleich, Leberfleck fehlt wie bisher. Die Hautfarbe ist im Prompt ohnehin ausdrücklich festgelegt („warm tan skin“); die Herkunftsangabe verschiebt daher nur die Assoziationen des Modells, keine Merkmale im Einzelnen. Für gezielte Änderungen wirken einzelne Merkmale (Gesichtsform, Hautton, Haare) verlässlicher als die Herkunft. **Eigentümer wählt Mexiko (2026-11-07):** Die Avatar-Beschreibung beginnt ab jetzt mit „a 21-year-old adult Mexican woman with mature adult facial features, of Mexican descent, …“; alles Übrige unverändert, Proportionen werden neu festgelegt. Fünf Proportions-Entwürfe (Z-Image-Turbo, Seed 101, je 0,0013 $): 1 kurvig (wie B), 2 klein und zierlich (155 cm), 3 sportlich-kurvig (165 cm), 4 Birnenform (160 cm), 5 weich und vollschlank (163 cm). Ergebnis: 2 deutlich schlanker mit kleiner Oberweite; 3 mit flachem Bauch und kräftigen Oberschenkeln, aber das Oberteil wurde zum bauchfreien Top (Kleidung folgt dem Wort „flat toned stomach“); 5 sichtbar voller mit rundem Gesicht; **1 und 4 fast gleich** – die Birnenform hebt sich bei diesem Seed kaum ab. Körpergrößen sind ohne Bezugsgröße im Bild nicht unterscheidbar (jede Figur füllt den Rahmen).
 
+**Neuer Testavatar (Eigentümer wählt Entwurf 3, 2026-11-07).** Das bauchfreie Top ließ sich mit „full-length … covers her waist“ und „hip-length … no bare midriff“ nicht verhindern (Z-Image-Turbo kennt keinen Negativ-Prompt; „athletic“ und „flat toned stomach“ ziehen Sportkleidung nach sich). Gelöst durch „toned core“ statt „flat toned stomach“ und einen Bodysuit statt eines Oberteils. Beschreibung ab jetzt (Z-Image-Turbo, Seed 101, Referenzbild `avatar_mx_ref3.png` im Scratchpad):
+
+```text
+a 21-year-old adult Mexican woman with mature adult facial features, of Mexican descent, warm tan skin,
+dark brown wavy hair falling just past her shoulders, dark brown almond-shaped eyes, full natural eyebrows,
+a small distinct dark mole on her left cheek, athletic curvy build, about 165 cm tall, toned shoulders and arms,
+toned core, defined waist, strong muscular thighs, round firm buttocks, medium bust, wearing a form-fitting
+black long-sleeve bodysuit that covers her whole torso from neck to hips without any gap, under tight black
+leggings that show her figure, barefoot
+```
+
+Die LoRA-Tests oben liefen mit dem bisherigen (kolumbianischen, kurvigen) Avatar; Gewichte und Prompt-Hinweise gelten weiter, die Ähnlichkeit wäre mit dem neuen Avatar neu zu prüfen.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
