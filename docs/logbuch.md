@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] V.54 angelegt: weitere LoRAs später
+
+- Eigentümer fragte, warum der S4-Schlüssel nicht als Netzwerk-Secret geht. Antwort: S3/S4 signiert jede Anfrage mit dem geheimen Schlüssel (wechselnde Signatur), ein fester Kopfzeilen-Schlüssel vom Proxy reicht nicht – der Schlüssel müsste im Container liegen (Umgebungsvariable) oder der Mac erzeugt eine vorab signierte Upload-Adresse.
+- Eigentümer: „wir lassen das Thema vorerst und greifen später weitere LoRAs auf“ → V.54, Landeplatz 10.11. Die umgewandelte Shibari-Datei lag nur im Scratchpad dieser Session und geht mit ihr verloren; das Umwandlungsverfahren steht im Logbuch-Eintrag „Shibari umgewandelt“.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Shibari umgewandelt, Upload zu Runware blockiert
 
 - Eigentümer: „wandle Shibari um und lade sie neu hoch“, Ablage „Kurzzeit-Dateihoster“. Runware nimmt Modelle nur über eine Download-Adresse an (auch die CLI, `runware model upload --download-url`).
