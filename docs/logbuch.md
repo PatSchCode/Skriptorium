@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] 10.8: getrennte Prüfung ohne Befund hoch oder mittel
+
+- Getrennte Instanz (Unteragent auf Sonnet, nur Diff `c8c2ea6..HEAD`, Bedrohungsmodell und Regeln; kein Gesprächsverlauf, kein Netz zu den Anbietern), 2026-11-07: keine Befunde hoch oder mittel, keine Anforderung von ASVS 5.0.0 L1 / Auth L2 verletzt; 102 Tests grün nachgeprüft.
+- Niedrig, optional: (1) keine Größengrenze der Runware-Antwort vor dem Dekodieren (nur ein fehlerhafter Anbieter könnte Speicher binden; bei OpenRouter vermutlich ebenso); (2) eine von Hand beschädigte `system/runware-modelle.md` lässt `GET /api/images/models` mit 422 scheitern. Hinweise: keine Mengenbegrenzung je Sitzung (über L1 hinaus; Guthaben begrenzt), 150 s Lesezeit ohne Befund.
+- Geprüft ohne Befund: Schlüssel nicht in Antworten, Logs, `repr` oder Fehlerketten; kein Aufruf von `accountManagement`; Kennungen und Civitai-Links nur nach festem Muster, kein Abruf fremder Adressen; Bilder durch `inspect_image`; `checkContent` fest im Code; Sitzungs- und Origin-Pflicht auf den neuen Routen; keine HTML-Darstellung in der Oberfläche.
+- Nach „Schutzbedarf ist Obergrenze“ dem Eigentümer als optional vorgelegt, nicht still umgesetzt.
+
 ### 2026-11-07 – [BEOBACHTUNG] 10.8: Bau fertig, Probe über den eigenen Server-Weg
 
 - Server (`24d955e`): Adapter `ai_gateway/runware.py` (Bild als base64, `includeCost`, `checkContent: false`, LoRAs, Modellsuche), Liste `system/runware-modelle.md` (`api/runware_models.py`), Zuordnung am Kennungsformat in `image_routes.py`, Routen `POST`/`PUT /api/images/runware` (89 Routen). Tests: 40 Adapter, 37 Routen/Liste; Python-Abdeckung 99,88 %, `runware.py`, `runware_models.py`, `image_routes.py` je 100 %.
