@@ -1598,7 +1598,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Betroffene Module:** keine (Konto bei Runware)
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Logbuch-Eintrag, Recherche
-- **Notizen:** Angelegt 2026-11-07 in 10.8. Stand: fünf nutzbare eigene LoRAs (Plastic Zip-Cuffs, Megapack, Rope Bondage, Metal Bondage, Tape Bondage). Nachtrag 2026-11-07: Danach zusätzlich geprüft und brauchbar: Large Ball Gag (Z-Image-Turbo), Armbinder (Z-Image-Turbo und Krea 2), German Handcuffs (Krea 2, `skriptorium:2861561@3232520`). Alle LoRAs des Erstellers „sarahpeterson“ sind auf Wunsch des Eigentümers aussortiert (Qualität, Überzeichnung) und werden nicht aufgenommen; ihre Uploads liegen ungenutzt im Konto (Löschen siehe oben).
+- **Notizen:** Angelegt 2026-11-07 in 10.8. Stand: fünf nutzbare eigene LoRAs (Plastic Zip-Cuffs, Megapack, Rope Bondage, Metal Bondage, Tape Bondage). Nachtrag 2026-11-07: Danach zusätzlich geprüft und brauchbar: Large Ball Gag (Z-Image-Turbo), Armbinder (Z-Image-Turbo und Krea 2), German Handcuffs (Krea 2, `skriptorium:2861561@3232520`). Armbinder auf Krea 2 mit dem Testavatar nur bei Gewicht 1,0, „single sleeve“, festgehaltener Kleidung und passendem Seed (404 angenommen); Armbinder-Flux auf Z-Image-Turbo verliert bei 0,6 die Figur. Alle LoRAs des Erstellers „sarahpeterson“ sind auf Wunsch des Eigentümers aussortiert (Qualität, Überzeichnung) und werden nicht aufgenommen; ihre Uploads liegen ungenutzt im Konto (Löschen siehe oben).
 
 #### V.53: Fester Startwert (Seed) beim Bilderzeugen
 

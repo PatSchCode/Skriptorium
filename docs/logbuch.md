@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea mit Seed 404 angenommen
+
+- Eigentümer nimmt Seed 404 an. Rezept in `docs/research/bildanbieter.md`, Stand in V.54 nachgetragen.
+
 ### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea, sechs Seeds: Form und Kleidung stabil, Sitz schwankt
 
 - Form, Kleidung und Gesicht in allen sechs stabil; Sitz bei allen leicht links der Mitte, am besten Seed 404. Stützt den Wunsch V.53 (fester Seed). Details in `docs/research/bildanbieter.md`. Skript `szene.py` nimmt den Seed jetzt aus `SEED`.
