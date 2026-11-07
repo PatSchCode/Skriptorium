@@ -202,6 +202,8 @@ Erste Entwürfe (Studio, Seeds 101 und 404): **Z-Image (Grundmodell)** (CFG 3, N
 
 Zweite Runde (Eigentümer: beide nachschärfen; Seeds 101 und 404; Shorts als eng anliegende Radlerhose): **Z-Image** mit „defined cheekbones and jawline … fit curvy … toned“ und Negativ „chubby, round face“ (je 0,0096 $) – jetzt schlank-athletisch mit flachem Bauch, aber kaum noch kurvig; Gesicht kantiger, Mitte zwanzig, sehr viele Sommersprossen. **Krea 2 Turbo** mit „young adult … smooth fresh skin and a soft youthful face … pronounced curvy“ (je 0,0037 $) – passt am besten: Mitte zwanzig, deutlich kurviger, Haar lang bis zum Rücken, feine Sommersprossen, grüne Augen. **Krea 2 Turbo mit Mystic XXX 0,6** (0,0037–0,005 $) – noch kurviger, aber Gesicht runder und deutlich jünger wirkend; für diese Figur nicht verwenden.
 
+Dritte Runde (Eigentümer: Gesicht etwas runder und hübscher; nur Krea 2 Turbo, Seeds 101, 404, 505, 606; je 0,0037 $): Zusatz „a pretty soft oval face with gently rounded cheeks, delicate features and full lips, clearly a grown woman in her mid twenties“. Gesicht weicher und ovaler, weiter klar erwachsen (Mitte zwanzig); **Nebenwirkung: Figur deutlich schlanker, Kurven fast verschwunden** – die längere Gesichtsbeschreibung verdrängt die Körperbeschreibung. Am rundesten 505 (Haar bis zur Taille, Figur am ehesten kurvig).
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
