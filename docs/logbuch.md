@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Reihe „Sarah Petersons“ auf Z-Image-Turbo: nur der Beißknebel lohnt
+
+- Auf Wunsch des Eigentümers vier Teile der Reihe (Shibari, Handschellen, Hogtie, Beißknebel) privat hochgeladen und je ohne/mit LoRA verglichen, 8 Bilder, 0,014 $. Ergebnis in `docs/research/bildanbieter.md`: Z-Image-Turbo zeigt Shibari über Kleidung und Hogtie schon ohne LoRA gut; Handschellen landen in beiden Fassungen vorn; Hogtie mit LoRA schlechter (Stab statt Seil); nur der Beißknebel profitiert deutlich. Nebenbefund: Das frühere Kinbaku-Problem auf Z-Image lag wohl am Motiv mit zwei Figuren, nicht an Seil allgemein (Deutung).
+
 ### 2026-11-07 – [BEOBACHTUNG] Z-Image-Turbo mit drei LoRAs: Ball Gag hilft, Hands wenig, UltraReal schadet
 
 - Auf Wunsch des Eigentümers drei LoRAs privat hochgeladen (Hands, Large Ball Gag, Lenovo UltraReal; `z_image_turbo`), alle laden fehlerfrei. Je ein Vergleich ohne/mit LoRA, Seed 777, zusammen 0,0114 $. Details in `docs/research/bildanbieter.md`.
