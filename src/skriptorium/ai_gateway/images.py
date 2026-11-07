@@ -77,9 +77,18 @@ class ImageReference:
 
 
 @dataclass(frozen=True)
+class LoraChoice:
+    """An addition to a base model (LoRA) and how strongly it acts (ADR-115)."""
+
+    model: str
+    weight: float
+
+
+@dataclass(frozen=True)
 class ImageOrder:
     """What the caller asks for: model, prompt, aspect ratio such as ``2:3``, optionally one
-    image as the basis and the resolution and quality the model offers (ADR-109)."""
+    image as the basis and the resolution and quality the model offers (ADR-109), and the
+    additions to the model (LoRAs, only at Runware, ADR-115)."""
 
     model: str
     prompt: str
@@ -87,6 +96,7 @@ class ImageOrder:
     reference: ImageReference | None = None
     resolution: str | None = None
     quality: str | None = None
+    loras: tuple[LoraChoice, ...] = ()
 
 
 @dataclass(frozen=True)
