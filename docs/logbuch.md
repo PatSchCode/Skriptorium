@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Civitai-Bild nachgestellt: SDXL-Grundmodell mit kurzem Prompt
+
+- Erzeugungsdaten über die Civitai-Schnittstelle gelesen und ohne Hires nachgestellt; Vergleich mit Testavatar auf SDXL und Z-Image. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] SDXL-Checkpoints scheiden aus
 
 - RealVisXL, epiCRealism XL, CyberRealistic XL: schwache Prompt-Treue, ein unverlangtes Bild mit nacktem Oberkörper trotz Negativ-Prompt, Gesichter jünger als 21. Problematische Bilder gelöscht, nicht weitergegeben. Details in `docs/research/bildanbieter.md`.
