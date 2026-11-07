@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Alter bei Krea 2 Turbo: 21 behalten, Seed-Wahl wirkt am stärksten
+
+- Eigentümer fragte nach Alter 18 im Prompt; abgeraten (Jugend-Bildsprache, Risiko minderjährig wirkender Figuren). Alter vorn, weiches Licht, glatte Haut: leicht jünger; Seeds 101 und 404 am nächsten an 21. Details in `docs/research/bildanbieter.md`.
+
 ### 2026-11-07 – [BEOBACHTUNG] Joschek's Ball Gags (Krea 2): sicher ab 0,6
 
 - Ohne LoRA kein Knebel; 0,6 glaubwürdig mit erhaltenem Gesicht; 1,5 verzerrt. Details in `docs/research/bildanbieter.md`.
