@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-07 – [BEOBACHTUNG] Handschellen-LoRAs gesucht
+
+- Auf Wunsch des Eigentümers (realistische, tragende Fesselung bevorzugt). Liste in `docs/research/bildanbieter.md`: für Z-Image-Turbo „cuffed behind back“ und „arms behind back“ aus der Reihe Sarah Petersons; für Krea 2 German Handcuffs, Leather Cuffs, Standing Arrest u. a.; „Metal Cuffs (Police Style)“ im kohya-Format (vermutlich nicht ladbar). Nichts hochgeladen.
+
 ### 2026-11-07 – [GELÖST] Bewertung Shibari korrigiert
 
 - Eigentümer meinte den Shibari-Vergleich (Frau im Schneidersitz): Mit LoRA ist die Seilverbindung realistischer. In voller Auflösung bestätigt: ohne LoRA dekoratives, aufgelegtes Muster ohne Spannung; mit „Rope tied shibari“ tragende Seilführung um Oberarme und Rumpf, ins Material eingeschnitten, Beine mehrfach gebunden. Meine Bewertung („kein Gewinn“) hatte das ordentlichere Muster höher gewichtet als die Funktion – falsch; korrigiert. Die Hogtie-Korrektur (Eintrag darunter) entstand aus einem Missverständnis der Rückmeldung, ist aber in voller Auflösung belegt und bleibt.
