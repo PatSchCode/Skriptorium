@@ -220,6 +220,15 @@ Gegenprobe auf **Z-Image (Grundmodell)** (CFG 3, Negativ-Prompt „small breasts
 Nachtest mit betont schmaler Taille („fit curvy … slim narrow waist, a flat toned stomach … slender toned arms“, Negativ zusätzlich „overweight, plus size, wide waist, belly, thick arms, round face“; je 0,0096–0,0124 $): **Seed 505 etwas straffer** (Taille schmaler, Bikini-Bild am nächsten an „kurvig mit großer, runder, fester Brust“), **Seed 101 unverändert füllig**. Der Seed bestimmt die Grundfigur stärker als Prompt und Negativ-Prompt.
 **Krea 2 Raw** (Vermutung des Eigentümers: die Checkpoints sind das Problem; Raw ist das nicht destillierte Grundmodell, auf dem Joschek trainiert): Runware nimmt `negativePrompt`, `CFGScale`, `steps` und `scheduler` an. Zweiter Avatar, Seed 505 (zusammen 0,078 $): **Mit Negativ-Prompt entstehen in jeder Einstellung Farbflecken und Bildfehler** (20 Schritte/CFG 2,5, 28/3,5, auch ein kurzer Negativ-Prompt) – Ursache des misslungenen ersten Raw-Tests war also der Negativ-Prompt, nicht Schritte oder CFG. **Ohne Negativ-Prompt sauber**, aber Figur schlank, Oberweite mittel, Gesicht älter (Anfang dreißig) – Körperwörter wirken nicht besser als bei Turbo, bei rund dreifachem Preis (0,0115–0,016 $). Folge: Krea 2 Raw löst das Problem nicht.
 
+**Community-Checkpoints (Suche auf Civitai, 2026-11-07, nach Downloads):**
+
+- Auf Krea 2: Moody Krea 2 Mix (catlover1937) `2731187@3427699` (124.129), Muse by Stable Yogi `2741166@3425119` (90.482), Realism by Stable Yogi `2786499@3329215` (49.613), Krea2-realism (RudySen) `2728365@3405129` (41.786), GonzaLomo Krea 2 (GBRX) `2761943@3245099` (38.747), RedCraft Krea2 Edition `958009@3086841`; stark auf Nacktheit ausgerichtet: FinePorn, LUSTIFY v10, PornMaster-Mix.
+- Auf Z-Image-Turbo: Zenith (6tZ) `2237711@3319176` (80.240), CyberRealistic Z-Image Turbo `2218365@3411348` (45.689), unStable Revolution `2193942@2852808`, Moody Pro/Real Mix.
+- Auf Z-Image-Base: Moody Wild Mix `2384856@2939920`, Juggernaut Z (bei Runware vorhanden).
+- Chroma: Chroma v1.0-HD (Lodestone) `1330309@2164239`, UnCanny (Photorealism Chroma) `2086389@2517681`, GonzaLomo Chroma `2182526@2627397`.
+
+**Keines davon ist bei Runware vorhanden**; ein direkter Aufruf mit `civitai:…`-Kennung scheitert mit `invalidModel`. Nutzbar nur über einen privaten Upload als Checkpoint (`modelUpload`, Kategorie checkpoint). Dateigrößen: Krea-2-Feinabstimmungen 12–13 GB (fp8/int8), bf16 bis 24 GB; Zenith 5,7 GB (fp8) bzw. 11,5 GB (bf16); UnCanny 8,3 GB (fp8). Ob Runware Speicher für eigene Checkpoints berechnet und welche Formate (fp8, int8, gguf) es annimmt, ist offen. Vorteil der Krea-2-Feinabstimmungen: gleiche Architektur, die Joschek-LoRAs sollten dort laufen.
+
 ## Modellsuche mit Schlüssel (2026-11-07, Cloud-Session)
 
 Nur lesend: `modelSearch` (kostenlos), `accountManagement`/`getDetails` (nur Guthaben und Verbrauch ausgewertet; die Antwort listet auch die Schlüssel des Kontos – nie ausgeben, im Adapter nicht aufrufen), öffentliche Modell-Schemata `https://runware.ai/docs/models/<id>/schema.json` (Preise in `info["x-pricing"]`). Kein Bild erzeugt.
