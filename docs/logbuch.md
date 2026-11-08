@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 11.5 gebaut und gemergt, 11.17 angelegt
+
+- **Dauer:** 2026-11-08, ca. 21:12–22:05 UTC (Cloud-Session; Branches `feat/11.5-figuren-assistent`, `docs/11.5-sessionende`).
+- **Bearbeitet:** 11.5 – Probe der Textmodelle (0 Sperren in 18 Anfragen), Vorlage mit Mockup, zwei Runden Auswahlfragen, ADR-123, Bau in Server und Oberfläche, eingebaute Anfrage echt nachgeprüft; PR #232, CI vier Jobs grün (Vite ohne Bündelgrößen-Warnung), auf „Ja, und nach grüner CI mergen“ des Eigentümers gemergt → `f322c4c`. Dazu 11.17 aus der Nachricht der Session zu D.28 (nach Rückfrage).
+- **Stand:** `main` `f322c4c` plus dieser Abschluss (Pull Request folgt). Server unverändert `3c162fa` – 11.5 ist nicht eingespielt. Phase 11 bei 4 von 17.
+- **Offen:** Pull Request zu diesem Abschluss mergen. 11.5: Einspielen vom Mac (ADR-039), Probe des Eigentümers am Server (Assistent an einer echten Figur, 4 Entwürfe, Hauptbild), dann `[ERLEDIGT]`. 11.17 Vorlage. D.28 Nachweis auf dem Mac; D.11 Frist überschritten.
+- **Nächster Schritt:** 11.5 einspielen und abnehmen (Mac-Session), danach 11.17, dann 11.6. Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (4 von 17, „In Arbeit“ 11.5, „Als Nächstes“ 11.17 und 11.6, Blocker 0); CHANGELOG mit 11.5 unter „Hinzugefügt“. Drift: ADR-123 → 11.5 vorhanden; Reifegrade unverändert (ADR-123 ohne Wirkung); Modul-Liste unverändert; FR-035/FR-029 (11.5), FR-035 (11.17) vorhanden; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-114 bis ADR-123); Phase 11 17 Schritte (Schwelle über 32). Größen: `docs/project-context.md` 351 Zeilen; Logbuch rund 290 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** durchgehend Opus 5.5 (Entscheidungs-Klasse, Sitzungsabfrage); 11.5 verlangt sie, 0 Schritte oberhalb der Empfehlung. Logbuch, README und Fahrplan (Routine) nicht abgegeben – kleine Teilarbeiten mit geladenem Kontext, Abgabe ruht bis D.22.
+- **Kontextgröße:** 429.020 Token (Sitzungsabfrage nach dem Merge; zu Beginn meldete sie 0) – über der Grenze 200.000, aber innerhalb des laufenden Schritts 11.5; kein neuer Schritt begonnen. Nächste Session neu beginnen.
+
 ### 2026-11-08 – [BEOBACHTUNG] Nachricht aus der Session zu D.28: Schritt 11.17 angelegt
 
 - Nachricht der Vorsession (abgeschickt 21:12 UTC, hier erst nach dem Bau von 11.5 angekommen): Krea 2 Turbo/Raw und die geprüften LoRAs fehlen in der Runware-Liste der App; der Eigentümer hatte dort „Eigener Schritt vor 11.6“ gewählt, ohne die sarahpeterson-LoRAs. Beim Eigentümer nachgefragt, bevor der Fahrplan geändert wurde: „Ja, in diesen PR“ → 11.17 angelegt, Abhängigkeit von 11.6; Phase 11 jetzt 17 Schritte (Schwelle über 32). Befund im Code: Die Startliste in `api/runware_models.py` greift nur bei leerer Liste – Eintragen über die Einstellungen genügt vermutlich ohne Code.
