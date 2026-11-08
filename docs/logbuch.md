@@ -29,6 +29,21 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] D.28 umgesetzt und gemergt, Nachweis auf dem Mac offen
+
+- **Dauer:** 2026-11-08, ca. 20:42–21:10 UTC (Cloud-Session, Branch `scp/upbeat-lamport-720j8m`).
+- **Bearbeitet:** D.28 – Stopp auf der Routine-Klasse, Modellwechsel, Vorlage mit drei erprobten Optionen, Freigabe A (ADR-122), Umsetzung, PR #230 (CI vier Jobs grün, Protokoll des Pre-Commit-Jobs ohne Warnung), auf Anweisung des Eigentümers („Merge den PR.“) gemergt → `acf11de`. Kein Einspielen nötig (nur Entwicklungswerkzeug).
+- **Stand:** `main` `acf11de` plus dieser Abschluss (Pull Request folgt). Server unverändert `3c162fa`. Phase 11 bei 4 von 16.
+- **Offen:** Pull Request zu diesem Abschluss mergen. D.28 bleibt 🟠, bis der erste Commit in einer Mac-Session ohne Behelf durchläuft. D.11 Frist überschritten.
+- **Nächster Schritt:** 11.5 Figuren-Assistent für das Aussehen (Vorlage mit Grundsatzfrage, kurze Probe der Textmodelle; Entscheidungs-Klasse). Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan ohne Drift (D.28 nicht nutzerrelevant, Phase 11 4 von 16, „Als Nächstes“ 11.5–11.6, Blocker 0); CHANGELOG nicht berührt. Drift: ADR-122 → D.28 vorhanden; Reifegrade unverändert (ADR-122 ohne Wirkung); Modul-Liste unverändert; keine Anforderung berührt; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-113 bis ADR-122); Phase 11 unverändert 16 geplante Schritte. Größen: `docs/project-context.md` 351 Zeilen; Logbuch 247 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** Beginn auf Sonnet 5.5 (Routine) bis zum Stopp; ab dem Wechsel Opus 5.5 (Entscheidungs-Klasse). Oberhalb der Empfehlung: 1 Schritt (D.28, empfohlen Routine; die Vorlage verlangte die Entscheidungs-Klasse, die Umsetzung danach lief auf ihr weiter). Abgegeben: nichts – Abgabe an die Routine-Klasse ausgesetzt (D.22).
+- **Kontextgröße:** 247.812 Token nach dem Merge (Sitzungsabfrage) – über der Grenze 200.000; deshalb kein neuer Schritt, Abschluss nach `CLAUDE.md` Abschnitt 12. Nächste Session neu beginnen.
+
+### 2026-11-08 – [BEOBACHTUNG] PR #230 gemergt
+
+- CI zu `775e428`: vier Jobs grün nach rund 2,5 Minuten; mergebar ohne Konflikt. Eigentümer: „Merge den PR.“ → Merge-Commit `acf11de` (kein Squash, Projektkontext Abschnitt 10). Beobachtung des PR und Sicherheits-Check-in danach beendet.
+
 ### 2026-11-08 – [GELÖST] D.28 Pre-Commit-Hook markdownlint ohne Behelf
 
 - **Reproduziert:** Hook `markdownlint-cli2` allein mit frischem pre-commit-Cache (`PRE_COMMIT_HOME` im Scratchpad), ohne Behelf: `ValueError … '0-alpha'` in nodeenv 1.11.0 wie am 2026-11-06. Ursache bestätigt im Quelltext von pre-commit 4.6.2: `node.get_default_version` → `lang_base.exe_exists` verwirft `node`/`npm` unter Home, ohne `language_version` ruft pre-commit `nodeenv --prebuilt` ohne `-n` auf.
