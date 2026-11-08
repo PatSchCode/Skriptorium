@@ -29,12 +29,19 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 10.9 gebaut (Unteragent), nachgeprüft
+
+- Bau durch einen frischen Unteragenten (Opus) nach ADR-116; drei Commits `cc09b88` (manuscript/api), `316bf34` (ui), `89861cb` (Datenmodell in `docs/architecture.md` Abschnitt 7, FR-027). Kennung `JJJJMMTT-HHMMSS` (Zusatz `-2` … bei gleicher Sekunde), reserviert bei Streambeginn; geschrieben im selben `finally` wie der Verbrauch, Speicherfehler nur als Art im Log, Stream unberührt. Routen `GET …/stories/{s}/requests` und `…/requests/{id}` (Routen 91); Feld `request` im `start`-Ereignis und im Verlauf (englische JSON-Namen wie überall; Dateikopf deutsch).
+- Selbst nachgeprüft: ruff, mypy `--strict`, bandit grün; pytest 1.293 bestanden, 99,90 %; eslint, prettier, tsc grün; vitest 604 bestanden, 98,83 / 95,3 / 98,39 / 98,96 %. End-to-End laut Unteragent 17 grün (Chromium-Pfad per `PLAYWRIGHT_CHROMIUM_EXECUTABLE`); kein neuer End-to-End-Test, weil die Suite den Schreib-Stream im Browser ersetzt.
+- Bekannte Grenzen: Nachrichten im Dateitext sind durch Kommentarzeilen `<!-- nachricht: … -->` getrennt – steht genau so eine Zeile allein im Text des Autors, wird die Nachricht beim Lesen falsch geteilt (sehr unwahrscheinlich). „Verworfen“ zeigt auch eine Anfrage, über die noch nicht entschieden ist. Anfrage-Dateien liegen wie der Verlauf im Suchindex; die `@`-Suche filtert nach Pfad.
+- Mini-Reibung: Stop-Hook verlangte zweimal Commit, während der Unteragent im selben Arbeitsverzeichnis baute – zurückgestellt, damit der Pre-Commit-Hook seine offenen Änderungen nicht wegstasht.
+
 ### 2026-11-08 – [ADR-ANGELEGT] ADR-116: Schreib-Anfragen im Wortlaut festhalten (10.9)
 
 - Vorlage mit Mockup zu 10.9 gestellt (Kategorie 4), vier Auswahlfragen beantwortet: alle Schreib-Anfragen auch verworfene (Empfehlung), **letzte 50 je Geschichte** (Empfehlung war 20), eigener Reiter „Anfragen“ (Empfehlung), Antwort der KI mitspeichern (Empfehlung). Ablage `stories/<geschichte>/anfragen/<zeit>.md`, Kennung im `start`-Ereignis, Verweis aus dem Verlauf. Nicht reaktiv; Reaktiv-Quote 0/10 (ADR-107 bis ADR-116).
 - 10.9 auf `[IN ARBEIT]`; 10.8 bleibt daneben `[IN ARBEIT]`, wartet nur auf das Einspielen vom Mac (kein Arbeitsanteil in dieser Session).
 - Mini-Reibung: Eigentümer meldete „Gemergt“ für PR #220; GitHub zeigte den PR noch offen (`main` = `f6fee9e`). Nicht selbst gemergt; Branch `feat/10.9-anfrage-festhalten` auf den Stand von #220 gesetzt, damit kein Konflikt entsteht.
-- Kontextgröße nach der Vorlage: 218.820 Token (Sitzungsabfrage) – über der Grenze 200.000.
+- Kontextgröße nach der Vorlage: 218.820 Token (Sitzungsabfrage) – über der Grenze 200.000. Vorschlag „neue Session für den Bau“; Eigentümer: „Weiter hier“ – Abweichung nach `CLAUDE.md` Abschnitt 0 („Sessiongröße“, Ausnahme). Bau läuft über einen frischen Unteragenten derselben Klasse (kleiner Kontext je Aufruf), Ergebnis geprüft vor dem Commit.
 
 ### 2026-11-08 – [BEOBACHTUNG] V.57 und V.58 angelegt (Landeplatz 10.11)
 
