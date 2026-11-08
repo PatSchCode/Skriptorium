@@ -29,6 +29,23 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 11.5: Probe der Textmodelle für den Figuren-Assistenten
+
+- `spikes/figuren-assistent-11.5/` (Skript, 18 Antworten, Bericht): drei Figuren (Testavatar 2, eine Leibeigene mit Eisenhalsband und Kettennarben im Eintrag, ein Schmied mit offenem Merkmal) × grok-4.6, grok-4.7, qwen3.8-max × 2 Läufe; Auftrag: deutsche Zeilen `- **Merkmal:** …` plus englische Bildbeschreibung nach dem Muster der Bildtests (Alter vorn, ohne Kleidung, Pose, Fesseln).
+- Ergebnis: 0 Sperren, Form 18/18, Alter vorn 18/18, nichts erfunden (offenes Merkmal 6/6 als „–“), Halsband 6/6 aus dem Bild-Prompt gelassen; 41–56 Wörter; 9,6–29,7 s; 0,006–0,014 $ je Anfrage, zusammen rund 0,15 $. grok-4.6 am schnellsten und günstigsten.
+- Befund für die Vorlage: Den deutschen Teil gibt jedes Modell wörtlich aus den Antworten wieder – das Programm kann ihn selbst bauen; das Modell braucht es nur für die englische Bildbeschreibung. Größe teils als nackte Zahl („172 cm“).
+- Grenze: Einträge mit stärker sexualisiertem oder fesselungsbezogenem Inhalt nicht geprüft; Sperren bleiben möglich (V.58 (7)).
+- Mockup `mockup-11.5.html` (Vorbelegung vorher/nachher, Fragen, Ergebnis mit 4 Entwürfen, Eintrag danach), auf 390 und 1280 px ohne Querscrollen geprüft.
+
+### 2026-11-08 21:12 – [SESSIONSTART] 11.5 Figuren-Assistent für das Aussehen
+
+- **Modell:** eingestellt und bedient `claude-opus-5-5` (Sitzungsabfrage `get_session`: `configured_model`, `session_context.model`, `last_served_model`) → Entscheidungs-Klasse; 11.5 verlangt sie (Vorlage mit Grundsatzfrage, Auslöser 1), kein STOPP nötig.
+- **Wiedereinstieg:** `main` `43b9e74` (PR #231 gemergt), laut Auftrag keine offenen Pull Requests. Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker. Branch `feat/11.5-figuren-assistent` (Checkout war ohne Branch).
+- **Auftrag:** 11.5 nach Fahrplan: Vorlage mit Grundsatzfrage und kurzer Probe der Textmodelle; Rückfragen als Auswahlfragen.
+- **Kontextgröße zu Beginn:** Sitzungsabfrage meldet 0 von 1.000.000 Token (Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster `allowed`, ohne Prozentangabe; Wochenstand nicht gemeldet.
+- **Umgebung:** `OPENROUTER_API_KEY` und `RUNWARE_API_KEY` in der Cloud-Session gesetzt (nur Vorhandensein geprüft).
+
 ### 2026-11-08 – [SESSIONENDE] D.28 umgesetzt und gemergt, Nachweis auf dem Mac offen
 
 - **Dauer:** 2026-11-08, ca. 20:42–21:10 UTC (Cloud-Session, Branch `scp/upbeat-lamport-720j8m`).

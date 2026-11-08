@@ -1,0 +1,9 @@
+{
+  "modell": "qwen/qwen3.8-max-0902",
+  "figur": "liv",
+  "lauf": 2,
+  "finish_reason": "stop",
+  "kosten_usd": 0.00603306,
+  "token_aus": 827,
+  "sekunden": 15.0
+}

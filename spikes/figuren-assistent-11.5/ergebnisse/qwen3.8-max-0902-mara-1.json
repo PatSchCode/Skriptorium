@@ -1,0 +1,9 @@
+{
+  "modell": "qwen/qwen3.8-max-0902",
+  "figur": "mara",
+  "lauf": 1,
+  "finish_reason": "stop",
+  "kosten_usd": 0.00984852,
+  "token_aus": 1457,
+  "sekunden": 26.1
+}
