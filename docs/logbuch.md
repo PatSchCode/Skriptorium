@@ -29,6 +29,40 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 10.8 am Server erprobt und erledigt; Befund: Figuren-Beschreibung reicht nicht zum Prompten
+
+- Schlüssel vom Eigentümer eingetragen (Prüfung nur auf Vorhandensein: beide Schlüsselnamen in der `.env`, Wert 32 Zeichen, im Container gesetzt, `healthy`). Eigentümer: Die Anbindung funktioniert → 10.8 `[ERLEDIGT]` (Akzeptanz: Probe mit echtem Bild, Prüfung durch getrennte Instanz, Eigentümer bestätigt).
+- Befund des Eigentümers: Die Kanon-Beschreibung von Figuren ist für vernünftiges Prompten nicht ausreichend. Das ist die Lücke von V.58 (Figuren-Assistent für das Aussehen, Landeplatz 10.11) und passt zu V.57 („Figur“ als Lücke im Rezept); kein neuer Schritt, V.58-Notiz ergänzt und für die Planung in 10.11 höher gewichtet. 10.9 ist noch nicht vom Eigentümer erprobt.
+- Präzisierung auf Rückfrage: Gemeint sind nicht fehlende Körper- oder Gesichtsangaben (Eigentümer: „kommt im Wesentlichen nicht hin“), sondern die **Vorbelegung** des Bild-Prompts (Auswahl „Die Vorbelegung ist unbrauchbar“). Code-Stand geprüft: Figuren bekommen den Abschnitt „Aussehen“ unverändert als Prompt (ADR-084). Was daran stört, wurde nicht weiter benannt; bei V.58 vermerkt, Klärung bei der Planung 10.11 (Bezug V.52, V.56 (5), V.57).
+- Probe von 10.9 am Server vom Eigentümer bestätigt („Probe klappt“) → 10.9 `[ERLEDIGT]`; Phase 10 steht bei 10 von 11 (offen: 10.11). Fahrplan, README nachgezogen; Pull Request für die gebündelte Doku folgt.
+
+### 2026-11-08 – [SESSIONENDE] 10.8 und 10.9 eingespielt, Schlüssel und Proben stehen aus
+
+- **Dauer:** 2026-11-08, ca. 14:55–15:15 UTC (lokale Mac-Session).
+- **Bearbeitet:** Stand übernommen (`main` `25c9bd6`); 10.8 und 10.9 auf den VPS eingespielt (Revision `25c9bd6`, `healthy`, Anmeldeseite 200); Fahrplan und README nachgezogen.
+- **Stand:** Server `25c9bd6`; Rückweg `skriptorium:vorher` / `app.vorher` (`de64667`) vorhanden. `.env` auf dem VPS enthält nur `OPENROUTER_API_KEY`. Doku-Zweig `docs/10.8-einspielen-vorbereiten` nur lokal, nicht gepusht (Proben des Eigentümers offen).
+- **Offen:** Eigentümer trägt `RUNWARE_API_KEY` ein (Antwort auf Rückfrage: „später“) und bestätigt die Proben; danach 10.8 und 10.9 `[ERLEDIGT]`, Pull Request für die gebündelte Doku. D.28; D.11 Frist überschritten; Branch-Aufräumen (viele gemergte Fernzweige); überholter lokaler Zweig `feat/10.8-zweiter-bildanbieter` auf dem Mac.
+- **Nächster Schritt:** Schlüssel eintragen → Proben → 10.8/10.9 abschließen → 10.11 Planung. Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan abgeglichen (Als Nächstes, Einspielen vermerkt); Blocker 0; Drift: ADR-116 → 10.9 vorhanden, Reifegrade unverändert, Modul-Liste unverändert, Reaktiv-Quote 0/10, Phase 10 bei 11 Schritten. Größen: Logbuch über dem Trigger 800 (November-Scheibe, Verdichtung beim Phasen-Wechsel nach 10.11). Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** aktiv Sonnet 5.5 (Routine-Klasse; Sitzungsabfrage `get_session`). Einspielen auf der Routine-Klasse unterhalb der Empfehlung (Entscheidung), Entscheidungsanteil lag in ADR-114 bis ADR-116; keine Schritte oberhalb; nichts abgegeben.
+- **Kontextgröße:** 182.232 Token nach der Mindest-Lektüre (Sitzungsabfrage), danach deutlich über 200.000 durch das Einspielen; Sessionende hiermit, nächste Session neu beginnen.
+
+### 2026-11-08 – [BEOBACHTUNG] Code von 10.8 und 10.9 eingespielt (`25c9bd6`), Schlüssel steht aus
+
+- Auftrag des Eigentümers: „10.8 und 10.9 einspielen“. CI auf `main` `25c9bd6` grün. Ablauf nach Runbook Abschnitt 7: Archiv übertragen, Revision geschrieben, `skriptorium:vorher` getaggt (Rückweg bereit, `app.vorher` = `de64667`), Image gebaut, Container neu erstellt. Warten nur per HTTPS (zwölf Abfragen, bis `/api/health` 200 lieferte; vorher 404 vom Proxy, solange der Container nicht `healthy` war), danach genau eine SSH-Prüfung: `REVISION` 25c9bd6, `(healthy)`, Start-Log ohne Fehler.
+- Die Compose-Datei reicht `.env` als Ganzes durch (`env_file: .env`) – für `RUNWARE_API_KEY` ist keine Änderung nötig. `.env` auf dem Server enthält bisher nur `OPENROUTER_API_KEY` (nur Schlüsselnamen geprüft, keine Werte). `RUNWARE_API_KEY` ist auch in der lokalen Mac-Umgebung nicht gesetzt; den Wert trägt der Eigentümer selbst ein (unsichtbare Eingabe, Runbook-Befehl), die KI sieht ihn nie.
+- Bis zum Eintrag des Schlüssels: keine Runware-Gruppe in den Einstellungen (wie vorgesehen, `docs/project-context.md` Abschnitt 5), Bilder über OpenRouter unberührt. 10.9 ist ohne Schlüssel prüfbar.
+- Mini-Reibung: erster lokaler Schlüsselcheck mit `${!v}` scheiterte unter zsh („bad substitution“); mit `printenv` gelöst.
+
+### 2026-11-08 – [SESSIONSTART] Mac-Session: Stand übernehmen, Einspielen 10.8/10.9 vorbereiten
+
+- **Umgebung:** lokale Session auf dem Mac des Eigentümers (SSH zum VPS wäre von hier möglich, ADR-025). Gestartet auf dem überholten lokalen Zweig `feat/10.8-zweiter-bildanbieter`; nach `git fetch` Wechsel auf `main` und Vorspulen auf `25c9bd6` (Merge PR #221, 2026-11-08 15:49 +01:00, durch den Eigentümer). Doku-Zweig `docs/10.8-einspielen-vorbereiten` von dort; nur lokal, nichts gepusht.
+- **Offene Pull Requests / Stand:** PR #221 (10.9) ist gemergt (`state` MERGED, 14:49 UTC); damit sind 10.8 (`96e56bc`) und 10.9 beide in `main`. Auf dem Server weiter `de64667`. Drift: Fahrplan führt 10.9 noch als „wartet auf Bestätigung“ – der Merge durch den Eigentümer gilt als Bestätigung, wird beim nächsten Fahrplan-Update berichtigt (Rückfrage an den Eigentümer gestellt).
+- **Modell:** eingestellt `claude-sonnet-5-5` (Sitzungsabfrage `get_session`, `model`) → Routine-Klasse; Bedient-Modell wird von der Abfrage nicht getrennt gemeldet, kein Widerspruch im Systemkontext. Empfehlung 10.8/10.9-Einspielen: Entscheidung (Secrets, Eskalations-Auslöser 1 für den Schritt, der Entscheidungsanteil ist mit ADR-114/115/116 getan). Kein neuer Eskalations-Auslöser aktiv; Hinweis dazu in der Antwort an den Eigentümer. Plan-Limits: 5-Stunden 11 %, Woche 2 % (Max).
+- **Kontextgröße:** 182.232 Token nach der Mindest-Lektüre (Sitzungsabfrage `get_usage`, Fenster 1.000.000); Grenze 200.000 – kurz davor, die Größe stammt überwiegend aus Pflicht-Dokumenten, Memory und Werkzeug-Definitionen.
+- **Mindest-Lektüre:** `docs/project-context.md` vollständig; Logbuch ab letztem Sessionende (2026-11-08, V.57/V.58, 10.9) – es gibt keine Einträge danach; Fahrplan „Aktueller Stand“, Übersicht, Schritte 10.8–10.11; Architektur 1/2/9; Entscheidungen Teil A (bis ADR-116, Reaktiv-Quote 0/10) und Teil C; aktive Blocker: keine. Anforderungen: Klasse M, nicht Mindest-Lektüre.
+- **Vorhaben:** noch offen – Auftrag des Eigentümers fehlt (nur „neue session“). Naheliegend laut Sessionende: 10.8 und 10.9 vom Mac einspielen (`RUNWARE_API_KEY` in die `.env` auf dem VPS, Probe), nur auf Anweisung (ADR-039).
+
 ### 2026-11-08 – [SESSIONENDE] V.57/V.58 angelegt, 10.9 gebaut, PR #221 grün
 
 - **Dauer:** 2026-11-08, ca. 13:10–14:45 UTC (Cloud-Session).
