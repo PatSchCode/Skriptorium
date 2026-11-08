@@ -15,6 +15,7 @@ the list only after Runware listed it.
 
 import base64
 import logging
+import secrets
 from collections.abc import Container
 from datetime import UTC, datetime
 from typing import Annotated, Final, Literal
@@ -44,7 +45,7 @@ from skriptorium.api.runware_models import (
     identifier,
     is_runware,
 )
-from skriptorium.canon import ImageOrigin
+from skriptorium.canon import ImageOrigin, OriginLora
 from skriptorium.storage import InvalidInput, inspect_image
 
 _log = logging.getLogger("skriptorium.api")
@@ -68,6 +69,8 @@ class ImageModelOut(BaseModel):
     references: int
     resolutions: list[str]
     qualities: list[str]
+    # Whether it takes a start value (ADR-121); Runware models always do.
+    seed: bool = False
 
 
 class RunwareModelOut(BaseModel):
@@ -133,6 +136,9 @@ class ImagePriceOut(BaseModel):
 _Id = Annotated[str, Field(min_length=1, max_length=200)]
 # A level as the catalog names it, e.g. "2K" or "medium" (ADR-109).
 _Level = Annotated[str, Field(min_length=1, max_length=20)]
+# A start value every provider takes (ADR-121); the server draws one in this range itself.
+MAX_SEED: Final = 2_147_483_647
+_Seed = Annotated[int, Field(ge=1, le=MAX_SEED)]
 
 
 class ReferenceIn(BaseModel):
@@ -182,6 +188,8 @@ class GenerateIn(BaseModel):
     quality: _Level | None = None
     # LoRAs of the list for a Runware model (ADR-115).
     loras: Annotated[list[LoraChoiceIn], Field(max_length=5)] = []
+    # A fixed start value (ADR-121); without it the server draws one for models that take it.
+    seed: _Seed | None = None
     # Where the image is meant to go, for the usage statistics (ADR-100): a world for an entry
     # image or a map, a world and a story for a cover.
     world: _Id | None = None
@@ -202,6 +210,26 @@ class GeneratedOut(BaseModel):
     media_type: str
     cost_usd: float | None
     model: str
+    # The start value sent, or ``None`` for a model without one (ADR-121).
+    seed: int | None = None
+    # At Runware the model's addition and the trigger words the server appended (ADR-121).
+    appended: str | None = None
+
+
+class OriginLoraIn(BaseModel):
+    """A LoRA that went along with a taken-over image (ADR-121)."""
+
+    id: _Id
+    name: Annotated[str, Field(max_length=200)]
+    weight: Annotated[float, Field(ge=-2, le=2)]
+
+
+class OriginLoraOut(BaseModel):
+    """A LoRA of a stored origin."""
+
+    id: str
+    name: str
+    weight: float
 
 
 class ImageOriginIn(BaseModel):
@@ -216,6 +244,10 @@ class ImageOriginIn(BaseModel):
     # The levels chosen, if the model offered any (ADR-109).
     resolution: _Level | None = None
     quality: _Level | None = None
+    # Start value, LoRAs and the appended text (ADR-121).
+    seed: _Seed | None = None
+    loras: Annotated[list[OriginLoraIn], Field(max_length=5)] = []
+    appended: Annotated[str | None, Field(max_length=4000)] = None
 
 
 class ImageOriginOut(BaseModel):
@@ -229,6 +261,9 @@ class ImageOriginOut(BaseModel):
     basis: str | None
     resolution: str | None = None
     quality: str | None = None
+    seed: int | None = None
+    loras: list[OriginLoraOut] = []
+    appended: str | None = None
 
 
 def origin_from(given: ImageOriginIn | None) -> ImageOrigin | None:
@@ -245,6 +280,9 @@ def origin_from(given: ImageOriginIn | None) -> ImageOrigin | None:
         given.basis,
         given.resolution,
         given.quality,
+        given.seed,
+        tuple(OriginLora(lora.id, lora.name, lora.weight) for lora in given.loras),
+        given.appended,
     )
 
 
@@ -261,6 +299,9 @@ def origin_out(origin: ImageOrigin | None) -> ImageOriginOut | None:
         basis=origin.basis,
         resolution=origin.resolution,
         quality=origin.quality,
+        seed=origin.seed,
+        loras=[OriginLoraOut(id=x.id, name=x.name, weight=x.weight) for x in origin.loras],
+        appended=origin.appended,
     )
 
 
@@ -297,6 +338,7 @@ async def list_image_models(found: ServicesDep) -> ImageModelList:
                 references=m.references,
                 resolutions=list(m.resolutions),
                 qualities=list(m.qualities),
+                seed=m.seed,
             )
             for m in found.image_catalog.models()
         ],
@@ -405,11 +447,11 @@ async def image_price(
 @router.post("/generate")
 async def generate_image(body: GenerateIn, found: ServicesDep) -> GeneratedOut:
     """Generate one image for the preview; stores nothing (ADR-077, ADR-115)."""
-    provider, order = (
-        _runware_order(body, found)
-        if is_runware(body.model)
-        else await _openrouter_order(body, found)
-    )
+    appended: str | None = None
+    if is_runware(body.model):
+        provider, order, appended = _runware_order(body, found)
+    else:
+        provider, order = await _openrouter_order(body, found)
     record = found.usage.recorder(body.world, body.story)
     try:
         image = await provider.generate(order)
@@ -430,6 +472,8 @@ async def generate_image(body: GenerateIn, found: ServicesDep) -> GeneratedOut:
         media_type=_MEDIA_TYPES[info.kind],
         cost_usd=image.cost_usd,
         model=body.model,
+        seed=order.seed,
+        appended=appended,
     )
 
 
@@ -446,21 +490,34 @@ async def _openrouter_order(body: GenerateIn, found: Services) -> tuple[ImagePro
     _check_levels(found, body.model, body.resolution, body.quality)
     if body.loras:
         raise InvalidInput("Zusätze (LoRAs) gibt es nur bei Modellen von Runware")
+    catalog_model = found.image_catalog.model(body.model)
+    takes_seed = catalog_model is not None and catalog_model.seed
+    if body.seed is not None and not takes_seed:
+        raise InvalidInput("Dieses Bildmodell nimmt keinen Startwert an")
     reference = None
     if body.reference is not None:
         if found.image_catalog.references(body.model) < 1:
             raise InvalidInput("Dieses Bildmodell nimmt kein Ausgangsbild an")
         reference = ImageReference(*_basis(body.reference, found))
     order = ImageOrder(
-        body.model, body.prompt, body.aspect_ratio, reference, body.resolution, body.quality
+        body.model,
+        body.prompt,
+        body.aspect_ratio,
+        reference,
+        body.resolution,
+        body.quality,
+        seed=_seed(body.seed) if takes_seed else None,
     )
     return found.images, order
 
 
-def _runware_order(body: GenerateIn, found: Services) -> tuple[ImageProvider, ImageOrder]:
-    """Provider and order for a base model of the Runware list (ADR-115).
+def _runware_order(
+    body: GenerateIn, found: Services
+) -> tuple[ImageProvider, ImageOrder, str | None]:
+    """Provider, order and the appended text for a base model of the Runware list (ADR-115).
 
-    The model's addition and the trigger words of the chosen LoRAs are appended to the prompt.
+    The model's addition and the trigger words of the chosen LoRAs are appended to the prompt;
+    every Runware model takes a start value (ADR-121).
 
     Raises:
         HTTPException: 503 without a key.
@@ -484,17 +541,23 @@ def _runware_order(body: GenerateIn, found: Services) -> tuple[ImageProvider, Im
         if not fits(lora, model):
             raise InvalidInput(f"{lora.name} passt nicht zu {model.name}")
         chosen.append(lora)
-    prompt = full_prompt(body.prompt, model.addition, *(lora.trigger for lora in chosen))
+    additions = (model.addition, *(lora.trigger for lora in chosen))
     order = ImageOrder(
         model.id,
-        prompt,
+        full_prompt(body.prompt, *additions),
         body.aspect_ratio,
         loras=tuple(
             LoraChoice(lora.id, choice.weight)
             for lora, choice in zip(chosen, body.loras, strict=True)
         ),
+        seed=_seed(body.seed),
     )
-    return found.runware, order
+    return found.runware, order, full_prompt("", *additions) or None
+
+
+def _seed(given: int | None) -> int:
+    """The start value to send: the fixed one, else one drawn here (ADR-121)."""
+    return given if given is not None else secrets.randbelow(MAX_SEED) + 1
 
 
 def _check_levels(found: Services, model: str, resolution: str | None, quality: str | None) -> None:

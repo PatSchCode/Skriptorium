@@ -5,6 +5,7 @@ import {
   type AspectRatio,
   type ImageLevels,
   type ImageReference,
+  type LoraChoice,
   type StoredImageOrigin,
 } from "../api";
 
@@ -29,6 +30,9 @@ export interface GenerateSeed {
   basis?: Basis;
   /** Resolution and quality of the origin (step 10.5, ADR-109). */
   levels?: ImageLevels;
+  /** Start value (fixed) and LoRAs of the origin (step 11.4, ADR-121). */
+  seed?: number | null;
+  loras?: LoraChoice[];
 }
 
 const FORMATS: readonly string[] = ["2:3", "1:1", "3:2"];
@@ -48,6 +52,13 @@ export function seedOf(
       resolution: origin.resolution ?? null,
       quality: origin.quality ?? null,
     },
+    // Only what the origin has (step 11.4, ADR-121).
+    ...(origin.seed == null ? {} : { seed: origin.seed }),
+    ...((origin.loras ?? []).length === 0
+      ? {}
+      : {
+          loras: (origin.loras ?? []).map(({ id, weight }) => ({ id, weight })),
+        }),
   };
 }
 
@@ -113,6 +124,28 @@ export function ImageOriginPanel({
               {origin.resolution}
               {origin.quality == null ? "" : ` · Qualität ${origin.quality}`}
             </dd>
+          </>
+        )}
+        {origin.seed != null && (
+          <>
+            <dt>Startwert</dt>
+            <dd>{origin.seed}</dd>
+          </>
+        )}
+        {(origin.loras ?? []).length > 0 && (
+          <>
+            <dt>LoRAs</dt>
+            <dd>
+              {(origin.loras ?? [])
+                .map((lora) => `${lora.name} · Gewicht ${String(lora.weight)}`)
+                .join(", ")}
+            </dd>
+          </>
+        )}
+        {origin.appended != null && origin.appended !== "" && (
+          <>
+            <dt>Angehängt</dt>
+            <dd>{origin.appended}</dd>
           </>
         )}
         {origin.basis !== null && (

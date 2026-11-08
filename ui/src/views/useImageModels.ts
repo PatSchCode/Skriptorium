@@ -51,6 +51,8 @@ export function useImageModels(
                 id: entry.id,
                 name: entry.name,
                 references: 0,
+                // Every Runware model takes a start value (step 11.4, ADR-121).
+                seed: true,
                 runware: entry,
               })),
             ];

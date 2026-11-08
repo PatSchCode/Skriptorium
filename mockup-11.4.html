@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mockup 11.4</title>
+    <style>
+      :root {
+        --page: #efeae0;
+        --surface: #fffdf8;
+        --text: #1f2328;
+        --muted: #5c5647;
+        --line: #ddd5c6;
+        --accent: #8a6d3b;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--text);
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+      }
+      h1 {
+        font-size: 1.2rem;
+        margin: 16px 16px 4px;
+      }
+      h3.view {
+        margin: 24px 16px 8px;
+        font-size: 1rem;
+      }
+      .legend {
+        margin: 0 16px 10px;
+        font-size: 0.92rem;
+        color: var(--muted);
+        max-width: 1150px;
+      }
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 0 16px 8px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .cols {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .tag {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin: 0 0 6px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      .new-inline {
+        outline: 2px dashed var(--accent);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .field {
+        margin: 8px 0;
+      }
+      .input {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        padding: 8px 10px;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin: 6px 0 0;
+      }
+      .radios {
+        display: inline-flex;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .radios span {
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+      .radios span:last-child {
+        border-right: 0;
+      }
+      .radios .on {
+        background: var(--accent);
+        color: #fff;
+      }
+      .sel {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 3px 8px;
+        background: #fff;
+        font-size: 0.85rem;
+        display: inline-block;
+      }
+      .num {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 3px 8px;
+        background: #fff;
+        font:
+          13px ui-monospace,
+          Menlo,
+          monospace;
+        display: inline-block;
+        min-width: 9ch;
+      }
+      .num.off {
+        color: #aaa;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .ghost {
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 3px 8px;
+        font: inherit;
+        font-size: 0.85rem;
+      }
+      .primary {
+        background: var(--accent);
+        color: #fff;
+        border: 0;
+        border-radius: 6px;
+        padding: 4px 12px;
+        font: inherit;
+        font-size: 0.85rem;
+      }
+      .preview {
+        height: 150px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #7b8fa6, #e7d7b5);
+      }
+      dl {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 2px 10px;
+        margin: 6px 0 0;
+        font-size: 0.85rem;
+      }
+      dt {
+        color: var(--muted);
+      }
+      dd {
+        margin: 0;
+      }
+      summary {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>11.4 Fester Startwert und vollständige Herkunft</h1>
+    <p class="legend">
+      Heute bekommt jedes Bild einen neuen Zufallswert. Ein gutes Bild lässt
+      sich deshalb nicht mit leicht geänderter Beschreibung wiederholen. „Neu
+      erzeugen“ aus der Herkunft eines Runware-Bildes verliert außerdem die
+      LoRAs. Den Startwert nehmen Runware (alle Modelle) und bei OpenRouter 18
+      von 63 Bildmodellen an, z. B. FLUX.2, Seedream, Qwen Image und Krea 2. Bei
+      den übrigen fehlt das Feld. Ob OpenRouter den Wert auch einhält, zeigt
+      erst die Probe. Beispielwerte sind erfunden. Gestrichelt: neu.
+    </p>
+
+    <h3 class="view">1 · Fenster „Bild erzeugen“ vor dem Erzeugen (Frage 1)</h3>
+    <div class="cols">
+      <section>
+        <p class="tag">Vorher</p>
+        <div class="card">
+          <div class="field">
+            Bildbeschreibung (änderbar)
+            <div class="input">
+              Mira Ostwind, schmale Frau Mitte dreißig, salzgraues Haar,
+              Seemannsjacke, am Kai im Nebel
+            </div>
+          </div>
+          <div class="field">
+            <span class="radios"
+              ><span class="on">Hochformat</span><span>Quadrat</span
+              ><span>Quer</span></span
+            >
+          </div>
+          <div class="field">
+            Modell <span class="sel">epiCRealism XL VXIV ▾</span>
+          </div>
+          <div class="field">
+            Zusätze (LoRAs): ☑ Nebelstimmung <span class="num">0.8</span>
+          </div>
+          <p class="note">
+            Abrechnung nach Rechenzeit – die Kosten stehen nach dem Erzeugen da
+          </p>
+          <div class="row">
+            <button class="primary">✨ Erzeugen</button
+            ><button class="ghost">Abbrechen</button>
+          </div>
+        </div>
+      </section>
+      <section>
+        <p class="tag">Nachher – Startwert unter dem Modell</p>
+        <div class="card">
+          <div class="field">
+            Bildbeschreibung (änderbar)
+            <div class="input">
+              Mira Ostwind, schmale Frau Mitte dreißig, salzgraues Haar,
+              Seemannsjacke, am Kai im Nebel
+            </div>
+          </div>
+          <div class="field">
+            <span class="radios"
+              ><span class="on">Hochformat</span><span>Quadrat</span
+              ><span>Quer</span></span
+            >
+          </div>
+          <div class="field">
+            Modell <span class="sel">epiCRealism XL VXIV ▾</span>
+          </div>
+          <div class="field new-inline">
+            Startwert
+            <span class="radios"
+              ><span class="on">zufällig</span><span>fest</span></span
+            >
+            <span class="num off">—</span>
+          </div>
+          <div class="field">
+            Zusätze (LoRAs): ☑ Nebelstimmung <span class="num">0.8</span>
+          </div>
+          <p class="note">
+            Abrechnung nach Rechenzeit – die Kosten stehen nach dem Erzeugen da
+          </p>
+          <div class="row">
+            <button class="primary">✨ Erzeugen</button
+            ><button class="ghost">Abbrechen</button>
+          </div>
+          <p class="note">
+            Bei „fest“ wird das Zahlenfeld aktiv. Bei einem Modell ohne
+            Startwert fehlt die Zeile.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <h3 class="view">2 · Nach dem Erzeugen (Vorschau)</h3>
+    <div class="cols">
+      <section>
+        <p class="tag">Vorher</p>
+        <div class="card">
+          <div class="preview"></div>
+          <p class="note">epiCRealism XL VXIV · Kosten 0,0031 $</p>
+          <div class="row">
+            <button class="primary">Übernehmen</button
+            ><button class="ghost">Neu erzeugen</button
+            ><button class="ghost">Beschreibung ändern</button
+            ><button class="ghost">Verwerfen</button>
+          </div>
+        </div>
+      </section>
+      <section>
+        <p class="tag">Nachher – Startwert sichtbar und behaltbar</p>
+        <div class="card">
+          <div class="preview"></div>
+          <p class="note">
+            epiCRealism XL VXIV · Kosten 0,0031 $ ·
+            <span class="new-inline"
+              >Startwert 1834072215
+              <button class="ghost">Startwert behalten</button></span
+            >
+          </p>
+          <div class="row">
+            <button class="primary">Übernehmen</button
+            ><button class="ghost">Neu erzeugen</button
+            ><button class="ghost">Beschreibung ändern</button
+            ><button class="ghost">Verwerfen</button>
+          </div>
+          <p class="note">
+            „Startwert behalten“ stellt im Formular „fest“ mit dieser Zahl ein.
+            Danach führt „Beschreibung ändern“ → „Erzeugen“ zu demselben Bild
+            mit kleiner Änderung.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <h3 class="view">3 · Herkunft eines übernommenen Bildes (Frage 2)</h3>
+    <div class="cols">
+      <section>
+        <p class="tag">Vorher</p>
+        <div class="card">
+          <details open>
+            <summary>Herkunft</summary>
+            <dl>
+              <dt>Modell</dt>
+              <dd>civitai:277058@1405120</dd>
+              <dt>Datum</dt>
+              <dd>08.11.2026</dd>
+              <dt>Kosten</dt>
+              <dd>0,0031 $</dd>
+              <dt>Beschreibung</dt>
+              <dd>Mira Ostwind, schmale Frau …</dd>
+            </dl>
+          </details>
+          <div class="row"><button class="ghost">Neu erzeugen</button></div>
+          <p class="note">
+            „Neu erzeugen“ übernimmt Modell, Beschreibung und Format – die LoRAs
+            fehlen.
+          </p>
+        </div>
+      </section>
+      <section>
+        <p class="tag">Nachher – vollständig</p>
+        <div class="card">
+          <details open>
+            <summary>Herkunft</summary>
+            <dl>
+              <dt>Modell</dt>
+              <dd>civitai:277058@1405120</dd>
+              <dt>Datum</dt>
+              <dd>08.11.2026</dd>
+              <dt>Kosten</dt>
+              <dd>0,0031 $</dd>
+              <dt class="new-inline">Startwert</dt>
+              <dd class="new-inline">1834072215</dd>
+              <dt class="new-inline">LoRAs</dt>
+              <dd class="new-inline">Nebelstimmung · Gewicht 0.8</dd>
+              <dt class="new-inline">Angehängt</dt>
+              <dd class="new-inline">fog, misty harbour</dd>
+              <dt>Beschreibung</dt>
+              <dd>Mira Ostwind, schmale Frau …</dd>
+            </dl>
+          </details>
+          <div class="row"><button class="ghost">Neu erzeugen</button></div>
+          <p class="note">
+            „Neu erzeugen“ übernimmt jetzt auch die LoRAs mit Gewicht und stellt
+            den Startwert ein. Angehängt wird beim Neu-Erzeugen der Zusatz, der
+            dann in der Liste steht.
+          </p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

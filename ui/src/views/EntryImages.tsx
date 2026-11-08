@@ -113,6 +113,8 @@ export function EntryImages({
           initialFormat={seed?.format ?? defaultFormat(entry)}
           initialModel={seed?.model ?? null}
           initialLevels={seed?.levels}
+          initialSeed={seed?.seed ?? null}
+          initialLoras={seed?.loras}
           basis={seed?.basis ?? null}
           onTakeOver={async (image, origin) => {
             onChanged(

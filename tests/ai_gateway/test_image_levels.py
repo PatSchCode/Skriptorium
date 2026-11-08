@@ -36,7 +36,11 @@ MODELS = {
             "name": "Gemini",
             "supported_parameters": {"resolution": _enum("1K", "2K", "4K", "2K; drop", 7)},
         },
-        {"id": "black-forest-labs/flux.2-pro", "name": "FLUX.2 Pro", "supported_parameters": {}},
+        {
+            "id": "black-forest-labs/flux.2-pro",
+            "name": "FLUX.2 Pro",
+            "supported_parameters": {"seed": {"type": "boolean"}},
+        },
         {
             "id": "seed/seedream-lite",
             "name": "Seedream Lite",
@@ -168,3 +172,24 @@ def test_the_request_names_the_levels_only_when_chosen() -> None:
     assert isinstance(first, dict) and isinstance(second, dict)
     assert (first["resolution"], first["quality"]) == ("2K", "low")
     assert "resolution" not in second and "quality" not in second
+
+
+def test_the_catalog_knows_which_models_take_a_start_value() -> None:
+    # Step 11.4 (ADR-121): ``seed`` under ``supported_parameters``.
+    catalog, _, _ = _setup()
+    flux = catalog.model("black-forest-labs/flux.2-pro")
+    grok = catalog.model("x-ai/grok-imagine")
+    assert flux is not None and grok is not None
+    assert (flux.seed, grok.seed) == (True, False)
+
+
+def test_the_request_names_the_start_value_only_when_given() -> None:
+    answer = httpx.Response(200, json={"data": [{"b64_json": "iVBORw==", "media_type": "x"}]})
+    _, adapter, sent = _setup(answer, answer)
+    flux = "black-forest-labs/flux.2-pro"
+    asyncio.run(adapter.generate(ImageOrder(flux, "Turm", "2:3", seed=1834072215)))
+    asyncio.run(adapter.generate(ImageOrder(flux, "Turm", "2:3")))
+    first, second = sent
+    assert isinstance(first, dict) and isinstance(second, dict)
+    assert first["seed"] == 1834072215
+    assert "seed" not in second

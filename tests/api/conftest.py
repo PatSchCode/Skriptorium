@@ -204,6 +204,12 @@ IMAGE_MODELS = {
             },
         },
         {
+            "id": "black-forest-labs/flux.2-flex",
+            "name": "Black Forest Labs: FLUX.2 Flex",
+            # Takes a start value (step 11.4, ADR-121).
+            "supported_parameters": {"seed": {"type": "boolean"}},
+        },
+        {
             "id": "recraft/recraft-v4-vector",
             "name": "Recraft: Recraft V4 Vector",
             "supported_parameters": {"output_format": {"type": "enum", "values": ["svg"]}},

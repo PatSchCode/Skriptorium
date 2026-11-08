@@ -131,14 +131,20 @@ export function FormatChoice({
   );
 }
 
-/** The generated image before it is taken over, with the model and the real cost. */
+/**
+ * The generated image before it is taken over, with the model, the real cost and the start value
+ * with "Startwert behalten" (step 11.4, ADR-121).
+ */
 export function GeneratedPreview({
   result,
   name,
+  onKeepSeed,
 }: {
   result: GeneratedImage;
   name: string;
+  onKeepSeed: (seed: number) => void;
 }) {
+  const seed = result.seed ?? null;
   return (
     <>
       <img
@@ -151,6 +157,20 @@ export function GeneratedPreview({
         {result.cost_usd === null
           ? "Kosten nicht gemeldet"
           : `Kosten ${formatCost(result.cost_usd)}`}
+        {seed !== null && (
+          <>
+            {` · Startwert ${String(seed)} `}
+            <button
+              type="button"
+              className="ghost"
+              onClick={() => {
+                onKeepSeed(seed);
+              }}
+            >
+              Startwert behalten
+            </button>
+          </>
+        )}
       </p>
     </>
   );

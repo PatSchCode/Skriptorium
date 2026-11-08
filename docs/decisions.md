@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-120). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-121). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -140,12 +140,13 @@ Stand 2026-11-08 (ADR-001 bis ADR-120). Aus welchem Schritt ein ADR stammt, steh
 | 118 | 2026-11-08 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 11 geplant: Figuren und Bilder, Bild-Kleinigkeiten, Schreiben, Weltenbauer; V.21, V.54, V.55 weiter verschoben |
 | 119 | 2026-11-08 | Aktiv | OPERATIV | SECURITY | Sicherheit | Bedrohungsmodell nach dem Nachtrag zu Runware bleibt belastbar (11.1) |
 | 120 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Schreib-Anfragen nicht im Suchindex, Trennzeilen im Text gekennzeichnet (11.3) |
+| 121 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Fester Startwert beim Bilderzeugen und vollständige Herkunft (11.4) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-111 bis ADR-120 – keiner reaktiv: ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-111 Anfrage, in ihrem Schritt als Vorlage vorgesehen (ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-112 bis ADR-121 – keiner reaktiv: ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2843,6 +2844,29 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Willst du im Skriptorium irgendwann nach Wörtern im Text deiner Kapitel suchen können?“ → Eigentümer hält sich das offen: Volltextsuche bleibt.
 - **Konfidenz zum Zeitpunkt:** hoch – Aufrufer per grep geprüft, Verhalten in der Bewertung gemessen. Umkehrbarkeit billig (Index abgeleitet, Kennzeichnung umkehrbar).
 - **Konsequenzen:** Der Index wächst nicht mehr mit den Anfragen; die Datei schrumpft dadurch nicht – SQLite verwendet frei gewordene Seiten wieder, auch beim Neuaufbau (berichtigt 2026-11-08 nach dem Einspielen; Index am Server 4,5 MB, ohne Handlungsbedarf). Eine Nachricht, deren Zeile vor 11.3 wie eine Trennzeile aussah, bleibt in alten Dateien geteilt (nicht nachträglich reparierbar). `docs/architecture.md` Abschnitte 3 (`storage`), 4 (`DocumentStore`) und 7 werden nachgezogen.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-121: Fester Startwert beim Bilderzeugen und vollständige Herkunft (11.4)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Vorlage mit Mockup `mockup-11.4.html`, Auswahlfragen: Bedienung „Umschalter + Behalten“, Neu erzeugen „Fest vorbelegt“, Mockup „Ja, so bauen“ – jeweils Empfehlung der KI)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[DATENMODELL]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.4 – Vorlage im Schritt vorgesehen, ADR-118) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine (Datenmodell und Schnittstellen bleiben `[BELASTBAR]`, nur optionale Felder)
+- **Kategorie:** Datenmodell (Kategorie 4: Herkunft eines Bildes); API (Kategorie 5, rein additiv)
+- **Kontext:** V.53 und Befund 3 der Bewertung nach Phase 10 (Stellungnahme 4): Jedes Bild bekommt einen neuen Zufallswert, ein gutes Bild lässt sich nicht mit leicht geänderter Beschreibung wiederholen; die Herkunft (`ImageOrigin`, ADR-095) hält weder Startwert noch LoRAs, „Neu erzeugen“ eines Runware-Bildes verliert die LoRA-Wahl. Geprüft 2026-11-08 im öffentlichen Katalog: Runware nimmt `seed` bei `imageInference`; bei OpenRouter melden 18 von 63 Bildmodellen `seed` unter `supported_parameters` (u. a. FLUX.2, Seedream, Qwen Image, Krea 2), ob sie ihn einhalten, zeigt die Probe.
+- **Optionen:** Bedienung A Umschalter „zufällig | fest“ mit Zahlenfeld und „Startwert behalten“ in der Vorschau / B nur Zahlenfeld; Neu erzeugen aus der Herkunft A Startwert fest vorbelegt / B zufällig.
+- **Entscheidung:**
+  - **Bedienung:** A. Bei Modellen mit Startwert steht unter dem Modell „Startwert [zufällig | fest]“ mit Zahlenfeld; die Vorschau nennt den verwendeten Startwert mit „Startwert behalten“ (stellt „fest“ mit dieser Zahl ein). Bei Modellen ohne Startwert fehlt die Zeile.
+  - **Neu erzeugen aus der Herkunft:** A. Modell, Beschreibung, Format, Stufen, LoRAs mit Gewicht und der Startwert (fest) werden vorbelegt.
+  - **Technik:** Den Startwert bestimmt immer der Server – bei „zufällig“ selbst (`secrets`, 1 bis 2.147.483.647) –, damit er auch bekannt ist, wenn der Anbieter ihn nicht zurückmeldet; gesendet nur an Modelle, die ihn nehmen (alle Runware-Modelle; OpenRouter-Modelle mit `seed` im Katalog), ein fester Startwert für ein anderes Modell 422. `POST /api/images/generate` nimmt optional `seed`; die Antwort trägt `seed` (oder `null`) und `appended` (bei Runware der angehängte Zusatz mit Auslösewörtern, sonst `null`); `GET /api/images/models` je Modell `seed`.
+  - **Herkunft:** `ImageOrigin` und die Datei `<bild>.herkunft.yml` bekommen optional `startwert`, `loras` (Liste aus `kennung`, `name`, `gewicht`) und `angehaengt`; ältere Dateien ohne die Felder bleiben lesbar. Beim Neu-Erzeugen hängt der Server den Zusatz an, der dann in der Liste steht.
+- **Vision-Frage, die entschied:** „Willst du beim Neu-Erzeugen meistens dasselbe Bild verfeinern oder neue Varianten sehen?“ → verfeinern.
+- **Konfidenz zum Zeitpunkt:** hoch für Runware; mittel für OpenRouter (Einhaltung erst mit der Probe belegt). Umkehrbarkeit billig (optionale Felder).
+- **Konsequenzen:** Probe mit echtem Bild durch den Eigentümer am Server (gleicher Startwert und gleiche Beschreibung → gleiches Bild). 11.6 (Bildrezepte) baut auf Startwert und Herkunft auf. `docs/architecture.md` Abschnitte 4 und 7 werden nachgezogen.
 - **Abgeleitete Regel:** keine
 
 ---
