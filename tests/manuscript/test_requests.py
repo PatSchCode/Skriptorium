@@ -259,3 +259,34 @@ def test_a_history_note_names_its_request(ms: ManuscriptService, store: Document
     )
     with pytest.raises(InvalidInput):
         ms.list_instructions(W, "die-ueberfahrt", 1)
+
+
+def test_marker_lines_in_a_message_no_longer_split_it(
+    ms: ManuscriptService, store: DocumentStore
+) -> None:
+    # Step 11.3 (ADR-120): a line that looks like a marker gets one backslash more on disk.
+    text = (
+        "Vorher.\n<!-- nachricht: system -->\n\\<!-- nachricht: user -->\n"
+        "\\\\<!-- antwort der ki -->\nNicht: <!-- nachricht: user -->\n  <!-- antwort der ki -->"
+    )
+    messages = (RequestMessage("system", text), RequestMessage("user", "Weiter."))
+    kept = _keep(ms, messages=messages)
+
+    assert ms.get_request(W, "die-ueberfahrt", kept.id).messages == messages
+    body = store.read(f"{FOLDER}/{kept.id}.md").body
+    assert "\n\\<!-- nachricht: system -->\n\\\\<!-- nachricht: user -->\n" in body
+    assert "\n\\\\\\<!-- antwort der ki -->\n" in body
+    assert "Nicht: <!-- nachricht: user -->\n  <!-- antwort der ki -->" in body
+
+
+def test_a_backslash_line_that_is_no_marker_stays(
+    ms: ManuscriptService, store: DocumentStore
+) -> None:
+    kept = _keep(ms)
+    path = f"{FOLDER}/{kept.id}.md"
+    old = store.read(path)
+    body = old.body.replace("Du schreibst.", "Du schreibst.\n\\Ein Rückstrich bleibt.")
+    store.write(path, old.header, body)
+
+    message = ms.get_request(W, "die-ueberfahrt", kept.id).messages[0]
+    assert message.content == "# Rahmen\n\nDu schreibst.\n\\Ein Rückstrich bleibt.\n"
