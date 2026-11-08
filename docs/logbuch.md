@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 11.2 Bildformular zerlegt
+
+- Auf „Ja, 11.2 starten“ des Eigentümers in derselben Session; Klasse über der Empfehlung (Opus statt Routine), zu Beginn gesagt; Abgabe an Sonnet ruht bis D.22.
+- Zweig `refactor/11.2-bildformular` auf `docs/11.1-bedrohungsmodell-runware` aufgesetzt statt auf `main`: Der Fahrplan auf `main` kennt den Stand von 11.1 noch nicht (PR #224 offen) – sonst Konflikte in benachbarten Zeilen. Reibung: erst von `main` angelegt, die Fahrplan-Änderung schlug fehl; Zweig ohne eigene Commits gelöscht und neu angelegt.
+- Zeilen vorher/nachher: `ImageGenerate.tsx` 687 → 281 (Komponente 162); neu `ImageGenerateForm.tsx` 241, `ImageChoices.tsx` 157, `RunwareLoras.tsx` 115, `imageGenerateText.ts` 97. Die Hilfen (`describePrice`, `describeBasisPrice`, `shortLabel`, `nearestFormat`) bleiben über `ImageGenerate.tsx` erreichbar, Tests unverändert.
+- Prüfungen: prettier, eslint (`--max-warnings 0`), `tsc --noEmit` grün; vitest 52 Dateien, 604 Tests grün; Abdeckung 98,83 / 95,29 / 98,39 / 98,97 % (vorher 98,83 / 95,30 / 98,39 / 98,96 %; Zweige im üblichen Schwanken, über 94 %). End-to-End-Tests berühren das Bildformular nicht; sie laufen in der CI.
+
 ### 2026-11-08 – [SESSIONENDE] 11.1 erledigt, Bedrohungsmodell bleibt belastbar
 
 - **Dauer:** 2026-11-08, ca. 16:20–16:40 UTC (lokale Mac-Session, gestartet aus der Planungssession).

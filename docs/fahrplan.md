@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-08 (11.1 erledigt, ADR-119; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
+- **Stand vom:** 2026-11-08 (11.1 erledigt, ADR-119; 11.2 erledigt; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 - **Laufende Phase:** Phase 11 „Figuren, Bilder und Feinschliff“ (Phase 10 abgeschlossen 2026-11-08)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner – 11.1 erledigt 2026-11-08, 11.2 noch nicht begonnen.
-- **Nächster Schritt:** 11.2 Bildformular entlasten, danach 11.3 Ablage der Anfragen härten (Vorlage). D.28 wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** keiner – 11.1 und 11.2 erledigt 2026-11-08, 11.3 noch nicht begonnen.
+- **Nächster Schritt:** 11.3 Ablage der Anfragen härten (Vorlage), danach 11.4 Fester Startwert. D.28 wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,12 +24,12 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 
-**Phase 11: 1 von 16 erledigt.**
+**Phase 11: 2 von 16 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
 | ✅ | 11.1 | Bedrohungsmodell und Architektur um Runware ergänzen (U.3) | erledigt 2026-11-08 (ADR-119) | – |
-| ⚪ | 11.2 | Bildformular entlasten (U.1) | offen | KI |
+| ✅ | 11.2 | Bildformular entlasten (U.1) | erledigt 2026-11-08 | – |
 | ⚪ | 11.3 | Ablage der Schreib-Anfragen härten (U.2) | offen | KI |
 | ⚪ | 11.4 | Fester Startwert und vollständige Herkunft (V.53) | offen | KI |
 | ⚪ | 11.5 | Figuren-Assistent für das Aussehen (V.58) | offen | KI |
@@ -227,7 +227,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 11.2: Bildformular entlasten (U.1)
 
-- **Status:** ⚪ OFFEN
+- **Status:** ✅ ERLEDIGT (2026-11-08) – `ImageGenerate.tsx` 687 → 281 Zeilen, Komponente `ImageGenerate` 162 Zeilen; ausgelagert nach `ImageGenerateForm.tsx` (Formular in Teilen: Beschreibung, Modell, Stufen, Preis), `ImageChoices.tsx` (Format, Stufen, Modell-Gruppen, Grundlage, Vorschau), `RunwareLoras.tsx` (`useLoraChoice`, LoRA-Auswahl, angehängte Wörter), `imageGenerateText.ts` (Texte und Hilfen; Exporte über `ImageGenerate.tsx` unverändert). Verhalten unverändert, 604 Komponenten-Tests unverändert grün; Abdeckung 98,83 / 95,29 / 98,39 / 98,97 % (vorher 98,83 / 95,30 / 98,39 / 98,96 %)
 - **Phasentyp-Kontext:** UMSETZUNG (Umbau innerhalb `ui`, Verhalten unverändert)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** nein – Umbau innerhalb eines Moduls ohne Schnittstellenänderung
