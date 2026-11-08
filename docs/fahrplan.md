@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-08 (11.5 gebaut und gemergt #232, ADR-123; 11.17 angelegt; D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 - **Laufende Phase:** Phase 11 „Figuren, Bilder und Feinschliff“ (Phase 10 abgeschlossen 2026-11-08)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 11.5 (ADR-123) – gebaut, gemergt (#232), eingespielt `ad29ed0`; offen: Probe des Eigentümers mit echten Entwürfen. In Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08. D.28 (ADR-122) erledigt, Nachweis auf dem Mac erbracht.
-- **Nächster Schritt:** 11.5 abschließen: Probe des Eigentümers mit echten Entwürfen am Server (eingespielt `ad29ed0`); danach 11.17 (Krea 2 und LoRAs in die Runware-Liste), dann 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 11.5 (ADR-123) – gebaut, gemergt (#232), eingespielt `ad29ed0`; nach der Probe des Eigentümers Nachbesserung mit ADR-124 (Vorschläge der KI); offen: Probe der Vorschläge in einer Cloud-Session, Bau, Einspielen, Abnahme. In Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08. D.28 (ADR-122) erledigt, Nachweis auf dem Mac erbracht.
+- **Nächster Schritt:** 11.5 nachbessern (ADR-124): Probe der Vorschläge und Bau in einer Cloud-Session, Einspielen vom Mac, Abnahme; danach 11.17 (Krea 2 und LoRAs in die Runware-Liste), dann 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -32,7 +32,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | ✅ | 11.2 | Bildformular entlasten (U.1) | erledigt 2026-11-08 | – |
 | ✅ | 11.3 | Ablage der Schreib-Anfragen härten (U.2) | erledigt 2026-11-08 (ADR-120) | – |
 | ✅ | 11.4 | Fester Startwert und vollständige Herkunft (V.53) | erledigt 2026-11-08 (ADR-121) | – |
-| 🔵 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | eingespielt `ad29ed0`, Probe am Server offen (ADR-123) | Eigentümer |
+| 🟠 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | eingespielt `ad29ed0`; Nachbesserung: Vorschläge der KI (ADR-124) | KI: Probe und Bau in Cloud-Session |
 | ⚪ | 11.17 | Krea 2 und geprüfte LoRAs in die Runware-Liste (vor 11.6) | offen | KI/Eigentümer |
 | ⚪ | 11.6 | Bildrezepte (V.57) | offen | KI |
 | ⚪ | 11.7 | Prompt in Schlagworte umsetzen (V.52) | offen | KI |
@@ -276,14 +276,15 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 11.5: Figuren-Assistent für das Aussehen (V.58)
 
-- **Status:** 🔵 IN ARBEIT (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html`, entschieden mit ADR-123 (Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6, Assistent ersetzt das Herauslösen bei Figuren, Entwürfe mit frei änderbarem Zusatz). Gebaut: Server (`canon`: `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after`; `context.build_figure_looks`; Route `…/figure-looks`, Aufgabe `figurenassistent`), Oberfläche (`FigureLooks`, `FigureDrafts`, Vorbelegung aus „Bildbeschreibung“); Server 1.354 Tests, 99,86 %; Oberfläche 636 Tests, 98,77 / 94,98 / 98,34 / 98,92 %; eingebaute Anfrage echt nachgeprüft (grok-4.6, 3 von 3 in Form). Eingespielt 2026-11-08 `ad29ed0` (Mac, ADR-039; `healthy`, Anmeldeseite 200). Offen: Probe mit echten Entwürfen und Bestätigung des Eigentümers
+- **Status:** 🔵 IN ARBEIT (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html`, entschieden mit ADR-123 (Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6, Assistent ersetzt das Herauslösen bei Figuren, Entwürfe mit frei änderbarem Zusatz). Gebaut: Server (`canon`: `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after`; `context.build_figure_looks`; Route `…/figure-looks`, Aufgabe `figurenassistent`), Oberfläche (`FigureLooks`, `FigureDrafts`, Vorbelegung aus „Bildbeschreibung“); Server 1.354 Tests, 99,86 %; Oberfläche 636 Tests, 98,77 / 94,98 / 98,34 / 98,92 %; eingebaute Anfrage echt nachgeprüft (grok-4.6, 3 von 3 in Form). Eingespielt 2026-11-08 `ad29ed0` (Mac, ADR-039; `healthy`, Anmeldeseite 200). Probe des Eigentümers: Bilder gut, aber die Einträge enthalten kaum Aussehen → Nachbesserung in 11.5 mit ADR-124 (Vorschläge aus Eintrag und Welt ersetzen die festen Auswahlen; Mockup `mockup-11.5b.html`). Offen: Probe der Vorschläge (Cloud-Session), Bau, Einspielen, Abnahme mit Vorschlägen
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn; Grundsatzfrage zur Form des „Aussehens“ und kurze Probe der Textmodelle vorab)
 - **Abhängigkeiten:** 11.2
 - **Freigabepflichtig:** ja – wie V.58 (neue KI-Aufgabe, ggf. feste Felder, Voreinstellung eines Textmodells)
 - **Empfohlene Klasse:** Entscheidung – Vorlage mit Grundsatzfrage zum Datenmodell und neue KI-Aufgabe (Eskalations-Auslöser 1).
 - **Eingangskriterien:** 11.2 erledigt; vor der Voreinstellung eines Modells Probe auf Sperren
 - **Anforderungen (ab Klasse M):** FR-035, FR-029
-- **Zu tun:** wie V.58; dazu der Befund des Eigentümers aus der Probe von 10.8: Die Vorbelegung des Bild-Prompts (`entryPrompt`, ADR-084) ist für Runware-Modelle unbrauchbar – in der Vorlage zuerst klären, was daran stört, und den Ort der Prompt-Bildung (Oberfläche, Server oder eigene Schicht; Befund 3 der Bewertung) mitentscheiden.
+- **Zu tun (Nachbesserung, ADR-124):** (a) Probe in einer Cloud-Session: Vorschläge für Testfiguren mit wenig Aussehen (z. B. Brann aus `spikes/figuren-assistent-11.5/`) mit grok-4.6 und den Ausweichmodellen – Form (3 je Frage, Alter ab 18), Sperren, Herkunft in bildtauglichen Begriffen, Kosten; (b) Bau: Anfrage in `context`, Route in `api`, Knopf „✨ Vorschläge machen“ und Vorschläge statt `CHOICES` in `ui`; (c) Einspielen vom Mac; (d) Abnahme durch den Eigentümer.
+- **Zu tun (ursprünglich):** wie V.58; dazu der Befund des Eigentümers aus der Probe von 10.8: Die Vorbelegung des Bild-Prompts (`entryPrompt`, ADR-084) ist für Runware-Modelle unbrauchbar – in der Vorlage zuerst klären, was daran stört, und den Ort der Prompt-Bildung (Oberfläche, Server oder eigene Schicht; Befund 3 der Bewertung) mitentscheiden.
 - **Akzeptanzkriterien:** wie V.58.
 - **Betroffene Module:** context, canon, api, ui
 - **Reifegrad-Wirkung:** keine (bei festen Feldern: Datenmodell neu prüfen)

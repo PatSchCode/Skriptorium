@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mockup 11.5b</title>
+    <style>
+      :root {
+        --page: #efeae0;
+        --surface: #fffdf8;
+        --text: #1f2328;
+        --muted: #5c5647;
+        --line: #ddd5c6;
+        --accent: #8a6d3b;
+        --soft: #f3ead8;
+        --bad: #9b2c2c;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--text);
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+      }
+      h1 {
+        font-size: 1.2rem;
+        margin: 16px 16px 4px;
+      }
+      h3.view {
+        margin: 24px 16px 8px;
+        font-size: 1rem;
+      }
+      .legend {
+        margin: 0 16px 10px;
+        font-size: 0.92rem;
+        color: var(--muted);
+        max-width: 1150px;
+      }
+      .switch {
+        margin: 0 16px 8px;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .switch button {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+      .switch button[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 0 16px 8px;
+        align-items: start;
+      }
+      body.only-before .cols > .after,
+      body.only-after .cols > .before {
+        display: none;
+      }
+      body.only-before .cols,
+      body.only-after .cols {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 640px;
+      }
+      @media (max-width: 900px) {
+        .cols {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .tag {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin: 0 0 6px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      .new {
+        outline: 2px dashed var(--accent);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .input {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        padding: 8px 10px;
+        white-space: pre-wrap;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin: 6px 0 0;
+      }
+      .bad {
+        color: var(--bad);
+      }
+      .q {
+        display: grid;
+        grid-template-columns: 9rem minmax(0, 1fr);
+        gap: 4px 10px;
+        align-items: start;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 600px) {
+        .q {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .q b {
+        font-size: 0.85rem;
+        padding-top: 3px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 1px 9px;
+        background: #fff;
+        font-size: 0.8rem;
+      }
+      .chip.sug {
+        background: var(--soft);
+        border-color: #d8c49c;
+      }
+      .chip.sug::before {
+        content: "✨ ";
+      }
+      .chip.from::after {
+        content: " · aus Eintrag";
+        color: var(--muted);
+        font-size: 0.72rem;
+      }
+      .chip.on {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .chip.on::after {
+        color: #f3ead8;
+      }
+      .free {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        padding: 2px 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 4px;
+        min-height: 1.3em;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .btn {
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #fff;
+        border-radius: 6px;
+        padding: 4px 12px;
+        font-size: 0.85rem;
+      }
+      .ghost {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 6px;
+        padding: 4px 10px;
+        font-size: 0.85rem;
+      }
+      .sel {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 3px 8px;
+        background: #fff;
+        font-size: 0.85rem;
+      }
+      .entry {
+        background: var(--soft);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mockup 11.5b – Assistent schlägt Aussehen vor</h1>
+    <p class="legend">
+      Beispiel: die Testfigur „Brann Holt“ aus der Probe zu 11.5. Ihr Eintrag
+      hat zwei Sätze und kein Wort zum Aussehen – wie viele Einträge in deinen
+      Welten. Gestrichelt umrandet = neu. ✨ = Vorschlag der KI, „aus Eintrag“ =
+      aus dem Text abgeleitet. Die Vorschläge hier sind von Hand geschrieben;
+      echte zeigt erst die Probe.
+    </p>
+    <div class="switch" role="group" aria-label="Ansicht">
+      <button type="button" aria-pressed="true" data-mode="">
+        Nebeneinander
+      </button>
+      <button type="button" aria-pressed="false" data-mode="only-before">
+        Nur vorher
+      </button>
+      <button type="button" aria-pressed="false" data-mode="only-after">
+        Nur nachher
+      </button>
+    </div>
+
+    <h3 class="view">1 · Assistent, Schritt 1: Fragen</h3>
+    <div class="cols">
+      <div class="before">
+        <p class="tag">Heute (ADR-123)</p>
+        <div class="card">
+          <div class="entry">
+            <b>Brann Holt</b> – Schmied in Kerrow, seit dem Brand der alten Esse
+            halb taub auf dem linken Ohr. Er redet nicht gern über den Krieg.
+          </div>
+          <div class="q">
+            <b>Herkunft</b>
+            <div>
+              <div class="chips">
+                <span class="chip">Nordeuropa</span
+                ><span class="chip">Westeuropa</span
+                ><span class="chip">Südeuropa</span
+                ><span class="chip">Osteuropa</span
+                ><span class="chip">Ostasien</span><span class="chip">…</span>
+              </div>
+              <div class="free">Ergänzung</div>
+            </div>
+          </div>
+          <div class="q">
+            <b>Alter</b>
+            <div><span class="sel">&nbsp;&nbsp;&nbsp;</span></div>
+          </div>
+          <div class="q">
+            <b>Größe</b>
+            <div class="chips">
+              <span class="chip">klein</span><span class="chip">mittel</span
+              ><span class="chip">groß</span>
+            </div>
+          </div>
+          <div class="q">
+            <b>Körperbau</b>
+            <div class="chips">
+              <span class="chip">zierlich</span><span class="chip">schlank</span
+              ><span class="chip">athletisch</span
+              ><span class="chip">kurvig</span><span class="chip">füllig</span
+              ><span class="chip">kräftig</span>
+            </div>
+          </div>
+          <div class="q">
+            <b>Proportionen</b>
+            <div class="free"></div>
+          </div>
+          <div class="q">
+            <b>Gesicht</b>
+            <div class="chips">
+              <span class="chip">oval</span><span class="chip">rund</span
+              ><span class="chip">herzförmig</span
+              ><span class="chip">kantig</span>
+            </div>
+          </div>
+          <div class="q">
+            <b>Haar</b>
+            <div class="free"></div>
+          </div>
+          <div class="q">
+            <b>Augen</b>
+            <div class="chips">
+              <span class="chip">braun</span><span class="chip">blau</span
+              ><span class="chip">grün</span><span class="chip">grau</span
+              ><span class="chip">haselnuss</span>
+            </div>
+          </div>
+          <div class="q">
+            <b>Haut</b>
+            <div class="chips">
+              <span class="chip">hell</span><span class="chip">mittel</span
+              ><span class="chip">oliv</span><span class="chip">dunkel</span>
+            </div>
+          </div>
+          <div class="q" style="border-bottom: 0">
+            <b>Besondere Merkmale</b>
+            <div class="free"></div>
+          </div>
+          <div class="row">
+            <span class="note">Modell</span><span class="sel">grok-4.6 ▾</span>
+            <span class="btn">✨ Formulieren</span
+            ><span class="ghost">Verwerfen</span>
+          </div>
+          <p class="note bad">
+            Alles leer: Was nicht im Eintrag steht, musst du selbst wissen und
+            eintippen. Die festen Auswahlen sind allgemein („kräftig“, „grau“)
+            und kennen weder Figur noch Welt. Lässt du etwas offen, schreibt die
+            KI es nicht in die Bildbeschreibung – das Bild wird beliebig.
+          </p>
+        </div>
+      </div>
+
+      <div class="after">
+        <p class="tag">Nachher</p>
+        <div class="card">
+          <div class="entry">
+            <b>Brann Holt</b> – Schmied in Kerrow, seit dem Brand der alten Esse
+            halb taub auf dem linken Ohr. Er redet nicht gern über den Krieg.
+          </div>
+          <div class="row new" style="margin: 0 0 8px">
+            <span class="btn">✨ Vorschläge machen</span>
+            <span class="note" style="margin: 0"
+              >aus Eintrag und Welt · ca. 0,01 $ · nochmal tippen = neue
+              Vorschläge</span
+            >
+          </div>
+          <div class="new">
+            <div class="q">
+              <b>Herkunft</b>
+              <div>
+                <div class="chips">
+                  <span class="chip sug on">nordeuropäisch wirkend</span
+                  ><span class="chip sug">britisch-keltisch wirkend</span
+                  ><span class="chip sug">osteuropäisch wirkend</span>
+                </div>
+                <div class="free">Ergänzung</div>
+              </div>
+            </div>
+            <div class="q">
+              <b>Alter</b>
+              <div class="chips">
+                <span class="chip sug">42</span
+                ><span class="chip sug on">48</span
+                ><span class="chip sug">55</span>
+                <span class="note" style="margin: 0"
+                  >&nbsp;oder Zahl ab 18</span
+                >
+              </div>
+            </div>
+            <div class="q">
+              <b>Größe</b>
+              <div class="chips">
+                <span class="chip sug on">groß, etwa 188 cm</span
+                ><span class="chip sug">mittel, etwa 178 cm</span
+                ><span class="chip sug">sehr groß, etwa 195 cm</span>
+              </div>
+            </div>
+            <div class="q">
+              <b>Körperbau</b>
+              <div class="chips">
+                <span class="chip sug from on">massig, breite Schultern</span
+                ><span class="chip sug">sehnig-kräftig</span
+                ><span class="chip sug">untersetzt, stämmig</span>
+              </div>
+            </div>
+            <div class="q">
+              <b>Proportionen</b>
+              <div class="chips">
+                <span class="chip sug from on"
+                  >mächtige Unterarme, breiter Brustkorb</span
+                ><span class="chip sug">dicker Nacken, große Hände</span
+                ><span class="chip sug">lange Arme, kurzer Rumpf</span>
+              </div>
+            </div>
+            <div class="q">
+              <b>Gesicht</b>
+              <div>
+                <div class="chips">
+                  <span class="chip sug">breit, flache Nase</span
+                  ><span class="chip sug on">kantig, tiefe Falten</span
+                  ><span class="chip sug">hager, eingefallene Wangen</span>
+                </div>
+                <div class="free" style="color: var(--text)">
+                  Ergänzung: gebrochene Nase
+                </div>
+              </div>
+            </div>
+            <div class="q">
+              <b>Haar</b>
+              <div class="chips">
+                <span class="chip sug on">Glatze, grauer Vollbart</span
+                ><span class="chip sug">kurz geschoren, ergraut</span
+                ><span class="chip sug from"
+                  >dunkelblond, Spitzen angesengt</span
+                >
+              </div>
+            </div>
+            <div class="q">
+              <b>Augen</b>
+              <div class="chips">
+                <span class="chip sug on">hellgrau, tiefliegend</span
+                ><span class="chip sug">dunkelbraun</span
+                ><span class="chip sug">blau, zusammengekniffen</span>
+              </div>
+            </div>
+            <div class="q">
+              <b>Haut</b>
+              <div class="chips">
+                <span class="chip sug from on"
+                  >wettergegerbt, gerötet von der Esse</span
+                ><span class="chip sug from">hell, Ruß in den Poren</span
+                ><span class="chip sug">sonnengebräunt, ledrig</span>
+              </div>
+            </div>
+            <div class="q" style="border-bottom: 0">
+              <b>Besondere Merkmale</b>
+              <div class="chips">
+                <span class="chip sug from on"
+                  >Brandnarben am linken Ohr und Hals</span
+                ><span class="chip sug from"
+                  >alte Schnittnarbe über der Braue</span
+                ><span class="chip sug">verkrümmter kleiner Finger</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <span class="note">Modell</span><span class="sel">grok-4.6 ▾</span>
+            <span class="btn">✨ Formulieren</span
+            ><span class="ghost">Verwerfen</span>
+          </div>
+          <p class="note">
+            Nichts ist gesetzt, bevor du tippst – hier ist eine mögliche Auswahl
+            gezeigt. Steht im Eintrag schon eine Zeile, bleibt sie vorgewählt;
+            die KI schlägt dann nur Abwandlungen vor. Herkunft beschreibt, wie
+            die Figur <i>aussieht</i> („nordeuropäisch wirkend“), nicht das Volk
+            deiner Welt – Bildmodelle kennen „Kerrow“ nicht.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="view">2 · Danach – unverändert</h3>
+    <div class="cols">
+      <div class="before">
+        <p class="tag">Heute</p>
+        <div class="card">
+          <p class="note" style="margin: 0">
+            „Formulieren“ → deutsche Zeilen und englische Bildbeschreibung zum
+            Bearbeiten → 4 Entwürfe → Hauptbild → „Übernehmen“.
+          </p>
+        </div>
+      </div>
+      <div class="after">
+        <p class="tag">Nachher</p>
+        <div class="card">
+          <div class="input">
+            a 48-year-old adult Northern European man with mature adult facial
+            features, weathered skin reddened by forge heat, angular face with
+            deep lines and a broken nose, bald head with a full grey beard,
+            deep-set pale grey eyes, burn scars on his left ear and neck, about
+            188 cm tall, massive build with broad shoulders, powerful forearms
+            and a broad chest
+          </div>
+          <p class="note">
+            Gleicher Ablauf wie heute. Die Bildbeschreibung entsteht nur aus
+            dem, was du angetippt hast – erfunden wird nur im Schritt
+            „Vorschläge“, und dort siehst du es.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      for (const button of document.querySelectorAll(".switch button")) {
+        button.addEventListener("click", () => {
+          document.body.className = button.dataset.mode;
+          for (const other of document.querySelectorAll(".switch button")) {
+            other.setAttribute("aria-pressed", String(other === button));
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
