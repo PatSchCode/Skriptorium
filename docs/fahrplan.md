@@ -12,7 +12,7 @@
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
 - **Aktiver Schritt:** 10.8 Zweiter Bildanbieter – Runware gewählt 2026-11-07 (ADR-114); Probe des Eigentümers im Playground läuft („brauchbar“), neuer Wunsch Erwachseneninhalte; Modellsuche mit `RUNWARE_API_KEY` erledigt 2026-11-07 (Cloud-Session), zweite Vorlage entschieden (ADR-115), gebaut und getrennt geprüft – bestätigt und gemergt 2026-11-08 (PR #218, `96e56bc`) – wartet nur noch auf Einspielen vom Mac (Checkpoint-Versuch bleibt in V.56). 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
-- **Nächster Schritt:** 10.8: Einspielen vom Mac mit `RUNWARE_API_KEY` auf dem VPS (Stand `main` `96e56bc` oder neuer), Probe auf dem Server; danach 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup), dann 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Nächster Schritt:** 10.8: Einspielen vom Mac mit `RUNWARE_API_KEY` auf dem VPS (Stand `main` `96e56bc` oder neuer), Probe auf dem Server; danach 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup), dann 10.11 (neu darin: V.57 Bildrezepte, V.58 Figuren-Assistent, angelegt 2026-11-08). D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -67,7 +67,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06), V.52 (Schlagwort-Prompts, aus 10.8, 2026-11-07, ADR-115), V.53 (fester Seed beim Bilderzeugen, aus 10.8, 2026-11-07), V.54 (weitere LoRAs, u. a. Shibari, aus 10.8, 2026-11-07), V.55 (MOSS Image, aus 10.8, 2026-11-07), V.56 (Erkenntnisse der Bildmodell-Erkundung, aus 10.8, 2026-11-07). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06), V.52 (Schlagwort-Prompts, aus 10.8, 2026-11-07, ADR-115), V.53 (fester Seed beim Bilderzeugen, aus 10.8, 2026-11-07), V.54 (weitere LoRAs, u. a. Shibari, aus 10.8, 2026-11-07), V.55 (MOSS Image, aus 10.8, 2026-11-07), V.56 (Erkenntnisse der Bildmodell-Erkundung, aus 10.8, 2026-11-07), V.57 (Bildrezepte mit Figur als Lücke, 2026-11-08), V.58 (Figuren-Assistent für das Aussehen, 2026-11-08). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -377,7 +377,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51, V.52, V.53, V.54, V.55, V.56 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51, V.52, V.53, V.54, V.55, V.56, V.57, V.58 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen. Prüfen, ob V.52–V.58 zusammen eine eigene Phase „Figuren und Bilder“ werden (V.58 Assistent liefert das „Wer“, V.57 Rezept das „Was“).
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1565,6 +1565,40 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Angelegt 2026-11-06 in 10.10 (`spikes/hermes-10.10/README.md`).
+
+#### V.58: Figuren-Assistent für das Aussehen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Wunsch des Eigentümers, Übergabe 2026-11-08 nach den Bildtests in 10.8)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn; Grundsatzfrage zur Form des „Aussehens“ und kurze Probe der Textmodelle vorab)
+- **Abhängigkeiten:** 10.8; abzustimmen mit V.46, V.53, V.57
+- **Freigabepflichtig:** ja – neue KI-Aufgabe in „Modell je Aufgabe“ (ADR-096; Kategorie 1/5 prüfen), ggf. feste Felder für das Aussehen (Kategorie 4, vgl. ADR-091), Voreinstellung eines Textmodells
+- **Empfohlene Klasse:** Entscheidung – Vorlage mit Grundsatzfrage zum Datenmodell und neue KI-Aufgabe (Eskalations-Auslöser 1).
+- **Eingangskriterien:** 10.8 abgeschlossen; vor der Voreinstellung eines Modells Probe auf Sperren
+- **Anforderungen (ab Klasse M):** FR-035, FR-029
+- **Zu tun:** (1) Geführte Fragen zum Aussehen einer Figur: Herkunft, Alter (ausdrücklich erwachsen), Größe, Körperbau, Proportionen, Gesicht, Haar, Augen, Haut, besondere Merkmale – je Frage Auswahl plus freie Ergänzung. (2) Formulierung des Textes mit den in den Bildtests erprobten Wendungen (`docs/research/bildanbieter.md`, Logbuch 2026-11-07; z. B. rundere Gesichtsbeschreibung verdrängte die Kurven; Alter vorn). (3) Erzeugt 3–4 Entwürfe mit verschiedenen Startwerten; der gewählte Entwurf wird Hauptbild und Bezug der Figur (Seed nach V.53 oder Bezugsbild für „Bild zu Bild“, ADR-097). (4) Ergebnis: Abschnitt „Aussehen“ im Kanon-Eintrag (über die Abschnittsregel, Regel-003; Vorbelegung ADR-084, Herauslösen ADR-078/ADR-108) und Bausteine für die Lücke [Figur] in V.57. (5) Grundsatzfrage vorlegen: „Aussehen“ als Fließtext, als feste Felder (Datenmodell, vgl. ADR-091) oder Mittelweg Markdown mit festen Zeilen „- **Herkunft:** …“ über die Abschnittsregel. (6) Eigene Aufgabe in „Modell je Aufgabe“ (ADR-096) mit eigenem Textmodell unabhängig vom Schreiben; Kandidaten grok-4.6, grok-4.7, qwen3.8-max. Vor der Voreinstellung kurze Probe auf Sperren: einige Anfragen je Modell mit einer typischen Figur, Sperren und Brauchbarkeit zählen. (7) Sperre erkennen und ein anderes Modell anbieten (wie D.13, V.40).
+- **Akzeptanzkriterien:** Probe auf Sperren mit Zahlen je Modell; Vorlage mit Mockup und Entscheidung zur Form des „Aussehens“, ADR; Tests; Probe mit echten Entwürfen (3–4 Bilder, gewählter Entwurf als Hauptbild mit Bezug); Eigentümer bestätigt.
+- **Betroffene Module:** context, canon, api, ui (ai_gateway nur, falls die Erkennung von Sperren dort liegt)
+- **Reifegrad-Wirkung:** keine (bei festen Feldern: Datenmodell neu prüfen)
+- **Artefakte:** Probe, Vorlage mit Mockup, ADR, Code, Tests
+- **Notizen:** Angelegt 2026-11-08 (Übergabe aus der Session vom 2026-11-08). Bezug: V.46 (Fragenliste je Art im Weltenbauer – der Kern davon für die Art „Figur“), V.53, V.57; Weltenbauer (FR-029), ADR-078/ADR-108 (Aussehen herauslösen), ADR-084 (Vorbelegung). Arbeitsteilung mit V.57: Der Assistent liefert das „Wer“, das Rezept das „Was“.
+
+#### V.57: Bildrezepte – Szene, Modell und LoRAs als Vorlage, Figur als Lücke
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Wunsch des Eigentümers, Übergabe 2026-11-08 nach den Bildtests in 10.8)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8; abzustimmen mit V.52, V.53, V.56 (3)/(4), V.58
+- **Freigabepflichtig:** ja – voraussichtlich eigene Ablage der Rezepte (Kategorie 4, Datenmodell), neue Routen (Kategorie 5), ggf. neue Verantwortung im Modul (Kategorie 2 prüfen)
+- **Empfohlene Klasse:** Entscheidung – Datenmodell-Entscheidung mit Vorlage und Mockup (Eskalations-Auslöser 1).
+- **Eingangskriterien:** 10.8 abgeschlossen
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** (1) Rezept = Grundmodell + LoRAs mit Gewichten + Einstellungen (Schritte, CFG, Auflösung) + Szenentext (Kleidung, Pose, Requisiten, Ort, Licht, Kamera) + Platzhalter [Figur]. (2) Beim Erzeugen Rezept und Figur wählen; das „Aussehen“ der Figur wird an der festgelegten Stelle eingesetzt (Vorbelegung ADR-084). Dasselbe Rezept gilt für beliebige Figuren aller Welten. (3) Die Reihenfolge im Prompt ist Teil des Rezepts (Bildtests 2026-11-07: Fesselung bzw. Kleidung zuerst, Alter vorn). (4) Ein Rezept gehört zu einer Modellfamilie (Fließtext bei Krea 2/Z-Image, Schlagworte bei Pony/Illustrious → V.52), oder das Aussehen wird passend umgeformt. (5) Gleichbleibende Figur über einen Bezug je Figur: Startwert (V.53) oder Bezugsbild für „Bild zu Bild“ (ADR-097). (6) Klären, ob Rezepte die Voreinstellungen je Grundmodell und das empfohlene LoRA-Gewicht aus V.56 (3)/(4) ersetzen oder ergänzen. (7) Ablage der Rezepte (voraussichtlich weltübergreifend, eigene Ablage) als Datenmodell-Entscheidung mit Vorlage und Mockup.
+- **Akzeptanzkriterien:** Vorlage mit Mockup, ADR; Tests; Probe mit echten Bildern (dasselbe Rezept für zwei Figuren aus verschiedenen Welten); Eigentümer bestätigt.
+- **Betroffene Module:** storage, api, ui, context (Einsetzen des Aussehens; Zuordnung der Ablage in der Vorlage klären)
+- **Reifegrad-Wirkung:** Datenmodell (Abschnitt 7) – neue Ablage prüfen
+- **Artefakte:** Vorlage mit Mockup, ADR, Code, Tests
+- **Notizen:** Angelegt 2026-11-08 (Übergabe aus der Session vom 2026-11-08). Bezug: V.52, V.53, V.56 (3)/(4), V.58. Für 10.11 prüfen, ob V.52–V.58 zusammen eine eigene Phase „Figuren und Bilder“ werden (Assistent V.58 liefert das „Wer“, Rezept V.57 das „Was“).
 
 #### V.56: Erkenntnisse aus der Bildmodell-Erkundung in die Anwendung übernehmen
 
