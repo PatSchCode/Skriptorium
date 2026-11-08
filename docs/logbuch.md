@@ -34,6 +34,7 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 - Schlüssel vom Eigentümer eingetragen (Prüfung nur auf Vorhandensein: beide Schlüsselnamen in der `.env`, Wert 32 Zeichen, im Container gesetzt, `healthy`). Eigentümer: Die Anbindung funktioniert → 10.8 `[ERLEDIGT]` (Akzeptanz: Probe mit echtem Bild, Prüfung durch getrennte Instanz, Eigentümer bestätigt).
 - Befund des Eigentümers: Die Kanon-Beschreibung von Figuren ist für vernünftiges Prompten nicht ausreichend. Das ist die Lücke von V.58 (Figuren-Assistent für das Aussehen, Landeplatz 10.11) und passt zu V.57 („Figur“ als Lücke im Rezept); kein neuer Schritt, V.58-Notiz ergänzt und für die Planung in 10.11 höher gewichtet. 10.9 ist noch nicht vom Eigentümer erprobt.
 - Präzisierung auf Rückfrage: Gemeint sind nicht fehlende Körper- oder Gesichtsangaben (Eigentümer: „kommt im Wesentlichen nicht hin“), sondern die **Vorbelegung** des Bild-Prompts (Auswahl „Die Vorbelegung ist unbrauchbar“). Code-Stand geprüft: Figuren bekommen den Abschnitt „Aussehen“ unverändert als Prompt (ADR-084). Was daran stört, wurde nicht weiter benannt; bei V.58 vermerkt, Klärung bei der Planung 10.11 (Bezug V.52, V.56 (5), V.57).
+- Probe von 10.9 am Server vom Eigentümer bestätigt („Probe klappt“) → 10.9 `[ERLEDIGT]`; Phase 10 steht bei 10 von 11 (offen: 10.11). Fahrplan, README nachgezogen; Pull Request für die gebündelte Doku folgt.
 
 ### 2026-11-08 – [SESSIONENDE] 10.8 und 10.9 eingespielt, Schlüssel und Proben stehen aus
 

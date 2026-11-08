@@ -23,7 +23,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 9 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 10 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-11-08
@@ -111,8 +111,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **10.7** (erledigt 2026-11-06): Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken (ADR-111).
 - ✅ **10.10** (erledigt 2026-11-06): Hermes 4 gemessen – Einstellungen helfen nicht, Hermes bleibt wählbar wie heute; Längengrenze gegen Endlosschleifen geplant (ADR-113, V.51).
 - ✅ **Erledigt:** 10.8 zweiter Bildanbieter – Runware angebunden (ADR-114, ADR-115): Modelle und LoRAs in den Einstellungen, Inhaltsprüfung aus; getrennt geprüft, vom Eigentümer bestätigt und in `main` (2026-11-08); eingespielt und vom Eigentümer am Server erprobt (2026-11-08); die Kanon-Beschreibung einer Figur reicht noch nicht für gutes Prompten – Landeplatz V.58 (Figuren-Assistent). Erkundung der Bildmodelle und LoRAs abgeschlossen, Folgewünsche in V.56.
-- 🟠 **In Arbeit:** 10.9 Anfragen an die KI im Wortlaut festhalten – gebaut, Reiter „Anfragen“ (ADR-116); in `main` und eingespielt (2026-11-08); wartet auf die Probe.
-- ⚪ **Als Nächstes:** 10.9 abnehmen (Probe des Eigentümers); danach 10.11 Planung.
+- ✅ **Erledigt:** 10.9 Anfragen an die KI im Wortlaut festhalten – Reiter „Anfragen“ (ADR-116); eingespielt und vom Eigentümer am Server erprobt (2026-11-08).
+- ⚪ **Als Nächstes:** 10.11 Planung der nächsten Ausbaustufe.
 - ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Bildrezepte und Figuren-Assistent, Veröffentlichung.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
