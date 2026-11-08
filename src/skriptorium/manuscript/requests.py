@@ -46,6 +46,16 @@ REQUEST_ID: Final = re.compile(r"\d{8}-\d{6}(?:-[1-9]\d{0,3})?")
 _MARKER: Final = re.compile(
     r"^<!-- (?:nachricht: (system|user|assistant)|antwort der ki) -->$", re.MULTILINE
 )
+# A line of a message that looks like a marker, with any backslashes already in front of it. It
+# gets one backslash more when written and loses one when read (step 11.3, ADR-120), so it can
+# no longer split the message; a line without that form is never changed.
+_MARKER_LIKE: Final = re.compile(
+    r"^(\\*)(<!-- (?:nachricht: (?:system|user|assistant)|antwort der ki) -->)$", re.MULTILINE
+)
+_ESCAPED: Final = re.compile(
+    r"^\\(\\*<!-- (?:nachricht: (?:system|user|assistant)|antwort der ki) -->)$",
+    re.MULTILINE,
+)
 
 
 def checked_request_id(request_id: str) -> str:
@@ -216,8 +226,18 @@ def _header(request: WritingRequest) -> dict[str, HeaderValue]:
 
 
 def _body(request: WritingRequest) -> str:
-    parts = [f"<!-- nachricht: {m.role} -->\n\n{m.content}\n\n" for m in request.messages]
+    parts = [f"<!-- nachricht: {m.role} -->\n\n{_escape(m.content)}\n\n" for m in request.messages]
     return "".join(parts) + f"<!-- antwort der ki -->\n\n{request.answer}"
+
+
+def _escape(content: str) -> str:
+    """``content`` with every marker-like line given one more leading backslash."""
+    return _MARKER_LIKE.sub(r"\\\1\2", content)
+
+
+def _unescape(content: str) -> str:
+    """The inverse of :func:`_escape`: one leading backslash less on marker-like lines."""
+    return _ESCAPED.sub(r"\1", content)
 
 
 def _request_from(document: Document) -> WritingRequest:
@@ -259,7 +279,7 @@ def _parts(document: Document) -> tuple[tuple[RequestMessage, ...], str]:
         if marker[1] is None:
             return tuple(messages), body[marker.end() + 2 :]
         end = markers[index + 1].start() if index + 1 < len(markers) else len(body)
-        messages.append(RequestMessage(marker[1], body[marker.end() + 2 : end - 2]))
+        messages.append(RequestMessage(marker[1], _unescape(body[marker.end() + 2 : end - 2])))
     raise InvalidInput(f"{document.path}: Antwort der KI fehlt")
 
 
