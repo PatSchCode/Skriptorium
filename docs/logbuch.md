@@ -29,6 +29,35 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 22:11 – [SESSIONSTART] Neue lokale Mac-Session, Wiedereinstieg nach 11.5
+
+- **Modell:** eingestellt und bedient `claude-sonnet-5-5` (Sitzungsabfrage `get_session`: `model`) → Routine-Klasse. Das Einspielen von 11.5 und die Probe sind Routine; 11.17 verlangt die Entscheidungs-Klasse (Freigabe zum Runware-Konto, Auslöser 1) → vor 11.17 STOPP MODELLWECHSEL.
+- **Wiedereinstieg:** `git fetch` und `pull --ff-only` gegen `origin/main` – war 16 Commits zurück, jetzt `ad29ed0` (PR #233 gemergt); keine offenen Pull Requests. Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker. Branch `docs/11.5-einspielen`.
+- **Auftrag:** noch keiner genannt („Neue Session“); naheliegend laut letztem Sessionende: 11.5 einspielen und abnehmen (nur auf Anweisung, ADR-039).
+- **Kontextgröße zu Beginn:** 187.692 Token (Sitzungsabfrage `get_usage`; Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster 21 %, Woche 7 %.
+
+### 2026-11-08 – [BEOBACHTUNG] 11.5 eingespielt (`ad29ed0`)
+
+- Auftrag des Eigentümers per Auswahlfrage: „11.5 einspielen und abnehmen“ (ADR-039). CI auf `main` für `ad29ed0` grün (Lauf 22:07 UTC). Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf (`git archive` → `app.neu`, `REVISION`, `skriptorium:vorher` gesetzt – Stand `3c162fa`, `docker compose build`, `up -d`).
+- Warten nur über HTTPS: `/api/health` zuerst 404 (sechs Abfragen im Abstand von 10 s, Container noch im Start), dann 200 nach rund 70 s; Anmeldeseite 200. Eine SSH-Prüfung: `healthy`, `REVISION` `ad29ed0`.
+- Offen: Probe des Eigentümers am Server (Assistent an einer echten Figur, 4 Entwürfe, Hauptbild); erst danach 11.5 `[ERLEDIGT]`.
+
+### 2026-11-08 – [ADR-ANGELEGT] ADR-124 Figuren-Assistent schlägt das Aussehen vor
+
+- Code nachgelesen (`ui/src/figureLooks.ts` mit festen `CHOICES`, `context/figure_looks.py` mit „Erfinde keine Merkmale dazu“). Mockup `mockup-11.5b.html` (Fragen vorher/nachher an der Testfigur Brann, Umschalter nebeneinander/einzeln), auf 390 und 1280 px ohne Querscrollen geprüft.
+- Vorlage als `ENTSCHEIDUNG ERFORDERLICH` mit vier Auswahlfragen; Eigentümer: „Vorschläge ersetzen sie“, „Eintrag und Welt“, Mockup „Ja, so bauen“, „In 11.5 nachbessern“ – jeweils Empfehlung → ADR-124, `[REAKTIV]`. Reaktiv-Quote 1/10 (ADR-115 bis ADR-124), unter 30 %.
+- Probe der Vorschläge nicht hier: Der lokale OpenRouter-Schlüssel ist ungültig (seit 2026-10-09 bekannt) – Probe und Bau in einer Cloud-Session.
+
+### 2026-11-08 – [BEOBACHTUNG] Befund des Eigentümers zu 11.5, Modellwechsel
+
+- Eigentümer nach dem Einspielen: „Die Bilderstellung ist nicht das Problem, aber … die Daten, die aus dem Kanon vorliegen, die sind einfach nicht bildgenerationstauglich.“ Auswahlfragen: Ursache „Eintrag enthält kaum Aussehen“; gewünscht „KI schlägt vor, du wählst“ (Empfehlung) – hebt die Regel „nichts erfunden“ aus ADR-123 auf.
+- Auf Sonnet 5.5 (Routine) gestoppt, weil daraus eine Vorlage mit ADR folgt (`CLAUDE.md` Abschnitt 0, Auslöser 1). Eigentümer wechselte per `/model` auf `claude-opus-5-5`; Sitzungsabfrage `get_session` meldet `model` `claude-opus-5-5` → Entscheidungs-Klasse bestätigt, Arbeit fortgesetzt. 11.5 bleibt 🔵 bis zur Entscheidung.
+
+### 2026-11-08 – [GELÖST] D.28 auf dem Mac nachgewiesen
+
+- Der Commit `5da4c66` (erster Commit in einer Mac-Session seit ADR-122) lief ohne Behelf: `markdownlint-cli2` Passed, alle 17 Hooks grün (Netz zur npm-Registry war da, Hook-Umgebung entstand neu). Akzeptanzkriterium „Mac unverändert“ erfüllt → D.28 `[ERLEDIGT]`.
+
 ### 2026-11-08 – [SESSIONENDE] 11.5 gebaut und gemergt, 11.17 angelegt
 
 - **Dauer:** 2026-11-08, ca. 21:12–22:05 UTC (Cloud-Session; Branches `feat/11.5-figuren-assistent`, `docs/11.5-sessionende`).

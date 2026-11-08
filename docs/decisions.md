@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-123). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-124). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -142,13 +142,14 @@ Stand 2026-11-08 (ADR-001 bis ADR-123). Aus welchem Schritt ein ADR stammt, steh
 | 120 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Schreib-Anfragen nicht im Suchindex, Trennzeilen im Text gekennzeichnet (11.3) |
 | 121 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Fester Startwert beim Bilderzeugen und vollständige Herkunft (11.4) |
 | 122 | 2026-11-08 | Aktiv | OPERATIV | STACK | Build-Pipeline | Pre-Commit-Hook markdownlint nutzt das Node aus dem PATH (D.28) |
-| 123 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, Architektur, API | Figuren-Assistent: „Aussehen“ als Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6 (11.5) |
+| 123 | 2026-11-08 | Aktiv (Regel „nichts erfunden“ geändert durch ADR-124) | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, Architektur, API | Figuren-Assistent: „Aussehen“ als Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6 (11.5) |
+| 124 | 2026-11-08 | Aktiv | REAKTIV | SCHNITTSTELLE | API, KI-Aufgabe | Figuren-Assistent schlägt das Aussehen aus Eintrag und Welt vor, du wählst (11.5) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-114 bis ADR-123 – keiner reaktiv: ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 1 / 10 (10 %) über ADR-115 bis ADR-124 – reaktiv: ADR-124 (Vorschläge im Figuren-Assistenten, 11.5: neue Route und geänderte KI-Aufgabe nach der Probe des Eigentümers, in der Planung nicht vorgesehen). Nicht reaktiv: ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2911,6 +2912,31 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Soll das Aussehen deiner Figuren so im Eintrag stehen, dass Programm und Bildmodell es sicher finden – auch wenn es sich weniger wie Prosa liest?“ → ja, Zeilen; und der Bild-Prompt wird einmal geschrieben und liegt beim Eintrag.
 - **Konfidenz zum Zeitpunkt:** hoch für Form und Ablage (folgt Regel-003 und ADR-092); mittel für Sperren bei Einträgen mit stark erotischem oder fesselungsbezogenem Inhalt (nicht geprüft) und für die Bildqualität (zeigen die Entwürfe). Umkehrbarkeit billig: Markdown-Schreibweise, kein Schema.
 - **Konsequenzen:** Probe mit echten Entwürfen und Bestätigung durch den Eigentümer am Server. 11.6 setzt die Bildbeschreibung als [Figur] ein, 11.7 baut Schlagworte daraus. `docs/architecture.md` Abschnitte 3, 4 und 7 werden nachgezogen.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-124: Figuren-Assistent schlägt das Aussehen aus Eintrag und Welt vor, du wählst (11.5)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Befund aus der Probe am Server nach dem Einspielen von `ad29ed0`; Vorlage mit Mockup `mockup-11.5b.html`, Auswahlfragen: Ursache „Eintrag enthält kaum Aussehen“, Weg „KI schlägt vor, du wählst“, Auswahlen „Vorschläge ersetzen sie“, Grundlage „Eintrag und Welt“, Mockup „Ja, so bauen“, Landeplatz „In 11.5 nachbessern“ – jeweils Empfehlung der KI)
+- **Status:** Aktiv
+- **Tags:** `[REAKTIV]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.5, nach dem Bau und vor der Abnahme) – reaktiv: neue Route und geänderte KI-Aufgabe, in der Planung (ADR-118) und in ADR-123 nicht vorgesehen
+- **Reifegrad-Wirkung:** keine (kein neues Modul, kein Datenmodell; `context` und `api` bekommen je eine Funktion bzw. Route nach bestehendem Muster)
+- **Kategorie:** API (Kategorie 5, rein additiv: eigene Route für Vorschläge); Änderung einer KI-Aufgabe aus ADR-123
+- **Kontext:** Eigentümer nach der Probe am Server: „Die Bilderstellung ist nicht das Problem, aber … die Daten, die aus dem Kanon vorliegen, die sind einfach nicht bildgenerationstauglich.“ Die Einträge beschreiben Rolle und Geschichte, kaum das Äußere. Der Assistent nach ADR-123 fragt nur ab, was der Autor schon weiß; die festen Auswahlen sind allgemein, offene Fragen bleiben „–“ und fehlen in der Bildbeschreibung – das Bild wird beliebig.
+- **Optionen:** A Vorschläge der KI ersetzen die festen Auswahlen; B feste Auswahlen bleiben, Vorschläge kommen dazu. Grundlage: nur Eintrag / Eintrag und Welt / dazu verknüpfte Einträge. Landeplatz: in 11.5 / eigener Schritt 11.18.
+- **Entscheidung:**
+  - **Ablauf:** Oben im Fragenfenster ein Knopf „✨ Vorschläge machen“. Ein Textmodell (Aufgabe „Figuren-Assistent“, grok-4.6, ADR-123) schlägt je Frage drei Antworten vor, beim Alter drei ganze Zahlen ab 18; erneutes Drücken liefert neue Vorschläge. Was sich aus dem Eintrag ableiten lässt, ist als „aus Eintrag“ gekennzeichnet. Nichts ist gewählt, bevor der Autor tippt; vorhandene Zeilen bleiben vorgewählt, die KI schlägt dann Abwandlungen vor. Freie Ergänzung bleibt.
+  - **Auswahlen:** Die festen Auswahlen (`CHOICES`) entfallen; ohne Vorschläge bleiben die freien Felder.
+  - **Herkunft:** als sichtbares Aussehen in Begriffen, die Bildmodelle kennen („nordeuropäisch wirkend“), nicht als Volk oder Ort der Welt.
+  - **Grundlage der Vorschläge:** der Eintrag der Figur und die Weltbeschreibung; keine verknüpften Einträge. Abschnitt „Bildbeschreibung“ bleibt draußen (wie ADR-123).
+  - **„Nichts erfunden“:** gilt weiter für die Bildbeschreibung – sie entsteht nur aus den Antworten des Autors. Erfunden wird nur im Schritt „Vorschläge“, sichtbar, und in den Kanon kommt nur, was der Autor wählt.
+  - **Landeplatz:** 11.5; Abnahme mit Vorschlägen.
+- **Vision-Frage, die entschied:** „Darf die KI das Aussehen deiner Figuren vorschlagen, solange erst deine Auswahl in den Kanon kommt?“ → ja.
+- **Konfidenz zum Zeitpunkt:** mittel – Form und Ablauf folgen dem bestehenden Muster (Auswahl plus freie Ergänzung); Güte der Vorschläge und Sperren bei freizügigen Einträgen zeigt erst die Probe. Umkehrbarkeit billig: ein Knopf, eine Anfrage, kein Schema.
+- **Konsequenzen:** Probe der Vorschläge vor dem Bau (Cloud-Session, dort gilt der Schlüssel): Testfiguren mit wenig Aussehen, grok-4.6 und Ausweichmodelle, Sperren, Form, Bildtauglichkeit der Herkunft. Danach Bau in `context` (Anfrage), `api` (Route), `ui` (Knopf, Vorschläge statt `CHOICES`); Einspielen vom Mac; Abnahme durch den Eigentümer. `docs/architecture.md` Abschnitte 3 und 4 nachziehen.
 - **Abgeleitete Regel:** keine
 
 ---
