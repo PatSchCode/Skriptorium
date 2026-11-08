@@ -370,7 +370,7 @@ data/
 - **Denk-Token von grok-4.7 deckeln (1.024) / Denken abschalten:** Deckel verlängert das Vorab-Denken auf 162–244 s, Abschalten lehnt der Anbieter ab – siehe ADR-052 (D.16)
 
 <!-- ANCHOR:reifegrad-uebersicht -->
-## 9. Reifegrad-Übersicht (Stand vom 2026-11-05, nach ADR-105; Phasen 7–9 ohne Reifegrad-Wirkung außer NFR Kontexttreue, ADR-103)
+## 9. Reifegrad-Übersicht (Stand vom 2026-11-08, nach ADR-118; Phasen 7–10 ohne Reifegrad-Wirkung außer NFR Kontexttreue, ADR-103; Nachtrag Runware im Bedrohungsmodell offen → 11.1)
 
 | Bestandteil | Reifegrad | Seit | Validiert durch / wartet auf |
 |---|---|---|---|

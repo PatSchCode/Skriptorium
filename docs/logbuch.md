@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 10.8 und 10.9 abgeschlossen, Phase 10 beendet, Phase 11 geplant
+
+- **Dauer:** 2026-11-08, ca. 14:55–16:10 UTC (lokale Mac-Session; Detail-Einträge dieser Session im Archiv `docs/archiv/logbuch-phase-10.md`).
+- **Bearbeitet:** 10.8 und 10.9 eingespielt (`25c9bd6`), Runware-Schlüssel vom Eigentümer eingetragen, beide Proben bestätigt → `[ERLEDIGT]` (PR #222); Befund zur Vorbelegung des Bild-Prompts bei V.58 bzw. 11.5. 10.11: Pflichtfrage mit getrennter Instanz (ADR-117), Vision-Abgleich, Planung Phase 11 (ADR-118), Phase 10 archiviert, Logbuch verdichtet, Onboarding-Pfad validiert.
+- **Stand:** Server `25c9bd6` mit beiden Schlüsseln, `healthy`. `main` `10a1901`; Phasenabschluss auf `docs/10.11-planung` (Pull Request folgt).
+- **Offen:** Pull Request zu 10.11 mergen (Eigentümer); D.28 Lösung wählen; D.11 Frist überschritten; Fernzweig `docs/10.8-einspielen-vorbereiten` löschen (Eigentümer, GitHub); Rückweg-Image `skriptorium:vorher` auf dem VPS bleibt bis zum nächsten Einspielen.
+- **Nächster Schritt:** 11.1 Bedrohungsmodell und Architektur um Runware ergänzen (getrennte Prüfung), dann 11.2 und 11.3. Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (Phase 11, 0 von 16, Als Nächstes 11.1–11.3), Kontext (Status Phase 11, Server `25c9bd6`), Blocker 0. Drift: ADR-117/118 → 11.1–11.16 vorhanden; Reifegrade unverändert, Kopfzeile Abschnitt 9 auf ADR-118 gesetzt (inhaltlicher Nachtrag Runware in 11.1, Befund 6); Modul-Liste unverändert; FR-038 → 11.15; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-109 bis ADR-118); Phase 11 bei 16 geplanten Schritten (Schwelle über 32). Größen: `docs/project-context.md` 351 Zeilen (Budget 600); Logbuch nach Verdichtung rund 100 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** Start auf Sonnet 5.5 (Routine; Einspielen 10.8/10.9 unterhalb der Empfehlung, Entscheidungsanteil lag in ADR-114 bis ADR-116); für 10.11 STOPP mit Modellwechsel, ab da Opus 5.5 (Entscheidungs-Klasse, Sitzungsabfrage). Oberhalb der Empfehlung auf Opus: Logbuch, README, Archivierung (Routine), nicht abgegeben – kleine Teilarbeiten mit geladenem Kontext, Routine-Abgabe ruht bis D.22. Abgegeben: Bewertung an eine getrennte Instanz (Sonnet) – als Pflicht der Methodik, nicht als Klassen-Abgabe.
+- **Kontextgröße:** 354.881 Token (Sitzungsabfrage) – über der Grenze 200.000 seit dem Einspielen; 10.11 auf ausdrücklichen Wunsch des Eigentümers hier („10.11 machen wir hier“). Nächste Session neu beginnen.
+
 ### 2026-11-08 – [PHASEN-WECHSEL] Reflexion Phase 10 (UMSETZUNG) → Phase 11 (UMSETZUNG)
 
 - **Gelernt:** Die Probe des Eigentümers am Server findet, was Tests nicht finden: Die Runware-Anbindung lief, aber die Vorbelegung des Bild-Prompts aus „Aussehen“ ist für die Modelle unbrauchbar (→ 11.5). Die getrennte Instanz kam ohne diese Rückmeldung aus dem Code zum selben Ort (`entryPrompt`, Befund 3).
