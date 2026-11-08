@@ -26,13 +26,13 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 - **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 8 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
-- **Letzte Änderung:** 2026-11-06
+- **Letzte Änderung:** 2026-11-07
 - **Architektur-Reife:** Module, Schnittstellen, Datenmodell und Token-Budget BELASTBAR (ADR-013); Reaktionszeit BELASTBAR (grok-4.6 erstes Textstück meist unter 30 s, ADR-052; grok-4.7 denkt zu lange vor und kommt in 5.12 aus der Voreinstellung); Kanon-Treue BELASTBAR (erstes echtes Kapitel des Eigentümers in 4.8: 0 Widersprüche, mit qwen3.8-max); Kontexttreue BELASTBAR bis etwa 30 Kapitel (ADR-103); Sicherheitsniveau und Schutzbedarf BELASTBAR (ADR-006, ADR-007); Observability BELASTBAR (Log-Zeile und Monatskosten, ADR-021, ADR-023); Bedrohungsmodell BELASTBAR (Prüfung 4.5); Host BELASTBAR (4.2); Netz BELASTBAR (Prüfungen von außen, 4.7); Backups BELASTBAR (4.3); Secrets im Betrieb VORLÄUFIG (Gate 4.6, BELASTBAR mit D.11)
 - **Aktive Blocker:** 0
 
 ## Quick Start
 
-Stand 2026-11-05 (v1.0.0 plus Phasen 6 bis 9): Server mit Anmeldung und Oberfläche für Welten, Kanon, Import (Markdown und SillyTavern) und Geschichten; KI-Weltenbauer; Export nach SillyTavern; Aufbau wie ein Chat mit Leiste links und eigener Adresse je Ansicht; Schreiben mit KI (Figuren-Schreibweise, `@`-Menü, wählbare Länge, Kapitel-Kurzfassungen, Gast-Figuren aus anderen Welten) mit `OPENROUTER_API_KEY`; markierte Textstellen in den Kanon übernehmen; Modell je Geschichte, Kosten je Anfrage und Monat; Darstellung hell, dunkel oder schwarz (AMOLED); als App installierbar. Aus Phase 7: Zeitstrahl, E-Book mit Titelbild, Aussehen „Buch“, Bilder an Kanon-Einträgen, Karten mit Zoom und Markierungen, Bilder von der KI erzeugen und beschreiben lassen. Aus Phasen 8 und 9: Weltenbauer aus dem Manuskript, Verweise zwischen Einträgen, feste Abschnitte je Art und Beziehungen, Bilder mit Herkunft und Bild zu Bild, Modell je Aufgabe, Archivieren und Löschen, Seite „Verbrauch“, Gast-Figuren mit Weltbezug.
+Stand 2026-11-05 (v1.0.0 plus Phasen 6 bis 9): Server mit Anmeldung und Oberfläche für Welten, Kanon, Import (Markdown und SillyTavern) und Geschichten; KI-Weltenbauer; Export nach SillyTavern; Aufbau wie ein Chat mit Leiste links und eigener Adresse je Ansicht; Schreiben mit KI (Figuren-Schreibweise, `@`-Menü, wählbare Länge, Kapitel-Kurzfassungen, Gast-Figuren aus anderen Welten) mit `OPENROUTER_API_KEY`; markierte Textstellen in den Kanon übernehmen; Modell je Geschichte, Kosten je Anfrage und Monat; Darstellung hell, dunkel oder schwarz (AMOLED); als App installierbar. Aus Phase 7: Zeitstrahl, E-Book mit Titelbild, Aussehen „Buch“, Bilder an Kanon-Einträgen, Karten mit Zoom und Markierungen, Bilder von der KI erzeugen und beschreiben lassen. Aus Phasen 8 und 9: Weltenbauer aus dem Manuskript, Verweise zwischen Einträgen, feste Abschnitte je Art und Beziehungen, Bilder mit Herkunft und Bild zu Bild, Modell je Aufgabe, Archivieren und Löschen, Seite „Verbrauch“, Gast-Figuren mit Weltbezug. Aus Phase 10 (in Arbeit): zweiter Bildanbieter Runware mit Community-Modellen und LoRAs (optional, `RUNWARE_API_KEY`).
 
 ### Voraussetzungen
 
@@ -41,6 +41,7 @@ Stand 2026-11-05 (v1.0.0 plus Phasen 6 bis 9): Server mit Anmeldung und Oberflä
 - git; für Sessions des Coding-Agents (Cloud-Session unter Linux, lokal auf macOS arm64) richtet `scripts/session-start.sh` alles ein (SessionStart-Hook)
 - Internetzugang zu `api.pwnedpasswords.com` beim Festlegen oder Ändern des Passworts
 - ein OpenRouter-API-Schlüssel in `OPENROUTER_API_KEY` (siehe `.env.example`) – für KI-Anfragen ab Schritt 3.3; Tests laufen ohne Schlüssel
+- optional ein Runware-API-Schlüssel in `RUNWARE_API_KEY` – zweiter Bildanbieter (Schritt 10.8); ohne ihn nur Bildmodelle von OpenRouter
 
 ### Einrichten und starten
 
@@ -109,7 +110,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **10.6** (erledigt 2026-11-06): Bilder zwischen den Absätzen eines Kapitels und im E-Book – hochladen, erzeugen oder aus dem Kanon (ADR-110).
 - ✅ **10.7** (erledigt 2026-11-06): Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken (ADR-111).
 - ✅ **10.10** (erledigt 2026-11-06): Hermes 4 gemessen – Einstellungen helfen nicht, Hermes bleibt wählbar wie heute; Längengrenze gegen Endlosschleifen geplant (ADR-113, V.51).
-- ⚪ **Als Nächstes:** 10.9 vollständige Anfrage festhalten und 10.8 zweiter Bildanbieter; danach 10.11 Planung.
+- 🟠 **In Arbeit:** 10.8 zweiter Bildanbieter – Runware angebunden (ADR-114, ADR-115): Modelle und LoRAs in den Einstellungen, Inhaltsprüfung aus; getrennte Prüfung erfolgt, wartet auf Bestätigung des Eigentümers und Einspielen. Erkundung der Bildmodelle und LoRAs abgeschlossen, Folgewünsche in V.56.
+- ⚪ **Als Nächstes:** 10.9 vollständige Anfrage festhalten; danach 10.11 Planung.
 - ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Veröffentlichung.
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 

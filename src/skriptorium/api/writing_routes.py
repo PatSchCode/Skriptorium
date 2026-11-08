@@ -33,6 +33,7 @@ from skriptorium.api.flows import (
     stream_worldbuilder,
     summarize_chapter,
 )
+from skriptorium.api.image_routes import Selectable
 from skriptorium.context import DEFAULT_LENGTH, HitsQuery, Length
 from skriptorium.manuscript import Chapter, Story
 
@@ -214,7 +215,7 @@ async def set_task_models(body: TasksIn, found: ServicesDep) -> ModelList:
 
     def allowed(task: Task, model: str) -> bool:
         if task == "bilderzeugung":
-            return model in found.image_catalog
+            return model in Selectable(found)
         if task == "bildbeschreibung" and found.catalog.available:
             return found.catalog.reads_images(model)
         return model in found.catalog

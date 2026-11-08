@@ -22,12 +22,698 @@
 
 Die letzten Einträge geben den aktuellen Stand wieder. Bei Sessionbeginn liest die KI mindestens den letzten `[SESSIONENDE]`-Eintrag und alle Einträge danach, um den Faden aufzunehmen.
 
-Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-Commit (Modus 2, abgeschlossen 2026-09-26). Verlauf und Begründungen der Initialisierung stehen in `docs/decisions.md` (ADR-001 bis ADR-009). Phasen 1 bis 9 sind verdichtet; Details in `docs/archiv/logbuch-phase-1.md` bis `docs/archiv/logbuch-phase-9.md`. Die Einträge vom September 2026 (Reflexionen der Phasen 1 bis 3) stehen seit 2026-11-04 in `docs/archiv/logbuch-2026-09.md`.
+Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-Commit (Modus 2, abgeschlossen 2026-09-26). Verlauf und Begründungen der Initialisierung stehen in `docs/decisions.md` (ADR-001 bis ADR-009). Phasen 1 bis 9 sind verdichtet; Details in `docs/archiv/logbuch-phase-1.md` bis `docs/archiv/logbuch-phase-9.md`. Die Einträge vom September 2026 (Reflexionen der Phasen 1 bis 3) stehen seit 2026-11-04 in `docs/archiv/logbuch-2026-09.md`, die vom Oktober 2026 seit 2026-11-07 in `docs/archiv/logbuch-2026-10.md`.
 
 ---
 
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
+
+### 2026-11-07 – [SESSIONENDE] Bildmodelle und LoRAs erkundet; 10.8 unverändert offen
+
+- **Dauer:** ganzer Tag (Session seit 00:08 UTC), mit Unterbrechungen.
+- **Bearbeitet:** V.54 (LoRAs) und Erkundung der Bildmodelle für 10.8; kein Code geändert. Ergebnisse vollständig in `docs/research/bildanbieter.md`, neue Prüfliste `docs/research/fesselungsartikel.md`.
+- **Erreicht:** Testavatar 1 (Mexiko, 21) neu festgelegt, Testavatar 2 (Skandinavien, 26, Krea 2 Turbo Seed 505) angelegt; alle Joschek-LoRAs für Krea 2 getestet (Empfehlungen je LoRA), Wäsche-LoRAs, Fotorealismus-LoRAs, Kombination zweier LoRAs; Checkpoint-Vergleich (Z-Image, Juggernaut Z, Krea 2 Raw/Turbo, SDXL); Ursache der Raw-Bildfehler gefunden (Negativ-Prompt); Bedingungen für eigene Checkpoints bei Runware und Civitai als Inferenz-Anbieter geklärt. PR 218 auf Entwurf gestellt (CI läuft bei Entwürfen nicht).
+- **Offen:** 10.8 – Bestätigung des Eigentümers, Einspielen (Schlüssel auf dem VPS). Entscheidung zum Checkpoint: Upload einer Krea-2-Feinabstimmung bei Runware (Probe) oder kostenloser Probelauf bei Civitai. Für die Anwendung abgeleitete Wünsche als V.56 (Landeplatz 10.11).
+- **Nächster Schritt:** Mit dem Eigentümer klären, ob 10.8 abgeschlossen wird (PR 218 auf „Ready for review“, Einspielen) – oder zuerst der Checkpoint-Versuch.
+- **Modell-Bilanz:** aktive Klasse Entscheidung (bedient: siehe Sitzungsabfrage); Erkundungsarbeit lief oberhalb der Empfehlung für Routinearbeit; keine Abgabe an Unteragenten (kein Probelauf für Mechanik-/Routine-Klasse belegt).
+- **Kontextgröße:** rund 828.000 Token – weit über der Grenze von 200.000; Weiterarbeit auf ausdrücklichen Wunsch des Eigentümers („Weiter hier“). Neue Session empfohlen.
+- **Archivierung:** Oktober-Scheibe ausgelagert nach `docs/archiv/logbuch-2026-10.md`; das Logbuch bleibt über 800 Zeilen, weil die laufende Monats-Scheibe allein so groß ist – Verdichtung beim nächsten Phasen-Wechsel.
+
+### 2026-11-07 – [GELÖST] Bildfehler bei Krea 2 Raw: Ursache ist der Negativ-Prompt
+
+- Mit Negativ-Prompt Farbflecken in jeder Einstellung, ohne sauber. Raw setzt Körperwörter aber nicht besser um als Turbo. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Zweiter Testavatar: drei Runden, auf Wunsch abgebrochen
+
+- Festlegungen schrittweise abgefragt (Nordeuropa, 26, kupferrot, grüne Augen, Sommersprossen, kurvig, 172 cm). Krea 2 Turbo passt am besten; rundere Gesichtsbeschreibung verdrängte die Kurven. Danach Referenz festgelegt: Runde 3, Krea 2 Turbo, Seed 505. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Wäsche-LoRAs (Krea 2): Krea kann Wäsche schon ohne LoRA
+
+- Lingerie Construction sichert Strapse; Cinzia mit schwebenden Clips. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Bowing Down (Krea 2): beständig, aber Hüfte erhoben
+
+- Alle Joschek-LoRAs für Krea 2 sind damit getestet. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Lip Biting (Krea 2): Wirkung schwach
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Kneeling Hands on Thighs: bei Runware nicht verarbeitet, Test abgebrochen
+
+- Zwei Uploads, über 30 Minuten `loraModelNotReady`; Abbruch auf Wunsch des Eigentümers.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Gimp (Krea 2): einheitlich, mit Latex-LoRA am besten
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Touch (Krea 2): Wirkung gering
+
+- Umarmung gelingt schon ohne LoRA; LoRA macht Griff fester. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Ballet Ankle Heels (Krea 2): echte Ballettstiefel ab 0,6
+
+- Testavatar 21. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Female Chastity Harness (Krea 2): stimmig erst bei 1,0
+
+- Prüffigur 45 Jahre mit Sport-BH. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Nipple Clamps (Krea 2): stimmig bei 0,6, eigene Prüffigur 45 Jahre
+
+- Nacktbild-Test zunächst abgelehnt (Altersunsicherheit des 21-jährigen Avatars); auf Vorschlag des Eigentümers mit 45-jähriger Prüffigur durchgeführt. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Sidesuspension (Krea 2): erkennbar, aber nicht stimmig
+
+- Erste Bewertung nach der neuen Prüfliste; Eintrag „Seitliche Aufhängung“ ergänzt. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [GELÖST] Spreader-Gag-Bewertung korrigiert; Nachschlagedokument Fesselungsartikel angelegt
+
+- Eigentümer: Serie hat nicht funktioniert, nur 404 bei 1,0 kommt dem Vorbild nahe. Bestätigt – ich hatte nach sauberer Zeichnung statt nach echtem Aufbau bewertet. Neu: `docs/research/fesselungsartikel.md` mit Aufbau, Sitz und typischen Bildfehlern je Artikel als Prüfliste für künftige Bewertungen.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Spreader Gag (Krea 2): gut bei 0,6, bei 1,0 unstimmig
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Harness Gag erzwingt gebundenes Haar
+
+- Zwei Anläufe für offenes Haar (9 Bilder) ohne Erfolg. Details in `docs/research/bildanbieter.md`.
+- Eigentümer: Offenes Haar unter einem Kopfgeschirr ist unrealistisch; das gebundene Haar ist richtig. Erste Kombination gilt.
+
+### 2026-11-07 – [BEOBACHTUNG] Zwei LoRAs kombiniert (Leather Cuffs + Harness Gag): funktioniert
+
+- Beide Elemente in allen drei Seeds, Hände stimmig; Haar wird zum Zopf. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [GELÖST] Fehlbewertung Seed 101 (Hände) korrigiert
+
+- Eigentümer: bei Seed 101 passt die Anatomie der Hände nicht. Nachgeprüft, bestätigt; Bewertung in der Recherche korrigiert. Ursache: Hände nicht in voller Auflösung geprüft, nur Seil-Ausschnitte. Lehre (erneut): bei Fesselung hinter dem Rücken immer die Hände im Ausschnitt prüfen.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar in Sport-BH und Shorts mit Rope Bondage: Seilwirkung auf der Haut sichtbar
+
+- Seil eng auf der Haut mit leichter Wölbung; Seed 404 hinten bestes Takate Kote bisher. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Getting Gagged (Krea 2): Handlung erst bei 1,0, Stoff wird durchscheinend
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Panel Gag (Krea 2): erst bei 1,0
+
+- Bei 0,6 kein Knebel, bei 1,0 vollständig. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Spider Gag: Gurt realistisch, wenn er auf der Haut unter dem Haar verläuft
+
+- Zopf löst das Gurtproblem, lässt sie aber jünger wirken; offenes Haar über dem Gurt ist die bessere Lösung. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Spider Gag (Krea 2): gut ab 0,6
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Shiny Latex Bodysuits (Krea 2): echter Latex ab 0,6
+
+- Ohne LoRA nur matter Elasthan. Einmal Antwort ohne Bild von Runware, Wiederholung lief. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Bolero Straitjacket (Krea 2): stimmig ab 0,6, weiß gegen schwarz
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Metalstocks bei 1,0 mit Seitenansicht: gleiches Muster in sechs Seeds
+
+- Hals weiter nicht im Balken, Rückenausschnitt trotz Gegenanweisung. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Metalstocks mit tiefer Vorbeuge: Vorbeuge gelingt, Hals im Balken nicht
+
+- Zwei Anläufe, je sechs Bilder; tiefe Vorbeuge und vollständiger Pranger schließen sich bisher aus. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Metalstocks (Krea 2): stimmig bei 0,6, bei 1,0 uneinheitlich; Metall-Yoke per Prompt
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Yoke (Krea 2): stimmig erst bei 1,0
+
+- Bei 0,6 Hals nicht im Joch, bei 1,0 vollständig. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Harness Gag (Krea 2): sehr glaubwürdig ab 0,6
+
+- Kopfgeschirr mit Ballknebel in beiden Seeds; ohne LoRA keiner. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Hogtied (Krea 2): stimmig ab 0,6; Famegrid nicht verarbeitet
+
+- Hogtie mit Verbindungsseil in beiden Seeds; ohne LoRA keiner. Famegrid nach über 40 Minuten bei Runware nicht bereit. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Leather Cuffs (Krea 2): sehr glaubwürdig ab 0,6
+
+- Lederfesseln an Hand- und Fußgelenken mit Karabinern, Hände natürlich; ohne LoRA keine Fesseln. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Alter bei Krea 2 Turbo: 21 behalten, Seed-Wahl wirkt am stärksten
+
+- Eigentümer fragte nach Alter 18 im Prompt; abgeraten (Jugend-Bildsprache, Risiko minderjährig wirkender Figuren). Alter vorn, weiches Licht, glatte Haut: leicht jünger; Seeds 101 und 404 am nächsten an 21. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Joschek's Ball Gags (Krea 2): sicher ab 0,6
+
+- Ohne LoRA kein Knebel; 0,6 glaubwürdig mit erhaltenem Gesicht; 1,5 verzerrt. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Fotorealismus-LoRAs: Skin Texture für Z-Image überzeugt, LoKr-LoRAs laden nicht
+
+- Realistic Skin Texture macht Z-Image deutlich fotografischer. Amateur Photography und Realism Engine (LoKr) laden bei Runware nicht. Krea 2 Turbo sehr natürlich, Porträt aber zu alt; Mystic XXX verjüngt und rundet. Waist slider: negativ = schlanker; Runware begrenzt LoRA-Gewichte auf ±4, die Anwendung auf ±2. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Nachschärfen auf Z-Image: höhere Auflösung, aber glattere Haut
+
+- Hochrechnen und Bild-zu-Bild (0,15/0,3) glätten die Hautstruktur; kein Gewinn an Natürlichkeit. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Z-Image mit niedrigerem CFG: Natürlichkeits-Wörter wirken stärker als der CFG-Wert
+
+- CFG 3 und 2,5 kaum verschieden; „candid photo, natural skin texture …“ macht das Bild deutlich natürlicher. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Civitai-Bild nachgestellt: SDXL-Grundmodell mit kurzem Prompt
+
+- Erzeugungsdaten über die Civitai-Schnittstelle gelesen und ohne Hires nachgestellt; Vergleich mit Testavatar auf SDXL und Z-Image. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] SDXL-Checkpoints scheiden aus
+
+- RealVisXL, epiCRealism XL, CyberRealistic XL: schwache Prompt-Treue, ein unverlangtes Bild mit nacktem Oberkörper trotz Negativ-Prompt, Gesichter jünger als 21. Problematische Bilder gelöscht, nicht weitergegeben. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Vergleich von vier Checkpoints: Z-Image und Juggernaut Z vorn
+
+- Negativ-Prompt löst das Shorts-Problem bei voller Körperbeschreibung. Krea 2 Raw mit Bildfehlern bzw. zu jung wirkend, LUSTIFY ignoriert die Kleidung und lieferte ungefragt ein Aktbild (gelöscht, nicht weitergegeben). Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Suche nach anderem Checkpoint bei Runware
+
+- Kandidaten: Z-Image (Grundmodell), Juggernaut Z, Krea 2 Raw, SDXL-Fotorealismus (RealVisXL, epiCRealism XL, LUSTIFY), Qwen-Image; Chroma nicht vorhanden. Liste in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Oberweite im Bikini: Abstufung erkennbar, aber mild
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Oberweite in drei Stufen: Unterschiede gering
+
+- „small“ etwas kleiner, „medium“ und „full“ kaum verschieden; schwarzer Bodysuit und Zusatz „in proportion“ dämpfen. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Pool mit voller Körperbeschreibung: gleiches Muster, Shorts entfallen auch hier
+
+- Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Strand mit voller Körperbeschreibung: einheitlichste Reihe, Shorts entfallen
+
+- Vier Bademoden wie verlangt mit Figur und jungem Gesicht; Tankini und Surf werden zu Badeanzügen. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Volle Körperbeschreibung bei Bademode: Figur zurück, Surf-Shorts werden Slip
+
+- Badeanzug und Bikini mit Figur wie im Referenzbild und jungem Gesicht; Surf-Set knapper. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Mittelweg am See: jung trotz Sonne, Figur bleibt schlanker
+
+- Alter vorn reicht auch bei Sonne; „athletic curvy build“ ändert die Figur kaum. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Avatar wirkt am See älter: Alter vorn im Prompt und weiches Licht helfen
+
+- Eigentümer bemerkt älteres Aussehen am See. Alter an den Anfang, weiches Licht: wirkt wie 21, aber Figur schlanker. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Bademoden am See: vier wie verlangt, Tankini und Surf-Shorts abweichend
+
+- Gesamtbild über vier Umgebungen: Badeanzug und Bikini verlässlich, Shorts zur Bademode Glückssache. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Bademoden am Pool: alle sechs wie verlangt
+
+- Tankini mit Shorts und Surf-Set mit Boardshorts gelingen hier; Gesicht am einheitlichsten. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Bademoden am Strand: Bademode bleibt, Licht und Haare ändern sich
+
+- Tankini weiter mit Slip, Surf-Shorts kürzer; Haut dunkler, Haare lockiger. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Sechs Bademoden am Testavatar: alle wie verlangt
+
+- Nur beim Tankini Slip statt Shorts. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Kleidung zuerst im Prompt: vier von fünf Stilen jetzt wie verlangt
+
+- Reihenfolge Kleidung → Person, Körper knapp, Längen genannt; Rock-Stil noch mit schmalem Spalt; Figur weniger kurvig. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Zehn Kleidungsstile: fünf wie verlangt, vier freizügiger, Tracht gescheitert
+
+- Körperbeschreibung zieht bei lockerer Kleidung Bauchfreiheit und kurze Säume nach sich. Einmal `internalError` bei Runware, Wiederholung lief. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Neuer Testavatar: Mexiko, sportlich-kurvig, Bodysuit
+
+- Eigentümer wählt Herkunft Mexiko und Proportions-Entwurf 3. Bauchfreies Top trotz Gegenanweisung; gelöst mit „toned core“ und Bodysuit. Neue Beschreibung in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar: Herkunft Mexiko bzw. Mittelamerika ändert wenig
+
+- Vergleich Kolumbien/Mexiko/Guatemala mit Seed 101: nur leichte Verschiebungen bei Hautton, Gesichtsform und Brauen. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Alle mit dem Testavatar geprüften LoRAs als brauchbar bestätigt
+
+- Eigentümer bestätigt zusätzlich Large Ball Gag, Rope Bondage, Metal Bondage, Tape Bondage und Plastic Zip-Cuffs. Gesamtstand in V.54 und `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Megapack 0,8 vom Eigentümer bestätigt
+
+- In V.54 nachgetragen.
+
+### 2026-11-07 – [BEOBACHTUNG] Megapack mit Gewicht 0,8: Knebel sicher, Gesicht weitgehend erhalten
+
+- 0,8 als Mittelweg zwischen 0,6 (kein Knebel) und 1,0 (Gesicht verschoben). Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Megapack mit Gewicht 1,0: Knebel in allen drei Seeds, Gesicht verschoben
+
+- Tuchknebel glaubwürdig; Gesicht runder, Haare kürzer. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Megapack (Krea 2), 0,6: Seil an Handgelenken sehr gut, Knebel fehlt
+
+- Tuchknebel in keinem der drei Seeds, Handgelenk-Seil überzeugend, Knöchel nur einseitig. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Plastic Zip-Cuffs (Krea 2), 0,6: auf Anhieb stimmig
+
+- Kabelbinder-Handschellen in allen drei Seeds eng und glaubwürdig, Figur erhalten; Arme nicht hinter der Lehne. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Tape Bondage: Handgelenke eng in einem Wickel, Kreuzwicklung nicht darstellbar
+
+- Handgelenke in allen drei Seeds eng nebeneinander in gemeinsamem Wickel mit sichtbaren Lagen; keine Kreuzwicklung, Knöchel-Band nur um einen Knöchel. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Tape Bondage: schmale Wickel per Prompt, LoRA unter 0,6 wirkungslos
+
+- Eigentümer: Wickel unrealistisch breit. Beschreibung „one tape width wide … wrapped around the same spot many times“ ergibt bei 0,6 schmale Bänder; bei 0,4 und ohne LoRA kein Klebeband. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Tape Bondage, Rückansicht, sechs Seeds: Knöchel jetzt zusammen, Knie nie
+
+- Handgelenke, Mund und Knöchel in allen sechs stimmig, Knie in keinem getaped; Figur leicht verjüngt, am besten 303. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Tape Bondage (Krea 2), 0,6: Handgelenke und Mund gut, Beine teils unvollständig
+
+- Von vorn stimmig; von hinten Knöchel einzeln umwickelt, Knie frei; Figur leicht verjüngt. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Metal Bondage, Rückansicht, sechs Seeds: Handschellen hinten in fünf von sechs
+
+- Genauere Armhaltung bringt verkettete Schellen hinter dem Rücken (außer Seed 202); Figur teils verjüngt, am besten 303 und 606. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Metal Bondage (Krea 2), 0,6: Füße und Halsband gut, Handgelenke ohne Kette
+
+- Handschellen nicht hinter dem Rücken und nicht verbunden; Figur von vorn verjüngt. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Rope Bondage, Rückansicht, sechs Seeds: Armhaltung jetzt in allen richtig
+
+- Genauere Beschreibung der Armhaltung brachte gestapelte Unterarme in allen sechs Seeds; Handgelenke einzeln statt zusammen gebunden; Seed 101 mit dritter Hand; am besten 303, 404, 606. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Rope Bondage (Krea 2), 0,6: Figur hält, Arme hinten nicht stimmig
+
+- Vorderansicht stimmig, Rückansicht mit falscher Armhaltung. Leberfleck erstmals sichtbar. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea mit Seed 404 angenommen
+
+- Eigentümer nimmt Seed 404 an. Rezept in `docs/research/bildanbieter.md`, Stand in V.54 nachgetragen.
+
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea, sechs Seeds: Form und Kleidung stabil, Sitz schwankt
+
+- Form, Kleidung und Gesicht in allen sechs stabil; Sitz bei allen leicht links der Mitte, am besten Seed 404. Stützt den Wunsch V.53 (fester Seed). Details in `docs/research/bildanbieter.md`. Skript `szene.py` nimmt den Seed jetzt aus `SEED`.
+
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea 1,0, von hinten, Kleidung festgehalten: Kleidung bleibt
+
+- Ausdrückliche Stoffangabe hält die Kleidung gegen die LoRA. Armbinder näher an der Mitte, ein Arm wirkt noch frei. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Armbinder Krea 1,0 mit „single sleeve“: Form stimmt, Sitz und Kleidung nicht
+
+- Ein einziger geschnürter Ärmel, aber seitlich statt mittig hinter dem Rücken; Kleidung wird zu Netzstoff und Leder. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Armbinder, Gewicht 0,6: keiner der beiden LoRAs gelingt
+
+- Z-Image-Turbo (Armbinder-Flux): Armbinder erkennbar, Figur verloren (Gesicht, Haare, Kleidung, Körper). Krea 2 (Armbinder): Figur erhalten, aber zwei getrennte Ärmel statt eines Armbinders. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] German Handcuffs brauchbar; kleinere Schellen per Prompt
+
+- Eigentümer bestätigt German Handcuffs als brauchbar (V.54 nachgetragen). Wunsch: Schellen passend zum Handgelenk. Zusatz „small, slim … snugly … true-to-scale“ im Prompt macht Schellen schmaler und enger, Kette kürzer; 0,6 und 0,4 kaum verschieden. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit German Handcuffs (Krea 2 Turbo): Reihenfolge im Prompt entscheidet
+
+- Gewicht 0,6, Handschellen hinter der Avatar-Beschreibung: Hände nicht hinter dem Rücken. Handschellen vor die Beschreibung gestellt: bei 0,6 und 1,0 korrekt hinter der Stuhllehne. Details und Kosten in `docs/research/bildanbieter.md` (Abschnitt Testavatar). Skript `szene.py` im Scratchpad nimmt das Modell jetzt aus der Umgebungsvariable `MODEL`.
+
+### 2026-11-07 – [BEOBACHTUNG] Alle LoRAs von „sarahpeterson“ aussortiert
+
+- **Entscheidung des Eigentümers** nach Durchsicht aller Modelle des Erstellers auf Civitai: lieblos gemacht, mehr Fehler und Inkonsistenzen als Nutzen (Handschellen; Bound on stomach zeigt Hogtie und gleichzeitig eine Hand am Buch), Qualität fragwürdig, Frauen stark überzeichnet – kein Inhalt mit Anspruch.
+- **Betroffen:** die fünf Uploads Rope tied shibari, Handcuffed, Bound on stomach, Bite gag und cuffed behind back (über die Civitai-API geprüft: auch „cuffed behind back“ stammt von „sarahpeterson“) sowie alle weiteren der Reihe. Vermerk in `docs/research/bildanbieter.md` und in V.54. Uploads bleiben im Runware-Konto, Löschen per API nicht möglich.
+- **Verbleibend brauchbar:** Z-Image-Turbo – Large Ball Gag (FloorInspector), Armbinder (AI_After_Dark); Krea 2 – Plastic Zip-Cuffs, Megapack, Rope Bondage, Metal Bondage, Tape Bondage, Armbinder.
+- **Nebenbei:** PR 218 auf Entwurf gestellt (Wunsch des Eigentümers); die CI läuft bei Entwürfen nicht.
+
+### 2026-11-07 – [BEOBACHTUNG] Reihe „Sarah Petersons“: Name des Erstellers, Trainingsumfang unbekannt
+
+- Frage des Eigentümers nach den Trainingsbildern. Befund: „sarahpeterson“ ist der Benutzername des Erstellers bei Civitai (Reihe für SD 1.5, SDXL, Chroma, Z-Image, Flux Klein, Qwen), kein Hinweis im Text auf eine bestimmte abgebildete Person. Dateiköpfe der vier Z-Image-LoRAs nennen keine Bildanzahl; nur Schritte (2.901–4.248) und je eine Bildbeschreibung, die nur aus dem Auslösewort besteht (`ss_tag_frequency` mit Zähler 1 – *Deutung, nicht belegt:* sehr kleiner Datensatz oder unvollständige Angabe). Wer auf den Trainingsbildern zu sehen ist, lässt sich aus Datei und Beschreibung nicht feststellen; Beispielbilder bei Civitai nicht angesehen.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Large Ball Gag, Gewicht 0,6: Figur bleibt erkennbar
+
+- Z-Image-Turbo, Seed 101, `skriptorium:999177@2731175` Gewicht 0,6, sitzend auf Stuhl, von vorne; Knebel, Hände hinter der Lehne und Knöchel ausdrücklich im Prompt (0,0025 $).
+- Ergebnis: Gesicht, welliges Haar, Kleidung und kurvige Figur nahe an der Referenz; roter Ballknebel mit Riemen sitzt, Hände hinter der Lehne, Knöchel an den Stuhlbeinen gebunden. Bislang die beste Kombination aus Wiedererkennung und LoRA-Wirkung.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar, Shibari 0,6 mit Beinfesselung im Prompt
+
+- Weg 1 auf Wunsch des Eigentümers: Gewicht 0,6, Prompt um „legs bound together with rope at the thighs, knees and ankles“ ergänzt (je 0,0025 $).
+- Von vorne: Gesicht nahe an der Referenz (welliges Haar), Brust- und Taillenbänder, Beine an Oberschenkeln, Knien und Knöcheln gebunden – vollständige Fesselung bei erhaltener Wiedererkennung. Ausschnitt etwas eckiger als die Standardkleidung.
+- Von hinten: Handgelenke hinten gebunden, Brustband, Längsseil; Beine nur an den Knöcheln sichtbar gebunden; Gesicht weiter älter mit glattem Haar – die Rückenansicht bleibt der schwache Punkt.
+- Folge: Für den Testavatar mit Fessel-LoRAs Gewicht 0,6 und alle gewünschten Fesselungen ausdrücklich im Prompt.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Shibari, Gewicht 0,6: Gesicht näher, Fesselung schwächer
+
+- Wie zuvor, aber Gewicht 0,6 (je 0,0025 $). Vergleich mit Referenz (Seed 101) und Gewicht 1,0, Gesichter vergrößert.
+- Gesicht: von vorne deutlich näher an der Referenz (jünger, welliges Haar), aber nicht gleich; von hinten weiter glattes, kürzeres Haar und älter. Kleidung jetzt durchgehend schwarz.
+- Fesselung: Brust- und Taillenbänder, Arme bzw. Handgelenke hinten gebunden – aber die Beine sind nicht mehr gebunden (bei 1,0 von der LoRA selbst ergänzt, im Prompt nicht verlangt).
+- Folge: Zielkonflikt Wiedererkennung gegen Wirkung der LoRA. Offen: 0,6 mit Beinfesselung ausdrücklich im Prompt, oder 0,8; dauerhaft eine eigene Figuren-LoRA.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit Rope tied shibari: Fesselung gut, Gesicht wandert
+
+- Z-Image-Turbo, Seed 101, `skriptorium:1501202@2605811` Gewicht 1,0, Ansicht von vorne und von hinten (je 0,0025 $).
+- Fesselung: vorne Seilbänder über und unter der Brust und an der Taille, Beine an Oberschenkeln, Knien und Knöcheln gebunden, Arme hinten; hinten Handgelenke gebunden, Brustbänder, Seil über die Schultern, Knöchel gebunden – straff und glaubwürdig.
+- Abweichungen vom Referenzbild: Gesicht deutlich älter und anders, Haare kürzer und glatt; vorne V-Ausschnitt statt Rundhals, hinten dunkelblaue statt schwarze Leggings. Die LoRA zieht das Aussehen weg vom Testavatar. Figur (kurvig) bleibt erhalten.
+- Gegenmittel (nicht erprobt): Gewicht 0,6–0,7. Unklar, ob „Sarah Petersons“ der Name des Autors oder einer realen Person auf den Trainingsbildern ist – im zweiten Fall würde die LoRA Züge einer echten Person übertragen.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar: Körperbau B kurvig
+
+- Eigentümer wählt Entwurf B (kurvig). Testavatar vollständig festgelegt (Beschreibung, Körperbau, Standardkleidung, Z-Image-Turbo, Seed 101) in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Drei Körperbau-Entwürfe für den Testavatar
+
+- Auf Wunsch des Eigentümers: A athletisch, B kurvig, C groß und langbeinig (Seed 101, 0,0039 $). B klar anders, A und C ähnlich (Körpergröße ohne Bezugsobjekt nicht darstellbar). Bewusst kein sehr zierlicher Entwurf (wirkt leicht jünger). Wahl offen.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar festgelegt: Seed 101
+
+- Eigentümer wählt Seed 101. Testavatar = Beschreibung und Standardkleidung aus `docs/research/bildanbieter.md` („Testavatar“), Z-Image-Turbo, Seed 101.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar mit figurbetonter Kleidung
+
+- Eigentümer: Kleidung muss figurbetont sein, damit Vergleiche aussagekräftig sind. Standardkleidung jetzt schwarzes enges Langarm-Oberteil und Leggings, barfuß; Beschreibung um „mature adult facial features“ ergänzt (vorher wirkten zwei Seeds jünger). Vier Ganzkörperbilder einheitlich und klar erwachsen. Beschreibung in `docs/research/bildanbieter.md` aktualisiert.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar als Ganzkörperaufnahme
+
+- Wunsch des Eigentümers nach vollständigen Porträtaufnahmen: vier Ganzkörperbilder (Z-Image-Turbo, gleiche Seeds, 0,0065 $). Figur stimmig; bei Seeds 202 und 303 wirkt das Gesicht jünger – für eine klar erwachsene Testfigur 101 oder 404 empfohlen.
+
+### 2026-11-07 – [BEOBACHTUNG] Testavatar angelegt
+
+- Vorgabe des Eigentümers: 21 Jahre, weiblich, südamerikanisch. Beschreibung und erste vier Porträts (Z-Image-Turbo, 0,0052 $) in `docs/research/bildanbieter.md` („Testavatar“). Die vier sind sehr ähnlich; der Leberfleck fehlt. Auswahl offen.
+
+### 2026-11-07 – [BEOBACHTUNG] Eigentümer: beide Armbinder brauchbar
+
+- Eigentümer: „ja beide definitiv brauchbar“ → `skriptorium:691492@2536151` (Z-Image-Turbo) und `skriptorium:2767766@3119356` (Krea 2) als nutzbare LoRAs vorgemerkt.
+
+### 2026-11-07 – [BEOBACHTUNG] Armbinder: nur mit LoRA, dann auf beiden Modellen gut
+
+- Test Armbinder-Flux (Z-Image-Turbo) und Armbinder (Krea 2 Turbo), je ohne/mit, 0,021 $. Ohne LoRA in keinem Modell ein Armbinder; mit LoRA beide glaubwürdig (Schnürung, Schulterriemen), Krea etwas detailreicher, Z-Image günstiger. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Armbinder-LoRAs gesucht
+
+- Suche auf Wunsch des Eigentümers: für Z-Image-Turbo vier (Armbinder-Flux, ArmRestraints-Set, MonoGlove, Bolero-Zwangsjacke), für Krea 2 drei (Armbinder, Boxtie armbinder, Bolero-Zwangsjacke); alle im passenden Format. Nichts hochgeladen. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Eigentümer: Kettenhandschellen
+
+- Eigentümer: „wir bleiben bei Kettenhandschellen“ → für Handschellen Z-Image-Turbo mit „cuffed behind back“ (`skriptorium:1756180@2568521`); die Scharnier-LoRA (`skriptorium:3020654@3429711`) bleibt ungenutzt im Konto.
+
+### 2026-11-07 – [BEOBACHTUNG] Scharnier-Handschellen: nur mit LoRA auf Krea 2
+
+- Test auf Wunsch des Eigentümers, 0,019 $: Prompt allein liefert bei Z-Image-Turbo Kettenhandschellen, bei Krea 2 Turbo gar keine; mit „Hinged Handcuffs (held)“ (`skriptorium:3020654@3429711`, Krea 2) angelegte Schellen mit starrem Stahlteil hinter der Lehne. Hände in voller Auflösung geprüft.
+
+### 2026-11-07 – [BEOBACHTUNG] Rigid und hinged Cuffs: kaum etwas vorhanden
+
+- Suche auf Wunsch des Eigentümers. Nur „Hinged Handcuffs (held)“ für Krea 2 (gehalten, nicht angelegt) und „Rigidstock Cuff“ (Stockfessel, FLUX/Pony/Illustrious, kohya). Nichts hochgeladen. Details in `docs/research/bildanbieter.md`.
+
+### 2026-11-07 – [BEOBACHTUNG] Handschellen hinter dem Rücken: die Ansicht von hinten entscheidet
+
+- Test „cuffed behind back“ (Z-Image-Turbo) und German Handcuffs (Krea 2 Turbo), je ohne/mit, Verhörraum von schräg hinten, 0,021 $. Alle vier zeigen die Handschellen hinten; am überzeugendsten Z-Image-Turbo mit LoRA (eng sitzend, Arme hinter der Lehne). Details in `docs/research/bildanbieter.md`. Hände in voller Auflösung geprüft (Lehre aus den Korrekturen).
+
+### 2026-11-07 – [BEOBACHTUNG] Handschellen-LoRAs gesucht
+
+- Auf Wunsch des Eigentümers (realistische, tragende Fesselung bevorzugt). Liste in `docs/research/bildanbieter.md`: für Z-Image-Turbo „cuffed behind back“ und „arms behind back“ aus der Reihe Sarah Petersons; für Krea 2 German Handcuffs, Leather Cuffs, Standing Arrest u. a.; „Metal Cuffs (Police Style)“ im kohya-Format (vermutlich nicht ladbar). Nichts hochgeladen.
+
+### 2026-11-07 – [GELÖST] Bewertung Shibari korrigiert
+
+- Eigentümer meinte den Shibari-Vergleich (Frau im Schneidersitz): Mit LoRA ist die Seilverbindung realistischer. In voller Auflösung bestätigt: ohne LoRA dekoratives, aufgelegtes Muster ohne Spannung; mit „Rope tied shibari“ tragende Seilführung um Oberarme und Rumpf, ins Material eingeschnitten, Beine mehrfach gebunden. Meine Bewertung („kein Gewinn“) hatte das ordentlichere Muster höher gewichtet als die Funktion – falsch; korrigiert. Die Hogtie-Korrektur (Eintrag darunter) entstand aus einem Missverständnis der Rückmeldung, ist aber in voller Auflösung belegt und bleibt.
+
+### 2026-11-07 – [GELÖST] Bewertung Hogtie korrigiert
+
+- Eigentümer: Mit LoRA war die Seilverbindung realistischer. In voller Auflösung nachgeprüft: Mit „Bound on stomach“ verbindet eine weiße Kordel mit Schnallen Knöchel und gebundene Hände (echte Hogtie-Verbindung); ohne LoRA führt das Juteseil nur zur Hüfte. Meine erste Bewertung („weißer Stab, schlechter“) beruhte auf der verkleinerten Übersicht – falsch. Recherche korrigiert. Lehre: Einzelheiten von Fesselungen nur in voller Auflösung beurteilen.
+
+### 2026-11-07 – [BEOBACHTUNG] Reihe „Sarah Petersons“ auf Z-Image-Turbo: nur der Beißknebel lohnt
+
+- Auf Wunsch des Eigentümers vier Teile der Reihe (Shibari, Handschellen, Hogtie, Beißknebel) privat hochgeladen und je ohne/mit LoRA verglichen, 8 Bilder, 0,014 $. Ergebnis in `docs/research/bildanbieter.md`: Z-Image-Turbo zeigt Shibari über Kleidung und Hogtie schon ohne LoRA gut; Handschellen landen in beiden Fassungen vorn; Hogtie mit LoRA schlechter (Stab statt Seil); nur der Beißknebel profitiert deutlich. Nebenbefund: Das frühere Kinbaku-Problem auf Z-Image lag wohl am Motiv mit zwei Figuren, nicht an Seil allgemein (Deutung).
+
+### 2026-11-07 – [BEOBACHTUNG] Z-Image-Turbo mit drei LoRAs: Ball Gag hilft, Hands wenig, UltraReal schadet
+
+- Auf Wunsch des Eigentümers drei LoRAs privat hochgeladen (Hands, Large Ball Gag, Lenovo UltraReal; `z_image_turbo`), alle laden fehlerfrei. Je ein Vergleich ohne/mit LoRA, Seed 777, zusammen 0,0114 $. Details in `docs/research/bildanbieter.md`.
+- Large Ball Gag: deutlich besser (Riemen, Hände hinten). Hands: kleine Verbesserung, aber das Kinbaku-Motiv scheitert an Z-Image-Turbo selbst (drei Frauen, kaum Seilbilder). Lenovo UltraReal: Porträt glatter und jünger, schlechter als ohne.
+- Reibung: Upload-Skript war fest auf `krea_oss_2` eingestellt – Architektur jetzt über `ARCH` wählbar.
+
+### 2026-11-07 – [BEOBACHTUNG] Erkundung Z-Image: Unterschied Base/Turbo, LoRA-Lage
+
+- Auftrag des Eigentümers: Unterschied Z-Image / Z-Image-Turbo, vorhandene LoRAs, Kleidung und die bisherigen Themen. Ergebnis in `docs/research/bildanbieter.md` („Erkundung Z-Image“): Turbo = verdichtet, 8 Schritte, ohne CFG/Negativ-Prompt, sehr fotorealistisch, wenig Vielfalt; Z-Image = Grundmodell, 28–50 Schritte, CFG und Negativ-Prompt, mehr Vielfalt. Civitai 1.123 LoRAs (843 Turbo); bei Runware zu den Themen keine – Upload nötig. Stichprobe Dateiformat: alle passend (diffusers). Hand-LoRA mit 313.117 Downloads gefunden (Handproblem bei Fesselungen).
+
+### 2026-11-07 – [BEOBACHTUNG] Modellvergleich: Z-Image-Familie vorn
+
+- Ziel des Eigentümers: möglichst fotorealistisch, Modell ohne Einschränkungen, fehlende Dinge per LoRA. Vergleich von sieben Grundmodellen bei Runware (Porträt, Knebel am See; Motiv 3 weggelassen), 14 Bilder, 0,078 $. Tabelle und Bewertung in `docs/research/bildanbieter.md`.
+- Kurz: Z-Image-Turbo (0,13 Cent, 4 s) natürlichstes Porträt und Knebel ohne LoRA (Hände aber vorn); Z-Image-NSFW-Unlock und Juggernaut Z folgen der Fesselung am besten; Krea 2 Turbo lässt Knebel und Fesseln ohne LoRA weg; SDXL-Modelle (epiCRealism, LUSTIFY) detailreich, aber mit Zusatzteilen im Knebel-Motiv; HiDream wirkt retuschiert.
+
+### 2026-11-07 – [BEOBACHTUNG] MOSS Image: nur bei fal.ai, dort mit Prüfung und ohne LoRAs → V.55
+
+- Interesse des Eigentümers an MOSS Image. Geprüft (nur lesend): OpenRouter nein, Runware nein (auch kein Upload, Architektur nicht vorgesehen), fal.ai ja (`fal-ai/moss-image`, 0,05 $ je Megapixel, Prüfung ohne Freischaltung immer an, kein LoRA-Feld), Replicate ungeprüft. Offenes Modell (Apache-2.0); selbst betreiben ausgeschlossen (Projektkontext Abschnitt 3). Als V.55 mit Landeplatz 10.11 angelegt.
+
+### 2026-11-07 – [BEOBACHTUNG] Alten Shibari-Upload löschen – geht nicht per API
+
+- Eigentümer: Upload `skriptorium:591433@3318444` löschen. Runware-Doku und CLI (`runware model …`: search, show, schema, pricing, examples, upload) kennen kein Löschen eigener Modelle; `delete` gibt es nur für Medien (`mediaStorage`). Nicht dokumentierte Aufrufe nicht ausprobiert. Weg: Dashboard von Runware durch den Eigentümer (ob dort angeboten, nicht geprüft) oder Ersetzen durch erneuten Upload (V.54). Bis dahin unschädlich: privat, lädt nicht, Speicher im Beta kostenlos.
+
+### 2026-11-07 – [BEOBACHTUNG] V.54 angelegt: weitere LoRAs später
+
+- Eigentümer fragte, warum der S4-Schlüssel nicht als Netzwerk-Secret geht. Antwort: S3/S4 signiert jede Anfrage mit dem geheimen Schlüssel (wechselnde Signatur), ein fester Kopfzeilen-Schlüssel vom Proxy reicht nicht – der Schlüssel müsste im Container liegen (Umgebungsvariable) oder der Mac erzeugt eine vorab signierte Upload-Adresse.
+- Eigentümer: „wir lassen das Thema vorerst und greifen später weitere LoRAs auf“ → V.54, Landeplatz 10.11. Die umgewandelte Shibari-Datei lag nur im Scratchpad dieser Session und geht mit ihr verloren; das Umwandlungsverfahren steht im Logbuch-Eintrag „Shibari umgewandelt“.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Shibari umgewandelt, Upload zu Runware blockiert
+
+- Eigentümer: „wandle Shibari um und lade sie neu hoch“, Ablage „Kurzzeit-Dateihoster“. Runware nimmt Modelle nur über eine Download-Adresse an (auch die CLI, `runware model upload --download-url`).
+- Umwandlung in der Session (Skripte im Scratchpad, ohne Zusatzpakete): Original 234,7 MB, kohya-Format, F32, Rang 16, Alpha 16 (Faktor 1). 256 von 264 Modulen eindeutig den Modulen der funktionierenden LoRAs zugeordnet (`lora_unet_blocks_…` → `diffusion_model.blocks.…`, `lora_down`/`lora_up` → `lora_A`/`lora_B`); weggelassen 8 Module ohne Gegenstück (`first`, `last_linear`, `tmlp_0/2`, `tproj_1`, `txtfusion_projector`, `txtmlp_1/3` – Namen im Original von Krea 2 Raw nicht nachprüfbar, Hugging Face verlangt Anmeldung). Ergebnis 228,6 MB, Kopf gegen Tape Bondage geprüft: gleiche 512 Schlüssel, keine Formfehler.
+- Upload: litterbox.catbox.moe antwortete „Invalid uploader“; ein zweiter Versuch mit Testdatei (litterbox, tmpfiles.org) wurde von der Sicherheitsprüfung der Umgebung als möglicher Datenabfluss blockiert – nicht umgangen. Umgewandelte Datei liegt nur im Scratchpad dieser Session.
+- Eigentümer: „Freigabe“ für den Upload zu einem Kurzzeit-Hoster. litterbox mit der echten Datei erneut „Invalid uploader“ (wohl Sperre der Herkunftsadresse); file.io (Löschen nach erstem Abruf) von der Sicherheitsprüfung der Umgebung blockiert – die Freigabe im Gespräch genügt ihr nicht, nötig wäre eine Berechtigungsregel in den Einstellungen. Nicht weiter versucht.
+- Eigentümer: Berechtigungsregel „nur für diese Session“ → eng gefasste Erlaubnis für genau den einen Upload-Befehl in `.claude/settings.local.json` (nicht committet). Die Regel griff (Befehl lief durch die Prüfung), aber file.io ist aus der Umgebung nicht erreichbar: zweimal Verbindungsabbruch, auch die Startseite (`ws_closed_mid_exchange` am Proxy). Regel danach gelöscht.
+- Offen: Weg zu einer Download-Adresse (Eigentümer entscheidet). Alter Upload `skriptorium:591433@3318444` (nicht ladbar) liegt weiter im Konto.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: drei weitere LoRAs – zwei wirken stark, Shibari lädt nicht
+
+- Eigentümer wählt alle drei geprüften Kandidaten. Privat hochgeladen: `skriptorium:2728181@3066750` (Metal Bondage), `skriptorium:591433@3318444` (Shibari, Gewicht 0,4, Auslösewort), `skriptorium:2351806@3096239` (Tape Bondage); alle nach einigen Minuten in der Modellsuche.
+- Vergleich auf Krea 2 Turbo (Seed 777, je ohne und mit LoRA, bekleidete erwachsene Figuren): Metal Bondage (Gewicht 1,0, 0,0136 $) – ohne LoRA Schellen an den Handgelenken mit loser Kette, mit LoRA Handschellen an der Wand und Fußschellen mit Kette sichtbar; Abweichung 34,6. Tape Bondage (1,0, 0,0161 $) – ohne LoRA gar kein Klebeband (und eine ältere Frau ohne Fesseln), mit LoRA Klebeband über dem Mund, um Rumpf und Stuhl, an den Beinen; Abweichung 38,6. Nebenwirkung Tape: Kleidung wechselt von Hose zu Rock mit Strumpfhose.
+- Shibari: Bild mit LoRA → HTTP 400 `failedLoraLoad` („incompatible format or configuration“) – das kohya-Format des Dateikopfs (`lora_unet_…`) nimmt Runware für Krea 2 nicht. Upload liegt trotzdem im Konto. Möglichkeiten: Datei ins diffusers-Format umwandeln und neu hochladen (Lizenz erlaubt Abwandlungen), oder den Upload löschen.
+
+### 2026-11-07 – [SESSIONENDE] Nachtrag: LoRAs erprobt, Wiedereinstieg
+
+- **Seit dem letzten Sessionende:** Civitai-Schlüssel als Netzwerk-Secret; drei LoRAs privat zu Runware hochgeladen (`skriptorium:2964163@3386627`, `…2767605@3115420`, `…2742699@3142259`), auf Krea 2 Turbo sauber (Raw mit Bildfehlern); Krea 2 Raw/Turbo als eine Familie im Code (`fb29b82`); Proben zu Seil, Knebel, Takate Kote, Kinbaku; V.53 (fester Seed) angelegt. KI-Kosten der Proben zusammen rund 0,20 $ (Runware-Guthaben).
+- **Wiedereinstieg:** neue Session auf `feat/10.8-zweiter-bildanbieter`; CI von [PatSchCode/Skriptorium#218](https://github.com/PatSchCode/Skriptorium/pull/218) prüfen; Bestätigung des Eigentümers zu 10.8; Einspielen vom Mac (`RUNWARE_API_KEY` mit dem zeilenweisen Befehl aus dem Runbook in `.env`, Durchreichen in der Compose-Datei prüfen); danach 10.9.
+- **Kontextgröße:** weit über der Grenze (Eigentümer: „Weiter hier“); nächste Session neu beginnen.
+
+### 2026-11-07 – [BEOBACHTUNG] V.53 angelegt: fester Seed beim Bilderzeugen
+
+- Eigentümer: „nimm den festen Seed als Wunsch für 10.11 auf“ → V.53 im Fahrplan, Landeplatz 10.11 (Startwert wählbar, anzeigen, in der Herkunft festhalten; Unterstützung je Anbieter klären). Kein Code.
+
+### 2026-11-07 – [GELÖST] 10.8: Hände bei der Box-Fesselung – mehrere Seeds statt genauer Beschreibung
+
+- Weg 1 auf Wunsch des Eigentümers: einfachere Beschreibung (Kinbaku-Prompt ohne Handdetails), Rope Bondage 1,2, Krea 2 Turbo, fünf Seeds (11, 222, 3333, 4444, 5555), je 0,0037 $, zusammen 0,0185 $.
+- Ergebnis: Seed 5555 unbrauchbar (drei statt zwei Figuren); bei 11, 222, 3333, 4444 Unterarme waagerecht übereinander, Handgelenke mittig gebunden, Hände locker am anderen Unterarm – deutlich besser als mit der ausführlichen Handbeschreibung. Am saubersten 4444, dann 222.
+- Folge für die Arbeit mit dem Skriptorium: bei schwierigen Posen mehrmals „Neu erzeugen“ statt die Beschreibung aufzublähen. Feste Seeds kann das Skriptorium heute nicht vorgeben (jedes Bild ein neuer Zufallswert).
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Hände bei der Box-Fesselung – genaue Beschreibung verschlechtert sie
+
+- Eigentümer: „Die Hände passen nicht.“ Prompt um Handhaltung ergänzt (Handgelenke in der Rückenmitte gekreuzt und gebunden, Handflächen flach am anderen Unterarm, Finger locker); Seeds 777 und 1903, sonst unverändert; je 0,0037 $.
+- Ergebnis: Handgelenke jetzt mittig gestapelt und umwickelt, aber Hände zeigen mit offenen Handflächen nach außen, bei Seed 777 hat die jüngere Figur zu viele Hände. Die ausführliche Handbeschreibung macht das Modell eher unsicherer.
+- Möglichkeiten (nicht erprobt): mehrere Seeds erzeugen und das beste wählen; Hände nur knapp beschreiben oder verdecken (Ausschnitt, Ärmel); Hände nachträglich ausbessern (Inpainting – das Skriptorium kann das heute nicht, wäre ein neuer V-Schritt).
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Kinbaku mit zwei Figuren – Ansicht von hinten trifft die Box-Fesselung
+
+- Wunsch des Eigentümers: enges Kinbaku, Trainerin ebenfalls gebunden. Krea 2 Turbo, Rope Bondage Gewicht 1,2, Seed 777, Querformat 1216 × 832, Prompt mit Dreiviertelansicht von hinten, zwei erwachsene Frauen kniend im Dojo, schwarze enge Kleidung, Unterarme waagerecht gestapelt, Bänder über und unter der Brust, Längsseil am Rücken; 0,005 $.
+- Ergebnis: beide gebunden; Unterarme waagerecht hinter dem Rücken, zwei Brustbänder, Knoten und Längsseil am Rücken gut erkennbar – deutlich näher an Takate Kote als die Ansicht von vorn. Abweichung: Schulterseile laufen als X nach oben (eher Geschirr), Hände greifen die Ellbogen.
+- Folge: Bei Fesselungen auf dem Rücken die Ansicht von hinten oder schräg hinten in den Prompt; Gewicht 1,2 ohne sichtbare Bildfehler.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Takate Kote – keine der Varianten trifft die Fesselung
+
+- Wunsch des Eigentümers. Krea 2 Turbo, Seed 777, Gewicht 1,0, Prompt: Frau im Yukata kniend auf Tatami, Takate Kote (Unterarme waagerecht hinter dem Rücken, zwei Seilbänder über und unter der Brust, Seil unter den Armen). Ohne LoRA 0,0037 $, Rope Bondage 0,005 $, Megapack 0,005 $.
+- Ohne LoRA: kein Seil, Arme vorne verschränkt („folded“ falsch gedeutet). Rope Bondage: drei Seilbänder um Brust und Taille, Hände hinten auf Hüfthöhe – kommt am nächsten, aber keine waagerecht gestapelten Unterarme. Megapack: zwei Bänder um die Brust, Handgelenke hinten seitlich gebunden. Bei keiner Fassung ist die eigentliche Box-Fesselung von hinten erkennbar.
+- Möglichkeiten (nicht erprobt): Ansicht von hinten oder schräg hinten im Prompt, Gewicht 1,2, die spezialisierte LoRA 縛り/shibari (`591433@3318444`, 25.521 Downloads) hochladen.
+- Nebenbefund: Alle drei PNG-Dateien von Runware genau 3.037.407 Byte groß, Inhalt verschieden (Prüfsummen) – vermutlich kaum komprimiert.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Megapack wirkt bei Knebel deutlich
+
+- Wunsch des Eigentümers: Vergleich mit Knebel am See. Krea 2 Turbo, Seed 777, Gewicht 1,0, Prompt: Frau im Sommerkleid am Seeufer, Hände hinten mit Seil, roter Ballknebel mit Lederriemen. Ohne LoRA 0,0037 $, mit Megapack 0,0037 $ (vorher 0,0124 $ – Abrechnung nach Rechenzeit; *Deutung:* LoRA diesmal schon geladen).
+- Ergebnis: ohne LoRA weder Knebel noch Fesseln – das Grundmodell lässt beides einfach weg; mit Megapack Ballknebel mit Riemen, Seil um Oberarme und Handgelenke hinten. Knebel sitzt leicht seitlich im Mund. Mittlere Pixelabweichung 26,3 von 255.
+- Folge: Die LoRAs lohnen sich bei Motiven, die Krea 2 allein nicht darstellt (hier: Knebel, Fesselung überhaupt); bei einfachen Seilszenen kaum (Eintrag darunter).
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Wirkung der Seil-LoRAs gering – Krea 2 Turbo kann Seile schon
+
+- Eigentümer: „Die Bilder der unterschiedlichen LoRAs sehen identisch aus.“ Kontrollvergleich auf Krea 2 Turbo, gleicher Prompt (Frau auf Stuhl im Keller, Seil um Rumpf, Hände hinten, Knöchel an Stuhlbeinen), Seed 777, Gewicht 1,0: ohne LoRA 0,0037 $, Megapack 0,0124 $, Rope Bondage 0,0149 $.
+- Ergebnis: Schon ohne LoRA Seil um Rumpf und Handgelenk; die LoRAs ändern Einzelheiten – Megapack fesselt zusätzlich die Knöchel und lässt Seil herabhängen, Rope Bondage legt ein Brustgeschirr (Seil über und unter der Brust) und bindet die Knöchel. Mittlere Pixelabweichung zur Fassung ohne LoRA 18,6 (Megapack) und 11,4 (Rope) von 255. Hände in keiner Fassung hinter der Lehne.
+- Deutung: Bei einfachen Seilmotiven bringt das Grundmodell das meiste selbst; die LoRAs sollten sich bei Motiven zeigen, die Krea 2 allein nicht kann (Knebel, Klebeband, Hogtie, Aufhängung) – noch nicht geprüft.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: zwei weitere LoRAs hochgeladen und erprobt
+
+- Eigentümer wählt aus der Liste: Bondage & Gags Megapack (`2767605@3115420`) und Joschek's Rope Bondage v2 (`2742699@3142259`). Dateiköpfe: beide auf Krea 2 Raw, Rang 64 (431 bzw. 678 Trainingsbilder), keine Auslösewörter – beschreibende Prompts. Lizenz: keine Abwandlungen, Namensnennung beim Weitergeben, kommerziell nur Bilderzeugungsdienste (*Deutung:* privater Upload für eigene, nicht verkaufte Bilder unberührt).
+- Privat hochgeladen als `skriptorium:2767605@3115420` und `skriptorium:2742699@3142259` (Architektur `krea_oss_2`); nach wenigen Minuten in der Modellsuche.
+- Reibungen: Pythons `http.client` geht nicht über den Proxy (kein Civitai-Schlüssel, 401) → Weiterleitung mit curl holen; diese Dateien liegen bei Cloudflare R2 (`…r2.cloudflarestorage.com`) statt bei `b2.civitai.com`; die Antwort des Uploads ließ sich nicht auswerten, die Bereitstellung wurde über die Modellsuche bestätigt.
+- Probebilder auf Krea 2 Turbo (Seed 4242, Gewicht 1,0, bekleidete erwachsene Figur): Megapack, Frau auf Stuhl im Keller mit Seil um Rumpf und Stuhlbeine, 0,0096 $ – sauber, Hände nicht ganz wie verlangt hinter der Lehne; Rope Bondage, Frau in Scheune, Arme hinten, Seil um Oberkörper, 0,0083 $ – sauber, folgt dem Prompt. Keine Bildfehler wie bei Raw.
+
+### 2026-11-07 – [GELÖST] 10.8: Krea 2 Raw und Turbo als eine Familie
+
+- `api/runware_models.py` `_FAMILIES`: `krea_oss_2` und `krea_oss_2_turbo` → Familie `krea_oss_2`; Test in `test_families_decide_which_lora_fits` (Turbo und Raw passen, Krea 2 Medium `krea_2` nicht). 1.273 Tests grün, Abdeckung 99,92 %.
+- Gegenprobe über den Server-Weg mit echtem Schlüssel (ohne Bild): `krea:krea@2-turbo` und `skriptorium:2964163@3386627` hinzugefügt → die LoRA steht bei Turbo unter „passende LoRAs“.
+
+### 2026-11-07 – [GELÖST] 10.8: Plastic Zip-Cuffs läuft sauber auf Krea 2 Turbo
+
+- Gleicher Aufbau wie der Vergleich mit Raw (Seed 4242, keine Schritte/CFG), Modell `krea:krea@2-turbo`: ohne LoRA 0,0037 $ – sauber, Fesseln als breite Armbänder; mit LoRA 0,6 0,0136 $ – **sauber, ohne Bildfehler**, Kabelbinder richtig geformt, keine Verletzungen im Gesicht.
+- Folge: Die LoRA (Architektur `krea_oss_2`) mit Krea 2 Turbo nutzen, nicht mit Raw. Damit der Dialog sie bei Turbo anbietet, muss die Familien-Lücke in `api/runware_models.py` geschlossen werden (`krea_oss_2_turbo` → Familie `krea_oss_2`) – heute würde sie nur bei Raw erscheinen.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Vergleich Krea 2 Raw ohne und mit LoRA – Fehler kommen von der LoRA
+
+- Direkt über die API, Einstellungen wie der Adapter (keine Schritte/CFG), Seed 4242, gleicher Prompt (mit LoRA plus Auslösewort): ohne LoRA 0,0122 $, mit LoRA 0,6 0,0128 $.
+- Ohne LoRA: sauberes Bild ohne Bildfehler; die Fesseln sehen aber aus wie klobige Kunststoff-Manschetten, nicht wie Kabelbinder. Verletzungen im Gesicht auch ohne LoRA → kommen vom Grundmodell bzw. vom Prompt („grim“, „interrogation room“), nicht von der LoRA.
+- Mit LoRA 0,6: Kabelbinder richtig geformt, aber dieselben weißen, rot-blau umrandeten Bildfehler wie bei 1,0 → Ursache ist die LoRA in der Umgebung von Runware (Gewicht allein erklärt es nicht; Voreinstellungen ebenso nicht, da das Bild ohne LoRA sauber ist). Vermutung, nicht belegt: Die LoRA (diffusers-Format, ai-toolkit) passt nicht sauber zur Krea-2-Umsetzung bzw. Optimierung von Runware.
+- Mögliche nächste Proben (mit Freigabe): Gewicht 0,3; dieselbe LoRA auf `krea:krea@2-turbo`; die ältere Version V0.1 (`@3358423`); Meldung an Runware.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Probebild Krea 2 Raw mit eigener LoRA – läuft, aber Bildfehler
+
+- Über den Server-Weg (Testclient, eigenes Datenverzeichnis): `krea:krea@2-raw` und `skriptorium:2964163@3386627` per „Prüfen und hinzufügen“ übernommen (Familie `krea_oss_2`, LoRA wird beim Grundmodell angeboten, Auslösewort angehängt); Bild 832 × 1216 in 40 s für 0,0186 $.
+- Ergebnis: Die Kabelbinder sind da (übergroß), aber deutliche Bildfehler – weiße, rot-blau umrandete Flächen über Haar, Mantel und Bank; dazu Verletzungen im Gesicht, die der Prompt nicht verlangte. Ursache offen: Gewicht 1,0 zu hoch, oder die Voreinstellungen von Runware für Schritte und CFG bei Krea 2 Raw (der Adapter schickt keine), oder die LoRA selbst (V0.4, 32 Trainingsbilder). Klärung nur mit Vergleichsbildern (ohne LoRA, Gewicht 0,6).
+
+### 2026-11-07 – [GELÖST] 10.8: LoRA Plastic Zip-Cuffs (Krea 2) privat zu Runware hochgeladen
+
+- Auf Frage des Eigentümers („kannst du das Modell direkt zu Runware hochladen?“): `modelUpload` mit `downloadURL` = signierte, kurzlebige Speicheradresse, auf die Civitai den angemeldeten Download weiterleitet (Host `b2.civitai.com`, Token nur für diese Datei; der Civitai-Schlüssel ging nicht an Runware; Adresse nicht ausgegeben, danach gelöscht).
+- Reibung: erster Versuch `missingAIR` – eigene Kennung nötig; Präfix des Kontos laut `getDetails`/`AIRSource` = `skriptorium` (nur dieses Feld gelesen) → `skriptorium:2964163@3386627`.
+- Antwort zuerst nur `validated`, danach im Hintergrund verarbeitet; nach wenigen Minuten in `modelSearch` gefunden: LoRA, `krea_oss_2`, privat, Auslösewort `pla5ticz1pcuff5`, Gewicht 1. Damit belegt: Die Modellsuche findet private Modelle des eigenen Kontos – „Prüfen und hinzufügen“ funktioniert dafür.
+- Offen: Probebild mit `krea:krea@2-raw` + LoRA; Familien-Lücke Raw/Turbo im Code.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Plastic Zip-Cuffs für Krea 2 – Stand zum Weitermachen
+
+- Hinweis des Eigentümers: Die LoRA gibt es auch für Krea 2. Geprüft (nur lesend, `docs/research/bildanbieter.md`): Krea-2-Versionen `@3386627` und `@3358423` bei Runware nicht gelistet; Grundmodelle `krea:krea@2-raw` / `krea:krea@2-turbo` (offene Gewichte, LoRAs möglich, ca. 0,015 $) vorhanden; Nutzung der LoRA nur per eigenem privatem Upload zu Runware; Civitai-Download braucht Anmeldung.
+- Vorgelegt: (1) Eigentümer lädt selbst hoch, (2) Upload durch die KI mit Civitai-Schlüssel über das sichere Formular, (3) erstmal nicht. Antwort: „Merk dir wo wir sind, wir machen morgen weiter“ – **Frage offen**, nichts hochgeladen, kein Code geändert.
+- Gefundene Lücke (noch nicht behoben): `api/runware_models.py` `_FAMILIES` kennt `krea_oss_2` und `krea_oss_2_turbo` nicht als eine Familie – eine Turbo-LoRA würde bei Krea 2 Raw nicht angeboten (Runware: Turbo-LoRAs laufen auch auf Raw). Ein Eintrag plus Test, innerhalb von 10.8.
+- Civitai-Schlüssel vom Eigentümer als Netzwerk-Secret der Umgebung für `civitai.com` hinterlegt (Proxy setzt ihn ein, kein Wert im Container oder Gespräch). Probe nur mit Status: Download-Adresse der LoRA antwortet jetzt 307 (Weiterleitung) statt 401 – Zugang wirkt; nichts heruntergeladen.
+- LoRA identifiziert über den Dateikopf (Teilabruf, 65 KB statt 218 MB): Krea 2 Raw, Rang 32, 32 Trainingsbilder – Upload mit Architektur `krea_oss_2` (Details `docs/research/bildanbieter.md`).
+- **Wiedereinstieg morgen:** Upload erledigt (siehe Eintrag darüber); Familien-Lücke schließen; vor einem Upload klären, ob `modelSearch` private Modelle findet und ob CLI/Dashboard eine lokale Datei annehmen; dann wie im Sessionende darüber (CI von #218, Bestätigung, Einspielen).
+
+### 2026-11-07 – [SESSIONENDE] 10.8 gebaut und geprüft, Pull Request #218 aktualisiert
+
+- **Dauer:** 2026-11-07 ca. 01:08 bis 02:20 (Cloud-Session, zweimal Neustart des Arbeitsprozesses ohne Verlust).
+- **Bearbeitet:** 10.8 – Modellsuche und Probebilder bei Runware, zweite Vorlage (ADR-115, V.52), Prüfung der Civitai-Wunschmodelle, Bau (Server `24d955e`, Oberfläche `ade0df6`), Probe über den eigenen Server-Weg, getrennte Prüfung, Härtung `778e165` mit Nachprüfung; Doku (Kontext, Architektur, Anforderungen, README, CHANGELOG, Runbook). Pull Request [PatSchCode/Skriptorium#218](https://github.com/PatSchCode/Skriptorium/pull/218) – Titel und Beschreibung auf den Bau umgestellt (das Repository liegt jetzt unter `PatSchCode`).
+- **Stand:** 10.8 `[IN ARBEIT]` – Code fertig, Tests grün (Python 1.273, 99,88 %; Oberfläche 597; End-to-End 17), getrennt geprüft ohne Befund hoch/mittel. CI des Pull Requests noch nicht gesehen.
+- **Offen:** Bestätigung des Eigentümers (Akzeptanzkriterium); Einspielen vom Mac: `RUNWARE_API_KEY` in `/opt/docker/skriptorium/.env` (mit dem zeilenweisen Befehl aus dem Runbook), Compose-Datei auf Durchreichen prüfen, dann Probe auf dem Server. Danach 10.8 `[ERLEDIGT]`.
+- **Nächster Schritt:** CI von #218 prüfen, mergen nach Freigabe, Einspielen auf Anweisung; dann 10.9. Datiert: D.5 ab 2026-11-12; D.11 Frist überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.8 in Arbeit) abgeglichen; Drift: ADR-115 → 10.8 und V.52 vorhanden, Reaktiv-Quote 0/10 (ADR-106 bis ADR-115), Reifegrade unverändert (Erweiterungen vermerkt), Modul-Liste unverändert, 0 Blocker, Phase 10 bei 11 Schritten; FR-025/FR-035 nachgetragen. Größen: Logbuch rund 630 Zeilen (Trigger 800), Kontext 351 Zeilen (Budget 600). Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** durchgehend Opus 5.5 (Entscheidungs-Klasse, Sitzungsabfrage), Empfehlung für 10.8; oberhalb: Logbuch, README, Doku-Pflege (Routine), nicht abgegeben (Routine-Abgabe ruht bis D.22). Abgegeben: zwei getrennte Prüfungen an Unteragenten auf Sonnet (als getrennte Instanz, nicht zur Ersparnis).
+- **Kontextgröße:** 486.458 Token am Ende (Grenze 200.000; überschritten ab etwa 262.000 nach ADR-115, Eigentümer: „Weiter hier“).
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: optionale Befunde umgesetzt, Nachprüfung ohne Befund
+
+- Eigentümer: „Beide umsetzen“ → `778e165`: Runware-Antwort gestreamt gelesen, Abbruch ab 56 MB vor dem Dekodieren; beschädigte `system/runware-modelle.md` zeigt die Startliste (Warnzeile `runware_liste_defekt`), Erzeugen damit bleibt abgelehnt. 1.273 Python-Tests grün, Abdeckung 99,88 %.
+- Getrennte Nachprüfung (Sonnet, nur `git show 778e165`): kein Befund mittel oder höher. Hinweise ohne Änderung: eine entpackte Teilmenge kann die Grenze kurz überschreiten (begrenzt); 150 s gelten je Lesevorgang (wie vorher); bei kaputter Liste zeigt die Auswahl Modelle, die dann mit 422 scheitern – ein Feld zur Erklärung wäre optional, nicht umgesetzt (Fall nur bei Handbearbeitung der Datei).
+- Eigentümer: „Pull Request anlegen“.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: getrennte Prüfung ohne Befund hoch oder mittel
+
+- Getrennte Instanz (Unteragent auf Sonnet, nur Diff `c8c2ea6..HEAD`, Bedrohungsmodell und Regeln; kein Gesprächsverlauf, kein Netz zu den Anbietern), 2026-11-07: keine Befunde hoch oder mittel, keine Anforderung von ASVS 5.0.0 L1 / Auth L2 verletzt; 102 Tests grün nachgeprüft.
+- Niedrig, optional: (1) keine Größengrenze der Runware-Antwort vor dem Dekodieren (nur ein fehlerhafter Anbieter könnte Speicher binden; bei OpenRouter vermutlich ebenso); (2) eine von Hand beschädigte `system/runware-modelle.md` lässt `GET /api/images/models` mit 422 scheitern. Hinweise: keine Mengenbegrenzung je Sitzung (über L1 hinaus; Guthaben begrenzt), 150 s Lesezeit ohne Befund.
+- Geprüft ohne Befund: Schlüssel nicht in Antworten, Logs, `repr` oder Fehlerketten; kein Aufruf von `accountManagement`; Kennungen und Civitai-Links nur nach festem Muster, kein Abruf fremder Adressen; Bilder durch `inspect_image`; `checkContent` fest im Code; Sitzungs- und Origin-Pflicht auf den neuen Routen; keine HTML-Darstellung in der Oberfläche.
+- Nach „Schutzbedarf ist Obergrenze“ dem Eigentümer als optional vorgelegt, nicht still umgesetzt.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Bau fertig, Probe über den eigenen Server-Weg
+
+- Server (`24d955e`): Adapter `ai_gateway/runware.py` (Bild als base64, `includeCost`, `checkContent: false`, LoRAs, Modellsuche), Liste `system/runware-modelle.md` (`api/runware_models.py`), Zuordnung am Kennungsformat in `image_routes.py`, Routen `POST`/`PUT /api/images/runware` (89 Routen). Tests: 40 Adapter, 37 Routen/Liste; Python-Abdeckung 99,88 %, `runware.py`, `runware_models.py`, `image_routes.py` je 100 %.
+- Oberfläche (`ade0df6`): Gruppen OpenRouter/Runware im Dialog, LoRAs mit Gewicht, Bereich „Bildmodelle bei Runware“ in den Einstellungen; 597 Tests, Abdeckung 98,81 / 95,22 / 98,36 / 98,95 %. End-to-End 17 von 17 grün.
+- Probe über `create_app` mit echtem Schlüssel (Testclient, eigenes Datenverzeichnis): LoRA `civitai:536201@596079` per Kennung übernommen (Auslösewort „handcuffs, cuffs“, Gewicht 0,8); Link zur nicht gelisteten Version mit Meldung abgelehnt; epiCRealism XL VXIV mit LoRA 0,7 → Bild in 9,5 s für 0,0037 $, LoRA sichtbar wirksam (Pony-LoRA auf SDXL-Modell, gleiche Familie).
+- Getrennte Prüfung (Kategorie 6) gestartet, Ergebnis folgt.
+
+### 2026-11-07 – [GELÖST] 10.8: Reibungen beim Bau
+
+- Pre-Commit prüft mit mypy auch ungestagte, aber vorhandene Testdateien → Server-Teil als ein Commit statt zwei.
+- Vertragsdatei `tests/shared/api-responses.json` zeigte `runware_ready: true`, weil in der Cloud-Session der echte Schlüssel gesetzt ist → Test-Fixture bekommt einen gefälschten Runware-Server (`FakeRunware`), sonst wäre die CI ohne Schlüssel rot.
+- Gewichtsfeld: Leeren setzte sofort 0 → eigenes Feld `WeightInput` (Zwischenstände beim Tippen, beim Verlassen wieder der gültige Wert).
+- Playwright 1.62.1 findet den vorinstallierten Browser nicht unter seinem Pfad → Lauf mit Hilfskonfiguration (`launchOptions.executablePath` `/opt/pw-browsers/chromium`), danach gelöscht; nichts im Repo geändert.
+- Notfall-Handbuch: Der Befehl zum Schlüsseltausch schrieb `.env` ganz neu und hätte den zweiten Schlüssel gelöscht → ersetzt nur noch die eine Zeile (an einer Probe-Datei geprüft). Offen fürs Einspielen: ob die Compose-Datei auf dem VPS `RUNWARE_API_KEY` in den Container durchreicht (nur lokal beim Eigentümer einsehbar).
+
+### 2026-11-07 – [BEOBACHTUNG] Sessiongröße überschritten, Eigentümer: „Weiter hier“
+
+- Sitzungsabfrage nach ADR-115: 261.581 Token Kontext (Grenze 200.000, `docs/project-context.md` Abschnitt 6); zu Sessionbeginn meldete die Abfrage 0. Vorschlag „neue Session für den Bau“; Eigentümer: „Weiter hier“ – Abweichung nach `CLAUDE.md` Abschnitt 0 („Sessiongröße“, Ausnahme). Bau von 10.8 läuft in dieser Session weiter.
+
+### 2026-11-07 – [ADR-ANGELEGT] ADR-115: Runware – Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen
+
+- Zweite Vorlage zu 10.8 vollständig beantwortet (Auswahlfragen, siehe ADR-115): Prüfung bei Runware fest aus; Fließtext-Prompt, Schlagwort-Knopf als V.52 → 10.11; Technik wie vorgeschlagen; LoRAs gleich in 10.8; Liste in den Einstellungen mit Prüfung per `modelSearch`.
+- Mockup (vom Eigentümer mit „Ja, so bauen“ bestätigt):
+
+```text
+Einstellungen › Bildmodelle bei Runware
+  Grundmodelle                                   Zusatz zum Prompt
+  FLUX.2 [dev]            runware:400@1          –
+  Z-Image-Turbo           runware:z-image@turbo  –
+  HiDream I1 Dev          runware:97@2           –
+  epiCRealism XL VXIV     civitai:277058@1405120 –
+  [ Kennung oder Civitai-Link einfügen ] [Prüfen und hinzufügen]
+  LoRAs                                   Basis   Auslösewort   Gewicht
+  [ Kennung oder Civitai-Link einfügen ] [Prüfen und hinzufügen]
+
+Bild erzeugen
+  Modell  [ epiCRealism XL VXIV (Runware) ▾ ]   (Gruppen OpenRouter / Runware)
+  Zusätze [✓] <LoRA>  Gewicht [0,8]     ← nur LoRAs mit passender Basis
+  Prompt  [ … aus dem Kanon … ] (Zusatz und Auslösewort werden angehängt)
+  Preis   ab 0,0025 $ bzw. „Preis nach dem Erzeugen“
+```
+
+- Reaktiv-Quote 0/10 (ADR-106 bis ADR-115).
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: erstes Probebild über die Runware-API
+
+- Freigabe des Eigentümers: Probebild ja, LoRAs „gleich in 10.8“.
+- Gewünschte Version epiCRealism XL `@1552721` abgelehnt (`invalidModel`, ohne Kosten): Runware lädt nicht gelistete Civitai-Versionen nicht nach. Gelistete Version `@1405120`: Bild in 7 s für 0,0025 $, `checkContent: false` gesetzt. Folge: Kennungen beim Hinzufügen per `modelSearch` prüfen.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Wunschmodelle aus Civitai geprüft
+
+- Eigentümer nennt zwei Civitai-Links (Domain `civitai.red`, gleiche Kennungen wie `civitai.com`). Ergebnis in `docs/research/bildanbieter.md`: epiCRealism XL bei Runware in 20 Versionen, die gewünschte „VXVI – LastFAME DMD2“ (`@1552721`) nicht gelistet; Plastic Zip-Cuffs ist eine LoRA für das Grundmodell „MOSS Image“, das Runware nicht anbietet – dort nicht nutzbar.
+- Neu für die Vorlage: LoRAs (Zusätze zu einem Grundmodell) waren in der Modell-Liste nicht vorgesehen. Rückfrage an den Eigentümer: Probebild mit der nicht gelisteten Version, LoRA-Unterstützung ja oder nein.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: zweite Vorlage teilweise beantwortet
+
+- Vorlage mit vier Fragen (Inhaltsvorgabe, Modell-Liste, Schlagwort-Prompts, Technik) und Mockup der Bildauswahl gestellt.
+- Antworten des Eigentümers: Inhalte „Erlauben, Prüfung aus“ (Runware `checkContent` fest aus im Code; Darstellungen Minderjähriger bleiben verboten); Schlagworte „Fließtext, ich passe an“ (Knopf „in Schlagworte umsetzen“ wird V.52 mit Landeplatz 10.11); Technik „Ja, so bauen“ (Zuordnung am Kennungsformat, `RUNWARE_API_KEY` nur auf Server und in der Cloud-Session, Kosten-Bremse über Vorab-Guthaben, Kosten per `includeCost`, getrennte Prüfung).
+- Modell-Liste offen: „civitai will ich jetzt klären“ – Rückfrage läuft. ADR folgt, wenn alle vier Punkte beantwortet sind; kein Code vorher.
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Modellsuche bei Runware
+
+- Nur lesend, kein Bild erzeugt; Befunde in `docs/research/bildanbieter.md` („Modellsuche mit Schlüssel“). FLUX.2 [dev], FLUX.1 [dev], Z-Image (Turbo), HiDream I1 verfügbar, 0,003–0,02 $ je Bild; Community-Modelle aus Civitai (Pony, Illustrious, NoobAI, LUSTIFY!) über `civitai:<Modell>@<Version>`, abgerechnet nach Rechenzeit. Nicht gefunden: BigASP, Chroma, Pony V7.
+- Inhaltsprüfung `safety.checkContent` in 122 von 127 Bildschemata, nirgends mit Voreinstellung – der Adapter muss sie ausdrücklich setzen.
+- Reibung: Die Doku-Adressen aus dem Recherche-Stand vom 2026-10-12 leiten um oder liefern 404; Einstieg jetzt über `https://runware.ai/llms.txt` und `docs/models/index.json`. `getUsageActivity` braucht `groupBy` als Liste, nicht als Text (Fehler `invalidGroupBy`), und lieferte trotzdem keine Zeilen für die 29 Anfragen aus dem Playground.
+- Vorsicht: `accountManagement`/`getDetails` gibt die Schlüssel des Kontos mit aus – ausgewertet wurden nur Guthaben (21,07 $) und Verbrauch (3,99 $, 29 Anfragen); kein Wert in der Ausgabe.
+
+### 2026-11-07 – [SESSIONSTART] 10.8 Zweiter Bildanbieter – Modellsuche bei Runware
+
+- **Umgebung:** Cloud-Session (Linux), Branch `feat/10.8-zweiter-bildanbieter` (`a4bf01c`) vom Remote ausgecheckt; vom Werkzeug vorgegeben war `claude/happy-lovelace-abnbdc`, der Eigentümer hat ausdrücklich den Feature-Branch genannt. `RUNWARE_API_KEY` gesetzt (nur Vorhandensein und Länge geprüft), `OPENROUTER_API_KEY` gesetzt.
+- **Modell:** eingestellt `claude-opus-5-5`, bedient `claude-opus-5-5` (Sitzungsabfrage `get_session`) → **Entscheidungs-Klasse**, entspricht der Empfehlung für 10.8.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens: 0` – kein verwertbarer Wert, Regel der Sessiongröße entfällt.
+- **Mindest-Lektüre:** Kontext vollständig, Logbuch ab letztem Sessionende, Fahrplan (Stand, Phase 10), Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker (keine).
+- **Vorhaben:** 10.8 fortsetzen – Modellsuche bei Runware nur lesend, danach zweite Vorlage.
+
+### 2026-11-07 – [SESSIONENDE] 10.8 Runware gewählt, weiter in der Cloud-Session
+
+- **Dauer:** 2026-11-06 ca. 22:50 bis 2026-11-07 (lokale Session auf dem Mac).
+- **Bearbeitet:** 10.8 – Modellwechsel auf die Entscheidungs-Klasse, Nachprüfung von Katalogen, Preisen und Filtern (`docs/research/bildanbieter.md`), Vorlage mit vier Optionen, Erklärung der Freischaltung bei fal.ai, Wahl Runware (ADR-114); Hilfe zur Probe des Eigentümers im Playground (Modelle, Prompts, Scheduler); Wunsch nach Erwachseneninhalten festgehalten, Bedingungen von Runware §10 geprüft (offen formuliert), Community-Modelle über Kennungen `civitai:<Modell>@<Version>` (Runware-CLI).
+- **Stand:** Branch `feat/10.8-zweiter-bildanbieter`, nur Doku, als Pull Request zum Weiterarbeiten in der Cloud-Session (Wunsch des Eigentümers). Kein Code geändert, kein Einspielen nötig.
+- **Offen:** Eigentümer legt `RUNWARE_API_KEY` in der Cloud-Umgebung an. Dort: Modellsuche bei Runware nur lesend (Verfügbarkeit von FLUX.2 [dev], Z-Image Turbo, HiDream I1 und der Kandidaten für Erwachseneninhalte, Voreinstellung der Inhaltsprüfung), Wert des Schlüssels nie ausgeben (nur gesetzt/nicht gesetzt). Danach zweite Vorlage zu 10.8: Modell-Liste, Zuordnung Modell → Anbieter, Mockup der Bildauswahl, Vorbelegung bei Modellen mit Schlagwort-Prompts, Stil-Zusatz als Option, neue Inhaltsvorgabe statt „keine pornografischen Inhalte“ (ADR-077), Schlüssel und Kosten-Bremse, getrennte Prüfung. Unbeantwortet: welche Modelle im Playground taugten, ob die düstere Szene durchging, ob heute Bilder an Filtern scheitern. In der Cloud-Session greift D.28 (Pre-Commit-Hook markdownlint; Umweg `PATH=/usr/local/bin:$PATH` nur für den Commit).
+- **Nächster Schritt:** 10.8 in der Cloud-Session fortsetzen (Modellsuche, dann zweite Vorlage). Datiert: D.5 ab 2026-11-12; D.11 Frist 2026-10-31 überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.8 in Arbeit, 10.9 als Nächstes), Kontext (Runware in Abschnitt 5), Blocker (0) abgeglichen. Drift: ADR-114 → 10.8 vorhanden; Reaktiv-Quote 0/10 (ADR-105 bis ADR-114) nachgezogen; Reifegrade unverändert; Modul-Liste unverändert; 0 blockierte Schritte; Phase 10 bei 11 geplanten Schritten. Größen: Logbuch rund 530 Zeilen (Trigger 800), `docs/project-context.md` 350 Zeilen (Budget 600). Ablaufdaten-Register: kein neuer Vorlauf erreicht.
+- **Modell-Bilanz:** Beginn auf Sonnet 5.5 (Routine) → Stopp nach Abschnitt 0, Wechsel auf Opus 5.5 (Entscheidungs-Klasse; Sitzungsabfrage bestätigt). Schritt 10.8 auf seiner Empfehlung; oberhalb: Doku-Pflege, Logbuch und README (Routine), nicht abgegeben (kleine Teilarbeiten mit geladenem Kontext; Routine-Abgabe ruht bis D.22).
+- **Kontextgröße:** nicht feststellbar (Sitzungsabfrage meldet keinen Wert).
+
+### 2026-11-07 – [BEOBACHTUNG] 10.8: Probe im Playground, neuer Wunsch Erwachseneninhalte
+
+- Eigentümer probiert im Runware-Playground (Prompt-Vorschläge und Scheduler-Frage beantwortet: Voreinstellung lassen): „Bisher scheint das, was ich brauche, brauchbar zu sein. Nur das Prompting ist halt sehr umfangreich.“ Modelle und Filterergebnis der düsteren Szene noch nicht gemeldet.
+- Neuer Wunsch: Modelle, die Erwachseneninhalte liefern, „vielleicht sogar Bondage“. Das ändert die bisherige Vorgabe „keine pornografischen Inhalte geplant“ (ADR-076, ADR-077, ADR-114 Vision-Frage) – Gegenstand der zweiten Vorlage zu 10.8, kein Eingriff vorher. Befund: Runwares Bedingungen §10 lassen offen, ob Erwachseneninhalte erlaubt sind (`docs/research/bildanbieter.md`); Kandidaten nur offene bzw. Community-Modelle, teils mit Schlagwort-Prompts statt Fließtext.
+
+### 2026-11-07 – [ADR] ADR-114: Runware als zweiter Bildanbieter
+
+- Vorlage 10.8 mit vier Optionen (Runware, Replicate, fal.ai, keiner) nach Nachprüfung von Katalogen und Preisen (`docs/research/bildanbieter.md`, „Nachprüfung für 10.8“). Befund: OpenRouter führt inzwischen 63 Bildmodelle; ein zweiter Anbieter bringt vor allem offene Modelle mit eigenem Filterschalter.
+- Nachfrage des Eigentümers: Freischaltung bei fal.ai und Unterschied zu Runware. Nachgeprüft: fal-Schemata (FLUX dev, Z-Image Turbo, Pony V7) verlangen weiter eine Freischaltung des Kontos, sonst immer Prüfung mit schwarzem Bild; Runware prüft laut Integrationsdoku nur auf Anforderung (offizielle Seite 404).
+- Eigentümer: „Runware“ → ADR-114. Offen: Frage, ob heute Bilder an Filtern scheitern (nicht beantwortet); Probe im Playground; zweite Vorlage.
+
+### 2026-11-06 – [SESSIONSTART] 10.8 Zweiter Bildanbieter – Stopp wegen Modellklasse
+
+- **Umgebung:** lokale Session auf dem Mac des Eigentümers (macOS, `main` = `c8c2ea6` nach `git pull --ff-only`, 11 Commits aus PR #217 nachgezogen). KI-Läufe mit dem Schlüssel gelten nur in der Cloud-Session.
+- **Modell:** eingestellt `claude-sonnet-5-5`, Sitzungsabfrage (`get_session`) meldet dasselbe → **Routine-Klasse**. Empfohlene Klasse für 10.8: **Entscheidung** (Abhängigkeit und Secrets, Eskalations-Auslöser 1) → Pflicht-Eskalation, Stopp mit `Benötigte Klasse: Entscheidung`.
+- **Kontextgröße:** Sitzungsabfrage liefert keinen Wert für die Kontextgröße; nicht feststellbar.
+- **Mindest-Lektüre:** Kontext vollständig, Logbuch ab letztem Sessionende, Fahrplan (Stand, Phase 10), Architektur 1/2/9, Entscheidungen Teil A (Auszug) und Teil C, aktive Blocker (keine). Abgleich: Fahrplan-Übersicht „8 von 11“ passt zur Schrittliste.
+- **Vorhaben:** 10.8 nach V.24 – Vorlage, ADR, aktuelle Preise, getrennte Prüfung des Umgangs mit dem Schlüssel; Arbeit beginnt nach Modellwechsel. Kein Code, kein Fahrplan-Status geändert.
+- **Modellwechsel:** Eigentümer wechselte per `/model` auf `claude-opus-5-5` („Ja, gewechselt“); Sitzungsabfrage bestätigt `claude-opus-5-5` → **Entscheidungs-Klasse**, Stopp aufgehoben.
 
 ### 2026-11-06 – [SESSIONENDE] 10.10 erledigt (ADR-113), nächstes Mal 10.9 oder 10.8
 
@@ -381,86 +1067,6 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 ### 2026-11-05 – [ONBOARDING-VALIDATION] Phasengrenze Phase 9 (9.15)
 
 - Frischer Worktree von `main` (`942eabf`) im Scratchpad: Quick Start der README genau wie dokumentiert (`uv python install 3.14.7`, `uv sync --frozen --python 3.14.7`, `npm ci`, `uv run pre-commit install`, `uv run skriptorium-einrichtung`, `npx vite build`, `uvicorn`) – alle Schritte Exit 0, `/api/health` → `{"status":"ok"}` nach 2 s; `scripts/session-start.sh` Exit 0. Befund: Text über dem Schnellstart nannte noch den Stand vom 2026-10-13 – berichtigt. Worktree entfernt, Hook im Haupt-Checkout neu eingerichtet.
-
-### 2026-10-18 – [PHASEN-WECHSEL] Reflexion Phase 8 (UMSETZUNG) → Phase 9 (UMSETZUNG)
-
-- **Gelernt:** Der Umbau vor neuen Funktionen wirkte messbar: `canon/service.py` 878 → 349 Zeilen, `WorldMaps.tsx` 716 → 86, Abdeckung Python 98,88 → 99,84 %, Oberfläche 94,45 → 98,84 % Zeilen; die Ratsche der Mindestwerte hielt die ganze Phase.
-- **Gelernt:** Proben nach Regel-002 mit 3 Läufen je Seite können Streuung als Befund zeigen; erst 6 Läufe klärten 8.11. Ein Ergebnis-Satz („alle Mittelwerte in der Spannweite“) war weiter gefasst als die Tabelle – Ergebnis-Sätze vor dem Vorlegen Zeile für Zeile gegen die Zahlen prüfen.
-- **Gelernt:** Am selben Tag liefen eine Cloud-Session und eine Session auf dem Mac; nicht hochgeladene Commits sieht die andere Session nicht. Nach langer Pause vor dem nächsten Schritt `origin/main` prüfen.
-- **Kippende Annahmen:** Die Gliederung eines Eintrags („Aussehen“, „Geografie – …“) galt nach 8.4 als gelöst; tatsächlich kennt sie vor allem die Oberfläche, der Server sieht Textblöcke, vier Stellen erkennen Namen je eigener Regel (Bewertung, Befund 1) → 9.1.
-- **Reifegrad:** unverändert `[BELASTBAR]`; NFR Kontexttreue `[VORLÄUFIG]` – die Beförderung lag seit 2026-10-11 ohne Schritt (Vision-Abgleich), jetzt 9.14.
-- **ADRs der Phase:** 082–090 (082 `api` → `storage` reaktiv, 083 Abschnitte ersetzen, 084 Bildvorlagen, 085 Kurzfassung, 086 Weltenbauer im Wortlaut, 087 Weltenbauer aus dem Manuskript, 088 Verweise, 089 Pflichtfrage, 090 Planung Phase 9); Reaktiv-Quote 1/10.
-- **Wucherung:** 13 → 13 Schritte; neue Wünsche als V.33–V.37 mit Landeplatz 8.13.
-- **Getrennte Instanz:** für die Pflichtfrage (Sonnet, ohne Gesprächsverlauf, 20 min); bei 8.11 keine vollständige Handbewertung der Widersprüche.
-- **Neue Erkundungsbedarfe:** Quellen für Worldbuilding und Namen, eigener Recherche-Baustein (9.12); Kontexttreue (9.14); Speicherlayout der Verbrauchsdateien (9.11).
-- **Methodik-Lehren:** Die Drift-Prüfung am Sessionende vergleicht die Reifegrad-Tabelle mit den ADRs, nicht die NFR-Texte (Abschnitt 6) und Modulbeschreibungen (Abschnitt 3) – beide waren veraltet; erst Vision-Abgleich und Bewertung fanden es. Zusammenführen eines Pull Requests braucht eine ausdrückliche Freigabe; ein bloßes „Weiter“ lehnte die Rechteprüfung ab.
-- **Details:** [`docs/archiv/logbuch-phase-8.md`](archiv/logbuch-phase-8.md)
-
-### 2026-10-13 – [PHASEN-WECHSEL] Reflexion Phase 7 (UMSETZUNG) → Phase 8 (UMSETZUNG)
-
-- **Gelernt:** Prüfaufträge quer über alle KI-Bereiche (D.18) finden Mischungen *innerhalb* von Einträgen, die Tests je Funktion nicht sehen (doppelte Abschnitte, Vorlagen aus dem ganzen Text). Die Zählung in den echten Daten danach (0 von 133) trennt Bauart-Risiko von eingetretenem Schaden.
-- **Gelernt:** Große Bild-Themen vorab zuschneiden (ADR-072: fünf Teilschritte) hielt jeden Schritt prüfbar; jede Teilvorlage brachte aber neue Schritte (7.14, 7.15) – Phase an der Wucherungs-Schwelle.
-- **Gelernt:** Bestätigungen des Eigentümers sammeln sich, wenn mehrere Schritte gleichzeitig „eingespielt, wartet“ sind (zeitweise sieben); vor einem Phasenabschluss gebündelt abfragen.
-- **Kippende Annahmen:** Testabdeckung hält sich nicht von selbst – Oberfläche 98,16 → 94,45 %, weil die Schwellen 80/70 weit unter dem Ist lagen (Bewertung, Befund 3).
-- **Reifegrad:** unverändert `[BELASTBAR]`; Tabelle in `docs/architecture.md` Abschnitt 9 ist nachzuziehen (8.1).
-- **ADRs der Phase:** 069–081 (072 Bilder und Karten, 073 Karten, 074 Bilder beschreiben, 077 Bilder erzeugen, 078 Aussehen, 079 Markierungen, 080 Pflichtfrage, 081 Planung Phase 8); Reaktiv-Quote 0/10.
-- **Wucherung:** 8 → 16 Schritte; Schwelle > 16 erreicht, nicht überschritten.
-- **Getrennte Instanz:** bei 7.6, 7.10–7.13 (Sicherheit, keine Befunde hoch/mittel) und für die Pflichtfrage (Sonnet).
-- **Neue Erkundungsbedarfe:** wandernde Figuren (8.12); Kosten von Regeln im Wortlaut für den Weltenbauer (8.7).
-- **Methodik-Lehren:** Die Onboarding-Prüfung im Worktree verbiegt jedes Mal den gemeinsamen Pre-Commit-Hook (dreimal) – jetzt fester Teil des Ablaufs im Runbook (Abschnitt 8). Sessionstart auf dem Mac prüft den Server mit genau einer gebündelten SSH-Abfrage.
-- **Details:** [`docs/archiv/logbuch-phase-7.md`](archiv/logbuch-phase-7.md)
-
-### 2026-10-12 – [PHASEN-WECHSEL] Reflexion Phase 6 (UMSETZUNG) → Phase 7 (UMSETZUNG)
-
-- **Gelernt:** Bei Fremdformaten den schreibenden Code des Herstellers lesen, nicht nur die Spezifikation (Hinweis des Eigentümers in 6.8): SillyTavern schreibt `chara` und `ccv3`, Lorebooks mit `comment`/`enabled`.
-- **Gelernt:** Kopfzeilen und Sicherheitsregeln immer auch von außen prüfen – der Proxy überschrieb die CSP der App (6.6). Die getrennte Prüfung des Codes allein sah das nicht.
-- **Gelernt:** Erst messen, dann entscheiden: der Spike 6.13 belegte den Schaden fehlender Kanon-Einträge (4,0/3,3 statt 0/0,7 Widersprüche je Kette) und machte 6.3 zur klaren Entscheidung; die Technik-Prüfung an der Geschichte des Eigentümers zeigte 0–28 → 34 von 34 Einträgen.
-- **Gelernt:** Sichtproben mit Sonderfunktionen (`@`) Zeichen für Zeichen tippen; Einfügen am Stück übersah das fehlende `@`-Menü im Weltenbauer (6.7).
-- **Gelernt:** Beim Einspielen nur über HTTPS warten, dann eine SSH-Abfrage – eine SSH-Schleife sperrte den Zugang vorübergehend.
-- **Kippende Annahmen:** Websuche „ca. 1 ct“ – tatsächlich 5–7 ct je Antwort, weil Suchergebnisse als Eingabe zählen (6.7). Pauschaler Überschriften-Versatz im Import aus 6.8 hätte Gegenstände beim Rückimport verformt (6.9, angepasst).
-- **Reifegrad:** unverändert `[BELASTBAR]`; NFR Kontexttreue beim Referenzumfang mit 6.3 und der Prüfung an der Geschichte des Eigentümers gestützt.
-- **ADRs der Phase:** 059–068 (062 Kanon vor den Seiten, 063 Schutz, 064 Weltenbauer, 065/066 SillyTavern, 067 Pflichtfrage, 068 Planung Phase 7); Reaktiv-Quote 0/10.
-- **Wucherung:** 12 → 14 Schritte (+6.13 Spike, +6.14 als Ausnahme auf Wunsch des Eigentümers); Schwelle > 15 nicht erreicht.
-- **Getrennte Instanz:** fünfmal eingesetzt (Schutz 6.4–6.6, Import 6.8 mit Nachprüfung, Import-Änderung 6.9, Pflichtfrage); fand u. a. ein kubisch langsames Muster im bestehenden Markdown-Import.
-- **Neue Erkundungsbedarfe:** Ablage von Bilddateien (7.6), Format für das Publizieren (7.4), V.20 (Figurenkarten im Netz finden).
-- **Methodik-Lehren:** Phasenregeln (ADR-060: neue Wünsche → V-Schritte) vor dem ersten Mockup prüfen; Session erneut weit über der Kontextgrenze (dauerhaftes „weiter hier“ des Eigentümers).
-- **Details:** [`docs/archiv/logbuch-phase-6.md`](archiv/logbuch-phase-6.md)
-
-### 2026-10-11 – [PHASEN-WECHSEL] Reflexion Phase 5 (UMSETZUNG) → Phase 6 (UMSETZUNG)
-
-- **Gelernt:** Die größten Verbesserungen kamen aus den Befunden des Eigentümers bei echter Nutzung (Einleitungs- und Schlusssätze, Scrollen, Chat-Aufbau, Smartphone), nicht aus Tests; Befunde sofort mit Code-Stelle festhalten und einordnen, dann bauen.
-- **Gelernt:** Wirkung von Anweisungen nur mit festem Prüfverfahren belegen: Probeschreiben nach Regel-002 mit mehreren Läufen und verblindeter Bewertung (ADR-047); einzelne Läufe belegen nichts.
-- **Gelernt:** Bei einem Wunsch nach „Skript“ erst die Form klären (einmaliger Befehl oder gepflegtes Werkzeug); der Schlüsseltausch wurde am Ende ein einzelner Terminalbefehl, das fertige Skript wurde verworfen. Bei Abfragen mit Inhalt der Geschichte des Eigentümers nur Art und Größe ausgeben, keine Titel.
-- **Kippende Annahmen:** grok-4.7 als Modell für den Alltag – Sperren bei echten Genres und 44–157 s bis zum ersten Textstück (ADR-044, ADR-052); grok-4.6 wurde Voreinstellung, grok-4.7 bleibt wählbar. Der Referenzumfang (D.4) ließ sich nur hochrechnen; dabei blieb eine Kanon-Lücke offen (ADR-057).
-- **Reifegrad:** NFR Reaktionszeit `[BELASTBAR]` → `[VORLÄUFIG]` → `[BELASTBAR]` (ADR-051, ADR-052); NFR Kontexttreue Referenzumfang `OFFEN` → `[VORLÄUFIG]` (Beförderung nach 6.3); Secrets im Betrieb bleibt `[VORLÄUFIG]` bis D.11.
-- **ADRs der Phase:** 044–060 (u. a. 047 Probeschreiben, 048 Service Worker, 053 Schreibweise, 055 Modell-Katalog, 056 Verlauf der Anweisungen, 057 Nachweis D.4, 058 v1.0.0 mit Verzicht auf den menschlichen Blick, 059 Planung Phase 6, 060 Pflichtfrage); Reaktiv-Quote 0/10.
-- **Wucherung:** 13 → 26 Schritte durch Befunde des Eigentümers im Alltag; Schwelle erreicht, nicht überschritten; 24 erledigt, 2 verschoben (5.4 → V.16, 5.25 → V.13 → 6.4).
-- **Neue Erkundungsbedarfe:** Kanon-Lücke aus D.4 (6.3), 6.11 und 6.12 aus der Pflichtfrage (ADR-060, weiterbauen mit Umbau), freiwillige Maßnahmen V.18 und V.19, Wortanzeige im Manuskript (V.17).
-- **Methodik-Lehren:** Sessions erneut weit über der Kontextgrenze auf Anweisung; 5.26 wurde doppelt begonnen, weil die Arbeit einer anderen Session übersehen wurde – vor Beginn eines Schritts Stand von `origin/main` prüfen.
-- **Details:** [`docs/archiv/logbuch-phase-5.md`](archiv/logbuch-phase-5.md)
-
-### 2026-10-08 13:15 UTC – [PHASEN-WECHSEL] Reflexion Phase 4 (STABILISIERUNG) → Phase 5 (UMSETZUNG)
-
-- **Gelernt:** Das Gate vor dem ersten öffentlichen Deployment hat getragen: Host, Netz, Sicherung mit echter Wiederherstellung und Notfall-Handbuch lagen vor dem 30.09.; kein Sicherheitsvorfall.
-- **Gelernt:** Erst die echte Nutzung zeigte die wichtigsten Mängel: Modell-Sperren bei echten Genres, Einleitungs- und Schlusssätze, Scrollen, unübersichtliche Oberfläche. Tests und Probeschreiben mit Testwelten fanden sie nicht.
-- **Gelernt:** Befunde vom Eigentümer sofort mit Code-Stelle festhalten und einordnen, ohne gleich zu bauen; Entscheidungen über das Frage-System gehen auch vom Handy.
-- **Kippende Annahmen:** Startmodell grok-4.7 ungeeignet für die echten Inhalte (Kanon-Treue gemessen mit qwen3.8-max); 1-Mio.-Kontextfenster sind wegen des Budgets von 30.000 Token nicht nötig; ein „Guthaben“ des Coding-Agents war irrelevant.
-- **Reifegrad:** Host, Netz, Backups, Bedrohungsmodell `[BELASTBAR]`; NFR Kanon-Treue `[BELASTBAR]`; Secrets im Betrieb `[VORLÄUFIG]` bis D.11.
-- **ADRs der Phase:** 025–043; reaktiv 0; Quote 0/10.
-- **Wucherung:** 8 → 16 Schritte (Infrastruktur-Befunde und Funktionstest); STOPP beim 17., Neuplanung mit getrennter Instanz (ADR-042).
-- **Neue Erkundungsbedarfe:** D.13 (Sperren im Text erkennen), D.4 (Referenzumfang) bleibt; grok-4.5 über 5.12 prüfen.
-- **Methodik-Lehren:** Sessions erneut weit über der Kontextgrenze auf Anweisung; `pkill -f`/`pgrep -f` treffen die eigene Shell, wenn das Muster im Befehl steht (Muster mit `[u]vicorn` schreiben); Markdown-Linter verlangt echte Überschriften statt fetter Zeilen.
-- **Details:** [`docs/archiv/logbuch-phase-4.md`](archiv/logbuch-phase-4.md)
-
-### 2026-10-08 13:05 UTC – [ONBOARDING-VALIDATION] Phasenabschluss 4 und Versionsänderung (Trigger 3, DoD)
-
-- **Form (Klasse M):** frischer Worktree von `fb912f4` im Scratchpad, eigenes Datenverzeichnis; README-Quick-Start wie dokumentiert: `uv python install 3.14.7`, `uv sync --frozen --python 3.14.7`, `npm ci` (0 Schwachstellen), `uv run pre-commit install`, `uv run skriptorium-einrichtung` (Exit 0; Ausgabe mit dem Einrichtungscode nicht angezeigt), `npx vite build`, uvicorn.
-- **Ergebnis:** `/api/health` → `{"status":"ok"}`; `/` → 200; `/api/worlds` ohne Sitzung → 401; Server-Log nur eine erwartete Warnung „ki-anbieter nicht eingerichtet“ (kein Schlüssel, README: Tests ohne Schlüssel). `pytest --cov`: 410 bestanden, 99,79 %; `vitest --coverage`: 102 bestanden, 98,67 % Zeilen, 96,53 % Zweige. `scripts/session-start.sh` im Worktree: Exit 0. Pre-Commit-Hook danach im Haupt-Checkout neu installiert.
-- **Befund:** keiner im Onboarding-Pfad. End-to-End-Tests laufen im CI-Job.
-
-### 2026-10-08 13:00 UTC – [ADR-ANGELEGT] ADR-043 v0.1.0 als Vorabversion
-
-- Vision-Checkpoint vor Go-Live: offene Elemente D.4 (FR-010 teilweise), 5.1, 5.2, 5.3; V.1/V.2 laut Vision nicht in der ersten Version; kein externer Blick. Vorgelegt als `ENTSCHEIDUNG ERFORDERLICH`; Eigentümer: „A: Vorabversion“ (Frage-System). Go-Live vor v1.0.0 in 5.14.
 
 <!-- ANCHOR:eintragstypen -->
 ## Eintragstypen (Übersicht)

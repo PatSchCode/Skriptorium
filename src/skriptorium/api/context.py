@@ -7,7 +7,13 @@ from typing import Annotated, Final
 
 from fastapi import Depends, HTTPException, Request, status
 
-from skriptorium.ai_gateway import ImageCatalog, ImageProvider, ModelCatalog, ModelProvider
+from skriptorium.ai_gateway import (
+    ImageCatalog,
+    ImageProvider,
+    ModelCatalog,
+    ModelProvider,
+    RunwareImageProvider,
+)
 from skriptorium.api.access import (
     CredentialStore,
     FailureThrottle,
@@ -16,6 +22,7 @@ from skriptorium.api.access import (
     SessionStore,
 )
 from skriptorium.api.favorites import Favorites
+from skriptorium.api.runware_models import RunwareModels
 from skriptorium.api.usage import UsageLog
 from skriptorium.canon import CanonService
 from skriptorium.context import ContextBuilder
@@ -45,6 +52,10 @@ class Services:
     # Image models and their provider (step 7.12, ADR-077); None without a key.
     image_catalog: ImageCatalog
     images: ImageProvider | None
+    # The second image provider (step 10.8, ADR-115): Runware, None without its key; which
+    # provider serves a model follows from the form of its identifier (``image_routes``).
+    runware: RunwareImageProvider | None
+    runware_models: RunwareModels
 
 
 def services(request: Request) -> Services:

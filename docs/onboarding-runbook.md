@@ -71,7 +71,7 @@ uv run pre-commit install
 
 ### Schritt 3: Konfiguration
 
-Variablen, siehe `.env.example`: `SKRIPTORIUM_DATA_DIR` (Datenverzeichnis, Standard `./data`) und `OPENROUTER_API_KEY` (Schlüssel für OpenRouter, seit Schritt 3.1; gebraucht erst für KI-Anfragen ab Schritt 3.3 – Server und Tests laufen ohne). Den Schlüssel nur in der Umgebung setzen, beim Anbieter eine Ausgabengrenze einrichten.
+Variablen, siehe `.env.example`: `SKRIPTORIUM_DATA_DIR` (Datenverzeichnis, Standard `./data`) und `OPENROUTER_API_KEY` (Schlüssel für OpenRouter, seit Schritt 3.1; gebraucht erst für KI-Anfragen ab Schritt 3.3 – Server und Tests laufen ohne), optional `RUNWARE_API_KEY` (zweiter Bildanbieter, Schritt 10.8; ohne ihn fehlt nur die Gruppe „Runware“ beim Bilderzeugen). Schlüssel nur in der Umgebung setzen; bei OpenRouter eine Ausgabengrenze einrichten, bei Runware (keine Grenze je Schlüssel) nur Vorab-Guthaben ohne automatisches Nachladen.
 
 Passwort einrichten (ADR-017, ADR-041): Der Befehl erzeugt einen Einrichtungscode aus 12 Zeichen in Dreiergruppen (z. B. `K7Q-M3X-RAP-H9D`; Groß-/Kleinschreibung, Bindestriche und Leerzeichen egal), der 24 Stunden und nur einmal gilt; gespeichert wird nur sein scrypt-Hash in `system/zugang.md`. Mit dem Code wird das Passwort festgelegt (mindestens 15 Zeichen; geprüft gegen Pwned Passwords von Have I Been Pwned, Daten unter CC BY 4.0). Derselbe Weg hilft bei vergessenem Passwort.
 
@@ -163,7 +163,7 @@ docker run -d --name skriptorium -p 127.0.0.1:8000:8000 -v skriptorium-daten:/da
 docker exec skriptorium skriptorium-einrichtung    # Einrichtungscode, dann http://localhost:8000
 ```
 
-- Ohne `-e OPENROUTER_API_KEY` (Wert aus der Shell übernehmen) laufen keine KI-Anfragen.
+- Ohne `-e OPENROUTER_API_KEY` (Wert aus der Shell übernehmen) laufen keine KI-Anfragen; `-e RUNWARE_API_KEY` ist optional (Bilder über Runware).
 - Das Sitzungs-Cookie ist `Secure`; Browser nehmen es unter `http://localhost` trotzdem an.
 - Stoppen und wieder starten: `docker stop skriptorium`, `docker start skriptorium`.
 - Meldet Docker Desktop beim Start `initializing Ingest server … sailor-ingest.sock … Das System kann auf die Datei nicht zugreifen`, betrifft das einen internen Dienst, nicht die Engine; Bauen und Starten gingen trotzdem (2026-09-30).
@@ -180,10 +180,10 @@ Für den Eigentümer **ohne KI**. Alles läuft im Programm „Terminal“ auf de
 - **Zugang (Ort, nicht Wert):**
   - Server: SSH-Schlüssel auf dem Mac des Eigentümers (`~/.ssh/`), Anmeldung mit `ssh <vps>`; Notweg ohne Mac: Kundenbereich des Hosters (netcup) mit Konsole und Neustart.
   - Sicherung: MEGA-Konto des Eigentümers (Bucket, Schlüssel); Duplicati-Passphrase und S4-Schlüssel: noch nur im Duplicati-Auftrag auf dem VPS („Exportieren → Als Befehlszeile“); Ablage außerhalb des Servers folgt mit D.11 (ADR-038) – bis dahin ist die Sicherung nach Verlust des Servers nicht lesbar.
-  - KI-Schlüssel: Konto des Eigentümers bei OpenRouter (openrouter.ai → „Keys“); auf dem Server in `/opt/docker/skriptorium/.env` (nur root lesbar).
+  - KI-Schlüssel: Konto des Eigentümers bei OpenRouter (openrouter.ai → „Keys“) und bei Runware (Dashboard → „API Keys“, seit 10.8); auf dem Server beide in `/opt/docker/skriptorium/.env` (nur root lesbar).
   - Anmeldepasswort des Skriptoriums: nur beim Eigentümer; vergessen → neuer Einrichtungscode: `ssh <vps> 'docker exec skriptorium skriptorium-einrichtung'`.
 - **System anhalten:** `ssh <vps> 'cd /opt/docker/skriptorium && docker compose stop'` – danach ist das Skriptorium aus und bleibt es auch nach einem Neustart des Servers; die Daten bleiben unberührt. **Wieder starten:** `ssh <vps> 'cd /opt/docker/skriptorium && docker compose start'`; Erfolg nach etwa einer Minute: `ssh <vps> 'docker ps --filter name=skriptorium'` zeigt `(healthy)` – erprobt am 2026-09-30 (KI und Eigentümer ohne KI)
-- **KI-Schlüssel widerrufen** (Verdacht auf Missbrauch oder unerwartete Kosten): bei OpenRouter unter „Keys“ den Schlüssel des Skriptoriums löschen – wirkt sofort; das Skriptorium läuft weiter, nur KI-Anfragen schlagen fehl. Neuen Schlüssel dort anlegen (Ausgabengrenze 50 $ setzen) und eintragen, Eingabe bleibt unsichtbar: `ssh -t <vps> 'read -rsp "Neuer Schluessel: " K && printf "# Secrets des Skriptoriums. Nur root lesbar.\nOPENROUTER_API_KEY=%s\n" "$K" > /opt/docker/skriptorium/.env && chmod 600 /opt/docker/skriptorium/.env && cd /opt/docker/skriptorium && docker compose up -d'` – nicht erprobt (Verzicht des Eigentümers, ADR-037)
+- **KI-Schlüssel widerrufen** (Verdacht auf Missbrauch oder unerwartete Kosten): bei OpenRouter unter „Keys“ bzw. bei Runware unter „API Keys“ den Schlüssel des Skriptoriums löschen – wirkt sofort; das Skriptorium läuft weiter, nur KI-Anfragen bzw. Bilder über Runware schlagen fehl. Neuen Schlüssel dort anlegen (bei OpenRouter Ausgabengrenze 50 $ setzen) und eintragen, Eingabe bleibt unsichtbar; der Befehl ersetzt nur die eine Zeile und lässt den anderen Schlüssel in `.env` stehen (`NAME` = `OPENROUTER_API_KEY` oder `RUNWARE_API_KEY`): `ssh -t <vps> 'read -rsp "Neuer Schluessel: " K && cd /opt/docker/skriptorium && { grep -v "^NAME=" .env; printf "NAME=%s\n" "$K"; } > .env.neu && chmod 600 .env.neu && mv .env.neu .env && docker compose up -d'` – nicht erprobt (Verzicht des Eigentümers, ADR-037). Die frühere Fassung schrieb `.env` ganz neu und hätte seit 10.8 den zweiten Schlüssel gelöscht.
 - **Neue Version einspielen** (ADR-039; macht die KI auf Anweisung, hier zum Nachvollziehen) – erprobt am 2026-09-30:
   1. Auf dem Mac im Repo, Stand `main` nach grüner CI: `git archive --format=tar main | ssh <vps> 'cd /opt/docker/skriptorium && rm -rf app.neu && mkdir app.neu && tar -x -C app.neu'`, dann die Kurzform des Commits nach `app.neu/REVISION` schreiben.
   2. Auf dem Server in `/opt/docker/skriptorium`: `docker tag skriptorium:local skriptorium:vorher`, `rm -rf app.vorher && mv app app.vorher && mv app.neu app`, `docker compose build`, `docker compose up -d`; warten, bis `docker ps` `(healthy)` zeigt.

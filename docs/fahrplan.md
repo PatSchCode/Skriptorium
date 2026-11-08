@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-06 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
+- **Stand vom:** 2026-11-07 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner in Arbeit. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
-- **Nächster Schritt:** 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup) bzw. 10.8 Zweiter Bildanbieter – Reihenfolge wählt der Eigentümer; danach 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.8 Zweiter Bildanbieter – Runware gewählt 2026-11-07 (ADR-114); Probe des Eigentümers im Playground läuft („brauchbar“), neuer Wunsch Erwachseneninhalte; Modellsuche mit `RUNWARE_API_KEY` erledigt 2026-11-07 (Cloud-Session), zweite Vorlage entschieden (ADR-115), gebaut und getrennt geprüft – wartet auf Bestätigung und Einspielen. 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
+- **Nächster Schritt:** 10.8: Bestätigung des Eigentümers, Einspielen mit `RUNWARE_API_KEY` auf dem VPS; danach 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup), dann 10.11. D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -35,7 +35,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
 | ✅ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | erledigt 2026-11-06 (ADR-110; zwei Korrekturen PR #214, #215) | – |
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
-| ⚪ | 10.8 | Zweiter Bildanbieter (V.24) | offen | KI: nach 10.5 |
+| 🟠 | 10.8 | Zweiter Bildanbieter (V.24) | in Arbeit – Runware gewählt (ADR-114) | du: Probe im Runware-Playground |
 | ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
 | ✅ | 10.10 | Textqualität von Hermes 4 messen (V.41) | erledigt 2026-11-06 (ADR-113: nichts übernehmen) | – |
 | ⚪ | 10.11 | Planung der nächsten Ausbaustufe | offen | KI |
@@ -67,7 +67,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ⚪ | D.25 | Kontexttreue nachmessen ab 25 Kapiteln | offen – ausgelöst, sobald eine Geschichte 25 Kapitel hat | KI – Kapitelzahl bei jeder Messung auf dem Server mitprüfen |
 | ✅ | D.16 | Reaktionszeit erneut erkunden – grok-4.7 über 90 s | erledigt 2026-10-10 (ADR-052) | – |
 
-Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
+Verschoben auf die übernächste Ausbaustufe (Landeplatz 10.11): V.21 (seit 2026-10-12), V.40 (2026-10-22), V.44, V.45, V.46 (aus 9.12, 2026-11-05) – ADR-105; V.47 (Favoriten ohne Anbieter, 2026-11-05), V.48 („Wesen:“ im Fließtext, 2026-11-05), V.49 (Zoom in der Großansicht, 2026-11-05), V.50 (Meldung bei unlesbaren Bildern, 2026-11-05), V.51 (Längengrenze gegen Endlosschleifen, aus 10.10, 2026-11-06), V.52 (Schlagwort-Prompts, aus 10.8, 2026-11-07, ADR-115), V.53 (fester Seed beim Bilderzeugen, aus 10.8, 2026-11-07), V.54 (weitere LoRAs, u. a. Shibari, aus 10.8, 2026-11-07), V.55 (MOSS Image, aus 10.8, 2026-11-07), V.56 (Erkenntnisse der Bildmodell-Erkundung, aus 10.8, 2026-11-07). In Phase 10 übernommen (2026-11-05, ADR-105): V.43 → 10.1, V.38 → 10.2, V.39 → 10.3, V.23 → 10.6, V.33 → 10.7, V.24 → 10.8, V.42 → 10.9, V.41 → 10.10. Verworfen (ADR-105): V.20. In Phase 9 übernommen (2026-10-18, ADR-090): V.35 → 9.3–9.9 und 9.12, V.36 → 9.10, V.37 → 9.11, V.34 → 9.13. Frühere Übernahmen und Verwerfungen: Archive der Phasen 6–9 und ADR-059, ADR-068, ADR-081.
 
 ---
 
@@ -320,7 +320,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.8: Zweiter Bildanbieter (V.24)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114). Zweite Vorlage beantwortet 2026-11-07 (ADR-115): Erwachseneninhalte ohne Prüfung bei Runware, mehrere Bildanbieter nach Kennungsformat, Grundmodelle und LoRAs in den Einstellungen, Schlüssel nur serverseitig, Kosten-Bremse über Vorab-Guthaben; Modellsuche und Probebild in `docs/research/bildanbieter.md`. Gebaut 2026-11-07 (`24d955e`, `ade0df6`; Tests grün, Probe mit echtem Bild 0,0037 $), getrennte Prüfung ohne Befund hoch/mittel. Zwei optionale Befunde umgesetzt (`778e165`, nachgeprüft). Krea 2 Raw/Turbo als eine Familie; eigene LoRA `skriptorium:2964163@3386627` privat hochgeladen, sauber auf Krea 2 Turbo (auf Raw Bildfehler). Offen: Bestätigung des Eigentümers, Einspielen (Schlüssel auf dem VPS, Durchreichen in der Compose-Datei prüfen). Erkundung der Bildmodelle und LoRAs 2026-11-07 (ohne Code; Ergebnisse in `docs/research/bildanbieter.md`, Folgewünsche V.56); PR 218 als Entwurf
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4, 10.5
 - **Freigabepflichtig:** ja – neuer externer Dienst (Kategorie 3), Schlüssel im Betrieb (Kategorie 6)
@@ -377,7 +377,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Empfohlene Klasse:** Entscheidung – inhaltliche Neuplanung mit Vision-Abgleich.
 - **Eingangskriterien:** Vision-Abgleich an der Phasengrenze nach Phase 10
 - **Anforderungen (ab Klasse M):** keine
-- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
+- **Zu tun:** V.21, V.40, V.44, V.45, V.46, V.47, V.48, V.49, V.50, V.51, V.52, V.53, V.54, V.55, V.56 (und neue V-Schritte) in eine neue Phase überführen oder per ADR verwerfen.
 - **Akzeptanzkriterien:** Jeder verschobene Schritt hat einen neuen Schritt mit ID oder `[VERWORFEN]` mit ADR.
 - **Betroffene Module:** keine (Planung)
 - **Reifegrad-Wirkung:** keine
@@ -1565,6 +1565,91 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Code, Tests, ADR
 - **Notizen:** Angelegt 2026-11-06 in 10.10 (`spikes/hermes-10.10/README.md`).
+
+#### V.56: Erkenntnisse aus der Bildmodell-Erkundung in die Anwendung übernehmen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (angelegt 2026-11-07 nach der Erkundung in 10.8/V.54)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** teils – Schnittstellen der Einstellungen (Kategorie 5), ggf. neuer Anbieter oder eigener Checkpoint (Kategorie 3)
+- **Empfohlene Klasse:** Entscheidung – Vorlage mit mehreren Optionen (Eskalations-Auslöser 1).
+- **Eingangskriterien:** 10.8 abgeschlossen
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Aus `docs/research/bildanbieter.md` abgeleitete Wünsche prüfen und vorlegen: (1) LoRA-Gewicht in den Einstellungen von ±2 auf den Runware-Bereich ±4 erweitern (Regler-LoRAs wie Waist slider); (2) Negativ-Prompt je Grundmodell nur anbieten, wo er wirkt (Z-Image Grundmodell ja; Krea 2 Turbo/Z-Image-Turbo nicht unterstützt; Krea 2 Raw erzeugt damit Bildfehler); (3) Voreinstellungen je Grundmodell (Schritte, CFG) mitspeichern; (4) Empfohlenes Gewicht je LoRA aus den Tests als Startwert (meist 0,6, einige 0,8–1,0); (5) Hinweise zum Prompt-Aufbau in der Bedienung (Fesselung/Kleidung zuerst, Alter vorn, Ansicht von hinten); (6) Entscheidung über eigenen Checkpoint (Upload einer Krea-2-Feinabstimmung bei Runware) oder Civitai als weiteren Anbieter.
+- **Akzeptanzkriterien:** Vorlage mit Optionen, ADR, Umsetzung der freigegebenen Punkte mit Tests.
+- **Betroffene Module:** ai_gateway, api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Vorlage, ADR, Code, Tests
+- **Notizen:** Grundlage: Erkundung vom 2026-11-07 (Testavatare, Joschek-LoRAs, Checkpoint-Vergleich).
+
+#### V.55: MOSS Image nutzbar machen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Interesse des Eigentümers 2026-11-07; Befund in `docs/research/bildanbieter.md`, „MOSS Image“)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** ja – dritter Bildanbieter (Kategorie 3) bzw. Inhaltsvorgabe (Kategorie 6)
+- **Empfohlene Klasse:** Entscheidung – neuer Dienst (Eskalations-Auslöser 1).
+- **Eingangskriterien:** MOSS Image bei einem Anbieter mit abschaltbarer Prüfung verfügbar, oder Entscheidung für fal.ai mit Prüfung
+- **Anforderungen (ab Klasse M):** FR-025, FR-035
+- **Zu tun:** Verfügbarkeit bei Runware nachprüfen (Verzeichnis, Modellsuche, erlaubte Architekturen für den Upload); Replicate mit Schlüssel prüfen; sonst Vorlage: fal.ai als dritter Anbieter nur für Motive, die dessen Prüfung passieren (0,05 $ je Megapixel, keine LoRAs) – oder warten. Weitere Wege (Nachfrage 2026-11-07): Runware Model Serving (Gewichte an Runware, Abrechnung je Bild, Annahme von MOSS bei Runware anfragen), Runware Serverless (eigener Container, ab 1,10 $ je GPU-Stunde), RunPod Serverless (Preise ungeprüft) – alle mit eigener Inhaltsprüfung und LoRAs, aber Grenzfall zu Vision Abschnitt 6 / Projektkontext Abschnitt 3 („kein selbst betriebenes Modell“) → Entscheidung mit ADR.
+- **Akzeptanzkriterien:** Vorlage, ADR; bei Umsetzung Tests und Probe mit echtem Bild; Eigentümer bestätigt.
+- **Betroffene Module:** ai_gateway, api, ui (nur bei Umsetzung)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Recherche, ADR
+- **Notizen:** Angelegt 2026-11-07 in 10.8. Dazu passt die MOSS-Version von Plastic Zip-Cuffs (`2964163@3427755`).
+
+#### V.54: Weitere LoRAs aufnehmen (u. a. Shibari im passenden Format)
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Eigentümer 2026-11-07: „wir lassen das Thema vorerst und greifen später weitere LoRAs auf“)
+- **Phasentyp-Kontext:** UMSETZUNG (ohne Code; Betrieb des Runware-Kontos)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** ja – Ablage einer Datei außerhalb des Projekts bzw. Zugangsschlüssel (Kategorie 6)
+- **Empfohlene Klasse:** Entscheidung – Umgang mit Schlüsseln und Uploads (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Weitere LoRAs aus der Liste in `docs/research/bildanbieter.md` nach Wunsch des Eigentümers privat zu Runware hochladen und mit Vergleichsbild prüfen. Shibari (`591433@3318444`) liegt nur im kohya-Format vor und lädt bei Runware nicht (`failedLoraLoad`); umgewandelt ins diffusers-Format (Verfahren im Logbuch 2026-11-07, 8 Randmodule weggelassen), Upload scheiterte am fehlenden Weg zu einer Download-Adresse (Kurzzeit-Hoster aus der Cloud-Session gesperrt bzw. nicht erreichbar). Offene Wege: eigener S4-Bucket mit eigenem Benutzer und Schlüssel als Umgebungsvariable, oder vorab signierte Upload-Adresse vom Mac. Alten, nicht ladbaren Upload `skriptorium:591433@3318444` löschen oder ersetzen – Löschen eigener Modelle bietet Runware weder per API noch per CLI an (Stand 2026-11-07, nur `modelUpload`/`modelSearch`); nur im Dashboard durch den Eigentümer, falls dort angeboten, oder durch erneuten Upload unter derselben Kennung ersetzen.
+- **Akzeptanzkriterien:** Je LoRA Vergleichsbild mit und ohne LoRA; Eintrag in der Recherche; Eigentümer bestätigt.
+- **Betroffene Module:** keine (Konto bei Runware)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Logbuch-Eintrag, Recherche
+- **Notizen:** Angelegt 2026-11-07 in 10.8. Stand: fünf nutzbare eigene LoRAs (Plastic Zip-Cuffs, Megapack, Rope Bondage, Metal Bondage, Tape Bondage). Nachtrag 2026-11-07: Danach zusätzlich geprüft und brauchbar: Large Ball Gag (Z-Image-Turbo), Armbinder (Z-Image-Turbo und Krea 2), German Handcuffs (Krea 2, `skriptorium:2861561@3232520`). Armbinder auf Krea 2 mit dem Testavatar nur bei Gewicht 1,0, „single sleeve“, festgehaltener Kleidung und passendem Seed (404 angenommen); Armbinder-Flux auf Z-Image-Turbo verliert bei 0,6 die Figur. Megapack (Krea 2) mit dem Testavatar bei Gewicht 0,8 brauchbar (Tuchknebel sicher, Gesicht weitgehend erhalten); unter 0,8 kein Knebel. Ebenfalls vom Eigentümer als brauchbar bestätigt (2026-11-07), jeweils mit dem Testavatar: Large Ball Gag (Z-Image-Turbo, 0,6), Rope Bondage (Krea 2, 0,6; Armhaltung genau beschreiben, Seeds 303/404/606), Metal Bondage (Krea 2, 0,6; Armhaltung genau beschreiben, Seed 303), Tape Bondage (Krea 2, 0,6, Untergrenze; schmale Wickel, Handgelenke eng; Kreuzwicklung nicht darstellbar), Plastic Zip-Cuffs (Krea 2, 0,6; Seed 303). Allgemein: Fesselung zuerst im Prompt, Kleidung ausdrücklich festhalten, bei Fesselung hinter dem Rücken Ansicht von hinten. Alle LoRAs des Erstellers „sarahpeterson“ sind auf Wunsch des Eigentümers aussortiert (Qualität, Überzeichnung) und werden nicht aufgenommen; ihre Uploads liegen ungenutzt im Konto (Löschen siehe oben).
+
+#### V.53: Fester Startwert (Seed) beim Bilderzeugen
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Eigentümer 2026-11-07: „nimm den festen Seed als Wunsch für 10.11 auf“)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** ja – Herkunft eines Bildes um den Startwert erweitern (Kategorie 4), Feld in der Anfrage (Kategorie 5, additiv)
+- **Empfohlene Klasse:** Entscheidung – Datenmodell (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Startwert im Dialog „Bild erzeugen“ wählbar (zufällig oder fest), den verwendeten Startwert nach dem Erzeugen anzeigen und in der Herkunft des Bildes (ADR-095) festhalten, damit „Neu erzeugen“ ein gutes Bild mit leicht geändertem Prompt wiederholen kann. Klären: welche Anbieter einen Startwert annehmen (Runware: Feld `seed`, Antwort meldet ihn; OpenRouter: je Modell prüfen).
+- **Akzeptanzkriterien:** Vorlage mit Mockup, ADR; Tests; Probe mit echtem Bild (gleicher Startwert und Prompt → gleiches Bild); Eigentümer bestätigt.
+- **Betroffene Module:** ai_gateway, api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR, Mockup
+- **Notizen:** Angelegt 2026-11-07 in 10.8 nach den Proben mit fünf Seeds (Box-Fesselung, Logbuch): Bei schwierigen Posen hilft das Wählen unter mehreren Startwerten; heute bekommt jedes Bild einen neuen Zufallswert.
+
+#### V.52: Prompt in Schlagworte umsetzen (Pony, Illustrious)
+
+- **Status:** ⏸️ VERSCHOBEN → 10.11 (Planung der nächsten Ausbaustufe)
+- **Landeplatz (nur VERSCHOBEN):** 10.11 (Eigentümer 2026-11-07: „Fließtext, ich passe an“, ADR-115)
+- **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
+- **Abhängigkeiten:** 10.8
+- **Freigabepflichtig:** ja – neue Anfrage an ein Textmodell (Kategorie 1 prüfen)
+- **Empfohlene Klasse:** Entscheidung – neue KI-Aufgabe (Eskalations-Auslöser 1).
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Knopf im Dialog „Bild erzeugen“, der den Fließtext aus dem Kanon über das Textmodell in Schlagworte (Booru-Tags) für Pony- und Illustrious-Modelle umsetzt; Kosten je Aufruf anzeigen.
+- **Akzeptanzkriterien:** Vorlage, ADR; Tests; Probe mit echtem Bild; Eigentümer bestätigt.
+- **Betroffene Module:** context, api, ui
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Code, Tests, ADR
+- **Notizen:** Angelegt 2026-11-07 in der zweiten Vorlage zu 10.8.
 
 #### V.50: Verständliche Meldung bei unlesbaren Bildern
 

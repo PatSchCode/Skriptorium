@@ -25,6 +25,7 @@ from skriptorium.ai_gateway import (
     OpenRouterImageProvider,
     OpenRouterProvider,
     ProviderUnavailable,
+    RunwareImageProvider,
 )
 from skriptorium.api import (
     auth_routes,
@@ -45,6 +46,7 @@ from skriptorium.api.access import (
 from skriptorium.api.access.pwned import BreachedPasswordCheck
 from skriptorium.api.context import Services
 from skriptorium.api.favorites import Favorites
+from skriptorium.api.runware_models import RunwareModels
 from skriptorium.api.settings import Settings
 from skriptorium.api.usage import UsageLog
 from skriptorium.canon import CanonService
@@ -80,6 +82,7 @@ _log = logging.getLogger("skriptorium.api")
 Clock = Callable[[], datetime]
 ProviderFactory = Callable[[ModelCatalog], ModelProvider | None]
 ImageProviderFactory = Callable[[ImageCatalog], ImageProvider | None]
+RunwareFactory = Callable[[], RunwareImageProvider | None]
 
 
 class Health(BaseModel):
@@ -98,6 +101,7 @@ def create_app(
     catalog: ModelCatalog | None = None,
     image_provider_factory: ImageProviderFactory | None = None,
     image_catalog: ImageCatalog | None = None,
+    runware_factory: RunwareFactory | None = None,
 ) -> FastAPI:
     """Build the FastAPI application.
 
@@ -113,6 +117,8 @@ def create_app(
         image_provider_factory: Creates the image provider (step 7.12); OpenRouter with the key
             from the environment if missing, ``None`` without a key.
         image_catalog: Image models; OpenRouter's list if missing.
+        runware_factory: Creates the second image provider (step 10.8, ADR-115); Runware with
+            the key from the environment if missing, ``None`` without a key.
     """
     _configure_logging()
     settings = settings or Settings.from_environment()
@@ -124,11 +130,12 @@ def create_app(
     provider = (provider_factory or _provider_from_environment)(catalog)
     image_catalog = image_catalog or ImageCatalog()
     images = (image_provider_factory or _images_from_environment)(image_catalog)
+    runware = (runware_factory or _runware_from_environment)()
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         yield
-        for client in (provider, images):
+        for client in (provider, images, runware):
             close = getattr(client, "aclose", None)
             if close is not None:
                 await close()
@@ -151,6 +158,8 @@ def create_app(
         favorites=Favorites(store),
         image_catalog=image_catalog,
         images=images,
+        runware=runware,
+        runware_models=RunwareModels(store),
     )
 
     @app.get("/api/health")
@@ -190,6 +199,14 @@ def _images_from_environment(catalog: ImageCatalog) -> ImageProvider | None:
     """Image generation through OpenRouter; ``None`` if the key is missing."""
     try:
         return OpenRouterImageProvider.from_environment(catalog)
+    except ProviderUnavailable:
+        return None
+
+
+def _runware_from_environment() -> RunwareImageProvider | None:
+    """Image generation through Runware; ``None`` if the key is missing (ADR-115)."""
+    try:
+        return RunwareImageProvider.from_environment()
     except ProviderUnavailable:
         return None
 

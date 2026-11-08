@@ -108,6 +108,7 @@ Modularer Monolith (ADR-003): ein Python-Server (FastAPI) liefert die React-Ober
 | Service | Zweck | Authentifizierung | Ausfallverhalten |
 |---|---|---|---|
 | OpenRouter | Zugang zu KI-Modellen verschiedener Anbieter, freie Modellwahl (FR-018) | API-Schlüssel, nur serverseitig, nie im Browser | Text des Autors geht nie verloren; Fehlermeldung statt stillem Abbruch; Wiederholen mit anderem Modell (`docs/architecture.md` Abschnitt 5) |
+| Runware | zweiter Bildanbieter neben OpenRouter: offene und Community-Modelle (Civitai) mit LoRAs, Inhaltsprüfung fest aus (ADR-114, ADR-115, 10.8) | `RUNWARE_API_KEY`, nur serverseitig; Kosten-Bremse ist das Vorab-Guthaben ohne automatisches Nachladen (keine Ausgabengrenze je Schlüssel) | Bilder über Runware gehen nicht, Fehlermeldung im Dialog; ohne Schlüssel keine Runware-Gruppe; Bilder über OpenRouter unberührt |
 | weitere KI-Anbieter | künftig parallel zu OpenRouter (FR-025) | je Anbieter | wie OpenRouter |
 | MEGA S4 (Objektspeicher) | Ziel der täglichen Sicherung des Datenverzeichnisses per Duplicati (ADR-036) | Zugangsschlüssel eines eigenen IAM-Benutzers, per Bucket-Richtlinie nur auf den Sicherungs-Bucket; nur auf dem Server und beim Eigentümer; Inhalt vor dem Hochladen verschlüsselt | Sicherung schlägt fehl, Betrieb unberührt; Wiederherstellung nur mit Passphrase, die der Eigentümer auch außerhalb des Servers verwahrt |
 | Have I Been Pwned – Pwned Passwords | Prüfung neuer Passwörter gegen geleakte Passwörter (ADR-017); Daten CC BY 4.0, Namensnennung am Passwortfeld und in der README | keine; nur 5 Hex-Zeichen des SHA-1-Hashes verlassen den Server | Festlegen oder Ändern des Passworts wird abgelehnt, bis der Dienst erreichbar ist; Anmeldung unberührt |
@@ -287,6 +288,7 @@ Default „Warnungen sind Fehler". Benannte Ausnahmen:
 | Posten | Art (laufend / einmalig / KI-Verbrauch) | Betrag je Monat | Stand vom | Entscheidung nötig ab |
 |---|---|---|---|---|
 | KI-Anfragen über OpenRouter | KI-Verbrauch | gemessen Oktober 2026: 1.094 Anfragen, 38,31 $ (Verbrauchsdateien, 2026-11-05; ursprüngliche Schätzung 400 Anfragen, 6–36 $ – `docs/architecture.md` Abschnitt 6); gemessen in 1.1 (Testwelt, bis 17.600 Token): Startmodell grok-4.7 ca. 12 $ je Monat, hochgerechnet auf die Obergrenze 30.000 Token ca. 21 $ (ADR-010, `docs/research/modell-eignungstest.md`) | 2026-09-26 | Summe über 50 € |
+| Bilder über Runware | KI-Verbrauch | Vorab-Guthaben (Stand 2026-11-07: 21,07 $ nach 3,99 $ Probe im Playground); gemessen 0,0025–0,0037 $ je Bild mit epiCRealism XL (mit LoRA) | 2026-11-07 | Summe über 50 € |
 | Hosting | laufend | vorhandener netcup-VPS (ADR-025), mitgenutzt; kein Betrag – laut Eigentümer nicht Sache des Projekts | 2026-09-27 | – |
 | Sicherungsziel MEGA S4 | laufend | vorhandener Mega-Tarif des Eigentümers mit S4 (ADR-036); kein zusätzlicher Betrag | 2026-09-30 | – |
 
