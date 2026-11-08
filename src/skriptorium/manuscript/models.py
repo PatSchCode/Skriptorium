@@ -68,6 +68,10 @@ FREE_TEXT_MAX: Final = 1000
 # Longest relation of a guest to the world of the story (step 9.13, ADR-102); several paragraphs,
 # far below the request budget.
 RELATION_MAX: Final = 4000
+# Kept writing requests per story; beyond that the oldest goes (step 10.9, ADR-116).
+MAX_REQUESTS: Final = 50
+# Characters of the instruction in the list of kept requests.
+INSTRUCTION_START: Final = 120
 
 
 class Keep(Enum):
@@ -110,6 +114,75 @@ class InstructionNote:
     instruction: str
     text: str
     model: str | None = None
+    # Identifier of the writing request the text came from (step 10.9, ADR-116); older notes
+    # and notes of texts taken over before the request was kept have none.
+    request: str | None = None
+
+
+@dataclass(frozen=True)
+class RequestBlock:
+    """One building block of a writing request: its kind, its label and its estimated tokens."""
+
+    kind: str
+    label: str
+    tokens: int
+
+
+@dataclass(frozen=True)
+class RequestMessage:
+    """One message of a writing request as it went to the AI (text only, no image data)."""
+
+    role: str
+    content: str
+
+
+@dataclass(frozen=True)
+class WritingRequest:
+    """A writing request as it went to the AI, with the AI's raw answer (step 10.9, ADR-116).
+
+    ``instruction`` is the instruction as it went into the request (the text for "Weiter" or
+    the lines of a new scene included); ``pictures`` names the entries whose main image went
+    along. ``outcome`` is ``ok``, ``abgebrochen`` or the error kind of the writing flow; tokens
+    and cost are those the provider reported, ``None`` if it reported none. ``answer`` is the
+    streamed text as the AI wrote it, with the line of a conflict note if there was one.
+    """
+
+    id: str
+    at: datetime
+    chapter: int
+    model: str
+    length: str
+    instruction: str
+    blocks: tuple[RequestBlock, ...]
+    estimated_tokens: int
+    pictures: tuple[str, ...]
+    outcome: str
+    input_tokens: int | None
+    output_tokens: int | None
+    cost_usd: float | None
+    messages: tuple[RequestMessage, ...]
+    answer: str
+
+
+@dataclass(frozen=True)
+class RequestSummary:
+    """A kept writing request in the list (step 10.9, ADR-116), without its texts.
+
+    ``instruction`` is the start of the instruction, at most :data:`INSTRUCTION_START`
+    characters; ``taken_over`` is true when a note of the history names the request.
+    """
+
+    id: str
+    at: datetime
+    chapter: int
+    model: str
+    estimated_tokens: int
+    input_tokens: int | None
+    output_tokens: int | None
+    cost_usd: float | None
+    outcome: str
+    instruction: str
+    taken_over: bool
 
 
 @dataclass(frozen=True)

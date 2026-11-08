@@ -1413,6 +1413,60 @@ button.more-toggle {
   margin: 0;
 }
 
+/* Anfragen (step 10.9, ADR-116): the kept requests of the story as a table that scrolls
+   sideways on small screens, the open request below it. */
+.requests-scroll {
+  overflow-x: auto;
+}
+
+.requests-table td {
+  white-space: nowrap;
+}
+
+.requests-table td.instruction {
+  max-width: 20rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--muted);
+}
+
+.requests-table tr.shown td {
+  background: var(--button);
+}
+
+.request-detail {
+  margin-top: 1rem;
+}
+
+.request-detail h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.request-blocks {
+  margin: 0.5rem 0;
+}
+
+.request-blocks td:last-child,
+.request-blocks th:last-child {
+  text-align: right;
+}
+
+.request-detail details {
+  margin-top: 0.5rem;
+}
+
+.request-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 30rem;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
 /* Size of the chapter below the manuscript (step 6.1). */
 .chapter-length {
   display: flex;

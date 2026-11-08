@@ -94,6 +94,69 @@ export interface InstructionNote {
   /** The AI's text as it went into the manuscript. */
   text: string;
   model: string | null;
+  /** The kept writing request the text came from (step 10.9, ADR-116); `null` for older notes. */
+  request: string | null;
+}
+
+/** What the interface sends to note a taken-over exchange; `request` only when known. */
+export type InstructionOrder = Omit<InstructionNote, "at" | "request"> & {
+  request?: string;
+};
+
+/** One building block of a kept writing request with its estimated tokens. */
+export interface RequestBlock {
+  kind: string;
+  label: string;
+  tokens: number;
+}
+
+/** One message of a kept writing request, as it went to the AI (text only). */
+export interface RequestMessage {
+  role: "system" | "user" | "assistant";
+  content: string;
+}
+
+/**
+ * Outcome of a writing request: `ok`, `abgebrochen` (the author stopped it) or the error kind of
+ * the proposal stream.
+ */
+export type RequestOutcome =
+  "ok" | "abgebrochen" | Exclude<WriteErrorKind, "verbindung">;
+
+/** A kept writing request in the list (step 10.9, ADR-116), without its texts. */
+export interface RequestSummary {
+  /** Time of sending, also the order: `JJJJMMTT-HHMMSS`, with `-2` … for the same second. */
+  id: string;
+  /** Time of sending, ISO 8601 in UTC. */
+  at: string;
+  chapter: number;
+  model: string;
+  estimated_tokens: number;
+  /** As the provider reported them; `null` if it reported nothing. */
+  input_tokens: number | null;
+  output_tokens: number | null;
+  cost_usd: number | null;
+  outcome: RequestOutcome;
+  /** The start of the instruction as it went into the request. */
+  instruction: string;
+  /** A note of the history names the request. */
+  taken_over: boolean;
+}
+
+/** A kept writing request with what went to the AI and its raw answer (ADR-116). */
+export interface WritingRequest extends Omit<
+  RequestSummary,
+  "taken_over" | "instruction"
+> {
+  length: string;
+  /** The whole instruction as it went into the request. */
+  instruction: string;
+  blocks: RequestBlock[];
+  /** Names of the entries whose main image went along. */
+  pictures: string[];
+  messages: RequestMessage[];
+  /** The answer as the AI streamed it, with the line of a conflict note. */
+  answer: string;
 }
 
 /** Result of creating the summaries (step 3.6); `failure` names the step that failed. */
@@ -302,13 +365,23 @@ export const manuscriptApi = {
     world: string,
     story: string,
     number: number,
-    note: Omit<InstructionNote, "at">,
+    note: InstructionOrder,
   ) =>
     request(
       "POST",
       `${storyPath(world, story)}/chapters/${String(number)}/instructions`,
       note,
     ) as Promise<InstructionNote[]>,
+  /** The kept writing requests of a story, newest first (step 10.9, ADR-116). */
+  writingRequests: (world: string, story: string) =>
+    request("GET", `${storyPath(world, story)}/requests`) as Promise<
+      RequestSummary[]
+    >,
+  writingRequest: (world: string, story: string, id: string) =>
+    request(
+      "GET",
+      `${storyPath(world, story)}/requests/${enc(id)}`,
+    ) as Promise<WritingRequest>,
   setStorySummary: (world: string, story: string, summary: string) =>
     request("PUT", `${storyPath(world, story)}/summary`, {
       summary,

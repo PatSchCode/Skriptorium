@@ -43,12 +43,18 @@ export type {
   Form,
   GuestLink,
   InstructionNote,
+  InstructionOrder,
+  RequestBlock,
+  RequestMessage,
+  RequestOutcome,
+  RequestSummary,
   Story,
   StoryDeletion,
   StoryFact,
   StoryPicture,
   SummaryResult,
   SummaryStatus,
+  WritingRequest,
   WritingStyle,
 } from "./manuscript";
 export { formatCost } from "./models";

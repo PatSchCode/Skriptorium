@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-07 (ADR-001 bis ADR-115). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-116). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -135,12 +135,13 @@ Stand 2026-11-07 (ADR-001 bis ADR-115). Aus welchem Schritt ein ADR stammt, steh
 | 113 | 2026-11-06 | Aktiv | ERKENNTNIS | PERFORMANCE | – (Ergebnis Schritt 10.10) | Hermes 4 bleibt wie heute: Denken nicht nutzbar, keine Einstellung mit Wirkung; Längengrenze als V.51 |
 | 114 | 2026-11-07 | Aktiv | OPERATIV | ABHÄNGIGKEIT | Externe Abh. | Runware als zweiter Bildanbieter (10.8) |
 | 115 | 2026-11-07 | Aktiv | OPERATIV | SECURITY, DATENMODELL, SCHNITTSTELLE | Sicherheit, Datenmodell, Architektur, API | Runware: Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen (10.8) |
+| 116 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell | Schreib-Anfragen im Wortlaut festhalten: letzte 50 je Geschichte, mit Antwort, eigener Reiter (10.9) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-106 bis ADR-115 – keiner reaktiv: ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-106 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-107 bis ADR-116 – keiner reaktiv: ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-107 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2734,6 +2735,29 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Konfidenz zum Zeitpunkt:** hoch für Ablauf und Kosten (Probe); mittel für Runwares Auslegung von §10 (Risiko: Sperre, Verlust höchstens des Restguthabens). Umkehrbarkeit billig (Konstante, Datei unter `system/`).
 - **Umsetzung (Nachtrag 2026-11-07):** Die Zuordnung Anbieter → Adapter steht als zweites Feld `Services.runware` neben `Services.images` (OpenRouter); welcher Adapter eine Anfrage bekommt, entscheidet `image_routes` am Kennungsformat. Preis vorher: bei Runware-Modellen immer „Abrechnung nach Rechenzeit – Kosten nach dem Erzeugen“ (die Preissätze stehen nur in den Schemata der Runware-Doku, ein weiterer Abruf lohnt nicht). Getrennte Prüfung (Sonnet, 2026-11-07): keine Befunde hoch oder mittel, keine ASVS-Anforderung verletzt; zwei niedrige, optionale Befunde (Größengrenze der Antwort vor dem Dekodieren; beschädigte Listendatei sperrt die Modell-Liste) dem Eigentümer vorgelegt.
 - **Konsequenzen:** `docs/project-context.md` Abschnitte 5 und 8 (Kostenregister), `.env.example`, `docs/architecture.md` (Beziehung `ai_gateway` → Runware) mit dem Bau; Mockup der Bildauswahl und der Einstellungen im Logbuch (`[ADR-ANGELEGT]` ADR-115); Tests; Probe mit echtem Bild nach dem Bau.
+- **Abgeleitete Regel:** keine
+
+#### ADR-116: Schreib-Anfragen im Wortlaut festhalten – letzte 50 je Geschichte, mit Antwort, eigener Reiter (10.9)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Vorlage mit Mockup zu 10.9, Auswahlfragen: Umfang „Alle, auch verworfene“ – Empfehlung der KI; Anzahl „Letzte 50 je Geschichte“ – Empfehlung war 20; Anzeige „Eigener Reiter ‚Anfragen‘“ – Empfehlung; Antwort „Ja, mitspeichern“ – Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[DATENMODELL]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.9 – „Freigabepflichtig: ja – neue Ablage“; als Vorlage vorgesehen, ADR-105) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine (Datenmodell bleibt `[BELASTBAR]`, rein ergänzende Dateien; keine neue Beziehung zwischen Modulen)
+- **Kategorie:** Datenmodell (Kategorie 4); API rein ergänzend (Kategorie 5 nicht berührt)
+- **Kontext:** V.42 / 10.9 (FR-013, FR-027): Zu einem KI-Text soll sich nachlesen lassen, was an die KI ging – heute hält der Verlauf nur Anweisung, Text und Modell übernommener Vorschläge fest (ADR-056); die Bausteinliste (`BuiltContext.blocks`) entsteht bei jeder Anfrage und wird verworfen. Befund 6 der Bewertung nach Phase 9: nicht in die Verbrauchsdatei, eigenes Ziel.
+- **Optionen:** Umfang A alle abgeschickten Schreib-Anfragen / B nur übernommene; Anzahl 20 je Geschichte / 50 je Geschichte / 10 je Kapitel; Anzeige A eigener Reiter / B nur Verweis im Verlauf; Antwort mitspeichern ja / nein.
+- **Entscheidung:**
+  - **Umfang:** jede abgeschickte Schreib-Anfrage (Weiterschreiben, neue Szene) – fertig, abgebrochen oder fehlgeschlagen, übernommen oder verworfen. Nicht enthalten: Kurzfassungen, Weltenbauer, Bildbeschreibung, Bilder erzeugen.
+  - **Ablage:** eine Datei je Anfrage `worlds/<welt>/stories/<geschichte>/anfragen/<zeit>.md`; Kopf: Zeit (UTC), Kapitel, Modell, Länge, Anweisung, Bausteinliste (Art, Bezeichnung, Token), geschätzte Token, Namen der mitgeschickten Bilder (keine Bilddaten), Ausgang (`ok`, `abgebrochen` oder Fehlerart), gemeldete Token und Kosten; Dateitext: die Nachrichten im Wortlaut und die Antwort der KI roh (mit Konflikt-Hinweis). Geschrieben am Ende des Streams, wo auch der Verbrauch gezählt wird. Höchstens **50 je Geschichte**; danach fällt die älteste weg (ca. 5 MB je Geschichte, in der Sicherung enthalten).
+  - **Verknüpfung:** Das `start`-Ereignis trägt zusätzlich die Kennung der Anfrage; beim Übernehmen geht sie in den Verlaufseintrag (Feld ergänzend, alte Einträge ohne). Löschen eines Kapitels nimmt dessen Anfragen mit, die Kapitelnummern rücken nach wie beim Verlauf (9.9); Archivieren und Löschen der Geschichte nehmen den Ordner mit.
+  - **Anzeige:** dritter Reiter „Anfragen“ neben „Manuskript | Verlauf“: Liste der letzten Anfragen der Geschichte (neueste oben; Zeit, Kapitel, Modell, Token, Kosten, übernommen/verworfen/abgebrochen, Anfang der Anweisung); Klick zeigt Bausteine mit Token und, aufklappbar, Wortlaut der Nachrichten und Antwort. Im Verlauf je KI-Text „Anfrage ansehen“, solange die Anfrage noch aufbewahrt ist.
+  - `context` und der Schreib-Ablauf lesen die Anfragen nie – sie gehen nie wieder an die KI. Die Inhalte liegen im Datenverzeichnis, nicht im Log (Regel „Logs nur Metadaten“ bleibt).
+  - Module: `manuscript` (Dateien, lesen, ergänzen, kürzen), `api` (Ablauf, lesende Routen), `ui` (Reiter, Verweis im Verlauf).
+- **Vision-Frage, die entschied:** „Willst du auch bei verworfenen Vorschlägen sehen können, was die KI bekam?“ → ja.
+- **Konfidenz zum Zeitpunkt:** hoch – gleiches Speichermuster wie Verlauf und Fakten (ADR-003, ADR-056), Bausteinliste entsteht schon heute. Umkehrbarkeit billig (rollierende Ablage, nichts hängt davon ab).
+- **Konsequenzen:** Je Anfrage ca. 100 KB; 50 Anfragen je Geschichte ca. 5 MB, in der täglichen Sicherung (ADR-036). Wer eine Anfrage nachlesen will, die älter als die letzten 50 ist, findet sie nicht mehr. `docs/architecture.md` Abschnitt 7 (Datenmodell) bekommt die Ablage mit dem Bau.
 - **Abgeleitete Regel:** keine
 
 ---

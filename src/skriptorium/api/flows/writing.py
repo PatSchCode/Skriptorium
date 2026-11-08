@@ -19,7 +19,10 @@ images. ``context`` words which image belongs to which entry; the images do not 
 the text budget.
 
 Every request is counted through ``record`` when the stream ends: finished, failed or aborted
-(ADR-023, step 3.9).
+(ADR-023, step 3.9). At the same place a :class:`RequestKeeper` keeps the request as it went to
+the AI, with the raw answer, in the story (step 10.9, ADR-116); the ``start`` event names its
+identifier so that taking the proposal over can note it in the history. Keeping is never read
+back for a request to the AI, and a storage failure never breaks the stream.
 
 If the instruction contradicts the canon, the AI writes in line with the canon and starts its
 answer with one line beginning with ``CONFLICT_MARKER``. That line goes to the interface as a
@@ -28,8 +31,10 @@ separate ``hinweis`` event, so taking over the proposal never puts it into the m
 """
 
 import json
+import logging
 from collections.abc import AsyncIterator, Callable, Mapping, Sequence
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Final
 
 from skriptorium.ai_gateway import (
@@ -52,12 +57,18 @@ from skriptorium.canon import CanonEntry, CanonService, Category
 from skriptorium.context import (
     CONFLICT_MARKER,
     DEFAULT_LENGTH,
+    ContextBlock,
     ContextBuilder,
     ContextTooLarge,
     Length,
 )
-from skriptorium.manuscript import ManuscriptService
-from skriptorium.storage import InvalidInput, NotFound
+from skriptorium.manuscript import (
+    ManuscriptService,
+    RequestBlock,
+    RequestMessage,
+    WritingRequest,
+)
+from skriptorium.storage import AlreadyExists, InvalidInput, NotFound, StorageError
 
 # First model of the model order grok-4.6 → grok-4.7 → qwen3.8-max (ADR-011, ADR-044).
 DEFAULT_MODEL: Final = next(iter(DEFAULT_MODELS))
@@ -77,6 +88,8 @@ PICTURE_TOKENS: Final = 2500
 
 # Counts one AI request: kind, model, usage reported by the provider, outcome (ADR-023).
 UsageRecorder = Callable[[Kind, str, Usage | None, str], None]
+
+_log = logging.getLogger("skriptorium.api.flows.writing")
 
 
 @dataclass(frozen=True)
@@ -108,12 +121,33 @@ class WriteOrder:
 
 
 @dataclass(frozen=True)
+class SentRequest:
+    """What a writing request is kept with besides its messages (step 10.9, ADR-116).
+
+    ``instruction`` is the instruction as it went into the request; ``pictures`` names the
+    entries whose main image went along.
+    """
+
+    world: str
+    story: str
+    chapter: int
+    length: Length
+    instruction: str
+    blocks: tuple[ContextBlock, ...]
+    pictures: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
 class PreparedRequest:
-    """The request for ``ai_gateway``, the estimated size of its context and its image count."""
+    """The request for ``ai_gateway``, the estimated size of its context and its image count.
+
+    ``sent`` is set for writing requests, which are kept (ADR-116); other flows leave it out.
+    """
 
     completion: CompletionRequest
     estimated_tokens: int
     pictures: int = 0
+    sent: SentRequest | None = None
 
 
 def prepare_request(
@@ -177,6 +211,15 @@ def prepare_request(
         CompletionRequest(order.model, tuple(messages), MAX_OUTPUT_TOKENS, TEMPERATURE),
         built.estimated_tokens + PICTURE_TOKENS * len(pictured),
         len(pictured),
+        SentRequest(
+            order.world,
+            order.story,
+            order.chapter,
+            order.length,
+            instruction,
+            built.blocks,
+            tuple(found.name for found in pictured),
+        ),
     )
 
 
@@ -226,31 +269,111 @@ _ERROR_KINDS: Final[Sequence[tuple[type[GatewayError], str]]] = (
 )
 
 
+@dataclass(frozen=True)
+class OpenRequest:
+    """A writing request about to be sent: its reserved identifier, the time of sending and
+    what it is kept with."""
+
+    id: str
+    at: datetime
+    sent: SentRequest
+
+
+@dataclass(frozen=True)
+class RequestKeeper:
+    """Keeps every writing request with the AI's raw answer in its story (ADR-116).
+
+    A storage failure is logged by its kind and swallowed: keeping must never break writing,
+    and no text of the request ever goes into the log.
+    """
+
+    manuscripts: ManuscriptService
+    clock: Callable[[], datetime]
+
+    def open(self, prepared: PreparedRequest) -> OpenRequest | None:
+        """Reserve the identifier of the request; ``None`` for a request that is not kept."""
+        sent = prepared.sent
+        if sent is None:
+            return None
+        at = self.clock()
+        return OpenRequest(self.manuscripts.reserve_request(sent.world, sent.story, at), at, sent)
+
+    def release(self, opened: OpenRequest) -> None:
+        """Give the identifier back: the request was never sent."""
+        self.manuscripts.release_request(opened.sent.world, opened.sent.story, opened.id)
+
+    def keep(
+        self,
+        prepared: PreparedRequest,
+        opened: OpenRequest,
+        answer: str,
+        outcome: str,
+        usage: Usage | None,
+    ) -> None:
+        """Keep the request as sent, with ``answer`` as the AI streamed it."""
+        sent = opened.sent
+        request = WritingRequest(
+            id=opened.id,
+            at=opened.at,
+            chapter=sent.chapter,
+            model=prepared.completion.model,
+            length=sent.length,
+            instruction=sent.instruction,
+            blocks=tuple(RequestBlock(b.kind, b.label, b.tokens) for b in sent.blocks),
+            estimated_tokens=prepared.estimated_tokens,
+            pictures=sent.pictures,
+            outcome=outcome,
+            input_tokens=usage.input_tokens if usage else None,
+            output_tokens=usage.output_tokens if usage else None,
+            cost_usd=usage.cost_usd if usage else None,
+            messages=tuple(
+                RequestMessage(message.role, message.content)
+                for message in prepared.completion.messages
+            ),
+            answer=answer,
+        )
+        try:
+            self.manuscripts.save_request(sent.world, sent.story, request)
+        except (StorageError, InvalidInput, NotFound, AlreadyExists) as error:
+            _log.warning("Anfrage nicht gespeichert: %s", type(error).__name__)
+
+
 async def stream_events(
-    provider: ModelProvider, prepared: PreparedRequest, record: UsageRecorder | None = None
+    provider: ModelProvider,
+    prepared: PreparedRequest,
+    record: UsageRecorder | None = None,
+    keeper: RequestKeeper | None = None,
 ) -> AsyncIterator[str]:
     """Stream the answer as Server-Sent Events.
 
-    Events: ``start`` (model, estimated tokens), then at most one ``hinweis`` (the AI's note on
-    a contradiction with the canon, step 4.14) and ``text`` per chunk, then either ``done``
-    (usage) or ``error`` (kind only; texts for the author live in the interface). Closing the
-    connection closes the provider stream, which ends the request at the provider. At the end
-    the request is passed to ``record`` with outcome ``ok``, the error kind or ``abgebrochen``.
+    Events: ``start`` (model, estimated tokens, images, the identifier of the kept request or
+    ``None``), then at most one ``hinweis`` (the AI's note on a contradiction with the canon,
+    step 4.14) and ``text`` per chunk, then either ``done`` (usage) or ``error`` (kind only;
+    texts for the author live in the interface). Closing the connection closes the provider
+    stream, which ends the request at the provider. At the end the request is passed to
+    ``record`` with outcome ``ok``, the error kind or ``abgebrochen``, and to ``keeper`` with the
+    same outcome and the raw answer (ADR-116). A connection closed before the request was sent
+    counts nothing and keeps nothing.
     """
     completion = prepared.completion
-    yield _event(
-        "start",
-        {
-            "model": completion.model,
-            "estimated_tokens": prepared.estimated_tokens,
-            "images": prepared.pictures,
-        },
-    )
+    opened = keeper.open(prepared) if keeper is not None else None
     usage: Usage | None = None
     outcome = "abgebrochen"
+    sent = False
+    answer: list[str] = []
     events = provider.stream(completion)
     split = NoteSplitter()
     try:
+        yield _event(
+            "start",
+            {
+                "model": completion.model,
+                "estimated_tokens": prepared.estimated_tokens,
+                "images": prepared.pictures,
+                "request": opened.id if opened is not None else None,
+            },
+        )
+        sent = True
         async for event in events:
             if isinstance(event, Completed):
                 usage, outcome = event.usage, "ok"
@@ -266,6 +389,7 @@ async def stream_events(
                     },
                 )
             elif event.text:
+                answer.append(event.text)
                 for name, text in split.feed(event.text):
                     yield _event(name, {"text": text})
     except GatewayError as error:
@@ -277,8 +401,13 @@ async def stream_events(
         close = getattr(events, "aclose", None)
         if close is not None:
             await close()
-        if record is not None:
+        if sent and record is not None:
             record("schreiben", completion.model, usage, outcome)
+        if keeper is not None and opened is not None:
+            if sent:
+                keeper.keep(prepared, opened, "".join(answer), outcome, usage)
+            else:
+                keeper.release(opened)
 
 
 class NoteSplitter:

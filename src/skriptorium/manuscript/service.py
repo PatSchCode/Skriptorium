@@ -15,7 +15,10 @@ Layout below the data directory (docs/architecture.md section 7)::
     worlds/<world>/stories/<story>/bilder/bild-<r>.<e>   pictures between paragraphs, named in
                                                          the text as ``![…](bild:<file>)``
                                                          (ADR-110)
-    worlds/<world>/stories/<story>/verlauf/NN.md         kapitel, anweisungen (ADR-056)
+    worlds/<world>/stories/<story>/verlauf/NN.md         kapitel, anweisungen (ADR-056),
+                                                         optional anfrage per note (ADR-116)
+    worlds/<world>/stories/<story>/anfragen/<id>.md      writing requests as sent, with the
+                                                         AI's answer, the last 50 (ADR-116)
 
 A novel (``roman``) has any number of chapters; a short story or fragment has exactly one,
 created with the story, because the data model keeps all manuscript text in chapter files.
@@ -24,8 +27,8 @@ the flow control in ``api`` (``manuscript`` does not depend on ``canon``). The s
 for the existence of the world.
 
 The service is a facade: the work is done by ``StoryStore`` (``stories``), ``ChapterStore``
-(``chapters``) and ``StoryExtras`` (``extras``); the header handling of the files lives in
-``headers``, the checks of caller input in ``validation``.
+(``chapters``), ``StoryExtras`` (``extras``) and ``RequestStore`` (``requests``); the header
+handling of the files lives in ``headers``, the checks of caller input in ``validation``.
 """
 
 import contextlib
@@ -43,6 +46,7 @@ from skriptorium.manuscript.models import (
     FREE_TEXT_MAX,
     GENRES,
     KEEP,
+    MAX_REQUESTS,
     RELATION_MAX,
     STYLES,
     SUMMARY_STATUSES,
@@ -54,13 +58,18 @@ from skriptorium.manuscript.models import (
     GuestLink,
     InstructionNote,
     Keep,
+    RequestBlock,
+    RequestMessage,
+    RequestSummary,
     Story,
     StoryContents,
     StoryFact,
     SummaryStatus,
+    WritingRequest,
     WritingStyle,
 )
 from skriptorium.manuscript.pictures import pictures_in
+from skriptorium.manuscript.requests import RequestStore
 from skriptorium.manuscript.stories import StoryStore
 from skriptorium.manuscript.validation import checked_chapter_style
 from skriptorium.storage import DocumentStore, ImageOrigin, InvalidInput, NotFound
@@ -73,6 +82,7 @@ __all__ = [
     "FREE_TEXT_MAX",
     "GENRES",
     "KEEP",
+    "MAX_REQUESTS",
     "RELATION_MAX",
     "STYLES",
     "SUMMARY_STATUSES",
@@ -85,10 +95,14 @@ __all__ = [
     "InstructionNote",
     "Keep",
     "ManuscriptService",
+    "RequestBlock",
+    "RequestMessage",
+    "RequestSummary",
     "Story",
     "StoryContents",
     "StoryFact",
     "SummaryStatus",
+    "WritingRequest",
     "WritingStyle",
 ]
 
@@ -101,6 +115,7 @@ class ManuscriptService:
         self._chapters = ChapterStore(store)
         self._stories = StoryStore(store, self._chapters)
         self._extras = StoryExtras(store, self._stories, self._chapters)
+        self._requests = RequestStore(store)
 
     # --- stories --------------------------------------------------------------------------
 
@@ -469,13 +484,16 @@ class ManuscriptService:
 
         Number and file name of each following chapter go down by one, its history
         ``verlauf/NN.md`` moves along, and its short summary, if it has one, is marked
-        ``veraltet``; the history of the deleted chapter is deleted. The overall summary is left
-        as it is. Returns the remaining chapters in order.
+        ``veraltet``; the history of the deleted chapter is deleted. The kept writing requests
+        of the chapter are deleted, those of later chapters get the new number (ADR-116). The
+        overall summary is left as it is. Returns the remaining chapters in order.
 
         Raises:
             NotFound: The story or the chapter does not exist.
         """
-        return self._chapters.delete_chapter(world_id, story_id, number)
+        remaining = self._chapters.delete_chapter(world_id, story_id, number)
+        self._requests.drop_chapter(world_id, story_id, number)
+        return remaining
 
     def complete_chapter(self, world_id: str, story_id: str, number: int) -> Chapter:
         """Mark a chapter as completed; its summary is created by the flow in ``api`` (3.6).
@@ -525,3 +543,49 @@ class ManuscriptService:
             InvalidInput: Empty instruction or text.
         """
         return self._extras.add_instruction(world_id, story_id, number, note)
+
+    # --- kept writing requests (step 10.9, ADR-116) ----------------------------------------
+
+    def reserve_request(self, world_id: str, story_id: str, at: datetime) -> str:
+        """A new identifier for a writing request sent at ``at``; its file follows with
+        :meth:`save_request`, or :meth:`release_request` gives the identifier back.
+
+        Raises:
+            InvalidInput: Bad identifier of world or story.
+        """
+        return self._requests.reserve(world_id, story_id, at)
+
+    def release_request(self, world_id: str, story_id: str, request_id: str) -> None:
+        """Give back a reserved identifier whose request was never sent."""
+        self._requests.release(world_id, story_id, request_id)
+
+    def save_request(self, world_id: str, story_id: str, request: WritingRequest) -> None:
+        """Keep a writing request under its reserved identifier; beyond :data:`MAX_REQUESTS`
+        the oldest of the story is deleted.
+
+        Raises:
+            NotFound: The story does not exist (any more).
+            InvalidInput: Bad identifier.
+            AlreadyExists: A request with the identifier is kept already.
+            StorageError: Writing or deleting failed.
+        """
+        self._requests.save(world_id, story_id, request)
+
+    def list_requests(self, world_id: str, story_id: str) -> list[RequestSummary]:
+        """The kept writing requests of a story, newest first, without their texts; never sent
+        to the AI.
+
+        Raises:
+            NotFound: The story does not exist.
+            InvalidInput: A file is broken.
+        """
+        return self._requests.list_requests(world_id, story_id)
+
+    def get_request(self, world_id: str, story_id: str, request_id: str) -> WritingRequest:
+        """One kept writing request with its messages and the AI's answer.
+
+        Raises:
+            NotFound: The story or the request does not exist.
+            InvalidInput: The file is broken.
+        """
+        return self._requests.get_request(world_id, story_id, request_id)

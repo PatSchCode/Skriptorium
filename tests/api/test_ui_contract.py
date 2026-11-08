@@ -476,6 +476,21 @@ def _streams(rec: _Recorder, provider: FakeProvider, story: str) -> None:
         rec.stream(prefix, "DescribeEvent", path, {"model": "x-ai/grok-4.6"})
 
 
+def _requests(rec: _Recorder, story: str) -> None:
+    """The kept writing requests of the streams above (step 10.9, ADR-116); the oldest is noted
+    as taken over."""
+    oldest = rec.client.get(f"{story}/requests").json()[-1]["id"]
+    rec.post(
+        "addInstructionWithRequest",
+        "InstructionNote[]",
+        f"{story}/chapters/1/instructions",
+        {"instruction": "Mira kommt dazu.", "text": "Der Nebel hob sich.", "request": oldest},
+        status=201,
+    )
+    rec.get("writingRequests", "RequestSummary[]", f"{story}/requests")
+    rec.get("writingRequest", "WritingRequest", f"{story}/requests/{oldest}")
+
+
 def _models_images_and_usage(rec: _Recorder, images: FakeImages) -> None:
     rec.get("models", "ModelList", "/api/models")
     rec.put(
@@ -586,6 +601,7 @@ def test_the_answers_of_the_server_are_the_recorded_ones(
     story = _manuscript(rec)
     _summaries(rec, provider, story)
     _streams(rec, provider, story)
+    _requests(rec, story)
     _models_images_and_usage(rec, images)
     _transfer(rec)
     _account(rec, clock)

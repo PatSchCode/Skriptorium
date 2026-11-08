@@ -1,7 +1,10 @@
 import type { Chapter } from "../api";
 
-/** Manuscript, the history of instructions over the text (step 5.13) or the short summary. */
-export type ChapterView = "manuskript" | "verlauf" | "kurzfassung";
+/**
+ * Manuscript, the history of instructions over the text (step 5.13), the kept requests of the
+ * story (step 10.9, ADR-116) or the short summary.
+ */
+export type ChapterView = "manuskript" | "verlauf" | "anfragen" | "kurzfassung";
 
 /**
  * The tabs over a chapter; "Kurzfassung" exists once the chapter has one (steps 3.6, 6.2). At
@@ -39,6 +42,15 @@ export function ChapterTabs({
         }}
       >
         Verlauf
+      </button>
+      <button
+        type="button"
+        aria-current={view === "anfragen"}
+        onClick={() => {
+          onView("anfragen");
+        }}
+      >
+        Anfragen
       </button>
       {hasSummary && (
         <button

@@ -29,6 +29,7 @@ import { useCanonTake } from "./useCanonTake";
 import { useChapterCompletion } from "./useChapterCompletion";
 import { useChapterDraft } from "./useChapterDraft";
 import { WritingPanel } from "./WritingPanel";
+import { WritingRequests } from "./WritingRequests";
 
 // The editor with its Markdown grammar is large; it is loaded when a chapter is opened.
 const ManuscriptEditor = lazy(() =>
@@ -82,6 +83,8 @@ export function ChapterEditor({
   const { factForm, ...canon } = useCanonTake(onCanonChanged);
   const [view, setView] = useState<ChapterView>("manuskript");
   const [noted, setNoted] = useState(0);
+  // The kept request open on the tab "Anfragen" (step 10.9, ADR-116).
+  const [shownRequest, setShownRequest] = useState<string | null>(null);
   // The tab "Kurzfassung" exists once the chapter is completed or has one (steps 3.6, 6.2).
   const hasSummary =
     chapter.status === "abgeschlossen" || chapter.summary !== "";
@@ -238,6 +241,19 @@ export function ChapterEditor({
             world={chapter.world}
             story={chapter.story}
             chapter={chapter.number}
+            round={noted}
+            onRequest={(id) => {
+              setShownRequest(id);
+              setView("anfragen");
+            }}
+          />
+        )}
+        {view === "anfragen" && (
+          <WritingRequests
+            world={chapter.world}
+            story={chapter.story}
+            shown={shownRequest}
+            onShow={setShownRequest}
             round={noted}
           />
         )}

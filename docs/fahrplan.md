@@ -11,8 +11,8 @@
 - **Stand vom:** 2026-11-08 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.8 Zweiter Bildanbieter – Runware gewählt 2026-11-07 (ADR-114); Probe des Eigentümers im Playground läuft („brauchbar“), neuer Wunsch Erwachseneninhalte; Modellsuche mit `RUNWARE_API_KEY` erledigt 2026-11-07 (Cloud-Session), zweite Vorlage entschieden (ADR-115), gebaut und getrennt geprüft – bestätigt und gemergt 2026-11-08 (PR #218, `96e56bc`) – wartet nur noch auf Einspielen vom Mac (Checkpoint-Versuch bleibt in V.56). 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
-- **Nächster Schritt:** 10.8: Einspielen vom Mac mit `RUNWARE_API_KEY` auf dem VPS (Stand `main` `96e56bc` oder neuer), Probe auf dem Server; danach 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup), dann 10.11 (neu darin: V.57 Bildrezepte, V.58 Figuren-Assistent, angelegt 2026-11-08). D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.9 Vollständige Anfrage festhalten – gebaut 2026-11-08 (ADR-116), wartet auf Bestätigung und Einspielen. Daneben 10.8 Zweiter Bildanbieter (fertig gebaut, wartet nur auf Einspielen vom Mac): – Runware gewählt 2026-11-07 (ADR-114); Probe des Eigentümers im Playground läuft („brauchbar“), neuer Wunsch Erwachseneninhalte; Modellsuche mit `RUNWARE_API_KEY` erledigt 2026-11-07 (Cloud-Session), zweite Vorlage entschieden (ADR-115), gebaut und getrennt geprüft – bestätigt und gemergt 2026-11-08 (PR #218, `96e56bc`) – wartet nur noch auf Einspielen vom Mac (Checkpoint-Versuch bleibt in V.56). 10.10 erledigt 2026-11-06 (ADR-113: Hermes 4 bleibt wie heute; Längengrenze als V.51). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06 (eingespielt `de64667`).
+- **Nächster Schritt:** 10.8: Einspielen vom Mac mit `RUNWARE_API_KEY` auf dem VPS (Stand `main` `96e56bc` oder neuer), Probe auf dem Server; 10.9 bestätigen und mit einspielen (gebaut 2026-11-08, ADR-116), dann 10.11 (neu darin: V.57 Bildrezepte, V.58 Figuren-Assistent, angelegt 2026-11-08). D.28 (Pre-Commit in der Cloud-Session) wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -36,7 +36,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | erledigt 2026-11-06 (ADR-110; zwei Korrekturen PR #214, #215) | – |
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
 | 🟠 | 10.8 | Zweiter Bildanbieter (V.24) | in Arbeit – Runware (ADR-114, ADR-115), bestätigt und gemergt 2026-11-08 (PR #218) | KI vom Mac: Einspielen mit `RUNWARE_API_KEY` |
-| ⚪ | 10.9 | Vollständige Anfrage festhalten (V.42) | offen | KI: Vorlage |
+| 🟠 | 10.9 | Vollständige Anfrage festhalten (V.42) | in Arbeit – gebaut (ADR-116) | du: Bestätigung, dann Einspielen vom Mac |
 | ✅ | 10.10 | Textqualität von Hermes 4 messen (V.41) | erledigt 2026-11-06 (ADR-113: nichts übernehmen) | – |
 | ⚪ | 10.11 | Planung der nächsten Ausbaustufe | offen | KI |
 
@@ -336,7 +336,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.9: Vollständige Anfrage zum KI-Text festhalten (V.42)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT – Vorlage mit Mockup beantwortet 2026-11-08 (ADR-116): alle Schreib-Anfragen auch verworfene, letzte 50 je Geschichte, mit Antwort der KI, eigener Reiter „Anfragen“. Gebaut 2026-11-08 (`cc09b88`, `316bf34`, `89861cb`; 1.293 Python-Tests 99,90 %, 604 Komponenten-Tests 98,83 / 95,3 / 98,39 / 98,96 %, 17 End-to-End-Tests grün) – wartet auf Bestätigung des Eigentümers und Einspielen
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** keine
 - **Freigabepflichtig:** ja – neue Ablage (Kategorie 4), ggf. Schnittstelle (Kategorie 5)

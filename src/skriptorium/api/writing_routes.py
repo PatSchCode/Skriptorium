@@ -18,6 +18,7 @@ from skriptorium.api.flows import (
     DEFAULT_MODEL,
     DescribeOrder,
     FitOrder,
+    RequestKeeper,
     Scene,
     SummaryFailure,
     Turn,
@@ -228,7 +229,10 @@ async def set_task_models(body: TasksIn, found: ServicesDep) -> ModelList:
 async def write(
     world_id: str, story_id: str, number: int, body: WriteIn, found: ServicesDep
 ) -> StreamingResponse:
-    """Stream a proposal for the end of the chapter as Server-Sent Events; saves nothing."""
+    """Stream a proposal for the end of the chapter as Server-Sent Events.
+
+    The manuscript stays unchanged; the request is kept with the AI's answer (ADR-116).
+    """
     if found.provider is None:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "KI-Anbieter nicht eingerichtet")
     scene = None
@@ -254,7 +258,12 @@ async def write(
         found.canon, found.manuscript, found.context, order, models=found.catalog
     )
     return StreamingResponse(
-        stream_events(found.provider, prepared, found.usage.recorder(world_id, story_id)),
+        stream_events(
+            found.provider,
+            prepared,
+            found.usage.recorder(world_id, story_id),
+            RequestKeeper(found.manuscript, found.clock),
+        ),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )
