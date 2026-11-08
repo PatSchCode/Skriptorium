@@ -20,10 +20,15 @@ repos:
       - id: check-merge-conflict
       - id: detect-private-key
 
+  # Node aus dem PATH (ADR-122, D.28): ohne Angabe übergeht pre-commit ein Node im
+  # Home-Verzeichnis (scripts/session-start.sh) und lädt per nodeenv ein „neuestes“, das scheitern
+  # kann. Nach einem Node-Wechsel behält die angelegte Hook-Umgebung das alte Node, bis
+  # `uv run --frozen pre-commit clean` sie verwirft.
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.23.3
     hooks:
       - id: markdownlint-cli2
+        language_version: system
 
   - repo: local
     hooks:
