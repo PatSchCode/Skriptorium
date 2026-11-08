@@ -778,7 +778,11 @@ describe("history of instructions (step 5.13, FR-027)", () => {
   const HISTORY =
     "/api/worlds/salzmark/stories/ueberfahrt/chapters/1/instructions";
 
-  function storyRoutes(feed: ReturnType<typeof sseFeed>, failNote = false) {
+  function storyRoutes(
+    feed: ReturnType<typeof sseFeed>,
+    failNote = false,
+    extra: Parameters<typeof fakeApi>[0] = {},
+  ) {
     let saved = CHAPTER;
     let notes: object[] = [];
     return fakeApi({
@@ -801,6 +805,7 @@ describe("history of instructions (step 5.13, FR-027)", () => {
             ];
             return { status: 201, body: notes };
           },
+      ...extra,
     });
   }
 
@@ -899,6 +904,113 @@ describe("history of instructions (step 5.13, FR-027)", () => {
     });
     expect(await within(history).findByText("Der Wind drehte.")).toBeDefined();
     expect(within(history).getByText("Weiter")).toBeDefined();
+  });
+
+  it("notes the kept request and opens it from the history on the tab Anfragen (step 10.9)", async () => {
+    const feed = sseFeed();
+    const requests = "/api/worlds/salzmark/stories/ueberfahrt/requests";
+    const kept = {
+      id: "20261010-194000",
+      at: "2026-10-10T19:40:00Z",
+      chapter: 1,
+      model: "x-ai/grok-4.7",
+      estimated_tokens: 900,
+      input_tokens: 880,
+      output_tokens: 12,
+      cost_usd: 0.004,
+      outcome: "ok",
+      instruction: "Mira kommt mit der Laterne.",
+      taken_over: true,
+    };
+    const { calls } = storyRoutes(feed, false, {
+      [`GET ${requests}`]: ok([kept]),
+      [`GET ${requests}/20261010-194000`]: ok({
+        ...kept,
+        length: "mittel",
+        pictures: [],
+        blocks: [{ kind: "anweisung", label: "Anweisung", tokens: 9 }],
+        messages: [
+          { role: "system", content: "Du schreibst." },
+          {
+            role: "user",
+            content: "# Anweisung\n\nMira kommt mit der Laterne.",
+          },
+        ],
+        answer: "Mira trat ein.",
+      }),
+    });
+    const user = userEvent.setup();
+    render(<StoryPage story={STORY} />);
+    await ready();
+    await typeInstruction("Mira kommt mit der Laterne.");
+    await user.click(screen.getByRole("button", { name: "Weiterschreiben" }));
+    feed.send("start", {
+      model: "x-ai/grok-4.7",
+      estimated_tokens: 900,
+      images: 0,
+      request: "20261010-194000",
+    });
+    await takeOver(feed, "Mira trat ein.");
+    await waitFor(() => {
+      expect(
+        calls.find((c) => c.method === "POST" && c.path === HISTORY)?.body,
+      ).toEqual({
+        instruction: "Mira kommt mit der Laterne.",
+        text: "Mira trat ein.",
+        model: "x-ai/grok-4.7",
+        request: "20261010-194000",
+      });
+    });
+
+    await user.click(screen.getByRole("button", { name: "Verlauf" }));
+    await user.click(
+      await screen.findByRole("button", { name: "Anfrage ansehen" }),
+    );
+
+    expect(
+      screen
+        .getByRole("button", { name: "Anfragen" })
+        .getAttribute("aria-current"),
+    ).toBe("true");
+    const shown = await screen.findByRole("article", {
+      name: /^Anfrage vom 10\.10\./,
+    });
+    expect(within(shown).getByText("Antwort der KI")).toBeDefined();
+    expect(
+      screen.getByRole("button", { name: /^10\.10\./, pressed: true }),
+    ).toBeDefined();
+  });
+
+  it("offers no request for notes whose request is gone", async () => {
+    const feed = sseFeed();
+    storyRoutes(feed, false, {
+      "GET /api/worlds/salzmark/stories/ueberfahrt/requests": ok([]),
+    });
+    const user = userEvent.setup();
+    render(<StoryPage story={STORY} />);
+    await ready();
+    await user.click(screen.getByRole("button", { name: "Weiterschreiben" }));
+    feed.send("start", {
+      model: "x-ai/grok-4.7",
+      estimated_tokens: 900,
+      images: 0,
+      request: "20261010-194000",
+    });
+    await takeOver(feed, "Der Wind drehte.");
+    await user.click(screen.getByRole("button", { name: "Verlauf" }));
+
+    const history = screen.getByRole("region", {
+      name: "Verlauf der Anweisungen",
+    });
+    expect(await within(history).findByText("Der Wind drehte.")).toBeDefined();
+    expect(
+      screen.queryByRole("button", { name: "Anfrage ansehen" }),
+    ).toBeNull();
+
+    await user.click(screen.getByRole("button", { name: "Anfragen" }));
+    expect(
+      await screen.findByText("Noch keine Anfragen in dieser Geschichte."),
+    ).toBeDefined();
   });
 
   it("keeps the taken-over text and says when the history could not be saved", async () => {

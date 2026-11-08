@@ -51,6 +51,8 @@ export function useWriteFlow({
   const [usage, setUsage] = useState<Usage | null>(null);
   // Images that went along with the proposal (step 10.7, ADR-111).
   const [pictures, setPictures] = useState(0);
+  // The kept request of the proposal (step 10.9, ADR-116), named in the history on taking over.
+  const [requestId, setRequestId] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
   const controller = useRef<AbortController | null>(null);
   const busy = phase === "thinking" || phase === "writing";
@@ -87,6 +89,7 @@ export function useWriteFlow({
     setError(null);
     setUsage(null);
     setPictures(0);
+    setRequestId(null);
     setLastOrder(order);
     if (!(await prepare())) {
       setPhase("idle");
@@ -101,6 +104,7 @@ export function useWriteFlow({
         (event) => {
           if (event.type === "start") {
             setPictures(event.images);
+            setRequestId(event.request);
           } else if (event.type === "text") {
             setPhase("writing");
             setProposal((text) => text + event.text);
@@ -143,6 +147,7 @@ export function useWriteFlow({
     setError(null);
     // What the proposal came from, for the history (step 5.13); not the field as it is now.
     const order = lastOrder;
+    const request = requestId;
     const text = proposal.trim();
     try {
       await onAccept(proposal);
@@ -166,6 +171,8 @@ export function useWriteFlow({
               : "Weiter",
         text,
         model: order.model,
+        // A stream without the identifier (or a request not kept) notes none.
+        ...(typeof request === "string" ? { request } : {}),
       });
       onNoted?.();
     } catch (reason: unknown) {
