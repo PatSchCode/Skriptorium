@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-118). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-119). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -138,12 +138,13 @@ Stand 2026-11-08 (ADR-001 bis ADR-118). Aus welchem Schritt ein ADR stammt, steh
 | 116 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell | Schreib-Anfragen im Wortlaut festhalten: letzte 50 je Geschichte, mit Antwort, eigener Reiter (10.9) |
 | 117 | 2026-11-08 | Aktiv | STRATEGISCH | MODUL, SECURITY, METHODIK | Architektur | Pflichtfrage nach Phase 10: klein umbauen (11.1–11.3), danach weiterbauen |
 | 118 | 2026-11-08 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 11 geplant: Figuren und Bilder, Bild-Kleinigkeiten, Schreiben, Weltenbauer; V.21, V.54, V.55 weiter verschoben |
+| 119 | 2026-11-08 | Aktiv | OPERATIV | SECURITY | Sicherheit | Bedrohungsmodell nach dem Nachtrag zu Runware bleibt belastbar (11.1) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-109 bis ADR-118 – keiner reaktiv: ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-109 bis ADR-111 Schnittstelle, Datenmodell bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-110 bis ADR-119 – keiner reaktiv: ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-110 und ADR-111 Datenmodell bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2800,6 +2801,25 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Welche Themen kommen nach den drei Umbau-Schritten in Phase 11?“ → alle vier.
 - **Konfidenz zum Zeitpunkt:** hoch für die Reihenfolge (Seed vor Rezepten, Assistent vor Schlagworten und Fragenliste; Befund 2/3 der Bewertung), mittel für den Umfang – 16 Schritte sind so viele wie Phase 4 und 7; neue Wünsche werden V-Schritte mit Landeplatz 11.16. Umkehrbarkeit billig.
 - **Konsequenzen:** Wucherungs-Schwelle mehr als 32 Schritte. Schritte, die Vorlagen brauchen, beginnen mit Mockup und Auswahlfragen. FR-038 bekommt den Schritt 11.15.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-119: Bedrohungsmodell nach dem Nachtrag zu Runware bleibt belastbar (11.1)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Auswahlfrage: „Bleibt belastbar“ – Empfehlung der KI und der getrennten Instanz; optionale Hinweise „Nein, nicht nötig“)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[SECURITY]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.1 – Prüfung des Reifegrads im Schritt vorgesehen, ADR-117) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine – „Bedrohungsmodell Gesamtsystem“ bleibt `[BELASTBAR]`, jetzt mit Nachtrag Runware
+- **Kategorie:** Sicherheit und Datenschutz (Kategorie 6)
+- **Kontext:** Befund 6 der Bewertung nach Phase 10 (`docs/research/bewertung-phase-10.md`, Stellungnahme 2): Das Bedrohungsmodell kannte Runware nicht, obwohl seit 10.8 Prompts ohne Inhaltsprüfung an einen zweiten Anbieter gehen (ADR-115). Nachtrag in `docs/architecture.md` Abschnitte 3, 4, 6, 7, 9, nur aus Code und ADRs. Getrennte Prüfung (Sonnet, ohne Gesprächsverlauf, nur lesend; `docs/research/pruefung-11.1-runware.md`): keine falsche Sicherheitsaussage; 1 Befund mittel (zweiter Ablageort des Schlüssels in der Cloud-Umgebung fehlte) und 6 niedrige, alle im Text behoben; Urteil „kann belastbar bleiben“.
+- **Optionen:** A belastbar lassen; B per ADR auf vorläufig zurückstufen und erneut prüfen. Optionale Hinweise über ASVS L1: Tagesgrenze für Bilder, Warnschwelle für das Runware-Guthaben – notieren oder nicht.
+- **Entscheidung:** A. Die Hinweise werden nicht als Schritte angelegt; sie stehen im Prüfbericht.
+- **Vision-Frage, die entschied:** „Reicht dir, dass Runware ohne eigene Prüfung im Skriptorium arbeitet und nur das Guthaben die Kosten begrenzt, so wie beschrieben?“ → ja.
+- **Konfidenz zum Zeitpunkt:** hoch – jede Aussage am Code oder ADR belegt, getrennt geprüft. Nicht prüfbar aus dem Repo: die Einstellungen im Runware-Konto (automatisches Nachladen aus). Umkehrbarkeit billig.
+- **Konsequenzen:** Restrisiken offen im Bedrohungsmodell: Kontosperre bei Runware (ADR-115), keine eigene Inhaltsprüfung, Kosten-Bremse hängt an der Konto-Einstellung „Nachladen aus“, nicht erfasste Kosten bei Zeitgrenze. Phase 11 geht mit 11.2 weiter.
 - **Abgeleitete Regel:** keine
 
 ---

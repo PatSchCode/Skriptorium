@@ -23,11 +23,11 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 11 – Figuren, Bilder und Feinschliff (Umsetzung), geplant 2026-11-08 (ADR-117, ADR-118); Phase 10 abgeschlossen 2026-11-08. Fortschritt: 0 von 16 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 11 – Figuren, Bilder und Feinschliff (Umsetzung), geplant 2026-11-08 (ADR-117, ADR-118); Phase 10 abgeschlossen 2026-11-08. Fortschritt: 1 von 16 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-11-08
-- **Architektur-Reife:** Module, Schnittstellen, Datenmodell und Token-Budget BELASTBAR (ADR-013); Reaktionszeit BELASTBAR (grok-4.6 erstes Textstück meist unter 30 s, ADR-052; grok-4.7 denkt zu lange vor und kommt in 5.12 aus der Voreinstellung); Kanon-Treue BELASTBAR (erstes echtes Kapitel des Eigentümers in 4.8: 0 Widersprüche, mit qwen3.8-max); Kontexttreue BELASTBAR bis etwa 30 Kapitel (ADR-103); Sicherheitsniveau und Schutzbedarf BELASTBAR (ADR-006, ADR-007); Observability BELASTBAR (Log-Zeile und Monatskosten, ADR-021, ADR-023); Bedrohungsmodell BELASTBAR (Prüfung 4.5); Host BELASTBAR (4.2); Netz BELASTBAR (Prüfungen von außen, 4.7); Backups BELASTBAR (4.3); Secrets im Betrieb VORLÄUFIG (Gate 4.6, BELASTBAR mit D.11)
+- **Architektur-Reife:** Module, Schnittstellen, Datenmodell und Token-Budget BELASTBAR (ADR-013); Reaktionszeit BELASTBAR (grok-4.6 erstes Textstück meist unter 30 s, ADR-052; grok-4.7 denkt zu lange vor und kommt in 5.12 aus der Voreinstellung); Kanon-Treue BELASTBAR (erstes echtes Kapitel des Eigentümers in 4.8: 0 Widersprüche, mit qwen3.8-max); Kontexttreue BELASTBAR bis etwa 30 Kapitel (ADR-103); Sicherheitsniveau und Schutzbedarf BELASTBAR (ADR-006, ADR-007); Observability BELASTBAR (Log-Zeile und Monatskosten, ADR-021, ADR-023); Bedrohungsmodell BELASTBAR (Prüfung 4.5, Nachtrag Runware 11.1, ADR-119); Host BELASTBAR (4.2); Netz BELASTBAR (Prüfungen von außen, 4.7); Backups BELASTBAR (4.3); Secrets im Betrieb VORLÄUFIG (Gate 4.6, BELASTBAR mit D.11)
 - **Aktive Blocker:** 0
 
 ## Quick Start
@@ -103,7 +103,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 
 - ✅ **Phase 9** (abgeschlossen 2026-11-05): gegliederte Einträge und Beziehungen, Bilder vom Bedarf her mit Herkunft und Bild zu Bild, Modell je Aufgabe, Löschen und Archivieren, Seite „Verbrauch“, Gast-Figuren mit Weltbezug.
 - ✅ **Phase 10** (abgeschlossen 2026-11-08): Löschkaskade für Kanon-Einträge, Aussehen herauslösen für Orte und Gegenstände, Auflösung und Qualität bei Bildern, Bilder im Manuskript und E-Book, Bilder beim Schreiben mitschicken, zweiter Bildanbieter Runware mit Community-Modellen und LoRAs, Anfragen an die KI im Wortlaut nachlesen (ADR-106 bis ADR-116).
-- ⚪ **Als Nächstes:** 11.1 Bedrohungsmodell um Runware ergänzen, 11.2 Bildformular entlasten, 11.3 Ablage der Anfragen härten (Pflichtfrage, ADR-117).
+- ✅ **Erledigt:** 11.1 Bedrohungsmodell um Runware ergänzt, getrennt geprüft, bleibt belastbar (ADR-119).
+- ⚪ **Als Nächstes:** 11.2 Bildformular entlasten, 11.3 Ablage der Anfragen härten (Pflichtfrage, ADR-117).
 - ⚪ **Phase 11** (ADR-118): Figuren und Bilder – fester Startwert, Figuren-Assistent für das Aussehen, Bildrezepte, Schlagwort-Prompts, Einstellungen aus der Bild-Erkundung (11.4–11.8); Großansicht und Bildmeldungen (11.9); Längengrenze, Favoriten, „Wesen:“ im Fließtext (11.10–11.11); Weltenbauer mit gesperrten Antworten, Fragenliste, Recherche und Namenshilfe (11.12–11.15).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
