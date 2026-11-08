@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [ADR-ANGELEGT] ADR-116: Schreib-Anfragen im Wortlaut festhalten (10.9)
+
+- Vorlage mit Mockup zu 10.9 gestellt (Kategorie 4), vier Auswahlfragen beantwortet: alle Schreib-Anfragen auch verworfene (Empfehlung), **letzte 50 je Geschichte** (Empfehlung war 20), eigener Reiter „Anfragen“ (Empfehlung), Antwort der KI mitspeichern (Empfehlung). Ablage `stories/<geschichte>/anfragen/<zeit>.md`, Kennung im `start`-Ereignis, Verweis aus dem Verlauf. Nicht reaktiv; Reaktiv-Quote 0/10 (ADR-107 bis ADR-116).
+- 10.9 auf `[IN ARBEIT]`; 10.8 bleibt daneben `[IN ARBEIT]`, wartet nur auf das Einspielen vom Mac (kein Arbeitsanteil in dieser Session).
+- Mini-Reibung: Eigentümer meldete „Gemergt“ für PR #220; GitHub zeigte den PR noch offen (`main` = `f6fee9e`). Nicht selbst gemergt; Branch `feat/10.9-anfrage-festhalten` auf den Stand von #220 gesetzt, damit kein Konflikt entsteht.
+- Kontextgröße nach der Vorlage: 218.820 Token (Sitzungsabfrage) – über der Grenze 200.000.
+
 ### 2026-11-08 – [BEOBACHTUNG] V.57 und V.58 angelegt (Landeplatz 10.11)
 
 - Aus der Übergabe der vorigen Session zwei neue V-Schritte im Fahrplan: V.57 „Bildrezepte – Szene, Modell und LoRAs als Vorlage, Figur als Lücke“ und V.58 „Figuren-Assistent für das Aussehen“, beide `[VERSCHOBEN]` → 10.11, Empfohlene Klasse Entscheidung (Datenmodell bzw. neue KI-Aufgabe). Mitgezogen: Liste der verschobenen Schritte in der Übersicht, „Zu tun“ von 10.11 (mit Prüfauftrag: V.52–V.58 als eigene Phase „Figuren und Bilder“?), „Nächster Schritt“ im aktuellen Stand, README „Später“.
