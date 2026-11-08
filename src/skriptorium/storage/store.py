@@ -4,7 +4,9 @@ Paths are relative POSIX paths below the data directory, e.g.
 ``worlds/salzmark/canon/figur/kael.md``. Documents below ``worlds/<world>/`` are indexed
 for that world by name (header ``name`` or ``titel``, else the file stem), aliases (header
 ``aliasse``) and full text. Image files (PNG, JPEG, WebP; step 7.6, ADR-072) live in the same
-tree with the same path checks; they are not indexed.
+tree with the same path checks; they are not indexed. Neither are the kept writing requests
+``worlds/<world>/stories/<story>/anfragen/<id>.md`` (step 11.3, ADR-120): nobody searches them,
+and they would grow the index with every request.
 """
 
 import contextlib
@@ -86,6 +88,7 @@ class DocumentStore:
         self._index_path = root / _INDEX_FILE
         with self._connect() as connection:
             connection.executescript(_SCHEMA)
+            _drop_unindexed(connection)
 
     def read(self, path: str) -> Document:
         """Read one document.
@@ -343,7 +346,7 @@ class DocumentStore:
     def _index_document(self, connection: sqlite3.Connection, document: Document) -> None:
         _remove_from_index(connection, document.path)
         world = _world_of(document.path)
-        if world is None:
+        if world is None or not _indexed(document.path):
             return
         name = _name_of(document)
         connection.execute(
@@ -437,6 +440,30 @@ def _remove_tree_from_index(connection: sqlite3.Connection, prefix: str) -> None
     bounds = (f"{prefix}/", f"{prefix}0")
     connection.execute("DELETE FROM documents WHERE path >= ? AND path < ?", bounds)
     connection.execute("DELETE FROM fulltext WHERE path >= ? AND path < ?", bounds)
+
+
+def _indexed(path: str) -> bool:
+    """Whether a document at ``path`` goes into the index: not a kept writing request.
+
+    Only ``worlds/<world>/stories/<story>/anfragen/<file>`` is left out (ADR-120) - exactly at
+    this depth, so a world, story or entry that happens to be called "anfragen" stays indexed.
+    """
+    parts = PurePosixPath(path).parts
+    return not (
+        len(parts) == 6
+        and parts[0] == "worlds"
+        and parts[2] == "stories"
+        and parts[4] == "anfragen"
+    )
+
+
+def _drop_unindexed(connection: sqlite3.Connection) -> None:
+    """Remove rows of documents that are no longer indexed, left by an older version (11.3)."""
+    stale = [
+        path for (path,) in connection.execute("SELECT path FROM documents") if not _indexed(path)
+    ]
+    for path in stale:
+        _remove_from_index(connection, path)
 
 
 def _world_of(path: str) -> str | None:

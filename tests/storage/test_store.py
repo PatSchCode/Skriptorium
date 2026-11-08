@@ -1,6 +1,7 @@
 """Tests for DocumentStore: files, atomic writes and the derived index."""
 
 import os
+import sqlite3
 from pathlib import Path
 
 import pytest
@@ -312,3 +313,53 @@ def test_leftover_of_a_failed_removal_goes_with_the_next_deletion(
     (leftover / "chapters" / "01-x.md").write_text("---\ntitel: X\n---\n", encoding="utf-8")
     store.delete_tree(STORY_DIR)
     assert [p.name for p in root.iterdir() if p.name.startswith(".")] == []
+
+
+REQUEST = "worlds/salzmark/stories/flucht/anfragen/20261108-140205.md"
+
+
+@pytest.mark.parametrize("mode", ["name", "fulltext"])
+def test_kept_writing_requests_are_not_indexed(store: DocumentStore, mode: SearchMode) -> None:
+    # Step 11.3 (ADR-120): nobody searches them, and they grew the index with every request.
+    store.write(REQUEST, {"name": "Kael"}, "Kael schmiedet Klingen.")
+    assert store.search("salzmark", "Kael", mode) == []
+
+    store.rebuild_index()
+    assert store.search("salzmark", "Kael", mode) == []
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "worlds/anfragen/canon/figur/kael.md",
+        "worlds/salzmark/stories/anfragen/story.md",
+        "worlds/salzmark/canon/figur/anfragen.md",
+        "worlds/salzmark/stories/flucht/anfragen/alt/x.md",
+    ],
+)
+def test_only_the_requests_folder_of_a_story_is_left_out(store: DocumentStore, path: str) -> None:
+    world = path.split("/")[1]
+    store.write(path, {"name": "Kael"}, "Kael schmiedet Klingen.")
+    assert [hit.path for hit in store.search(world, "Kael", "fulltext")] == [path]
+
+
+def test_opening_removes_rows_an_older_version_left(root: Path) -> None:
+    store = DocumentStore(root)
+    store.write(KAEL, {"name": "Kael"}, "Kael schmiedet Klingen.")
+    with sqlite3.connect(root / "index.sqlite") as connection:
+        connection.execute(
+            "INSERT INTO documents (path, world, name) VALUES (?, 'salzmark', 'Kael')", (REQUEST,)
+        )
+        connection.execute("INSERT INTO aliases (path, alias) VALUES (?, 'Kae')", (REQUEST,))
+        connection.execute(
+            "INSERT INTO fulltext (path, name, body) VALUES (?, 'Kael', 'Kael')", (REQUEST,)
+        )
+    connection.close()
+
+    reopened = DocumentStore(root)
+    assert [hit.path for hit in reopened.search("salzmark", "Kae")] == [KAEL]
+    assert [hit.path for hit in reopened.search("salzmark", "Kael", "fulltext")] == [KAEL]
+    with sqlite3.connect(root / "index.sqlite") as connection:
+        left = connection.execute("SELECT count(*) FROM aliases WHERE path = ?", (REQUEST,))
+        assert left.fetchone() == (0,)
+    connection.close()
