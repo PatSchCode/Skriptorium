@@ -29,6 +29,20 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] V.57 und V.58 angelegt (Landeplatz 10.11)
+
+- Aus der Übergabe der vorigen Session zwei neue V-Schritte im Fahrplan: V.57 „Bildrezepte – Szene, Modell und LoRAs als Vorlage, Figur als Lücke“ und V.58 „Figuren-Assistent für das Aussehen“, beide `[VERSCHOBEN]` → 10.11, Empfohlene Klasse Entscheidung (Datenmodell bzw. neue KI-Aufgabe). Mitgezogen: Liste der verschobenen Schritte in der Übersicht, „Zu tun“ von 10.11 (mit Prüfauftrag: V.52–V.58 als eigene Phase „Figuren und Bilder“?), „Nächster Schritt“ im aktuellen Stand, README „Später“.
+- Offene Klärungen stehen in den Schritten: V.57 – ersetzen oder ergänzen Rezepte die Voreinstellungen aus V.56 (3)/(4); Ablage der Rezepte. V.58 – „Aussehen“ als Fließtext, feste Felder oder Markdown mit festen Zeilen; Probe der Textmodelle auf Sperren vor der Voreinstellung.
+- Phase 10 unverändert bei 11 geplanten Schritten (V-Schritte zählen nicht zum Schrittplan). Mini-Reibung: erster Commit scheiterte an D.28 (nodeenv, Alpha-Nummer); mit dem dokumentierten Behelf `PATH=/usr/local/bin:$PATH` lief der Hook grün.
+
+### 2026-11-08 – [SESSIONSTART] V.57/V.58 anlegen, danach Frage nach 10.9
+
+- **Umgebung:** Cloud-Session, Branch `docs/v57-v58-bildrezepte-assistent` von `main` `f6fee9e`. Offene Pull Requests vor der Übernahme geprüft (Lehre der vorigen Session): keine – `main` ist der aktuelle Stand (PR #219 gemergt).
+- **Modell:** eingestellt `claude-opus-5-5`, bedient `claude-opus-5-5` (Sitzungsabfrage) → Entscheidungs-Klasse. Das Anlegen der V-Schritte ist Routine-Arbeit (Doku) – Hinweis zu Beginn gegeben; Abgabe an die Routine-Klasse ruht bis D.22.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens` 0 (Höchstwert 1.000.000); Grenze 200.000 nach jedem Schritt geprüft.
+- **Mindest-Lektüre:** Kontext vollständig; Logbuch ab letztem Sessionende; Fahrplan „Aktueller Stand“, Übersicht und Phase 10 samt V.52–V.56; Architektur 1/2/9; Entscheidungen Teil A und C; aktive Blocker (keine).
+- **Vorhaben:** V.57 und V.58 anlegen (Landeplatz 10.11) per Pull Request; danach den Eigentümer fragen, ob 10.9 (Vorlage mit Mockup) beginnt. 10.8 einspielen geht nur vom Mac (ADR-025).
+
 ### 2026-11-08 – [SESSIONENDE] 10.8 bestätigt und gemergt, nächstes Mal Einspielen vom Mac
 
 - **Dauer:** 2026-11-08, ca. 01:32–02:05 UTC (Cloud-Session, Branch `claude/clever-carson-ahzym2`, ein Neustart des Arbeitsprozesses ohne Verlust).
