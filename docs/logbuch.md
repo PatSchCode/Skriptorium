@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 10.8: CI grün, bestätigt, gemergt
+
+- PR #218 von Entwurf auf „Ready for review“ gestellt (01:55 UTC); erster CI-Lauf auf `01a66c8`: alle vier Jobs grün (Python 1:37, TypeScript 1:56, Pre-Commit 2:02, End-to-End 2:17 min), keine Anmerkungen; Vite-Build ohne Bündelgrößen-Warnung. Keine Review-Kommentare.
+- Eigentümer: „Bestätigt, mergen“ → Merge-Commit `96e56bc` in `main` (ohne Squash). 10.8 bleibt `[IN ARBEIT]` bis zum Einspielen vom Mac (`RUNWARE_API_KEY` in der `.env` auf dem VPS, Durchreichen in der Compose-Datei prüfen, Probe auf dem Server).
+- Doku-Nachtrag dieser Session (Sessionstart, Entscheidung, dieser Eintrag) über einen eigenen kleinen Pull Request vom Session-Branch.
+
 ### 2026-11-08 – [SESSIONSTART] 10.8 abschließen oder Checkpoint-Versuch
 
 - **Umgebung:** Cloud-Session, Branch `claude/clever-carson-ahzym2`. Die Session startete auf `main` (`c8c2ea6`), der die Arbeit an 10.8 nicht enthält; der aktuelle Stand liegt auf dem Entwurfs-Pull-Request #218 (`feat/10.8-zweiter-bildanbieter`, `01a66c8`). Der Session-Branch steht deshalb jetzt auf `01a66c8` (Vorspulen, `c8c2ea6` ist Vorfahre). Mini-Reibung: Mindest-Lektüre zuerst gegen `main` gelesen und einen falschen Wiedereinstieg („10.9 oder 10.8“) notiert; erst die Rückfrage des Eigentümers („PR Vorlage ansehen“) führte zu #218. Lehre: bei Sessionstart offene Pull Requests prüfen, bevor der Stand aus `main` übernommen wird.
