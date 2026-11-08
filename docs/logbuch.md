@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] Code von 10.8 und 10.9 eingespielt (`25c9bd6`), Schlüssel steht aus
+
+- Auftrag des Eigentümers: „10.8 und 10.9 einspielen“. CI auf `main` `25c9bd6` grün. Ablauf nach Runbook Abschnitt 7: Archiv übertragen, Revision geschrieben, `skriptorium:vorher` getaggt (Rückweg bereit, `app.vorher` = `de64667`), Image gebaut, Container neu erstellt. Warten nur per HTTPS (zwölf Abfragen, bis `/api/health` 200 lieferte; vorher 404 vom Proxy, solange der Container nicht `healthy` war), danach genau eine SSH-Prüfung: `REVISION` 25c9bd6, `(healthy)`, Start-Log ohne Fehler.
+- Die Compose-Datei reicht `.env` als Ganzes durch (`env_file: .env`) – für `RUNWARE_API_KEY` ist keine Änderung nötig. `.env` auf dem Server enthält bisher nur `OPENROUTER_API_KEY` (nur Schlüsselnamen geprüft, keine Werte). `RUNWARE_API_KEY` ist auch in der lokalen Mac-Umgebung nicht gesetzt; den Wert trägt der Eigentümer selbst ein (unsichtbare Eingabe, Runbook-Befehl), die KI sieht ihn nie.
+- Bis zum Eintrag des Schlüssels: keine Runware-Gruppe in den Einstellungen (wie vorgesehen, `docs/project-context.md` Abschnitt 5), Bilder über OpenRouter unberührt. 10.9 ist ohne Schlüssel prüfbar.
+- Mini-Reibung: erster lokaler Schlüsselcheck mit `${!v}` scheiterte unter zsh („bad substitution“); mit `printenv` gelöst.
+
 ### 2026-11-08 – [SESSIONSTART] Mac-Session: Stand übernehmen, Einspielen 10.8/10.9 vorbereiten
 
 - **Umgebung:** lokale Session auf dem Mac des Eigentümers (SSH zum VPS wäre von hier möglich, ADR-025). Gestartet auf dem überholten lokalen Zweig `feat/10.8-zweiter-bildanbieter`; nach `git fetch` Wechsel auf `main` und Vorspulen auf `25c9bd6` (Merge PR #221, 2026-11-08 15:49 +01:00, durch den Eigentümer). Doku-Zweig `docs/10.8-einspielen-vorbereiten` von dort; nur lokal, nichts gepusht.
