@@ -32,7 +32,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | ✅ | 11.2 | Bildformular entlasten (U.1) | erledigt 2026-11-08 | – |
 | ✅ | 11.3 | Ablage der Schreib-Anfragen härten (U.2) | erledigt 2026-11-08 (ADR-120) | – |
 | ✅ | 11.4 | Fester Startwert und vollständige Herkunft (V.53) | erledigt 2026-11-08 (ADR-121) | – |
-| 🔵 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | gebaut, Probe am Server offen (ADR-123) | Eigentümer |
+| 🔵 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | eingespielt `ad29ed0`, Probe am Server offen (ADR-123) | Eigentümer |
 | ⚪ | 11.17 | Krea 2 und geprüfte LoRAs in die Runware-Liste (vor 11.6) | offen | KI/Eigentümer |
 | ⚪ | 11.6 | Bildrezepte (V.57) | offen | KI |
 | ⚪ | 11.7 | Prompt in Schlagworte umsetzen (V.52) | offen | KI |
@@ -276,7 +276,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 11.5: Figuren-Assistent für das Aussehen (V.58)
 
-- **Status:** 🔵 IN ARBEIT (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html`, entschieden mit ADR-123 (Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6, Assistent ersetzt das Herauslösen bei Figuren, Entwürfe mit frei änderbarem Zusatz). Gebaut: Server (`canon`: `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after`; `context.build_figure_looks`; Route `…/figure-looks`, Aufgabe `figurenassistent`), Oberfläche (`FigureLooks`, `FigureDrafts`, Vorbelegung aus „Bildbeschreibung“); Server 1.354 Tests, 99,86 %; Oberfläche 636 Tests, 98,77 / 94,98 / 98,34 / 98,92 %; eingebaute Anfrage echt nachgeprüft (grok-4.6, 3 von 3 in Form). Offen: Pull Request, Einspielen vom Mac, Probe mit echten Entwürfen und Bestätigung des Eigentümers
+- **Status:** 🔵 IN ARBEIT (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html`, entschieden mit ADR-123 (Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6, Assistent ersetzt das Herauslösen bei Figuren, Entwürfe mit frei änderbarem Zusatz). Gebaut: Server (`canon`: `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after`; `context.build_figure_looks`; Route `…/figure-looks`, Aufgabe `figurenassistent`), Oberfläche (`FigureLooks`, `FigureDrafts`, Vorbelegung aus „Bildbeschreibung“); Server 1.354 Tests, 99,86 %; Oberfläche 636 Tests, 98,77 / 94,98 / 98,34 / 98,92 %; eingebaute Anfrage echt nachgeprüft (grok-4.6, 3 von 3 in Form). Eingespielt 2026-11-08 `ad29ed0` (Mac, ADR-039; `healthy`, Anmeldeseite 200). Offen: Probe mit echten Entwürfen und Bestätigung des Eigentümers
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn; Grundsatzfrage zur Form des „Aussehens“ und kurze Probe der Textmodelle vorab)
 - **Abhängigkeiten:** 11.2
 - **Freigabepflichtig:** ja – wie V.58 (neue KI-Aufgabe, ggf. feste Felder, Voreinstellung eines Textmodells)
