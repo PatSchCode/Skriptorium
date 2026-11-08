@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-122). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-123). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -142,12 +142,13 @@ Stand 2026-11-08 (ADR-001 bis ADR-122). Aus welchem Schritt ein ADR stammt, steh
 | 120 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Schreib-Anfragen nicht im Suchindex, Trennzeilen im Text gekennzeichnet (11.3) |
 | 121 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Fester Startwert beim Bilderzeugen und vollständige Herkunft (11.4) |
 | 122 | 2026-11-08 | Aktiv | OPERATIV | STACK | Build-Pipeline | Pre-Commit-Hook markdownlint nutzt das Node aus dem PATH (D.28) |
+| 123 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, Architektur, API | Figuren-Assistent: „Aussehen“ als Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6 (11.5) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-113 bis ADR-122 – keiner reaktiv: ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-114 bis ADR-123 – keiner reaktiv: ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2885,6 +2886,31 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Soll der Hook immer das Node nehmen, das das Projekt ohnehin festlegt, oder ein eigenes, fest benanntes mitbringen?“ → das des Projekts.
 - **Konfidenz zum Zeitpunkt:** hoch für Cloud-Session und CI (erprobt bzw. Verhalten unverändert); mittel für den Mac (dort entsteht beim ersten Commit eine neue Hook-Umgebung – Nachweis in einer Mac-Session, D.28). Umkehrbarkeit billig (eine Zeile).
 - **Konsequenzen:** Behelf `PATH=/usr/local/bin:$PATH` entfällt. Fehlt Node im PATH, scheitert der Hook mit Meldung statt Node nachzuladen. Nach einem Node-Wechsel behält eine angelegte Hook-Umgebung das alte Node, bis `pre-commit clean` sie verwirft (Kommentar in `.pre-commit-config.yaml`).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-123: Figuren-Assistent – „Aussehen“ als Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6 (11.5)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Vorlage mit Probe `spikes/figuren-assistent-11.5/README.md` und Mockup `mockup-11.5.html`, Auswahlfragen: was stört „Erzählteile drin, Name und Länge“; Form „Zeilen“, Bild-Prompt „Im Eintrag“, Modell „grok-4.6“, Mockup „Ja, so bauen“, Herauslösen „Durch Assistent ersetzen“ – jeweils Empfehlung der KI; Entwürfe „Zusatz frei“ statt der Empfehlung „4, Studio, schlicht“)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[DATENMODELL]` `[SCHNITTSTELLE]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.5 – Vorlage im Schritt vorgesehen, ADR-118) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine (Datenmodell bleibt `[BELASTBAR]`: nur eine Schreibweise im Markdown und ein weiterer Abschnittsname, kein Dateikopf-Feld)
+- **Kategorie:** Datenmodell (Kategorie 4: Form des Abschnitts „Aussehen“, neuer Abschnitt „Bildbeschreibung“); Architektur/API (Kategorie 1/5: neue KI-Aufgabe mit eigener Route, rein additiv); Voreinstellung eines Textmodells
+- **Kontext:** V.58 und Befund des Eigentümers aus der Probe von 10.8: Die Vorbelegung von „Bild erzeugen“ bei Figuren („Name: Aussehen“, ADR-084) ist für die Runware-Modelle unbrauchbar. Gestört haben den Eigentümer die Erzählteile (Kleidung, Haltung) und Name und Länge (bis 700 Zeichen). Die Bildtests vom 2026-11-07 zeigen, was trägt: englische kurze Wendungen, „a `<Alter>`-year-old adult …“ vorn, Kleidung und Fesselung getrennt vom „Wer“. Probe vorab: grok-4.6, grok-4.7, qwen3.8-max je 6 Anfragen, 0 Sperren, Form 18/18, nichts erfunden; den deutschen Teil gaben alle wörtlich aus den Antworten wieder.
+- **Optionen:** Form A Zeilen „- **Merkmal:** …“ im Abschnitt / B Fließtext / C feste Felder im Dateikopf; Bild-Prompt 1 eigener Abschnitt im Eintrag / 2 bei jedem Bild neu übersetzen / 3 deutsch lassen; Modell grok-4.6 / grok-4.7 / qwen3.8-max.
+- **Entscheidung:**
+  - **Form:** A. Der Abschnitt „Aussehen“ einer Figur besteht aus Zeilen „- **Herkunft:** …“, „Alter“, „Größe“, „Körperbau“, „Proportionen“, „Gesicht“, „Haar“, „Augen“, „Haut“, „Besondere Merkmale“ (ohne Angabe „–“). Gelesen und geschrieben über die Abschnittsregel (Regel-003). Alter ab 18, in Oberfläche und Server geprüft. Vorhandene Fließtexte bleiben gültig; der Assistent ersetzt sie erst beim Übernehmen.
+  - **Bildbeschreibung:** 1. Eigener Abschnitt „Bildbeschreibung“ direkt nach „Aussehen“: ein englischer Absatz für Bildmodelle, Alter vorn, ohne Name, Kleidung, Pose, Umgebung und Fesseln. Nicht in der Vorlage neuer Figuren (ADR-092 bleibt), nicht in Anfragen an die KI zum Schreiben, Weltenbau oder Zusammenfassen (der Server lässt ihn weg). „Bild erzeugen“ füllt bei Figuren mit ihm vor; ohne ihn wie bisher (ADR-084).
+  - **Ablauf:** „✨ Aussehen festlegen“ am Figur-Eintrag öffnet den Assistenten: Fragen mit Auswahl und freier Ergänzung, vorbelegt aus vorhandenen Zeilen → „Formulieren“: Die Zeilen baut das Programm aus den Antworten; ein Textmodell schreibt nur die Bildbeschreibung aus Antworten und Eintrag → beides änderbar → Entwürfe mit verschiedenen Startwerten und einem frei änderbaren, vorbelegten Zusatz (Studio, schlichte eng anliegende Kleidung, neutraler Hintergrund) → gewählter Entwurf wird Hauptbild mit Startwert in der Herkunft (ADR-121) → „Übernehmen“ schreibt beide Abschnitte (Rückfrage ersetzen oder anhängen wie beim Herauslösen).
+  - **Herauslösen:** Bei Figuren ersetzt der Assistent „✨ Aussehen herauslösen“; Orte und Gegenstände behalten es (ADR-108).
+  - **Modell:** eigene Aufgabe „Figuren-Assistent“ in „Modell je Aufgabe“ (ADR-096), voreingestellt grok-4.6. Sperrt das Modell, nennt das Fenster das und bietet ein anderes Modell an (V.58 (7)).
+  - **Ort der Prompt-Bildung:** Die Anfrage an das Textmodell baut `context`; die Vorbelegung bleibt eine reine Lesefunktion in der Oberfläche (`imagePrompts.ts`). Das Einsetzen in Rezepte entscheidet 11.6.
+- **Vision-Frage, die entschied:** „Soll das Aussehen deiner Figuren so im Eintrag stehen, dass Programm und Bildmodell es sicher finden – auch wenn es sich weniger wie Prosa liest?“ → ja, Zeilen; und der Bild-Prompt wird einmal geschrieben und liegt beim Eintrag.
+- **Konfidenz zum Zeitpunkt:** hoch für Form und Ablage (folgt Regel-003 und ADR-092); mittel für Sperren bei Einträgen mit stark erotischem oder fesselungsbezogenem Inhalt (nicht geprüft) und für die Bildqualität (zeigen die Entwürfe). Umkehrbarkeit billig: Markdown-Schreibweise, kein Schema.
+- **Konsequenzen:** Probe mit echten Entwürfen und Bestätigung durch den Eigentümer am Server. 11.6 setzt die Bildbeschreibung als [Figur] ein, 11.7 baut Schlagworte daraus. `docs/architecture.md` Abschnitte 3, 4 und 7 werden nachgezogen.
 - **Abgeleitete Regel:** keine
 
 ---

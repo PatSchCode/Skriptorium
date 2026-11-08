@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [ADR-ANGELEGT] ADR-123 Figuren-Assistent: Zeilen, Bildbeschreibung im Eintrag, grok-4.6
+
+- Vorlage zu 11.5 mit Probe und Mockup, zwei Runden Auswahlfragen. Eigentümer: Was stört „Erzählteile drin, Name und Länge“ (nicht: Deutsch, Alter nicht vorn); Form „Zeilen“, Bild-Prompt „Im Eintrag“, Modell „grok-4.6“, Mockup „Ja, so bauen“, Herauslösen bei Figuren „Durch Assistent ersetzen“ – jeweils Empfehlung; Entwürfe „Zusatz frei“ (Empfehlung war 4 Entwürfe mit festem Studio-Zusatz) → ADR-123. Reaktiv-Quote 0/10 (ADR-114 bis ADR-123).
+
 ### 2026-11-08 – [BEOBACHTUNG] 11.5: Probe der Textmodelle für den Figuren-Assistenten
 
 - `spikes/figuren-assistent-11.5/` (Skript, 18 Antworten, Bericht): drei Figuren (Testavatar 2, eine Leibeigene mit Eisenhalsband und Kettennarben im Eintrag, ein Schmied mit offenem Merkmal) × grok-4.6, grok-4.7, qwen3.8-max × 2 Läufe; Auftrag: deutsche Zeilen `- **Merkmal:** …` plus englische Bildbeschreibung nach dem Muster der Bildtests (Alter vorn, ohne Kleidung, Pose, Fesseln).

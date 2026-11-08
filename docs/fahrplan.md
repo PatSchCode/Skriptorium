@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-08 (D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
+- **Stand vom:** 2026-11-08 (11.5 entschieden, ADR-123; D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 - **Laufende Phase:** Phase 11 „Figuren, Bilder und Feinschliff“ (Phase 10 abgeschlossen 2026-11-08)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** D.28 (Querschnitt, ADR-122) – gemergt (#230), offen ist nur der Nachweis beim ersten Commit auf dem Mac; in Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08, 11.5 noch nicht begonnen.
-- **Nächster Schritt:** 11.5 Figuren-Assistent für das Aussehen (Vorlage mit Grundsatzfrage und kurzer Probe der Textmodelle), danach 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** D.28 (Querschnitt, ADR-122) – gemergt (#230), offen ist nur der Nachweis beim ersten Commit auf dem Mac; in Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08; 11.5 in Arbeit – Vorlage entschieden (ADR-123), Bau offen.
+- **Nächster Schritt:** 11.5 bauen nach ADR-123 (Server: Abschnitt „Bildbeschreibung“, Aufgabe „Figuren-Assistent“, Route; Oberfläche: Assistent, Vorbelegung), danach 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -32,7 +32,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | ✅ | 11.2 | Bildformular entlasten (U.1) | erledigt 2026-11-08 | – |
 | ✅ | 11.3 | Ablage der Schreib-Anfragen härten (U.2) | erledigt 2026-11-08 (ADR-120) | – |
 | ✅ | 11.4 | Fester Startwert und vollständige Herkunft (V.53) | erledigt 2026-11-08 (ADR-121) | – |
-| 🟡 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | wartet auf Freigabe | Eigentümer |
+| 🔵 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | in Arbeit (ADR-123) | KI |
 | ⚪ | 11.6 | Bildrezepte (V.57) | offen | KI |
 | ⚪ | 11.7 | Prompt in Schlagworte umsetzen (V.52) | offen | KI |
 | ⚪ | 11.8 | Erkenntnisse der Bildmodell-Erkundung (V.56) | offen | KI |
@@ -275,7 +275,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 11.5: Figuren-Assistent für das Aussehen (V.58)
 
-- **Status:** 🟡 WARTET-AUF-FREIGABE (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html` an den Eigentümer
+- **Status:** 🔵 IN ARBEIT (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html`, entschieden mit ADR-123 (Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6, Assistent ersetzt das Herauslösen bei Figuren, Entwürfe mit frei änderbarem Zusatz); Bau offen
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn; Grundsatzfrage zur Form des „Aussehens“ und kurze Probe der Textmodelle vorab)
 - **Abhängigkeiten:** 11.2
 - **Freigabepflichtig:** ja – wie V.58 (neue KI-Aufgabe, ggf. feste Felder, Voreinstellung eines Textmodells)
