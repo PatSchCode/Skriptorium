@@ -29,6 +29,31 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 10.8 bestätigt und gemergt, nächstes Mal Einspielen vom Mac
+
+- **Dauer:** 2026-11-08, ca. 01:32–02:05 UTC (Cloud-Session, Branch `claude/clever-carson-ahzym2`, ein Neustart des Arbeitsprozesses ohne Verlust).
+- **Bearbeitet:** 10.8 – Wiedereinstieg auf dem Stand von PR #218, Entscheidung „Abschließen“, PR auf „Ready for review“, CI grün, Bestätigung des Eigentümers, Merge `96e56bc`. Doku-Nachtrag als PR #219.
+- **Stand:** `main` = `96e56bc` (mit 10.8); PR #219 (nur Doku) offen. Auf dem Server weiterhin `de64667` – 10.8 noch nicht eingespielt.
+- **Offen:** PR #219 mergen (Eigentümer); Einspielen vom Mac (`RUNWARE_API_KEY` zeilenweise nach Runbook in `/opt/docker/skriptorium/.env`, Durchreichen in der Compose-Datei prüfen, Probe auf dem Server), danach 10.8 `[ERLEDIGT]`; D.28 Lösung wählen; `minimatch` unter ESLint; überholter lokaler Zweig `feat/9.9-loeschen-archivieren` auf dem Mac.
+- **Nächster Schritt:** 10.8 einspielen (Mac-Session, SSH nur von dort, ADR-025); danach 10.9 Vollständige Anfrage festhalten (Vorlage mit Mockup). Datiert: D.5 ab 2026-11-12; D.11 Frist 2026-10-31 überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.8 wartet auf Einspielen, Als Nächstes, Letzte Änderung 2026-11-08), Kontext, Blocker (0) abgeglichen; Übersicht im Fahrplan bei 10.8 stand noch auf „du: Probe im Runware-Playground“ – berichtigt. Drift: ADR-114/115 → 10.8 vorhanden; Checkpoint-Wunsch → V.56 (6); Reifegrade unverändert; Modul-Liste unverändert; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-106 bis ADR-115); Phase 10 bei 11 geplanten Schritten. Größen: `docs/project-context.md` 351 Zeilen (Budget 600); Logbuch rund 1.130 Zeilen über dem Trigger 800 – Oktober-Scheibe bereits ausgelagert, die November-Scheibe ist die aktuelle und bleibt; Verdichtung beim Phasen-Wechsel nach 10.11 (wie im letzten Sessionende vermerkt). Ablaufdaten-Register: kein neuer Vorlauf; D.5 ab 2026-11-12.
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse; Sitzungsabfrage: eingestellt und bedient `claude-opus-5-5`). 10.8 auf seiner Empfehlung; oberhalb: Doku-Pflege, README, Logbuch (Routine), nicht abgegeben (kleine Teilarbeiten mit geladenem Kontext; Routine-Abgabe ruht bis D.22). Abgegeben: nichts.
+- **Kontextgröße:** 235.339 Token (Sitzungsabfrage nach dem Merge) – über der Grenze 200.000; kein neuer Schritt begonnen. Nächste Session neu beginnen. Lehre für den Sessionstart: offene Pull Requests prüfen, bevor der Stand aus `main` übernommen wird.
+
+### 2026-11-08 – [BEOBACHTUNG] 10.8: CI grün, bestätigt, gemergt
+
+- PR #218 von Entwurf auf „Ready for review“ gestellt (01:55 UTC); erster CI-Lauf auf `01a66c8`: alle vier Jobs grün (Python 1:37, TypeScript 1:56, Pre-Commit 2:02, End-to-End 2:17 min), keine Anmerkungen; Vite-Build ohne Bündelgrößen-Warnung. Keine Review-Kommentare.
+- Eigentümer: „Bestätigt, mergen“ → Merge-Commit `96e56bc` in `main` (ohne Squash). 10.8 bleibt `[IN ARBEIT]` bis zum Einspielen vom Mac (`RUNWARE_API_KEY` in der `.env` auf dem VPS, Durchreichen in der Compose-Datei prüfen, Probe auf dem Server).
+- Doku-Nachtrag dieser Session (Sessionstart, Entscheidung, dieser Eintrag) über einen eigenen kleinen Pull Request vom Session-Branch.
+
+### 2026-11-08 – [SESSIONSTART] 10.8 abschließen oder Checkpoint-Versuch
+
+- **Umgebung:** Cloud-Session, Branch `claude/clever-carson-ahzym2`. Die Session startete auf `main` (`c8c2ea6`), der die Arbeit an 10.8 nicht enthält; der aktuelle Stand liegt auf dem Entwurfs-Pull-Request #218 (`feat/10.8-zweiter-bildanbieter`, `01a66c8`). Der Session-Branch steht deshalb jetzt auf `01a66c8` (Vorspulen, `c8c2ea6` ist Vorfahre). Mini-Reibung: Mindest-Lektüre zuerst gegen `main` gelesen und einen falschen Wiedereinstieg („10.9 oder 10.8“) notiert; erst die Rückfrage des Eigentümers („PR Vorlage ansehen“) führte zu #218. Lehre: bei Sessionstart offene Pull Requests prüfen, bevor der Stand aus `main` übernommen wird.
+- **Modell:** eingestellt `claude-opus-5-5`, bedient `claude-opus-5-5` (Sitzungsabfrage: `session_context.model` und `last_served_model`) → Entscheidungs-Klasse. Empfehlung für 10.8: Entscheidung – passt.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens` 0 bei Sessionbeginn; Grenze 200.000 wird nach jedem Schritt geprüft.
+- **Mindest-Lektüre:** Kontext vollständig; Logbuch ab letztem Sessionende (Stand #218); Fahrplan „Aktueller Stand“ (Stand #218) und Phase 10; Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker (keine) – gelesen auf `main`, Abweichungen in #218 werden für 10.8 nachgelesen.
+- **Vorhaben:** Eigentümer entscheidet, ob 10.8 abgeschlossen wird (#218 auf „Ready for review“, CI, Merge, Einspielen) oder zuerst der Checkpoint-Versuch läuft.
+
 ### 2026-11-07 – [SESSIONENDE] Bildmodelle und LoRAs erkundet; 10.8 unverändert offen
 
 - **Dauer:** ganzer Tag (Session seit 00:08 UTC), mit Unterbrechungen.
