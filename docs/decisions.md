@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-119). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-120). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -139,12 +139,13 @@ Stand 2026-11-08 (ADR-001 bis ADR-119). Aus welchem Schritt ein ADR stammt, steh
 | 117 | 2026-11-08 | Aktiv | STRATEGISCH | MODUL, SECURITY, METHODIK | Architektur | Pflichtfrage nach Phase 10: klein umbauen (11.1–11.3), danach weiterbauen |
 | 118 | 2026-11-08 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 11 geplant: Figuren und Bilder, Bild-Kleinigkeiten, Schreiben, Weltenbauer; V.21, V.54, V.55 weiter verschoben |
 | 119 | 2026-11-08 | Aktiv | OPERATIV | SECURITY | Sicherheit | Bedrohungsmodell nach dem Nachtrag zu Runware bleibt belastbar (11.1) |
+| 120 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Schreib-Anfragen nicht im Suchindex, Trennzeilen im Text gekennzeichnet (11.3) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-110 bis ADR-119 – keiner reaktiv: ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-110 und ADR-111 Datenmodell bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-111 bis ADR-120 – keiner reaktiv: ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-111 Anfrage, in ihrem Schritt als Vorlage vorgesehen (ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2820,6 +2821,28 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Reicht dir, dass Runware ohne eigene Prüfung im Skriptorium arbeitet und nur das Guthaben die Kosten begrenzt, so wie beschrieben?“ → ja.
 - **Konfidenz zum Zeitpunkt:** hoch – jede Aussage am Code oder ADR belegt, getrennt geprüft. Nicht prüfbar aus dem Repo: die Einstellungen im Runware-Konto (automatisches Nachladen aus). Umkehrbarkeit billig.
 - **Konsequenzen:** Restrisiken offen im Bedrohungsmodell: Kontosperre bei Runware (ADR-115), keine eigene Inhaltsprüfung, Kosten-Bremse hängt an der Konto-Einstellung „Nachladen aus“, nicht erfasste Kosten bei Zeitgrenze. Phase 11 geht mit 11.2 weiter.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-120: Schreib-Anfragen nicht im Suchindex, Trennzeilen im Text gekennzeichnet (11.3)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Auswahlfragen: Index „Nur Anfragen raus“ – Empfehlung der KI war, die Volltextsuche ganz zu entfernen; Trennzeilen „Mit \ kennzeichnen“ – Empfehlung)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[DATENMODELL]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.3 – Vorlage im Schritt vorgesehen, ADR-117) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine (Datenmodell und `storage` bleiben `[BELASTBAR]`; Dateiform unverändert)
+- **Kategorie:** Datenmodell / Indexstrategie (Kategorie 4)
+- **Kontext:** Befund 5 und 8 der Bewertung nach Phase 10, Stellungnahme 3 (`docs/research/bewertung-phase-10.md`): Alle Anfrage-Dateien (`anfragen/*.md`, ADR-116) landen in Namens- und Volltexttabelle des Index (gemessen 6,3 MB Index bei 5 MB Anfragen), obwohl niemand darin sucht; die Volltextsuche hat im Programm keinen Aufrufer (nur Tests; das `@`-Menü nutzt die Namenssuche). `_body` schreibt die Trennzeilen `<!-- nachricht: … -->` ohne Maskierung: eine solche Zeile im Text einer Nachricht teilt sie beim Lesen (gemessen 2 geschrieben, 3 gelesen); die Antwort läuft bis zum Dateiende und ist nicht betroffen.
+- **Optionen:** Index A nur Anfragen ausnehmen / B zusätzlich die Volltextsuche ganz entfernen; Trennzeilen A mit vorangestelltem `\` kennzeichnen / B eindeutiger Trenner je Datei (neue Dateiform).
+- **Entscheidung:**
+  - **Index:** A. Dokumente `worlds/<welt>/stories/<geschichte>/anfragen/<kennung>.md` werden nicht indexiert (weder Name noch Aliasse noch Volltext) – Pfadfilter in `storage`, genau auf diese Tiefe, damit eine Welt, Geschichte oder ein Eintrag namens „anfragen“ nicht betroffen ist. Beim Öffnen des Index entfernt `storage` vorhandene Zeilen solcher Pfade (einmalig wirksam, danach ohne Treffer); der Neuaufbau nimmt sie nicht mehr auf. Die Volltextsuche über die übrigen Dokumente bleibt, auch ohne Aufrufer – Wunsch des Eigentümers.
+  - **Trennzeilen:** A. Eine Zeile einer Nachricht, die genau wie eine Trennzeile aussieht (auch mit schon vorangestellten `\`), bekommt beim Speichern ein `\` mehr; beim Lesen fällt eines weg. Umkehrbar, Dateiform gleich, alte Dateien weiter lesbar. Die Antwort wird nicht gekennzeichnet (sie läuft bis zum Dateiende).
+  - Verworfen: Volltextsuche ganz entfernen (Eigentümer behält sie); Trenner je Datei (neue Dateiform, vom Fahrplan für 11.3 ausgeschlossen).
+- **Vision-Frage, die entschied:** „Willst du im Skriptorium irgendwann nach Wörtern im Text deiner Kapitel suchen können?“ → Eigentümer hält sich das offen: Volltextsuche bleibt.
+- **Konfidenz zum Zeitpunkt:** hoch – Aufrufer per grep geprüft, Verhalten in der Bewertung gemessen. Umkehrbarkeit billig (Index abgeleitet, Kennzeichnung umkehrbar).
+- **Konsequenzen:** Der Index wächst nicht mehr mit den Anfragen; die Datei schrumpft erst beim Neuaufbau (Befehl im Runbook Abschnitt 7). Eine Nachricht, deren Zeile vor 11.3 wie eine Trennzeile aussah, bleibt in alten Dateien geteilt (nicht nachträglich reparierbar). `docs/architecture.md` Abschnitte 3 (`storage`), 4 (`DocumentStore`) und 7 werden nachgezogen.
 - **Abgeleitete Regel:** keine
 
 ---

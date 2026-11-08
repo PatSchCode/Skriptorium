@@ -29,6 +29,31 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.3 erledigt, Umbau aus der Pflichtfrage abgeschlossen
+
+- **Dauer:** 2026-11-08, ca. 16:20–17:30 UTC (lokale Mac-Session; nach dem ersten Sessionende zu 11.1 auf Wunsch des Eigentümers weiter mit 11.2 und 11.3).
+- **Bearbeitet:** 11.1 (PR #224, gemergt `d73d03f` auf „Du mergst“ des Eigentümers); 11.2 (PR #225, CI grün, offen); 11.3 Vorlage, ADR-120, Umsetzung auf `fix/11.3-ablage-anfragen` (aufgesetzt auf 11.2).
+- **Stand:** Phase 11 bei 3 von 16; Umbau aus ADR-117 (11.1–11.3) abgeschlossen. Server unverändert `25c9bd6` – 11.2 und 11.3 sind Code und noch nicht eingespielt.
+- **Offen:** #225 und der Pull Request zu 11.3 mergen; danach Einspielen vom Mac auf Anweisung (ADR-039), am besten zusammen; optional danach Index einmal neu aufbauen (Runbook Abschnitt 7), damit die Datei schrumpft. Fernzweige `docs/11.1-bedrohungsmodell-runware` und nach dem Merge die übrigen löschen. D.28 Lösung wählen; D.11 Frist überschritten.
+- **Nächster Schritt:** 11.4 Fester Startwert und vollständige Herkunft (Vorlage, Entscheidungs-Klasse). Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (3 von 16, Erledigt 11.1–11.3, Als Nächstes 11.4–11.5), Kontext (Status ab 11.4, nicht eingespielt), CHANGELOG (11.3 unter „Behoben“), Blocker 0. Drift: ADR-119 → 11.1, ADR-120 → 11.3 vorhanden; Reifegrade unverändert, Kopfzeile Abschnitt 9 nach ADR-119 (ADR-120 ohne Reifegrad-Wirkung); Modul-Liste unverändert; FR-027 (11.3) vorhanden; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-111 bis ADR-120); Phase 11 bei 16 geplanten Schritten. Größen: `docs/project-context.md` 351 Zeilen (Budget 600); Logbuch rund 150 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** durchgehend Opus 5.5 (Entscheidungs-Klasse). Oberhalb der Empfehlung: 11.2 (Routine; Warnung zu Beginn, Abgabe ruht bis D.22) – 1 Schritt. 11.1 und 11.3 auf ihrer Klasse. Abgegeben: getrennte Prüfung zu 11.1 an Sonnet 5.5 (Pflicht der Methodik).
+- **Kontextgröße:** 429.017 Token (Sitzungsabfrage) – über der Grenze 200.000 seit Beginn; weiter nach dauerhaftem „weiter hier“ (2026-09-28). Nächste Session neu beginnen.
+
+### 2026-11-08 – [ADR-ANGELEGT] ADR-120 Anfragen nicht im Suchindex, Trennzeilen gekennzeichnet
+
+- Vorlage zu 11.3 mit zwei Fragen. Selbst nachgeprüft vor der Vorlage: `DocumentStore.search(…, "fulltext")` hat im Programm keinen Aufrufer (nur Tests), `canon.find_entries` nutzt `"name"`. Eigentümer: Index „Nur Anfragen raus“ (Empfehlung war, die Volltextsuche ganz zu entfernen – er behält sie), Trennzeilen „Mit \ kennzeichnen“ (Empfehlung) → ADR-120.
+
+### 2026-11-08 – [BEOBACHTUNG] 11.3 umgesetzt
+
+- `storage/store.py`: `_indexed` lässt genau `worlds/<welt>/stories/<geschichte>/anfragen/<datei>` aus (Tests: Welt, Geschichte, Eintrag und Unterordner namens „anfragen“ bleiben indexiert); `_drop_unindexed` entfernt beim Öffnen alte Zeilen solcher Pfade (Test mit von Hand eingefügten Zeilen in allen drei Tabellen). `manuscript/requests.py`: `_escape`/`_unescape` für Zeilen in Nachrichten, die wie Trennzeilen aussehen, auch mit schon vorangestellten `\`.
+- Prüfungen: ruff, ruff format, `mypy --strict`, bandit ohne Befund; pytest 1.302 grün (vorher 1.293, +9), Abdeckung 99,90 %, beide Dateien 100 %. Keine Änderung an Oberfläche oder Abhängigkeiten.
+- Zweig auf `refactor/11.2-bildformular` aufgesetzt (PR #225 offen, CI grün) – gleicher Grund wie bei 11.2.
+
+### 2026-11-08 – [BEOBACHTUNG] PR #224 gemergt, PR #225 geöffnet
+
+- #224 (11.1): alle vier Pflicht-Checks grün; Eigentümer „Du mergst“ → Merge-Commit `d73d03f`, Fernzweig nicht gelöscht. #225 (11.2) danach gegen das neue `main` geöffnet, zeigt nur seine zwei Commits; CI mit allen vier Checks grün.
+
 ### 2026-11-08 – [BEOBACHTUNG] 11.2 Bildformular zerlegt
 
 - Auf „Ja, 11.2 starten“ des Eigentümers in derselben Session; Klasse über der Empfehlung (Opus statt Routine), zu Beginn gesagt; Abgabe an Sonnet ruht bis D.22.
