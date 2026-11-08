@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONSTART] 10.8 abschließen oder Checkpoint-Versuch
+
+- **Umgebung:** Cloud-Session, Branch `claude/clever-carson-ahzym2`. Die Session startete auf `main` (`c8c2ea6`), der die Arbeit an 10.8 nicht enthält; der aktuelle Stand liegt auf dem Entwurfs-Pull-Request #218 (`feat/10.8-zweiter-bildanbieter`, `01a66c8`). Der Session-Branch steht deshalb jetzt auf `01a66c8` (Vorspulen, `c8c2ea6` ist Vorfahre). Mini-Reibung: Mindest-Lektüre zuerst gegen `main` gelesen und einen falschen Wiedereinstieg („10.9 oder 10.8“) notiert; erst die Rückfrage des Eigentümers („PR Vorlage ansehen“) führte zu #218. Lehre: bei Sessionstart offene Pull Requests prüfen, bevor der Stand aus `main` übernommen wird.
+- **Modell:** eingestellt `claude-opus-5-5`, bedient `claude-opus-5-5` (Sitzungsabfrage: `session_context.model` und `last_served_model`) → Entscheidungs-Klasse. Empfehlung für 10.8: Entscheidung – passt.
+- **Kontextgröße:** Sitzungsabfrage meldet `used_tokens` 0 bei Sessionbeginn; Grenze 200.000 wird nach jedem Schritt geprüft.
+- **Mindest-Lektüre:** Kontext vollständig; Logbuch ab letztem Sessionende (Stand #218); Fahrplan „Aktueller Stand“ (Stand #218) und Phase 10; Architektur 1/2/9, Entscheidungen Teil A und C, aktive Blocker (keine) – gelesen auf `main`, Abweichungen in #218 werden für 10.8 nachgelesen.
+- **Vorhaben:** Eigentümer entscheidet, ob 10.8 abgeschlossen wird (#218 auf „Ready for review“, CI, Merge, Einspielen) oder zuerst der Checkpoint-Versuch läuft.
+
 ### 2026-11-07 – [SESSIONENDE] Bildmodelle und LoRAs erkundet; 10.8 unverändert offen
 
 - **Dauer:** ganzer Tag (Session seit 00:08 UTC), mit Unterbrechungen.
