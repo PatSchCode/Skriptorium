@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-116). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-118). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -136,12 +136,14 @@ Stand 2026-11-08 (ADR-001 bis ADR-116). Aus welchem Schritt ein ADR stammt, steh
 | 114 | 2026-11-07 | Aktiv | OPERATIV | ABHÄNGIGKEIT | Externe Abh. | Runware als zweiter Bildanbieter (10.8) |
 | 115 | 2026-11-07 | Aktiv | OPERATIV | SECURITY, DATENMODELL, SCHNITTSTELLE | Sicherheit, Datenmodell, Architektur, API | Runware: Erwachseneninhalte ohne Prüfung, Modelle und LoRAs in den Einstellungen (10.8) |
 | 116 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell | Schreib-Anfragen im Wortlaut festhalten: letzte 50 je Geschichte, mit Antwort, eigener Reiter (10.9) |
+| 117 | 2026-11-08 | Aktiv | STRATEGISCH | MODUL, SECURITY, METHODIK | Architektur | Pflichtfrage nach Phase 10: klein umbauen (11.1–11.3), danach weiterbauen |
+| 118 | 2026-11-08 | Aktiv | STRATEGISCH | METHODIK | Planung | Phase 11 geplant: Figuren und Bilder, Bild-Kleinigkeiten, Schreiben, Weltenbauer; V.21, V.54, V.55 weiter verschoben |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-107 bis ADR-116 – keiner reaktiv: ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-107 bis ADR-111 Datenmodell, Schnittstelle bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-090, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-109 bis ADR-118 – keiner reaktiv: ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-109 bis ADR-111 Schnittstelle, Datenmodell bzw. Anfrage, jeweils in ihrem Schritt als Vorlage vorgesehen (ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2758,6 +2760,46 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Willst du auch bei verworfenen Vorschlägen sehen können, was die KI bekam?“ → ja.
 - **Konfidenz zum Zeitpunkt:** hoch – gleiches Speichermuster wie Verlauf und Fakten (ADR-003, ADR-056), Bausteinliste entsteht schon heute. Umkehrbarkeit billig (rollierende Ablage, nichts hängt davon ab).
 - **Konsequenzen:** Je Anfrage ca. 100 KB; 50 Anfragen je Geschichte ca. 5 MB, in der täglichen Sicherung (ADR-036). Wer eine Anfrage nachlesen will, die älter als die letzten 50 ist, findet sie nicht mehr. `docs/architecture.md` Abschnitt 7 (Datenmodell) bekommt die Ablage mit dem Bau.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-117: Pflichtfrage nach Phase 10 – klein umbauen, danach weiterbauen
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Auswahlfrage: „Klein umbauen“); Empfehlung der KI und der getrennten Instanz
+- **Status:** Aktiv
+- **Tags:** `[STRATEGISCH]` `[MODUL]` `[SECURITY]` `[METHODIK]`
+- **Phasentyp-Kontext:** Phasengrenze nach Phase 10 (UMSETZUNG)
+- **Reifegrad-Wirkung:** keine (Umbau innerhalb der Module; Nachtrag zum Bedrohungsmodell wird getrennt geprüft, 11.1)
+- **Kategorie:** Architektur (Pflichtfrage nach `CLAUDE.md` Abschnitt 12)
+- **Kontext:** Bewertung durch eine getrennte Instanz (Sonnet, ohne Gesprächsverlauf, nur lesend), `docs/research/bewertung-phase-10.md`: Fundament gesund (pytest 1.293, 99,90 %; vitest 604, 98,83 % Anweisungen; 0 Platzhalter; alle Modulkanten auf der Karte; Reaktiv-Quote 0/10; Phase 10 bei 11 von 11), kein Befund „hoch“. Befunde „mittel“: (1) zweiter Bildanbieter in `ai_gateway` sauber, `api`/`ui` kennen Anbieter-Einzelheiten – Registry erst bei einem dritten Anbieter; (2) `ImageGenerate.tsx` nach dem Zerlegen in 10.4 von 452 auf 687 Zeilen gewachsen; (3) Vorbelegung des Bild-Prompts bei Figuren: Datenmodell trägt, es fehlt eine Schicht (deckt sich mit dem Befund des Eigentümers aus der Probe von 10.8); (4) wachsende Funktionen im Schreib-Ablauf; (6) Bedrohungsmodell und Architektur kennen Runware nicht. Niedrig bis mittel: (5) Anfrage-Ablage im ungenutzten Volltextindex, Trennzeilen ohne Maskierung. Von der bauenden KI nachgeprüft: (2), (5) und (6) per `wc`, grep und Lesen von `storage/store.py`.
+- **Entscheidung:** klein umbauen, danach weiterbauen:
+  - **11.1** Bedrohungsmodell und Architektur um Runware ergänzen (U.3; nach Stellungnahme 2 eigener Schritt statt Pflege, getrennt geprüft);
+  - **11.2** Bildformular entlasten (U.1), vor den Bildschritten 11.4–11.8;
+  - **11.3** Ablage der Schreib-Anfragen härten (U.2; Vorlage, auch zur Frage, ob der Volltextindex ganz entfällt).
+  Verworfen: weiterbauen ohne Umbau (neue Bildfunktionen würden in das gewachsene Formular gehen, Sicherheitsnachtrag bliebe offen), neu aufsetzen.
+- **Vision-Frage, die entschied:** „Ist dir recht, dass vor dem Figuren-Assistenten und den Bildrezepten zuerst drei kleine Aufräum- und Nachtragsschritte kommen?“ → ja.
+- **Konfidenz zum Zeitpunkt:** mittel (hoch gegen einen Neuaufbau) – die Wirkung einer neuen Prompt-Schicht auf die Bildqualität zeigt erst eine Probe. Umkehrbarkeit billig.
+- **Konsequenzen:** Phase 11 beginnt mit 11.1–11.3; die Grundsatzfragen zur Form von „Aussehen“, zum Ort der Prompt-Bildung und zur Ablage von Rezept und Bezug gehören in die Vorlagen von 11.5 und 11.6, nicht in einen Umbau vorab. Logbuch-Verdichtung beim Phasenwechsel.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-118: Planung von Phase 11 „Figuren, Bilder und Feinschliff“
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Auswahlfrage mit Mehrfachwahl: alle vier vorgeschlagenen Themen „Figuren und Bilder“, „Bild-Kleinigkeiten“, „Schreiben robuster“, „Weltenbauer“)
+- **Status:** Aktiv
+- **Tags:** `[STRATEGISCH]` `[METHODIK]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 10, Schritt 10.11 – Replanning)
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Planung (Replanning nach `CLAUDE.md` Abschnitt 12)
+- **Kontext:** 17 verschobene Schritte mit Landeplatz 10.11 (V.21, V.40, V.44–V.58). Vision-Abgleich gegen `docs/vision.md` und `docs/requirements.md`: keine verwaisten Elemente (alle 19 Muss-Anforderungen erledigt, FR-006 verworfen, FR-038 → V.45; vom Publizieren bleibt der öffentliche Lese-Link V.21). Pflichtfrage: ADR-117.
+- **Entscheidung:** Phase 11 mit 16 Schritten: 11.1–11.3 Umbau (ADR-117); Figuren und Bilder 11.4 Seed und vollständige Herkunft (V.53), 11.5 Figuren-Assistent (V.58), 11.6 Bildrezepte (V.57), 11.7 Schlagworte (V.52), 11.8 Erkenntnisse der Bild-Erkundung (V.56); 11.9 Großansicht und Bildmeldungen (V.49, V.50); Schreiben 11.10 Längengrenze (V.51), 11.11 Favoriten und „Wesen:“ (V.47, V.48); Weltenbauer 11.12 gesperrte Antworten (V.40), 11.13 Fragenliste (V.46), 11.14 Recherche (V.44), 11.15 Namenshilfe (V.45); 11.16 Planung. Weiter verschoben auf 11.16: V.21 (öffentlicher Lese-Link – eigene Sicherheitsentscheidung), V.54 (weitere LoRAs – Erprobung ohne Code), V.55 (MOSS – dritter Anbieter, erst mit Registry; Befund 1 der Bewertung).
+- **Vision-Frage, die entschied:** „Welche Themen kommen nach den drei Umbau-Schritten in Phase 11?“ → alle vier.
+- **Konfidenz zum Zeitpunkt:** hoch für die Reihenfolge (Seed vor Rezepten, Assistent vor Schlagworten und Fragenliste; Befund 2/3 der Bewertung), mittel für den Umfang – 16 Schritte sind so viele wie Phase 4 und 7; neue Wünsche werden V-Schritte mit Landeplatz 11.16. Umkehrbarkeit billig.
+- **Konsequenzen:** Wucherungs-Schwelle mehr als 32 Schritte. Schritte, die Vorlagen brauchen, beginnen mit Mockup und Auswahlfragen. FR-038 bekommt den Schritt 11.15.
 - **Abgeleitete Regel:** keine
 
 ---

@@ -23,7 +23,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 10 – Kanon-Pflege, Bilder und Nachvollziehbarkeit (Umsetzung), geplant 2026-11-05 (ADR-104, ADR-105); Phase 9 abgeschlossen 2026-11-05. Fortschritt: 10 von 11 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 11 – Figuren, Bilder und Feinschliff (Umsetzung), geplant 2026-11-08 (ADR-117, ADR-118); Phase 10 abgeschlossen 2026-11-08. Fortschritt: 0 von 16 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-11-08
@@ -32,7 +32,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 
 ## Quick Start
 
-Stand 2026-11-05 (v1.0.0 plus Phasen 6 bis 9): Server mit Anmeldung und Oberfläche für Welten, Kanon, Import (Markdown und SillyTavern) und Geschichten; KI-Weltenbauer; Export nach SillyTavern; Aufbau wie ein Chat mit Leiste links und eigener Adresse je Ansicht; Schreiben mit KI (Figuren-Schreibweise, `@`-Menü, wählbare Länge, Kapitel-Kurzfassungen, Gast-Figuren aus anderen Welten) mit `OPENROUTER_API_KEY`; markierte Textstellen in den Kanon übernehmen; Modell je Geschichte, Kosten je Anfrage und Monat; Darstellung hell, dunkel oder schwarz (AMOLED); als App installierbar. Aus Phase 7: Zeitstrahl, E-Book mit Titelbild, Aussehen „Buch“, Bilder an Kanon-Einträgen, Karten mit Zoom und Markierungen, Bilder von der KI erzeugen und beschreiben lassen. Aus Phasen 8 und 9: Weltenbauer aus dem Manuskript, Verweise zwischen Einträgen, feste Abschnitte je Art und Beziehungen, Bilder mit Herkunft und Bild zu Bild, Modell je Aufgabe, Archivieren und Löschen, Seite „Verbrauch“, Gast-Figuren mit Weltbezug. Aus Phase 10 (in Arbeit): zweiter Bildanbieter Runware mit Community-Modellen und LoRAs (optional, `RUNWARE_API_KEY`).
+Stand 2026-11-08 (v1.0.0 plus Phasen 6 bis 10): Server mit Anmeldung und Oberfläche für Welten, Kanon, Import (Markdown und SillyTavern) und Geschichten; KI-Weltenbauer; Export nach SillyTavern; Aufbau wie ein Chat mit Leiste links und eigener Adresse je Ansicht; Schreiben mit KI (Figuren-Schreibweise, `@`-Menü, wählbare Länge, Kapitel-Kurzfassungen, Gast-Figuren aus anderen Welten) mit `OPENROUTER_API_KEY`; markierte Textstellen in den Kanon übernehmen; Modell je Geschichte, Kosten je Anfrage und Monat; Darstellung hell, dunkel oder schwarz (AMOLED); als App installierbar. Aus Phase 7: Zeitstrahl, E-Book mit Titelbild, Aussehen „Buch“, Bilder an Kanon-Einträgen, Karten mit Zoom und Markierungen, Bilder von der KI erzeugen und beschreiben lassen. Aus Phasen 8 und 9: Weltenbauer aus dem Manuskript, Verweise zwischen Einträgen, feste Abschnitte je Art und Beziehungen, Bilder mit Herkunft und Bild zu Bild, Modell je Aufgabe, Archivieren und Löschen, Seite „Verbrauch“, Gast-Figuren mit Weltbezug. Aus Phase 10: Bilder im Manuskript und beim Schreiben, Auflösung und Qualität, zweiter Bildanbieter Runware mit Community-Modellen und LoRAs (optional, `RUNWARE_API_KEY`), Reiter „Anfragen“ mit dem Wortlaut jeder Schreib-Anfrage.
 
 ### Voraussetzungen
 
@@ -101,19 +101,10 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 
 ## Nächste Schritte
 
-- ✅ **Phase 9** (abgeschlossen 2026-11-05): gegliederte Einträge und Beziehungen, Bilder vom Bedarf her mit Herkunft und Bild zu Bild, Modell je Aufgabe, Löschen und Archivieren, Seite „Verbrauch“ mit Cache-Treffern, Gast-Figuren mit Weltbezug, Kontexttreue belastbar bis etwa 30 Kapitel; Pflichtfrage: weiterbauen mit drei kleinen Umbauten (ADR-104).
-- ✅ **10.1** (erledigt 2026-11-05): Löschen eines Kanon-Eintrags zeigt vorher, was mitgeht, und nimmt es mit (ADR-106).
-- ✅ **10.2** (erledigt 2026-11-05): Die Figurenkarte für SillyTavern nimmt in „personality“ genau den Abschnitt „Wesen“ (ADR-107).
-- ✅ **10.3** (erledigt 2026-11-05): „✨ Aussehen herauslösen“ auch für Orte und Gegenstände (ADR-108).
-- ✅ **10.4** (erledigt 2026-11-05): Bildfenster intern in kleinere Bausteine zerlegt, Bedienung unverändert.
-- ✅ **10.5** (erledigt 2026-11-05): Auflösung und Qualität bei „Bild erzeugen“, voreingestellt 2K; erzeugte Bilder bis 4.096 Pixel (ADR-109).
-- ✅ **10.6** (erledigt 2026-11-06): Bilder zwischen den Absätzen eines Kapitels und im E-Book – hochladen, erzeugen oder aus dem Kanon (ADR-110).
-- ✅ **10.7** (erledigt 2026-11-06): Hauptbilder genannter Einträge beim Schreiben auf Knopfdruck mitschicken (ADR-111).
-- ✅ **10.10** (erledigt 2026-11-06): Hermes 4 gemessen – Einstellungen helfen nicht, Hermes bleibt wählbar wie heute; Längengrenze gegen Endlosschleifen geplant (ADR-113, V.51).
-- ✅ **Erledigt:** 10.8 zweiter Bildanbieter – Runware angebunden (ADR-114, ADR-115): Modelle und LoRAs in den Einstellungen, Inhaltsprüfung aus; getrennt geprüft, vom Eigentümer bestätigt und in `main` (2026-11-08); eingespielt und vom Eigentümer am Server erprobt (2026-11-08); die Kanon-Beschreibung einer Figur reicht noch nicht für gutes Prompten – Landeplatz V.58 (Figuren-Assistent). Erkundung der Bildmodelle und LoRAs abgeschlossen, Folgewünsche in V.56.
-- ✅ **Erledigt:** 10.9 Anfragen an die KI im Wortlaut festhalten – Reiter „Anfragen“ (ADR-116); eingespielt und vom Eigentümer am Server erprobt (2026-11-08).
-- ⚪ **Als Nächstes:** 10.11 Planung der nächsten Ausbaustufe.
-- ⚪ **Phase 10** (ADR-105): 10.1 Löschkaskade für Kanon-Einträge, 10.2 Export liest „Wesen“, 10.3 Aussehen herauslösen für Orte und Gegenstände; 10.4 Bildansichten zerlegen, 10.5 Auflösung und Qualität bei der Bilderzeugung, 10.6 Bilder im Manuskript, 10.7 Bilder beim Schreiben, 10.8 zweiter Bildanbieter; 10.9 vollständige Anfrage festhalten, 10.10 Hermes 4 messen; 10.11 Planung. Später: Recherche, Namenshilfe, Fragenliste, Bildrezepte und Figuren-Assistent, Veröffentlichung.
+- ✅ **Phase 9** (abgeschlossen 2026-11-05): gegliederte Einträge und Beziehungen, Bilder vom Bedarf her mit Herkunft und Bild zu Bild, Modell je Aufgabe, Löschen und Archivieren, Seite „Verbrauch“, Gast-Figuren mit Weltbezug.
+- ✅ **Phase 10** (abgeschlossen 2026-11-08): Löschkaskade für Kanon-Einträge, Aussehen herauslösen für Orte und Gegenstände, Auflösung und Qualität bei Bildern, Bilder im Manuskript und E-Book, Bilder beim Schreiben mitschicken, zweiter Bildanbieter Runware mit Community-Modellen und LoRAs, Anfragen an die KI im Wortlaut nachlesen (ADR-106 bis ADR-116).
+- ⚪ **Als Nächstes:** 11.1 Bedrohungsmodell um Runware ergänzen, 11.2 Bildformular entlasten, 11.3 Ablage der Anfragen härten (Pflichtfrage, ADR-117).
+- ⚪ **Phase 11** (ADR-118): Figuren und Bilder – fester Startwert, Figuren-Assistent für das Aussehen, Bildrezepte, Schlagwort-Prompts, Einstellungen aus der Bild-Erkundung (11.4–11.8); Großansicht und Bildmeldungen (11.9); Längengrenze, Favoriten, „Wesen:“ im Fließtext (11.10–11.11); Weltenbauer mit gesperrten Antworten, Fragenliste, Recherche und Namenshilfe (11.12–11.15).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
 Ergebnisse der Erkundung: [Modell-Eignungstest](docs/research/modell-eignungstest.md) – damals Startmodell grok-4.7, Zweitmodell grok-4.6; seit 5.7 ist grok-4.6 voreingestellt (ADR-044).
