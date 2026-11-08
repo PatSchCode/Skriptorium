@@ -773,7 +773,8 @@
         "at": "2026-09-26T12:00:00Z",
         "instruction": "Weiter",
         "text": "Der Nebel hob sich.",
-        "model": "x-ai/grok-4.6"
+        "model": "x-ai/grok-4.6",
+        "request": null
       }
     ]
   },
@@ -785,13 +786,15 @@
         "at": "2026-09-26T12:00:00Z",
         "instruction": "Weiter",
         "text": "Der Nebel hob sich.",
-        "model": "x-ai/grok-4.6"
+        "model": "x-ai/grok-4.6",
+        "request": null
       },
       {
         "at": "2026-09-26T12:00:00Z",
         "instruction": "Neue Szene",
         "text": "Mira kam dazu.",
-        "model": null
+        "model": null,
+        "request": null
       }
     ]
   },
@@ -1082,7 +1085,8 @@
     "body": {
       "model": "x-ai/grok-4.7",
       "estimated_tokens": 1472,
-      "images": 0
+      "images": 0,
+      "request": "20260926-120000"
     }
   },
   "writeText": {
@@ -1304,6 +1308,238 @@
       "output_tokens": 40,
       "cost_usd": 0.0021,
       "finish_reason": "stop"
+    }
+  },
+  "addInstructionWithRequest": {
+    "route": "POST /api/worlds/die-salzmark/stories/die-ueberfahrt/chapters/1/instructions",
+    "type": "InstructionNote[]",
+    "body": [
+      {
+        "at": "2026-09-26T12:00:00Z",
+        "instruction": "Weiter",
+        "text": "Der Nebel hob sich.",
+        "model": "x-ai/grok-4.6",
+        "request": null
+      },
+      {
+        "at": "2026-09-26T12:00:00Z",
+        "instruction": "Neue Szene",
+        "text": "Mira kam dazu.",
+        "model": null,
+        "request": null
+      },
+      {
+        "at": "2026-09-26T12:00:00Z",
+        "instruction": "Mira kommt dazu.",
+        "text": "Der Nebel hob sich.",
+        "model": null,
+        "request": "20260926-120000"
+      }
+    ]
+  },
+  "writingRequests": {
+    "route": "GET /api/worlds/die-salzmark/stories/die-ueberfahrt/requests",
+    "type": "RequestSummary[]",
+    "body": [
+      {
+        "id": "20260926-120000-6",
+        "at": "2026-09-26T12:00:00Z",
+        "chapter": 1,
+        "model": "x-ai/grok-4.7",
+        "estimated_tokens": 1502,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost_usd": null,
+        "outcome": "nicht_erreichbar",
+        "instruction": "Setze das Manuskript an seinem Ende fort: nur den unmittelbar nächsten Moment der Szene, ohne Zeitsprung.",
+        "taken_over": false
+      },
+      {
+        "id": "20260926-120000-5",
+        "at": "2026-09-26T12:00:00Z",
+        "chapter": 1,
+        "model": "x-ai/grok-4.7",
+        "estimated_tokens": 1502,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost_usd": null,
+        "outcome": "ungueltig",
+        "instruction": "Setze das Manuskript an seinem Ende fort: nur den unmittelbar nächsten Moment der Szene, ohne Zeitsprung.",
+        "taken_over": false
+      },
+      {
+        "id": "20260926-120000-4",
+        "at": "2026-09-26T12:00:00Z",
+        "chapter": 1,
+        "model": "x-ai/grok-4.7",
+        "estimated_tokens": 1502,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost_usd": null,
+        "outcome": "zu_viele_anfragen",
+        "instruction": "Setze das Manuskript an seinem Ende fort: nur den unmittelbar nächsten Moment der Szene, ohne Zeitsprung.",
+        "taken_over": false
+      },
+      {
+        "id": "20260926-120000-3",
+        "at": "2026-09-26T12:00:00Z",
+        "chapter": 1,
+        "model": "x-ai/grok-4.7",
+        "estimated_tokens": 1502,
+        "input_tokens": null,
+        "output_tokens": null,
+        "cost_usd": null,
+        "outcome": "abgelehnt",
+        "instruction": "Setze das Manuskript an seinem Ende fort: nur den unmittelbar nächsten Moment der Szene, ohne Zeitsprung.",
+        "taken_over": false
+      },
+      {
+        "id": "20260926-120000-2",
+        "at": "2026-09-26T12:00:00Z",
+        "chapter": 1,
+        "model": "x-ai/grok-4.7",
+        "estimated_tokens": 1502,
+        "input_tokens": 1200,
+        "output_tokens": 40,
+        "cost_usd": 0.0021,
+        "outcome": "ok",
+        "instruction": "Setze das Manuskript an seinem Ende fort: nur den unmittelbar nächsten Moment der Szene, ohne Zeitsprung.",
+        "taken_over": false
+      },
+      {
+        "id": "20260926-120000",
+        "at": "2026-09-26T12:00:00Z",
+        "chapter": 1,
+        "model": "x-ai/grok-4.7",
+        "estimated_tokens": 1472,
+        "input_tokens": 1200,
+        "output_tokens": 40,
+        "cost_usd": 0.0021,
+        "outcome": "ok",
+        "instruction": "Mira kommt dazu.",
+        "taken_over": true
+      }
+    ]
+  },
+  "writingRequest": {
+    "route": "GET /api/worlds/die-salzmark/stories/die-ueberfahrt/requests/20260926-120000",
+    "type": "WritingRequest",
+    "body": {
+      "id": "20260926-120000",
+      "at": "2026-09-26T12:00:00Z",
+      "chapter": 1,
+      "model": "x-ai/grok-4.7",
+      "length": "mittel",
+      "instruction": "Mira kommt dazu.",
+      "blocks": [
+        {
+          "kind": "rahmen",
+          "label": "Rahmen",
+          "tokens": 304
+        },
+        {
+          "kind": "welt",
+          "label": "Die Salzmark",
+          "tokens": 13
+        },
+        {
+          "kind": "schreibweise",
+          "label": "Figuren-Schreibweise",
+          "tokens": 270
+        },
+        {
+          "kind": "schreibweise-atmo",
+          "label": "Schreibweise",
+          "tokens": 94
+        },
+        {
+          "kind": "regel",
+          "label": "Salzgesetz",
+          "tokens": 7
+        },
+        {
+          "kind": "zeitlinie",
+          "label": "Die Große Flut",
+          "tokens": 10
+        },
+        {
+          "kind": "gefuehrte-figur",
+          "label": "Kael",
+          "tokens": 20
+        },
+        {
+          "kind": "fakten",
+          "label": "Fakten dieser Geschichte",
+          "tokens": 20
+        },
+        {
+          "kind": "auffuellung",
+          "label": "Hafen von Grauwasser",
+          "tokens": 14
+        },
+        {
+          "kind": "auffuellung",
+          "label": "Runenklinge",
+          "tokens": 9
+        },
+        {
+          "kind": "auffuellung",
+          "label": "Mondvolk",
+          "tokens": 7
+        },
+        {
+          "kind": "auffuellung",
+          "label": "Nebelkönig",
+          "tokens": 37
+        },
+        {
+          "kind": "handlungsstand",
+          "label": "Gesamtzusammenfassung",
+          "tokens": 12
+        },
+        {
+          "kind": "seiten",
+          "label": "Kapitel 1",
+          "tokens": 20
+        },
+        {
+          "kind": "anweisung",
+          "label": "Anschluss",
+          "tokens": 92
+        },
+        {
+          "kind": "anweisung",
+          "label": "Anweisung",
+          "tokens": 10
+        },
+        {
+          "kind": "anweisung",
+          "label": "Vorgaben",
+          "tokens": 304
+        },
+        {
+          "kind": "schreibweise",
+          "label": "Erinnerung Figuren-Schreibweise",
+          "tokens": 95
+        }
+      ],
+      "estimated_tokens": 1472,
+      "pictures": [],
+      "outcome": "ok",
+      "input_tokens": 1200,
+      "output_tokens": 40,
+      "cost_usd": 0.0021,
+      "messages": [
+        {
+          "role": "system",
+          "content": "Du bist Co-Autor einer Geschichte in der Welt „Die Salzmark“. Der Kanon unten ist verbindlich: Widersprich ihm nie. Erfinde nur, was der Kanon offen lässt. Die Zeitlinie ist verbindlich: Lass keine Handlung vor einem Ereignis geschehen, das laut Zeitlinie später liegt, wenn die Anweisung es nicht ausdrücklich verlangt. Verlangt die Anweisung etwas, das dem Kanon widerspricht, schreibe trotzdem kanontreu und beginne deine Antwort mit genau einer Zeile „HINWEIS: …“, die dem Autor in einem Satz sagt, was du abgewandelt hast und warum; danach folgt der Text. Ohne Widerspruch schreibst du keine solche Zeile. Der Text selbst enthält nie Hinweise an den Autor. Eine Fortsetzung schließt nahtlos an das Ende des Manuskripts an: ohne Einleitung und ohne abschließenden Satz. Handlungsstand und Zeitlinie können über die Schreibstelle hinausreichen; was nach ihr geschieht, liegt in der Zukunft und wird weder erzählt noch angedeutet. Eine Regel mit der Zeile „Gilt nur in: …“ gilt nur an diesem Ort.\n\n# Welt: Die Salzmark\n\nSalz, Nebel, Wind.\n\n# Geschichte: Die Überfahrt\n\nErzählperspektive: er\n\n## Figuren-Schreibweise\n\nDer Autor führt selbst: Kael. Du führst die Welt und alle übrigen Figuren. Beschreibt die Anweisung, was Kael tut oder sagt, schreibst du genau das aus, Gesagtes als wörtliche Rede, und nichts darüber hinaus. Sonst gilt für Kael:\n\n- keine Handlung und keine Bewegung, auch keine kleine (nicht aufstehen, nicht greifen, nicht nicken, nicht weitergehen);\n- keine wörtliche oder indirekte Rede, keine Antwort, keinen Entschluss;\n- keine Gedanken, Erinnerungen, Gefühle oder Absichten;\n- erlaubt ist nur, was die Figur unmittelbar wahrnimmt: sehen, hören, riechen, spüren; bei Ich-Erzählung in der ersten Person.\n\nBeschreibe, was die übrigen Figuren und die Welt tun. Sobald die geführte Figur handeln, sprechen oder sich entscheiden müsste, beende deinen Text an genau dieser Stelle. Dort schreibt der Autor weiter.\n\n## Schreibweise\n\n- Genre: Thriller\n- Tonalität: zärtlich\n- Tempo: langsam\n\nHalte diese Schreibweise in Wortwahl, Satzbau und Tempo ein. Sie tritt hinter den Kanon und die Figuren-Schreibweise zurück: Widerspricht sie einem Kanon-Eintrag oder der Führung einer Figur, gelten Kanon und Figuren-Schreibweise.\n\n## Salzgesetz (Regel)\n\n## Die Große Flut (Zeitlinie)\n\n## Kael (Figur)\nAuch: Fährmann\n\nFährmann, schweigsam, narbig.\n\n## Fakten dieser Geschichte\n- Kael: Kael fürchtet das Wasser.\n\n## Hafen von Grauwasser (Ort)\n\nKalter Hafen.\n\n## Runenklinge (Gegenstand)\n\n## Mondvolk (Kultur)\n\n## Nebelkönig (Figur, Gast aus der Welt „Nebelreich“)\n\n### In dieser Welt („Die Salzmark“)\n\nKam über das Eis und blieb."
+        },
+        {
+          "role": "user",
+          "content": "# Handlungsstand\n\nDer Nebel hob sich.\n\n# Letzte Manuskript-Seiten (wörtlich)\n\nKael band das Boot fest.\n\n# Anschluss\n\nDas Manuskript endet mit: „Kael band das Boot fest.“\n\nSetzt du fort, beginnt dein Text mit dem nächsten Satz unmittelbar nach diesen Worten, in derselben Szene: Führe Ort, Lage und Figuren nicht neu ein und fasse nichts zusammen. Verlangt die Anweisung eine neue Szene, beginnt sie dort.\n\n# Anweisung\n\nMira kommt dazu.\n\n# Vorgaben für deinen Text\n\n- Schreibe nur aus, was die Anweisung verlangt, und höre dann auf. Nimm nicht vorweg, was der Autor als Nächstes schreiben könnte.\n- Länge: etwa 150 bis 300 Wörter.\n- Die Länge ist eine Obergrenze: Gibt die Anweisung weniger her, schreibe kürzer, statt mit Beschreibung aufzufüllen.\n- Die Schreibstelle ist das Ende des bisherigen Manuskripts. Was Handlungsstand, Kurzfassungen oder Zeitlinie über spätere Ereignisse sagen, liegt in der Zukunft: Erzähle es nicht und deute es nicht an.\n- Wiederhole keine Sätze, Bilder, Gesten und Wendungen aus den letzten Manuskript-Seiten; finde für Wiederkehrendes neue Worte oder lass es weg.\n- Ort, Licht, Geräusche, Gerüche und Stimmung sind bekannt: Beschreibe sie nur, wenn sich an ihnen etwas ändert, auch nicht umschrieben.\n- Kein abschließender, zusammenfassender oder ausblickender Satz: Dein Text hört mitten im Geschehen auf, mit einer Handlung oder Rede einer Figur, nicht mit Warten, Schweigen, einem Blick oder Stimmung.\n\nErinnerung: Kael führt der Autor. Was die Anweisung für Kael vorgibt, schreibst du genau aus, nicht mehr. Darüber hinaus keine Handlung, keine Rede, keinen Entschluss und keine Gedanken, nur Wahrnehmung. Schließe nicht mit Warten oder einem Blick auf Kael. Ende, sobald die Figur handeln oder antworten müsste."
+        }
+      ],
+      "answer": "Der Nebel hob sich."
     }
   },
   "models": {

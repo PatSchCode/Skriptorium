@@ -17,6 +17,7 @@ from skriptorium.manuscript.models import (
     Story,
     StoryFact,
 )
+from skriptorium.manuscript.requests import checked_request_id
 from skriptorium.manuscript.stories import StoryStore
 from skriptorium.manuscript.validation import required_text
 from skriptorium.storage import (
@@ -147,12 +148,17 @@ class StoryExtras:
         number: int,
         note: InstructionNote,
     ) -> list[InstructionNote]:
-        """Note a taken-over exchange; the chapter file stays as it is."""
+        """Note a taken-over exchange; the chapter file stays as it is.
+
+        ``note.request`` must have the form of a request identifier; whether the request is
+        still kept does not matter (ADR-116).
+        """
         checked = InstructionNote(
             note.at,
             required_text(note.instruction, "Anweisung"),
             required_text(note.text, "Text"),
             (note.model.strip() or None) if note.model is not None else None,
+            checked_request_id(note.request) if note.request is not None else None,
         )
         notes = [*self.list_instructions(world_id, story_id, number), checked]
         self._store.write(

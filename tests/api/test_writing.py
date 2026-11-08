@@ -607,7 +607,7 @@ def test_history_of_instructions_never_reaches_the_ai(
     }
     noted = writer.post(history, json=exchange)
     assert noted.status_code == 201, noted.text
-    assert noted.json() == [{"at": "2026-09-26T12:00:00Z", **exchange}]
+    assert noted.json() == [{"at": "2026-09-26T12:00:00Z", **exchange, "request": None}]
     assert writer.post(history, json={**exchange, "instruction": "  "}).status_code == 422
     assert writer.post(history, json={"instruction": "Weiter"}).status_code == 422
     assert writer.post(history.replace("/1/", "/7/"), json=exchange).status_code == 404

@@ -13,6 +13,8 @@ STORY_FILE: Final = "story.md"
 FACTS_FILE: Final = "facts.md"
 CHAPTERS: Final = "chapters"
 HISTORY: Final = "verlauf"
+# Folder of the writing requests as they went to the AI (step 10.9, ADR-116).
+REQUESTS: Final = "anfragen"
 COVER_KEY: Final = "titelbild"
 # Folder of the pictures between paragraphs (step 10.6, ADR-110).
 PICTURES: Final = "bilder"
@@ -34,6 +36,14 @@ def facts_path(world_id: str, story_id: str) -> str:
 
 def history_path(world_id: str, story_id: str, number: int) -> str:
     return f"{story_dir(world_id, story_id)}/{HISTORY}/{number:02d}.md"
+
+
+def request_dir(world_id: str, story_id: str) -> str:
+    return f"{story_dir(world_id, story_id)}/{REQUESTS}"
+
+
+def request_path(world_id: str, story_id: str, request_id: str) -> str:
+    return f"{request_dir(world_id, story_id)}/{request_id}.md"
 
 
 def cover_path(world_id: str, story_id: str, file: str) -> str:

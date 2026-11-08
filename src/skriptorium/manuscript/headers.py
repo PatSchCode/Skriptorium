@@ -227,11 +227,13 @@ def notes_from(document: Document) -> list[InstructionNote]:
         instruction = item.get("anweisung") if isinstance(item, dict) else None
         text = item.get("text", "") if isinstance(item, dict) else None
         model = item.get("modell") if isinstance(item, dict) else None
+        request = item.get("anfrage") if isinstance(item, dict) else None
         if (
             not isinstance(at, str)
             or not isinstance(instruction, str)
             or not isinstance(text, str)
             or not (model is None or isinstance(model, str))
+            or not (request is None or isinstance(request, str))
         ):
             raise InvalidInput(
                 f"{document.path}: anweisungen braucht je Eintrag zeit und anweisung"
@@ -240,7 +242,7 @@ def notes_from(document: Document) -> list[InstructionNote]:
             moment = datetime.fromisoformat(at)
         except ValueError as error:
             raise InvalidInput(f"{document.path}: ungültige Zeit {at!r}") from error
-        notes.append(InstructionNote(moment, instruction, text, model))
+        notes.append(InstructionNote(moment, instruction, text, model, request))
     return notes
 
 
@@ -285,16 +287,17 @@ def facts_header(facts: Sequence[StoryFact]) -> dict[str, HeaderValue]:
 
 
 def history_header(number: int, notes: Sequence[InstructionNote]) -> dict[str, HeaderValue]:
-    """Header of the instruction history file of one chapter."""
-    return {
-        "kapitel": number,
-        "anweisungen": [
-            {
-                "zeit": n.at.isoformat(timespec="seconds"),
-                "anweisung": n.instruction,
-                "modell": n.model,
-                "text": n.text,
-            }
-            for n in notes
-        ],
-    }
+    """Header of the instruction history file of one chapter; ``anfrage`` only where a note
+    names its writing request (ADR-116), so older notes stay as they were."""
+    items: list[HeaderValue] = []
+    for n in notes:
+        item: dict[str, HeaderValue] = {
+            "zeit": n.at.isoformat(timespec="seconds"),
+            "anweisung": n.instruction,
+            "modell": n.model,
+            "text": n.text,
+        }
+        if n.request is not None:
+            item["anfrage"] = n.request
+        items.append(item)
+    return {"kapitel": number, "anweisungen": items}

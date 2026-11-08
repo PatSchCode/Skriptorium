@@ -19,8 +19,10 @@ from skriptorium.manuscript import (
     Chapter,
     Form,
     InstructionNote,
+    RequestSummary,
     Story,
     SummaryStatus,
+    WritingRequest,
     WritingStyle,
 )
 from skriptorium.storage import MAX_IMAGE_BYTES, InvalidInput, NotFound
@@ -111,6 +113,8 @@ class InstructionIn(BaseModel):
     instruction: str
     text: str
     model: str | None = None
+    # The identifier of the kept writing request the text came from (step 10.9, ADR-116).
+    request: str | None = None
 
 
 class StoryDeletionConfirm(BaseModel):
@@ -366,8 +370,25 @@ def add_instruction(
 ) -> list[InstructionNote]:
     """Note a taken-over exchange; the AI never gets this list."""
     found.canon.get_world(world_id)
-    note = InstructionNote(found.clock(), body.instruction, body.text, body.model)
+    note = InstructionNote(found.clock(), body.instruction, body.text, body.model, body.request)
     return found.manuscript.add_instruction(world_id, story_id, number, note)
+
+
+@router.get("/{story_id}/requests")
+def list_requests(world_id: str, story_id: str, found: ServicesDep) -> list[RequestSummary]:
+    """The kept writing requests of the story, newest first, without texts (step 10.9,
+    ADR-116); the AI never gets them."""
+    found.canon.get_world(world_id)
+    return found.manuscript.list_requests(world_id, story_id)
+
+
+@router.get("/{story_id}/requests/{request_id}")
+def get_request(
+    world_id: str, story_id: str, request_id: str, found: ServicesDep
+) -> WritingRequest:
+    """One kept writing request: what went to the AI and its raw answer (ADR-116)."""
+    found.canon.get_world(world_id)
+    return found.manuscript.get_request(world_id, story_id, request_id)
 
 
 def _story(found: Services, world_id: str, story_id: str) -> Story:

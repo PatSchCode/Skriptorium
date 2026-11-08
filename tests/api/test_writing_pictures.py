@@ -91,6 +91,10 @@ def test_main_images_of_named_entries_go_along_in_order_at_most_four(
     base = _events(without.text)[0][1]["estimated_tokens"]
     assert start["images"] == MAX_PICTURES
     assert start["estimated_tokens"] >= base + MAX_PICTURES * PICTURE_TOKENS
+    # The kept request names the entries whose images went along, without image data (ADR-116).
+    kept = writer.get(f"{WRITE.split('/chapters/')[0]}/requests/{start['request']}").json()
+    assert kept["pictures"] == ["Kael", "Mira", "Hafen von Grauwasser", "Nebelkönig"]
+    assert kept["estimated_tokens"] == start["estimated_tokens"]
 
 
 def test_the_place_and_characters_of_a_new_scene_count_as_named(

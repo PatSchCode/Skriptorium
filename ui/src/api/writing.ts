@@ -28,8 +28,17 @@ export type WriteErrorKind =
 
 /** Events of the proposal stream (Server-Sent Events of the write endpoint). */
 export type WriteEvent =
-  /** `images`: how many images went along (step 10.7, ADR-111). */
-  | { type: "start"; model: string; estimated_tokens: number; images: number }
+  /**
+   * `images`: how many images went along (step 10.7, ADR-111); `request`: the identifier of the
+   * kept request (step 10.9, ADR-116), `null` if it is not kept.
+   */
+  | {
+      type: "start";
+      model: string;
+      estimated_tokens: number;
+      images: number;
+      request: string | null;
+    }
   | { type: "text"; text: string }
   /** The AI's note that it changed an instruction contradicting the canon (step 4.14). */
   | { type: "hinweis"; text: string }
