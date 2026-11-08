@@ -10,7 +10,7 @@
 
 - **Projektname:** Skriptorium
 - **Kurzbeschreibung:** Schreibwerkstatt für einen einzelnen Autor: Mehrere eigene Welten dienen als verbindlicher Kanon, Autor und KI schreiben im Wechsel Prosa darin, ohne der jeweiligen Welt zu widersprechen.
-- **Status:** In Betrieb seit v1.0.0 (2026-10-11, ADR-058), Weiterentwicklung in Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (begonnen 2026-11-05, ADR-105); seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz erreichbar (Schritt 4.7); eingespielt Stand `25c9bd6` (2026-11-08, mit 10.8 Runware und 10.9 Anfragen; Oberfläche mit Node 26 gebaut); offen: 10.11 Planung, D.11 bis 2026-10-31
+- **Status:** In Betrieb seit v1.0.0 (2026-10-11, ADR-058), Weiterentwicklung in Phase 11 „Figuren, Bilder und Feinschliff“ (geplant 2026-11-08, ADR-117, ADR-118); seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz erreichbar (Schritt 4.7); eingespielt Stand `25c9bd6` (2026-11-08, mit 10.8 Runware und 10.9 Anfragen; Oberfläche mit Node 26 gebaut); offen: Phase 11 ab 11.1, D.11 bis 2026-10-31
 - **Version (SemVer):** v1.0.0 (2026-10-11, Schritt 5.14) – erstes produktives Release (ADR-058); davor v0.1.0 (2026-10-08, Vorabversion, ADR-043)
 - **Dokumentationssprache:** Deutsch
 - **Codesprache (Kommentare, Variablennamen):** Englisch (Eigentümer, 2026-09-26); Fachbegriffe einheitlich: world, canon, canon entry, story, manuscript, guest character
