@@ -17,6 +17,8 @@ export interface ImageModelList {
     references: number;
     resolutions?: string[];
     qualities?: string[];
+    /** Whether it takes a start value (step 11.4, ADR-121); Runware models always do. */
+    seed?: boolean;
   }[];
   available: boolean;
   /** False without a key; generating then answers 503. */
@@ -56,6 +58,13 @@ export interface LoraChoice {
   weight: number;
 }
 
+/** A LoRA that went along with a taken-over image, with its name (step 11.4, ADR-121). */
+export interface OriginLora {
+  id: string;
+  name: string;
+  weight: number;
+}
+
 export interface ImagePrice {
   cost_usd: number | null;
   unit: string | null;
@@ -89,6 +98,10 @@ export interface ImageOrigin {
   /** The levels chosen, if the model offered any (step 10.5, ADR-109). */
   resolution?: string;
   quality?: string;
+  /** Start value, LoRAs and the text the server appended (step 11.4, ADR-121). */
+  seed?: number;
+  loras?: OriginLora[];
+  appended?: string;
 }
 
 /** The levels of one image, `null` where the model offers none (step 10.5, ADR-109). */
@@ -108,6 +121,10 @@ export interface StoredImageOrigin {
   /** Missing or `null` for older origins and models without levels (step 10.5). */
   resolution?: string | null;
   quality?: string | null;
+  /** Missing or empty for older origins (step 11.4, ADR-121). */
+  seed?: number | null;
+  loras?: OriginLora[];
+  appended?: string | null;
 }
 
 export interface GeneratedImage {
@@ -115,6 +132,10 @@ export interface GeneratedImage {
   media_type: string;
   cost_usd: number | null;
   model: string;
+  /** The start value sent, `null` for a model without one (step 11.4, ADR-121). */
+  seed?: number | null;
+  /** At Runware the model's addition and the trigger words the server appended. */
+  appended?: string | null;
 }
 
 /** Where a generated image goes: a world, and a story for a cover (step 9.11, ADR-100). */
@@ -152,6 +173,8 @@ export const imagesApi = {
       quality?: string;
       /** Only for a Runware model (ADR-115). */
       loras?: LoraChoice[];
+      /** A fixed start value; without it the server draws one (step 11.4, ADR-121). */
+      seed?: number;
     } & ImageTarget,
   ) =>
     request("POST", "/api/images/generate", order) as Promise<GeneratedImage>,

@@ -7,10 +7,16 @@ export type Ticked = Readonly<Record<string, number>>;
 
 /**
  * The LoRAs the author ticks in "Bild erzeugen" (step 10.8, ADR-115): only those that fit the
- * chosen Runware model go along, each with its weight; for another model none.
+ * chosen Runware model go along, each with its weight; for another model none. `initial` ticks
+ * the LoRAs of an origin when generating anew (step 11.4, ADR-121).
  */
-export function useLoraChoice(runware: RunwareModel | undefined) {
-  const [ticked, setTicked] = useState<Ticked>({});
+export function useLoraChoice(
+  runware: RunwareModel | undefined,
+  initial: readonly LoraChoice[] = [],
+) {
+  const [ticked, setTicked] = useState<Ticked>(() =>
+    Object.fromEntries(initial.map((lora) => [lora.id, lora.weight])),
+  );
   const chosen: LoraChoice[] =
     runware === undefined
       ? []

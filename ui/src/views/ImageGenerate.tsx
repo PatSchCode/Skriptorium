@@ -7,6 +7,7 @@ import {
   type ImageLevels,
   type ImageOrigin,
   type ImageTarget,
+  type LoraChoice,
 } from "../api";
 import { ErrorText } from "./Common";
 import { GeneratedPreview } from "./ImageChoices";
@@ -14,6 +15,7 @@ import { ImageGenerateForm } from "./ImageGenerateForm";
 import { blobOf, shortLabel } from "./imageGenerateText";
 import type { Basis } from "./ImageOriginPanel";
 import { useLoraChoice } from "./RunwareLoras";
+import { useSeedChoice } from "./SeedChoice";
 import { useElapsed } from "./useElapsed";
 import { useImageLevels } from "./useImageLevels";
 import { useImageModels } from "./useImageModels";
@@ -41,7 +43,8 @@ const NO_LEVELS: ImageLevels = { resolution: null, quality: null };
  * (world, and story for a cover) only files the request in the usage statistics (step 9.11).
  * Where the model offers them, resolution and quality are chosen too (step 10.5, ADR-109).
  * Models of the owner's list at Runware (step 10.8, ADR-115) come in a group of their own; for
- * them LoRAs that fit the model can be added, each with its weight.
+ * them LoRAs that fit the model can be added, each with its weight. Models that take a start
+ * value offer it random or fixed (step 11.4, ADR-121); the origin keeps it with the LoRAs.
  */
 export function ImageGenerate({
   title,
@@ -49,6 +52,8 @@ export function ImageGenerate({
   initialFormat,
   initialModel = null,
   initialLevels = NO_LEVELS,
+  initialSeed = null,
+  initialLoras = [],
   takeOverLabel = "Übernehmen",
   hint = null,
   extra = null,
@@ -64,6 +69,9 @@ export function ImageGenerate({
   initialModel?: string | null;
   /** The levels to preselect where the model offers them (step 10.5). */
   initialLevels?: ImageLevels;
+  /** A fixed start value and the LoRAs to preselect, from an origin (step 11.4, ADR-121). */
+  initialSeed?: number | null;
+  initialLoras?: readonly LoraChoice[];
   takeOverLabel?: string;
   /**
    * A note above the description, e.g. that an entry has no looks yet (step 7.16), with a button
@@ -86,7 +94,9 @@ export function ImageGenerate({
   const choice = useImageModels(initialModel, basis !== null, setError);
   const runware = choice.chosen?.runware;
   // Only ticked LoRAs that fit the model go along (ADR-115).
-  const loras = useLoraChoice(runware);
+  const loras = useLoraChoice(runware, initialLoras);
+  const seed = useSeedChoice(initialSeed);
+  const takesSeed = choice.chosen?.seed === true;
   const levels = useImageLevels(
     choice.model,
     choice.models?.find((m) => m.id === choice.model),
@@ -120,6 +130,7 @@ export function ImageGenerate({
           ...target,
           ...(basis === null ? {} : { reference: basis.reference }),
           ...(loras.chosen.length === 0 ? {} : { loras: loras.chosen }),
+          ...(takesSeed && seed.seed !== undefined ? { seed: seed.seed } : {}),
         }),
       );
     } catch (reason: unknown) {
@@ -143,6 +154,17 @@ export function ImageGenerate({
         cost_usd: result.cost_usd,
         ...chosenLevels,
         ...(basis === null ? {} : { basis: shortLabel(basis.label) }),
+        ...(result.seed == null ? {} : { seed: result.seed }),
+        ...(loras.chosen.length === 0
+          ? {}
+          : {
+              loras: loras.chosen.map((lora) => ({
+                ...lora,
+                name:
+                  choice.loras.find((l) => l.id === lora.id)?.name ?? lora.id,
+              })),
+            }),
+        ...(result.appended == null ? {} : { appended: result.appended }),
       });
       onClose();
     } catch (reason: unknown) {
@@ -174,6 +196,7 @@ export function ImageGenerate({
           loras={choice.loras}
           ticked={loras.ticked}
           onTick={loras.setTicked}
+          seed={seed}
           busy={busy}
           failed={error !== null}
         />
@@ -184,6 +207,7 @@ export function ImageGenerate({
             choice.models?.find((m) => m.id === choice.model)?.name ??
             choice.model
           }
+          onKeepSeed={seed.keep}
         />
       )}
       {busy && result === null && (
@@ -193,7 +217,12 @@ export function ImageGenerate({
       <GenerateActions
         generated={result !== null}
         busy={busy}
-        canGenerate={choice.ready && choice.model !== "" && prompt !== ""}
+        canGenerate={
+          choice.ready &&
+          choice.model !== "" &&
+          prompt !== "" &&
+          (!takesSeed || seed.valid)
+        }
         takeOverLabel={takeOverLabel}
         onGenerate={() => void generate()}
         onTakeOver={() => void takeOver()}

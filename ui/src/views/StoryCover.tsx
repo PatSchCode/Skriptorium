@@ -174,6 +174,8 @@ export function StoryCover({
           initialFormat={seed?.format ?? "2:3"}
           initialModel={seed?.model ?? null}
           initialLevels={seed?.levels}
+          initialSeed={seed?.seed ?? null}
+          initialLoras={seed?.loras}
           basis={seed?.basis ?? null}
           // A story has one cover: taking over replaces it, also when made from it (step 9.8).
           takeOverLabel={

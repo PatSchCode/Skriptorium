@@ -13,6 +13,7 @@ import {
 } from "./imageGenerateText";
 import type { Basis } from "./ImageOriginPanel";
 import { RunwareExtras, type Ticked } from "./RunwareLoras";
+import { SeedField, type useSeedChoice } from "./SeedChoice";
 import type { useImageLevels } from "./useImageLevels";
 import type { useImageModels } from "./useImageModels";
 import type { useImageRequest } from "./useImageRequest";
@@ -37,6 +38,7 @@ export function ImageGenerateForm({
   loras,
   ticked,
   onTick,
+  seed,
   busy,
   failed,
 }: {
@@ -51,6 +53,8 @@ export function ImageGenerateForm({
   loras: readonly RunwareLora[];
   ticked: Ticked;
   onTick: (ticked: Ticked) => void;
+  /** The start value; shown only for a model that takes one (step 11.4, ADR-121). */
+  seed: ReturnType<typeof useSeedChoice>;
   busy: boolean;
   /** An error is shown already; then no note about missing models. */
   failed: boolean;
@@ -76,6 +80,7 @@ export function ImageGenerateForm({
         busy={busy}
         failed={failed}
       />
+      {choice.chosen?.seed === true && <SeedField choice={seed} busy={busy} />}
       <LevelFields levels={levels} priceOf={priceOf} busy={busy} />
       <RunwareExtras
         runware={runware}
