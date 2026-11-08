@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 11.4 gebaut, Probe am Server steht aus
+
+- Vorab geprüft im öffentlichen Katalog von OpenRouter: 18 von 63 Bildmodellen nennen `seed` unter `supported_parameters` (Typ „boolean“, kein Wertebereich), keiner der Anbieter als Durchreich-Parameter. Deshalb zieht der Server den Startwert selbst (1 bis 2.147.483.647) und kennt ihn so auch ohne Rückmeldung des Anbieters.
+- Server: `ImageOrder.seed`, `ImageModel.seed`; `image_routes` mit `_seed`, 422 für einen festen Startwert bei einem Modell ohne; Herkunft mit `startwert`, `loras`, `angehaengt` (`OriginLora` über `canon`/`manuscript` weitergereicht wie `ImageOrigin`). Tests: 1.327 grün (+25), alle geänderten Dateien 100 %, Gesamt 99,90 %. Im Testkatalog ein eigenes Modell mit Startwert (`flux.2-flex`) statt FLUX.2 Pro, damit die Vertragsdatei keinen Zufallswert aufnimmt; zwei Tests, die die Modelle aufzählen, nachgezogen.
+- Oberfläche: `SeedChoice.tsx` (Hook und Zeile), Vorschau mit „Startwert behalten“, Herkunft mit Startwert, LoRAs, Angehängtem; `seedOf` nimmt Startwert und LoRAs nur auf, wenn vorhanden (alter Test unverändert). 610 Tests grün (+6), Abdeckung 98,84 / 95,30 / 98,41 / 98,97 %.
+- Im Browser mit frischem Datenverzeichnis und dem echten Katalog geprüft: Zeile bei FLUX.2 Pro und Qwen Image 3, nicht bei GPT Image; ungültiger fester Wert sperrt „Erzeugen“ mit Hinweis. Reibung: ein Klick nach Koordinaten traf daneben, und `form_input` löste bei der Modellwahl kein React-Ereignis aus – über Referenz bzw. Skript nachgeholt. Erzeugt wurde lokal nichts (lokaler Schlüssel ungültig).
+
+### 2026-11-08 – [ADR-ANGELEGT] ADR-121 Fester Startwert und vollständige Herkunft
+
+- Vorlage zu 11.4 mit Mockup `mockup-11.4.html` (drei Ansichten vorher/nachher). Eigentümer: Bedienung „Umschalter + Behalten“, Neu erzeugen „Fest vorbelegt“, Mockup „Ja, so bauen“ – jeweils Empfehlung → ADR-121.
+
 ### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.3 gemergt und eingespielt
 
 - **Dauer:** 2026-11-08, ca. 16:20–17:45 UTC (lokale Mac-Session); ersetzt als Wiedereinstieg den Eintrag „11.1 bis 11.3 erledigt“ darunter, der vor den Merges geschrieben war.
