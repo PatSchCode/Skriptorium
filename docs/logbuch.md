@@ -29,6 +29,26 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.3 gemergt und eingespielt
+
+- **Dauer:** 2026-11-08, ca. 16:20–17:45 UTC (lokale Mac-Session); ersetzt als Wiedereinstieg den Eintrag „11.1 bis 11.3 erledigt“ darunter, der vor den Merges geschrieben war.
+- **Stand:** `main` `d12f46f` (PR #224, #225, #226 gemergt – alle auf „mergen“ des Eigentümers, je nach grüner CI); Server `d12f46f`, `healthy`. Phase 11 bei 3 von 16, Umbau aus ADR-117 abgeschlossen.
+- **Offen:** Fernzweige `docs/11.1-bedrohungsmodell-runware`, `refactor/11.2-bildformular`, `fix/11.3-ablage-anfragen` auf GitHub löschen (Eigentümer oder KI auf Anweisung); Rückweg-Image `skriptorium:vorher` (Stand `25c9bd6`) bleibt bis zum nächsten Einspielen. D.28 Lösung wählen; D.11 Frist überschritten.
+- **Nächster Schritt:** 11.4 Fester Startwert und vollständige Herkunft (Vorlage, Entscheidungs-Klasse). Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** wie im Eintrag darunter; zusätzlich Kontext (eingespielter Stand `d12f46f`), Fahrplan 11.3 (eingespielt), ADR-120 berichtigt. Drift sonst unverändert.
+- **Modell-Bilanz:** wie im Eintrag darunter (Opus 5.5; 1 Schritt oberhalb der Empfehlung: 11.2).
+- **Kontextgröße:** rund 450.000 Token (Sitzungsabfrage zuletzt 429.017) – über der Grenze seit Beginn, weiter nach dauerhaftem „weiter hier“.
+
+### 2026-11-08 – [GELÖST] Falsche Aussage zur Größe des Index berichtigt
+
+- In ADR-120, im Logbuch und im Text von PR #226 stand, die Index-Datei schrumpfe beim Neuaufbau. Falsch: `rebuild_index` löscht und füllt dieselbe Datei, SQLite verwendet die frei gewordenen Seiten wieder, die Datei wird nicht kleiner (das ginge nur mit `VACUUM` oder einer neu angelegten Datei). Bemerkt beim Blick auf den Server nach dem Einspielen (4,5 MB). ADR-120 berichtigt; kein Handlungsbedarf, weil künftiges Wachstum die freien Seiten zuerst nutzt.
+
+### 2026-11-08 – [BEOBACHTUNG] 11.2 und 11.3 eingespielt (`d12f46f`)
+
+- Auf „Ja, einspielen“ des Eigentümers, nach grüner CI auf `main` für `d12f46f`. Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf: `git archive` → `app.neu`, `REVISION`, `skriptorium:vorher` gesetzt (Stand `25c9bd6`), `app.vorher`, `docker compose build`, `up -d`.
+- Warten nur über HTTPS: `/api/health` 200 nach 60 s, Anmeldeseite 200. Danach genau eine SSH-Prüfung: Container `healthy`, `REVISION` `d12f46f`, 0 Zeilen mit Pfad `…/anfragen/…` im Index (das Aufräumen beim Öffnen hat gegriffen), `index.sqlite` 4.468.736 Byte.
+- Keine Probe des Eigentümers nötig (11.2 ohne sichtbare Änderung, 11.3 betrifft nur seltene Zeilen und den Index); auffällig wäre ein Fehler beim Öffnen des Reiters „Anfragen“ oder des Fensters „Bild erzeugen“.
+
 ### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.3 erledigt, Umbau aus der Pflichtfrage abgeschlossen
 
 - **Dauer:** 2026-11-08, ca. 16:20–17:30 UTC (lokale Mac-Session; nach dem ersten Sessionende zu 11.1 auf Wunsch des Eigentümers weiter mit 11.2 und 11.3).
