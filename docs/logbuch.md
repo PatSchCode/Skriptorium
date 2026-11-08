@@ -29,6 +29,23 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.4 erledigt und eingespielt
+
+- **Dauer:** 2026-11-08, ca. 16:20–20:35 UTC (lokale Mac-Session, mit Pausen des Eigentümers); ersetzt als Wiedereinstieg die beiden Sessionende-Einträge darunter.
+- **Bearbeitet:** 11.1 (PR #224), 11.2 (#225), 11.3 (#226, ADR-120), Doku zum Einspielen (#227), 11.4 (#228, ADR-121) – alle gemergt auf Wort des Eigentümers nach grüner CI; eingespielt `d12f46f` und `3c162fa`.
+- **Stand:** `main` mit diesem Abschluss (PR folgt); Server `3c162fa`, `healthy`. Phase 11 bei 4 von 16.
+- **Offen:** Pull Request zu diesem Abschluss mergen. D.28 Lösung wählen; D.11 Frist überschritten. Rückweg-Image `skriptorium:vorher` steht auf `d12f46f`.
+- **Nächster Schritt:** 11.5 Figuren-Assistent für das Aussehen (Vorlage mit Grundsatzfrage, kurze Probe der Textmodelle; Entscheidungs-Klasse). Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (4 von 16, Erledigt 11.1–11.4, Als Nächstes 11.5–11.6), Kontext (Status, eingespielt `3c162fa`), CHANGELOG (11.4 unter „Hinzugefügt“), Blocker 0. Drift: ADR-121 → 11.4 vorhanden; Reifegrade unverändert (ADR-120/121 ohne Wirkung); Modul-Liste unverändert; FR-035 (11.4) vorhanden; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-112 bis ADR-121); Phase 11 bei 16 geplanten Schritten. Größen: `docs/project-context.md` 351 Zeilen; Logbuch rund 185 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** durchgehend Opus 5.5 (Entscheidungs-Klasse). Oberhalb der Empfehlung: 1 Schritt (11.2, Routine). Abgegeben: getrennte Prüfung zu 11.1 an Sonnet 5.5.
+- **Kontextgröße:** über der Grenze 200.000 seit Beginn (zuletzt gemessen 429.017, seitdem weiter gewachsen); weiter nach dauerhaftem „weiter hier“. Nächste Session neu beginnen.
+
+### 2026-11-08 – [BEOBACHTUNG] 11.4 eingespielt und vom Eigentümer abgenommen
+
+- CI auf `main` für `3c162fa` erst nach rund 2 Minuten Wartezeit angelaufen (gestartet 20:22 UTC), dann alle vier Jobs grün. Einspielen nach Runbook in einem SSH-Aufruf; `/api/health` 200 nach 60 s, Anmeldeseite 200; eine SSH-Prüfung: `healthy`, `REVISION` `3c162fa`.
+- Probe des Eigentümers am Server: fester Startwert und gleiche Beschreibung → „Ja, gleiches Bild“ → 11.4 `[ERLEDIGT]`. Welche Modelle er probiert hat, hat er nicht genannt; ob OpenRouter-Modelle den Startwert einhalten, ist damit nicht einzeln belegt.
+- Reibung: Der Eigentümer fragte, von welchem PR die Rede sei, als die KI auf die CI von `main` nach dem Merge wartete – künftig „Lauf auf `main` nach dem Merge“ statt „CI“ ohne Bezug sagen.
+
 ### 2026-11-08 – [BEOBACHTUNG] 11.4 gebaut, Probe am Server steht aus
 
 - Vorab geprüft im öffentlichen Katalog von OpenRouter: 18 von 63 Bildmodellen nennen `seed` unter `supported_parameters` (Typ „boolean“, kein Wertebereich), keiner der Anbieter als Durchreich-Parameter. Deshalb zieht der Server den Startwert selbst (1 bis 2.147.483.647) und kennt ihn so auch ohne Rückmeldung des Anbieters.
