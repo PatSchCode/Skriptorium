@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 10.8 und 10.9 eingespielt, Schlüssel und Proben stehen aus
+
+- **Dauer:** 2026-11-08, ca. 14:55–15:15 UTC (lokale Mac-Session).
+- **Bearbeitet:** Stand übernommen (`main` `25c9bd6`); 10.8 und 10.9 auf den VPS eingespielt (Revision `25c9bd6`, `healthy`, Anmeldeseite 200); Fahrplan und README nachgezogen.
+- **Stand:** Server `25c9bd6`; Rückweg `skriptorium:vorher` / `app.vorher` (`de64667`) vorhanden. `.env` auf dem VPS enthält nur `OPENROUTER_API_KEY`. Doku-Zweig `docs/10.8-einspielen-vorbereiten` nur lokal, nicht gepusht (Proben des Eigentümers offen).
+- **Offen:** Eigentümer trägt `RUNWARE_API_KEY` ein (Antwort auf Rückfrage: „später“) und bestätigt die Proben; danach 10.8 und 10.9 `[ERLEDIGT]`, Pull Request für die gebündelte Doku. D.28; D.11 Frist überschritten; Branch-Aufräumen (viele gemergte Fernzweige); überholter lokaler Zweig `feat/10.8-zweiter-bildanbieter` auf dem Mac.
+- **Nächster Schritt:** Schlüssel eintragen → Proben → 10.8/10.9 abschließen → 10.11 Planung. Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan abgeglichen (Als Nächstes, Einspielen vermerkt); Blocker 0; Drift: ADR-116 → 10.9 vorhanden, Reifegrade unverändert, Modul-Liste unverändert, Reaktiv-Quote 0/10, Phase 10 bei 11 Schritten. Größen: Logbuch über dem Trigger 800 (November-Scheibe, Verdichtung beim Phasen-Wechsel nach 10.11). Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** aktiv Sonnet 5.5 (Routine-Klasse; Sitzungsabfrage `get_session`). Einspielen auf der Routine-Klasse unterhalb der Empfehlung (Entscheidung), Entscheidungsanteil lag in ADR-114 bis ADR-116; keine Schritte oberhalb; nichts abgegeben.
+- **Kontextgröße:** 182.232 Token nach der Mindest-Lektüre (Sitzungsabfrage), danach deutlich über 200.000 durch das Einspielen; Sessionende hiermit, nächste Session neu beginnen.
+
 ### 2026-11-08 – [BEOBACHTUNG] Code von 10.8 und 10.9 eingespielt (`25c9bd6`), Schlüssel steht aus
 
 - Auftrag des Eigentümers: „10.8 und 10.9 einspielen“. CI auf `main` `25c9bd6` grün. Ablauf nach Runbook Abschnitt 7: Archiv übertragen, Revision geschrieben, `skriptorium:vorher` getaggt (Rückweg bereit, `app.vorher` = `de64667`), Image gebaut, Container neu erstellt. Warten nur per HTTPS (zwölf Abfragen, bis `/api/health` 200 lieferte; vorher 404 vom Proxy, solange der Container nicht `healthy` war), danach genau eine SSH-Prüfung: `REVISION` 25c9bd6, `(healthy)`, Start-Log ohne Fehler.
