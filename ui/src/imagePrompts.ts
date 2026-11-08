@@ -5,6 +5,7 @@
 import type { CanonEntry, Story, World } from "./api";
 import {
   APPEARANCE,
+  IMAGE_DESCRIPTION,
   LOCATION,
   PURPOSE,
   readPart,
@@ -22,12 +23,15 @@ const PLACE_LIMIT = 200;
  * – the first one with text, up to the next heading of the same or a higher level – or line
  * "**Aussehen:** …", step 7.16), without them just the name; a place its looks with its "Lage";
  * an item without looks only the first sentence of "Zweck" (else of its text); any other entry
- * its looks, else the start of its text (step 8.5, ADR-084).
+ * its looks, else the start of its text (step 8.5, ADR-084). A figure with an image description
+ * (step 11.5, ADR-123) gets that alone, as it stands: English, without the name, made for image
+ * models by the figure assistant.
  */
 export function entryPrompt(entry: CanonEntry): string {
   const looks = appearanceOf(entry.body);
   if (entry.category === "figur") {
-    return joined(entry.name, looks ?? "");
+    const description = imageDescriptionOf(entry.body);
+    return description ?? joined(entry.name, looks ?? "");
   }
   if (looks === null && entry.category === "gegenstand") {
     return joined(
@@ -56,6 +60,14 @@ export function lacksAppearance(entry: CanonEntry): boolean {
       entry.category === "gegenstand") &&
     appearanceOf(entry.body) === null
   );
+}
+
+/**
+ * The image description of a figure as one paragraph, or `null` without one (step 11.5, ADR-123).
+ */
+export function imageDescriptionOf(body: string): string | null {
+  const text = readSection(body, IMAGE_DESCRIPTION);
+  return text === null ? null : text.split(/\s+/).join(" ");
 }
 
 /** The looks written in an entry (section or labelled line), or `null` (step 7.16). */

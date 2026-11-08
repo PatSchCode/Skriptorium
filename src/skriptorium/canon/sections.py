@@ -44,6 +44,23 @@ RELATIONS: Final = "Beziehungen"
 """The relations of a figure, one list line with one ``@Name`` each (ADR-093)."""
 LOCATION: Final = "Lage"
 """Where a place lies; an image of it gets it on top of its looks (ADR-094, ADR-108)."""
+IMAGE_DESCRIPTION: Final = "Bildbeschreibung"
+"""English text for image models after a figure's looks, written by the figure assistant; not
+part of the templates and left out of every request to write (step 11.5, ADR-123)."""
+LOOKS_LABELS: Final = (
+    "Herkunft",
+    "Alter",
+    "Größe",
+    "Körperbau",
+    "Proportionen",
+    "Gesicht",
+    "Haar",
+    "Augen",
+    "Haut",
+    "Besondere Merkmale",
+)
+"""The lines ``- **<label>:** …`` of a figure's looks, in order (step 11.5, ADR-123). The
+interface mirrors them (``ui/src/sections.ts``, rule 003)."""
 
 SECTIONS: Final[dict[Category, tuple[str, ...]]] = {
     "figur": (APPEARANCE, NATURE, "Fähigkeiten", "Geschichte", RELATIONS),
@@ -152,6 +169,19 @@ def drop_world_sections(markdown: str, world: str) -> str:
     return "".join(kept)
 
 
+def drop_sections(markdown: str, heading: str) -> str:
+    """``markdown`` without every section called ``heading``, with or without text.
+
+    Subsections go with it; everything else stays as it was, byte for byte. Only the server needs
+    this: requests to write go without a figure's image description (step 11.5, ADR-123).
+    """
+    lines = _lines_of(markdown)
+    found = _outermost(_sections_named(lines, heading))
+    if not found:
+        return markdown
+    return _rebuild(lines, [(section.start, section.end, []) for section in found])
+
+
 def nest_headings(markdown: str, top: int) -> str:
     """``markdown`` with its headings moved down until none is flatter than level ``top``.
 
@@ -258,6 +288,33 @@ def put_section(markdown: str, heading: str, text: str, mode: SectionMode) -> st
     block = [first, *middle, f"{_trim(text)}{eol}", *gap]
     edits = [(target.start, target.end, block), *((one.start, one.end, []) for one in gone)]
     return _rebuild(lines, edits)
+
+
+def put_section_after(markdown: str, heading: str, after: str, text: str) -> str:
+    """Puts ``text`` into the section ``heading``, a new one right after the section ``after``.
+
+    With a section ``heading`` this is :func:`put_section` replacing its text. Without one, a new
+    section on the level of ``after`` (the first one with text, else the first one) follows it,
+    after its blank lines; without ``after`` it is appended. Everything else stays as it was, byte
+    for byte (step 11.5, ADR-123: the image description right after a figure's looks).
+    """
+    lines = _lines_of(markdown)
+    if _sections_named(lines, heading):
+        return put_section(markdown, heading, text, "replace")
+    found = _sections_named(lines, after)
+    target = next((one for one in found if _body_of(lines, one)), found[0] if found else None)
+    if target is None:
+        return append_section(markdown, heading, text)
+    eol = _ending_of(markdown)
+    # The section has at least its heading line.
+    before = lines[: target.end]
+    before[-1] = _terminated(before[-1], eol)
+    block = [] if _is_blank(before[-1]) else [eol]
+    block += [f"{'#' * target.level} {heading}{eol}", eol, f"{_trim(text)}{eol}"]
+    rest = lines[target.end :]
+    if rest:
+        block.append(eol)
+    return "".join([*before, *block, *rest])
 
 
 def _trim(text: str) -> str:

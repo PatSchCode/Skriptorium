@@ -26,6 +26,7 @@ from skriptorium.api.flows import (
     WriteOrder,
     prepare_appearance,
     prepare_description,
+    prepare_figure_looks,
     prepare_guest_fit,
     prepare_request,
     prepare_worldbuilder,
@@ -159,6 +160,14 @@ class DescribeIn(BaseModel):
 class AppearanceIn(BaseModel):
     """The model that takes out the looks (step 7.16); missing: the preset model."""
 
+    model: str | None = None
+
+
+class FigureLooksIn(BaseModel):
+    """Answers to the questions about a figure's looks (step 11.5, ADR-123), by question
+    ("Herkunft", "Alter", …); missing questions are open. Missing model: the preset."""
+
+    answers: dict[str, str]
     model: str | None = None
 
 
@@ -328,6 +337,30 @@ async def appearance(
     )
     return StreamingResponse(
         stream_answer(found.provider, prepared, "aussehen", found.usage.recorder(world_id)),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
+    )
+
+
+@router.post("/worlds/{world_id}/entries/{entry_id}/figure-looks")
+async def figure_looks(
+    world_id: str, entry_id: str, body: FigureLooksIn, found: ServicesDep
+) -> StreamingResponse:
+    """Stream an English image description of a figure from the answers; saves nothing
+    (step 11.5, ADR-123). Age under 18, unknown questions or another category: 422."""
+    if found.provider is None:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "KI-Anbieter nicht eingerichtet")
+    await found.catalog.refresh()
+    prepared = prepare_figure_looks(
+        found.context,
+        world_id,
+        entry_id,
+        body.answers,
+        body.model or _preset(found, "figurenassistent"),
+        found.catalog,
+    )
+    return StreamingResponse(
+        stream_answer(found.provider, prepared, "figurenassistent", found.usage.recorder(world_id)),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
     )

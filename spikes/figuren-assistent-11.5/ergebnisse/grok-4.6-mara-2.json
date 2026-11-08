@@ -1,0 +1,9 @@
+{
+  "modell": "x-ai/grok-4.6",
+  "figur": "mara",
+  "lauf": 2,
+  "finish_reason": "stop",
+  "kosten_usd": 0.00884466,
+  "token_aus": 1402,
+  "sekunden": 17.2
+}

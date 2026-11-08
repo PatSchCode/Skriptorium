@@ -29,6 +29,39 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] Nachricht aus der Session zu D.28: Schritt 11.17 angelegt
+
+- Nachricht der Vorsession (abgeschickt 21:12 UTC, hier erst nach dem Bau von 11.5 angekommen): Krea 2 Turbo/Raw und die geprüften LoRAs fehlen in der Runware-Liste der App; der Eigentümer hatte dort „Eigener Schritt vor 11.6“ gewählt, ohne die sarahpeterson-LoRAs. Beim Eigentümer nachgefragt, bevor der Fahrplan geändert wurde: „Ja, in diesen PR“ → 11.17 angelegt, Abhängigkeit von 11.6; Phase 11 jetzt 17 Schritte (Schwelle über 32). Befund im Code: Die Startliste in `api/runware_models.py` greift nur bei leerer Liste – Eintragen über die Einstellungen genügt vermutlich ohne Code.
+
+### 2026-11-08 – [BEOBACHTUNG] 11.5 gebaut, Einspielen und Probe am Server offen
+
+- Server: `canon` `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after` (Regel-003: zweite Umsetzung, gemeinsame Fälle `after` und `looks` in `tests/shared/sections.json`); `context.build_figure_looks` mit `check_answers` (Alter ganze Zahl ab 18); `parts.render` lässt „Bildbeschreibung“ aus allen Anfragen; Route `POST …/entries/{eintrag}/figure-looks`, Aufgabe und Verbrauch `figurenassistent`. Routen 92 (vorher 91). 1.354 Tests grün, 99,86 %; neue Dateien 100 %.
+- Oberfläche: `figureLooks.ts` (Fragen, Auswahl, Zeilen, Erkennung der Form), `FigureLooks.tsx`, `FigureDrafts.tsx` (4 Entwürfe parallel, ein Fehler verwirft die übrigen nicht), `useTaskModel.ts`, `putSectionAfter`, Vorbelegung aus „Bildbeschreibung“; „Aussehen herauslösen“ nur noch für Orte und Gegenstände (zwei Tests darauf umgestellt), Einstellungen mit acht Aufgaben. 636 Tests grün, Abdeckung 98,77 / 94,98 / 98,34 / 98,92 % (vorher 98,84 / 95,30 / 98,41 / 98,97 %; über den Mindestwerten).
+- Eingebaute Anfrage echt nachgeprüft (grok-4.6, je Figur einmal): 3 von 3 in Form, „about … cm tall“, Halsband weggelassen, 0,004–0,005 $; Nachtrag in `spikes/figuren-assistent-11.5/README.md`.
+- Abweichung vom Mockup: Der geschätzte Preis vor dem Erzeugen der Entwürfe fehlt; das Fenster nennt die Summe danach. Im Browser nicht geprüft (kein Server mit Bildschlüssel in der Cloud-Session gestartet); die Bildqualität zeigt erst die Probe am Server.
+- Sperren bei Einträgen mit stark erotischem oder fesselungsbezogenem Inhalt bleiben ungeprüft; erkannt wird jede Antwort, die nicht mit „a `<Alter>`-year-old adult“ beginnt, dann bietet das Fenster ein anderes Modell an.
+
+### 2026-11-08 – [ADR-ANGELEGT] ADR-123 Figuren-Assistent: Zeilen, Bildbeschreibung im Eintrag, grok-4.6
+
+- Vorlage zu 11.5 mit Probe und Mockup, zwei Runden Auswahlfragen. Eigentümer: Was stört „Erzählteile drin, Name und Länge“ (nicht: Deutsch, Alter nicht vorn); Form „Zeilen“, Bild-Prompt „Im Eintrag“, Modell „grok-4.6“, Mockup „Ja, so bauen“, Herauslösen bei Figuren „Durch Assistent ersetzen“ – jeweils Empfehlung; Entwürfe „Zusatz frei“ (Empfehlung war 4 Entwürfe mit festem Studio-Zusatz) → ADR-123. Reaktiv-Quote 0/10 (ADR-114 bis ADR-123).
+
+### 2026-11-08 – [BEOBACHTUNG] 11.5: Probe der Textmodelle für den Figuren-Assistenten
+
+- `spikes/figuren-assistent-11.5/` (Skript, 18 Antworten, Bericht): drei Figuren (Testavatar 2, eine Leibeigene mit Eisenhalsband und Kettennarben im Eintrag, ein Schmied mit offenem Merkmal) × grok-4.6, grok-4.7, qwen3.8-max × 2 Läufe; Auftrag: deutsche Zeilen `- **Merkmal:** …` plus englische Bildbeschreibung nach dem Muster der Bildtests (Alter vorn, ohne Kleidung, Pose, Fesseln).
+- Ergebnis: 0 Sperren, Form 18/18, Alter vorn 18/18, nichts erfunden (offenes Merkmal 6/6 als „–“), Halsband 6/6 aus dem Bild-Prompt gelassen; 41–56 Wörter; 9,6–29,7 s; 0,006–0,014 $ je Anfrage, zusammen rund 0,15 $. grok-4.6 am schnellsten und günstigsten.
+- Befund für die Vorlage: Den deutschen Teil gibt jedes Modell wörtlich aus den Antworten wieder – das Programm kann ihn selbst bauen; das Modell braucht es nur für die englische Bildbeschreibung. Größe teils als nackte Zahl („172 cm“).
+- Grenze: Einträge mit stärker sexualisiertem oder fesselungsbezogenem Inhalt nicht geprüft; Sperren bleiben möglich (V.58 (7)).
+- Mockup `mockup-11.5.html` (Vorbelegung vorher/nachher, Fragen, Ergebnis mit 4 Entwürfen, Eintrag danach), auf 390 und 1280 px ohne Querscrollen geprüft.
+
+### 2026-11-08 21:12 – [SESSIONSTART] 11.5 Figuren-Assistent für das Aussehen
+
+- **Modell:** eingestellt und bedient `claude-opus-5-5` (Sitzungsabfrage `get_session`: `configured_model`, `session_context.model`, `last_served_model`) → Entscheidungs-Klasse; 11.5 verlangt sie (Vorlage mit Grundsatzfrage, Auslöser 1), kein STOPP nötig.
+- **Wiedereinstieg:** `main` `43b9e74` (PR #231 gemergt), laut Auftrag keine offenen Pull Requests. Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker. Branch `feat/11.5-figuren-assistent` (Checkout war ohne Branch).
+- **Auftrag:** 11.5 nach Fahrplan: Vorlage mit Grundsatzfrage und kurzer Probe der Textmodelle; Rückfragen als Auswahlfragen.
+- **Kontextgröße zu Beginn:** Sitzungsabfrage meldet 0 von 1.000.000 Token (Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster `allowed`, ohne Prozentangabe; Wochenstand nicht gemeldet.
+- **Umgebung:** `OPENROUTER_API_KEY` und `RUNWARE_API_KEY` in der Cloud-Session gesetzt (nur Vorhandensein geprüft).
+
 ### 2026-11-08 – [SESSIONENDE] D.28 umgesetzt und gemergt, Nachweis auf dem Mac offen
 
 - **Dauer:** 2026-11-08, ca. 20:42–21:10 UTC (Cloud-Session, Branch `scp/upbeat-lamport-720j8m`).

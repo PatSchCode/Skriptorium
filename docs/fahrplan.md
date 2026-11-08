@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-08 (D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
+- **Stand vom:** 2026-11-08 (11.5 entschieden, ADR-123; D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 - **Laufende Phase:** Phase 11 „Figuren, Bilder und Feinschliff“ (Phase 10 abgeschlossen 2026-11-08)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** D.28 (Querschnitt, ADR-122) – gemergt (#230), offen ist nur der Nachweis beim ersten Commit auf dem Mac; in Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08, 11.5 noch nicht begonnen.
-- **Nächster Schritt:** 11.5 Figuren-Assistent für das Aussehen (Vorlage mit Grundsatzfrage und kurzer Probe der Textmodelle), danach 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** D.28 (Querschnitt, ADR-122) – gemergt (#230), offen ist nur der Nachweis beim ersten Commit auf dem Mac; in Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08; 11.5 in Arbeit – gebaut nach ADR-123, Einspielen und Probe mit echten Entwürfen offen.
+- **Nächster Schritt:** 11.5 abschließen: Pull Request mergen, vom Mac einspielen (ADR-039), Probe des Eigentümers mit echten Entwürfen; danach 11.17 (Krea 2 und LoRAs in die Runware-Liste), dann 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -32,7 +32,8 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | ✅ | 11.2 | Bildformular entlasten (U.1) | erledigt 2026-11-08 | – |
 | ✅ | 11.3 | Ablage der Schreib-Anfragen härten (U.2) | erledigt 2026-11-08 (ADR-120) | – |
 | ✅ | 11.4 | Fester Startwert und vollständige Herkunft (V.53) | erledigt 2026-11-08 (ADR-121) | – |
-| ⚪ | 11.5 | Figuren-Assistent für das Aussehen (V.58) | offen | KI |
+| 🔵 | 11.5 | Figuren-Assistent für das Aussehen (V.58) | gebaut, Probe am Server offen (ADR-123) | Eigentümer |
+| ⚪ | 11.17 | Krea 2 und geprüfte LoRAs in die Runware-Liste (vor 11.6) | offen | KI/Eigentümer |
 | ⚪ | 11.6 | Bildrezepte (V.57) | offen | KI |
 | ⚪ | 11.7 | Prompt in Schlagworte umsetzen (V.52) | offen | KI |
 | ⚪ | 11.8 | Erkenntnisse der Bildmodell-Erkundung (V.56) | offen | KI |
@@ -199,11 +200,11 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 **Ziel:** Die drei kleinen Umbauten aus der Pflichtfrage (ADR-117) vor die Funktionen setzen, die sie brauchen; Figuren so beschreiben, dass Bildmodelle sie treffen (Figuren-Assistent, Bildrezepte, Seed, Schlagworte); Bilder und Schreiben im Kleinen verlässlicher machen; den Weltenbauer mit Fragen, Recherche und Namenshilfe ausbauen.
 
-**Abschlusskriterium:** Schritte 11.1–11.16 `[ERLEDIGT]`, `[VERWORFEN]` mit ADR oder `[VERSCHOBEN]` mit Ziel-Schritt.
+**Abschlusskriterium:** Schritte 11.1–11.17 `[ERLEDIGT]`, `[VERWORFEN]` mit ADR oder `[VERSCHOBEN]` mit Ziel-Schritt.
 
 **Reifegrad-Erwartung am Phasenende:** unverändert `[BELASTBAR]`; der Nachtrag zum Bedrohungsmodell (11.1) wird getrennt geprüft; Datenmodell-, Ablauf- und Abhängigkeits-Entscheidungen (11.3–11.8, 11.10–11.12, 11.14, 11.15) werden per ADR entschieden, bevor gebaut wird.
 
-**Ursprünglicher Schrittplan:** 16 Schritte, festgehalten am 2026-11-08 (ADR-117, ADR-118). Wucherungs-Schwelle: Default aus `docs/project-context.md` Abschnitt 6 (Faktor 2 und mindestens 5 zusätzliche Schritte, also mehr als 32); neue Wünsche während der Phase werden V-Schritte mit Landeplatz 11.16.
+**Ursprünglicher Schrittplan:** 16 Schritte, festgehalten am 2026-11-08 (ADR-117, ADR-118). Wucherungs-Schwelle: Default aus `docs/project-context.md` Abschnitt 6 (Faktor 2 und mindestens 5 zusätzliche Schritte, also mehr als 32); neue Wünsche während der Phase werden V-Schritte mit Landeplatz 11.16. Zusätzlich 11.17 (2026-11-08, Entscheidung des Eigentümers): jetzt 17 Schritte, unter der Schwelle.
 
 **Reihenfolge (Eigentümer, 2026-11-08; ADR-117, ADR-118):** Umbau 11.1–11.3, Figuren und Bilder 11.4–11.8 (Seed vor Rezepten, Assistent vor Schlagworten), Bild-Kleinigkeiten 11.9, Schreiben 11.10–11.11, Weltenbauer 11.12–11.15; zuletzt 11.16.
 
@@ -275,7 +276,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 11.5: Figuren-Assistent für das Aussehen (V.58)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🔵 IN ARBEIT (2026-11-08) – Probe der Textmodelle erledigt (`spikes/figuren-assistent-11.5/README.md`: 0 Sperren in 18 Anfragen, alle drei Modelle brauchbar); Vorlage mit Mockup `mockup-11.5.html`, entschieden mit ADR-123 (Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6, Assistent ersetzt das Herauslösen bei Figuren, Entwürfe mit frei änderbarem Zusatz). Gebaut: Server (`canon`: `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after`; `context.build_figure_looks`; Route `…/figure-looks`, Aufgabe `figurenassistent`), Oberfläche (`FigureLooks`, `FigureDrafts`, Vorbelegung aus „Bildbeschreibung“); Server 1.354 Tests, 99,86 %; Oberfläche 636 Tests, 98,77 / 94,98 / 98,34 / 98,92 %; eingebaute Anfrage echt nachgeprüft (grok-4.6, 3 von 3 in Form). Offen: Pull Request, Einspielen vom Mac, Probe mit echten Entwürfen und Bestätigung des Eigentümers
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn; Grundsatzfrage zur Form des „Aussehens“ und kurze Probe der Textmodelle vorab)
 - **Abhängigkeiten:** 11.2
 - **Freigabepflichtig:** ja – wie V.58 (neue KI-Aufgabe, ggf. feste Felder, Voreinstellung eines Textmodells)
@@ -289,14 +290,30 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Artefakte:** Probe, Vorlage mit Mockup, ADR, Code, Tests
 - **Notizen:** Aus V.58.
 
+#### 11.17: Krea 2 und die geprüften LoRAs in die Runware-Liste aufnehmen (vor 11.6)
+
+- **Status:** ⚪ OFFEN
+- **Phasentyp-Kontext:** UMSETZUNG (Betrieb; ggf. kleine Änderung der Startliste)
+- **Abhängigkeiten:** 10.8; Reihenfolge: nach 11.5, vor 11.6
+- **Freigabepflichtig:** ja – Runware-Konto und Uploads (Kategorie 6, wie V.54); Weg des Eintragens (Eigentümer über Einstellungen → Runware oder KI vom Mac aus) in der Vorlage klären
+- **Empfohlene Klasse:** Entscheidung – Freigabe zum Konto (Eskalations-Auslöser 1); das Eintragen selbst ist Routine.
+- **Eingangskriterien:** keine
+- **Anforderungen (ab Klasse M):** FR-035
+- **Zu tun:** Befund aus der Session zu D.28 (2026-11-08, per Nachricht an die Session zu 11.5 übergeben): Krea 2 Turbo (`krea:krea@2-turbo`) und Krea 2 Raw (`krea:krea@2-raw`) sowie die in der Erkundung vom 2026-11-07 geprüften LoRAs (eigene Uploads `skriptorium:…`, empfohlene Gewichte in `docs/research/bildanbieter.md` und bei V.54) stehen nicht in der Modellliste der App; die Startliste in `api/runware_models.py` (FLUX.2 [dev], Z-Image-Turbo, HiDream-I1 Dev, epiCRealism XL) greift nur bei leerer Liste. (1) Stand von `system/runware-modelle.md` auf dem Server prüfen (vom Mac). (2) Liste der aufzunehmenden Modelle und LoRAs mit Gewicht dem Eigentümer zur Bestätigung vorlegen – ohne die sarahpeterson-LoRAs (vom Eigentümer aussortiert). (3) Eintragen über Einstellungen → Runware (ADR-115) oder durch die KI vom Mac. (4) Probe am Server: je Modell bzw. LoRA ein Bild.
+- **Akzeptanzkriterien:** Liste vom Eigentümer bestätigt; Einträge in der App sichtbar; Probe am Server; Eigentümer bestätigt.
+- **Betroffene Module:** keine (Daten unter `system/`); `api` nur, falls die Startliste geändert wird
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Logbuch-Eintrag, ggf. Recherche-Nachtrag
+- **Notizen:** Eigentümer-Entscheidung in der Session zu D.28 („Eigener Schritt vor 11.6“), in der Session zu 11.5 bestätigt („Ja, in diesen PR“). Nummer 11.17, damit die übrigen IDs gleich bleiben. Phase 11 damit 17 Schritte (Wucherungs-Schwelle über 32). Berührt V.54 (weitere LoRAs, Landeplatz 11.16) nur für die schon geprüften Uploads.
+
 #### 11.6: Bildrezepte – Szene, Modell und LoRAs als Vorlage, Figur als Lücke (V.57)
 
 - **Status:** ⚪ OFFEN
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
-- **Abhängigkeiten:** 11.4, 11.5
+- **Abhängigkeiten:** 11.4, 11.5, 11.17
 - **Freigabepflichtig:** ja – wie V.57 (neue Ablage, Ort der Bild-Fachlogik: Kategorie 1/2/4)
 - **Empfohlene Klasse:** Entscheidung – Datenmodell und Modulzuschnitt (Eskalations-Auslöser 1).
-- **Eingangskriterien:** 11.4 und 11.5 erledigt
+- **Eingangskriterien:** 11.4, 11.5 und 11.17 erledigt
 - **Anforderungen (ab Klasse M):** FR-035
 - **Zu tun:** wie V.57; in der Vorlage den Ort der Bild-Fachlogik klären (heute Familien und Passung in `api/runware_models.py`, Befund 3 der Bewertung).
 - **Akzeptanzkriterien:** wie V.57.

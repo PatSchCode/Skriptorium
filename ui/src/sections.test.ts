@@ -2,8 +2,11 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   APPEARANCE,
+  IMAGE_DESCRIPTION,
+  LOOKS_LABELS,
   appendSection,
   putSection,
+  putSectionAfter,
   readLabelled,
   readPart,
   readSection,
@@ -26,11 +29,18 @@ const shared = JSON.parse(
   readFileSync("tests/shared/sections.json", "utf8"),
 ) as {
   categories: Record<string, string[]>;
+  looks: { labels: string[]; imageDescription: string };
   templates: { about: string; category: Category; expected: string }[];
   read: (Case & { heading: string })[];
   labelled: (Case & { label: string })[];
   part: (Case & { name: string })[];
   append: (Case & { heading: string; section: string; expected: string })[];
+  after: (Case & {
+    heading: string;
+    after: string;
+    section: string;
+    expected: string;
+  })[];
   put: (Case & {
     heading: string;
     section: string;
@@ -69,12 +79,24 @@ describe("the rule shared with the server (step 9.1)", () => {
     },
   );
 
+  it.each(shared.after)(
+    "puts after another section: $about",
+    ({ text, heading, after, section, expected }) => {
+      expect(putSectionAfter(text, heading, after, section)).toBe(expected);
+    },
+  );
+
   it("names the looks as the server does", () => {
     expect(shared.categories.figur).toContain(APPEARANCE);
   });
 
   it("lists the sections of each category as the server does (rule 003)", () => {
     expect(SECTIONS).toEqual(shared.categories);
+  });
+
+  it("names the lines of a figure's looks as the server does (step 11.5, ADR-123)", () => {
+    expect(LOOKS_LABELS).toEqual(shared.looks.labels);
+    expect(IMAGE_DESCRIPTION).toBe(shared.looks.imageDescription);
   });
 
   it.each(shared.templates)(

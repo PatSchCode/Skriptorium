@@ -6,6 +6,21 @@
     "gegenstand": ["Aussehen", "Zweck", "Verwendung", "Auswirkung"],
     "kultur": ["Gesellschaft", "Glaube und Bräuche", "Geschichte"]
   },
+  "looks": {
+    "labels": [
+      "Herkunft",
+      "Alter",
+      "Größe",
+      "Körperbau",
+      "Proportionen",
+      "Gesicht",
+      "Haar",
+      "Augen",
+      "Haut",
+      "Besondere Merkmale"
+    ],
+    "imageDescription": "Bildbeschreibung"
+  },
   "templates": [
     {
       "about": "a figure",
@@ -376,6 +391,64 @@
       "section": "Neu.",
       "mode": "replace",
       "expected": "## Aussehen\n\nNeu.\n"
+    }
+  ],
+  "after": [
+    {
+      "about": "a new section follows the looks on their level",
+      "text": "Kurz.\n\n### Aussehen\n\n- **Haar:** rot\n\n### Wesen\n\nLaut.\n",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": "a woman",
+      "expected": "Kurz.\n\n### Aussehen\n\n- **Haar:** rot\n\n### Bildbeschreibung\n\na woman\n\n### Wesen\n\nLaut.\n"
+    },
+    {
+      "about": "the looks at the end, without a final line break",
+      "text": "## Aussehen\nGroß.",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": " tall ",
+      "expected": "## Aussehen\nGroß.\n\n## Bildbeschreibung\n\ntall\n"
+    },
+    {
+      "about": "the looks with subsections: after all of them",
+      "text": "## Aussehen\n\nGroß.\n\n### Kleidung\n\nMantel.\n## Wesen\nTreu.\n",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": "tall",
+      "expected": "## Aussehen\n\nGroß.\n\n### Kleidung\n\nMantel.\n\n## Bildbeschreibung\n\ntall\n\n## Wesen\nTreu.\n"
+    },
+    {
+      "about": "an existing section is replaced where it is",
+      "text": "## Bildbeschreibung\n\nold\n\n## Aussehen\n\nGroß.\n",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": "new",
+      "expected": "## Bildbeschreibung\n\nnew\n\n## Aussehen\n\nGroß.\n"
+    },
+    {
+      "about": "the empty looks of a template still lead",
+      "text": "## Aussehen\n\n## Wesen\n\nTreu.\n",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": "tall",
+      "expected": "## Aussehen\n\n## Bildbeschreibung\n\ntall\n\n## Wesen\n\nTreu.\n"
+    },
+    {
+      "about": "without the looks it is appended",
+      "text": "Kael.\n",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": "tall",
+      "expected": "Kael.\n\n## Bildbeschreibung\n\ntall\n"
+    },
+    {
+      "about": "CRLF line endings stay",
+      "text": "## Aussehen\r\n\r\nGroß.\r\n",
+      "heading": "Bildbeschreibung",
+      "after": "Aussehen",
+      "section": "tall",
+      "expected": "## Aussehen\r\n\r\nGroß.\r\n\r\n## Bildbeschreibung\r\n\r\ntall\r\n"
     }
   ]
 }

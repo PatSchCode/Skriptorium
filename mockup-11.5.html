@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mockup 11.5</title>
+    <style>
+      :root {
+        --page: #efeae0;
+        --surface: #fffdf8;
+        --text: #1f2328;
+        --muted: #5c5647;
+        --line: #ddd5c6;
+        --accent: #8a6d3b;
+        --bad: #9b2c2c;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--text);
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+      }
+      h1 {
+        font-size: 1.2rem;
+        margin: 16px 16px 4px;
+      }
+      h3.view {
+        margin: 24px 16px 8px;
+        font-size: 1rem;
+      }
+      .legend {
+        margin: 0 16px 10px;
+        font-size: 0.92rem;
+        color: var(--muted);
+        max-width: 1150px;
+      }
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 0 16px 8px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .cols {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .tag {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin: 0 0 6px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      .new {
+        outline: 2px dashed var(--accent);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .input {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        padding: 8px 10px;
+        white-space: pre-wrap;
+      }
+      .mono {
+        font:
+          13px/1.45 ui-monospace,
+          Menlo,
+          monospace;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin: 6px 0 0;
+      }
+      .bad {
+        color: var(--bad);
+      }
+      .q {
+        display: grid;
+        grid-template-columns: 9.5rem minmax(0, 1fr);
+        gap: 4px 10px;
+        align-items: start;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 600px) {
+        .q {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      .q b {
+        font-size: 0.85rem;
+        padding-top: 3px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 1px 9px;
+        background: #fff;
+        font-size: 0.8rem;
+      }
+      .chip.on {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .free {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        padding: 2px 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .btn {
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #fff;
+        border-radius: 6px;
+        padding: 4px 12px;
+        font-size: 0.85rem;
+      }
+      .ghost {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 6px;
+        padding: 4px 10px;
+        font-size: 0.85rem;
+      }
+      .sel {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 3px 8px;
+        background: #fff;
+        font-size: 0.85rem;
+      }
+      .grid4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 10px;
+      }
+      @media (max-width: 600px) {
+        .grid4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      .pic {
+        aspect-ratio: 3 / 4;
+        border-radius: 6px;
+        background: linear-gradient(160deg, #c9b8a0, #8f7d66);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.75rem;
+        padding-bottom: 4px;
+      }
+      .pic.on {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mockup 11.5 – Figuren-Assistent für das Aussehen</h1>
+    <p class="legend">
+      Gestrichelt umrandet = neu. Beispiel: Testavatar 2 aus den Bildtests vom
+      2026-11-07 als Figur „Liv Arnesdatter“. Gezeigt ist die Empfehlung:
+      „Aussehen“ als feste Zeilen im Markdown, dazu eine englische
+      Bildbeschreibung im Eintrag, die die Vorbelegung von „Bild erzeugen“ wird.
+    </p>
+
+    <h3 class="view">1 · Vorbelegung im Fenster „Bild erzeugen“</h3>
+    <div class="cols">
+      <div>
+        <p class="tag">Heute (ADR-084)</p>
+        <div class="card">
+          <div class="input">
+            Liv Arnesdatter: Kupferrotes Haar, das ihr fast bis zur Taille
+            fällt, helle Haut mit Sommersprossen. Sie trägt bei jedem Wetter
+            dieselbe geflickte Öljacke und steht breitbeinig, als schwanke das
+            Deck unter ihr.
+          </div>
+          <p class="note bad">
+            Deutsch · Name vorn (sagt dem Bildmodell nichts) · Kleidung und
+            Haltung aus der Erzählung · Alter fehlt bzw. steht irgendwo · bis
+            700 Zeichen abgeschnitten
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="tag">Nachher</p>
+        <div class="card">
+          <div class="input new">
+            a 26-year-old adult Scandinavian woman with mature adult facial
+            features, fair skin with many freckles across nose and cheeks, soft
+            oval face, round cheeks, full lips, long straight copper red hair to
+            the middle of her back, green eyes, about 172 cm tall, curvy
+            hourglass figure with a narrow waist, wide hips, full thighs and a
+            full bust
+          </div>
+          <p class="note">
+            Aus dem Abschnitt „Bildbeschreibung“ des Eintrags. Alter vorn, keine
+            Kleidung, keine Pose, keine Umgebung – das setzt du beim Bild dazu
+            (später das Rezept, 11.6). Ohne Bildbeschreibung wie heute.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="view">
+      2 · Assistent, Schritt 1: Fragen (aus dem Eintrag „✨ Aussehen festlegen“)
+    </h3>
+    <div class="cols">
+      <div class="card new">
+        <div class="q">
+          <b>Herkunft</b>
+          <div>
+            <div class="chips">
+              <span class="chip on">Nordeuropa</span
+              ><span class="chip">Westeuropa</span
+              ><span class="chip">Südeuropa</span
+              ><span class="chip">Osteuropa</span
+              ><span class="chip">Ostasien</span
+              ><span class="chip">Südasien</span
+              ><span class="chip">Naher Osten</span
+              ><span class="chip">Afrika</span
+              ><span class="chip">Lateinamerika</span
+              ><span class="chip">gemischt</span>
+            </div>
+            <div class="free">Ergänzung: skandinavisch</div>
+          </div>
+        </div>
+        <div class="q">
+          <b>Alter</b>
+          <div>
+            <span class="sel">26</span>
+            <span class="note"
+              >&nbsp;Jahre · ab 18, sonst lässt sich nicht formulieren</span
+            >
+          </div>
+        </div>
+        <div class="q">
+          <b>Größe</b>
+          <div class="chips">
+            <span class="chip">klein</span><span class="chip">mittel</span
+            ><span class="chip">groß</span><span class="chip on">172 cm</span>
+          </div>
+        </div>
+        <div class="q">
+          <b>Körperbau</b>
+          <div class="chips">
+            <span class="chip">zierlich</span><span class="chip">schlank</span
+            ><span class="chip">athletisch</span
+            ><span class="chip on">kurvig</span><span class="chip">füllig</span
+            ><span class="chip">kräftig</span>
+          </div>
+        </div>
+        <div class="q">
+          <b>Proportionen</b>
+          <div class="free">
+            schmale Taille, breite Hüften, volle Oberschenkel, volle Brust
+          </div>
+        </div>
+        <div class="q">
+          <b>Gesicht</b>
+          <div>
+            <div class="chips">
+              <span class="chip on">oval</span><span class="chip">rund</span
+              ><span class="chip">herzförmig</span
+              ><span class="chip">kantig</span>
+            </div>
+            <div class="free">Ergänzung: weich, runde Wangen, volle Lippen</div>
+          </div>
+        </div>
+        <div class="q">
+          <b>Haar</b>
+          <div class="free">kupferrot, glatt, bis zur Rückenmitte</div>
+        </div>
+        <div class="q">
+          <b>Augen</b>
+          <div class="chips">
+            <span class="chip">braun</span><span class="chip">blau</span
+            ><span class="chip on">grün</span><span class="chip">grau</span
+            ><span class="chip">haselnuss</span>
+          </div>
+        </div>
+        <div class="q">
+          <b>Haut</b>
+          <div>
+            <div class="chips">
+              <span class="chip on">hell</span><span class="chip">mittel</span
+              ><span class="chip">oliv</span><span class="chip">dunkel</span>
+            </div>
+            <div class="free">
+              Ergänzung: viele Sommersprossen auf Nase und Wangen
+            </div>
+          </div>
+        </div>
+        <div class="q" style="border-bottom: 0">
+          <b>Besondere Merkmale</b>
+          <div class="free">(frei, z. B. Narben, Tätowierungen)</div>
+        </div>
+        <div class="row">
+          <span class="note">Modell</span><span class="sel">grok-4.6 ▾</span>
+          <span class="btn">✨ Formulieren</span
+          ><span class="ghost">Abbrechen</span>
+        </div>
+      </div>
+      <div class="card">
+        <p class="tag">Erläuterung</p>
+        <p>
+          Jede Frage: Auswahl plus freie Ergänzung; nichts ist Pflicht außer dem
+          Alter. Stehen im Eintrag schon Zeilen „- **Haar:** …“, sind die
+          Antworten damit vorbelegt.
+        </p>
+        <p>
+          „Formulieren“ schickt die Antworten und den bisherigen Eintrag an ein
+          Textmodell (eigene Aufgabe in „Modell je Aufgabe“). Es übernimmt nur,
+          was dasteht, und erfindet nichts dazu.
+        </p>
+        <p>
+          Kleidung, Pose, Fesseln, Ort und Licht gehören <i>nicht</i> hierher –
+          das ist das „Was“ des Bildes (Rezept, 11.6). Der Assistent liefert das
+          „Wer“.
+        </p>
+      </div>
+    </div>
+
+    <h3 class="view">3 · Assistent, Schritt 2: Ergebnis und Entwürfe</h3>
+    <div class="cols">
+      <div class="card new">
+        <p class="tag">Aussehen (Deutsch, zum Bearbeiten)</p>
+        <div class="input mono">
+          - **Herkunft:** Skandinavien - **Alter:** 26 - **Größe:** 172 cm -
+          **Körperbau:** kurvig, Sanduhrfigur - **Proportionen:** schmale
+          Taille, breite Hüften, volle Oberschenkel, volle Brust - **Gesicht:**
+          weich oval, runde Wangen, volle Lippen - **Haar:** kupferrot, glatt,
+          bis zur Rückenmitte - **Augen:** grün - **Haut:** hell, viele
+          Sommersprossen auf Nase und Wangen - **Besondere Merkmale:** –
+        </div>
+        <p class="tag" style="margin-top: 10px">
+          Bildbeschreibung (Englisch, zum Bearbeiten)
+        </p>
+        <div class="input">
+          a 26-year-old adult Scandinavian woman with mature adult facial
+          features, fair skin with many freckles …
+        </div>
+        <div class="row">
+          <span class="note">Bildmodell</span
+          ><span class="sel">Krea 2 Turbo ▾</span>
+          <span class="ghost">🎲 4 Entwürfe erzeugen · ca. 0,015 $</span>
+        </div>
+        <div class="grid4">
+          <div class="pic">Startwert 101</div>
+          <div class="pic">404</div>
+          <div class="pic on">505 ✓</div>
+          <div class="pic">606</div>
+        </div>
+        <p class="note">
+          Studio, schlichte Kleidung, neutraler Hintergrund (fester Zusatz nur
+          für die Entwürfe). Gewählter Entwurf wird Hauptbild; Herkunft mit
+          Startwert wie in 11.4.
+        </p>
+        <div class="row">
+          <span class="btn">Übernehmen</span
+          ><span class="ghost">Zurück zu den Fragen</span>
+        </div>
+      </div>
+      <div>
+        <p class="tag">Eintrag danach</p>
+        <div class="card">
+          <div class="input mono">
+            # Liv Arnesdatter Liv ist Fährfrau am Nordsund … ### Aussehen -
+            **Herkunft:** Skandinavien - **Alter:** 26 … - **Besondere
+            Merkmale:** –
+
+            <span class="new"
+              >### Bildbeschreibung a 26-year-old adult Scandinavian woman
+              …</span
+            >
+
+            ### Wesen …
+          </div>
+          <p class="note">
+            Ein vorhandener Abschnitt „Aussehen“ wird ersetzt – vorher fragt das
+            Fenster wie heute beim Herauslösen (ersetzen oder anhängen). Die
+            Bildbeschreibung geht nicht in Anfragen zum Schreiben.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

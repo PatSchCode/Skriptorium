@@ -80,19 +80,20 @@ function optionTexts(select: HTMLSelectElement): string[] {
 }
 
 describe("settings: model per task (step 9.7, ADR-096)", () => {
-  it("lists the seven tasks with the preset and saves a choice at once", async () => {
+  it("lists the eight tasks with the preset and saves a choice at once", async () => {
     const { calls } = settingsApi(list());
     const user = userEvent.setup();
     render(<Settings />);
 
     await screen.findByRole("combobox", { name: /^Weltenbauer/ });
-    expect(screen.getAllByRole("combobox")).toHaveLength(7);
+    expect(screen.getAllByRole("combobox")).toHaveLength(8);
     for (const name of [
       "Schreiben",
       "Weltenbauer",
       "Kapitel-Kurzfassung",
       "Gesamtzusammenfassung",
       "Aussehen herauslösen",
+      "Figuren-Assistent",
     ]) {
       expect(row(name).value).toBe("");
       expect(row(name).options[0]?.text).toBe("Voreinstellung (Grok 4.6)");

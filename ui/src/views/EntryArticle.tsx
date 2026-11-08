@@ -1,7 +1,8 @@
 import { api, CATEGORIES, type CanonEntry } from "../api";
 import { useState } from "react";
-import { appearanceOf } from "../imagePrompts";
+import { appearanceOf, imageDescriptionOf } from "../imagePrompts";
 import { AppearanceExtract } from "./AppearanceExtract";
+import { FigureLooks } from "./FigureLooks";
 import { EntryImages } from "./EntryImages";
 import { EntryText } from "./EntryText";
 import { IncomingLinks } from "./IncomingLinks";
@@ -83,6 +84,14 @@ export function EntryArticle({
         }}
         onEdit={onEdit}
       />
+      {!compact && !guest && current.category === "figur" && (
+        <FigureLooksButton
+          entry={current}
+          onChanged={() => {
+            onSaved();
+          }}
+        />
+      )}
       {!compact && !guest && extractable(current) && (
         <AppearanceButton
           entry={current}
@@ -106,12 +115,56 @@ export function EntryArticle({
   );
 }
 
-/** Entries whose looks can be taken out: figures (7.16), places and items (10.3, ADR-108). */
+/**
+ * Entries whose looks can be taken out: places and items (10.3, ADR-108). Figures had it from
+ * 7.16 on; since 11.5 the figure assistant takes its place (ADR-123).
+ */
 function extractable(entry: CanonEntry): boolean {
+  return entry.category === "ort" || entry.category === "gegenstand";
+}
+
+/**
+ * "✨ Aussehen festlegen" for a figure (step 11.5, ADR-123); shown always, to set the looks
+ * anew too – the hint says whether a section "Aussehen" or an image description is missing.
+ */
+function FigureLooksButton({
+  entry,
+  onChanged,
+}: {
+  entry: CanonEntry;
+  onChanged: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  if (open) {
+    return (
+      <FigureLooks
+        entry={entry}
+        onChanged={onChanged}
+        onClose={() => {
+          setOpen(false);
+        }}
+      />
+    );
+  }
+  const missing =
+    appearanceOf(entry.body) === null
+      ? "noch kein Abschnitt „Aussehen“"
+      : imageDescriptionOf(entry.body) === null
+        ? "noch keine Bildbeschreibung"
+        : null;
   return (
-    entry.category === "figur" ||
-    entry.category === "ort" ||
-    entry.category === "gegenstand"
+    <p className="row appearance-hint">
+      <button
+        type="button"
+        className="ghost"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        ✨ Aussehen festlegen
+      </button>
+      {missing !== null && <span className="note">– {missing}</span>}
+    </p>
   );
 }
 

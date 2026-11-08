@@ -25,6 +25,33 @@ export const LOCATION = "Lage";
 export const PURPOSE = "Zweck";
 
 /**
+ * English text for image models right after a figure's looks, written by the figure assistant
+ * (step 11.5, ADR-123); not part of the templates. "Bild erzeugen" starts from it; the server
+ * leaves it out of every request to write. As `IMAGE_DESCRIPTION` in `canon/sections.py`.
+ */
+export const IMAGE_DESCRIPTION = "Bildbeschreibung";
+
+/**
+ * The lines `- **<label>:** …` of a figure's looks, in order (step 11.5, ADR-123); as
+ * `LOOKS_LABELS` in `canon/sections.py`, coupled by `tests/shared/sections.json` (rule 003).
+ */
+export const LOOKS_LABELS = [
+  "Herkunft",
+  "Alter",
+  "Größe",
+  "Körperbau",
+  "Proportionen",
+  "Gesicht",
+  "Haar",
+  "Augen",
+  "Haut",
+  "Besondere Merkmale",
+] as const;
+
+/** One of the lines of a figure's looks. */
+export type LooksLabel = (typeof LOOKS_LABELS)[number];
+
+/**
  * The fixed sections of an entry by category, in order (ADR-092): the list of `SECTIONS` in
  * `canon/sections.py`, a test couples both to `tests/shared/sections.json` (rule 003). Rules and
  * the timeline have none.
@@ -254,6 +281,46 @@ export function putSection(
     { from: target.start, to: target.end, block },
     ...gone.map((one) => ({ from: one.start, to: one.end, block: [] })),
   ]);
+}
+
+/**
+ * Puts `text` into the section `heading`, a new one right after the section `after` (step 11.5,
+ * ADR-123: the image description right after a figure's looks). With a section `heading` this is
+ * `putSection` replacing its text. Without one, a new section on the level of `after` (the first
+ * one with text, else the first one) follows it, after its blank lines; without `after` it is
+ * appended. As `put_section_after` in the server, checked against the same cases.
+ */
+export function putSectionAfter(
+  markdown: string,
+  heading: string,
+  after: string,
+  text: string,
+): string {
+  const lines = linesOf(markdown);
+  if (sectionsNamed(lines, heading).length > 0) {
+    return putSection(markdown, heading, text, "replace");
+  }
+  const found = sectionsNamed(lines, after);
+  const target = found.find((one) => bodyOf(lines, one) !== "") ?? found[0];
+  if (target === undefined) {
+    return appendSection(markdown, heading, text);
+  }
+  const eol = endingOf(markdown);
+  // The section has at least its heading line.
+  const before = lines.slice(0, target.end);
+  const last = before.length - 1;
+  before[last] = terminated(before[last] ?? "", eol);
+  const block = isBlank(before[last] ?? "") ? [] : [eol];
+  block.push(
+    `${"#".repeat(target.level)} ${heading}${eol}`,
+    eol,
+    `${text.trim()}${eol}`,
+  );
+  const rest = lines.slice(target.end);
+  if (rest.length > 0) {
+    block.push(eol);
+  }
+  return [...before, ...block, ...rest].join("");
 }
 
 /** `markdown` without the sections called `heading` (all of them). */

@@ -199,6 +199,7 @@ export const NO_TASK_MODELS: TaskModels = {
   gesamtzusammenfassung: null,
   bildbeschreibung: null,
   aussehen: null,
+  figurenassistent: null,
   bilderzeugung: null,
 };
 

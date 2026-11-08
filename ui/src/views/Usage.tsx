@@ -20,6 +20,7 @@ const KINDS: Record<string, string> = {
   bildbeschreibung: "Bild beschreiben",
   bilderzeugung: "Bild erzeugen",
   aussehen: "Aussehen",
+  figurenassistent: "Figuren-Assistent",
 };
 
 /** What the details below the table show: a world or one of its stories. */

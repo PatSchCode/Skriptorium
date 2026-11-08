@@ -79,7 +79,11 @@ export type {
   TranslatedMaterial,
 } from "./transfer";
 export type { Source } from "./stream";
-export { streamDescription, streamGuestFit } from "./describe";
+export {
+  streamDescription,
+  streamFigureLooks,
+  streamGuestFit,
+} from "./describe";
 export type {
   AspectRatio,
   GeneratedImage,

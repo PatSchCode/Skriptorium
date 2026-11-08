@@ -3,6 +3,7 @@ import { ENTRY, STORY, WORLD } from "../fake-api";
 import {
   coverPrompt,
   entryPrompt,
+  imageDescriptionOf,
   lacksAppearance,
   mapPrompt,
 } from "./imagePrompts";
@@ -33,6 +34,29 @@ describe("starting texts for generated images (step 7.12)", () => {
       body: "# Tomas\n\n- **Alter:** 41\n- **Aussehen:** breit, **braune Augen**.\n- **Beruf:** Zöllner",
     };
     expect(entryPrompt(listed)).toBe("Tomas: breit, braune Augen.");
+  });
+
+  it("takes a figure's image description alone, without the name (step 11.5, ADR-123)", () => {
+    const figure = {
+      ...ENTRY,
+      name: "Liv",
+      body:
+        "Fährfrau.\n\n### Aussehen\n\n- **Alter:** 26\n- **Haar:** kupferrot\n\n" +
+        "### Bildbeschreibung\n\na 26-year-old adult woman,\ncopper red hair\n\n### Wesen\n\nLaut.",
+    };
+    expect(entryPrompt(figure)).toBe(
+      "a 26-year-old adult woman, copper red hair",
+    );
+    expect(imageDescriptionOf(figure.body)).toBe(
+      "a 26-year-old adult woman, copper red hair",
+    );
+    expect(
+      entryPrompt({
+        ...figure,
+        body: "### Aussehen\n\n- **Haar:** rot\n\n### Bildbeschreibung\n\n",
+      }),
+    ).toBe("Liv: Haar: rot");
+    expect(imageDescriptionOf("Ohne.")).toBeNull();
   });
 
   it("skips an empty template section, takes a duplicate and subsections (step 8.4)", () => {
