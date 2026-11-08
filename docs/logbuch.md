@@ -29,6 +29,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] Nachricht aus der Session zu D.28: Schritt 11.17 angelegt
+
+- Nachricht der Vorsession (abgeschickt 21:12 UTC, hier erst nach dem Bau von 11.5 angekommen): Krea 2 Turbo/Raw und die geprüften LoRAs fehlen in der Runware-Liste der App; der Eigentümer hatte dort „Eigener Schritt vor 11.6“ gewählt, ohne die sarahpeterson-LoRAs. Beim Eigentümer nachgefragt, bevor der Fahrplan geändert wurde: „Ja, in diesen PR“ → 11.17 angelegt, Abhängigkeit von 11.6; Phase 11 jetzt 17 Schritte (Schwelle über 32). Befund im Code: Die Startliste in `api/runware_models.py` greift nur bei leerer Liste – Eintragen über die Einstellungen genügt vermutlich ohne Code.
+
 ### 2026-11-08 – [BEOBACHTUNG] 11.5 gebaut, Einspielen und Probe am Server offen
 
 - Server: `canon` `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after` (Regel-003: zweite Umsetzung, gemeinsame Fälle `after` und `looks` in `tests/shared/sections.json`); `context.build_figure_looks` mit `check_answers` (Alter ganze Zahl ab 18); `parts.render` lässt „Bildbeschreibung“ aus allen Anfragen; Route `POST …/entries/{eintrag}/figure-looks`, Aufgabe und Verbrauch `figurenassistent`. Routen 92 (vorher 91). 1.354 Tests grün, 99,86 %; neue Dateien 100 %.

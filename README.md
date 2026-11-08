@@ -23,7 +23,7 @@ Das Skriptorium ist eine Web-App, in der ein Autor seine selbst entwickelten Wel
 <!-- Synchronisiert mit docs/project-context.md Abschnitt 1, docs/fahrplan.md „Aktueller Stand",
      docs/architecture.md Abschnitt 9, docs/decisions.md Teil A und docs/blockers.md. -->
 
-- **Projektphase:** Phase 11 – Figuren, Bilder und Feinschliff (Umsetzung), geplant 2026-11-08 (ADR-117, ADR-118); Phase 10 abgeschlossen 2026-11-08. Fortschritt: 4 von 16 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
+- **Projektphase:** Phase 11 – Figuren, Bilder und Feinschliff (Umsetzung), geplant 2026-11-08 (ADR-117, ADR-118); Phase 10 abgeschlossen 2026-11-08. Fortschritt: 4 von 17 Schritten – Übersicht mit Ampel im [Fahrplan](docs/fahrplan.md#übersicht). Seit 2026-09-30 öffentlich unter HTTPS mit Passwortschutz auf dem netcup-VPS, tägliche Sicherung mit erprobter Wiederherstellung (Phase 4)
 - **Version:** v1.0.0 – erstes produktives Release (2026-10-11, ADR-058); davor v0.1.0 als Vorabversion (ADR-043)
 - **Status:** In Betrieb
 - **Letzte Änderung:** 2026-11-08
@@ -105,7 +105,7 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **Phase 10** (abgeschlossen 2026-11-08): Löschkaskade für Kanon-Einträge, Aussehen herauslösen für Orte und Gegenstände, Auflösung und Qualität bei Bildern, Bilder im Manuskript und E-Book, Bilder beim Schreiben mitschicken, zweiter Bildanbieter Runware mit Community-Modellen und LoRAs, Anfragen an die KI im Wortlaut nachlesen (ADR-106 bis ADR-116).
 - ✅ **Erledigt:** 11.1 Bedrohungsmodell um Runware ergänzt, getrennt geprüft, bleibt belastbar (ADR-119); 11.2 Bildformular in Teile zerlegt (Verhalten unverändert); 11.3 Anfragen aus dem Suchindex, Trennzeilen gekennzeichnet (ADR-120); 11.4 fester Startwert beim Bilderzeugen und vollständige Herkunft (ADR-121).
 - 🔵 **In Arbeit:** 11.5 Figuren-Assistent für das Aussehen – gebaut (ADR-123), Probe mit echten Entwürfen am Server steht aus.
-- ⚪ **Als Nächstes:** 11.6 Bildrezepte, dann 11.7 Schlagwort-Prompts.
+- ⚪ **Als Nächstes:** 11.17 Krea 2 und geprüfte LoRAs in die Runware-Liste, dann 11.6 Bildrezepte.
 - ⚪ **Phase 11** (ADR-118): Figuren und Bilder – fester Startwert, Figuren-Assistent für das Aussehen, Bildrezepte, Schlagwort-Prompts, Einstellungen aus der Bild-Erkundung (11.4–11.8); Großansicht und Bildmeldungen (11.9); Längengrenze, Favoriten, „Wesen:“ im Fließtext (11.10–11.11); Weltenbauer mit gesperrten Antworten, Fragenliste, Recherche und Namenshilfe (11.12–11.15).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 
