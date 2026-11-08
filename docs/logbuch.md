@@ -29,6 +29,15 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONSTART] Mac-Session: Stand übernehmen, Einspielen 10.8/10.9 vorbereiten
+
+- **Umgebung:** lokale Session auf dem Mac des Eigentümers (SSH zum VPS wäre von hier möglich, ADR-025). Gestartet auf dem überholten lokalen Zweig `feat/10.8-zweiter-bildanbieter`; nach `git fetch` Wechsel auf `main` und Vorspulen auf `25c9bd6` (Merge PR #221, 2026-11-08 15:49 +01:00, durch den Eigentümer). Doku-Zweig `docs/10.8-einspielen-vorbereiten` von dort; nur lokal, nichts gepusht.
+- **Offene Pull Requests / Stand:** PR #221 (10.9) ist gemergt (`state` MERGED, 14:49 UTC); damit sind 10.8 (`96e56bc`) und 10.9 beide in `main`. Auf dem Server weiter `de64667`. Drift: Fahrplan führt 10.9 noch als „wartet auf Bestätigung“ – der Merge durch den Eigentümer gilt als Bestätigung, wird beim nächsten Fahrplan-Update berichtigt (Rückfrage an den Eigentümer gestellt).
+- **Modell:** eingestellt `claude-sonnet-5-5` (Sitzungsabfrage `get_session`, `model`) → Routine-Klasse; Bedient-Modell wird von der Abfrage nicht getrennt gemeldet, kein Widerspruch im Systemkontext. Empfehlung 10.8/10.9-Einspielen: Entscheidung (Secrets, Eskalations-Auslöser 1 für den Schritt, der Entscheidungsanteil ist mit ADR-114/115/116 getan). Kein neuer Eskalations-Auslöser aktiv; Hinweis dazu in der Antwort an den Eigentümer. Plan-Limits: 5-Stunden 11 %, Woche 2 % (Max).
+- **Kontextgröße:** 182.232 Token nach der Mindest-Lektüre (Sitzungsabfrage `get_usage`, Fenster 1.000.000); Grenze 200.000 – kurz davor, die Größe stammt überwiegend aus Pflicht-Dokumenten, Memory und Werkzeug-Definitionen.
+- **Mindest-Lektüre:** `docs/project-context.md` vollständig; Logbuch ab letztem Sessionende (2026-11-08, V.57/V.58, 10.9) – es gibt keine Einträge danach; Fahrplan „Aktueller Stand“, Übersicht, Schritte 10.8–10.11; Architektur 1/2/9; Entscheidungen Teil A (bis ADR-116, Reaktiv-Quote 0/10) und Teil C; aktive Blocker: keine. Anforderungen: Klasse M, nicht Mindest-Lektüre.
+- **Vorhaben:** noch offen – Auftrag des Eigentümers fehlt (nur „neue session“). Naheliegend laut Sessionende: 10.8 und 10.9 vom Mac einspielen (`RUNWARE_API_KEY` in die `.env` auf dem VPS, Probe), nur auf Anweisung (ADR-039).
+
 ### 2026-11-08 – [SESSIONENDE] V.57/V.58 angelegt, 10.9 gebaut, PR #221 grün
 
 - **Dauer:** 2026-11-08, ca. 13:10–14:45 UTC (Cloud-Session).
