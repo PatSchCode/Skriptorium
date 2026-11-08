@@ -29,6 +29,11 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 10.8 am Server erprobt und erledigt; Befund: Figuren-Beschreibung reicht nicht zum Prompten
+
+- Schlüssel vom Eigentümer eingetragen (Prüfung nur auf Vorhandensein: beide Schlüsselnamen in der `.env`, Wert 32 Zeichen, im Container gesetzt, `healthy`). Eigentümer: Die Anbindung funktioniert → 10.8 `[ERLEDIGT]` (Akzeptanz: Probe mit echtem Bild, Prüfung durch getrennte Instanz, Eigentümer bestätigt).
+- Befund des Eigentümers: Die Kanon-Beschreibung von Figuren ist für vernünftiges Prompten nicht ausreichend. Das ist die Lücke von V.58 (Figuren-Assistent für das Aussehen, Landeplatz 10.11) und passt zu V.57 („Figur“ als Lücke im Rezept); kein neuer Schritt, V.58-Notiz ergänzt und für die Planung in 10.11 höher gewichtet. 10.9 ist noch nicht vom Eigentümer erprobt.
+
 ### 2026-11-08 – [SESSIONENDE] 10.8 und 10.9 eingespielt, Schlüssel und Proben stehen aus
 
 - **Dauer:** 2026-11-08, ca. 14:55–15:15 UTC (lokale Mac-Session).

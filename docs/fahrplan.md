@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-08 (Phase 10: 10.1–10.7 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
+- **Stand vom:** 2026-11-08 (Phase 10: 10.1–10.8 und 10.10 erledigt; D.1 Node 26 und D.27 Vitest erledigt). Phase 9 abgeschlossen 2026-11-05 (ADR-104, ADR-105). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 - **Laufende Phase:** Phase 10 „Kanon-Pflege, Bilder und Nachvollziehbarkeit“ (Phase 9 abgeschlossen 2026-11-05)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** 10.8 und 10.9 – Code eingespielt 2026-11-08 (`25c9bd6`, healthy, ADR-114 bis ADR-116); offen nur Proben: 10.9 ohne Schlüssel prüfbar (Reiter „Anfragen“), 10.8 nach Eintrag von `RUNWARE_API_KEY` auf dem VPS durch den Eigentümer (Runbook Abschnitt 7, Befehl mit `RUNWARE_API_KEY`). Merge von PR #221 durch den Eigentümer gilt als Bestätigung von 10.9. 10.10 erledigt 2026-11-06 (ADR-113). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06.
-- **Nächster Schritt:** Eigentümer trägt `RUNWARE_API_KEY` auf dem VPS ein (unsichtbare Eingabe, Runbook Abschnitt 7) und bestätigt die Proben (10.9: Anfrage schreiben, Reiter „Anfragen“; 10.8: Runware-Gruppe, ein Bild); danach 10.8 und 10.9 `[ERLEDIGT]`, dann 10.11 (neu darin: V.57, V.58). D.28 wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 10.9 – eingespielt 2026-11-08 (`25c9bd6`, healthy, ADR-116), offen nur die Probe des Eigentümers (Reiter „Anfragen“). 10.8 erledigt 2026-11-08 (Schlüssel eingetragen, Anbindung bestätigt). Merge von PR #221 durch den Eigentümer gilt als Bestätigung von 10.9. 10.10 erledigt 2026-11-06 (ADR-113). D.27 erledigt 2026-11-06, D.1 erledigt 2026-11-05 (ADR-112). 10.7 und 10.6 erledigt 2026-11-06.
+- **Nächster Schritt:** Eigentümer bestätigt die Probe von 10.9 (Anfrage schreiben, Reiter „Anfragen“); danach 10.9 `[ERLEDIGT]`, Pull Request für die gebündelte Doku, dann 10.11 (neu darin: V.57, V.58; V.58 hat durch den Befund zu 10.8 Gewicht bekommen). D.28 wartet auf Freigabe einer Lösung. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -24,7 +24,7 @@ Ampel (eingeführt 2026-10-08 auf Wunsch des Eigentümers; Rot nur für Blockier
 
 Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`docs/archiv/fahrplan-phase-9.md`](archiv/fahrplan-phase-9.md).
 
-**Phase 10: 8 von 11 erledigt.**
+**Phase 10: 9 von 11 erledigt.**
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
@@ -35,7 +35,7 @@ Phase 9 abgeschlossen 2026-11-05 (15 von 15 erledigt) – Details im Archiv [`do
 | ✅ | 10.5 | Auflösung und Qualität bei der Bilderzeugung | erledigt 2026-11-05 (ADR-109) | – |
 | ✅ | 10.6 | Bilder im Manuskript und im E-Book (V.23) | erledigt 2026-11-06 (ADR-110; zwei Korrekturen PR #214, #215) | – |
 | ✅ | 10.7 | Bilder beim Schreiben mitschicken (V.33) | erledigt 2026-11-06 (ADR-111) | – |
-| 🟠 | 10.8 | Zweiter Bildanbieter (V.24) | in Arbeit – Runware (ADR-114, ADR-115), gemergt 2026-11-08 (PR #218), eingespielt 2026-11-08 (`25c9bd6`), Schlüssel steht aus | du: `RUNWARE_API_KEY` auf dem VPS eintragen, Probe bestätigen |
+| ✅ | 10.8 | Zweiter Bildanbieter (V.24) | erledigt 2026-11-08 (ADR-114, ADR-115; PR #218, eingespielt `25c9bd6`, Anbindung vom Eigentümer am Server bestätigt) | – |
 | 🟠 | 10.9 | Vollständige Anfrage festhalten (V.42) | in Arbeit – gebaut (ADR-116), gemergt (PR #221), eingespielt 2026-11-08 (`25c9bd6`) | du: Probe bestätigen (Anfrage schreiben, Reiter „Anfragen“) |
 | ✅ | 10.10 | Textqualität von Hermes 4 messen (V.41) | erledigt 2026-11-06 (ADR-113: nichts übernehmen) | – |
 | ⚪ | 10.11 | Planung der nächsten Ausbaustufe | offen | KI |
@@ -320,7 +320,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 10.8: Zweiter Bildanbieter (V.24)
 
-- **Status:** 🟠 IN ARBEIT – Anbieter gewählt 2026-11-07: Runware (ADR-114). Zweite Vorlage beantwortet 2026-11-07 (ADR-115): Erwachseneninhalte ohne Prüfung bei Runware, mehrere Bildanbieter nach Kennungsformat, Grundmodelle und LoRAs in den Einstellungen, Schlüssel nur serverseitig, Kosten-Bremse über Vorab-Guthaben; Modellsuche und Probebild in `docs/research/bildanbieter.md`. Gebaut 2026-11-07 (`24d955e`, `ade0df6`; Tests grün, Probe mit echtem Bild 0,0037 $), getrennte Prüfung ohne Befund hoch/mittel. Zwei optionale Befunde umgesetzt (`778e165`, nachgeprüft). Krea 2 Raw/Turbo als eine Familie; eigene LoRA `skriptorium:2964163@3386627` privat hochgeladen, sauber auf Krea 2 Turbo (auf Raw Bildfehler). Eigentümer bestätigt 2026-11-08; offen nur noch Einspielen vom Mac (Schlüssel auf dem VPS, Durchreichen in der Compose-Datei prüfen, Probe auf dem Server). Erkundung der Bildmodelle und LoRAs 2026-11-07 (ohne Code; Ergebnisse in `docs/research/bildanbieter.md`, Folgewünsche V.56); PR 218 als Entwurf. 2026-11-08: Eigentümer „Abschließen“ – PR 218 auf „Ready for review“ für die CI; Checkpoint-Versuch nicht vorher, er bleibt in V.56 (6) mit Landeplatz 10.11. CI grün (alle vier Jobs, keine Warnungen), Eigentümer bestätigt, gemergt in `main` (`96e56bc`); eingespielt 2026-11-08 (`25c9bd6`), `RUNWARE_API_KEY` auf dem VPS und Probe stehen aus
+- **Status:** ✅ ERLEDIGT (2026-11-08) – Anbieter gewählt 2026-11-07: Runware (ADR-114). Zweite Vorlage beantwortet 2026-11-07 (ADR-115): Erwachseneninhalte ohne Prüfung bei Runware, mehrere Bildanbieter nach Kennungsformat, Grundmodelle und LoRAs in den Einstellungen, Schlüssel nur serverseitig, Kosten-Bremse über Vorab-Guthaben; Modellsuche und Probebild in `docs/research/bildanbieter.md`. Gebaut 2026-11-07 (`24d955e`, `ade0df6`; Tests grün, Probe mit echtem Bild 0,0037 $), getrennte Prüfung ohne Befund hoch/mittel. Zwei optionale Befunde umgesetzt (`778e165`, nachgeprüft). Krea 2 Raw/Turbo als eine Familie; eigene LoRA `skriptorium:2964163@3386627` privat hochgeladen, sauber auf Krea 2 Turbo (auf Raw Bildfehler). Eigentümer bestätigt 2026-11-08; offen nur noch Einspielen vom Mac (Schlüssel auf dem VPS, Durchreichen in der Compose-Datei prüfen, Probe auf dem Server). Erkundung der Bildmodelle und LoRAs 2026-11-07 (ohne Code; Ergebnisse in `docs/research/bildanbieter.md`, Folgewünsche V.56); PR 218 als Entwurf. 2026-11-08: Eigentümer „Abschließen“ – PR 218 auf „Ready for review“ für die CI; Checkpoint-Versuch nicht vorher, er bleibt in V.56 (6) mit Landeplatz 10.11. CI grün (alle vier Jobs, keine Warnungen), Eigentümer bestätigt, gemergt in `main` (`96e56bc`); eingespielt 2026-11-08 (`25c9bd6`), Schlüssel auf dem VPS eingetragen, Anbindung vom Eigentümer am Server bestätigt → ERLEDIGT 2026-11-08. Befund des Eigentümers dabei: die Kanon-Beschreibung einer Figur reicht für gutes Prompten nicht aus → V.58 (Landeplatz 10.11), kein neuer Schritt
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 10.4, 10.5
 - **Freigabepflichtig:** ja – neuer externer Dienst (Kategorie 3), Schlüssel im Betrieb (Kategorie 6)
@@ -1581,7 +1581,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Betroffene Module:** context, canon, api, ui (ai_gateway nur, falls die Erkennung von Sperren dort liegt)
 - **Reifegrad-Wirkung:** keine (bei festen Feldern: Datenmodell neu prüfen)
 - **Artefakte:** Probe, Vorlage mit Mockup, ADR, Code, Tests
-- **Notizen:** Angelegt 2026-11-08 (Übergabe aus der Session vom 2026-11-08). Bezug: V.46 (Fragenliste je Art im Weltenbauer – der Kern davon für die Art „Figur“), V.53, V.57; Weltenbauer (FR-029), ADR-078/ADR-108 (Aussehen herauslösen), ADR-084 (Vorbelegung). Arbeitsteilung mit V.57: Der Assistent liefert das „Wer“, das Rezept das „Was“.
+- **Notizen:** Angelegt 2026-11-08 (Übergabe aus der Session vom 2026-11-08). Bezug: V.46 (Fragenliste je Art im Weltenbauer – der Kern davon für die Art „Figur“), V.53, V.57; Weltenbauer (FR-029), ADR-078/ADR-108 (Aussehen herauslösen), ADR-084 (Vorbelegung). Arbeitsteilung mit V.57: Der Assistent liefert das „Wer“, das Rezept das „Was“. Befund 2026-11-08 (Probe von 10.8 am Server): Die Kanon-Beschreibung einer Figur reicht für ein vernünftiges Prompten nicht aus – genau die Lücke, die dieser Schritt schließen soll; bei 10.11 entsprechend gewichten.
 
 #### V.57: Bildrezepte – Szene, Modell und LoRAs als Vorlage, Figur als Lücke
 
