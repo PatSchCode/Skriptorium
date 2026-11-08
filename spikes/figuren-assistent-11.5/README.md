@@ -48,3 +48,13 @@ Von Hand gelesen (alle 18):
   möglich; der Assistent braucht die Erkennung mit Angebot eines anderen Modells (V.58 (7)).
 - Bildqualität der Prompts hier nicht geprüft; das zeigt die Probe mit echten Entwürfen am Ende von
   11.5.
+
+## Nachprüfung der eingebauten Anfrage (2026-11-08)
+
+Nach ADR-123 verlangt das Programm vom Modell nur noch die englische Bildbeschreibung (die deutschen
+Zeilen baut die Oberfläche) und die Größe als „about … cm tall“. Einmal je Figur mit grok-4.6 über
+`prepare_figure_looks` (Skript im Scratchpad der Session, nicht abgelegt):
+
+- Liv 50 Wörter, Mara 47, Brann 40; alle beginnen mit „a `<Alter>`-year-old adult“, Größe jeweils
+  „about … cm tall“, Halsband bei Mara weggelassen, Narben behalten; nichts erfunden.
+- Kosten 0,0044–0,0050 $ je Anfrage (weniger Ausgabe als in der Probe).

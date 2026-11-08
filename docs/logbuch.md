@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [BEOBACHTUNG] 11.5 gebaut, Einspielen und Probe am Server offen
+
+- Server: `canon` `LOOKS_LABELS`, `IMAGE_DESCRIPTION`, `drop_sections`, `put_section_after` (Regel-003: zweite Umsetzung, gemeinsame Fälle `after` und `looks` in `tests/shared/sections.json`); `context.build_figure_looks` mit `check_answers` (Alter ganze Zahl ab 18); `parts.render` lässt „Bildbeschreibung“ aus allen Anfragen; Route `POST …/entries/{eintrag}/figure-looks`, Aufgabe und Verbrauch `figurenassistent`. Routen 92 (vorher 91). 1.354 Tests grün, 99,86 %; neue Dateien 100 %.
+- Oberfläche: `figureLooks.ts` (Fragen, Auswahl, Zeilen, Erkennung der Form), `FigureLooks.tsx`, `FigureDrafts.tsx` (4 Entwürfe parallel, ein Fehler verwirft die übrigen nicht), `useTaskModel.ts`, `putSectionAfter`, Vorbelegung aus „Bildbeschreibung“; „Aussehen herauslösen“ nur noch für Orte und Gegenstände (zwei Tests darauf umgestellt), Einstellungen mit acht Aufgaben. 636 Tests grün, Abdeckung 98,77 / 94,98 / 98,34 / 98,92 % (vorher 98,84 / 95,30 / 98,41 / 98,97 %; über den Mindestwerten).
+- Eingebaute Anfrage echt nachgeprüft (grok-4.6, je Figur einmal): 3 von 3 in Form, „about … cm tall“, Halsband weggelassen, 0,004–0,005 $; Nachtrag in `spikes/figuren-assistent-11.5/README.md`.
+- Abweichung vom Mockup: Der geschätzte Preis vor dem Erzeugen der Entwürfe fehlt; das Fenster nennt die Summe danach. Im Browser nicht geprüft (kein Server mit Bildschlüssel in der Cloud-Session gestartet); die Bildqualität zeigt erst die Probe am Server.
+- Sperren bei Einträgen mit stark erotischem oder fesselungsbezogenem Inhalt bleiben ungeprüft; erkannt wird jede Antwort, die nicht mit „a `<Alter>`-year-old adult“ beginnt, dann bietet das Fenster ein anderes Modell an.
+
 ### 2026-11-08 – [ADR-ANGELEGT] ADR-123 Figuren-Assistent: Zeilen, Bildbeschreibung im Eintrag, grok-4.6
 
 - Vorlage zu 11.5 mit Probe und Mockup, zwei Runden Auswahlfragen. Eigentümer: Was stört „Erzählteile drin, Name und Länge“ (nicht: Deutsch, Alter nicht vorn); Form „Zeilen“, Bild-Prompt „Im Eintrag“, Modell „grok-4.6“, Mockup „Ja, so bauen“, Herauslösen bei Figuren „Durch Assistent ersetzen“ – jeweils Empfehlung; Entwürfe „Zusatz frei“ (Empfehlung war 4 Entwürfe mit festem Studio-Zusatz) → ADR-123. Reaktiv-Quote 0/10 (ADR-114 bis ADR-123).
