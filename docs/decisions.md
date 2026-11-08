@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-121). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-08 (ADR-001 bis ADR-122). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -141,12 +141,13 @@ Stand 2026-11-08 (ADR-001 bis ADR-121). Aus welchem Schritt ein ADR stammt, steh
 | 119 | 2026-11-08 | Aktiv | OPERATIV | SECURITY | Sicherheit | Bedrohungsmodell nach dem Nachtrag zu Runware bleibt belastbar (11.1) |
 | 120 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL | Datenmodell | Schreib-Anfragen nicht im Suchindex, Trennzeilen im Text gekennzeichnet (11.3) |
 | 121 | 2026-11-08 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, API | Fester Startwert beim Bilderzeugen und vollständige Herkunft (11.4) |
+| 122 | 2026-11-08 | Aktiv | OPERATIV | STACK | Build-Pipeline | Pre-Commit-Hook markdownlint nutzt das Node aus dem PATH (D.28) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 0 / 10 (0 %) über ADR-112 bis ADR-121 – keiner reaktiv: ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-112 Versionswechsel aus dem Ablaufdaten-Register (D.1, keine Architekturentscheidung); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 0 / 10 (0 %) über ADR-113 bis ADR-122 – keiner reaktiv: ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114); ADR-114 Anbieterwahl in ihrem Schritt als Vorlage vorgesehen (10.8, ADR-105); ADR-113 Erkenntnis aus geplanter Messung (10.10), keine Architekturänderung. Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2867,6 +2868,23 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Willst du beim Neu-Erzeugen meistens dasselbe Bild verfeinern oder neue Varianten sehen?“ → verfeinern.
 - **Konfidenz zum Zeitpunkt:** hoch für Runware; mittel für OpenRouter (Einhaltung erst mit der Probe belegt). Umkehrbarkeit billig (optionale Felder).
 - **Konsequenzen:** Probe mit echtem Bild durch den Eigentümer am Server (gleicher Startwert und gleiche Beschreibung → gleiches Bild). 11.6 (Bildrezepte) baut auf Startwert und Herkunft auf. `docs/architecture.md` Abschnitte 4 und 7 werden nachgezogen.
+- **Abgeleitete Regel:** keine
+
+#### ADR-122: Pre-Commit-Hook markdownlint nutzt das Node aus dem PATH (D.28)
+
+- **Datum:** 2026-11-08
+- **Entscheider:** Eigentümer (Auswahlfrage „A: system“ – Empfehlung der KI)
+- **Status:** Aktiv
+- **Tags:** `[OPERATIV]` `[STACK]`
+- **Phasentyp-Kontext:** STABILISIERUNG (Querschnitt D.28 – Vorlage im Schritt vorgesehen); keine Architekturentscheidung (Kategorie 7), daher nicht reaktiv
+- **Reifegrad-Wirkung:** keine
+- **Kategorie:** Build- und Deploy-Pipeline (Kategorie 7)
+- **Kontext:** In jeder frischen Cloud-Session scheitert der erste Commit im Hook `markdownlint-cli2` mit `ValueError: invalid literal for int() … '0-alpha'` (Befund 2026-11-06, Archiv-Logbuch Phase 10). pre-commit 4.6.2 nimmt ein vorhandenes Node nur, wenn `node` und `npm` außerhalb des Home-Verzeichnisses liegen (`lang_base.exe_exists`); `scripts/session-start.sh` legt Node 26.12.1 unter `~/.cache/skriptorium-tools/`, also lädt pre-commit per nodeenv 1.11.0 das „neueste“ Node und scheitert an der Alpha-Nummer im Index. In der CI legt `actions/setup-node` Node außerhalb von Home ab – dort wählte pre-commit schon `system`.
+- **Optionen:** A `language_version: system` am Hook; B Node in `scripts/session-start.sh` außerhalb des Home-Verzeichnisses ablegen; C `language_version: 26.12.1` am Hook. Erprobt 2026-11-08 in der Cloud-Session mit frischem pre-commit-Cache, ohne Behelf: ohne Angabe scheitert der Hook (Fehler reproduziert); A grün, Node im Hook 26.12.1 aus dem PATH über einen Verweis (17 MB); C grün, Node 26.12.1 als zweiter Download (245 MB). B nicht erprobt – auf dem Mac ohne Administrator-Rechte kein Ort außerhalb von Home, hängt an einer internen Eigenheit von pre-commit.
+- **Entscheidung:** A. Der Hook `markdownlint-cli2` trägt `language_version: system` und nutzt das Node aus dem PATH – in Cloud-Session und auf dem Mac das aus `scripts/session-start.sh`, in der CI das aus `actions/setup-node`. Folgt dem Muster der übrigen lokalen Hooks (`language: system`).
+- **Vision-Frage, die entschied:** „Soll der Hook immer das Node nehmen, das das Projekt ohnehin festlegt, oder ein eigenes, fest benanntes mitbringen?“ → das des Projekts.
+- **Konfidenz zum Zeitpunkt:** hoch für Cloud-Session und CI (erprobt bzw. Verhalten unverändert); mittel für den Mac (dort entsteht beim ersten Commit eine neue Hook-Umgebung – Nachweis in einer Mac-Session, D.28). Umkehrbarkeit billig (eine Zeile).
+- **Konsequenzen:** Behelf `PATH=/usr/local/bin:$PATH` entfällt. Fehlt Node im PATH, scheitert der Hook mit Meldung statt Node nachzuladen. Nach einem Node-Wechsel behält eine angelegte Hook-Umgebung das alte Node, bis `pre-commit clean` sie verwirft (Kommentar in `.pre-commit-config.yaml`).
 - **Abgeleitete Regel:** keine
 
 ---

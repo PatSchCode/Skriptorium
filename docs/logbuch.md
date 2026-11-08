@@ -29,6 +29,30 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [GELÖST] D.28 Pre-Commit-Hook markdownlint ohne Behelf
+
+- **Reproduziert:** Hook `markdownlint-cli2` allein mit frischem pre-commit-Cache (`PRE_COMMIT_HOME` im Scratchpad), ohne Behelf: `ValueError … '0-alpha'` in nodeenv 1.11.0 wie am 2026-11-06. Ursache bestätigt im Quelltext von pre-commit 4.6.2: `node.get_default_version` → `lang_base.exe_exists` verwirft `node`/`npm` unter Home, ohne `language_version` ruft pre-commit `nodeenv --prebuilt` ohne `-n` auf.
+- **Optionen erprobt** (je eine Kopie der Konfiguration, frischer Cache): `system` grün, Hook-Node ist ein Verweis auf `/root/.cache/skriptorium-tools/node-v26.12.1-linux-x64/bin/node` (17 MB); `26.12.1` grün, zweites Node als Download (245 MB). In der CI wählte pre-commit wegen `actions/setup-node` (außerhalb von Home) schon bisher `system`.
+- **Umgesetzt:** A nach Freigabe (ADR-122) – eine Zeile plus Kommentar in `.pre-commit-config.yaml`. Danach alle 17 Hooks über alle Dateien mit frischem Cache ohne Behelf grün, Node im Hook v26.12.1; der Commit lief ebenso mit frischem Cache.
+- **Reibung:** Der Commit des `[SESSIONSTART]`-Eintrags lief noch mit Behelf und legte im Standard-Cache dieses Containers eine Hook-Umgebung `system` an, die auf das System-Node 22 zeigt. Deshalb die Nachweise mit eigenem `PRE_COMMIT_HOME`; der Container ist flüchtig.
+- **Offen:** CI im Pull Request; Nachweis „Mac unverändert“ beim ersten Commit in einer Mac-Session (dort entsteht eine neue Hook-Umgebung, Netz zur npm-Registry nötig).
+
+### 2026-11-08 – [ADR-ANGELEGT] ADR-122 Pre-Commit-Hook markdownlint nutzt das Node aus dem PATH
+
+- Vorlage zu D.28 mit drei Optionen und Messwerten; Eigentümer: „A: system“ (Empfehlung) → ADR-122. Reaktiv-Quote 0/10 (ADR-113 bis ADR-122).
+
+### 2026-11-08 – [BEOBACHTUNG] Modellwechsel für D.28
+
+- Auf Sonnet 5.5 (Routine-Klasse) gestoppt, weil D.28 eine Vorlage nach Kategorie 7 braucht (`CLAUDE.md` Abschnitt 0, Auslöser 1). Der Eigentümer wechselte per `/model` auf `claude-opus-5-5`; die Sitzungsabfrage meldete danach `session_context.model` und `user_switched_model` `claude-opus-5-5` (`configured_model` bleibt `claude-sonnet-5-5`, `last_served_model` zeigte noch den Zug davor) → Entscheidungs-Klasse bestätigt, Arbeit fortgesetzt.
+
+### 2026-11-08 20:42 – [SESSIONSTART] D.28 Pre-Commit-Hook markdownlint in der Cloud-Session
+
+- **Modell:** eingestellt und bedient `claude-sonnet-5-5` (Sitzungsabfrage `get_session`) → Routine-Klasse. D.28 ist freigabepflichtig (Kategorie 7) und löst damit die Pflicht-Eskalation auf die Entscheidungs-Klasse aus (`CLAUDE.md` Abschnitt 0, Auslöser 1) → STOPP MODELLWECHSEL ERFORDERLICH, Arbeit an D.28 ruht bis zur Antwort des Eigentümers.
+- **Wiedereinstieg:** Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker; Branch `scp/upbeat-lamport-720j8m` (Cloud-Session, Branch vom Werkzeug vergeben, Projektkontext Abschnitt 10).
+- **Auftrag:** „Fang erstmal mit D.28 an“. D.28 steht im Fahrplan auf ⚪ OFFEN, „Vorschlag an den Eigentümer steht aus“; eine Lösung ist noch nicht freigegeben.
+- **Kontextgröße zu Beginn:** Sitzungsabfrage meldet 0 von 1.000.000 Token (Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster `allowed`, ohne Prozentangabe; Wochenstand nicht gemeldet.
+
 ### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.4 erledigt und eingespielt
 
 - **Dauer:** 2026-11-08, ca. 16:20–20:35 UTC (lokale Mac-Session, mit Pausen des Eigentümers); ersetzt als Wiedereinstieg die beiden Sessionende-Einträge darunter.
