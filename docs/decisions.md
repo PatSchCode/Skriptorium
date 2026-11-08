@@ -2842,7 +2842,7 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
   - Verworfen: Volltextsuche ganz entfernen (Eigentümer behält sie); Trenner je Datei (neue Dateiform, vom Fahrplan für 11.3 ausgeschlossen).
 - **Vision-Frage, die entschied:** „Willst du im Skriptorium irgendwann nach Wörtern im Text deiner Kapitel suchen können?“ → Eigentümer hält sich das offen: Volltextsuche bleibt.
 - **Konfidenz zum Zeitpunkt:** hoch – Aufrufer per grep geprüft, Verhalten in der Bewertung gemessen. Umkehrbarkeit billig (Index abgeleitet, Kennzeichnung umkehrbar).
-- **Konsequenzen:** Der Index wächst nicht mehr mit den Anfragen; die Datei schrumpft erst beim Neuaufbau (Befehl im Runbook Abschnitt 7). Eine Nachricht, deren Zeile vor 11.3 wie eine Trennzeile aussah, bleibt in alten Dateien geteilt (nicht nachträglich reparierbar). `docs/architecture.md` Abschnitte 3 (`storage`), 4 (`DocumentStore`) und 7 werden nachgezogen.
+- **Konsequenzen:** Der Index wächst nicht mehr mit den Anfragen; die Datei schrumpft dadurch nicht – SQLite verwendet frei gewordene Seiten wieder, auch beim Neuaufbau (berichtigt 2026-11-08 nach dem Einspielen; Index am Server 4,5 MB, ohne Handlungsbedarf). Eine Nachricht, deren Zeile vor 11.3 wie eine Trennzeile aussah, bleibt in alten Dateien geteilt (nicht nachträglich reparierbar). `docs/architecture.md` Abschnitte 3 (`storage`), 4 (`DocumentStore`) und 7 werden nachgezogen.
 - **Abgeleitete Regel:** keine
 
 ---
