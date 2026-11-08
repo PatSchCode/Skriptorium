@@ -96,3 +96,11 @@ def test_a_timeline_and_a_rule_are_rendered_like_every_entry() -> None:
     assert render(entry("# Regel\nSalz bindet.", category="regel")) == (
         "## Kael (Regel)\n\n### Regel\nSalz bindet."
     )
+
+
+def test_the_image_description_stays_out_of_every_request() -> None:
+    """Step 11.5 (ADR-123): English and only for image models."""
+    text = "### Aussehen\n- **Haar:** rot\n### Bildbeschreibung\na woman\n### Wesen\nTreu."
+    assert render(entry(text)) == (
+        "## Kael (Figur)\n\n### Aussehen\n- **Haar:** rot\n### Wesen\nTreu."
+    )

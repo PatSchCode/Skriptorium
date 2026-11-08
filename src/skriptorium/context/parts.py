@@ -7,10 +7,12 @@ from typing import Final, Literal
 
 from skriptorium.canon import (
     CATEGORIES,
+    IMAGE_DESCRIPTION,
     CanonEntry,
     Category,
     InvalidInput,
     drop_empty_sections,
+    drop_sections,
     drop_world_sections,
     nest_headings,
 )
@@ -166,7 +168,8 @@ def render(
     A guest names its home world in the heading (step 3.7). Below the name (level 2) no heading
     of the text is flatter than level 3 (a heading the author wrote on level 1 or 2 moves down
     with all the others), and sections without text are left out, so an empty template does not
-    clutter the request (step 9.3, ADR-092).
+    clutter the request (step 9.3, ADR-092). A figure's image description is left out too: it is
+    English and only for image models (step 11.5, ADR-123).
 
     A guest with a ``relation`` to the world of the story (named ``here``) gets it as the section
     "In dieser Welt" below its entry, and the sections of the entry about its home world are left
@@ -179,6 +182,7 @@ def render(
     aliases = f"\nAuch: {', '.join(entry.aliases)}" if entry.aliases else ""
     fitted_in = home is not None and relation.strip() != ""
     source = drop_world_sections(entry.body, home) if fitted_in and home else entry.body
+    source = drop_sections(source, IMAGE_DESCRIPTION)
     body = nest_headings(drop_empty_sections(source), ENTRY_BODY_LEVEL).strip()
     text = f"{heading}{aliases}\n\n{body}".strip()
     if not fitted_in:

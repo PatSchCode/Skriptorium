@@ -24,6 +24,7 @@ Task = Literal[
     "gesamtzusammenfassung",
     "bildbeschreibung",
     "aussehen",
+    "figurenassistent",
     "bilderzeugung",
 ]
 TASKS: Final[tuple[Task, ...]] = get_args(Task)

@@ -2,6 +2,7 @@
 
 from skriptorium.context.appearance import NO_APPEARANCE
 from skriptorium.context.builder import ContextBuilder
+from skriptorium.context.figure_looks import MIN_AGE, check_answers
 from skriptorium.context.manuscript_hits import MAX_HITS_TOKENS, HitsQuery, ManuscriptHits
 from skriptorium.context.parts import (
     CHARS_PER_TOKEN,
@@ -30,6 +31,7 @@ __all__ = [
     "LENGTHS",
     "MAX_BUDGET",
     "MAX_HITS_TOKENS",
+    "MIN_AGE",
     "NO_APPEARANCE",
     "OPENING_WORDS",
     "PROPOSAL_FENCE",
@@ -43,5 +45,6 @@ __all__ = [
     "ManuscriptHits",
     "PromptMessage",
     "Role",
+    "check_answers",
     "estimate_tokens",
 ]

@@ -42,6 +42,7 @@ Kind = Literal[
     "bildbeschreibung",
     "bilderzeugung",
     "aussehen",
+    "figurenassistent",
 ]
 
 

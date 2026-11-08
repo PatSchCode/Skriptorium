@@ -9,12 +9,16 @@ import pytest
 from skriptorium.canon.categories import Category
 from skriptorium.canon.sections import (
     FORMER_SECTIONS,
+    IMAGE_DESCRIPTION,
+    LOOKS_LABELS,
     SECTIONS,
     append_section,
     drop_empty_sections,
+    drop_sections,
     is_section_name,
     nest_headings,
     put_section,
+    put_section_after,
     read_labelled,
     read_part,
     read_section,
@@ -59,6 +63,10 @@ def test_put_section(case: dict[str, Any]) -> None:
 
 def test_the_shared_cases_name_the_sections_of_the_server() -> None:
     assert CASES["categories"] == {key: list(names) for key, names in SECTIONS.items()}
+    assert CASES["looks"] == {
+        "labels": list(LOOKS_LABELS),
+        "imageDescription": IMAGE_DESCRIPTION,
+    }
 
 
 @pytest.mark.parametrize("case", CASES["templates"], ids=_about)
@@ -200,3 +208,21 @@ def test_taking_skips_empty_sections_and_finds_nothing_without_text() -> None:
         None,
         "```\n## Wesen\nCode.\n```\n",
     )
+
+
+def test_drop_sections_takes_every_section_of_that_name() -> None:
+    """Step 11.5 (ADR-123): the image description stays out of requests to write."""
+    text = (
+        "Kurz.\n\n### Aussehen\n\n- **Haar:** rot\n\n### Bildbeschreibung\n\na woman\n\n"
+        "#### Unter\n\nmehr\n\n### Wesen\n\nlaut\n\n## bildbeschreibung\n"
+    )
+    assert drop_sections(text, IMAGE_DESCRIPTION) == (
+        "Kurz.\n\n### Aussehen\n\n- **Haar:** rot\n\n### Wesen\n\nlaut\n\n"
+    )
+    assert drop_sections("Ohne.\n", IMAGE_DESCRIPTION) == "Ohne.\n"
+
+
+@pytest.mark.parametrize("case", CASES["after"], ids=_about)
+def test_put_section_after(case: dict[str, Any]) -> None:
+    result = put_section_after(case["text"], case["heading"], case["after"], case["section"])
+    assert result == case["expected"]
