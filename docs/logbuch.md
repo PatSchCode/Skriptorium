@@ -29,6 +29,35 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] 11.1 erledigt, Bedrohungsmodell bleibt belastbar
+
+- **Dauer:** 2026-11-08, ca. 16:20–16:40 UTC (lokale Mac-Session, gestartet aus der Planungssession).
+- **Bearbeitet:** 11.1 – Nachtrag Runware in `docs/architecture.md` Abschnitte 3, 4 (Absatz zu 10.8 verlegt), 6, 7, 9; getrennte Prüfung; ADR-119. Branch `docs/11.1-bedrohungsmodell-runware`, Pull Request nach Freigabe des Eigentümers.
+- **Stand:** 11.1 `[ERLEDIGT]`; Phase 11 bei 1 von 16. Server unverändert `25c9bd6` (reine Dokumentation, kein Einspielen).
+- **Offen:** Pull Request mergen (Eigentümer); D.28 Lösung wählen; D.11 Frist überschritten.
+- **Nächster Schritt:** 11.2 Bildformular entlasten (Routine-Klasse), danach 11.3 (Vorlage, Entscheidungs-Klasse). Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (1 von 16, Erledigt 11.1, Als Nächstes 11.2–11.3; Architektur-Reife mit Nachtrag), Kontext (Status ab 11.2), Blocker 0. Drift: ADR-119 → 11.1 vorhanden; Reifegrad „Bedrohungsmodell Gesamtsystem“ ↔ ADR-119 passt, Kopfzeile Abschnitt 9 auf ADR-119; Modul-Liste unverändert; FR-035/FR-025 (11.1) vorhanden; 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-110 bis ADR-119); Phase 11 bei 16 geplanten Schritten. Größen: `docs/project-context.md` 351 Zeilen (Budget 600); Logbuch rund 125 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** durchgehend Opus 5.5 (Entscheidungs-Klasse, Sitzungsabfrage); 11.1 verlangt sie, 0 Schritte oberhalb der Empfehlung. Logbuch und README (Routine) nicht abgegeben – kleine Teilarbeiten mit geladenem Kontext, Routine-Abgabe ruht bis D.22. Abgegeben: getrennte Prüfung an Sonnet 5.5 – Pflicht der Methodik, keine Klassen-Abgabe.
+- **Kontextgröße:** 336.176 Token (Sitzungsabfrage) – über der Grenze 200.000 schon zu Beginn (204.747); weitergearbeitet nach dauerhaftem „weiter hier“ (2026-09-28).
+
+### 2026-11-08 – [ADR-ANGELEGT] ADR-119 Bedrohungsmodell bleibt belastbar
+
+- Vorlage als `ENTSCHEIDUNG ERFORDERLICH` mit Auswahlfragen. Eigentümer: „Bleibt belastbar“, optionale Hinweise (Tagesgrenze für Bilder, Warnschwelle Guthaben) „Nein, nicht nötig“, Pull Request „Ja“ → ADR-119.
+
+### 2026-11-08 – [BEOBACHTUNG] 11.1: Nachtrag Runware und getrennte Prüfung
+
+- Nachtrag nur aus Code (`ai_gateway/runware.py`, `api/runware_models.py`, `api/image_routes.py`, `api/app.py`, `manuscript/requests.py`, `storage/store.py`, `.env.example`), ADR-114 bis ADR-117 und Runbook Abschnitt 7. Nebenbei berichtigt: Grenze gelieferter Bilder im Bedrohungsmodell stand noch auf 25 MB statt 40 MB (ADR-109); Feldaufzählung der Anfrage-Datei (`geschaetzte_token` usw. neben, nicht in `bausteine`), `kosten_usd` `null` statt leer.
+- Getrennte Instanz: Unteragent auf Sonnet 5.5, ohne Gesprächsverlauf, nur lesend; erhielt Diff, Bedrohungsmodell und zum Abgleich die genannten Code-Dateien und ADRs. Ergebnis: keine falsche technische Aussage; Befund mittel – zweiter Ablageort des Runware-Schlüssels in der Cloud-Umgebung fehlte (ADR-115, belegt im Archiv-Logbuch Phase 10, 2026-11-07); 6 niedrige (zu gewisse Aussage zur Ausgabengrenze, veraltender Betrag, doppelter Rotationssatz, „sperrt nicht“ nur für die Anzeige, nicht erfasste Kosten bei Zeitgrenze und `processing`, Anfrage-Ablage fehlte im Bedrohungsmodell). Alle 7 im Text behoben; Bericht `docs/research/pruefung-11.1-runware.md`.
+- Reibung: Beim Behandeln von Befund 6 schrieb die KI zuerst „der Eigentümer prüft sie beim Aufladen“ – ein nicht belegter Ablauf; vor dem Commit gestrichen. Ebenso eine ungenaue Aussage zur CI ohne Schlüssel.
+
+### 2026-11-08 16:20 – [SESSIONSTART] 11.1 Bedrohungsmodell um Runware
+
+- **Modell:** eingestellt und bedient `claude-opus-5-5` (Sitzungsabfrage `get_session`) → Entscheidungs-Klasse; 11.1 verlangt sie, kein STOPP nötig.
+- **Wiedereinstieg:** `git fetch` und `pull --ff-only` gegen `origin/main` – schon aktuell (`a802faa`, PR #223 gemergt); keine offenen Pull Requests. Mindest-Lektüre vollständig; keine aktiven Blocker.
+- **Auftrag:** Session aus der Planungssession gestartet: 11.1 nach Fahrplan abarbeiten, Branch `docs/11.1-bedrohungsmodell-runware`.
+- **Kontextgröße zu Beginn:** 204.747 Token (Sitzungsabfrage `get_usage`) – über der Grenze 200.000, weil Systemkontext und Werkzeuge rund 100.000 Token belegen; weitergearbeitet nach dauerhaftem „weiter hier“ des Eigentümers (2026-09-28).
+- **Kontingent:** 5-Stunden-Fenster 18 %, Woche 3 %.
+
 ### 2026-11-08 – [SESSIONENDE] 10.8 und 10.9 abgeschlossen, Phase 10 beendet, Phase 11 geplant
 
 - **Dauer:** 2026-11-08, ca. 14:55–16:10 UTC (lokale Mac-Session; Detail-Einträge dieser Session im Archiv `docs/archiv/logbuch-phase-10.md`).
