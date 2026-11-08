@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
@@ -19,6 +19,8 @@ const FIGURE: CanonEntry = {
   ...ENTRY,
   body: "- **Wesen:** schweigsam\n- **Bart:** grau",
 };
+/** Since 11.5 a figure gets the figure assistant instead (ADR-123); a place still takes out. */
+const PLACE: CanonEntry = { ...FIGURE, category: "ort" };
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -37,11 +39,19 @@ function article(entry: CanonEntry, onSaved = vi.fn()) {
 }
 
 describe("taking out the looks of a figure (step 7.16)", () => {
-  it("is offered only to figures without a section Aussehen", () => {
-    article({ ...FIGURE, body: "## Aussehen\n\nHager." });
+  it("is not offered with a section Aussehen, nor to figures (step 11.5, ADR-123)", () => {
+    article({ ...PLACE, body: "## Aussehen\n\nHager." });
     expect(
       screen.queryByRole("button", { name: "✨ Aussehen herauslösen" }),
     ).toBeNull();
+    cleanup();
+    article(FIGURE);
+    expect(
+      screen.queryByRole("button", { name: "✨ Aussehen herauslösen" }),
+    ).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "✨ Aussehen festlegen" }),
+    ).toBeDefined();
   });
 
   it("is offered to places and items too, not to other kinds (step 10.3, ADR-108)", () => {
@@ -71,12 +81,12 @@ describe("taking out the looks of a figure (step 7.16)", () => {
     const { calls } = fakeApi({
       "GET /api/models": ok(modelList(["x-ai/grok-4.6"])),
       [STREAM]: () => ({ status: 200, stream: feed.stream }),
-      "GET /api/worlds/salzmark/entries/kael": ok(FIGURE),
-      "PATCH /api/worlds/salzmark/entries/kael": ok({ ...FIGURE, body: "neu" }),
+      "GET /api/worlds/salzmark/entries/kael": ok(PLACE),
+      "PATCH /api/worlds/salzmark/entries/kael": ok({ ...PLACE, body: "neu" }),
     });
     const saved = vi.fn();
     const user = userEvent.setup();
-    article(FIGURE, saved);
+    article(PLACE, saved);
     await user.click(
       screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
     );
@@ -112,7 +122,7 @@ describe("taking out the looks of a figure (step 7.16)", () => {
       [STREAM]: () => ({ status: 200, stream: feed.stream }),
     });
     const user = userEvent.setup();
-    article(FIGURE);
+    article(PLACE);
     await user.click(
       screen.getByRole("button", { name: "✨ Aussehen herauslösen" }),
     );

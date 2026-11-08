@@ -112,6 +112,7 @@ export type ModelTask =
   | "gesamtzusammenfassung"
   | "bildbeschreibung"
   | "aussehen"
+  | "figurenassistent"
   | "bilderzeugung";
 
 /** The saved model per task; `null` means the preset of the program. */

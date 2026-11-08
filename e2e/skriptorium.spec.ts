@@ -118,6 +118,7 @@ async function withImageModel(page: Page) {
         gesamtzusammenfassung: null,
         bildbeschreibung: null,
         aussehen: null,
+        figurenassistent: null,
         bilderzeugung: null,
       },
       catalog: [

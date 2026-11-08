@@ -46,7 +46,18 @@ const TASKS: readonly {
     note: "nur Modelle, die Bilder lesen",
     kind: "reading",
   },
-  { task: "aussehen", label: "Aussehen herauslösen", kind: "text" },
+  {
+    task: "aussehen",
+    label: "Aussehen herauslösen",
+    note: "Orte und Gegenstände",
+    kind: "text",
+  },
+  {
+    task: "figurenassistent",
+    label: "Figuren-Assistent",
+    note: "Bildbeschreibung einer Figur",
+    kind: "text",
+  },
   {
     task: "bilderzeugung",
     label: "Bilder erzeugen",

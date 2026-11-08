@@ -54,6 +54,27 @@ export function streamGuestFit(
   );
 }
 
+/**
+ * Ask the figure assistant for an English image description from the answers about a figure's
+ * looks (step 11.5, ADR-123); events as for a description. Nothing is saved.
+ */
+export function streamFigureLooks(
+  path: string,
+  model: string,
+  answers: Readonly<Record<string, string>>,
+  onEvent: (event: DescribeEvent) => void,
+  signal?: AbortSignal,
+): Promise<void> {
+  return streamEvents(
+    path,
+    { model, answers },
+    WRITE_EVENTS,
+    { type: "error", kind: "verbindung" },
+    onEvent,
+    signal,
+  );
+}
+
 export const describeApi = {
   describeImagePath: (world: string, entry: string, image: string) =>
     `${worldPath(world)}/entries/${enc(entry)}/images/${enc(image)}/describe`,
@@ -62,4 +83,7 @@ export const describeApi = {
   /** Stream of "Aussehen herauslösen" (step 7.16); takes `{model}` like a description. */
   appearancePath: (world: string, entry: string) =>
     `${worldPath(world)}/entries/${enc(entry)}/appearance`,
+  /** Stream of the figure assistant (step 11.5, ADR-123); takes `{model, answers}`. */
+  figureLooksPath: (world: string, entry: string) =>
+    `${worldPath(world)}/entries/${enc(entry)}/figure-looks`,
 };

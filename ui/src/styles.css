@@ -2835,3 +2835,86 @@ li.guest {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }
+
+/* The figure assistant (step 11.5, ADR-123): questions with choices, drafts in a grid. */
+.figure-looks {
+  max-height: none;
+}
+
+.figure-looks-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.figure-looks-questions fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.3rem 0 0.5rem;
+  border: none;
+  border-bottom: 1px solid var(--field-line);
+}
+
+.figure-looks-questions legend {
+  padding: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.figure-looks-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.figure-looks-chips button {
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.figure-looks-chips button[aria-pressed="true"] {
+  background: var(--text);
+  color: var(--page);
+}
+
+.figure-drafts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.figure-drafts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .figure-drafts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.figure-drafts-grid button {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.75rem;
+}
+
+.figure-drafts-grid button.chosen {
+  border-color: var(--text);
+}
+
+.figure-drafts-grid img {
+  width: 100%;
+  border-radius: 4px;
+}
