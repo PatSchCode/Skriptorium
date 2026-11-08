@@ -18,6 +18,7 @@ def test_lists_image_models_without_vector_models(logged_in: TestClient) -> None
     body = logged_in.get("/api/images/models").json()
     assert body["default"] == "black-forest-labs/flux.2-pro"
     assert [m["id"] for m in body["models"]] == [
+        "black-forest-labs/flux.2-flex",
         "black-forest-labs/flux.2-pro",
         "bytedance-seed/seedream-4.5",
     ]

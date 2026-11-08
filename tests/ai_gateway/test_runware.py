@@ -84,7 +84,16 @@ def test_generate_without_loras_sends_none_and_bounds_the_prompt() -> None:
     asyncio.run(adapter.generate(ImageOrder("runware:400@1", "x" * 5000, "1:1")))
     task = json.loads(seen[0].content)[0]
     assert "lora" not in task
+    assert "seed" not in task
     assert len(task["positivePrompt"]) == MAX_PROMPT_CHARS
+
+
+def test_generate_sends_a_given_start_value() -> None:
+    # Step 11.4 (ADR-121).
+    seen: list[httpx.Request] = []
+    adapter = _adapter(_image_handler(seen))
+    asyncio.run(adapter.generate(ImageOrder("runware:400@1", "Kael", "1:1", seed=42)))
+    assert json.loads(seen[0].content)[0]["seed"] == 42
 
 
 @pytest.mark.parametrize(

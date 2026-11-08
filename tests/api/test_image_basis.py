@@ -128,6 +128,7 @@ def test_image_models_name_how_many_bases_they_take(logged_in: TestClient) -> No
     assert {m["id"]: m["references"] for m in models} == {
         "black-forest-labs/flux.2-pro": 8,
         "bytedance-seed/seedream-4.5": 0,
+        "black-forest-labs/flux.2-flex": 0,
     }
 
 

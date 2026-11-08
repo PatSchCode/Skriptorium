@@ -39,6 +39,8 @@ class ImageModel:
     # The levels it offers, as the catalog names them (ADR-109); empty for none.
     resolutions: tuple[str, ...] = ()
     qualities: tuple[str, ...] = ()
+    # Whether it takes a start value (``seed`` in the catalog; step 11.4, ADR-121).
+    seed: bool = False
 
 
 @dataclass(frozen=True)
@@ -87,8 +89,9 @@ class LoraChoice:
 @dataclass(frozen=True)
 class ImageOrder:
     """What the caller asks for: model, prompt, aspect ratio such as ``2:3``, optionally one
-    image as the basis and the resolution and quality the model offers (ADR-109), and the
-    additions to the model (LoRAs, only at Runware, ADR-115)."""
+    image as the basis and the resolution and quality the model offers (ADR-109), the
+    additions to the model (LoRAs, only at Runware, ADR-115) and the start value (ADR-121;
+    ``None`` leaves it to the provider)."""
 
     model: str
     prompt: str
@@ -97,6 +100,7 @@ class ImageOrder:
     resolution: str | None = None
     quality: str | None = None
     loras: tuple[LoraChoice, ...] = ()
+    seed: int | None = None
 
 
 @dataclass(frozen=True)
@@ -261,6 +265,7 @@ def _model(item: Mapping[str, object]) -> ImageModel | None:
         references=most if isinstance(most, int) and not isinstance(most, bool) and most > 0 else 0,
         resolutions=_levels(parameters.get("resolution")),
         qualities=_levels(parameters.get("quality")),
+        seed="seed" in parameters,
     )
 
 

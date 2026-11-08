@@ -274,6 +274,8 @@ def _inference(order: ImageOrder) -> dict[str, object]:
     }
     if order.loras:
         task["lora"] = [{"model": lora.model, "weight": lora.weight} for lora in order.loras]
+    if order.seed is not None:
+        task["seed"] = order.seed
     return task
 
 

@@ -1,11 +1,19 @@
 """Tests for the origin of generated images in a companion file (steps 9.6, 10.5)."""
 
 import os
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from skriptorium.storage import DocumentStore, ImageOrigin, InvalidInput, NotFound, StorageError
+from skriptorium.storage import (
+    DocumentStore,
+    ImageOrigin,
+    InvalidInput,
+    NotFound,
+    OriginLora,
+    StorageError,
+)
 from skriptorium.storage.frontmatter import HeaderValue
 from skriptorium.storage.origins import origin_from_mapping, origin_to_mapping
 from tests.image_samples import png
@@ -160,3 +168,45 @@ def test_resolution_and_quality_round_trip(store: DocumentStore) -> None:
     for field in ("aufloesung", "qualitaet"):
         with pytest.raises(InvalidInput, match="Auflösung oder Qualität"):
             origin_from_mapping({**origin_to_mapping(ORIGIN), field: 2})
+
+
+def test_start_value_loras_and_appended_text_round_trip(
+    store: DocumentStore, tmp_path: Path
+) -> None:
+    # Step 11.4 (ADR-121).
+    full = replace(
+        ORIGIN,
+        seed=1834072215,
+        loras=(OriginLora("civitai:536201@596079", "Nebelstimmung", 0.8),),
+        appended="fog, misty harbour",
+    )
+    store.write_image(IMAGE, png(), origin=full)
+    assert store.read_image_origin(IMAGE) == full
+    text = (tmp_path / "data" / COMPANION).read_text(encoding="utf-8")
+    assert "startwert: 1834072215\n" in text
+    assert "angehaengt: fog, misty harbour\n" in text
+    # Without them the file looks as before.
+    assert set(origin_to_mapping(ORIGIN)) == {
+        "modell",
+        "anweisung",
+        "seitenverhaeltnis",
+        "kosten_usd",
+        "datum",
+    }
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"startwert": "7"},
+        {"startwert": True},
+        {"angehaengt": 3},
+        {"loras": "civitai:1@2"},
+        {"loras": [{"kennung": "a:b@c", "name": "x"}]},
+        {"loras": [{"kennung": "a:b@c", "name": "x", "gewicht": True}]},
+        {"loras": ["a:b@c"]},
+    ],
+)
+def test_refuses_a_wrong_start_value_or_lora(change: dict[str, HeaderValue]) -> None:
+    with pytest.raises(InvalidInput):
+        origin_from_mapping(origin_to_mapping(ORIGIN) | change)

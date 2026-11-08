@@ -151,6 +151,9 @@ def _payload(order: ImageOrder, endpoints: tuple[ImageEndpoint, ...]) -> dict[st
         payload["resolution"] = order.resolution
     if order.quality is not None:
         payload["quality"] = order.quality
+    # Only for models whose catalog entry names it (ADR-121); the caller checks that.
+    if order.seed is not None:
+        payload["seed"] = order.seed
     if order.reference is not None:
         encoded = base64.b64encode(order.reference.data).decode("ascii")
         payload["input_references"] = [

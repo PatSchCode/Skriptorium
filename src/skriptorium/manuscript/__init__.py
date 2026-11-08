@@ -29,7 +29,14 @@ from skriptorium.manuscript.service import (
     WritingRequest,
     WritingStyle,
 )
-from skriptorium.storage import AlreadyExists, ImageOrigin, InvalidInput, NotFound, StorageError
+from skriptorium.storage import (
+    AlreadyExists,
+    ImageOrigin,
+    InvalidInput,
+    NotFound,
+    OriginLora,
+    StorageError,
+)
 
 __all__ = [
     "ATMOSPHERES",
@@ -53,6 +60,7 @@ __all__ = [
     "InvalidInput",
     "ManuscriptService",
     "NotFound",
+    "OriginLora",
     "RequestBlock",
     "RequestMessage",
     "RequestSummary",
