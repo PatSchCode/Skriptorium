@@ -43,6 +43,10 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 - Warten nur über HTTPS: `/api/health` zuerst 404 (sechs Abfragen im Abstand von 10 s, Container noch im Start), dann 200 nach rund 70 s; Anmeldeseite 200. Eine SSH-Prüfung: `healthy`, `REVISION` `ad29ed0`.
 - Offen: Probe des Eigentümers am Server (Assistent an einer echten Figur, 4 Entwürfe, Hauptbild); erst danach 11.5 `[ERLEDIGT]`.
 
+### 2026-11-08 – [GELÖST] D.28 auf dem Mac nachgewiesen
+
+- Der Commit `5da4c66` (erster Commit in einer Mac-Session seit ADR-122) lief ohne Behelf: `markdownlint-cli2` Passed, alle 17 Hooks grün (Netz zur npm-Registry war da, Hook-Umgebung entstand neu). Akzeptanzkriterium „Mac unverändert“ erfüllt → D.28 `[ERLEDIGT]`.
+
 ### 2026-11-08 – [SESSIONENDE] 11.5 gebaut und gemergt, 11.17 angelegt
 
 - **Dauer:** 2026-11-08, ca. 21:12–22:05 UTC (Cloud-Session; Branches `feat/11.5-figuren-assistent`, `docs/11.5-sessionende`).
