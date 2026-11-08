@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 20:42 – [SESSIONSTART] D.28 Pre-Commit-Hook markdownlint in der Cloud-Session
+
+- **Modell:** eingestellt und bedient `claude-sonnet-5-5` (Sitzungsabfrage `get_session`) → Routine-Klasse. D.28 ist freigabepflichtig (Kategorie 7) und löst damit die Pflicht-Eskalation auf die Entscheidungs-Klasse aus (`CLAUDE.md` Abschnitt 0, Auslöser 1) → STOPP MODELLWECHSEL ERFORDERLICH, Arbeit an D.28 ruht bis zur Antwort des Eigentümers.
+- **Wiedereinstieg:** Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker; Branch `scp/upbeat-lamport-720j8m` (Cloud-Session, Branch vom Werkzeug vergeben, Projektkontext Abschnitt 10).
+- **Auftrag:** „Fang erstmal mit D.28 an“. D.28 steht im Fahrplan auf ⚪ OFFEN, „Vorschlag an den Eigentümer steht aus“; eine Lösung ist noch nicht freigegeben.
+- **Kontextgröße zu Beginn:** Sitzungsabfrage meldet 0 von 1.000.000 Token (Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster `allowed`, ohne Prozentangabe; Wochenstand nicht gemeldet.
+
 ### 2026-11-08 – [SESSIONENDE] 11.1 bis 11.4 erledigt und eingespielt
 
 - **Dauer:** 2026-11-08, ca. 16:20–20:35 UTC (lokale Mac-Session, mit Pausen des Eigentümers); ersetzt als Wiedereinstieg die beiden Sessionende-Einträge darunter.
