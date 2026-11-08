@@ -29,6 +29,17 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-08 – [SESSIONENDE] V.57/V.58 angelegt, 10.9 gebaut, PR #221 grün
+
+- **Dauer:** 2026-11-08, ca. 13:10–14:45 UTC (Cloud-Session).
+- **Bearbeitet:** V.57 und V.58 angelegt (PR #220, gemergt vom Eigentümer); 10.9 Vorlage mit Mockup → ADR-116, gebaut durch Unteragenten, nachgeprüft, PR #221 – CI grün auf `08f0174` (alle vier Jobs).
+- **Stand:** `main` mit #220; 10.9 auf `feat/10.9-anfrage-festhalten` (PR #221), wartet auf Bestätigung des Eigentümers. Auf dem Server weiter `de64667`.
+- **Offen:** PR #221 bestätigen und mergen (Eigentümer); Einspielen vom Mac: 10.8 (`RUNWARE_API_KEY` in die `.env`, Durchreichen in der Compose-Datei prüfen, Probe; Vorbelegung aus „Aussehen“ bei Runware-Modellen prüfen) und 10.9 (Probe: eine Anfrage schreiben, im Reiter „Anfragen“ ansehen); danach 10.8 und 10.9 `[ERLEDIGT]`. D.28 Lösung wählen; `minimatch` unter ESLint; überholter lokaler Zweig auf dem Mac.
+- **Nächster Schritt:** Mac-Session: 10.8 und 10.9 einspielen; danach 10.11 Planung (mit Vision-Abgleich, Pflichtfrage, Prüfauftrag „Figuren und Bilder“ V.52–V.58). Datiert: D.5 ab 2026-11-12; D.11 Frist überschritten.
+- **Sessionende-Prüfungen:** README gegen Fahrplan (8 von 11, 10.8 und 10.9 in Arbeit, Als Nächstes) und CHANGELOG (10.9 ergänzt) abgeglichen; Blocker 0. Drift: ADR-116 → 10.9 vorhanden; V.57/V.58 in 10.11 und Übersicht; Reifegrade unverändert; Modul-Liste unverändert (manuscript, api, ui); 0 blockierte Schritte; Reaktiv-Quote 0/10 (ADR-107 bis ADR-116); Phase 10 bei 11 geplanten Schritten. Größen: `docs/project-context.md` 351 Zeilen (Budget 600); Logbuch 1.156 Zeilen über dem Trigger 800 – nur November-Scheibe aktiv, Verdichtung beim Phasen-Wechsel nach 10.11. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** aktiv Opus 5.5 (Entscheidungs-Klasse; Sitzungsabfrage: eingestellt und bedient `claude-opus-5-5`). 10.9 auf seiner Empfehlung; oberhalb: Anlage V.57/V.58, Logbuch, README (Routine), Warnung zu Beginn gegeben, nicht abgegeben (Routine-Abgabe ruht bis D.22). Abgegeben: Bau von 10.9 an einen Unteragenten derselben Klasse – wegen Sessiongröße, nicht als Klassen-Abgabe.
+- **Kontextgröße:** 300.271 Token (Sitzungsabfrage) – über der Grenze 200.000 seit der Vorlage zu 10.9 (218.820); weiter auf „Weiter hier“ des Eigentümers. Nächste Session neu beginnen.
+
 ### 2026-11-08 – [BEOBACHTUNG] 10.9 gebaut (Unteragent), nachgeprüft
 
 - Bau durch einen frischen Unteragenten (Opus) nach ADR-116; drei Commits `cc09b88` (manuscript/api), `316bf34` (ui), `89861cb` (Datenmodell in `docs/architecture.md` Abschnitt 7, FR-027). Kennung `JJJJMMTT-HHMMSS` (Zusatz `-2` … bei gleicher Sekunde), reserviert bei Streambeginn; geschrieben im selben `finally` wie der Verbrauch, Speicherfehler nur als Art im Log, Stream unberührt. Routen `GET …/stories/{s}/requests` und `…/requests/{id}` (Routen 91); Feld `request` im `start`-Ereignis und im Verlauf (englische JSON-Namen wie überall; Dateikopf deutsch).
