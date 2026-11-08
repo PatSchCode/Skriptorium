@@ -8,10 +8,10 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-08 (D.28 umgesetzt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
+- **Stand vom:** 2026-11-08 (D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 - **Laufende Phase:** Phase 11 „Figuren, Bilder und Feinschliff“ (Phase 10 abgeschlossen 2026-11-08)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** D.28 (Querschnitt, ADR-122) – umgesetzt, offen sind CI im Pull Request und der Nachweis auf dem Mac; in Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08, 11.5 noch nicht begonnen.
+- **Aktiver Schritt:** D.28 (Querschnitt, ADR-122) – gemergt (#230), offen ist nur der Nachweis beim ersten Commit auf dem Mac; in Phase 11 sind 11.1 bis 11.4 erledigt 2026-11-08, 11.5 noch nicht begonnen.
 - **Nächster Schritt:** 11.5 Figuren-Assistent für das Aussehen (Vorlage mit Grundsatzfrage und kurzer Probe der Textmodelle), danach 11.6 Bildrezepte. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
@@ -49,7 +49,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
-| 🟠 | D.28 | Pre-Commit-Hook markdownlint in der Cloud-Session | in Arbeit (ADR-122: `language_version: system`, in der Cloud-Session ohne Behelf grün) | du: Pull Request mergen; KI: Nachweis beim ersten Commit auf dem Mac |
+| 🟠 | D.28 | Pre-Commit-Hook markdownlint in der Cloud-Session | in Arbeit (ADR-122, PR #230 gemergt; Cloud-Session ohne Behelf grün) | KI: Nachweis beim ersten Commit auf dem Mac |
 | ✅ | D.1 | Wechsel Node.js 24 → Node.js 26 LTS | erledigt 2026-11-05 (ADR-112: 26.12.1, PR #212) | – |
 | ⚪ | D.2 | Nachprüfung TypeScript 7 | offen | KI – am 2027-01-08 |
 | ⚪ | D.3 | Nachprüfung httpx | offen | KI – am 2027-03-26 |
@@ -821,7 +821,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 
 #### D.28: Pre-Commit-Hook markdownlint in der Cloud-Session
 
-- **Status:** 🟠 IN ARBEIT (seit 2026-11-08) – Eigentümer wählte A (ADR-122); umgesetzt auf `scp/upbeat-lamport-720j8m`: `language_version: system` am Hook in `.pre-commit-config.yaml`. Nachgewiesen in der Cloud-Session mit frischem pre-commit-Cache, ohne Behelf: alle 17 Hooks über alle Dateien grün, Node im Hook 26.12.1; der Commit dazu lief ebenso ohne Behelf. Offen: CI grün (Pull Request), Nachweis „Mac unverändert“ (erster Commit in einer Mac-Session nach dem Merge)
+- **Status:** 🟠 IN ARBEIT (seit 2026-11-08) – Eigentümer wählte A (ADR-122); `language_version: system` am Hook in `.pre-commit-config.yaml`; PR #230 → `acf11de`, CI vier Jobs grün, auf Anweisung des Eigentümers gemergt; kein Einspielen nötig. Nachgewiesen in der Cloud-Session mit frischem pre-commit-Cache, ohne Behelf: alle 17 Hooks über alle Dateien grün, Node im Hook 26.12.1; der Commit dazu lief ebenso ohne Behelf. Offen: Nachweis „Mac unverändert“ (erster Commit in einer Mac-Session)
 - **Phasentyp-Kontext:** STABILISIERUNG
 - **Abhängigkeiten:** D.1
 - **Frist:** keine harte – Behelf je Commit vorhanden
