@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 01:02 – [SESSIONSTART] Neue lokale Mac-Session, Wiedereinstieg nach 11.5 und 11.17
+
+- **Modell:** eingestellt `claude-opus-5-5` (Sitzungsabfrage `get_session`: `model`; Systemkontext ebenso) → Entscheidungs-Klasse. Ein bedientes Modell getrennt davon meldet die Abfrage nicht. Für das Einspielen von 11.5 (Routine) liegt die Session oberhalb der Empfehlung; 11.17 (Eintragen nach ADR-125) gehört zu einem Schritt mit Empfehlung Entscheidung. Abgabe an Unteragenten entfällt (D.22).
+- **Wiedereinstieg:** `git fetch` und `pull --ff-only` gegen `origin/main` – war 13 Commits zurück, jetzt `e7e00f6` (PR #236 gemergt); keine offenen Pull Requests. Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker. Branch `docs/11.5-11.17-mac`.
+- **Auftrag:** noch keiner genannt („Neue Session“); laut Fahrplan „Nächster Schritt“: Mac-Session – 11.5 einspielen (nur auf Anweisung, ADR-039) und abnehmen lassen; 11.17 eintragen nach ADR-125 und Stichprobe; dann 11.6.
+- **Kontextgröße zu Beginn:** 188.332 Token (Sitzungsabfrage `get_usage`; Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster 12 %, Woche 9 % (Zurücksetzung 2026-11-15 08:00 UTC).
+
 ### 2026-11-09 – [SESSIONENDE] 11.5 gemergt, 11.17 entschieden, Eintragen vom Mac offen
 
 - **Dauer:** 2026-11-08 ca. 23:42 bis 2026-11-09 ca. 01:00 UTC (Cloud-Session; ergänzt den Sessionende-Eintrag weiter unten, der vor Prüfung, Merge und 11.17 geschrieben war).
