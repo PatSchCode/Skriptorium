@@ -15,12 +15,13 @@ export const DRAFTS = 4;
 
 /**
  * What the drafts add to the image description, changeable before generating (owner, ADR-123:
- * "Zusatz frei"): the whole figure in plain underwear before a neutral background, so build,
- * proportions and face can be compared (owner after the trial of 2026-11-09: clothes hid the
- * proportions; ADR-123, addendum).
+ * "Zusatz frei"): the whole figure from head to feet in skimpy underwear before a neutral
+ * background, so build, proportions and face can be compared (owner after the trials of
+ * 2026-11-09: clothes, then plain underwear and a cropped frame hid the proportions; ADR-123,
+ * addendum). The framing words keep Krea 2 Turbo from cutting at the thighs (probe 2026-11-09).
  */
 export const DRAFT_ADDITION =
-  "full body, standing, facing the camera, arms relaxed at the sides, wearing only plain black underwear, barefoot, neutral grey studio background, soft even light";
+  "wide full-length photo, the entire body from head to bare feet visible in frame, space above the head and below the feet, standing straight, facing the camera, arms held slightly away from the body, wearing only a skimpy black string thong and a minimal black triangle bra, barefoot, plain light grey studio background, soft even light, camera at hip height";
 
 /** A draft the author picked, with what is kept as its origin (step 9.6, ADR-095; 11.4). */
 export interface ChosenDraft {
