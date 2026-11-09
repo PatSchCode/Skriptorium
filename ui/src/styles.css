@@ -2836,6 +2836,27 @@ li.guest {
   }
 }
 
+/* Bildrezepte (step 11.6, ADR-126): the list in the settings, "Als Rezept speichern" in the dialog. */
+.recipe-item {
+  margin-bottom: 0.5rem;
+}
+
+.recipe-item textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-save {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+  border: 1px solid var(--line, currentColor);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+
 /* The figure assistant (step 11.5, ADR-123, ADR-124): questions with suggestions, drafts in a grid. */
 .figure-looks {
   max-height: none;

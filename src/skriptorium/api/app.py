@@ -32,6 +32,7 @@ from skriptorium.api import (
     canon_routes,
     image_routes,
     manuscript_routes,
+    recipe_routes,
     usage_routes,
     writing_routes,
 )
@@ -46,6 +47,7 @@ from skriptorium.api.access import (
 from skriptorium.api.access.pwned import BreachedPasswordCheck
 from skriptorium.api.context import Services
 from skriptorium.api.favorites import Favorites
+from skriptorium.api.image_recipes import ImageRecipes
 from skriptorium.api.runware_models import RunwareModels
 from skriptorium.api.settings import Settings
 from skriptorium.api.usage import UsageLog
@@ -160,6 +162,7 @@ def create_app(
         images=images,
         runware=runware,
         runware_models=RunwareModels(store),
+        image_recipes=ImageRecipes(store),
     )
 
     @app.get("/api/health")
@@ -173,6 +176,7 @@ def create_app(
     app.include_router(manuscript_routes.router)
     app.include_router(writing_routes.router)
     app.include_router(image_routes.router)
+    app.include_router(recipe_routes.router)
     app.include_router(usage_routes.router)
     _add_error_handlers(app)
     app.middleware("http")(_origin_check)

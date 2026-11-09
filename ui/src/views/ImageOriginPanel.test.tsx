@@ -87,6 +87,18 @@ describe("origin of a generated image (step 9.6, ADR-095)", () => {
     expect(regenerate).toHaveBeenCalledWith(ORIGIN);
   });
 
+  it("names the recipe the image was made with (step 11.6, ADR-126)", async () => {
+    const user = userEvent.setup();
+    render(
+      <ImageOriginPanel
+        load={() => Promise.resolve({ ...ORIGIN, recipe: "Kerker, Seil" })}
+      />,
+    );
+    await user.click(await screen.findByText("Herkunft"));
+    expect(screen.getByText("Rezept")).toBeDefined();
+    expect(screen.getByText("Kerker, Seil")).toBeDefined();
+  });
+
   it("shows nothing for an uploaded image", async () => {
     const load = vi.fn(() => Promise.resolve(null));
     const { container } = render(<ImageOriginPanel load={load} />);

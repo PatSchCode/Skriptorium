@@ -29,6 +29,20 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [ADR] 11.6 Bildrezepte: Vorlage freigegeben, gebaut (ADR-126)
+
+- #239 gemergt (4 Pflicht-Checks grün, „Du mergst“; automatisches Mergen im Repo nicht erlaubt).
+- **Vorlage:** Vergleichsseite vorher/nachher (Desktop und Smartphone, je Ansicht nebeneinander) aus echten Bildschirmfotos der lokalen Oberfläche mit den Testwelten Salzmark und Glimmergrund im Arbeitsverzeichnis der Session (Test-Passwort der E2E-Fixture, Schein-Schlüssel ohne Wert, keine Bilder erzeugt); Nachher per Playwright in die echte Seite eingesetzt. Auswahlfragen: „Füllt das Fenster“, „Neben Runware-Liste“, „Mit 11.8 nachrüsten“, Mockup „Passt so“ – jeweils Empfehlung. ADR-126; 11.8 um Schritte/CFG im Rezept und die erneute Ortsfrage ergänzt.
+- **Gebaut** auf `feat/11.6-bildrezepte`: `api/image_recipes.py` (Ablage `system/bildrezepte.md`), `api/recipe_routes.py` (3 Routen, angemeldet), Herkunft `rezept`; Oberfläche `imageRecipes.ts`, `RecipeChoice.tsx`, `RecipeSettings.tsx`, Einbau in `ImageGenerate.tsx` (nur bei Figuren, nicht bei „Bild zu Bild“), `useImageLevels.takeLevels`. Auflösung und Qualität stehen schon im Rezept (V.57 (1)); Schritte/CFG kommen mit 11.8.
+- **Prüfung:** pytest 1.412 grün, 99,91 % (neue Dateien 100 %); bandit ohne Befund; vitest 656 grün, Abdeckung 98,83 % Zeilen / 94,81 % Zweige; `tsc`, `eslint`, `prettier`, `ruff`, `mypy` ohne Befund. Vertragstest um 3 Antworten ergänzt (Kennung im Test festgesetzt). Sicherheitstest: 96 Routen, 93 geschützt. Lokal in der echten Oberfläche: Rezept bei Ilka Varn (Salzmark) gespeichert, bei Brack (Glimmergrund) angewendet – Bildbeschreibung an `[Figur]`, Krea 2 Turbo, Rope Bondage 0,6; Fotos Desktop und Smartphone entsprechen dem Mockup (Szenenfeld in den Einstellungen nach dem ersten Foto auf volle Breite gesetzt).
+- **Beobachtung:** Eine Szene mit „her back“ passt nicht zu einer männlichen Figur – Szenen besser neutral formulieren („behind the back“). Hinweis an den Eigentümer, kein Code.
+- **Offen:** PR, CI, Einspielen, Probe mit echten Bildern (ein Rezept für zwei Figuren aus verschiedenen Welten), Abnahme. 11.6 bleibt 🟠 IN ARBEIT.
+
+### 2026-11-09 – [GELÖST] Mockup zeigte alten Stand: Oberfläche im falschen Ordner gebaut
+
+- `npx vite build` aus `ui/` baut ohne die Konfiguration im Wurzelverzeichnis nach `ui/dist/`; der Server liefert `dist/ui/` (Bau aus dem Wurzelverzeichnis, `vite.config.ts`: `outDir: "../dist/ui"`). Folge: Das Vorher-Foto zeigte den Stand vom Vortag ohne Bildbeschreibung – zuerst für einen Fehler aus 11.5 gehalten. Prüfung: `entryPrompt` liefert mit dem Text vom Server die Bildbeschreibung (Test), Server liefert sie aus. Lösung: aus dem Wurzelverzeichnis bauen, `ui/dist/` gelöscht. Wie bei vitest: Befehle der Oberfläche vom Wurzelverzeichnis aus.
+- Zweite Reibung: Elementfotos größer als das Fenster schnitten ab (die Seite scrollt in einem inneren Bereich, nicht im Fenster). Lösung: Fenster für das Foto auf 3.200 Pixel Höhe setzen, dann das Element fotografieren.
+
 ### 2026-11-09 – [BEOBACHTUNG] 11.5 und 11.17 erledigt
 
 - Eigentümer nach dem Einspielen von `f4f8b29` auf die Frage nach Entwürfen und Armbinder: „Passt“. Damit 11.5 (ADR-123, ADR-124) abgenommen und 11.17 (ADR-125) bestätigt; beide ✅ ERLEDIGT 2026-11-09.
