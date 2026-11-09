@@ -50,7 +50,7 @@ from typing import Final
 from skriptorium.canon import CanonService, InvalidInput, NotFound
 from skriptorium.context.appearance import build_appearance
 from skriptorium.context.describe import build_entry_image_description, build_map_description
-from skriptorium.context.figure_looks import build_figure_looks
+from skriptorium.context.figure_looks import build_figure_looks, build_looks_suggestions
 from skriptorium.context.guest_fit import build_guest_fit
 from skriptorium.context.manuscript_hits import HitsQuery, ManuscriptHits, find_hits
 from skriptorium.context.parts import (
@@ -224,6 +224,17 @@ class ContextBuilder:
         """Request of the figure assistant for an English image description (step 11.5); see
         :func:`skriptorium.context.figure_looks.build_figure_looks`."""
         return build_figure_looks(self._canon, world_id, entry_id, answers, budget)
+
+    def build_looks_suggestions(
+        self,
+        world_id: str,
+        entry_id: str,
+        answers: Mapping[str, str],
+        budget: int = MAX_BUDGET,
+    ) -> BuiltContext:
+        """Request of the figure assistant for suggestions per question (step 11.5, ADR-124); see
+        :func:`skriptorium.context.figure_looks.build_looks_suggestions`."""
+        return build_looks_suggestions(self._canon, world_id, entry_id, answers, budget)
 
     def build_guest_fit(
         self,
