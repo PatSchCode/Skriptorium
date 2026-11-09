@@ -111,7 +111,7 @@ describe("the suggestions of the model (step 11.5, ADR-124)", () => {
     const found = parseSuggestions(
       [
         "- **Herkunft:** a | | b | c | d",
-        "Alter: 17 | zwanzig | 40 | 41 | 42 | 43",
+        "Alter: 17 | zwanzig | 40 | 40 | 41 | 42 | 43",
         "Kleidung: Mantel | Hut",
         "Haar: erstes | zweites",
         "Haar: doppelt | wird ignoriert",
@@ -134,7 +134,7 @@ describe("the suggestions of the model (step 11.5, ADR-124)", () => {
 
   it("lists the line in the entry, the pick and the suggestions, each text once", () => {
     const chips = chipsFor("kupferrot", "hellrot", [
-      { text: "Kupferrot", fromEntry: false },
+      { text: "kupferrot", fromEntry: false },
       { text: "hellrot", fromEntry: true },
       { text: "schwarz", fromEntry: false },
     ]);
@@ -143,6 +143,10 @@ describe("the suggestions of the model (step 11.5, ADR-124)", () => {
       { text: "hellrot", fromEntry: false, own: false },
       { text: "schwarz", fromEntry: false, own: false },
     ]);
+    // A pick differing from the entry's line only in case stays visible.
+    expect(
+      chipsFor("kupferrot", "Kupferrot", []).map((chip) => chip.text),
+    ).toEqual(["kupferrot", "Kupferrot"]);
     expect(chipsFor(null, null, [])).toEqual([]);
     expect(chipsFor("", "", [{ text: "grau", fromEntry: true }])).toEqual([
       { text: "grau", fromEntry: true, own: false },

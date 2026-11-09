@@ -113,9 +113,9 @@ function suggestion(item: string): Suggestion {
 
 /**
  * The model's reply – one line `Frage: a | b | c` per question – as suggestions. Bullets and
- * bold around the question are tolerated; unknown questions, empty items and, for the age,
- * anything but an adult whole number are dropped; a question appears once, with at most three
- * suggestions. A reply without a single usable line gives an empty object.
+ * bold around the question are tolerated; unknown questions, empty or repeated items and, for
+ * the age, anything but an adult whole number are dropped; a question appears once, with at most
+ * three suggestions. A reply without a single usable line gives an empty object.
  */
 export function parseSuggestions(reply: string): Suggestions {
   const result: Suggestions = {};
@@ -139,7 +139,10 @@ export function parseSuggestions(reply: string): Suggestions {
       .split("|")
       .map(suggestion)
       .filter(
-        (item) => item.text !== "" && (label !== AGE || adultAge(item.text)),
+        (item, index, all) =>
+          item.text !== "" &&
+          (label !== AGE || adultAge(item.text)) &&
+          all.findIndex((other) => other.text === item.text) === index,
       )
       .slice(0, SUGGESTIONS_PER_QUESTION);
     if (items.length > 0) {
@@ -157,6 +160,7 @@ export interface Chip extends Suggestion {
 /**
  * The chips of one question (not the age): the line already in the entry, the answer picked now
  * and then the suggestions – each text once, so a pick stays visible when new suggestions come.
+ * Texts count as the same only when they match exactly: the pick is found by its exact text.
  */
 export function chipsFor(
   own: string | null,
@@ -165,11 +169,7 @@ export function chipsFor(
 ): Chip[] {
   const chips: Chip[] = [];
   const add = (item: Suggestion, isOwn: boolean) => {
-    const key = item.text.toLowerCase();
-    if (
-      item.text !== "" &&
-      !chips.some((chip) => chip.text.toLowerCase() === key)
-    ) {
+    if (item.text !== "" && !chips.some((chip) => chip.text === item.text)) {
       chips.push({ ...item, own: isOwn });
     }
   };
