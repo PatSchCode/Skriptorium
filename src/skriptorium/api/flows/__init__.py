@@ -2,7 +2,7 @@
 
 from skriptorium.api.flows.appearance import prepare_appearance
 from skriptorium.api.flows.describe import DescribeOrder, prepare_description
-from skriptorium.api.flows.figure_looks import prepare_figure_looks
+from skriptorium.api.flows.figure_looks import prepare_figure_looks, prepare_looks_suggestions
 from skriptorium.api.flows.guest_fit import FitOrder, prepare_guest_fit
 from skriptorium.api.flows.removal import (
     EntryDeletion,
@@ -71,6 +71,7 @@ __all__ = [
     "prepare_description",
     "prepare_figure_looks",
     "prepare_guest_fit",
+    "prepare_looks_suggestions",
     "prepare_request",
     "prepare_worldbuilder",
     "stream_answer",

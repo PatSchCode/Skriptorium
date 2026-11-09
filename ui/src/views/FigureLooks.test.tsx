@@ -13,6 +13,12 @@ vi.mock("../files", () => ({
 }));
 
 const STREAM = "POST /api/worlds/salzmark/entries/kael/figure-looks";
+const SUGGEST = `${STREAM}/suggestions`;
+const REPLY = [
+  "Herkunft: nordeuropäisch wirkend | keltisch wirkend | slawisch wirkend",
+  "Alter: 24 | 26 | 28",
+  "Haar: kupferrot, glatt, taillenlang [Eintrag] | hellrot | dunkelblond",
+].join("\n");
 const ENTRY_GET = "GET /api/worlds/salzmark/entries/kael";
 const PATCH = "PATCH /api/worlds/salzmark/entries/kael";
 const DESCRIPTION = "a 34-year-old adult Northern European man, black hair";
@@ -47,7 +53,10 @@ function finish(feed: ReturnType<typeof sseFeed>, text: string) {
 
 async function answerAndFormulate(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByRole("textbox", { name: "Alter" }), "34");
-  await user.click(screen.getByRole("button", { name: "Nordeuropa" }));
+  await user.type(
+    screen.getByRole("textbox", { name: "Herkunft (frei)" }),
+    "Nordeuropa",
+  );
   await user.type(
     screen.getByRole("textbox", { name: "Haar (frei)" }),
     "schwarz",
@@ -253,6 +262,9 @@ describe("the figure assistant (step 11.5, ADR-123)", () => {
     open();
     expect(await screen.findByText("kaputt")).toBeDefined();
     expect(screen.queryByRole("combobox", { name: "Modell" })).toBeNull();
+    expect(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    ).toHaveProperty("disabled", true);
   });
 
   it("asks before it replaces looks, and back to the questions keeps the answers", async () => {
@@ -412,5 +424,196 @@ describe("the figure assistant (step 11.5, ADR-123)", () => {
     ).toBeDefined();
     await user.click(screen.getByRole("button", { name: "Abbrechen" }));
     expect(onClose).toHaveBeenCalled();
+  });
+});
+
+describe("the suggestions for the questions (step 11.5, ADR-124)", () => {
+  const withLooks: CanonEntry = {
+    ...FIGURE,
+    body: "## Aussehen\n\n- **Alter:** 26\n- **Haar:** kupferrot, glatt\n\n## Wesen\n\nSchweigsam.",
+  };
+
+  // The badge follows the text; the accessible name may or may not put a space between them.
+  const OWN = /^kupferrot, glatt\s*bisher$/;
+  const FROM_ENTRY = /^kupferrot, glatt, taillenlang\s*aus Eintrag$/;
+
+  function feedsOf() {
+    const feeds: ReturnType<typeof sseFeed>[] = [];
+    const handler = () => {
+      const feed = sseFeed();
+      feeds.push(feed);
+      return { status: 200, stream: feed.stream };
+    };
+    return { feeds, handler };
+  }
+
+  function pressed(name: string | RegExp): string | null {
+    return screen.getByRole("button", { name }).getAttribute("aria-pressed");
+  }
+
+  async function ready() {
+    await waitFor(() => {
+      expect(screen.getByRole("combobox", { name: "Modell" })).toBeDefined();
+    });
+  }
+
+  it("asks with the answers so far, taps to pick and keeps the pick for new suggestions", async () => {
+    const { feeds, handler } = feedsOf();
+    const { calls } = fakeApi({
+      "GET /api/models": ok(modelList(["x-ai/grok-4.6"])),
+      [SUGGEST]: handler,
+    });
+    const user = userEvent.setup();
+    open(withLooks);
+    await ready();
+    expect(screen.getByText("aus Eintrag und Welt")).toBeDefined();
+    // The line already in the entry is the picked answer until the author taps another.
+    expect(pressed(OWN)).toBe("true");
+
+    await user.click(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    );
+    expect(await screen.findByText("Die KI macht Vorschläge …")).toBeDefined();
+    await waitFor(() => {
+      expect(feeds).toHaveLength(1);
+    });
+    expect(calls.find((c) => c.method === "POST")?.body).toMatchObject({
+      model: "x-ai/grok-4.6",
+      answers: { Alter: "26", Haar: "kupferrot, glatt", Herkunft: "" },
+    });
+    finish(feeds[0] ?? sseFeed(), REPLY);
+    expect(
+      await screen.findByText(/noch einmal tippen für neue Vorschläge/),
+    ).toBeDefined();
+    expect(screen.getByText(/Verbrauch: 400 Token ein/)).toBeDefined();
+
+    expect(pressed("nordeuropäisch wirkend")).toBe("false");
+    expect(pressed(FROM_ENTRY)).toBe("false");
+    await user.click(screen.getByRole("button", { name: "hellrot" }));
+    expect(pressed("hellrot")).toBe("true");
+    expect(pressed(OWN)).toBe("false");
+    await user.click(screen.getByRole("button", { name: "hellrot" }));
+    expect(pressed("hellrot")).toBe("false");
+    await user.click(screen.getByRole("button", { name: "hellrot" }));
+    await user.click(screen.getByRole("button", { name: "28" }));
+    expect(screen.getByRole("textbox", { name: "Alter" })).toHaveProperty(
+      "value",
+      "28",
+    );
+    expect(pressed("28")).toBe("true");
+    expect(pressed("24")).toBe("false");
+    await user.type(
+      screen.getByRole("textbox", { name: "Haar (frei)" }),
+      "zum Zopf",
+    );
+
+    // New suggestions do not take the pick away.
+    await user.click(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    );
+    await waitFor(() => {
+      expect(feeds).toHaveLength(2);
+    });
+    expect(calls.filter((c) => c.method === "POST").at(-1)?.body).toMatchObject(
+      { answers: { Alter: "28", Haar: "hellrot, zum Zopf" } },
+    );
+    finish(feeds[1] ?? sseFeed(), "Haar: schwarz | grau | weiß");
+    expect(
+      await screen.findByRole("button", { name: "schwarz" }),
+    ).toBeDefined();
+    expect(pressed("hellrot")).toBe("true");
+    expect(screen.queryByRole("button", { name: "dunkelblond" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "24" })).toBeNull();
+  });
+
+  it("says so when the reply has no suggestions in the asked form", async () => {
+    const { feeds, handler } = feedsOf();
+    fakeApi({
+      "GET /api/models": ok(modelList(["x-ai/grok-4.6"])),
+      [SUGGEST]: handler,
+    });
+    const user = userEvent.setup();
+    open();
+    await ready();
+    await user.click(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    );
+    await waitFor(() => {
+      expect(feeds).toHaveLength(1);
+    });
+    finish(feeds[0] ?? sseFeed(), "Dazu kann ich nichts sagen.");
+    expect(
+      await screen.findByText(/keine Vorschläge in der erwarteten Form/),
+    ).toBeDefined();
+    expect(screen.queryByText(/noch einmal tippen/)).toBeNull();
+  });
+
+  it("reports a refusal of the provider and a refusal before streaming", async () => {
+    const { feeds, handler } = feedsOf();
+    let before = false;
+    fakeApi({
+      "GET /api/models": ok(modelList(["x-ai/grok-4.6"])),
+      [SUGGEST]: () =>
+        before ? { status: 422, body: { detail: "Keine Figur." } } : handler(),
+    });
+    const user = userEvent.setup();
+    open();
+    await ready();
+    await user.click(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    );
+    await waitFor(() => {
+      expect(feeds).toHaveLength(1);
+    });
+    feeds[0]?.send("error", { kind: "abgelehnt" });
+    feeds[0]?.close();
+    expect(
+      await screen.findByText("Das Modell hat die Anfrage abgelehnt."),
+    ).toBeDefined();
+
+    before = true;
+    await user.click(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    );
+    expect(await screen.findByText("Keine Figur.")).toBeDefined();
+  });
+
+  it("stops only the suggestions and keeps the window with the answers", async () => {
+    const { feeds, handler } = feedsOf();
+    fakeApi({
+      "GET /api/models": ok(modelList(["x-ai/grok-4.6"])),
+      [SUGGEST]: handler,
+    });
+    const user = userEvent.setup();
+    const { onClose } = open();
+    await ready();
+    await user.type(
+      screen.getByRole("textbox", { name: "Haar (frei)" }),
+      "rot",
+    );
+    await user.click(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    );
+    await waitFor(() => {
+      expect(feeds).toHaveLength(1);
+    });
+    expect(
+      screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+    ).toHaveProperty("disabled", true);
+    await user.click(
+      screen.getByRole("button", { name: "Vorschläge abbrechen" }),
+    );
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+      ).toHaveProperty("disabled", false);
+    });
+    expect(onClose).not.toHaveBeenCalled();
+    expect(screen.queryByText("Die KI macht Vorschläge …")).toBeNull();
+    expect(screen.getByRole("textbox", { name: "Haar (frei)" })).toHaveProperty(
+      "value",
+      "rot",
+    );
+    expect(screen.getByRole("button", { name: "Verwerfen" })).toBeDefined();
   });
 });

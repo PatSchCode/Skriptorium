@@ -56,7 +56,9 @@ export function streamGuestFit(
 
 /**
  * Ask the figure assistant for an English image description from the answers about a figure's
- * looks (step 11.5, ADR-123); events as for a description. Nothing is saved.
+ * looks (step 11.5, ADR-123), or – with the suggestions path – for three suggestions per question
+ * from the entry and the world (ADR-124, answers may be partial); events as for a description.
+ * Nothing is saved.
  */
 export function streamFigureLooks(
   path: string,
@@ -86,4 +88,7 @@ export const describeApi = {
   /** Stream of the figure assistant (step 11.5, ADR-123); takes `{model, answers}`. */
   figureLooksPath: (world: string, entry: string) =>
     `${worldPath(world)}/entries/${enc(entry)}/figure-looks`,
+  /** Stream of the suggestions for the questions (step 11.5, ADR-124); takes `{model, answers}`. */
+  figureLooksSuggestionsPath: (world: string, entry: string) =>
+    `${worldPath(world)}/entries/${enc(entry)}/figure-looks/suggestions`,
 };

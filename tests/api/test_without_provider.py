@@ -32,6 +32,7 @@ def keyless(data_dir: Path) -> Iterator[TestClient]:
     [
         f"{WORLD}/entries/kael/appearance",
         f"{WORLD}/entries/kael/figure-looks",
+        f"{WORLD}/entries/kael/figure-looks/suggestions",
         f"{WORLD}/entries/kael/images/bild-000000000000.png/describe",
         f"{WORLD}/maps/karte-000000000000.png/describe",
         f"{WORLD}/stories/am-ufer/guests/nordland/ragna/fit",

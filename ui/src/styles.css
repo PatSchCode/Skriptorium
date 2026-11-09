@@ -2836,7 +2836,7 @@ li.guest {
   }
 }
 
-/* The figure assistant (step 11.5, ADR-123): questions with choices, drafts in a grid. */
+/* The figure assistant (step 11.5, ADR-123, ADR-124): questions with suggestions, drafts in a grid. */
 .figure-looks {
   max-height: none;
 }
@@ -2878,6 +2878,16 @@ li.guest {
 .figure-looks-chips button[aria-pressed="true"] {
   background: var(--text);
   color: var(--page);
+}
+
+.figure-looks-badge {
+  margin-left: 0.4rem;
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.figure-looks-suggest {
+  align-items: center;
 }
 
 .figure-drafts {

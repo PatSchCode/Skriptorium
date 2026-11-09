@@ -1,0 +1,9 @@
+{
+  "modell": "qwen/qwen3.8-max-0902",
+  "figur": "brann",
+  "lauf": 2,
+  "finish_reason": "stop",
+  "kosten_usd": 0.00809226,
+  "token_aus": 1145,
+  "sekunden": 27.7
+}

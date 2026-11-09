@@ -1,0 +1,9 @@
+{
+  "modell": "x-ai/grok-4.6",
+  "figur": "brann",
+  "lauf": 1,
+  "finish_reason": "stop",
+  "kosten_usd": 0.0072369,
+  "token_aus": 981,
+  "sekunden": 21.7
+}
