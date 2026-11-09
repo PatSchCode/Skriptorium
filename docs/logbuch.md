@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [BEOBACHTUNG] #238 gemergt und eingespielt (`f4f8b29`)
+
+- Eigentümer hat [#238](https://github.com/PatSchCode/Skriptorium/pull/238) selbst gemergt („Merged“); vier Pflicht-Checks grün, Baum des Merge-Commits gleich dem geprüften PR-Stand.
+- Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf (Stand vorher `b8507ff`). `/api/health` sechsmal 404, dann 200 nach rund 60 s; Anmeldeseite 200. SSH-Prüfung: `healthy`, `REVISION` `f4f8b29`, Liste mit 31 Einträgen; Auslösewort des Armbinders über den Code der App gelesen – vollständig (eine Suche mit `grep` fand es nicht, weil YAML die lange Zeile umbricht).
+- Offen: Abnahme 11.5 (Entwürfe zweite Runde) und Bestätigung 11.17 mit Armbinder durch den Eigentümer.
+
 ### 2026-11-09 – [GELÖST] 11.5: Entwürfe zweite Runde – knapp und ganze Figur im Bild
 
 - Eigentümer nach `b8507ff`: „Proportionen weiter unklar, Unterwäsche passt nicht, Unterwäsche muss knapp sein“; Auswahl „String und knapper BH“.
