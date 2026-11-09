@@ -29,6 +29,28 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [SESSIONENDE] 11.5 gemergt, 11.17 entschieden, Eintragen vom Mac offen
+
+- **Dauer:** 2026-11-08 ca. 23:42 bis 2026-11-09 ca. 01:00 UTC (Cloud-Session; ergänzt den Sessionende-Eintrag weiter unten, der vor Prüfung, Merge und 11.17 geschrieben war).
+- **Bearbeitet nach dem ersten Sessionende:** Prüfung auf Opus 5.5 mit zwei behobenen Fehlern und „Vorschläge abbrechen“ (Eintrag darunter); PR #235 auf „Ja, mergen“ des Eigentümers gemergt (`d27f0cc`, CI vier Jobs grün auf `b564616`). 11.17 auf „11.17 wird hier gemacht“: Kandidaten nachgeschlagen, Vorlage, ADR-125, Liste `docs/research/runware-liste-11.17.md`.
+- **Stand:** `main` `d27f0cc` plus dieser Abschluss (Pull Request folgt). Server unverändert `ad29ed0`. Phase 11 bei 4 von 17 (11.5 und 11.17 🟠).
+- **Offen:** Mac-Session: 11.5 einspielen und abnehmen; 11.17 nach ADR-125 eintragen (Datei auf dem Server zuerst ansehen und sichern, Kennungen erneut nachschlagen, bestehende Einträge behalten) und Stichprobe. D.11 Frist überschritten.
+- **Nächster Schritt:** Mac-Session mit 11.5 und 11.17; danach 11.6. Datiert: D.5 ab 2026-11-12.
+- **Sessionende-Prüfungen:** README (11.5 gemergt, 11.17 entschieden, „Als Nächstes“ 11.6), Kontext (Status), CHANGELOG unverändert (11.17 noch nicht in der App). Drift: ADR-125 → 11.17 vorhanden; Reifegrade unverändert (ADR-125 ohne Wirkung); Modul-Liste unverändert; FR-035 (11.17) vorhanden; 0 blockierte Schritte; Reaktiv-Quote 1/10 (ADR-116 bis ADR-125); Phase 11 17 Schritte (Schwelle über 32). Größen: `docs/project-context.md` 351 Zeilen; Logbuch rund 390 Zeilen. Ablaufdaten-Register: kein neuer Vorlauf.
+- **Modell-Bilanz:** Bau von 11.5 auf Sonnet 5.5 (Routine; unterhalb der Empfehlung Entscheidung, ohne Auslöser); ab dem Wechsel des Eigentümers Opus 5.5 (Entscheidung) für Prüfung, Merge und 11.17 – beides auf der empfohlenen Klasse. 0 Schritte oberhalb. Abgegeben: nichts (D.22).
+- **Kontextgröße:** 457.731 Token vor 11.17 (Sitzungsabfrage) – weit über der Grenze 200.000; 11.17 nach ausdrücklichem „11.17 wird hier gemacht“ des Eigentümers begonnen (Ausnahme „weiter hier“, `CLAUDE.md` Abschnitt 0). Nächste Session neu beginnen.
+
+### 2026-11-09 – [ADR-ANGELEGT] ADR-125 Runware-Liste für 11.17
+
+- Vorlage als `ENTSCHEIDUNG ERFORDERLICH` mit vier Auswahlfragen; Eigentümer: „Nur Krea 2 Turbo“, „26: bestätigt + stimmig“, „Stichprobe: Turbo + 3 LoRAs“ – jeweils Empfehlung. Zum Weg zwei Rückfragen: Die erste Antwort „Die liegen schon bei runware“ und die zweite „Die Gewichte sind schon bei runware hochgeladen“ meinten die hochgeladenen LoRA-Dateien; die App kennt eine LoRA aber erst mit Eintrag in ihrer Liste. Auf die Frage des Eigentümers erklärt, dass die Einstellseite „Bildmodelle bei Runware“ seit 10.8 besteht; danach „Lieber Mac-Session“ (Empfehlung war Eintragen durch den Eigentümer) → ADR-125, nicht reaktiv. Reaktiv-Quote 1/10 (ADR-116 bis ADR-125).
+- Reibung: Die Frage nach dem Weg war zu technisch gestellt („App-Liste“ gegen „Upload bei Runware“) – zwei Runden, bis der Unterschied klar war. Künftig zuerst sagen, wo der Eigentümer es in der App sieht.
+
+### 2026-11-09 – [BEOBACHTUNG] 11.17: Kandidaten bei Runware nachgeschlagen
+
+- `RunwareImageProvider.lookup` (Modellsuche, nur lesend, ohne Kosten) aus der Cloud-Session für 37 Kandidaten: alle vorhanden. Krea 2 Turbo `krea_oss_2_turbo`, Raw `krea_oss_2`, LoRAs `krea_oss_2` (passen nach `_FAMILIES` zu Turbo), Large Ball Gag, Hands und cuffed behind back `z_image_turbo`.
+- Befund: Runware meldet bei 22 der 26 gewählten LoRAs das Gewicht 1,0 und bei den meisten Joschek-LoRAs kein Auslösewort; beim Hinzufügen übernimmt die App diese Werte (`api/image_routes.py`, `default_weight`). Die Liste nennt deshalb die getesteten Gewichte und die Auslösewörter aus `docs/research/bildanbieter.md`.
+- „cuffed behind back“ `skriptorium:1756180@2568521` stammt von „sarahpeterson“ und bleibt draußen (beim Zusammenstellen erst als Z-Image-Kandidat geführt, vor der Vorlage aussortiert).
+
 ### 2026-11-09 – [GELÖST] Prüfung nach Modellwechsel: zwei Fehler in der Oberflächen-Logik
 
 - Auf Wunsch des Eigentümers nach dem Pull Request ([#235](https://github.com/PatSchCode/Skriptorium/pull/235)) gewechselt per `/model` auf `claude-opus-5-5`; `get_session` meldet `session_context.model` und `user_switched_model` `claude-opus-5-5` → Entscheidungs-Klasse bestätigt. Auftrag: „prüfe nochmal deine Arbeit“.
