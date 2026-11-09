@@ -22,7 +22,7 @@ Stand 2026-11-09. Entscheidungen des Eigentümers (Auswahlfragen in der Session 
 | # | Kennung | Name | Gewicht | Auslösewort |
 |---|---|---|---|---|
 | 1 | `skriptorium:2861561@3232520` | German Handcuffs | 0,6 | `clejuso` |
-| 2 | `skriptorium:2767766@3119356` | Armbinder | 1,0 | `BDSMArmbinder` |
+| 2 | `skriptorium:2767766@3119356` | Armbinder | 1,0 | `BDSMArmbinder, arms behind the back in one single black leather armbinder sleeve for both arms, not two separate sleeves, laced, with shoulder straps, centered on the back` (seit 2026-11-09; mit `BDSMArmbinder` allein entsteht kein Armbinder, ADR-125 Nachtrag) |
 | 3 | `skriptorium:2767605@3115420` | Bondage & Gags Megapack | 0,8 | – |
 | 4 | `skriptorium:999177@2731175` | Large Ball Gag (nur bei Z-Image-Turbo) | 0,6 | `gagged with a ball gag` |
 | 5 | `skriptorium:2742699@3142259` | Rope Bondage | 0,6 | – |

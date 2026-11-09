@@ -29,6 +29,20 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [GELÖST] 11.5: Entwürfe zweite Runde – knapp und ganze Figur im Bild
+
+- Eigentümer nach `b8507ff`: „Proportionen weiter unklar, Unterwäsche passt nicht, Unterwäsche muss knapp sein“; Auswahl „String und knapper BH“.
+- Probe im Container (Skript nur im Arbeitsverzeichnis der Session, Testfigur ohne Bezug zu einer Welt, Seed 101/202): erster Text mit „full body shot from head to toe“ – Z-Image-Turbo ganze Figur, knapp (0,0013 $); Krea 2 Turbo schneidet an den Oberschenkeln ab, Slip brav (0,0037 $). Zweiter Text mit „wide full-length photo, the entire body from head to bare feet visible in frame, space above the head and below the feet“ – Krea in allen drei Bildern von Kopf bis Fuß, auch wenn die Angabe hinter der Figurenbeschreibung steht (wie in der App); String bleibt bei Krea ein schlichter Slip (3 × 0,0037 $). Vermutlich war der abgeschnittene Bildausschnitt schon in der ersten Runde ein Grund für „Proportionen unklar“.
+- `DRAFT_ADDITION` auf den zweiten Text; Test prüft „skimpy black string thong“ und „head to bare feet“. Oberfläche 644 Tests grün, Abdeckung unverändert; `tsc`, `eslint`, `prettier` ohne Befund. ADR-123 Nachtrag ergänzt.
+
+### 2026-11-09 – [GELÖST] 11.17: Armbinder ohne Wirkung – Auslösewort erweitert
+
+- Eigentümer: LoRAs in der App auswählbar; Stichprobe: Armbinder bringt „gar keinen Armbinder“. Protokoll seit dem Einspielen: Krea-Bilder mit `loras=1` – die LoRA wurde mitgeschickt.
+- Probe im Container (Krea 2 Turbo, Armbinder 1,0, Seed 404, Testfigur in blickdichter Baumwolle, zusammen 0,0235 $): Auslösewort allein von hinten und von vorn – kein Armbinder; mit der Formulierung aus dem Rezept vom 2026-11-07 vorn oder am Ende des Prompts – geschnürter Armbinder mit Schultergurten (am Ende etwas rechts der Mitte). Zwei Bilder an den Eigentümer geschickt.
+- Eigentümer: „Ja, erweitern“ → Auslösewort des Armbinders über `RunwareModels.replace` um die Formulierung ergänzt; übrige 25 LoRAs und 5 Grundmodelle unverändert. ADR-125 Nachtrag, Liste in `docs/research/runware-liste-11.17.md` nachgezogen.
+- Reibung: `docker cp` holt nichts aus `/tmp` des Containers (vermutlich tmpfs) – Bilder stattdessen mit `docker exec … tar -c` geholt; die ersten vier Bilder waren schon bezahlt, gingen aber nicht verloren.
+- Offen: Andere LoRAs ohne Auslösewort (z. B. Yoke, Panel Gag, Female Chastity Harness, Metalstocks) brauchen vermutlich ebenfalls eine Beschreibung im Prompt; nicht geprüft.
+
 ### 2026-11-09 – [BEOBACHTUNG] #237 gemergt und eingespielt (`b8507ff`)
 
 - Auftrag des Eigentümers: „Mergen und einspielen“. PR [#237](https://github.com/PatSchCode/Skriptorium/pull/237) mit vier grünen Pflicht-Checks gemergt (`b8507ff`); Baum des Merge-Commits gleich dem geprüften PR-Stand (`e8878c8`, Basis `e7e00f6`), daher ohne Warten auf den Lauf auf `main` eingespielt.
