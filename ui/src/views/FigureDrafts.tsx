@@ -15,11 +15,12 @@ export const DRAFTS = 4;
 
 /**
  * What the drafts add to the image description, changeable before generating (owner, ADR-123:
- * "Zusatz frei"): the whole figure in plain fitted clothes before a neutral background, as in the
- * image tests of 2026-11-07, so build and face can be compared.
+ * "Zusatz frei"): the whole figure in plain underwear before a neutral background, so build,
+ * proportions and face can be compared (owner after the trial of 2026-11-09: clothes hid the
+ * proportions; ADR-123, addendum).
  */
 export const DRAFT_ADDITION =
-  "full body, standing, facing the camera, plain fitted black long-sleeve top and black leggings, barefoot, neutral grey studio background, soft even light";
+  "full body, standing, facing the camera, arms relaxed at the sides, wearing only plain black underwear, barefoot, neutral grey studio background, soft even light";
 
 /** A draft the author picked, with what is kept as its origin (step 9.6, ADR-095; 11.4). */
 export interface ChosenDraft {
