@@ -578,7 +578,7 @@ describe("the suggestions for the questions (step 11.5, ADR-124)", () => {
     expect(await screen.findByText("Keine Figur.")).toBeDefined();
   });
 
-  it("stops the request on Abbrechen and closes", async () => {
+  it("stops only the suggestions and keeps the window with the answers", async () => {
     const { feeds, handler } = feedsOf();
     fakeApi({
       "GET /api/models": ok(modelList(["x-ai/grok-4.6"])),
@@ -587,6 +587,10 @@ describe("the suggestions for the questions (step 11.5, ADR-124)", () => {
     const user = userEvent.setup();
     const { onClose } = open();
     await ready();
+    await user.type(
+      screen.getByRole("textbox", { name: "Haar (frei)" }),
+      "rot",
+    );
     await user.click(
       screen.getByRole("button", { name: "✨ Vorschläge machen" }),
     );
@@ -596,7 +600,20 @@ describe("the suggestions for the questions (step 11.5, ADR-124)", () => {
     expect(
       screen.getByRole("button", { name: "✨ Vorschläge machen" }),
     ).toHaveProperty("disabled", true);
-    await user.click(screen.getByRole("button", { name: "Abbrechen" }));
-    expect(onClose).toHaveBeenCalled();
+    await user.click(
+      screen.getByRole("button", { name: "Vorschläge abbrechen" }),
+    );
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "✨ Vorschläge machen" }),
+      ).toHaveProperty("disabled", false);
+    });
+    expect(onClose).not.toHaveBeenCalled();
+    expect(screen.queryByText("Die KI macht Vorschläge …")).toBeNull();
+    expect(screen.getByRole("textbox", { name: "Haar (frei)" })).toHaveProperty(
+      "value",
+      "rot",
+    );
+    expect(screen.getByRole("button", { name: "Verwerfen" })).toBeDefined();
   });
 });

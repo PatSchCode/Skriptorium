@@ -341,10 +341,17 @@ export function FigureLooks({
           disabled={saving}
           onClick={() => {
             abort.current?.abort();
-            onClose();
+            // Stopping the suggestions keeps the window and the answers (owner, 2026-11-09).
+            if (!suggesting) {
+              onClose();
+            }
           }}
         >
-          {busy ? "Abbrechen" : "Verwerfen"}
+          {suggesting
+            ? "Vorschläge abbrechen"
+            : running
+              ? "Abbrechen"
+              : "Verwerfen"}
         </button>
       </div>
       <SectionConflict asking={asking} />
