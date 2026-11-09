@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [BEOBACHTUNG] #237 gemergt und eingespielt (`b8507ff`)
+
+- Auftrag des Eigentümers: „Mergen und einspielen“. PR [#237](https://github.com/PatSchCode/Skriptorium/pull/237) mit vier grünen Pflicht-Checks gemergt (`b8507ff`); Baum des Merge-Commits gleich dem geprüften PR-Stand (`e8878c8`, Basis `e7e00f6`), daher ohne Warten auf den Lauf auf `main` eingespielt.
+- Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf (Stand vorher `e7e00f6`, `skriptorium:vorher` gesetzt). `/api/health` sechsmal 404, dann 200 nach rund 60 s; Anmeldeseite 200. Eine SSH-Prüfung: `healthy`, `REVISION` `b8507ff`, `system/runware-modelle.md` unverändert (3.854 Byte).
+- Reibung: `gh pr create` scheiterte zuerst („Head sha can't be blank“) – `origin` zeigt noch auf `Paddel87/Skriptorium`, die Pull Requests liegen unter `PatSchCode/Skriptorium`; mit `--repo PatSchCode/Skriptorium --head <branch>` ging es.
+- Offen: Abnahme 11.5 (Entwürfe in Unterwäsche), Sichtprüfung und Stichprobe 11.17 durch den Eigentümer.
+
 ### 2026-11-09 – [BEOBACHTUNG] 11.17 am Server eingetragen
 
 - Auftrag des Eigentümers: „Erst 11.17 dazu“ (vor dem Pull Request mit dem Zusatz aus 11.5). Weg nach ADR-125.
