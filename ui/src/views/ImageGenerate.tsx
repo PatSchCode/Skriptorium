@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 import {
   api,
   describeError,
@@ -6,14 +6,17 @@ import {
   type GeneratedImage,
   type ImageLevels,
   type ImageOrigin,
+  type ImageRecipe,
   type ImageTarget,
   type LoraChoice,
 } from "../api";
 import { ErrorText } from "./Common";
 import { GeneratedPreview } from "./ImageChoices";
 import { ImageGenerateForm } from "./ImageGenerateForm";
-import { blobOf, shortLabel } from "./imageGenerateText";
+import { fillRecipe } from "../imageRecipes";
+import { blobOf, FORMATS, shortLabel } from "./imageGenerateText";
 import type { Basis } from "./ImageOriginPanel";
+import { RecipeField, SaveRecipe, useRecipes } from "./RecipeChoice";
 import { useLoraChoice } from "./RunwareLoras";
 import { useSeedChoice } from "./SeedChoice";
 import { useElapsed } from "./useElapsed";
@@ -45,6 +48,9 @@ const NO_LEVELS: ImageLevels = { resolution: null, quality: null };
  * Models of the owner's list at Runware (step 10.8, ADR-115) come in a group of their own; for
  * them LoRAs that fit the model can be added, each with its weight. Models that take a start
  * value offer it random or fixed (step 11.4, ADR-121); the origin keeps it with the LoRAs.
+ * For a `figure` (step 11.6, ADR-126) a saved recipe fills the window – model, format, levels,
+ * LoRAs and its scene with the figure's text at `[Figur]` – and "Als Rezept speichern" keeps what
+ * the window holds as a recipe; the origin names the recipe applied.
  */
 export function ImageGenerate({
   title,
@@ -58,6 +64,7 @@ export function ImageGenerate({
   hint = null,
   extra = null,
   basis = null,
+  figure = null,
   target,
   onTakeOver,
   onClose,
@@ -82,6 +89,11 @@ export function ImageGenerate({
   extra?: ReactNode;
   /** A stored image the new one is made from (step 9.8). */
   basis?: Basis | null;
+  /**
+   * The figure the image shows, for recipes (step 11.6, ADR-126): its name and the text that
+   * goes in at `[Figur]`. Without it, or with a basis, there are no recipes.
+   */
+  figure?: { name: string; text: string } | null;
   /** Where the image goes, for the usage statistics (step 9.11, ADR-100). */
   target: ImageTarget;
   onTakeOver: (image: Blob, origin: ImageOrigin) => Promise<void>;
@@ -91,7 +103,15 @@ export function ImageGenerate({
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<GeneratedImage | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const reportError = useCallback((message: string) => {
+    setError(message);
+  }, []);
   const choice = useImageModels(initialModel, basis !== null, setError);
+  const withRecipes = figure !== null && basis === null;
+  const { recipes, reload } = useRecipes(withRecipes, reportError);
+  const [recipe, setRecipe] = useState<ImageRecipe | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [note, setNote] = useState<string | null>(null);
   const runware = choice.chosen?.runware;
   // Only ticked LoRAs that fit the model go along (ADR-115).
   const loras = useLoraChoice(runware, initialLoras);
@@ -114,6 +134,42 @@ export function ImageGenerate({
     ...(levels.resolution === null ? {} : { resolution: levels.resolution }),
     ...(levels.quality === null ? {} : { quality: levels.quality }),
   };
+
+  /** Fill the window with `picked` (ADR-126); LoRAs no longer in the list are left out. */
+  function apply(picked: ImageRecipe | null) {
+    setRecipe(picked);
+    setNote(null);
+    if (picked === null || figure === null) {
+      return;
+    }
+    if (!(choice.models ?? []).some((m) => m.id === picked.model)) {
+      setNote(
+        `Das Modell des Rezepts ist nicht mehr verfügbar: ${picked.model}`,
+      );
+      return;
+    }
+    request.setPrompt(fillRecipe(picked.scene, figure.text));
+    request.pickFormat(picked.aspect_ratio);
+    choice.setModel(picked.model);
+    levels.takeLevels(picked.model, {
+      resolution: picked.resolution,
+      quality: picked.quality,
+    });
+    const known = picked.loras.filter((lora) =>
+      choice.loras.some((l) => l.id === lora.id),
+    );
+    loras.setTicked(
+      Object.fromEntries(known.map((lora) => [lora.id, lora.weight])),
+    );
+    if (known.length < picked.loras.length) {
+      setNote(
+        `Nicht mehr in der Liste und weggelassen: ${picked.loras
+          .filter((lora) => !known.includes(lora))
+          .map((lora) => lora.id)
+          .join(", ")}`,
+      );
+    }
+  }
 
   async function generate() {
     elapsed.start();
@@ -165,6 +221,7 @@ export function ImageGenerate({
               })),
             }),
         ...(result.appended == null ? {} : { appended: result.appended }),
+        ...(recipe === null ? {} : { recipe: recipe.name }),
       });
       onClose();
     } catch (reason: unknown) {
@@ -182,6 +239,15 @@ export function ImageGenerate({
             ? "Der KI-Anbieter ist nicht eingerichtet – Bilder erzeugen geht gerade nicht."
             : "Runware ist nicht eingerichtet – mit diesem Modell geht es gerade nicht."}
         </p>
+      )}
+      {withRecipes && result === null && (
+        <RecipeField
+          recipes={recipes}
+          chosen={recipe?.id ?? null}
+          figureName={figure.name}
+          busy={busy}
+          onPick={apply}
+        />
       )}
       {result === null ? (
         <ImageGenerateForm
@@ -213,6 +279,7 @@ export function ImageGenerate({
       {busy && result === null && (
         <p className="note">Bild wird erzeugt … {String(elapsed.seconds)} s</p>
       )}
+      {note !== null && <p className="note">{note}</p>}
       <ErrorText message={error} />
       <GenerateActions
         generated={result !== null}
@@ -230,7 +297,47 @@ export function ImageGenerate({
           setResult(null);
         }}
         onClose={onClose}
+        onSaveRecipe={
+          withRecipes && !saving
+            ? () => {
+                setSaving(true);
+              }
+            : null
+        }
       />
+      {withRecipes && saving && (
+        <SaveRecipe
+          prompt={request.prompt}
+          figure={figure.text}
+          figureName={figure.name}
+          initialName={recipe?.name ?? ""}
+          recipes={recipes}
+          order={{
+            model: choice.model,
+            aspect_ratio: request.format,
+            ...chosenLevels,
+            loras: loras.chosen,
+          }}
+          described={[
+            choice.chosen?.name ?? choice.model,
+            FORMATS.find((f) => f.id === request.format)?.label ??
+              request.format,
+            ...loras.chosen.map(
+              (lora) =>
+                `${choice.loras.find((l) => l.id === lora.id)?.name ?? lora.id} ${String(lora.weight).replace(".", ",")}`,
+            ),
+          ].join(", ")}
+          onSaved={(saved) => {
+            setSaving(false);
+            setRecipe(saved);
+            setNote(`Rezept „${saved.name}“ gespeichert.`);
+            reload();
+          }}
+          onClose={() => {
+            setSaving(false);
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -248,6 +355,7 @@ function GenerateActions({
   onTakeOver,
   onChange,
   onClose,
+  onSaveRecipe,
 }: {
   generated: boolean;
   busy: boolean;
@@ -257,6 +365,8 @@ function GenerateActions({
   onTakeOver: () => void;
   onChange: () => void;
   onClose: () => void;
+  /** "Als Rezept speichern" (step 11.6, ADR-126); `null` without recipes. */
+  onSaveRecipe: (() => void) | null;
 }) {
   return (
     <div className="row">
@@ -305,6 +415,16 @@ function GenerateActions({
       >
         {generated ? "Verwerfen" : "Abbrechen"}
       </button>
+      {onSaveRecipe !== null && (
+        <button
+          type="button"
+          className="ghost"
+          disabled={busy}
+          onClick={onSaveRecipe}
+        >
+          Als Rezept speichern …
+        </button>
+      )}
     </div>
   );
 }

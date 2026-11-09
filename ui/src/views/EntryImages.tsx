@@ -116,6 +116,11 @@ export function EntryImages({
           initialSeed={seed?.seed ?? null}
           initialLoras={seed?.loras}
           basis={seed?.basis ?? null}
+          figure={
+            entry.category === "figur"
+              ? { name: entry.name, text: entryPrompt(entry) }
+              : null
+          }
           onTakeOver={async (image, origin) => {
             onChanged(
               await api.addImage(

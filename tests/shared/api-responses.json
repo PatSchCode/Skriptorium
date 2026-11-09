@@ -2247,6 +2247,56 @@
       "appended": null
     }
   },
+  "saveImageRecipe": {
+    "route": "POST /api/images/recipes",
+    "type": "ImageRecipe",
+    "body": {
+      "id": "0a1b2c3d",
+      "name": "Atelier",
+      "model": "black-forest-labs/flux.2-pro",
+      "aspect_ratio": "2:3",
+      "resolution": null,
+      "quality": null,
+      "loras": [],
+      "scene": "[Figur], plain grey studio background"
+    }
+  },
+  "imageRecipes": {
+    "route": "GET /api/images/recipes",
+    "type": "{ recipes: ImageRecipe[] }",
+    "body": {
+      "recipes": [
+        {
+          "id": "0a1b2c3d",
+          "name": "Atelier",
+          "model": "black-forest-labs/flux.2-pro",
+          "aspect_ratio": "2:3",
+          "resolution": null,
+          "quality": null,
+          "loras": [],
+          "scene": "[Figur], plain grey studio background"
+        }
+      ]
+    }
+  },
+  "setImageRecipes": {
+    "route": "PUT /api/images/recipes",
+    "type": "{ recipes: ImageRecipe[] }",
+    "body": {
+      "recipes": [
+        {
+          "id": "0a1b2c3d",
+          "name": "Studio",
+          "model": "black-forest-labs/flux.2-pro",
+          "aspect_ratio": "2:3",
+          "resolution": null,
+          "quality": null,
+          "loras": [],
+          "scene": "[Figur], studio"
+        }
+      ]
+    }
+  },
   "translateSillyTavern": {
     "route": "POST /api/worlds/die-salzmark/import/sillytavern",
     "type": "TranslatedMaterial",

@@ -62,5 +62,13 @@ export function useImageLevels(
     pickQuality: (quality: string) => {
       setChosen({ model, resolution: levels.resolution, quality });
     },
+    /** The levels of a recipe for `forModel` (step 11.6, ADR-126); `null` keeps the preset. */
+    takeLevels: (forModel: string, taken: ImageLevels) => {
+      setChosen(
+        taken.resolution === null && taken.quality === null
+          ? null
+          : { model: forModel, ...taken },
+      );
+    },
   };
 }

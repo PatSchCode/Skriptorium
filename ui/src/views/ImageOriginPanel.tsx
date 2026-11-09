@@ -126,6 +126,12 @@ export function ImageOriginPanel({
             </dd>
           </>
         )}
+        {origin.recipe != null && (
+          <>
+            <dt>Rezept</dt>
+            <dd>{origin.recipe}</dd>
+          </>
+        )}
         {origin.seed != null && (
           <>
             <dt>Startwert</dt>

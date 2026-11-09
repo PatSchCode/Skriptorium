@@ -102,6 +102,8 @@ export interface ImageOrigin {
   seed?: number;
   loras?: OriginLora[];
   appended?: string;
+  /** The name of the recipe it was made with (step 11.6, ADR-126). */
+  recipe?: string;
 }
 
 /** The levels of one image, `null` where the model offers none (step 10.5, ADR-109). */
@@ -125,7 +127,30 @@ export interface StoredImageOrigin {
   seed?: number | null;
   loras?: OriginLora[];
   appended?: string | null;
+  /** Missing or `null` without a recipe (step 11.6, ADR-126). */
+  recipe?: string | null;
 }
+
+/**
+ * An image recipe (step 11.6, ADR-126): a scene with the place of the figure (`[Figur]`), the
+ * model, format, levels and LoRAs with their weights; it holds for figures of every world.
+ */
+export interface ImageRecipe {
+  id: string;
+  name: string;
+  model: string;
+  aspect_ratio: AspectRatio;
+  resolution: string | null;
+  quality: string | null;
+  loras: LoraChoice[];
+  scene: string;
+}
+
+/** What "Als Rezept speichern" sends; a recipe of the same name is replaced. */
+export type RecipeOrder = Omit<ImageRecipe, "id" | "resolution" | "quality"> & {
+  resolution?: string;
+  quality?: string;
+};
 
 export interface GeneratedImage {
   content: string;
@@ -188,4 +213,17 @@ export const imagesApi = {
     models: { id: string; name: string; addition: string }[];
     loras: { id: string; name: string; trigger: string; weight: number }[];
   }) => request("PUT", "/api/images/runware", list) as Promise<ImageModelList>,
+  /** The saved image recipes (step 11.6, ADR-126). */
+  imageRecipes: () =>
+    request("GET", "/api/images/recipes") as Promise<{
+      recipes: ImageRecipe[];
+    }>,
+  /** Save a recipe by its name; one of the same name is replaced (ADR-126). */
+  saveImageRecipe: (recipe: RecipeOrder) =>
+    request("POST", "/api/images/recipes", recipe) as Promise<ImageRecipe>,
+  /** Names, scenes and order as edited; a recipe left out is removed (ADR-126). */
+  setImageRecipes: (recipes: { id: string; name: string; scene: string }[]) =>
+    request("PUT", "/api/images/recipes", { recipes }) as Promise<{
+      recipes: ImageRecipe[];
+    }>,
 };

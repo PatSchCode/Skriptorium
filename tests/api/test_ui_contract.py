@@ -531,6 +531,28 @@ def _models_images_and_usage(rec: _Recorder, images: FakeImages) -> None:
         "/api/images/generate",
         {**order, "reference": basis},
     )
+    _recipes(rec)
+
+
+def _recipes(rec: _Recorder) -> None:
+    """The image recipes (step 11.6, ADR-126); the identifier is fixed by the test."""
+    recipe = {
+        "name": "Atelier",
+        "model": "black-forest-labs/flux.2-pro",
+        "aspect_ratio": "2:3",
+        "loras": [],
+        "scene": "[Figur], plain grey studio background",
+    }
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr("skriptorium.api.image_recipes.secrets.token_hex", lambda _: "0a1b2c3d")
+        saved = rec.post("saveImageRecipe", "ImageRecipe", "/api/images/recipes", recipe)
+    rec.get("imageRecipes", "{ recipes: ImageRecipe[] }", "/api/images/recipes")
+    rec.put(
+        "setImageRecipes",
+        "{ recipes: ImageRecipe[] }",
+        "/api/images/recipes",
+        {"recipes": [{"id": saved["id"], "name": "Studio", "scene": "[Figur], studio"}]},
+    )
 
 
 def _transfer(rec: _Recorder) -> None:

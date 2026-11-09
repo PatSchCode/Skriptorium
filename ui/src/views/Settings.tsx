@@ -10,6 +10,7 @@ import { optionLabel, shortName } from "../models";
 import { useLoad } from "../useLoad";
 import { ErrorText } from "./Common";
 import { ModelManager } from "./ModelManager";
+import { RecipeSettings } from "./RecipeSettings";
 import { RunwareSettings } from "./RunwareSettings";
 
 /** Which models a task can take: text models, text models that read images, image models. */
@@ -161,6 +162,19 @@ export function Settings() {
       </section>
       {imageList !== undefined && (
         <RunwareSettings list={imageList} onChange={setSavedImages} />
+      )}
+      {imageList !== undefined && (
+        <RecipeSettings
+          models={
+            new Map([
+              ...imageList.models.map((m): [string, string] => [m.id, m.name]),
+              ...(imageList.runware ?? []).map((m): [string, string] => [
+                m.id,
+                m.name,
+              ]),
+            ])
+          }
+        />
       )}
       {managing && list !== undefined && (
         <ModelManager

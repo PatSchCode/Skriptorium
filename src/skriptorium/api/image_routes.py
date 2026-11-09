@@ -248,6 +248,8 @@ class ImageOriginIn(BaseModel):
     seed: _Seed | None = None
     loras: Annotated[list[OriginLoraIn], Field(max_length=5)] = []
     appended: Annotated[str | None, Field(max_length=4000)] = None
+    # The name of the recipe it was made with (ADR-126).
+    recipe: Annotated[str | None, Field(min_length=1, max_length=100)] = None
 
 
 class ImageOriginOut(BaseModel):
@@ -264,6 +266,7 @@ class ImageOriginOut(BaseModel):
     seed: int | None = None
     loras: list[OriginLoraOut] = []
     appended: str | None = None
+    recipe: str | None = None
 
 
 def origin_from(given: ImageOriginIn | None) -> ImageOrigin | None:
@@ -283,6 +286,7 @@ def origin_from(given: ImageOriginIn | None) -> ImageOrigin | None:
         given.seed,
         tuple(OriginLora(lora.id, lora.name, lora.weight) for lora in given.loras),
         given.appended,
+        given.recipe,
     )
 
 
@@ -302,6 +306,7 @@ def origin_out(origin: ImageOrigin | None) -> ImageOriginOut | None:
         seed=origin.seed,
         loras=[OriginLoraOut(id=x.id, name=x.name, weight=x.weight) for x in origin.loras],
         appended=origin.appended,
+        recipe=origin.recipe,
     )
 
 

@@ -22,6 +22,7 @@ from skriptorium.api.access import (
     SessionStore,
 )
 from skriptorium.api.favorites import Favorites
+from skriptorium.api.image_recipes import ImageRecipes
 from skriptorium.api.runware_models import RunwareModels
 from skriptorium.api.usage import UsageLog
 from skriptorium.canon import CanonService
@@ -56,6 +57,8 @@ class Services:
     # provider serves a model follows from the form of its identifier (``image_routes``).
     runware: RunwareImageProvider | None
     runware_models: RunwareModels
+    # The owner's image recipes (step 11.6, ADR-126).
+    image_recipes: ImageRecipes
 
 
 def services(request: Request) -> Services:

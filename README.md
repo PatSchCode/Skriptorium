@@ -104,7 +104,8 @@ Oberfläche bauen (`npx vite build`) und Server starten; dann `http://localhost:
 - ✅ **Phase 9** (abgeschlossen 2026-11-05): gegliederte Einträge und Beziehungen, Bilder vom Bedarf her mit Herkunft und Bild zu Bild, Modell je Aufgabe, Löschen und Archivieren, Seite „Verbrauch“, Gast-Figuren mit Weltbezug.
 - ✅ **Phase 10** (abgeschlossen 2026-11-08): Löschkaskade für Kanon-Einträge, Aussehen herauslösen für Orte und Gegenstände, Auflösung und Qualität bei Bildern, Bilder im Manuskript und E-Book, Bilder beim Schreiben mitschicken, zweiter Bildanbieter Runware mit Community-Modellen und LoRAs, Anfragen an die KI im Wortlaut nachlesen (ADR-106 bis ADR-116).
 - ✅ **Erledigt:** 11.1 Bedrohungsmodell um Runware ergänzt, getrennt geprüft, bleibt belastbar (ADR-119); 11.2 Bildformular in Teile zerlegt (Verhalten unverändert); 11.3 Anfragen aus dem Suchindex, Trennzeilen gekennzeichnet (ADR-120); 11.4 fester Startwert beim Bilderzeugen und vollständige Herkunft (ADR-121); 11.5 Figuren-Assistent für das Aussehen mit Vorschlägen der KI und Entwürfen von Kopf bis Fuß (ADR-123, ADR-124); 11.17 Krea 2 Turbo und 26 geprüfte LoRAs in der Runware-Liste (ADR-125).
-- ⚪ **Als Nächstes:** 11.6 Bildrezepte.
+- 🟠 **In Arbeit:** 11.6 Bildrezepte – Szene, Modell und LoRAs als Vorlage für jede Figur (ADR-126; gebaut, Probe mit echten Bildern und Abnahme offen).
+- ⚪ **Danach:** 11.7 Prompt in Schlagworte umsetzen.
 - ⚪ **Phase 11** (ADR-118): Figuren und Bilder – fester Startwert, Figuren-Assistent für das Aussehen, Bildrezepte, Schlagwort-Prompts, Einstellungen aus der Bild-Erkundung (11.4–11.8); Großansicht und Bildmeldungen (11.9); Längengrenze, Favoriten, „Wesen:“ im Fließtext (11.10–11.11); Weltenbauer mit gesperrten Antworten, Fragenliste, Recherche und Namenshilfe (11.12–11.15).
 - ⚪ **D.11:** Zugangsdaten der Sicherung außerhalb des Servers ablegen (spätestens 2026-10-31).
 

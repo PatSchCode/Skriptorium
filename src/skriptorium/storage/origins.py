@@ -1,5 +1,5 @@
 """Origin of a generated image, kept in a companion file next to it (steps 9.6, 9.8, 10.5,
-11.4, ADR-095, ADR-097, ADR-109, ADR-121).
+11.4, 11.6, ADR-095, ADR-097, ADR-109, ADR-121, ADR-126).
 
 The companion ``<image>.herkunft.yml`` holds plain YAML, not a Markdown document, so the
 search index (which reads every ``.md`` file) never sees it. Images without a companion
@@ -43,6 +43,8 @@ class ImageOrigin:
     seed: int | None = None
     loras: tuple[OriginLora, ...] = ()
     appended: str | None = None
+    # The name of the recipe it was made with (step 11.6, ADR-126); ``None`` without one.
+    recipe: str | None = None
 
 
 def origin_to_mapping(origin: ImageOrigin) -> dict[str, HeaderValue]:
@@ -68,6 +70,8 @@ def origin_to_mapping(origin: ImageOrigin) -> dict[str, HeaderValue]:
         ]
     if origin.appended is not None:
         mapping["angehaengt"] = origin.appended
+    if origin.recipe is not None:
+        mapping["rezept"] = origin.recipe
     return mapping
 
 
@@ -87,6 +91,7 @@ def origin_from_mapping(mapping: dict[str, HeaderValue]) -> ImageOrigin:
     quality = mapping.get("qualitaet")
     seed = mapping.get("startwert")
     appended = mapping.get("angehaengt")
+    recipe = mapping.get("rezept")
     if not (
         isinstance(model, str)
         and isinstance(prompt, str)
@@ -104,6 +109,8 @@ def origin_from_mapping(mapping: dict[str, HeaderValue]) -> ImageOrigin:
         raise InvalidInput("Startwert in der Herkunft des Bildes keine ganze Zahl")
     if appended is not None and not isinstance(appended, str):
         raise InvalidInput("Angehängter Text in der Herkunft des Bildes kein Text")
+    if recipe is not None and not isinstance(recipe, str):
+        raise InvalidInput("Rezept in der Herkunft des Bildes kein Text")
     return ImageOrigin(
         model,
         prompt,
@@ -116,6 +123,7 @@ def origin_from_mapping(mapping: dict[str, HeaderValue]) -> ImageOrigin:
         seed if isinstance(seed, int) else None,
         _loras(mapping.get("loras")),
         appended if isinstance(appended, str) else None,
+        recipe if isinstance(recipe, str) else None,
     )
 
 
