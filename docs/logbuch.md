@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [BEOBACHTUNG] 11.17 am Server eingetragen
+
+- Auftrag des Eigentümers: „Erst 11.17 dazu“ (vor dem Pull Request mit dem Zusatz aus 11.5). Weg nach ADR-125.
+- (1) Eine SSH-Abfrage: `data/system/runware-modelle.md` gibt es nicht – es galt die Startliste aus `api/runware_models.py`; keine Sicherungskopie nötig, Rückweg ist das Löschen der Datei. `RUNWARE_API_KEY` im Container gesetzt (nur Vorhandensein geprüft).
+- (3) Statt die Datei von Hand zu schreiben, ein Skript im Container (`docker exec -i skriptorium python -`, nur im Arbeitsverzeichnis der Session, nicht im Repo) mit dem Code der App: `RunwareImageProvider.lookup` je Kennung, dann `RunwareModels.add_model`/`add_lora` – gleiche Dateiform und gleiche Übernahme der Startliste wie beim Hinzufügen in den Einstellungen. Probedurchgang ohne Schreiben: alle 27 Kennungen vorhanden, Art und Architektur wie erwartet (`krea_oss_2_turbo`; LoRAs `krea_oss_2`, Large Ball Gag `z_image_turbo`); Runwares Standardgewichte wie in der Liste. Danach geschrieben: 5 Grundmodelle (FLUX.2 [dev], Z-Image-Turbo, HiDream-I1 Dev, epiCRealism XL, Krea 2 Turbo), 26 LoRAs mit Gewicht und Auslösewort der Liste; Datei 3.854 Byte, Besitzer 10001, Rechte 600. Die App liest die Liste je Anfrage, kein Neustart.
+- Namen der LoRAs aus der Liste übernommen, nicht von Runware; die Zusätze in Klammern („nur bei Z-Image-Turbo“, „am besten mit Latex Bodysuits 0,5“) stehen nicht im Namen.
+- Offen: (4) Sichtprüfung des Eigentümers in Einstellungen → „Bildmodelle bei Runware“ und Stichprobe (Krea 2 Turbo ohne LoRA, Leather Cuffs, Harness Gag, Shiny Latex Bodysuits).
+
 ### 2026-11-09 – [GELÖST] 11.5: Kleidung der Entwürfe verdeckt die Proportionen
 
 - Probe des Eigentümers am Server (`e7e00f6`): „Funktion ist vorhanden, Entwürfe erstellt“; Frage nach Studio und schwarzer Kleidung – beides kommt aus dem vorbelegten Zusatz der Entwürfe (ADR-123, „Zusatz frei“), nicht aus der Bildbeschreibung. Befund: „Die Kleidung macht das Erkennen der Proportionen schwierig.“
