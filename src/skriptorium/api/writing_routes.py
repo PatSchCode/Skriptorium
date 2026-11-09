@@ -28,6 +28,7 @@ from skriptorium.api.flows import (
     prepare_description,
     prepare_figure_looks,
     prepare_guest_fit,
+    prepare_looks_suggestions,
     prepare_request,
     prepare_worldbuilder,
     stream_answer,
@@ -352,6 +353,31 @@ async def figure_looks(
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "KI-Anbieter nicht eingerichtet")
     await found.catalog.refresh()
     prepared = prepare_figure_looks(
+        found.context,
+        world_id,
+        entry_id,
+        body.answers,
+        body.model or _preset(found, "figurenassistent"),
+        found.catalog,
+    )
+    return StreamingResponse(
+        stream_answer(found.provider, prepared, "figurenassistent", found.usage.recorder(world_id)),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
+    )
+
+
+@router.post("/worlds/{world_id}/entries/{entry_id}/figure-looks/suggestions")
+async def figure_looks_suggestions(
+    world_id: str, entry_id: str, body: FigureLooksIn, found: ServicesDep
+) -> StreamingResponse:
+    """Stream suggestions for a figure's looks, three per question, one line each; saves nothing
+    (step 11.5, ADR-124). The answers are what the author has so far and may be empty. Unknown
+    questions or another category: 422."""
+    if found.provider is None:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "KI-Anbieter nicht eingerichtet")
+    await found.catalog.refresh()
+    prepared = prepare_looks_suggestions(
         found.context,
         world_id,
         entry_id,
