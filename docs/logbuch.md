@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [GELÖST] 11.5: Kleidung der Entwürfe verdeckt die Proportionen
+
+- Probe des Eigentümers am Server (`e7e00f6`): „Funktion ist vorhanden, Entwürfe erstellt“; Frage nach Studio und schwarzer Kleidung – beides kommt aus dem vorbelegten Zusatz der Entwürfe (ADR-123, „Zusatz frei“), nicht aus der Bildbeschreibung. Befund: „Die Kleidung macht das Erkennen der Proportionen schwierig.“
+- Auswahlfrage → „Schlichte Unterwäsche“ (Empfehlung). `DRAFT_ADDITION` in `ui/src/views/FigureDrafts.tsx`: „wearing only plain black underwear“ statt Oberteil und Leggings, dazu „arms relaxed at the sides“. Test prüft den neuen Text. Oberfläche 644 Tests grün, 98,79 / 95,05 / 98,36 / 98,94 % (unverändert); `tsc`, `eslint`, `prettier` ohne Befund. Nicht im Browser geprüft: nur ein vorbelegter Text, im Komponenten-Test als Feldinhalt abgefragt. ADR-123 mit Nachtrag statt neuem ADR.
+- Reibung: Die Vorbelegung war in der Vorlage zu 11.5 als „schlichte eng anliegende Kleidung“ beschrieben; dass sie die Proportionen verdeckt, zeigte erst das Bild.
+
 ### 2026-11-09 – [BEOBACHTUNG] 11.5 Vorschläge eingespielt (`e7e00f6`)
 
 - Auftrag des Eigentümers: „Ja, einspielen“ (ADR-039). CI auf `main` für `e7e00f6` grün (Lauf 00:59 UTC). Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf (`git archive` → `app.neu`, `REVISION`, `skriptorium:vorher` gesetzt – Stand vorher `ad29ed0`, `docker compose build`, `up -d`).
