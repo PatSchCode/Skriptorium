@@ -63,12 +63,12 @@ Zeilen baut die Oberfläche) und die Größe als „about … cm tall“. Einmal
 
 Datum: 2026-11-09, Cloud-Session, OpenRouter. Skript: `probe_vorschlaege.py` (Aufruf im Dateikopf), Antworten und Prüftabelle je Runde in `ergebnisse-vorschlaege-1` bis `-3` (`pruefung.md`).
 
-### Aufbau
+### Aufbau der Probe der Vorschläge
 
 - Auftrag an das Modell: aus Weltbeschreibung, Kanon-Eintrag und den bisherigen Angaben des Autors zu jeder der zehn Fragen drei Vorschläge als eine Zeile `Frage: a | b | c`; ein Vorschlag, den der Eintrag hergibt, endet auf „ [Eintrag]“. Dieselben drei Figuren wie oben, mit einer erfundenen Welt „Kerrow und die Küstenlande“: Brann (Eintrag ohne Aussehen, keine Angaben), Liv (Alter und Haar vorgegeben, Haarfarbe im Eintrag), Mara (Narben an den Handgelenken und Halsband im Eintrag). Temperatur 0,8.
 - Runde 1: erster Entwurf, 1.200 Ausgabe-Token, drei Modelle × drei Figuren × zwei Läufe (18 Anfragen). Runde 2: Auftrag geschärft („Eintrag zuerst, erster Vorschlag daraus, in der Herkunft kein Name aus der Welt, durch Kommas getrennt“), 3.000 Token, wieder 18. Runde 3: nur grok-4.6, Satz zum Eintrag noch einmal geschärft („Alles, was er über das Äußere sagt – auch beiläufig –, ist Kanon … Kein Vorschlag darf dem Eintrag widersprechen“), 6 Anfragen.
 
-### Ergebnis
+### Ergebnis der Probe der Vorschläge
 
 | Runde | Modell | Sperren | Form (10 Zeilen, je 3, Alter ab 18) | Eintrag eingehalten (Mara: Narben an den Handgelenken) |
 |---|---|---|---|---|
@@ -96,7 +96,7 @@ Von Hand gelesen:
 - Voreinstellung bleibt grok-4.6 (ADR-123); der geschärfte Satz zum Eintrag gehört in den Auftrag. Ausweichmodelle brauchen Raum für Denk-Token: Ausgabegrenze 4.000 statt 1.200.
 - Ob eine Antwort brauchbar ist, entscheidet die Oberfläche am Format: Ohne eine einzige erkennbare Zeile meldet sie „keine Vorschläge in der erwarteten Form“, und das Fenster bietet ein anderes Modell an.
 
-### Grenzen
+### Grenzen der Probe der Vorschläge
 
 - Drei Figuren, je zwei Läufe; Einträge mit stark sexualisiertem oder fesselungsbezogenem Inhalt (Welten des Eigentümers, an denen grok in 4.8 sperrte) nicht geprüft. Sperren bleiben möglich.
 - Ob die Vorschläge bildtauglich sind, zeigt erst die Abnahme am Server mit einer echten Figur.
