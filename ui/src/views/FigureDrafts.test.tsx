@@ -61,6 +61,9 @@ describe("drafts of the figure assistant (step 11.5, ADR-123)", () => {
       [...(select as HTMLSelectElement).options].map((o) => o.value),
     ).toEqual(["b/mit", "runware:krea"]);
     expect(screen.getByRole("textbox")).toHaveProperty("value", DRAFT_ADDITION);
+    // Owner 2026-11-09: clothes hid the proportions, the drafts show plain underwear.
+    expect(DRAFT_ADDITION).toContain("plain black underwear");
+    expect(DRAFT_ADDITION).not.toContain("leggings");
     await user.clear(screen.getByRole("textbox"));
     await user.type(screen.getByRole("textbox"), "studio");
     await user.click(

@@ -2,6 +2,8 @@
 
 Stand 2026-11-09. Entscheidungen des Eigentümers (Auswahlfragen in der Session zu 11.17): Grundmodell nur Krea 2 Turbo, 26 LoRAs (8 von ihm bestätigte und 18 im Test vom 2026-11-07 stimmige), keine LoRAs von „sarahpeterson“, Probe am Server als Stichprobe. Alle Kennungen am 2026-11-09 bei Runware nachgeschlagen (`modelSearch`, wie die App beim Hinzufügen): vorhanden, Architektur `krea_oss_2_turbo` (Grundmodell), `krea_oss_2` (LoRAs, passen zu Turbo) bzw. `z_image_turbo` (Large Ball Gag). Gewichte und Auslösewörter aus `docs/research/bildanbieter.md`.
 
+**Eingetragen am 2026-11-09** von der KI in einer Mac-Session (Weg nach ADR-125): alle Einträge dieser Tabelle mit Gewicht und Auslösewort, Kennungen unmittelbar vorher erneut nachgeschlagen; die vier Modelle der Startliste stehen mit in der Datei. Die Anleitung unten gilt für künftige Einträge.
+
 ## So trägst du ein
 
 1. In der App **Einstellungen** öffnen, Abschnitt **„Bildmodelle bei Runware“**.

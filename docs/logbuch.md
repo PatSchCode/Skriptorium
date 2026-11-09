@@ -29,6 +29,34 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [BEOBACHTUNG] 11.17 am Server eingetragen
+
+- Auftrag des Eigentümers: „Erst 11.17 dazu“ (vor dem Pull Request mit dem Zusatz aus 11.5). Weg nach ADR-125.
+- (1) Eine SSH-Abfrage: `data/system/runware-modelle.md` gibt es nicht – es galt die Startliste aus `api/runware_models.py`; keine Sicherungskopie nötig, Rückweg ist das Löschen der Datei. `RUNWARE_API_KEY` im Container gesetzt (nur Vorhandensein geprüft).
+- (3) Statt die Datei von Hand zu schreiben, ein Skript im Container (`docker exec -i skriptorium python -`, nur im Arbeitsverzeichnis der Session, nicht im Repo) mit dem Code der App: `RunwareImageProvider.lookup` je Kennung, dann `RunwareModels.add_model`/`add_lora` – gleiche Dateiform und gleiche Übernahme der Startliste wie beim Hinzufügen in den Einstellungen. Probedurchgang ohne Schreiben: alle 27 Kennungen vorhanden, Art und Architektur wie erwartet (`krea_oss_2_turbo`; LoRAs `krea_oss_2`, Large Ball Gag `z_image_turbo`); Runwares Standardgewichte wie in der Liste. Danach geschrieben: 5 Grundmodelle (FLUX.2 [dev], Z-Image-Turbo, HiDream-I1 Dev, epiCRealism XL, Krea 2 Turbo), 26 LoRAs mit Gewicht und Auslösewort der Liste; Datei 3.854 Byte, Besitzer 10001, Rechte 600. Die App liest die Liste je Anfrage, kein Neustart.
+- Namen der LoRAs aus der Liste übernommen, nicht von Runware; die Zusätze in Klammern („nur bei Z-Image-Turbo“, „am besten mit Latex Bodysuits 0,5“) stehen nicht im Namen.
+- Offen: (4) Sichtprüfung des Eigentümers in Einstellungen → „Bildmodelle bei Runware“ und Stichprobe (Krea 2 Turbo ohne LoRA, Leather Cuffs, Harness Gag, Shiny Latex Bodysuits).
+
+### 2026-11-09 – [GELÖST] 11.5: Kleidung der Entwürfe verdeckt die Proportionen
+
+- Probe des Eigentümers am Server (`e7e00f6`): „Funktion ist vorhanden, Entwürfe erstellt“; Frage nach Studio und schwarzer Kleidung – beides kommt aus dem vorbelegten Zusatz der Entwürfe (ADR-123, „Zusatz frei“), nicht aus der Bildbeschreibung. Befund: „Die Kleidung macht das Erkennen der Proportionen schwierig.“
+- Auswahlfrage → „Schlichte Unterwäsche“ (Empfehlung). `DRAFT_ADDITION` in `ui/src/views/FigureDrafts.tsx`: „wearing only plain black underwear“ statt Oberteil und Leggings, dazu „arms relaxed at the sides“. Test prüft den neuen Text. Oberfläche 644 Tests grün, 98,79 / 95,05 / 98,36 / 98,94 % (unverändert); `tsc`, `eslint`, `prettier` ohne Befund. Nicht im Browser geprüft: nur ein vorbelegter Text, im Komponenten-Test als Feldinhalt abgefragt. ADR-123 mit Nachtrag statt neuem ADR.
+- Reibung: Die Vorbelegung war in der Vorlage zu 11.5 als „schlichte eng anliegende Kleidung“ beschrieben; dass sie die Proportionen verdeckt, zeigte erst das Bild.
+
+### 2026-11-09 – [BEOBACHTUNG] 11.5 Vorschläge eingespielt (`e7e00f6`)
+
+- Auftrag des Eigentümers: „Ja, einspielen“ (ADR-039). CI auf `main` für `e7e00f6` grün (Lauf 00:59 UTC). Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf (`git archive` → `app.neu`, `REVISION`, `skriptorium:vorher` gesetzt – Stand vorher `ad29ed0`, `docker compose build`, `up -d`).
+- Warten nur über HTTPS: `/api/health` sechsmal 404 im Abstand von 10 s (Container im Start), dann 200 nach rund 60 s; Anmeldeseite 200. Eine SSH-Prüfung: `healthy`, `REVISION` `e7e00f6`.
+- Mit eingespielt: „Vorschläge abbrechen“ (#235) und die Dokumente zu 11.17 (ohne Wirkung in der App). Offen: Abnahme der Vorschläge durch den Eigentümer.
+
+### 2026-11-09 01:02 – [SESSIONSTART] Neue lokale Mac-Session, Wiedereinstieg nach 11.5 und 11.17
+
+- **Modell:** eingestellt `claude-opus-5-5` (Sitzungsabfrage `get_session`: `model`; Systemkontext ebenso) → Entscheidungs-Klasse. Ein bedientes Modell getrennt davon meldet die Abfrage nicht. Für das Einspielen von 11.5 (Routine) liegt die Session oberhalb der Empfehlung; 11.17 (Eintragen nach ADR-125) gehört zu einem Schritt mit Empfehlung Entscheidung. Abgabe an Unteragenten entfällt (D.22).
+- **Wiedereinstieg:** `git fetch` und `pull --ff-only` gegen `origin/main` – war 13 Commits zurück, jetzt `e7e00f6` (PR #236 gemergt); keine offenen Pull Requests. Mindest-Lektüre vollständig (`docs/requirements.md` entfällt in Klasse M); keine aktiven Blocker. Branch `docs/11.5-11.17-mac`.
+- **Auftrag:** noch keiner genannt („Neue Session“); laut Fahrplan „Nächster Schritt“: Mac-Session – 11.5 einspielen (nur auf Anweisung, ADR-039) und abnehmen lassen; 11.17 eintragen nach ADR-125 und Stichprobe; dann 11.6.
+- **Kontextgröße zu Beginn:** 188.332 Token (Sitzungsabfrage `get_usage`; Grenze nach Projektkontext Abschnitt 6: 200.000).
+- **Kontingent:** 5-Stunden-Fenster 12 %, Woche 9 % (Zurücksetzung 2026-11-15 08:00 UTC).
+
 ### 2026-11-09 – [SESSIONENDE] 11.5 gemergt, 11.17 entschieden, Eintragen vom Mac offen
 
 - **Dauer:** 2026-11-08 ca. 23:42 bis 2026-11-09 ca. 01:00 UTC (Cloud-Session; ergänzt den Sessionende-Eintrag weiter unten, der vor Prüfung, Merge und 11.17 geschrieben war).
