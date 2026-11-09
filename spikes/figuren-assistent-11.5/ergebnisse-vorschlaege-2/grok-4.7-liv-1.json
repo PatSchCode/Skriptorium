@@ -1,0 +1,9 @@
+{
+  "modell": "x-ai/grok-4.7",
+  "figur": "liv",
+  "lauf": 1,
+  "finish_reason": "stop",
+  "kosten_usd": 0.0125631,
+  "token_aus": 1781,
+  "sekunden": 38.5
+}
