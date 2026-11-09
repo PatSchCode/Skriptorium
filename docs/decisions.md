@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-09 (ADR-001 bis ADR-125). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-09 (ADR-001 bis ADR-126). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -145,12 +145,13 @@ Stand 2026-11-09 (ADR-001 bis ADR-125). Aus welchem Schritt ein ADR stammt, steh
 | 123 | 2026-11-08 | Aktiv (Regel „nichts erfunden“ geändert durch ADR-124) | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, Architektur, API | Figuren-Assistent: „Aussehen“ als Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6 (11.5) |
 | 124 | 2026-11-08 | Aktiv | REAKTIV | SCHNITTSTELLE | API, KI-Aufgabe | Figuren-Assistent schlägt das Aussehen aus Eintrag und Welt vor, du wählst (11.5) |
 | 125 | 2026-11-09 | Aktiv | OPERATIV | SECURITY | Sicherheit | Krea 2 Turbo und 26 geprüfte LoRAs in die Runware-Liste, Eintragen vom Mac, Stichprobe (11.17) |
+| 126 | 2026-11-09 | Aktiv | OPERATIV | DATENMODELL, SCHNITTSTELLE, MODUL | Datenmodell, API, Architektur | Bildrezepte: weltübergreifend unter `system/`, füllen das Fenster „Bild erzeugen“, Code neben der Runware-Liste (11.6) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 1 / 10 (10 %) über ADR-116 bis ADR-125 – reaktiv: ADR-124 (Vorschläge im Figuren-Assistenten, 11.5: neue Route und geänderte KI-Aufgabe nach der Probe des Eigentümers, in der Planung nicht vorgesehen). Nicht reaktiv: ADR-125 Runware-Liste zu 11.17 (Kategorie 6, im Schritt als Vorlage vorgesehen, keine Architekturentscheidung); ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 1 / 10 (10 %) über ADR-117 bis ADR-126 – reaktiv: ADR-124 (Vorschläge im Figuren-Assistenten, 11.5: neue Route und geänderte KI-Aufgabe nach der Probe des Eigentümers, in der Planung nicht vorgesehen). Nicht reaktiv: ADR-126 Datenmodell, API und Ort der Bild-Fachlogik zu 11.6, im Schritt als Vorlage vorgesehen (ADR-118); ADR-125 Runware-Liste zu 11.17 (Kategorie 6, im Schritt als Vorlage vorgesehen, keine Architekturentscheidung); ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2963,6 +2964,33 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Konfidenz zum Zeitpunkt:** hoch – Kennungen am selben Tag bei Runware geprüft, Gewichte aus den Tests vom 2026-11-07. Umkehrbarkeit billig: Einträge lassen sich in den Einstellungen entfernen, die Sicherungskopie stellt den alten Stand her.
 - **Konsequenzen:** 11.17 bleibt offen bis zur Mac-Session (Eintragen, Stichprobe, Bestätigung). Restrisiko des direkten Schreibens: ein Fehler in der Datei zeigt in den Einstellungen und im Bilddialog eine Fehlermeldung statt der Liste – behoben durch Zurückspielen der Kopie.
 - **Nachtrag 2026-11-09 (Armbinder):** Eintragen erledigt (5 Grundmodelle, 26 LoRAs). In der Stichprobe des Eigentümers brachte Armbinder „gar keinen Armbinder“, obwohl die LoRA mitgeschickt wurde (Protokoll `loras=1`). Probe im Container (Krea 2 Turbo, Gewicht 1,0, Seed 404, 0,0235 $): mit dem Auslösewort allein weder von hinten noch von vorn ein Armbinder; mit der Formulierung aus dem Rezept vom 2026-11-07 ein geschnürter Armbinder mit Schultergurten, auch am Ende des Prompts. Eigentümer: „Ja, erweitern“ → Auslösewort jetzt „BDSMArmbinder, arms behind the back in one single black leather armbinder sleeve for both arms, not two separate sleeves, laced, with shoulder straps, centered on the back“ (über `RunwareModels.replace`, übrige Einträge unverändert).
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-126: Bildrezepte – weltübergreifend unter `system/`, füllen das Fenster „Bild erzeugen“, Code neben der Runware-Liste (11.6)
+
+- **Datum:** 2026-11-09
+- **Entscheider:** Eigentümer (Vorlage als `ENTSCHEIDUNG ERFORDERLICH` mit Vergleichsseite vorher/nachher und Auswahlfragen: „Füllt das Fenster“, „Neben Runware-Liste“, „Mit 11.8 nachrüsten“, Mockup „Passt so“ – jeweils Empfehlung der KI)
+- **Status:** Aktiv
+- **Tags:** `[DATENMODELL]` `[SCHNITTSTELLE]` `[MODUL]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.6, Vorlage im Schritt vorgesehen, ADR-118) – nicht reaktiv
+- **Reifegrad-Wirkung:** keine – neue Ablage additiv neben `system/runware-modelle.md`, kein neues Modul, keine neue Kante der Modul-Karte
+- **Kategorie:** Datenmodell (4), API additiv (5), Architektur (1/2: Ort der Bild-Fachlogik, Befund 3 der Bewertung nach Phase 10)
+- **Kontext:** V.57: Szene, Modell und LoRAs als wiederverwendbare Vorlage, die Figur als Lücke; dasselbe Rezept für Figuren aller Welten. Offen waren Ort des Anwendens (Oberfläche oder Server), Ort der Bild-Fachlogik (Befund 3: Familien und Passung liegen in `api/runware_models.py`, obwohl `api` keine Fachlogik tragen soll) und der Umfang der Einstellungen (Schritte, CFG gibt es im Bildauftrag noch nicht).
+- **Optionen:** Anwenden: A Rezept füllt das Fenster „Bild erzeugen“, alles bleibt änderbar / B Rezept erzeugt direkt über eine eigene Route. Ort: A neue Datei `api/image_recipes.py` neben `api/runware_models.py` / B eigenes Modul „Bilder“ (Umbau von rund 330 Zeilen vorab). Einstellungen: A Schritte und CFG mit 11.8 / B jetzt.
+- **Entscheidung:**
+  - **Ablage** `system/bildrezepte.md` (weltübergreifend, nicht indexiert), Feld `rezepte` – Liste mit `kennung` (zufällig, 8 Hex-Zeichen), `name` (höchstens 100 Zeichen, eindeutig ohne Groß-/Kleinschreibung), `modell`, `seitenverhaeltnis`, optional `aufloesung` und `qualitaet` (wo das Modell sie anbietet), `loras` (Liste aus `kennung` und `gewicht`, höchstens 5, nur bei Runware-Modellen, nur aus der Runware-Liste und passend zur Familie des Modells), `szene` (höchstens 4.000 Zeichen, enthält `[Figur]` genau einmal). Höchstens 50 Rezepte.
+  - **Anwenden in der Oberfläche:** Im Fenster „Bild erzeugen“ einer Figur wählt der Eigentümer ein Rezept; Modell, Format, Stufen, LoRAs mit Gewicht und die Beschreibung werden übernommen, `[Figur]` wird durch die Bildbeschreibung der Figur ersetzt (sonst die Vorbelegung aus ADR-084/ADR-123). Alles bleibt vor dem Erzeugen änderbar. Eine LoRA, die nicht mehr in der Liste steht, fällt mit Hinweis weg.
+  - **Anlegen** nur über „Als Rezept speichern“ im Fenster: die Bildbeschreibung der Figur im Text wird durch `[Figur]` ersetzt; fehlt sie, setzt der Eigentümer `[Figur]` selbst. Gleicher Name ersetzt das Rezept (Hinweis vorher). **Pflege** in den Einstellungen, Karte „Bildrezepte“: Name, Szene, Reihenfolge, Entfernen – Modell und LoRAs ändert man über Anwenden und erneutes Speichern.
+  - **Routen:** `GET /api/images/recipes`, `POST /api/images/recipes` (speichern nach Name), `PUT /api/images/recipes` (Liste wie bearbeitet; nur vorhandene Kennungen).
+  - **Herkunft:** additiv Feld `rezept` (Name) in `<bild>.herkunft.yml`.
+  - **Ort:** `api/image_recipes.py` neben der Runware-Liste; Prüfung von Modell und LoRAs über die vorhandene Passung (`fits`). Die Frage nach einem eigenen Baustein wird in 11.8 erneut gestellt (dort ggf. weiterer Anbieter, V.56 (6)).
+  - **Schritte und CFG** kommen mit 11.8 (V.56 (3)) und dann additiv ins Rezept; Rezepte ergänzen die Voreinstellungen je Grundmodell, sie ersetzen sie nicht (V.57 (6)).
+  - **Gleichbleibende Figur** (V.57 (5)) über die Bildbeschreibung; dazu der vorhandene Startwert (ADR-121) und „Bild zu Bild“ (ADR-097). Das Rezept hält keinen Startwert – er gehört zur Figur, nicht zur Szene. Umformen in Schlagworte für andere Modellfamilien (V.57 (4)) bleibt bei 11.7.
+- **Vision-Frage, die entschied:** „Willst du vor jedem Bild sehen und ändern können, was das Rezept einsetzt?“ → ja.
+- **Konfidenz zum Zeitpunkt:** hoch für das Anwenden im Fenster (Muster des Figuren-Assistenten, 11.5); mittel für den Ort (Befund 3 warnt). Umkehrbarkeit billig: Datei additiv, eine spätere Verschiebung im Code ändert keine Daten.
+- **Konsequenzen:** Phase 11 bleibt bei 17 Schritten. 11.8 erhält die Punkte „Schritte/CFG ins Rezept“ und „Ort der Bild-Fachlogik erneut prüfen“. Verworfen (Architektur Abschnitt 8): Anwenden auf dem Server ohne sichtbaren Text; eigenes Modul vorab.
 - **Abgeleitete Regel:** keine
 
 ---

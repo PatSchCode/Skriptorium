@@ -8,11 +8,11 @@
 <!-- ANCHOR:aktueller-stand -->
 ## Aktueller Stand
 
-- **Stand vom:** 2026-11-09 (11.5 und 11.17 erledigt nach Abnahme; #238 gemergt und eingespielt `f4f8b29`: Zusatz der Entwürfe zweite Runde; Armbinder-Auslösewort erweitert; #237 gemergt und eingespielt `b8507ff`; 11.17 am Server eingetragen; 11.5 Zusatz der Entwürfe auf Unterwäsche; 11.5 Vorschläge eingespielt `e7e00f6`; 11.17 entschieden, ADR-125; 11.5 Nachbesserung gebaut und gemergt #235: Vorschläge der KI, ADR-124; 11.5 gebaut und gemergt #232, ADR-123; 11.17 angelegt; D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
+- **Stand vom:** 2026-11-09 (11.6 in Arbeit: Vorlage mit Vergleichsseite freigegeben, ADR-126; #239 gemergt; 11.5 und 11.17 erledigt nach Abnahme; #238 gemergt und eingespielt `f4f8b29`: Zusatz der Entwürfe zweite Runde; Armbinder-Auslösewort erweitert; #237 gemergt und eingespielt `b8507ff`; 11.17 am Server eingetragen; 11.5 Zusatz der Entwürfe auf Unterwäsche; 11.5 Vorschläge eingespielt `e7e00f6`; 11.17 entschieden, ADR-125; 11.5 Nachbesserung gebaut und gemergt #235: Vorschläge der KI, ADR-124; 11.5 gebaut und gemergt #232, ADR-123; 11.17 angelegt; D.28 gemergt, ADR-122; 11.1 erledigt, ADR-119; 11.2 erledigt; 11.3 erledigt, ADR-120; 11.4 erledigt, ADR-121; Phase 11 geplant mit ADR-117, ADR-118). Frühere Stände: Logbuch und Archiv [`docs/archiv/fahrplan-phase-10.md`](archiv/fahrplan-phase-10.md).
 - **Laufende Phase:** Phase 11 „Figuren, Bilder und Feinschliff“ (Phase 10 abgeschlossen 2026-11-08)
 - **Phasentyp:** UMSETZUNG
-- **Aktiver Schritt:** keiner – 11.5 (ADR-123, ADR-124) und 11.17 (ADR-125) erledigt 2026-11-09 nach Abnahme des Eigentümers am Server (`f4f8b29`). In Phase 11 sind 11.1 bis 11.5 und 11.17 erledigt. D.28 (ADR-122) erledigt, Nachweis auf dem Mac erbracht.
-- **Nächster Schritt:** 11.6 Bildrezepte (Vorlage mit Mockup, Entscheidungs-Klasse). Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
+- **Aktiver Schritt:** 11.6 Bildrezepte – Vorlage freigegeben (ADR-126), Umsetzung läuft auf `feat/11.6-bildrezepte`. 11.5 (ADR-123, ADR-124) und 11.17 (ADR-125) erledigt 2026-11-09 nach Abnahme des Eigentümers am Server (`f4f8b29`). In Phase 11 sind 11.1 bis 11.5 und 11.17 erledigt. D.28 (ADR-122) erledigt, Nachweis auf dem Mac erbracht.
+- **Nächster Schritt:** 11.6 fertigstellen (Tests, Probe mit echten Bildern: ein Rezept für zwei Figuren aus verschiedenen Welten, Abnahme), danach 11.7. Querschnitt: D.11 bis 2026-10-31 (Eigentümer) – Frist überschritten. Datiert: D.5 ab 2026-11-12; D.15 ab 2026-12-17; D.9 2026-12-28. Knappe Ressource: Wochenkontingent Max 5x (Zurücksetzung sonntags 10:00 MESZ)
 - **Offene STOPP-Situationen:** keine – STOPP Phasen-Wucherung (Phase 4, 16 Schritte) aufgelöst am 2026-10-08 durch Neuplanung, Vision-Abgleich und Pflichtfrage (ADR-042; Bewertung `docs/research/bewertung-phase-4.md`). Die Befunde (a)–(h) und die Modell-Sperren haben ihren Landeplatz in 5.7–5.13, D.13, V.6–V.9.
 
 ---
@@ -34,7 +34,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | ✅ | 11.4 | Fester Startwert und vollständige Herkunft (V.53) | erledigt 2026-11-08 (ADR-121) | – |
 | ✅ | 11.5 | Figuren-Assistent für das Aussehen (V.58) | erledigt 2026-11-09 (ADR-123, ADR-124; eingespielt `f4f8b29`) | – |
 | ✅ | 11.17 | Krea 2 und geprüfte LoRAs in die Runware-Liste (vor 11.6) | erledigt 2026-11-09 (ADR-125) | – |
-| ⚪ | 11.6 | Bildrezepte (V.57) | offen | KI |
+| 🟠 | 11.6 | Bildrezepte (V.57) | in Arbeit (ADR-126) | KI |
 | ⚪ | 11.7 | Prompt in Schlagworte umsetzen (V.52) | offen | KI |
 | ⚪ | 11.8 | Erkenntnisse der Bildmodell-Erkundung (V.56) | offen | KI |
 | ⚪ | 11.9 | Großansicht und Meldungen bei Bildern (V.49, V.50) | offen | KI |
@@ -309,7 +309,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 
 #### 11.6: Bildrezepte – Szene, Modell und LoRAs als Vorlage, Figur als Lücke (V.57)
 
-- **Status:** ⚪ OFFEN
+- **Status:** 🟠 IN ARBEIT (Vorlage freigegeben 2026-11-09, ADR-126)
 - **Phasentyp-Kontext:** UMSETZUNG (mit Vorlage zu Beginn)
 - **Abhängigkeiten:** 11.4, 11.5, 11.17
 - **Freigabepflichtig:** ja – wie V.57 (neue Ablage, Ort der Bild-Fachlogik: Kategorie 1/2/4)
@@ -321,7 +321,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** storage, api, ui, context (Zuordnung in der Vorlage)
 - **Reifegrad-Wirkung:** keine (bei neuem Modulzuschnitt: Architektur neu prüfen)
 - **Artefakte:** Vorlage mit Mockup, ADR, Code, Tests
-- **Notizen:** Aus V.57.
+- **Notizen:** Aus V.57. Vorlage 2026-11-09 mit Vergleichsseite vorher/nachher (Testwelt Salzmark, Ilka Varn); Eigentümer: Rezept füllt das Fenster, Code neben der Runware-Liste, Schritte/CFG mit 11.8, Mockup „Passt so“ (ADR-126).
 
 #### 11.7: Prompt in Schlagworte umsetzen (V.52)
 
@@ -353,7 +353,7 @@ Festgehalten am 2026-09-26 in Modus 2 Schritt 6 (Klasse M, ADR-001: fünf Phasen
 - **Betroffene Module:** ai_gateway, api, ui
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Vorlage, ADR, Code, Tests
-- **Notizen:** Aus V.56.
+- **Notizen:** Aus V.56. Aus 11.6 (ADR-126): Schritte und CFG, sobald sie eingeführt sind, additiv auch ins Bildrezept (`system/bildrezepte.md`); Ort der Bild-Fachlogik (`api/runware_models.py`, `api/image_recipes.py`) erneut prüfen, falls ein weiterer Anbieter dazukommt.
 
 #### 11.9: Großansicht und Meldungen bei Bildern (V.49, V.50)
 
