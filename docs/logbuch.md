@@ -29,6 +29,12 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [BEOBACHTUNG] 11.5 Vorschläge eingespielt (`e7e00f6`)
+
+- Auftrag des Eigentümers: „Ja, einspielen“ (ADR-039). CI auf `main` für `e7e00f6` grün (Lauf 00:59 UTC). Ablauf nach Runbook Abschnitt 7 in einem SSH-Aufruf (`git archive` → `app.neu`, `REVISION`, `skriptorium:vorher` gesetzt – Stand vorher `ad29ed0`, `docker compose build`, `up -d`).
+- Warten nur über HTTPS: `/api/health` sechsmal 404 im Abstand von 10 s (Container im Start), dann 200 nach rund 60 s; Anmeldeseite 200. Eine SSH-Prüfung: `healthy`, `REVISION` `e7e00f6`.
+- Mit eingespielt: „Vorschläge abbrechen“ (#235) und die Dokumente zu 11.17 (ohne Wirkung in der App). Offen: Abnahme der Vorschläge durch den Eigentümer.
+
 ### 2026-11-09 01:02 – [SESSIONSTART] Neue lokale Mac-Session, Wiedereinstieg nach 11.5 und 11.17
 
 - **Modell:** eingestellt `claude-opus-5-5` (Sitzungsabfrage `get_session`: `model`; Systemkontext ebenso) → Entscheidungs-Klasse. Ein bedientes Modell getrennt davon meldet die Abfrage nicht. Für das Einspielen von 11.5 (Routine) liegt die Session oberhalb der Empfehlung; 11.17 (Eintragen nach ADR-125) gehört zu einem Schritt mit Empfehlung Entscheidung. Abgabe an Unteragenten entfällt (D.22).
