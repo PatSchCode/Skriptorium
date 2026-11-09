@@ -29,6 +29,14 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-09 – [GELÖST] Prüfung nach Modellwechsel: zwei Fehler in der Oberflächen-Logik
+
+- Auf Wunsch des Eigentümers nach dem Pull Request ([#235](https://github.com/PatSchCode/Skriptorium/pull/235)) gewechselt per `/model` auf `claude-opus-5-5`; `get_session` meldet `session_context.model` und `user_switched_model` `claude-opus-5-5` → Entscheidungs-Klasse bestätigt. Auftrag: „prüfe nochmal deine Arbeit“.
+- Diff von `context`, `api` und `ui` neu gelesen. Server ohne Befund. Zwei Fehler in `ui/src/figureLooks.ts`, beide behoben mit Test: (1) `parseSuggestions` ließ doppelte Vorschläge einer Frage stehen – beim Alter (`26 | 26 | 28`) zwei Chips mit demselben React-Schlüssel; jetzt entfernt. (2) `chipsFor` verglich Doppelte ohne Groß-/Kleinschreibung, die gedrückte Wahl aber exakt – eine Wahl „Kupferrot“ neben der Zeile „kupferrot“ aus dem Eintrag verschwand als Chip und blieb doch in der Antwort; jetzt zählt nur exakt gleicher Text als doppelt. Oberfläche danach 644 Tests, 98,79 / 95,05 / 98,36 / 98,94 %.
+- Nicht geändert, dem Eigentümer genannt: „Abbrechen“ während der Vorschläge schließt das ganze Fenster samt Antworten (gleiches Verhalten wie beim Formulieren seit ADR-123).
+- **Kontextgröße:** Die Sitzungsabfrage meldet nach dem Wechsel 414.404 Token – über der Grenze 200.000. Die Angabe „nicht feststellbar“ im Sessionende darunter ist damit überholt; kein neuer Schritt begonnen.
+- **Modell-Bilanz ergänzt:** Bau auf Sonnet 5.5 (Routine), Prüfung auf Opus 5.5 (Entscheidungs-Klasse, entspricht der Empfehlung von 11.5).
+
 ### 2026-11-09 – [SESSIONENDE] 11.5 Vorschläge gebaut und geprüft, Einspielen und Abnahme offen
 
 - **Dauer:** 2026-11-08 ca. 23:42 bis 2026-11-09 ca. 00:25 UTC (Cloud-Session, Branch `scp/gallant-mccarthy-k8sngb`).
