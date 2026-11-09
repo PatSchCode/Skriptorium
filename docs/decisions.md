@@ -16,7 +16,7 @@
 <!-- ANCHOR:teil-a-adr-uebersicht -->
 ## Teil A: ADR-Übersicht
 
-Stand 2026-11-08 (ADR-001 bis ADR-124). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
+Stand 2026-11-09 (ADR-001 bis ADR-125). Aus welchem Schritt ein ADR stammt, steht in seinem Eintrag (Feld „Phasentyp-Kontext“) und in der Spalte „Kurztitel“; die frühere Aufzählung je ADR steht im Archiv [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Sortiert nach Nummer; Mindest-Lektüre bei Sessionstart.
 
 | ADR | Datum | Status | Klassifikation | Themen | Kategorie | Kurztitel |
 |---|---|---|---|---|---|---|
@@ -144,12 +144,13 @@ Stand 2026-11-08 (ADR-001 bis ADR-124). Aus welchem Schritt ein ADR stammt, steh
 | 122 | 2026-11-08 | Aktiv | OPERATIV | STACK | Build-Pipeline | Pre-Commit-Hook markdownlint nutzt das Node aus dem PATH (D.28) |
 | 123 | 2026-11-08 | Aktiv (Regel „nichts erfunden“ geändert durch ADR-124) | OPERATIV | DATENMODELL, SCHNITTSTELLE | Datenmodell, Architektur, API | Figuren-Assistent: „Aussehen“ als Zeilen, englische „Bildbeschreibung“ im Eintrag, grok-4.6 (11.5) |
 | 124 | 2026-11-08 | Aktiv | REAKTIV | SCHNITTSTELLE | API, KI-Aufgabe | Figuren-Assistent schlägt das Aussehen aus Eintrag und Welt vor, du wählst (11.5) |
+| 125 | 2026-11-09 | Aktiv | OPERATIV | SECURITY | Sicherheit | Krea 2 Turbo und 26 geprüfte LoRAs in die Runware-Liste, Eintragen vom Mac, Stichprobe (11.17) |
 
 ### Reaktiv-Quote
 
 Anzahl `[REAKTIV]`-ADRs / Gesamtzahl der letzten 10 ADRs (Bezugsgröße nach `docs/project-context.md` Abschnitt 6).
 
-- **Aktueller Wert:** 1 / 10 (10 %) über ADR-115 bis ADR-124 – reaktiv: ADR-124 (Vorschläge im Figuren-Assistenten, 11.5: neue Route und geänderte KI-Aufgabe nach der Probe des Eigentümers, in der Planung nicht vorgesehen). Nicht reaktiv: ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105); ADR-115 zweite Vorlage zu 10.8, vor dem Bau vorgesehen (ADR-114). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
+- **Aktueller Wert:** 1 / 10 (10 %) über ADR-116 bis ADR-125 – reaktiv: ADR-124 (Vorschläge im Figuren-Assistenten, 11.5: neue Route und geänderte KI-Aufgabe nach der Probe des Eigentümers, in der Planung nicht vorgesehen). Nicht reaktiv: ADR-125 Runware-Liste zu 11.17 (Kategorie 6, im Schritt als Vorlage vorgesehen, keine Architekturentscheidung); ADR-123 Datenmodell, KI-Aufgabe und Modell zu 11.5, im Schritt als Vorlage vorgesehen (ADR-118); ADR-122 Werkzeug-Konfiguration zu D.28 (Kategorie 7, keine Architekturentscheidung, im Schritt als Vorlage vorgesehen); ADR-121 Datenmodell und API zu 11.4, im Schritt als Vorlage vorgesehen (ADR-118); ADR-120 Datenmodell zu 11.3, im Schritt als Vorlage vorgesehen (ADR-117); ADR-119 Sicherheitsentscheidung zum Reifegrad, in 11.1 vorgesehen (ADR-117), keine Architekturentscheidung; ADR-117 Pflichtfrage an der Phasengrenze (vorgesehen, `CLAUDE.md` Abschnitt 12), ADR-118 Planung in 10.11 (vorgesehen, ADR-105); ADR-116 Datenmodell zu 10.9, im Schritt als Vorlage vorgesehen (ADR-105). Verlauf der früheren Werte und Begründungen bis 2026-11-05: [`docs/archiv/decisions-reaktiv-verlauf.md`](archiv/decisions-reaktiv-verlauf.md). Beim nächsten ADR: Wert für die letzten 10 neu bilden und nur die Begründungen der ADRs im Fenster nennen.
 - **Schwellenwert (in `project-context.md` festgelegt):** 30 % `[REAKTIV]`-Anteil über die letzten 10 ADRs (Klasse M).
 - **Bei Überschreitung:** STOPP, Reflexion in `fahrplan.md` ergänzen, prüfen ob Architektur-Refactoring nötig ist.
 
@@ -2937,6 +2938,29 @@ Alle Einträge ADR-001 bis ADR-009 entstanden in Modus 2 (Projektinitialisierung
 - **Vision-Frage, die entschied:** „Darf die KI das Aussehen deiner Figuren vorschlagen, solange erst deine Auswahl in den Kanon kommt?“ → ja.
 - **Konfidenz zum Zeitpunkt:** mittel – Form und Ablauf folgen dem bestehenden Muster (Auswahl plus freie Ergänzung); Güte der Vorschläge und Sperren bei freizügigen Einträgen zeigt erst die Probe. Umkehrbarkeit billig: ein Knopf, eine Anfrage, kein Schema.
 - **Konsequenzen:** Probe der Vorschläge vor dem Bau (Cloud-Session, dort gilt der Schlüssel): Testfiguren mit wenig Aussehen, grok-4.6 und Ausweichmodelle, Sperren, Form, Bildtauglichkeit der Herkunft. Danach Bau in `context` (Anfrage), `api` (Route), `ui` (Knopf, Vorschläge statt `CHOICES`); Einspielen vom Mac; Abnahme durch den Eigentümer. `docs/architecture.md` Abschnitte 3 und 4 nachziehen.
+- **Abgeleitete Regel:** keine
+
+---
+
+#### ADR-125: Krea 2 Turbo und 26 geprüfte LoRAs in die Runware-Liste, Eintragen vom Mac, Stichprobe (11.17)
+
+- **Datum:** 2026-11-09
+- **Entscheider:** Eigentümer (Vorlage als `ENTSCHEIDUNG ERFORDERLICH` mit Auswahlfragen in der Cloud-Session zu 11.17: Grundmodell „Nur Krea 2 Turbo“, LoRAs „26: bestätigt + stimmig“, Probe „Stichprobe: Turbo + 3 LoRAs“ – jeweils Empfehlung der KI; Weg nach zwei Rückfragen „Lieber Mac-Session“ – Empfehlung war das Eintragen durch den Eigentümer über die Einstellungen)
+- **Status:** Aktiv
+- **Tags:** `[SECURITY]`
+- **Phasentyp-Kontext:** UMSETZUNG (Phase 11, Schritt 11.17, Vorlage im Schritt vorgesehen) – nicht reaktiv, keine Architekturentscheidung
+- **Reifegrad-Wirkung:** keine (nur Daten unter `system/`, kein Code)
+- **Kategorie:** Sicherheit (Kategorie 6: Runware-Konto und Zugriff der KI auf Produktionsdaten)
+- **Kontext:** Krea 2 und die am 2026-11-07 geprüften LoRAs fehlen in der Modellliste der App (`system/runware-modelle.md`); die Startliste in `api/runware_models.py` greift nur bei leerer Liste. Am 2026-11-09 alle 37 Kandidaten bei Runware nachgeschlagen (`modelSearch`): vorhanden. Beim Eintragen übernimmt die App Runwares Gewicht (`image_routes.py`: `default_weight`, sonst 1,0) und Auslösewort – bei 22 der 26 gewählten LoRAs steht Runware auf 1,0, bei den meisten Joschek-LoRAs fehlt das Auslösewort.
+- **Optionen:** Grundmodell: nur Turbo / Turbo und Raw. LoRAs: 26 (8 bestätigt + 18 stimmig) / nur 8 / alle 35. Weg: Eigentümer über Einstellungen → „Bildmodelle bei Runware“ nach einer Tabelle / KI vom Mac per SSH in die Datei. Probe: Stichprobe / je Eintrag ein Bild.
+- **Entscheidung:**
+  - **Grundmodell:** nur Krea 2 Turbo (`krea:krea@2-turbo`); Raw nicht (im Test fleckig und zu jung wirkend, Einstellungen unerprobt).
+  - **LoRAs:** die 26 aus `docs/research/runware-liste-11.17.md` mit den dort genannten Gewichten und Auslösewörtern; keine LoRAs von „sarahpeterson“, keine der schwachen.
+  - **Weg:** Die KI trägt in einer Mac-Session per SSH in `system/runware-modelle.md` ein (ADR-025, ADR-037): vorher Sicherungskopie der Datei, bestehende Einträge bleiben, unmittelbar vorher jede Kennung erneut bei Runware nachschlagen (ersetzt die Prüfung der App), danach Sichtprüfung des Eigentümers in den Einstellungen.
+  - **Probe am Server:** Stichprobe statt je Eintrag ein Bild – Krea 2 Turbo ohne LoRA, Leather Cuffs, Harness Gag, Shiny Latex Bodysuits. Ändert das Akzeptanzkriterium aus 11.17 „(4) je Modell bzw. LoRA ein Bild“; die LoRAs selbst sind seit 2026-11-07 einzeln geprüft.
+- **Vision-Frage, die entschied:** „Welche Fesselungen, Knebel und Kleidung sollen in der App wählbar sein – nur, was du selbst angesehen hast, oder alles, was im Test stimmig war?“ → alles, was im Test stimmig war.
+- **Konfidenz zum Zeitpunkt:** hoch – Kennungen am selben Tag bei Runware geprüft, Gewichte aus den Tests vom 2026-11-07. Umkehrbarkeit billig: Einträge lassen sich in den Einstellungen entfernen, die Sicherungskopie stellt den alten Stand her.
+- **Konsequenzen:** 11.17 bleibt offen bis zur Mac-Session (Eintragen, Stichprobe, Bestätigung). Restrisiko des direkten Schreibens: ein Fehler in der Datei zeigt in den Einstellungen und im Bilddialog eine Fehlermeldung statt der Liste – behoben durch Zurückspielen der Kopie.
 - **Abgeleitete Regel:** keine
 
 ---
