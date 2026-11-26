@@ -29,6 +29,13 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-26 02:40 – [SESSIONSTART] Cloud-Session, nur Lesen und Regel zur Umgebungsprüfung
+
+- **Umgebung:** Cloud-Session (`Linux x86_64`, `CLAUDE_CODE_REMOTE=true`); Quelle: Befehle in der Session. **Modell:** eingestellt und bedient `claude-sonnet-5-5` (Abfrage `get_session`), Klasse Routine (Abschnitt 6; Probelauf D.22 steht aus). Kontext 166.000 von 1.000.000 Token.
+- **Nachtrag:** Der Eintrag entsteht erst nach der ersten Antwort, nicht direkt nach der Mindest-Lektüre – die Session begann mit der Frage nach den offenen Fahrplanschritten, nur `fahrplan.md` (Übersicht) und Teile von `project-context.md` wurden gelesen, die übrige Mindest-Lektüre nicht.
+- **Zugang geprüft (2026-11-26):** `RUNWARE_API_KEY` und `OPENROUTER_API_KEY` gesetzt; `api.runware.ai` (404 auf dem Wurzelpfad), `openrouter.ai`, `civitai.com`, `einsatzbegleitung.de` erreichbar; **kein SSH-Client, `~/.ssh` leer, kein ssh-agent** – SSH zum VPS ist hier nicht möglich (bestätigt ADR-025). Gültigkeit des Runware-Schlüssels nicht geprüft.
+- **Neue Regel des Eigentümers:** Zu jedem Sessionbeginn Umgebung feststellen (Mac oder Cloud), sagen, was möglich ist, und im `[SESSIONSTART]` vermerken. Verankert in `docs/project-context.md` Abschnitt 3, „Unterstützte Entwickler-Plattformen“ (Mindest-Lektüre, wird jede Session ganz gelesen). Kein ADR angelegt – bei Bedarf als Betriebsregel in `docs/decisions.md` Teil C nachziehen.
+
 ### 2026-11-09 – [ADR] 11.6 Bildrezepte: Vorlage freigegeben, gebaut (ADR-126)
 
 - #239 gemergt (4 Pflicht-Checks grün, „Du mergst“; automatisches Mergen im Repo nicht erlaubt).
