@@ -51,6 +51,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
 | ✅ | D.28 | Pre-Commit-Hook markdownlint in der Cloud-Session | erledigt 2026-11-08 (ADR-122; Cloud-Session und Mac ohne Behelf grün) | – |
+| ✅ | D.29 | Sicherheitsfund virtualenv PYSEC-2026-4402 (Audit 2026-11-26) | erledigt 2026-11-26 (PR #241, CI 4 von 4 grün) | – |
 | ✅ | D.1 | Wechsel Node.js 24 → Node.js 26 LTS | erledigt 2026-11-05 (ADR-112: 26.12.1, PR #212) | – |
 | ⚪ | D.2 | Nachprüfung TypeScript 7 | offen | KI – am 2027-01-08 |
 | ⚪ | D.3 | Nachprüfung httpx | offen | KI – am 2027-03-26 |
@@ -836,6 +837,23 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 - **Reifegrad-Wirkung:** keine
 - **Artefakte:** Sperrdateien, Logbuch-Eintrag
 - **Notizen:** Angelegt 2026-10-25 nach dem roten Lauf zu #187. Verbleibend: 3 mittlere Funde in vitest ≤ 4.1.11 (`@vitest/mocker`, `@vitest/coverage-v8`) unter der Schwelle `high`; Behebung nur mit vitest 5 (`--force`), Linie noch nicht mindestreif – Landeplatz D.2 (Nachprüfung vitest 5 am 2027-03-03, Ablaufdaten-Register).
+
+#### D.29: Sicherheitsfund virtualenv PYSEC-2026-4402 (Audit 2026-11-26)
+
+- **Status:** ✅ ERLEDIGT (2026-11-26) – PR #241: CI grün (4 von 4, Audit ohne Befund, Lauf zu `21dc264`); Zusammenführen steht beim Eigentümer, kein Einspielen nötig. Verlauf: virtualenv 21.14.12 → 21.14.13 (`uv.lock`), lokal `pip-audit` ohne Befund und `uv sync --frozen` ohne Fehler; behoben auf dem Branch des Doku-PR #241 (die Cloud-Session darf nur auf ihren Branch pushen, wie bei D.21)
+- **Phasentyp-Kontext:** STABILISIERUNG
+- **Abhängigkeiten:** keine
+- **Frist:** sofort – roter Audit-Job blockiert jeden PR (#241) und `main`
+- **Freigabepflichtig:** nein – Patch-Update innerhalb der Linie 21.14, keine Breaking Changes
+- **Empfohlene Klasse:** Routine – Abhängigkeits-Update mit Audit.
+- **Eingangskriterien:** Befund der CI (Dependency-Audit, PR #241, 2026-11-26 01:42 UTC); `main` war am 2026-11-09 grün, der Befund ist seitdem neu in der Datenbank
+- **Anforderungen (ab Klasse M):** keine (Pflichtkategorie Dependency-Audit, `CLAUDE.md` Abschnitt 15)
+- **Zu tun:** PYSEC-2026-4402 in virtualenv 21.14.12 beheben (Fix in 21.14.13). Nach Regel-001 und der Mindestreife (`docs/project-context.md` Abschnitt 3) bleibt es in der Linie 21.14; die neueste Linie 21.15 wird nicht gewählt. virtualenv kommt nur über `pre-commit` (Entwicklungsgruppe) und ist nicht im Container – kein Einspielen nötig.
+- **Akzeptanzkriterien:** Audit ohne Befund in der CI; alle Jobs grün.
+- **Betroffene Module:** keine (Entwicklungswerkzeug)
+- **Reifegrad-Wirkung:** keine
+- **Artefakte:** Sperrdatei, Logbuch-Eintrag
+- **Notizen:** Angelegt 2026-11-26 nach dem roten Lauf zu #241 (nur Doku-Änderungen, `uv.lock` unverändert). Gleiches Muster wie D.21.
 
 #### D.28: Pre-Commit-Hook markdownlint in der Cloud-Session
 

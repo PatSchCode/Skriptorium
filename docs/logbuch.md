@@ -29,6 +29,21 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 <!-- ANCHOR:eintraege -->
 ## Einträge (neueste oben)
 
+### 2026-11-26 02:40 – [SESSIONSTART] Cloud-Session, nur Lesen und Regel zur Umgebungsprüfung
+
+- **Umgebung:** Cloud-Session (`Linux x86_64`, `CLAUDE_CODE_REMOTE=true`); Quelle: Befehle in der Session. **Modell:** eingestellt und bedient `claude-sonnet-5-5` (Abfrage `get_session`), Klasse Routine (Abschnitt 6; Probelauf D.22 steht aus). Kontext 166.000 von 1.000.000 Token.
+- **Nachtrag:** Der Eintrag entsteht erst nach der ersten Antwort, nicht direkt nach der Mindest-Lektüre – die Session begann mit der Frage nach den offenen Fahrplanschritten, nur `fahrplan.md` (Übersicht) und Teile von `project-context.md` wurden gelesen, die übrige Mindest-Lektüre nicht.
+- **Zugang geprüft (2026-11-26):** `RUNWARE_API_KEY` und `OPENROUTER_API_KEY` gesetzt; `api.runware.ai` (404 auf dem Wurzelpfad), `openrouter.ai`, `civitai.com`, `einsatzbegleitung.de` erreichbar; **kein SSH-Client, `~/.ssh` leer, kein ssh-agent** – SSH zum VPS ist hier nicht möglich (bestätigt ADR-025). Gültigkeit des Runware-Schlüssels nicht geprüft.
+- **Neue Regel des Eigentümers:** Zu jedem Sessionbeginn Umgebung feststellen (Mac oder Cloud), sagen, was möglich ist, und im `[SESSIONSTART]` vermerken. Verankert in `docs/project-context.md` Abschnitt 3, „Unterstützte Entwickler-Plattformen“ (Mindest-Lektüre, wird jede Session ganz gelesen). Kein ADR angelegt – bei Bedarf als Betriebsregel in `docs/decisions.md` Teil C nachziehen.
+
+### 2026-11-26 03:00 – [GELÖST] Roter Audit-Job auf dem Doku-PR #241: virtualenv PYSEC-2026-4402 (D.29)
+
+- **Befund:** Der Python-Job von #241 (nur `docs/`) scheiterte nach 28 Sekunden an `pip-audit`: virtualenv 21.14.12, PYSEC-2026-4402, Fix in 21.14.13. Alle Schritte davor (bandit, Lint, Typen) grün.
+- **Nicht durch den PR verursacht:** `uv.lock` auf `main` und im PR identisch; `main` war am 2026-11-09 grün – der Befund ist neu in der Datenbank. Dasselbe Muster wie D.21 (2026-10-22).
+- **Lösung:** `uv lock --upgrade-package 'virtualenv==21.14.13'` (Linie 21.14 bleibt, nach Mindestreife-Regel). Der erste Versuch mit `--upgrade-package virtualenv` hob auf 21.15.13 – verworfen, weil das die Linie wechselt; die Fix-Version der Linie reicht. Danach `uv sync --frozen` und `pip-audit --skip-editable`: ohne Befund (Exit 0). Fix auf dem Branch des Doku-PR, weil die Cloud-Session nur dorthin pushen darf (wie bei D.21); als eigener Commit.
+- **Freigabe:** Eigentümer „Ja, mach den Fix“ (2026-11-26). Kein Freigabe-Fall nach Abschnitt 4 (Patch innerhalb der Linie).
+- **Ergebnis:** CI auf #241 zu `21dc264`: Pre-Commit, TypeScript, Python (Audit ohne Befund) und End-to-End grün (4 von 4), PR mergebar. D.29 ✅ ERLEDIGT. Zusammenführen steht beim Eigentümer.
+
 ### 2026-11-09 – [ADR] 11.6 Bildrezepte: Vorlage freigegeben, gebaut (ADR-126)
 
 - #239 gemergt (4 Pflicht-Checks grün, „Du mergst“; automatisches Mergen im Repo nicht erlaubt).

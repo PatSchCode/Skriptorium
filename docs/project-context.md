@@ -83,6 +83,18 @@ Entwicklung erfolgt durch den Coding-Agent; der Eigentümer entwickelt nicht sel
 
 **Pflege-Regel:** Diese Tabelle wird bei jedem Touch an `scripts/`, `pyproject.toml`/`package.json` (Top-Level-Dependencies) oder bei jeder neuen plattform-bezogenen Eskalation re-validiert. Verstöße sind im selben Commit zu korrigieren.
 
+**Umgebungsprüfung zu Sessionbeginn (Regel des Eigentümers, 2026-11-26):** Zu Beginn jeder Session stellt die KI fest, ob sie auf dem Mac oder in einer Cloud-Session läuft, sagt dem Eigentümer ohne Aufforderung, was in dieser Umgebung möglich ist und was nicht, und trägt das Ergebnis in den `[SESSIONSTART]`-Eintrag ein. Das geschieht vor der Arbeit am ersten Schritt. Die Befehle geben nur Namen, Statuscodes und „gesetzt/nicht gesetzt“ aus, nie Secret-Werte.
+
+- **Feststellung:** `uname -sm` und die Variable `CLAUDE_CODE_REMOTE` (dieselbe Unterscheidung wie in `scripts/session-start.sh`). `Linux x86_64` mit `CLAUDE_CODE_REMOTE=true` ist die Cloud-Session; `Darwin arm64` ohne `CLAUDE_CODE_REMOTE=true` ist der Mac; alles andere ist unbestimmbar – dann fragt die KI nach.
+- **Fähigkeitsprüfung:** `command -v ssh` und `ls ~/.ssh` (SSH zum VPS möglich?), `RUNWARE_API_KEY` und `OPENROUTER_API_KEY` gesetzt oder nicht, Statuscode von `api.runware.ai` und `openrouter.ai`. Ist ein Zugang nur behauptet und nicht geprüft, sagt die KI das ausdrücklich.
+
+| Möglichkeit | Cloud-Session | Mac |
+|---|---|---|
+| Code, Tests, CI, Doku, Pull Requests | ja | ja |
+| SSH zum VPS, Deployment, Messungen auf dem Server (z. B. D.25, D.26) | **nein** – Stand 2026-11-26: kein SSH-Client, `~/.ssh` leer (ADR-025) | ja laut ADR-025, zu Sessionbeginn zu bestätigen; Deployment nur auf Anweisung (ADR-039) |
+| Proben mit echten Bildern (Runware, OpenRouter) | abhängig von Schlüsseln und Netz – Stand 2026-11-26: Schlüssel gesetzt, Hosts erreichbar, Gültigkeit des Runware-Schlüssels nicht belegt | zu Sessionbeginn zu prüfen |
+| Abnahme am Server, Schritte mit „Nächster Zug: du“ | Eigentümer | Eigentümer |
+
 <!-- ANCHOR:architektur-grobstruktur -->
 ## 4. Architektur-Grobstruktur
 
