@@ -42,7 +42,7 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 - **Nicht durch den PR verursacht:** `uv.lock` auf `main` und im PR identisch; `main` war am 2026-11-09 grün – der Befund ist neu in der Datenbank. Dasselbe Muster wie D.21 (2026-10-22).
 - **Lösung:** `uv lock --upgrade-package 'virtualenv==21.14.13'` (Linie 21.14 bleibt, nach Mindestreife-Regel). Der erste Versuch mit `--upgrade-package virtualenv` hob auf 21.15.13 – verworfen, weil das die Linie wechselt; die Fix-Version der Linie reicht. Danach `uv sync --frozen` und `pip-audit --skip-editable`: ohne Befund (Exit 0). Fix auf dem Branch des Doku-PR, weil die Cloud-Session nur dorthin pushen darf (wie bei D.21); als eigener Commit.
 - **Freigabe:** Eigentümer „Ja, mach den Fix“ (2026-11-26). Kein Freigabe-Fall nach Abschnitt 4 (Patch innerhalb der Linie).
-- **Offen:** CI auf #241 grün abwarten, dann D.29 auf ✅ setzen.
+- **Ergebnis:** CI auf #241 zu `21dc264`: Pre-Commit, TypeScript, Python (Audit ohne Befund) und End-to-End grün (4 von 4), PR mergebar. D.29 ✅ ERLEDIGT. Zusammenführen steht beim Eigentümer.
 
 ### 2026-11-09 – [ADR] 11.6 Bildrezepte: Vorlage freigegeben, gebaut (ADR-126)
 

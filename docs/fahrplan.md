@@ -51,7 +51,7 @@ Phase 10 abgeschlossen 2026-11-08 (11 von 11 erledigt) – Details im Archiv [`d
 | | Schritt | Titel | Status | Nächster Zug |
 |---|---|---|---|---|
 | ✅ | D.28 | Pre-Commit-Hook markdownlint in der Cloud-Session | erledigt 2026-11-08 (ADR-122; Cloud-Session und Mac ohne Behelf grün) | – |
-| 🟠 | D.29 | Sicherheitsfund virtualenv PYSEC-2026-4402 (Audit 2026-11-26) | in Arbeit – Fix auf dem Branch von #241, CI läuft | KI – CI abwarten |
+| ✅ | D.29 | Sicherheitsfund virtualenv PYSEC-2026-4402 (Audit 2026-11-26) | erledigt 2026-11-26 (PR #241, CI 4 von 4 grün) | – |
 | ✅ | D.1 | Wechsel Node.js 24 → Node.js 26 LTS | erledigt 2026-11-05 (ADR-112: 26.12.1, PR #212) | – |
 | ⚪ | D.2 | Nachprüfung TypeScript 7 | offen | KI – am 2027-01-08 |
 | ⚪ | D.3 | Nachprüfung httpx | offen | KI – am 2027-03-26 |
@@ -840,7 +840,7 @@ Diese Schritte gehören zu keiner Phase; sie werden fällig durch ein Datum, ein
 
 #### D.29: Sicherheitsfund virtualenv PYSEC-2026-4402 (Audit 2026-11-26)
 
-- **Status:** 🟠 IN ARBEIT (2026-11-26) – virtualenv 21.14.12 → 21.14.13 (`uv.lock`); lokal `pip-audit` ohne Befund, `uv sync --frozen` ohne Fehler. Offen: CI grün auf dem PR, Zusammenführen durch den Eigentümer. Behoben auf dem Branch des Doku-PR #241 (die Cloud-Session darf nur auf ihren Branch pushen, wie bei D.21)
+- **Status:** ✅ ERLEDIGT (2026-11-26) – PR #241: CI grün (4 von 4, Audit ohne Befund, Lauf zu `21dc264`); Zusammenführen steht beim Eigentümer, kein Einspielen nötig. Verlauf: virtualenv 21.14.12 → 21.14.13 (`uv.lock`), lokal `pip-audit` ohne Befund und `uv sync --frozen` ohne Fehler; behoben auf dem Branch des Doku-PR #241 (die Cloud-Session darf nur auf ihren Branch pushen, wie bei D.21)
 - **Phasentyp-Kontext:** STABILISIERUNG
 - **Abhängigkeiten:** keine
 - **Frist:** sofort – roter Audit-Job blockiert jeden PR (#241) und `main`
