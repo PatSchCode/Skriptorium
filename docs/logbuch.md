@@ -36,7 +36,19 @@ Das Logbuch beginnt mit der ersten regulären Session nach dem Initialisierungs-
 - **Zugang geprüft (2026-11-26):** `RUNWARE_API_KEY` und `OPENROUTER_API_KEY` gesetzt; `api.runware.ai` (404 auf dem Wurzelpfad), `openrouter.ai`, `civitai.com`, `einsatzbegleitung.de` erreichbar; **kein SSH-Client, `~/.ssh` leer, kein ssh-agent** – SSH zum VPS ist hier nicht möglich (bestätigt ADR-025). Gültigkeit des Runware-Schlüssels nicht geprüft.
 - **Neue Regel des Eigentümers:** Zu jedem Sessionbeginn Umgebung feststellen (Mac oder Cloud), sagen, was möglich ist, und im `[SESSIONSTART]` vermerken. Verankert in `docs/project-context.md` Abschnitt 3, „Unterstützte Entwickler-Plattformen“ (Mindest-Lektüre, wird jede Session ganz gelesen). Kein ADR angelegt – bei Bedarf als Betriebsregel in `docs/decisions.md` Teil C nachziehen.
 
-### 2026-11-26 03:00 – [GELÖST] Roter Audit-Job auf dem Doku-PR #241: virtualenv PYSEC-2026-4402 (D.29)
+### 2026-11-26 02:55 – [SESSIONENDE] Cloud-Session: Umgebungsregel und D.29, PR #241 gemergt
+
+- **Dauer:** 02:35 bis 02:55 (MEZ), rund 20 Minuten.
+- **Bearbeitet:** (1) Frage nach den offenen Fahrplanschritten beantwortet (Phase 11: 4 von 16 erledigt, 11.6 in Arbeit; Querschnitt-Liste). (2) Zugang der Cloud-Session geprüft. (3) **Neue Regel des Eigentümers:** Umgebungsprüfung zu Sessionbeginn (Mac oder Cloud), verankert in `docs/project-context.md` Abschnitt 3. (4) **D.29** angelegt und erledigt: virtualenv 21.14.12 → 21.14.13 (`uv.lock`), PYSEC-2026-4402. (5) PR #241 mit beiden Teilen gemergt (`17edcf2`), CI 4 von 4 grün, nach ausdrücklichem „merge“ des Eigentümers.
+- **Stand:** `main` auf `17edcf2`. Kein Schritt aus Phase 11 berührt; 11.6 bleibt 🟠 IN ARBEIT (Probe mit echten Bildern und Abnahme offen).
+- **Offen:** 11.6 (Probe, Abnahme) – Runware-Schlüssel gesetzt, Gültigkeit nicht geprüft; D.11 (Eigentümer, Frist 2026-10-31 überschritten); D.5 (seit 2026-11-12 fällig, KI); D.25 und D.26 brauchen Messungen auf dem Server (nur vom Mac aus, ADR-025); D.22 (Probelauf Routine-Klasse). Kein ADR für die Umgebungsregel – bei Bedarf als Betriebsregel in `docs/decisions.md` Teil C.
+- **Nächster Schritt:** 11.6 fertigstellen, bevorzugt in einer Session auf dem Mac (Server-Zugang); die Umgebungsprüfung zu Sessionbeginn meldet, was dort möglich ist.
+- **Modell-Bilanz:** aktive Klasse Routine (Sonnet 5.5, eingestellt und bedient `claude-sonnet-5-5`, Abfrage `get_session` vor diesem Eintrag). Schritte oberhalb der Empfehlung: 0 (D.29 und die Doku-Regel sind Routine-Arbeit). Abgegebene Teilarbeiten: keine – Abgabe an Unteragenten ist bis zum Probelauf D.22 ausgesetzt.
+- **Kontextgröße:** 240.960 Token, **über der Grenze von 200.000** (`docs/project-context.md` Abschnitt 6). Erste Messung 165.961 beim `[SESSIONSTART]`-Eintrag; die Prüfung nach jedem Schritt habe ich danach nicht durchgehend gemacht. Folge: keine neuen Schritte in dieser Session, neue Session beginnen.
+- **Sessionende-Prüfungen:** Drift-Prüfung: D.29 in Übersicht und Detail vorhanden und im Status gleich; Phasenumfang unverändert (Phase 11, 16 Schritte); keine neuen ADRs. README nicht gelesen – D.29 und die Umgebungsregel sind nicht nutzersichtbar (Trigger 1), die Status-Quellen (Phase, Version, Blocker) blieben unverändert. Ablaufdaten-Register: D.5 hat seinen Vorlauf erreicht und einen Schritt; kein Eintrag ohne Schritt. Archivierung: Logbuch unter 800 Zeilen.
+- **Korrektur:** Die Uhrzeit des `[GELÖST]`-Eintrags unten stand zunächst auf 03:00 (zu spät); auf 02:47 berichtigt.
+
+### 2026-11-26 02:47 – [GELÖST] Roter Audit-Job auf dem Doku-PR #241: virtualenv PYSEC-2026-4402 (D.29)
 
 - **Befund:** Der Python-Job von #241 (nur `docs/`) scheiterte nach 28 Sekunden an `pip-audit`: virtualenv 21.14.12, PYSEC-2026-4402, Fix in 21.14.13. Alle Schritte davor (bandit, Lint, Typen) grün.
 - **Nicht durch den PR verursacht:** `uv.lock` auf `main` und im PR identisch; `main` war am 2026-11-09 grün – der Befund ist neu in der Datenbank. Dasselbe Muster wie D.21 (2026-10-22).
